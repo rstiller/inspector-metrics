@@ -35,7 +35,15 @@
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "clean": "rm -fr build coverage",
     "compile": "tsc -p .",
-    "test": "mocha --opts mocha.opts test/**/*.ts",
-    "test:jenkins": "mocha --opts mocha.jenkins.opts test/**/*.ts"
+    "test": "mocha --opts mocha.opts",
+    "test:jenkins": "mocha --opts mocha.jenkins.opts"
+  },
+  "nyc": {
+    "include": ["lib/*.ts", "lib/**/*.ts"],
+    "exclude": ["test/*"],
+    "extension": [".ts"],
+    "require": [],
+    "reporter": ["json", "html", "cobertura"],
+    "all": true
   }
 }
