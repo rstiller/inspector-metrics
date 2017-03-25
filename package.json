@@ -1,0 +1,41 @@
+{
+  "name": "inspector-metrics",
+  "version": "1.0.0",
+  "private": false,
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rstiller/inspector-metrics"
+  },
+  "devDependencies": {
+    "typescript": "*",
+    "tslint": "*",
+    "mocha": "*",
+    "mocha-typescript": "*",
+    "chai": "*",
+    "ts-node": "*",
+    "nyc": "*",
+    "npm-check": "*",
+    "reflect-metadata": "*",
+    "@types/node": "*",
+    "@types/mocha": "*",
+    "@types/chai": "*",
+    "@types/lodash": "*",
+    "@types/async": "*"
+  },
+  "dependencies": {
+    "source-map-support": "*"
+  },
+  "scripts": {
+    "check:lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
+    "check:coverage": "nyc npm run test:jenkins",
+    "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+    "clean": "rm -fr build coverage",
+    "compile": "tsc -p .",
+    "test": "mocha --opts mocha.opts test/**/*.ts",
+    "test:jenkins": "mocha --opts mocha.jenkins.opts test/**/*.ts"
+  }
+}

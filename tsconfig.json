@@ -1,0 +1,40 @@
+{
+    "compilerOptions": {
+        "allowJs": false,
+        "alwaysStrict": true,
+        "declaration": true,
+        "module": "none",
+        "target": "es6",
+        "sourceMap": true,
+        "newLine": "LF",
+        "moduleResolution": "node",
+        "noLib": false,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noImplicitThis": true,
+        "noUnusedLocals": true,
+        "typeRoots": [
+            "node_modules/@types",
+            "node_modules/reflect-metadata"
+        ],
+        "types": [
+            "mocha", "chai", "node"
+        ],
+        "lib": [
+            "dom", "es6"
+        ],
+        "outDir": "build",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forceConsistentCasingInFileNames": true,
+        "removeComments": true
+    },
+    "include": [
+        "./lib/**/*.ts",
+        "./test/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.d.ts"
+    ]
+}

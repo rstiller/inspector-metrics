@@ -1,2 +1,2 @@
-# inspector
+# inspector-metrics
 Typescript Metrics Library
