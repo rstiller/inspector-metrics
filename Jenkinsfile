@@ -6,10 +6,6 @@ pipeline {
         }
     }
 
-    tools {
-        nodejs 'default'
-    }
-
     triggers {
         pollSCM('*/5 * * * *')
         cron('@daily')
