@@ -1,2 +1,4 @@
 # inspector-metrics
-Typescript Metrics Library
+Typescript Metrics Library (copied from http://metrics.dropwizard.io)
+
+

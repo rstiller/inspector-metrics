@@ -1,7 +1,6 @@
 {
   "name": "inspector-metrics",
   "version": "1.0.0",
-  "private": false,
   "licenses": [{
     "type": "MIT",
     "url": "https://www.opensource.org/licenses/mit-license.php"
@@ -20,13 +19,19 @@
     "nyc": "*",
     "npm-check": "*",
     "reflect-metadata": "*",
+    "sinon": "*",
+    "sinon-chai": "*",
     "@types/node": "*",
     "@types/mocha": "*",
     "@types/chai": "*",
     "@types/lodash": "*",
-    "@types/async": "*"
+    "@types/async": "*",
+    "@types/sinon": "*",
+    "@types/sinon-chai": "*"
   },
   "dependencies": {
+    "async": "*",
+    "lodash": "*",
     "source-map-support": "*"
   },
   "scripts": {
