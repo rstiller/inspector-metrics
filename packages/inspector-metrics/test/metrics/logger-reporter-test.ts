@@ -73,6 +73,24 @@ export class LoggerReporterTest {
         this.reporter.addMetricRegistry(this.registry);
     }
 
+    @test("no metric-registries added")
+    public checkNoMetricRegistries(): void {
+        this.reporter.removeMetricRegistry(this.registry);
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        if (!!this.internalCallback) {
+            this.internalCallback();
+        }
+
+        expect(this.loggerSpy).to.not.have.been.called;
+    }
+
     @test("counter reporting")
     public checkCounterReporting(): void {
         this.registry.newCounter("counter1");
@@ -186,6 +204,90 @@ export class LoggerReporterTest {
         expect(logMetadata.measurement_type).to.equal("timer");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
         expect(logMetadata.tags).to.not.be.null;
+    }
+
+    @test("registry tags")
+    public checkRegistryTags(): void {
+        this.registry.newCounter("counter1");
+        this.registry.setTag("application", "app");
+        this.registry.setTag("mode", "dev");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        if (!!this.internalCallback) {
+            this.internalCallback();
+        }
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("dev");
+    }
+
+    @test("metric tags")
+    public checkMetricTags(): void {
+        let counter = this.registry.newCounter("counter1");
+        counter.setTag("application", "app");
+        counter.setTag("mode", "dev");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        if (!!this.internalCallback) {
+            this.internalCallback();
+        }
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("dev");
+    }
+
+    @test("registry and metric tags")
+    public checkRegistryAndMetricTags(): void {
+        let counter = this.registry.newCounter("counter1");
+        this.registry.setTag("application", "app");
+        this.registry.setTag("mode", "dev");
+        counter.setTag("mode", "test");
+        counter.setTag("component", "main");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        if (!!this.internalCallback) {
+            this.internalCallback();
+        }
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("test");
+        expect(logMetadata.tags["component"]).to.equal("main");
     }
 
 }
