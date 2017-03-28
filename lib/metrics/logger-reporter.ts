@@ -68,7 +68,9 @@ export class LoggerReporter extends MetricReporter {
     }
 
     public stop(): void {
-        this.timer.unref();
+        if (!!this.timer) {
+            this.timer.unref();
+        }
     }
 
     private report(): void {
@@ -80,58 +82,58 @@ export class LoggerReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         let now: Date = new Date(this.clock.time().milliseconds);
 
-        this.reportCounters(registry.getCounters(), now);
-        this.reportGauges(registry.getGauges(), now);
-        this.reportHistograms(registry.getHistograms(), now);
-        this.reportMeters(registry.getMeters(), now);
-        this.reportTimers(registry.getTimers(), now);
+        this.reportCounters(registry, now);
+        this.reportGauges(registry, now);
+        this.reportHistograms(registry, now);
+        this.reportMeters(registry, now);
+        this.reportTimers(registry, now);
     }
 
-    private reportCounters(counters: Map<string, Counter>, date: Date): void {
-        if (!!counters) {
+    private reportCounters(registry: MetricRegistry, date: Date): void {
+        if (!!registry.getCounters()) {
             let logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "counter",
                 timestamp: date,
             });
-            counters.forEach((counter: Counter, name: string) => {
+            registry.getCounters().forEach((counter: Counter, name: string) => {
                 if (!isNaN(counter.getCount())) {
                     logMetadata.measurement = name;
-                    logMetadata.tags = this.buildTags(counter);
+                    logMetadata.tags = this.buildTags(registry, counter);
                     this.log.info(`${date} - counter ${name}: ${counter.getCount()}`, logMetadata);
                 }
             });
         }
     }
 
-    private reportGauges(gauges: Map<string, Gauge<any>>, date: Date): void {
-        if (!!gauges) {
+    private reportGauges(registry: MetricRegistry, date: Date): void {
+        if (!!registry.getGauges()) {
             let logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "gauge",
                 timestamp: date,
             });
-            gauges.forEach((gauge: Gauge<any>, name: string) => {
+            registry.getGauges().forEach((gauge: Gauge<any>, name: string) => {
                 if (!isNaN(gauge.getValue())) {
                     logMetadata.measurement = name;
-                    logMetadata.tags = this.buildTags(gauge);
+                    logMetadata.tags = this.buildTags(registry, gauge);
                     this.log.info(`${date} - gauge ${name}: ${gauge.getValue()}`, logMetadata);
                 }
             });
         }
     }
 
-    private reportHistograms(histograms: Map<string, Histogram>, date: Date): void {
-        if (!!histograms) {
+    private reportHistograms(registry: MetricRegistry, date: Date): void {
+        if (!!registry.getHistograms()) {
             let logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "histogram",
                 timestamp: date,
             });
-            histograms.forEach((histogram: Histogram, name: string) => {
+            registry.getHistograms().forEach((histogram: Histogram, name: string) => {
                 if (!isNaN(histogram.getCount())) {
                     logMetadata.measurement = name;
-                    logMetadata.tags = this.buildTags(histogram);
+                    logMetadata.tags = this.buildTags(registry, histogram);
 
                     let snapshot = histogram.getSnapshot();
                     this.log.info(`${date} - histogram ${name}\
@@ -152,17 +154,17 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
-    private reportMeters(meters: Map<string, Meter>, date: Date): void {
-        if (!!meters) {
+    private reportMeters(registry: MetricRegistry, date: Date): void {
+        if (!!registry.getMeters()) {
             let logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "meter",
                 timestamp: date,
             });
-            meters.forEach((meter: Meter, name: string) => {
+            registry.getMeters().forEach((meter: Meter, name: string) => {
                 if (!isNaN(meter.getCount())) {
                     logMetadata.measurement = name;
-                    logMetadata.tags = this.buildTags(meter);
+                    logMetadata.tags = this.buildTags(registry, meter);
 
                     this.log.info(`${date} - meter ${name}\
                                     \n\tcount: ${meter.getCount()}\
@@ -176,17 +178,17 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
-    private reportTimers(timers: Map<string, Timer>, date: Date): void {
-        if (!!timers) {
+    private reportTimers(registry: MetricRegistry, date: Date): void {
+        if (!!registry.getTimers()) {
             let logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "timer",
                 timestamp: date,
             });
-            timers.forEach((timer: Timer, name: string) => {
+            registry.getTimers().forEach((timer: Timer, name: string) => {
                 if (!isNaN(timer.getCount())) {
                     logMetadata.measurement = name;
-                    logMetadata.tags = this.buildTags(timer);
+                    logMetadata.tags = this.buildTags(registry, timer);
 
                     let snapshot = timer.getSnapshot();
                     this.log.info(`${date} - timer ${name}\
@@ -211,9 +213,9 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
-    private buildTags(taggable: Taggable): { [key: string]: string; } {
+    private buildTags(registry: MetricRegistry, taggable: Taggable): { [key: string]: string; } {
         let tags: { [x: string]: string } = {};
-        this.tags.forEach((tag, key) => tags[key] = tag);
+        registry.getTags().forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;
     }
