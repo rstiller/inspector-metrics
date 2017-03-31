@@ -1,0 +1,71 @@
+{
+  "name": "inspector-influx",
+  "version": "1.0.0",
+  "main": "./build/lib/metrics/index.js",
+  "typings": "./build/lib/metrics/index.d.ts",
+  "license": "MIT",
+  "licenses": [{
+    "type": "MIT",
+    "url": "https://www.opensource.org/licenses/mit-license.php"
+  }],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rstiller/inspector-influx"
+  },
+  "keywords": [
+    "metrics",
+    "typescript",
+    "influxdb"
+  ],
+  "devDependencies": {
+    "typescript": "^2.2",
+    "tslint": "^5.0",
+    "mocha": "^3.2",
+    "mocha-typescript": "^1.0",
+    "chai": "^3.5",
+    "ts-node": "^3.0",
+    "nyc": "^10.2",
+    "npm-check": "^5.4",
+    "reflect-metadata": "^0.1",
+    "sinon": "^2.1",
+    "sinon-chai": "^2.9",
+    "@types/node": "^7.0",
+    "@types/mocha": "^2.2",
+    "@types/chai": "^3.4",
+    "@types/lodash": "^4.14",
+    "@types/async": "^2.0",
+    "@types/sinon": "^2.1",
+    "@types/sinon-chai": "^2.7"
+  },
+  "dependencies": {
+    "async": "^2.2",
+    "inspector-metrics": "^1.0",
+    "influx": "^5.0",
+    "source-map-support": "^0.4"
+  },
+  "files": [
+    "build",
+    "lib",
+    "test",
+    "mocha.opts",
+    "tsconfig.json",
+    "tslint.json"
+  ],
+  "scripts": {
+    "check:lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
+    "check:coverage": "nyc npm run test:jenkins",
+    "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+    "clean": "rm -fr build coverage",
+    "compile": "tsc -p .",
+    "test": "mocha --opts mocha.opts",
+    "test:jenkins": "mocha --opts mocha.jenkins.opts"
+  },
+  "nyc": {
+    "include": ["lib/*.ts", "lib/**/*.ts"],
+    "exclude": ["test/*"],
+    "extension": [".ts"],
+    "require": [],
+    "reporter": ["json", "html", "cobertura"],
+    "all": true
+  }
+}
