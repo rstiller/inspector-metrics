@@ -24,7 +24,7 @@ export class InfluxMetricReporter extends MetricReporter {
     public constructor(dbConfig: IClusterConfig, interval: number = 1000, unit: TimeUnit = MILLISECOND, tags: Map<string, string> = new Map(), clock: Clock = new StdClock()) {
         super();
 
-        let database = dbConfig.database;
+        const database = dbConfig.database;
 
         this.interval = interval;
         this.unit = unit;
@@ -41,12 +41,12 @@ export class InfluxMetricReporter extends MetricReporter {
             hosts: dbConfig.hosts,
         };
 
-        this.queue = async.queue((task: Function, callback: Function) => {
+        this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
             task(callback);
         }, 1);
 
-        let unlock: Function = null;
-        this.queue.push((callback: Function) => {
+        let unlock: () => void = null;
+        this.queue.push((callback: () => void) => {
             unlock = callback;
         });
 
@@ -68,7 +68,7 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     public start(): void {
-        let interval: number = this.unit.convertTo(this.interval, MILLISECOND);
+        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
         this.timer = setInterval(() => {
             this.report();
         }, interval);
@@ -85,7 +85,7 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportMetricRegistry(registry: MetricRegistry): void {
-        let now: Date = new Date(this.clock.time().milliseconds);
+        const now: Date = new Date(this.clock.time().milliseconds);
 
         this.reportMetrics(registry.getCounters(),   now, "counter",   (name: string, counter: Counter, date: Date)     => this.reportCounter(name, counter, date));
         this.reportMetrics(registry.getGauges(),     now, "gauge",     (name: string, gauge: Gauge<any>, date: Date)    => this.reportGauge(name, gauge, date));
@@ -95,9 +95,9 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportMetrics<T extends Metric>(metrics: Map<string, T>, date: Date, type: MetricType, reportFunction: (name: string, metric: Metric, date: Date) => IPoint): void {
-        let points: IPoint[] = [];
+        const points: IPoint[] = [];
         metrics.forEach((counter, name) => {
-            let point: IPoint = reportFunction(name, counter, date);
+            const point: IPoint = reportFunction(name, counter, date);
             if (!!point) {
                 points.push(point);
             }
@@ -139,7 +139,7 @@ export class InfluxMetricReporter extends MetricReporter {
         if (isNaN(histogram.getCount())) {
             return null;
         }
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
 
         return {
             fields: {
@@ -183,7 +183,7 @@ export class InfluxMetricReporter extends MetricReporter {
         if (isNaN(timer.getCount())) {
             return null;
         }
-        let snapshot = timer.getSnapshot();
+        const snapshot = timer.getSnapshot();
         return {
             fields: {
                 count: timer.getCount(),
@@ -209,14 +209,14 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private buildTags(taggable: Taggable): { [key: string]: string } {
-        let tags: { [x: string]: string } = {};
+        const tags: { [x: string]: string } = {};
         this.tags.forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;
     }
 
     private sendPoints(points: IPoint[], type: MetricType): void {
-        this.queue.push((callback: Function) => {
+        this.queue.push((callback: () => void) => {
             this.db.writePoints(points)
                 .then(() => {
                     if (!!this.log) {
