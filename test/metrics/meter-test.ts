@@ -21,7 +21,7 @@ export class MeterTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let meter = new Meter(this.clock, 1);
+        const meter = new Meter(this.clock, 1);
 
         expect(meter.getCount()).to.equal(0);
         expect(meter.getMeanRate()).to.equal(0);
@@ -43,7 +43,7 @@ export class MeterTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let meter = new Meter(this.clock, 1);
+        const meter = new Meter(this.clock, 1);
 
         expect(meter.getCount()).to.equal(0);
         expect(meter.getMeanRate()).to.equal(0);
@@ -70,7 +70,7 @@ export class MeterTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let meter = new Meter(this.clock, 1);
+        const meter = new Meter(this.clock, 1);
 
         expect(meter.getCount()).to.equal(0);
         expect(meter.getMeanRate()).to.equal(0);
@@ -100,7 +100,7 @@ export class MeterTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let meter = new Meter(this.clock, 1);
+        const meter = new Meter(this.clock, 1);
 
         expect(meter.getCount()).to.equal(0);
         expect(meter.getMeanRate()).to.equal(0);
@@ -142,7 +142,7 @@ export class MeterTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let meter = new Meter(this.clock, 1);
+        const meter = new Meter(this.clock, 1);
 
         expect(meter.getCount()).to.equal(0);
         expect(meter.getMeanRate()).to.equal(0);

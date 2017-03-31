@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -19,11 +20,11 @@ chai.use(sinonChai);
 const expect = chai.expect;
 
 export class MockedLogger implements Logger {
-    public log(): void {};
-    public error(): void {};
-    public warn(): void {};
-    public info(): void {};
-    public debug(): void {};
+    public log(): void {}
+    public error(): void {}
+    public warn(): void {}
+    public info(): void {}
+    public debug(): void {}
 }
 
 export class MockedClock implements Clock {
@@ -47,7 +48,7 @@ export class LoggerReporterTest {
     private registry: MetricRegistry;
     private logger: Logger;
     private loggerSpy: SinonSpy;
-    private internalCallback: Function;
+    private internalCallback: () => void;
     private scheduler: Scheduler;
     private schedulerSpy: SinonSpy;
     private reporter: LoggerReporter;
@@ -62,7 +63,7 @@ export class LoggerReporterTest {
         this.logger = new MockedLogger();
         this.loggerSpy = spy(this.logger.info);
         this.logger.info = this.loggerSpy;
-        this.scheduler = (prog: Function, interval: number): NodeJS.Timer => {
+        this.scheduler = (prog: () => void, interval: number): NodeJS.Timer => {
             this.internalCallback = prog;
             return null;
         };
@@ -107,7 +108,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -130,7 +131,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("gauge1");
         expect(logMetadata.measurement_type).to.equal("gauge");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -153,7 +154,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("histogram1");
         expect(logMetadata.measurement_type).to.equal("histogram");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -176,7 +177,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("meter1");
         expect(logMetadata.measurement_type).to.equal("meter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -199,7 +200,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("timer1");
         expect(logMetadata.measurement_type).to.equal("timer");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -224,7 +225,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -235,7 +236,7 @@ export class LoggerReporterTest {
 
     @test("metric tags")
     public checkMetricTags(): void {
-        let counter = this.registry.newCounter("counter1");
+        const counter = this.registry.newCounter("counter1");
         counter.setTag("application", "app");
         counter.setTag("mode", "dev");
 
@@ -251,7 +252,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
@@ -262,7 +263,7 @@ export class LoggerReporterTest {
 
     @test("registry and metric tags")
     public checkRegistryAndMetricTags(): void {
-        let counter = this.registry.newCounter("counter1");
+        const counter = this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
         counter.setTag("mode", "test");
@@ -280,7 +281,7 @@ export class LoggerReporterTest {
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
-        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
         expect(logMetadata.measurement).to.equal("counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);

@@ -53,8 +53,8 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
     }
 
     public tick(): void {
-        let sum = this.sum;
-        let avg = sum / this.interval;
+        const sum = this.sum;
+        const avg = sum / this.interval;
         this.sum -= sum;
 
         if (this.avg === -1.0) {

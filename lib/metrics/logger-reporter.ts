@@ -16,7 +16,7 @@ import { Taggable } from "./taggable";
 import { MILLISECOND, TimeUnit } from "./time-unit";
 import { Timer } from "./timer";
 
-export type Scheduler = (prog: Function, interval: number) => NodeJS.Timer;
+export type Scheduler = (prog: () => void, interval: number) => NodeJS.Timer;
 
 export class LoggerReporter extends MetricReporter {
 
@@ -47,7 +47,7 @@ export class LoggerReporter extends MetricReporter {
             unit,
         };
 
-        this.queue = async.queue((task: Function, callback: Function) => {
+        this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
             task(callback);
         }, 1);
     }
@@ -61,7 +61,7 @@ export class LoggerReporter extends MetricReporter {
     }
 
     public start(): void {
-        let interval: number = this.unit.convertTo(this.interval, MILLISECOND);
+        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
         this.timer = this.scheduler(() => {
             this.report();
         }, interval);
@@ -80,7 +80,7 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportMetricRegistry(registry: MetricRegistry): void {
-        let now: Date = new Date(this.clock.time().milliseconds);
+        const now: Date = new Date(this.clock.time().milliseconds);
 
         this.reportCounters(registry, now);
         this.reportGauges(registry, now);
@@ -91,7 +91,7 @@ export class LoggerReporter extends MetricReporter {
 
     private reportCounters(registry: MetricRegistry, date: Date): void {
         if (!!registry.getCounters()) {
-            let logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "counter",
                 timestamp: date,
@@ -108,7 +108,7 @@ export class LoggerReporter extends MetricReporter {
 
     private reportGauges(registry: MetricRegistry, date: Date): void {
         if (!!registry.getGauges()) {
-            let logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "gauge",
                 timestamp: date,
@@ -125,7 +125,7 @@ export class LoggerReporter extends MetricReporter {
 
     private reportHistograms(registry: MetricRegistry, date: Date): void {
         if (!!registry.getHistograms()) {
-            let logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "histogram",
                 timestamp: date,
@@ -135,7 +135,7 @@ export class LoggerReporter extends MetricReporter {
                     logMetadata.measurement = name;
                     logMetadata.tags = this.buildTags(registry, histogram);
 
-                    let snapshot = histogram.getSnapshot();
+                    const snapshot = histogram.getSnapshot();
                     this.log.info(`${date} - histogram ${name}\
                                     \n\tcount: ${histogram.getCount()}\
                                     \n\tmax: ${this.getNumber(snapshot.getMax())}\
@@ -156,7 +156,7 @@ export class LoggerReporter extends MetricReporter {
 
     private reportMeters(registry: MetricRegistry, date: Date): void {
         if (!!registry.getMeters()) {
-            let logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "meter",
                 timestamp: date,
@@ -180,7 +180,7 @@ export class LoggerReporter extends MetricReporter {
 
     private reportTimers(registry: MetricRegistry, date: Date): void {
         if (!!registry.getTimers()) {
-            let logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = _.extend({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "timer",
                 timestamp: date,
@@ -190,7 +190,7 @@ export class LoggerReporter extends MetricReporter {
                     logMetadata.measurement = name;
                     logMetadata.tags = this.buildTags(registry, timer);
 
-                    let snapshot = timer.getSnapshot();
+                    const snapshot = timer.getSnapshot();
                     this.log.info(`${date} - timer ${name}\
                                     \n\tcount: ${timer.getCount()}\
                                     \n\tm15_rate: ${this.getNumber(timer.get15MinuteRate())}\
@@ -214,7 +214,7 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private buildTags(registry: MetricRegistry, taggable: Taggable): { [key: string]: string; } {
-        let tags: { [x: string]: string } = {};
+        const tags: { [x: string]: string } = {};
         registry.getTags().forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;

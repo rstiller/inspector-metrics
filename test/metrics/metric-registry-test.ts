@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -14,7 +15,7 @@ import { MetricRegistry } from "../../lib/metrics/metric-registry";
 import { Timer } from "../../lib/metrics/timer";
 
 const expect = chai.expect;
-function mapSize(size: number): Function {
+function mapSize(size: number): (map: Map<string, string>) => boolean {
     return (map: Map<string, string>) => map.size === size;
 }
 
@@ -23,11 +24,11 @@ export class MetricRegistryTest {
 
     @test("check default clock")
     public checkDefaultClock(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getDefaultClock()).to.be.not.null;
 
-        let clock = new StdClock();
+        const clock = new StdClock();
 
         expect(registry.getDefaultClock()).to.not.equal(clock);
         registry.setDefaultClock(clock);
@@ -36,12 +37,12 @@ export class MetricRegistryTest {
 
     @test("add, set, remove and check counters")
     public checkCounters(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getCounters()).to.satisfy(mapSize(0));
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
 
-        let counter = registry.newCounter("counter1");
+        const counter = registry.newCounter("counter1");
         expect(counter).to.be.not.null;
         expect(counter).to.be.instanceof(Counter);
 
@@ -74,12 +75,12 @@ export class MetricRegistryTest {
 
     @test("add, set, remove and check histograms")
     public checkHistograms(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getHistograms()).to.satisfy(mapSize(0));
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
 
-        let histogram = registry.newHistogram("histogram1");
+        const histogram = registry.newHistogram("histogram1");
         expect(histogram).to.be.not.null;
         expect(histogram).to.be.instanceof(Histogram);
 
@@ -112,12 +113,12 @@ export class MetricRegistryTest {
 
     @test("add, set, remove and check meters")
     public checkMeters(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getMeters()).to.satisfy(mapSize(0));
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
 
-        let meter = registry.newMeter("meter1");
+        const meter = registry.newMeter("meter1");
         expect(meter).to.be.not.null;
         expect(meter).to.be.instanceof(Meter);
 
@@ -150,11 +151,11 @@ export class MetricRegistryTest {
 
     @test("add, set, remove and check timers")
     public checkTimers(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getTimers()).to.satisfy(mapSize(0));
 
-        let timer = registry.newTimer("timer1");
+        const timer = registry.newTimer("timer1");
         expect(timer).to.be.not.null;
         expect(timer).to.be.instanceof(Timer);
 
@@ -187,11 +188,11 @@ export class MetricRegistryTest {
 
     @test("add metric set")
     public checkMetricSet(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getCounters()).to.satisfy(mapSize(0));
 
-        let counter = registry.newCounter("counter1");
+        const counter = registry.newCounter("counter1");
         registry.register("set1", registry);
 
         expect(registry.getCounters()).to.satisfy(mapSize(2));
@@ -202,12 +203,12 @@ export class MetricRegistryTest {
 
     @test("check name factory")
     public checkNameFactory(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getCounters()).to.satisfy(mapSize(0));
 
         registry.setNameFactory(() => "constant-name");
-        let counter = registry.newCounter("counter1");
+        const counter = registry.newCounter("counter1");
         registry.register("set1", registry);
 
         expect(registry.getCounters()).to.satisfy(mapSize(2));
@@ -218,11 +219,11 @@ export class MetricRegistryTest {
 
     @test("add, set, remove and check gauges")
     public checkGauges(): void {
-        let registry: MetricRegistry = new MetricRegistry();
+        const registry: MetricRegistry = new MetricRegistry();
 
         expect(registry.getGauges()).to.satisfy(mapSize(0));
 
-        let gauge = new SimpleGauge();
+        const gauge = new SimpleGauge();
         registry.register("gauge1", gauge);
 
         expect(registry.getGauges()).to.satisfy(mapSize(1));

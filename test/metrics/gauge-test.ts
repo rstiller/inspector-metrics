@@ -14,7 +14,7 @@ export class SimpleGaugeTest {
 
     @test("check set and get value")
     public checkGetAndSetValue(): void {
-        let gauge: SimpleGauge = new SimpleGauge();
+        const gauge: SimpleGauge = new SimpleGauge();
         expect(gauge.getValue()).to.equal(0);
         gauge.setValue(1);
         expect(gauge.getValue()).to.equal(1);

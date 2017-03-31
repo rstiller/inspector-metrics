@@ -83,10 +83,10 @@ export class SimpleSnapshot implements Snapshot {
             return 0;
         }
 
-        let mean = this.getMean();
+        const mean = this.getMean();
         let sum = 0;
         this.values.forEach((value) => {
-            let diff = value - mean;
+            const diff = value - mean;
             sum += diff * diff;
         });
 
@@ -102,8 +102,8 @@ export class SimpleSnapshot implements Snapshot {
             return 0;
         }
 
-        let pos = quantile * (this.values.length + 1);
-        let index = Math.round(pos);
+        const pos = quantile * (this.values.length + 1);
+        const index = Math.round(pos);
 
         if (index < 1) {
             return this.getMin();
@@ -111,8 +111,8 @@ export class SimpleSnapshot implements Snapshot {
             return this.getMax();
         }
 
-        let lower = this.values[index - 1];
-        let upper = this.values[index];
+        const lower = this.values[index - 1];
+        const upper = this.values[index];
         return lower + (pos - Math.floor(pos)) * (upper - lower);
     }
 

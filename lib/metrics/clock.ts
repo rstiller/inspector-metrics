@@ -16,8 +16,8 @@ export function diff(one: Time, two: Time): number {
     if (!one || !two) {
         return 0;
     }
-    let oneValue: number = one.nanoseconds + one.milliseconds * 1000000;
-    let twoValue: number = two.nanoseconds + two.milliseconds * 1000000;
+    const oneValue: number = one.nanoseconds + one.milliseconds * 1000000;
+    const twoValue: number = two.nanoseconds + two.milliseconds * 1000000;
     return twoValue - oneValue;
 }
 

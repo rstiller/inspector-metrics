@@ -14,7 +14,7 @@ export class CounterTest {
 
     @test("check count, reset and get")
     public checkBasics(): void {
-        let counter: Counter = new Counter();
+        const counter: Counter = new Counter();
         expect(counter.getCount()).to.equal(0);
         counter.increment(1);
         expect(counter.getCount()).to.equal(1);
