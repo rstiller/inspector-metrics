@@ -124,13 +124,13 @@ export class MetricRegistry extends Taggable implements MetricSet {
     }
 
     public newCounter(name: string): Counter {
-        let counter = new Counter();
+        const counter = new Counter();
         this.register(name, counter);
         return counter;
     }
 
     public newMeter(name: string, clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
-        let meter = new Meter(clock, sampleRate);
+        const meter = new Meter(clock, sampleRate);
         this.register(name, meter);
         return meter;
     }
@@ -139,7 +139,7 @@ export class MetricRegistry extends Taggable implements MetricSet {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        let histogram = new Histogram(reservoir);
+        const histogram = new Histogram(reservoir);
         this.register(name, histogram);
         return histogram;
     }
@@ -148,7 +148,7 @@ export class MetricRegistry extends Taggable implements MetricSet {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        let timer = new Timer(clock, reservoir);
+        const timer = new Timer(clock, reservoir);
         this.register(name, timer);
         return timer;
     }
@@ -170,9 +170,9 @@ export class MetricRegistry extends Taggable implements MetricSet {
             this.timers.set(name, metric);
             this.metrics.set(name, metric);
         } else if (this.isMetricSet(metric)) {
-            let registry = this;
+            const registry = this;
             new Map(metric.getMetrics()).forEach((m: Metric, n: string) => {
-                let metricName = this.nameFactory(name, n, m);
+                const metricName = this.nameFactory(name, n, m);
                 registry.register(metricName, m);
             });
         }

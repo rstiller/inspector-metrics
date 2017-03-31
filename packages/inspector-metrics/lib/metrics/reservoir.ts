@@ -26,7 +26,7 @@ export class DefaultReservoir implements Reservoir {
         if (this.values.length < this.maxSize) {
             this.values.push(value);
         } else {
-            let randomIndex: number = Math.round(Math.random() * this.values.length);
+            const randomIndex: number = Math.round(Math.random() * this.values.length);
             this.values[randomIndex % this.values.length] = value;
         }
     }

@@ -16,7 +16,7 @@ export abstract class MetricReporter {
     }
 
     public removeMetricRegistry(metricRegistry: MetricRegistry): void {
-        let index: number = this.metricRegistries.indexOf(metricRegistry);
+        const index: number = this.metricRegistries.indexOf(metricRegistry);
         if (index > -1) {
             this.metricRegistries.splice(index, 1);
         }

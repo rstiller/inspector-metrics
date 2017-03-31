@@ -14,7 +14,7 @@ export class TaggableTest {
 
     @test("add tag, set tag, remove tag, check tag")
     public checkTags(): void {
-        let taggable: Taggable = new Taggable();
+        const taggable: Taggable = new Taggable();
 
         expect(taggable.getTags()).to.be.a("Map");
         expect(taggable.getTags()).to.satisfy((map: Map<string, string>) => map.size === 0);

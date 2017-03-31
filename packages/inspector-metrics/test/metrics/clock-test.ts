@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -19,7 +20,7 @@ export class DiffTest {
 
     @test("diff with same value")
     public checkDiffWithSameValues(): void {
-        let time: Time = {
+        const time: Time = {
             milliseconds: 0,
             nanoseconds: 0,
         };
@@ -28,11 +29,11 @@ export class DiffTest {
 
     @test("diff with different nanoseconds")
     public checkDiffWithDifferentNanosecondValues(): void {
-        let one: Time = {
+        const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
         };
-        let two: Time = {
+        const two: Time = {
             milliseconds: 0,
             nanoseconds: 1,
         };
@@ -41,11 +42,11 @@ export class DiffTest {
 
     @test("diff with different milliseconds")
     public checkDiffWithDifferentMillisecondValues(): void {
-        let one: Time = {
+        const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
         };
-        let two: Time = {
+        const two: Time = {
             milliseconds: 1,
             nanoseconds: 0,
         };
@@ -54,11 +55,11 @@ export class DiffTest {
 
     @test("diff with different milliseconds and nanoseconds")
     public checkDiffWithDifferentMillisecondAndNanoseondValues(): void {
-        let one: Time = {
+        const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
         };
-        let two: Time = {
+        const two: Time = {
             milliseconds: 1,
             nanoseconds: 2,
         };
@@ -72,7 +73,8 @@ export class StdClockTest {
 
     @test("check time function")
     public checkTimeFunction(): void {
-        expect(new StdClock().time()).to.be.not.null;
+        const time = new StdClock().time();
+        expect(time).to.be.not.null;
     }
 
 }

@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -14,7 +15,7 @@ export class DefaultReservoirTest {
 
     @test("check correct size")
     public checkCorrectSize(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
@@ -24,10 +25,10 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from no values")
     public checkSnapshotFromNoValues(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(0);
         expect(snapshot.get95thPercentile()).to.equal(0);
         expect(snapshot.get98thPercentile()).to.equal(0);
@@ -43,12 +44,12 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from one value")
     public checkSnapshotFromOneValue(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -64,14 +65,14 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from same value twice")
     public checkSnapshotFromSameValueTwice(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -87,14 +88,14 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from different values")
     public checkSnapshotFromDifferentValues(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(3);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(3);
         expect(snapshot.get95thPercentile()).to.equal(3);
         expect(snapshot.get98thPercentile()).to.equal(3);
@@ -110,7 +111,7 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from same value more times than capacity")
     public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
@@ -119,7 +120,7 @@ export class DefaultReservoirTest {
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -135,14 +136,14 @@ export class DefaultReservoirTest {
 
     @test("check snapshot from different values")
     public checkSnapshotsWithDifferentValues(): void {
-        let reservoir = new DefaultReservoir(2);
+        const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(3);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot1 = reservoir.snapshot();
+        const snapshot1 = reservoir.snapshot();
         expect(snapshot1.get75thPercentile()).to.equal(3);
         expect(snapshot1.get95thPercentile()).to.equal(3);
         expect(snapshot1.get98thPercentile()).to.equal(3);
@@ -158,7 +159,7 @@ export class DefaultReservoirTest {
         reservoir.update(5);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot2 = reservoir.snapshot();
+        const snapshot2 = reservoir.snapshot();
         expect(snapshot2.get75thPercentile()).to.equal(5);
         expect(snapshot2.get95thPercentile()).to.equal(5);
         expect(snapshot2.get98thPercentile()).to.equal(5);
@@ -179,7 +180,7 @@ export class SlidingWindowReservoirTest {
 
     @test("check correct size")
     public checkCorrectSize(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
@@ -189,10 +190,10 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from no values")
     public checkSnapshotFromNoValues(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(0);
         expect(snapshot.get95thPercentile()).to.equal(0);
         expect(snapshot.get98thPercentile()).to.equal(0);
@@ -208,12 +209,12 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from one value")
     public checkSnapshotFromOneValue(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -229,14 +230,14 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from same value twice")
     public checkSnapshotFromSameValueTwice(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -252,14 +253,14 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from different values")
     public checkSnapshotFromDifferentValues(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(3);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(3);
         expect(snapshot.get95thPercentile()).to.equal(3);
         expect(snapshot.get98thPercentile()).to.equal(3);
@@ -275,7 +276,7 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from same value more times than capacity")
     public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
@@ -284,7 +285,7 @@ export class SlidingWindowReservoirTest {
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot = reservoir.snapshot();
+        const snapshot = reservoir.snapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -300,14 +301,14 @@ export class SlidingWindowReservoirTest {
 
     @test("check snapshot from different values")
     public checkSnapshotsWithDifferentValues(): void {
-        let reservoir = new SlidingWindowReservoir(2);
+        const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
         expect(reservoir.size()).to.equal(1);
         reservoir.update(3);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot1 = reservoir.snapshot();
+        const snapshot1 = reservoir.snapshot();
         expect(snapshot1.get75thPercentile()).to.equal(3);
         expect(snapshot1.get95thPercentile()).to.equal(3);
         expect(snapshot1.get98thPercentile()).to.equal(3);
@@ -323,7 +324,7 @@ export class SlidingWindowReservoirTest {
         reservoir.update(5);
         expect(reservoir.size()).to.equal(2);
 
-        let snapshot2 = reservoir.snapshot();
+        const snapshot2 = reservoir.snapshot();
         expect(snapshot2.get75thPercentile()).to.equal(5);
         expect(snapshot2.get95thPercentile()).to.equal(5);
         expect(snapshot2.get98thPercentile()).to.equal(5);

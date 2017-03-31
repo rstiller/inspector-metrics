@@ -64,7 +64,7 @@ export class Meter extends Taggable implements Metered {
         if (this.count === 0) {
             return 0.0;
         } else {
-            let elapsed: number = diff(this.startTime, this.clock.time());
+            const elapsed: number = diff(this.startTime, this.clock.time());
             return this.count / elapsed * Meter.SECOND_1_NANOS;
         }
     }
@@ -78,8 +78,8 @@ export class Meter extends Taggable implements Metered {
     }
 
     private tickIfNeeded(): void {
-        let currentTime: Time = this.clock.time();
-        let age: number = diff(this.lastTime, currentTime);
+        const currentTime: Time = this.clock.time();
+        const age: number = diff(this.lastTime, currentTime);
         if (age > this.interval) {
             this.lastTime = currentTime;
             this.tick(Math.floor(age / this.interval));

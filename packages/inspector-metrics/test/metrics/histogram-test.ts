@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -15,7 +16,7 @@ export class HistogramTest {
 
     @test("simple count and get")
     public checkOrdinaryCountAndGet(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(1024));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(1024));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
@@ -27,10 +28,10 @@ export class HistogramTest {
 
     @test("check snapshot from no values")
     public checkSnapshotFromNoValues(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
 
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
         expect(snapshot.get75thPercentile()).to.equal(0);
         expect(snapshot.get95thPercentile()).to.equal(0);
         expect(snapshot.get98thPercentile()).to.equal(0);
@@ -46,12 +47,12 @@ export class HistogramTest {
 
     @test("check snapshot from one value")
     public checkSnapshotFromOneValue(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
 
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -67,14 +68,14 @@ export class HistogramTest {
 
     @test("check snapshot from same value twice")
     public checkSnapshotFromSameValueTwice(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(2);
 
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -90,14 +91,14 @@ export class HistogramTest {
 
     @test("check snapshot from different values")
     public checkSnapshotFromDifferentValues(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
         histogram.update(3);
         expect(histogram.getCount()).to.equal(2);
 
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
         expect(snapshot.get75thPercentile()).to.equal(3);
         expect(snapshot.get95thPercentile()).to.equal(3);
         expect(snapshot.get98thPercentile()).to.equal(3);
@@ -113,7 +114,7 @@ export class HistogramTest {
 
     @test("check snapshot from same value more times than capacity")
     public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
@@ -122,7 +123,7 @@ export class HistogramTest {
         histogram.update(1);
         expect(histogram.getCount()).to.equal(3);
 
-        let snapshot = histogram.getSnapshot();
+        const snapshot = histogram.getSnapshot();
         expect(snapshot.get75thPercentile()).to.equal(1);
         expect(snapshot.get95thPercentile()).to.equal(1);
         expect(snapshot.get98thPercentile()).to.equal(1);
@@ -138,14 +139,14 @@ export class HistogramTest {
 
     @test("check snapshot from different values")
     public checkSnapshotsWithDifferentValues(): void {
-        let histogram: Histogram = new Histogram(new DefaultReservoir(2));
+        const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
         expect(histogram.getCount()).to.equal(1);
         histogram.update(3);
         expect(histogram.getCount()).to.equal(2);
 
-        let snapshot1 = histogram.getSnapshot();
+        const snapshot1 = histogram.getSnapshot();
         expect(snapshot1.get75thPercentile()).to.equal(3);
         expect(snapshot1.get95thPercentile()).to.equal(3);
         expect(snapshot1.get98thPercentile()).to.equal(3);
@@ -161,7 +162,7 @@ export class HistogramTest {
         histogram.update(5);
         expect(histogram.getCount()).to.equal(3);
 
-        let snapshot2 = histogram.getSnapshot();
+        const snapshot2 = histogram.getSnapshot();
         expect(snapshot2.get75thPercentile()).to.equal(5);
         expect(snapshot2.get95thPercentile()).to.equal(5);
         expect(snapshot2.get98thPercentile()).to.equal(5);

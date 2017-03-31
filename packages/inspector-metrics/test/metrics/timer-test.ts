@@ -1,3 +1,4 @@
+/* tslint:disable:no-unused-expression */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -24,7 +25,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -71,7 +72,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -118,7 +119,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -167,7 +168,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -218,7 +219,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -271,7 +272,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -350,7 +351,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -429,7 +430,7 @@ export class TimerTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -492,8 +493,8 @@ export class StopWatchTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
-        let stopWatch: StopWatch = timer.newStopWatch();
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -541,8 +542,8 @@ export class StopWatchTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
-        let stopWatch: StopWatch = timer.newStopWatch();
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
@@ -601,8 +602,8 @@ export class StopWatchTest {
             milliseconds: 0,
             nanoseconds: 0,
         });
-        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
-        let stopWatch: StopWatch = timer.newStopWatch();
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);

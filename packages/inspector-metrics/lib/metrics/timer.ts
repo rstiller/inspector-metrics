@@ -76,8 +76,8 @@ export class Timer extends Taggable implements Metered, Sampling {
         return this.meter.getMeanRate();
     }
 
-    public time(f: Function): void {
-        let startTime: Time = this.clock.time();
+    public time(f: () => void): void {
+        const startTime: Time = this.clock.time();
         try {
             f();
         } finally {
