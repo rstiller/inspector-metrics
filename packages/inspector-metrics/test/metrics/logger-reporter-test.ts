@@ -74,6 +74,20 @@ export class LoggerReporterTest {
         this.reporter.addMetricRegistry(this.registry);
     }
 
+    @test("remove metric-registry which was not added")
+    public checkRemoveMetricRegistry(): void {
+        this.reporter.removeMetricRegistry(this.registry);
+        this.reporter.removeMetricRegistry(this.registry);
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        this.reporter.start();
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.have.been.called;
+    }
+
     @test("no metric-registries added")
     public checkNoMetricRegistries(): void {
         this.reporter.removeMetricRegistry(this.registry);
