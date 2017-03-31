@@ -23,16 +23,15 @@
         "lib": [
             "dom", "es6"
         ],
-        "outDir": "build",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "removeComments": true
+        "removeComments": true,
+        "sourceRoot": "./lib/",
+        "rootDir": "./",
+        "charset": "utf-8",
+        "outDir": "build/"
     },
-    "include": [
-        "./lib/**/*.ts",
-        "./test/**/*.ts"
-    ],
     "exclude": [
         "node_modules",
         "**/*.d.ts"
