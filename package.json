@@ -1,6 +1,6 @@
 {
   "name": "inspector-metrics",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./build/lib/index.js",
   "types": "./build/lib/index",
   "license": "MIT",
@@ -41,6 +41,14 @@
     "lodash": "^4.17",
     "source-map-support": "^0.4"
   },
+  "files": [
+    "build",
+    "lib",
+    "test",
+    "mocha.opts",
+    "tsconfig.json",
+    "tslint.json"
+  ],
   "scripts": {
     "check:lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
     "check:coverage": "nyc npm run test:jenkins",
