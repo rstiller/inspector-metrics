@@ -1,6 +1,6 @@
 {
   "name": "inspector-influx",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
