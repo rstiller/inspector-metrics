@@ -99,6 +99,7 @@ export class LoggerReporter extends MetricReporter {
             registry.getCounters().forEach((counter: Counter, name: string) => {
                 if (!isNaN(counter.getCount())) {
                     logMetadata.measurement = name;
+                    logMetadata.group = counter.getGroup();
                     logMetadata.tags = this.buildTags(registry, counter);
                     this.log.info(`${date} - counter ${name}: ${counter.getCount()}`, logMetadata);
                 }
@@ -116,6 +117,7 @@ export class LoggerReporter extends MetricReporter {
             registry.getGauges().forEach((gauge: Gauge<any>, name: string) => {
                 if (!isNaN(gauge.getValue())) {
                     logMetadata.measurement = name;
+                    logMetadata.group = gauge.getGroup();
                     logMetadata.tags = this.buildTags(registry, gauge);
                     this.log.info(`${date} - gauge ${name}: ${gauge.getValue()}`, logMetadata);
                 }
@@ -133,6 +135,7 @@ export class LoggerReporter extends MetricReporter {
             registry.getHistograms().forEach((histogram: Histogram, name: string) => {
                 if (!isNaN(histogram.getCount())) {
                     logMetadata.measurement = name;
+                    logMetadata.group = histogram.getGroup();
                     logMetadata.tags = this.buildTags(registry, histogram);
 
                     const snapshot = histogram.getSnapshot();
@@ -164,6 +167,7 @@ export class LoggerReporter extends MetricReporter {
             registry.getMeters().forEach((meter: Meter, name: string) => {
                 if (!isNaN(meter.getCount())) {
                     logMetadata.measurement = name;
+                    logMetadata.group = meter.getGroup();
                     logMetadata.tags = this.buildTags(registry, meter);
 
                     this.log.info(`${date} - meter ${name}\
@@ -188,6 +192,7 @@ export class LoggerReporter extends MetricReporter {
             registry.getTimers().forEach((timer: Timer, name: string) => {
                 if (!isNaN(timer.getCount())) {
                     logMetadata.measurement = name;
+                    logMetadata.group = timer.getGroup();
                     logMetadata.tags = this.buildTags(registry, timer);
 
                     const snapshot = timer.getSnapshot();
