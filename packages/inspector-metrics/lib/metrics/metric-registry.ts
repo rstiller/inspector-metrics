@@ -160,6 +160,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         if (!!group) {
             metric.setGroup(group);
         }
+        name = this.generateName(name, metric);
         if (metric instanceof Meter) {
             this.meters.set(name, metric);
             this.metrics.set(name, metric);
@@ -182,6 +183,13 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
                 registry.register(metricName, m);
             });
         }
+    }
+
+    private generateName(name: string, metric: Metric): string {
+        if (!!metric.getGroup()) {
+            return `${metric.getGroup()}.${name}`;
+        }
+        return name;
     }
 
     private isGauge<T>(instance: any): instance is Gauge<T> {
