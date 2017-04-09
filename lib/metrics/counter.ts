@@ -2,10 +2,9 @@
 import "source-map-support/register";
 
 import { Counting } from "./counting";
-import { Metric } from "./metric";
-import { Taggable } from "./taggable";
+import { BaseMetric, Metric } from "./metric";
 
-export class Counter extends Taggable implements Counting, Metric {
+export class Counter extends BaseMetric implements Counting, Metric {
 
     private count: number = 0;
 

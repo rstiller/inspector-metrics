@@ -5,10 +5,10 @@ import { Clock, diff, Time } from "./clock";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
 import { Metered } from "./metered";
+import { BaseMetric } from "./metric";
 import { Reservoir } from "./reservoir";
 import { Sampling } from "./sampling";
 import { Snapshot } from "./snapshot";
-import { Taggable } from "./taggable";
 import { NANOSECOND, TimeUnit } from "./time-unit";
 
 export class StopWatch {
@@ -32,7 +32,7 @@ export class StopWatch {
 
 }
 
-export class Timer extends Taggable implements Metered, Sampling {
+export class Timer extends BaseMetric implements Metered, Sampling {
 
     private clock: Clock;
     private meter: Meter;
