@@ -122,36 +122,44 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return this.metrics;
     }
 
-    public newCounter(name: string, group: string = ""): Counter {
+    public newCounter(name: string, group: string = null): Counter {
         const counter = new Counter();
-        counter.setGroup(group);
+        if (!!group) {
+            counter.setGroup(group);
+        }
         this.register(name, counter);
         return counter;
     }
 
-    public newMeter(name: string, group: string = "", clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
+    public newMeter(name: string, group: string = null, clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
         const meter = new Meter(clock, sampleRate);
-        meter.setGroup(group);
+        if (!!group) {
+            meter.setGroup(group);
+        }
         this.register(name, meter);
         return meter;
     }
 
-    public newHistogram(name: string, group: string = "", reservoir: Reservoir = null): Histogram {
+    public newHistogram(name: string, group: string = null, reservoir: Reservoir = null): Histogram {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const histogram = new Histogram(reservoir);
-        histogram.setGroup(group);
+        if (!!group) {
+            histogram.setGroup(group);
+        }
         this.register(name, histogram);
         return histogram;
     }
 
-    public newTimer(name: string, group: string = "", clock: Clock = this.defaultClock, reservoir: Reservoir = null): Timer {
+    public newTimer(name: string, group: string = null, clock: Clock = this.defaultClock, reservoir: Reservoir = null): Timer {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const timer = new Timer(clock, reservoir);
-        timer.setGroup(group);
+        if (!!group) {
+            timer.setGroup(group);
+        }
         this.register(name, timer);
         return timer;
     }
