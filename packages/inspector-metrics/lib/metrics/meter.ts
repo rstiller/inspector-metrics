@@ -3,11 +3,11 @@ import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
 import { Metered } from "./metered";
+import { BaseMetric } from "./metric";
 import { ExponentiallyWeightedMovingAverage, MovingAverage } from "./moving-average";
-import { Taggable } from "./taggable";
 import { NANOSECOND, SECOND } from "./time-unit";
 
-export class Meter extends Taggable implements Metered {
+export class Meter extends BaseMetric implements Metered {
 
     private static AVG_1_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_1_MINUTE_1_SECOND_SAMPLERATE;
     private static AVG_5_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_5_MINUTE_1_SECOND_SAMPLERATE;

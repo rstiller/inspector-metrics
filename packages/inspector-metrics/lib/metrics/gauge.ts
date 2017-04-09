@@ -1,14 +1,13 @@
 
 import "source-map-support/register";
 
-import { Metric } from "./metric";
-import { Taggable } from "./taggable";
+import { BaseMetric, Metric } from "./metric";
 
-export interface Gauge<T> extends Metric, Taggable {
+export interface Gauge<T> extends Metric {
     getValue(): T;
 }
 
-export class SimpleGauge extends Taggable implements Gauge<number> {
+export class SimpleGauge extends BaseMetric implements Gauge<number> {
 
     private value: number = 0;
 

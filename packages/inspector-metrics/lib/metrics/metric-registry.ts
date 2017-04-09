@@ -6,15 +6,14 @@ import { Counter } from "./counter";
 import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
-import { Metric } from "./metric";
+import { BaseMetric, Metric } from "./metric";
 import { MetricSet } from "./metric-set";
 import { Reservoir, SlidingWindowReservoir } from "./reservoir";
-import { Taggable } from "./taggable";
 import { Timer } from "./timer";
 
 export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;
 
-export class MetricRegistry extends Taggable implements MetricSet {
+export class MetricRegistry extends BaseMetric implements MetricSet {
 
     private static defaultNameFactory(baseName: string, metricName: string, metric: Metric): string {
         return baseName + "." + metricName;
@@ -123,37 +122,44 @@ export class MetricRegistry extends Taggable implements MetricSet {
         return this.metrics;
     }
 
-    public newCounter(name: string): Counter {
+    public newCounter(name: string, group: string = ""): Counter {
         const counter = new Counter();
+        counter.setGroup(group);
         this.register(name, counter);
         return counter;
     }
 
-    public newMeter(name: string, clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
+    public newMeter(name: string, group: string = "", clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
         const meter = new Meter(clock, sampleRate);
+        meter.setGroup(group);
         this.register(name, meter);
         return meter;
     }
 
-    public newHistogram(name: string, reservoir: Reservoir = null): Histogram {
+    public newHistogram(name: string, group: string = "", reservoir: Reservoir = null): Histogram {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const histogram = new Histogram(reservoir);
+        histogram.setGroup(group);
         this.register(name, histogram);
         return histogram;
     }
 
-    public newTimer(name: string, clock: Clock = this.defaultClock, reservoir: Reservoir = null): Timer {
+    public newTimer(name: string, group: string = "", clock: Clock = this.defaultClock, reservoir: Reservoir = null): Timer {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const timer = new Timer(clock, reservoir);
+        timer.setGroup(group);
         this.register(name, timer);
         return timer;
     }
 
-    public register(name: string, metric: Metric): void {
+    public register(name: string, metric: Metric, group: string = null): void {
+        if (!!group) {
+            metric.setGroup(group);
+        }
         if (metric instanceof Meter) {
             this.meters.set(name, metric);
             this.metrics.set(name, metric);

@@ -2,13 +2,12 @@
 import "source-map-support/register";
 
 import { Counting } from "./counting";
-import { Metric } from "./metric";
+import { BaseMetric, Metric } from "./metric";
 import { Reservoir } from "./reservoir";
 import { Sampling } from "./sampling";
 import { Snapshot } from "./snapshot";
-import { Taggable } from "./taggable";
 
-export class Histogram extends Taggable implements Counting, Metric, Sampling {
+export class Histogram extends BaseMetric implements Counting, Metric, Sampling {
 
     private reservoir: Reservoir;
     private count: number = 0;
