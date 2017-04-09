@@ -9,6 +9,7 @@ export * from "./logger";
 export * from "./meter";
 export * from "./metered";
 export * from "./metric-registry";
+export * from "./metric-registry-listener";
 export * from "./metric-reporter";
 export * from "./metric-set";
 export * from "./metric";

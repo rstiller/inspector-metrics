@@ -7,11 +7,22 @@ import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
 import { BaseMetric, Metric } from "./metric";
+import { MetricRegistryListener } from "./metric-registry-listener";
 import { MetricSet } from "./metric-set";
 import { Reservoir, SlidingWindowReservoir } from "./reservoir";
 import { Timer } from "./timer";
 
 export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;
+
+export class Registration {
+
+    public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) {}
+
+    public removeEventListener(): void {
+        this.registry.removeListener(this.listener);
+    }
+
+}
 
 export class MetricRegistry extends BaseMetric implements MetricSet {
 
@@ -27,6 +38,19 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     private timers: Map<string, Timer> = new Map();
     private metrics: Map<string, Metric> = new Map();
     private nameFactory: NameFactory = MetricRegistry.defaultNameFactory;
+    private listeners: MetricRegistryListener[] = [];
+
+    public addListener(listener: MetricRegistryListener): Registration {
+        this.listeners.push(listener);
+        return new Registration(listener, this);
+    }
+
+    public removeListener(listener: MetricRegistryListener): void {
+        const index = this.listeners.indexOf(listener);
+        if (index > -1) {
+            delete this.listeners[index];
+        }
+    }
 
     public setNameFactory(nameFactory: NameFactory): void {
         this.nameFactory = nameFactory;
@@ -88,34 +112,47 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         this.counters.delete(name);
         this.histograms.delete(name);
         this.meters.delete(name);
-        this.metrics.delete(name);
         this.gauges.delete(name);
         this.timers.delete(name);
+
+        const metric = this.metrics.get(name);
+        this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public removeCounter(name: string): void {
         this.counters.delete(name);
+        const metric = this.metrics.get(name);
         this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public removeGauge(name: string): void {
         this.gauges.delete(name);
+        const metric = this.metrics.get(name);
         this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public removeHistogram(name: string): void {
         this.histograms.delete(name);
+        const metric = this.metrics.get(name);
         this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public removeMeter(name: string): void {
         this.meters.delete(name);
+        const metric = this.metrics.get(name);
         this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public removeTimer(name: string): void {
         this.timers.delete(name);
+        const metric = this.metrics.get(name);
         this.metrics.delete(name);
+        this.fireMetricRemoved(name, metric);
     }
 
     public getMetrics(): Map<string, Metric> {
@@ -172,18 +209,23 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         if (metric instanceof Meter) {
             this.meters.set(name, metric);
             this.metrics.set(name, metric);
+            this.fireMetricAdded(name, metric);
         } else if (metric instanceof Counter) {
             this.counters.set(name, metric);
             this.metrics.set(name, metric);
+            this.fireMetricAdded(name, metric);
         } else if (this.isGauge(metric)) {
             this.gauges.set(name, metric);
             this.metrics.set(name, metric);
+            this.fireMetricAdded(name, metric);
         } else if (metric instanceof Histogram) {
             this.histograms.set(name, metric);
             this.metrics.set(name, metric);
+            this.fireMetricAdded(name, metric);
         } else if (metric instanceof Timer) {
             this.timers.set(name, metric);
             this.metrics.set(name, metric);
+            this.fireMetricAdded(name, metric);
         } else if (this.isMetricSet(metric)) {
             const registry = this;
             new Map(metric.getMetrics()).forEach((m: Metric, n: string) => {
@@ -206,6 +248,14 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
 
     private isMetricSet(instance: any): instance is MetricSet {
         return !!instance.getMetrics && instance.getMetrics instanceof Function;
+    }
+
+    private fireMetricAdded(name: string, metric: Metric): void {
+        this.listeners.forEach((listener) => listener.metricAdded(name, metric));
+    }
+
+    private fireMetricRemoved(name: string, metric: Metric): void {
+        this.listeners.forEach((listener) => listener.metricRemoved(name, metric));
     }
 
 }
