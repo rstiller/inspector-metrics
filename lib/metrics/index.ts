@@ -2,6 +2,7 @@ export * from "./clock";
 export * from "./counter";
 export * from "./counting";
 export * from "./gauge";
+export * from "./groupable";
 export * from "./histogram";
 export * from "./logger-reporter";
 export * from "./logger";
