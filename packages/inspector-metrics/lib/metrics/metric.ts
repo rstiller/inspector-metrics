@@ -1,10 +1,10 @@
 
 import "source-map-support/register";
 
-import { IGroupable } from "./groupable";
-import { ITaggable } from "./taggable";
+import { Groupable } from "./groupable";
+import { Taggable } from "./taggable";
 
-export interface Metric extends IGroupable, ITaggable {
+export interface Metric extends Groupable, Taggable {
 }
 
 export abstract class BaseMetric implements Metric {

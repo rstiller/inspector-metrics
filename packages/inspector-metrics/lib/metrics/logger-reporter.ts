@@ -12,7 +12,7 @@ import { Logger } from "./logger";
 import { Meter } from "./meter";
 import { MetricRegistry } from "./metric-registry";
 import { MetricReporter } from "./metric-reporter";
-import { ITaggable } from "./taggable";
+import { Taggable } from "./taggable";
 import { MILLISECOND, TimeUnit } from "./time-unit";
 import { Timer } from "./timer";
 
@@ -218,7 +218,7 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
-    private buildTags(registry: MetricRegistry, taggable: ITaggable): { [key: string]: string; } {
+    private buildTags(registry: MetricRegistry, taggable: Taggable): { [key: string]: string; } {
         const tags: { [x: string]: string } = {};
         registry.getTags().forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);

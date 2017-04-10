@@ -185,6 +185,58 @@ snapshot = callStats.getSnapshot();
 snapshot.getMean();
 ```
 
+### MetricListeners
+
+```typescript
+import { Metric, MetricRegistry, MetricRegistryListener, MetricRegistryListenerRegistration } from "inspector-metrics";
+
+class Listener implements MetricRegistryListener {
+
+    public metricAdded(name: string, metric: Metric): void {
+        console.log(`added metric ${name}: ${metric}`);
+    }
+
+    public metricRemoved(name: string, metric: Metric): void {
+        console.log(`removed metric ${name}: ${metric}`);
+    }
+
+}
+
+const registry = new MetricRegistry();
+const registration: MetricRegistryListenerRegistration = registry.addListener(new Listener());
+
+// prints "added metric requests: Counter..." via console
+registry.newCounter("requests");
+
+// removes the listener
+registration.remove();
+```
+
+### Metric Groups
+
+Each metric can have a group, which is used to gather different metrics
+within metric reporter instances. E.g. if only gauges are used
+to gather metrics data a group can be used to report them all as one
+measure point with different fields.
+
+```typescript
+import { Gauge, MetricRegistry } from "inspector-metrics";
+
+const registry = new MetricRegistry();
+// reports the internal storage capacity of a queue
+const capacity: Gauge<number> = ...;
+// reports the element count in the queue
+const queueSize: Gauge<number> = ...;
+
+// all values grouped as buffer
+registry.register("elements", queueSize, "buffer");
+registry.register("capacity", capacity, "buffer");
+// counts the number of allocations during the execution of the application
+registry.newCounter("newAllocations", "buffer");
+
+// the reporter can now report the values as a single measurement point if supported ...
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)
