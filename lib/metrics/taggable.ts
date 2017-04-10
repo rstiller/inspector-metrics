@@ -1,7 +1,7 @@
 
 import "source-map-support/register";
 
-export interface ITaggable {
+export interface Taggable {
     getTags(): Map<string, string>;
     getTag(name: string): string;
     setTag(name: string, value: string): void;

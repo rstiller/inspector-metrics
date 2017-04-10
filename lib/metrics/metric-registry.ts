@@ -14,7 +14,7 @@ import { Timer } from "./timer";
 
 export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;
 
-export class Registration {
+export class MetricRegistryListenerRegistration {
 
     public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) {}
 
@@ -40,9 +40,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     private nameFactory: NameFactory = MetricRegistry.defaultNameFactory;
     private listeners: MetricRegistryListener[] = [];
 
-    public addListener(listener: MetricRegistryListener): Registration {
+    public addListener(listener: MetricRegistryListener): MetricRegistryListenerRegistration {
         this.listeners.push(listener);
-        return new Registration(listener, this);
+        return new MetricRegistryListenerRegistration(listener, this);
     }
 
     public removeListener(listener: MetricRegistryListener): void {
