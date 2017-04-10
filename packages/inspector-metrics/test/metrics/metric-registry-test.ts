@@ -5,14 +5,20 @@ import "source-map-support/register";
 
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
+import { SinonSpy, spy } from "sinon";
+import * as sinonChai from "sinon-chai";
 
 import { StdClock } from "../../lib/metrics/clock";
 import { Counter } from "../../lib/metrics/counter";
 import { SimpleGauge } from "../../lib/metrics/gauge";
 import { Histogram } from "../../lib/metrics/histogram";
 import { Meter } from "../../lib/metrics/meter";
+import { Metric } from "../../lib/metrics/metric";
 import { MetricRegistry } from "../../lib/metrics/metric-registry";
+import { MetricRegistryListener } from "../../lib/metrics/metric-registry-listener";
 import { Timer } from "../../lib/metrics/timer";
+
+chai.use(sinonChai);
 
 const expect = chai.expect;
 function mapSize(size: number): (map: Map<string, string>) => boolean {
@@ -251,6 +257,108 @@ export class MetricRegistryTest {
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
         expect(registry.getGauge("gauge1")).to.be.undefined;
         expect(registry.getMetric("gauge1")).to.be.undefined;
+    }
+
+    @test("check groups")
+    public checkGroup(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        const counter = registry.newCounter("counter1", "group");
+        const histogram = registry.newHistogram("histogram1", "group");
+        const meter = registry.newMeter("meter1", "group");
+        const timer = registry.newTimer("timer1", "group");
+        const gauge = new SimpleGauge();
+        registry.register("gauge1", gauge, "group");
+
+        expect(counter.getGroup()).to.equal("group");
+        expect(gauge.getGroup()).to.equal("group");
+        expect(histogram.getGroup()).to.equal("group");
+        expect(meter.getGroup()).to.equal("group");
+        expect(timer.getGroup()).to.equal("group");
+    }
+
+    @test("check listeners")
+    public checkListeners(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+        const listener: MetricRegistryListener = {
+            metricAdded: (name: string, metric: Metric) => {},
+            metricRemoved: (name: string, metric: Metric) => {},
+        };
+        const metricAddedSpy: SinonSpy = spy(listener.metricAdded);
+        const metricRemovedSpy: SinonSpy = spy(listener.metricRemoved);
+        listener.metricAdded = metricAddedSpy;
+        listener.metricRemoved = metricRemovedSpy;
+
+        const registration = registry.addListener(listener);
+
+        expect(metricAddedSpy.callCount).to.equal(0);
+        expect(metricRemovedSpy.callCount).to.equal(0);
+
+        const counter = registry.newCounter("counter1");
+        const histogram = registry.newHistogram("histogram1");
+        const meter = registry.newMeter("meter1");
+        const timer = registry.newTimer("timer1");
+        const gauge = new SimpleGauge();
+        registry.register("gauge1", gauge);
+
+        expect(metricAddedSpy.callCount).to.equal(5);
+        expect(metricRemovedSpy.callCount).to.equal(0);
+
+        let call1 = metricAddedSpy.getCall(0).args;
+        let call2 = metricAddedSpy.getCall(1).args;
+        let call3 = metricAddedSpy.getCall(2).args;
+        let call4 = metricAddedSpy.getCall(3).args;
+        let call5 = metricAddedSpy.getCall(4).args;
+
+        expect(call1[0]).to.equal("counter1");
+        expect(call2[0]).to.equal("histogram1");
+        expect(call3[0]).to.equal("meter1");
+        expect(call4[0]).to.equal("timer1");
+        expect(call5[0]).to.equal("gauge1");
+
+        expect(call1[1]).to.equal(counter);
+        expect(call2[1]).to.equal(histogram);
+        expect(call3[1]).to.equal(meter);
+        expect(call4[1]).to.equal(timer);
+        expect(call5[1]).to.equal(gauge);
+
+        registry.removeCounter("counter1");
+        registry.removeGauge("gauge1");
+        registry.removeHistogram("histogram1");
+        registry.removeMeter("meter1");
+        registry.removeTimer("timer1");
+
+        expect(metricAddedSpy.callCount).to.equal(5);
+        expect(metricRemovedSpy.callCount).to.equal(5);
+
+        call1 = metricRemovedSpy.getCall(0).args;
+        call2 = metricRemovedSpy.getCall(1).args;
+        call3 = metricRemovedSpy.getCall(2).args;
+        call4 = metricRemovedSpy.getCall(3).args;
+        call5 = metricRemovedSpy.getCall(4).args;
+
+        expect(call1[0]).to.equal("counter1");
+        expect(call2[0]).to.equal("gauge1");
+        expect(call3[0]).to.equal("histogram1");
+        expect(call4[0]).to.equal("meter1");
+        expect(call5[0]).to.equal("timer1");
+
+        expect(call1[1]).to.equal(counter);
+        expect(call2[1]).to.equal(gauge);
+        expect(call3[1]).to.equal(histogram);
+        expect(call4[1]).to.equal(meter);
+        expect(call5[1]).to.equal(timer);
+
+        registration.remove();
+
+        registry.newCounter("counter1");
+        registry.register("gauge1", gauge);
+        registry.newHistogram("histogram1");
+        registry.newMeter("meter1");
+        registry.newTimer("timer1");
+
+        expect(metricAddedSpy.callCount).to.equal(5);
+        expect(metricRemovedSpy.callCount).to.equal(5);
     }
 
 }

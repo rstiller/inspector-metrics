@@ -18,7 +18,7 @@ export class Registration {
 
     public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) {}
 
-    public removeEventListener(): void {
+    public remove(): void {
         this.registry.removeListener(this.listener);
     }
 
