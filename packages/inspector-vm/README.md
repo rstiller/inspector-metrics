@@ -1,2 +1,2 @@
 # inspector-vm
-NoedJS VM Metric Collector
+NodeJS VM Metric Collector
