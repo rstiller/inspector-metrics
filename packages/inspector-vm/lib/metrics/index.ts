@@ -1,1 +1,1 @@
-export * from "./vm-metrics";
+export * from "./gc-metrics";
