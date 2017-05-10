@@ -41,7 +41,7 @@ export class MockedClock implements Clock {
 
 }
 
-@suite("LoggerReporter")
+@suite
 export class LoggerReporterTest {
 
     private clock: MockedClock = new MockedClock();
@@ -74,8 +74,8 @@ export class LoggerReporterTest {
         this.reporter.addMetricRegistry(this.registry);
     }
 
-    @test("remove metric-registry which was not added")
-    public checkRemoveMetricRegistry(): void {
+    @test
+    public "remove metric-registry which was not added"(): void {
         this.reporter.removeMetricRegistry(this.registry);
         this.reporter.removeMetricRegistry(this.registry);
 
@@ -88,8 +88,8 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
     }
 
-    @test("no metric-registries added")
-    public checkNoMetricRegistries(): void {
+    @test
+    public "no metric-registries added"(): void {
         this.reporter.removeMetricRegistry(this.registry);
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -106,8 +106,8 @@ export class LoggerReporterTest {
         expect(this.loggerSpy).to.not.have.been.called;
     }
 
-    @test("counter reporting")
-    public checkCounterReporting(): void {
+    @test
+    public "counter reporting"(): void {
         this.registry.newCounter("counter1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -129,8 +129,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags).to.not.be.null;
     }
 
-    @test("gauge reporting")
-    public checkGaugeReporting(): void {
+    @test
+    public "gauge reporting"(): void {
         this.registry.register("gauge1", new SimpleGauge());
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -152,8 +152,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags).to.not.be.null;
     }
 
-    @test("histogram reporting")
-    public checkHistogramReporting(): void {
+    @test
+    public "histogram reporting"(): void {
         this.registry.newHistogram("histogram1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -175,8 +175,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags).to.not.be.null;
     }
 
-    @test("meter reporting")
-    public checkMeterReporting(): void {
+    @test
+    public "meter reporting"(): void {
         this.registry.newMeter("meter1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -198,8 +198,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags).to.not.be.null;
     }
 
-    @test("timer reporting")
-    public checkTimerReporting(): void {
+    @test
+    public "timer reporting"(): void {
         this.registry.newTimer("timer1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -221,8 +221,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags).to.not.be.null;
     }
 
-    @test("registry tags")
-    public checkRegistryTags(): void {
+    @test
+    public "registry tags"(): void {
         this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
@@ -248,8 +248,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags["mode"]).to.equal("dev");
     }
 
-    @test("metric tags")
-    public checkMetricTags(): void {
+    @test
+    public "metric tags"(): void {
         const counter = this.registry.newCounter("counter1");
         counter.setTag("application", "app");
         counter.setTag("mode", "dev");
@@ -275,8 +275,8 @@ export class LoggerReporterTest {
         expect(logMetadata.tags["mode"]).to.equal("dev");
     }
 
-    @test("registry and metric tags")
-    public checkRegistryAndMetricTags(): void {
+    @test
+    public "registry and metric tags"(): void {
         const counter = this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");

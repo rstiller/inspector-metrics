@@ -14,13 +14,13 @@ import { MockedClock } from "./mocked-clock";
 
 const expect = chai.expect;
 
-@suite("Timer")
+@suite
 export class TimerTest {
 
     private clock: MockedClock = new MockedClock();
 
-    @test("negative duration")
-    public checkNegativeDuration(): void {
+    @test
+    public "negative duration"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -66,8 +66,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.equal(0);
     }
 
-    @test("single duration measuring with no tick")
-    public checkSingleDurationMeasuringWithNoTick(): void {
+    @test
+    public "single duration measuring with no tick"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -113,8 +113,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.be.NaN;
     }
 
-    @test("multiple duration measuring with no tick")
-    public checkMultipleDurationMeasuringWithNoTick(): void {
+    @test
+    public "multiple duration measuring with no tick"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -162,8 +162,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.equal(10000);
     }
 
-    @test("single duration measuring with one tick")
-    public checkSingleDurationMeasuringWithOneTick(): void {
+    @test
+    public "single duration measuring with one tick"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -213,8 +213,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.be.NaN;
     }
 
-    @test("multiple duration measuring with one tick")
-    public checkMultipleDurationMeasuringWithOneTick(): void {
+    @test
+    public "multiple duration measuring with one tick"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -266,8 +266,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.equal(10000);
     }
 
-    @test("multiple duration measuring with multiple ticks")
-    public checkMultipleDurationMeasuringWithMultipleTicks(): void {
+    @test
+    public "multiple duration measuring with multiple ticks"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -345,8 +345,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.equal(10000);
     }
 
-    @test("multiple duration measuring with multiple ticks within different rate-intervals")
-    public checkMultipleDurationMeasuringWithMultipleTicksWithinDifferentRateIntervals(): void {
+    @test
+    public "multiple duration measuring with multiple ticks within different rate-intervals"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -424,8 +424,8 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.equal(10000);
     }
 
-    @test("add duration with time function")
-    public checkTimeFunction(): void {
+    @test
+    public "add duration with time function"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -482,13 +482,13 @@ export class TimerTest {
 
 }
 
-@suite("StopWatch")
+@suite
 export class StopWatchTest {
 
     private clock: MockedClock = new MockedClock();
 
-    @test("start and stop without time difference")
-    public checkStartAndStopWithoutTimeDifference(): void {
+    @test
+    public "start and stop without time difference"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -536,8 +536,8 @@ export class StopWatchTest {
         expect(snapshot.getStdDev()).to.be.NaN;
     }
 
-    @test("start and stop with time difference")
-    public checkStartAndStopWithTimeDifference(): void {
+    @test
+    public "start and stop with time difference"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -596,8 +596,8 @@ export class StopWatchTest {
         expect(snapshot.getStdDev()).to.be.NaN;
     }
 
-    @test("start and stop with time difference within different rate-intervals")
-    public checkStartAndStopWithTimeDifferenceWithinDifferentRateIntervals(): void {
+    @test
+    public "start and stop with time difference within different rate-intervals"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,

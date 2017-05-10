@@ -9,11 +9,11 @@ import * as TimeUnit from "../../lib/metrics/time-unit";
 
 const expect = chai.expect;
 
-@suite("TimeUnit")
+@suite
 export class TimeUnitTest {
 
-    @test("conversion")
-    public checkTimeUnitConvertion(): void {
+    @test
+    public "check time-unit conversion"(): void {
         expect(TimeUnit.NANOSECOND.convertTo(1, TimeUnit.NANOSECOND)).to.equal(1);
         expect(TimeUnit.MICROSECOND.convertTo(1, TimeUnit.NANOSECOND)).to.equal(1e3);
         expect(TimeUnit.MILLISECOND.convertTo(1, TimeUnit.NANOSECOND)).to.equal(1e6);

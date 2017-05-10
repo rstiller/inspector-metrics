@@ -11,11 +11,11 @@ import { DefaultReservoir } from "../../lib/metrics/reservoir";
 
 const expect = chai.expect;
 
-@suite("Histogram")
+@suite
 export class HistogramTest {
 
-    @test("simple count and get")
-    public checkOrdinaryCountAndGet(): void {
+    @test
+    public "simple count and get"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(1024));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
@@ -26,8 +26,8 @@ export class HistogramTest {
         expect(histogram.getCount()).to.equal(3);
     }
 
-    @test("check snapshot from no values")
-    public checkSnapshotFromNoValues(): void {
+    @test
+    public "check snapshot from no values"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
 
@@ -45,8 +45,8 @@ export class HistogramTest {
         expect(snapshot.size()).to.equal(0);
     }
 
-    @test("check snapshot from one value")
-    public checkSnapshotFromOneValue(): void {
+    @test
+    public "check snapshot from one value"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
@@ -66,8 +66,8 @@ export class HistogramTest {
         expect(snapshot.size()).to.equal(1);
     }
 
-    @test("check snapshot from same value twice")
-    public checkSnapshotFromSameValueTwice(): void {
+    @test
+    public "check snapshot from same value twice"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
@@ -89,8 +89,8 @@ export class HistogramTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotFromDifferentValues(): void {
+    @test
+    public "check snapshot from different values"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
@@ -112,8 +112,8 @@ export class HistogramTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from same value more times than capacity")
-    public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
+    @test
+    public "check snapshot from same value more times than capacity"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);
@@ -137,8 +137,8 @@ export class HistogramTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotsWithDifferentValues(): void {
+    @test
+    public "check snapshot from different values overloading capacity"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(2));
         expect(histogram.getCount()).to.equal(0);
         histogram.update(1);

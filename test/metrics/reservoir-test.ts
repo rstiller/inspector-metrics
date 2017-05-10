@@ -10,11 +10,11 @@ import { DefaultReservoir, SlidingWindowReservoir } from "../../lib/metrics/rese
 
 const expect = chai.expect;
 
-@suite("DefaultReservoir")
+@suite
 export class DefaultReservoirTest {
 
-    @test("check correct size")
-    public checkCorrectSize(): void {
+    @test
+    public "check correct size"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -23,8 +23,8 @@ export class DefaultReservoirTest {
         expect(reservoir.size()).to.equal(2);
     }
 
-    @test("check snapshot from no values")
-    public checkSnapshotFromNoValues(): void {
+    @test
+    public "check snapshot from no values"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
 
@@ -42,8 +42,8 @@ export class DefaultReservoirTest {
         expect(snapshot.size()).to.equal(0);
     }
 
-    @test("check snapshot from one value")
-    public checkSnapshotFromOneValue(): void {
+    @test
+    public "check snapshot from one value"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -63,8 +63,8 @@ export class DefaultReservoirTest {
         expect(snapshot.size()).to.equal(1);
     }
 
-    @test("check snapshot from same value twice")
-    public checkSnapshotFromSameValueTwice(): void {
+    @test
+    public "check snapshot from same value twice"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -86,8 +86,8 @@ export class DefaultReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotFromDifferentValues(): void {
+    @test
+    public "check snapshot from different values"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -109,8 +109,8 @@ export class DefaultReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from same value more times than capacity")
-    public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
+    @test
+    public "check snapshot from same value more times than capacity"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -134,8 +134,8 @@ export class DefaultReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotsWithDifferentValues(): void {
+    @test
+    public "check snapshot from different values - overloading capacity"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -175,11 +175,11 @@ export class DefaultReservoirTest {
 
 }
 
-@suite("SlidingWindowReservoir")
+@suite
 export class SlidingWindowReservoirTest {
 
-    @test("check correct size")
-    public checkCorrectSize(): void {
+    @test
+    public "check correct size"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -188,8 +188,8 @@ export class SlidingWindowReservoirTest {
         expect(reservoir.size()).to.equal(2);
     }
 
-    @test("check snapshot from no values")
-    public checkSnapshotFromNoValues(): void {
+    @test
+    public "check snapshot from no values"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
 
@@ -207,8 +207,8 @@ export class SlidingWindowReservoirTest {
         expect(snapshot.size()).to.equal(0);
     }
 
-    @test("check snapshot from one value")
-    public checkSnapshotFromOneValue(): void {
+    @test
+    public "check snapshot from one value"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -228,8 +228,8 @@ export class SlidingWindowReservoirTest {
         expect(snapshot.size()).to.equal(1);
     }
 
-    @test("check snapshot from same value twice")
-    public checkSnapshotFromSameValueTwice(): void {
+    @test
+    public "check snapshot from same value twice"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -251,8 +251,8 @@ export class SlidingWindowReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotFromDifferentValues(): void {
+    @test
+    public "check snapshot from different values"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -274,8 +274,8 @@ export class SlidingWindowReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from same value more times than capacity")
-    public checkSnapshotFromSameValueMoreTimesThanCapacity(): void {
+    @test
+    public "check snapshot from same value more times than capacity"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);
@@ -299,8 +299,8 @@ export class SlidingWindowReservoirTest {
         expect(snapshot.size()).to.equal(2);
     }
 
-    @test("check snapshot from different values")
-    public checkSnapshotsWithDifferentValues(): void {
+    @test
+    public "check snapshot from different values - overloading capacity"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
         reservoir.update(1);

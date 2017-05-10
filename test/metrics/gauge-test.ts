@@ -9,11 +9,11 @@ import { SimpleGauge } from "../../lib/metrics/gauge";
 
 const expect = chai.expect;
 
-@suite("SimpleGauge")
+@suite
 export class SimpleGaugeTest {
 
-    @test("check set and get value")
-    public checkGetAndSetValue(): void {
+    @test
+    public "check set and get value"(): void {
         const gauge: SimpleGauge = new SimpleGauge();
         expect(gauge.getValue()).to.equal(0);
         gauge.setValue(1);

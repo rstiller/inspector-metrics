@@ -10,7 +10,7 @@ import { MILLISECOND } from "../../lib/metrics/time-unit";
 
 const expect = chai.expect;
 
-@suite("ExponentiallyWeightedMovingAverage")
+@suite
 export class ExponentiallyWeightedMovingAverageTest {
 
     private movingAverage: ExponentiallyWeightedMovingAverage;
@@ -19,19 +19,19 @@ export class ExponentiallyWeightedMovingAverageTest {
         this.movingAverage = new ExponentiallyWeightedMovingAverage(0.5, 1, MILLISECOND);
     }
 
-    @test("check basics")
-    public checkBasics(): void {
+    @test
+    public "check basics"(): void {
         expect(this.movingAverage.getAlpha()).to.equal(0.5);
         expect(this.movingAverage.getUnit()).to.equal(MILLISECOND);
     }
 
-    @test("no values")
-    public checkWithNoValues(): void {
+    @test
+    public "no values"(): void {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(0);
     }
 
-    @test("1 value average")
-    public checkWithOnly1Value(): void {
+    @test
+    public "1 value average"(): void {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(0);
         this.movingAverage.update(5);
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(0);
@@ -39,8 +39,8 @@ export class ExponentiallyWeightedMovingAverageTest {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(5.0);
     }
 
-    @test("multiple values")
-    public checkWithMultipleValues(): void {
+    @test
+    public "multiple values"(): void {
         this.movingAverage.update(5);
         this.movingAverage.tick();
         this.movingAverage.update(6);
@@ -50,8 +50,8 @@ export class ExponentiallyWeightedMovingAverageTest {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(6.25);
     }
 
-    @test("multiple values - degraded")
-    public checkWithMultipleValuesDegraded(): void {
+    @test
+    public "multiple values - degraded"(): void {
         this.movingAverage.update(5);
         this.movingAverage.tick();
         this.movingAverage.update(6);
@@ -67,8 +67,8 @@ export class ExponentiallyWeightedMovingAverageTest {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(0.78125);
     }
 
-    @test("multiple values - all same")
-    public checkWithMultipleValuesAllSame(): void {
+    @test
+    public "multiple values - all same"(): void {
         this.movingAverage.update(5);
         this.movingAverage.tick();
         this.movingAverage.update(5);
@@ -90,8 +90,8 @@ export class ExponentiallyWeightedMovingAverageTest {
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(5);
     }
 
-    @test("multiple values - increasing")
-    public checkWithMultipleValuesIncreasing(): void {
+    @test
+    public "multiple values - increasing"(): void {
         this.movingAverage.update(5);
         this.movingAverage.tick();
         expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(5);
