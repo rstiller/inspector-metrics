@@ -10,16 +10,16 @@ import { diff, StdClock, Time } from "../../lib/metrics/clock";
 
 const expect = chai.expect;
 
-@suite("Diff")
+@suite
 export class DiffTest {
 
-    @test("diff with null values")
-    public checkDiffWithNullValues(): void {
+    @test
+    public "diff with null values"(): void {
         expect(diff(null, null)).to.equal(0);
     }
 
-    @test("diff with same value")
-    public checkDiffWithSameValues(): void {
+    @test
+    public "diff with same value"(): void {
         const time: Time = {
             milliseconds: 0,
             nanoseconds: 0,
@@ -27,8 +27,8 @@ export class DiffTest {
         expect(diff(time, time)).to.equal(0);
     }
 
-    @test("diff with different nanoseconds")
-    public checkDiffWithDifferentNanosecondValues(): void {
+    @test
+    public "diff with different nanoseconds"(): void {
         const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
@@ -40,8 +40,8 @@ export class DiffTest {
         expect(diff(one, two)).to.equal(1);
     }
 
-    @test("diff with different milliseconds")
-    public checkDiffWithDifferentMillisecondValues(): void {
+    @test
+    public "diff with different milliseconds"(): void {
         const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
@@ -53,8 +53,8 @@ export class DiffTest {
         expect(diff(one, two)).to.equal(1000000);
     }
 
-    @test("diff with different milliseconds and nanoseconds")
-    public checkDiffWithDifferentMillisecondAndNanoseondValues(): void {
+    @test
+    public "diff with different milliseconds and nanoseconds"(): void {
         const one: Time = {
             milliseconds: 0,
             nanoseconds: 0,
@@ -68,11 +68,11 @@ export class DiffTest {
 
 }
 
-@suite("StdClock")
+@suite
 export class StdClockTest {
 
-    @test("check time function")
-    public checkTimeFunction(): void {
+    @test
+    public "check time function"(): void {
         const time = new StdClock().time();
         expect(time).to.be.not.null;
     }

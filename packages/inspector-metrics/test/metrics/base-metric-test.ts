@@ -12,11 +12,11 @@ const expect = chai.expect;
 
 export class TestMetric extends BaseMetric {}
 
-@suite("BaseMetric")
+@suite
 export class BaseMetricTest {
 
-    @test("add tag, set tag, remove tag, check tag")
-    public checkTags(): void {
+    @test
+    public "add tag, set tag, remove tag, check tag"(): void {
         const baseMetric: BaseMetric = new TestMetric();
 
         expect(baseMetric.getTags()).to.be.a("Map");
@@ -37,8 +37,8 @@ export class BaseMetricTest {
         expect(baseMetric.getTags()).to.satisfy((map: Map<string, string>) => map.size === 0);
     }
 
-    @test("set group, check group")
-    public checkGroup(): void {
+    @test
+    public "set group, check group"(): void {
         const baseMetric: BaseMetric = new TestMetric();
 
         expect(baseMetric.getGroup()).to.be.undefined;

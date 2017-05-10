@@ -9,11 +9,11 @@ import { Counter } from "../../lib/metrics/counter";
 
 const expect = chai.expect;
 
-@suite("Counter")
+@suite
 export class CounterTest {
 
-    @test("check count, reset and get")
-    public checkBasics(): void {
+    @test
+    public "check count, reset and get"(): void {
         const counter: Counter = new Counter();
         expect(counter.getCount()).to.equal(0);
         counter.increment(1);

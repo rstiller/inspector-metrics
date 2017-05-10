@@ -10,13 +10,13 @@ import { MockedClock } from "./mocked-clock";
 
 const expect = chai.expect;
 
-@suite("Meter")
+@suite
 export class MeterTest {
 
     private clock: MockedClock = new MockedClock();
 
-    @test("single mark and check rates with no tick")
-    public singleMarkAndCheckRatesWithNoTick(): void {
+    @test
+    public "single mark and check rates with no tick"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -37,8 +37,8 @@ export class MeterTest {
         expect(meter.get15MinuteRate()).to.equal(0);
     }
 
-    @test("mark and tick and check rates")
-    public markAndTickAndCheckRates(): void {
+    @test
+    public "mark and tick and check rates"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -64,8 +64,8 @@ export class MeterTest {
         expect(meter.get15MinuteRate()).to.be.equal(1);
     }
 
-    @test("multi mark and tick and check rates")
-    public multiMarkAndTickAndCheckRates(): void {
+    @test
+    public "multi mark and tick and check rates"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -94,8 +94,8 @@ export class MeterTest {
         expect(meter.get15MinuteRate()).to.be.equal(9);
     }
 
-    @test("mark and multi tick and check rates withing same rate-interval")
-    public markAndMultiTickAndCheckRatesWithinSameRateInterval(): void {
+    @test
+    public "mark and multi tick and check rates withing same rate-interval"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -136,8 +136,8 @@ export class MeterTest {
         expect(meter.get15MinuteRate()).to.be.equal(10);
     }
 
-    @test("mark and multi tick and check rates within different rate-intervals")
-    public markAndMultiTickAndCheckRatesWithinDifferentRateIntervals(): void {
+    @test
+    public "mark and multi tick and check rates within different rate-intervals"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
