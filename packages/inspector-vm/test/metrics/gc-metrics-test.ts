@@ -6,10 +6,10 @@ import { suite, test } from "mocha-typescript";
 
 // const expect = chai.expect;
 
-@suite("GCMetricsReporter")
+@suite
 export class GCMetricsReporterTest {
 
-    @test("nothing")
+    @test
     public checkNothing(): void {
     }
 
