@@ -10,10 +10,10 @@ import { suite, test } from "mocha-typescript";
 
 // const expect = chai.expect;
 
-@suite("InfluxMetricReporter")
+@suite
 export class InfluxMetricReporterTest {
 
-    @test("nothing")
+    @test
     public checkNothing(): void {
     }
 
