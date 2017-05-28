@@ -37,6 +37,7 @@
     "@types/sinon-chai": "^2.7"
   },
   "dependencies": {
+    "gc-heap-stats": "^1.0.0",
     "gc-stats": "^1.0.0",
     "inspector-metrics": "^1.2",
     "source-map-support": "^0.4"
