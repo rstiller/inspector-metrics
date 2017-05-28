@@ -70,6 +70,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         this.defaultClock = defaultClock;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getCounterList} instead
+     */
     public getCounters(): Map<string, Counter> {
         const map: Map<string, Counter> = new Map();
         this.metrics
@@ -78,6 +81,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return map;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getGaugeList} instead
+     */
     public getGauges(): Map<string, Gauge<any>> {
         const map: Map<string, Gauge<any>> = new Map();
         this.metrics
@@ -86,6 +92,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return map;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getHistogramList} instead
+     */
     public getHistograms(): Map<string, Histogram> {
         const map: Map<string, Histogram> = new Map();
         this.metrics
@@ -94,6 +103,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return map;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getMeterList} instead
+     */
     public getMeters(): Map<string, Meter> {
         const map: Map<string, Meter> = new Map();
         this.metrics
@@ -102,12 +114,45 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return map;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getTimerList} instead
+     */
     public getTimers(): Map<string, Timer> {
         const map: Map<string, Timer> = new Map();
         this.metrics
             .filter(this.isTimer)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Timer));
         return map;
+    }
+
+    public getCounterList(): Counter[] {
+        return this.metrics
+            .filter(this.isCounter)
+            .map((registration) => registration.metricRef as Counter);
+    }
+
+    public getGaugeList(): Array<Gauge<any>> {
+        return this.metrics
+            .filter(this.isGauge)
+            .map((registration) => registration.metricRef as Gauge<any>);
+    }
+
+    public getHistogramList(): Histogram[] {
+        return this.metrics
+            .filter(this.isHistogram)
+            .map((registration) => registration.metricRef as Histogram);
+    }
+
+    public getMeterList(): Meter[] {
+        return this.metrics
+            .filter(this.isMeter)
+            .map((registration) => registration.metricRef as Meter);
+    }
+
+    public getTimerList(): Timer[] {
+        return this.metrics
+            .filter(this.isTimer)
+            .map((registration) => registration.metricRef as Timer);
     }
 
     /**

@@ -1,4 +1,3 @@
-
 import "source-map-support/register";
 
 import { BaseMetric, Metric } from "./metric";

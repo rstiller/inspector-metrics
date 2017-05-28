@@ -1,4 +1,3 @@
-
 import "source-map-support/register";
 
 import * as async from "async";

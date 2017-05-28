@@ -1,4 +1,3 @@
-
 import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
