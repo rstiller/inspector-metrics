@@ -38,11 +38,12 @@ export class Timer extends BaseMetric implements Metered, Sampling {
     private meter: Meter;
     private histogram: Histogram;
 
-    public constructor(clock: Clock, reservoir: Reservoir) {
+    public constructor(clock: Clock, reservoir: Reservoir, name?: string) {
         super();
         this.clock = clock;
-        this.meter = new Meter(clock, 1);
-        this.histogram = new Histogram(reservoir);
+        this.name = name;
+        this.meter = new Meter(clock, 1, name);
+        this.histogram = new Histogram(reservoir, name);
     }
 
     public addDuration(duration: number, unit: TimeUnit): void {

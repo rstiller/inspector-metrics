@@ -24,8 +24,9 @@ export class Meter extends BaseMetric implements Metered {
     private avg5Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_5_MINUTE, 1, SECOND);
     private avg15Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_15_MINUTE, 1, SECOND);
 
-    public constructor(clock: Clock, sampleRate: number) {
+    public constructor(clock: Clock, sampleRate: number, name?: string) {
         super();
+        this.name = name;
         this.clock = clock;
         this.startTime = clock.time();
         this.lastTime = this.startTime;

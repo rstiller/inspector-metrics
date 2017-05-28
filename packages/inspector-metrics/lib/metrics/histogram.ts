@@ -12,8 +12,9 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
     private reservoir: Reservoir;
     private count: number = 0;
 
-    public constructor(reservoir: Reservoir) {
+    public constructor(reservoir: Reservoir, name?: string) {
         super();
+        this.name = name;
         this.reservoir = reservoir;
     }
 
