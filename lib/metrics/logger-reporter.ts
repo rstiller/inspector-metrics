@@ -41,8 +41,8 @@ export class LoggerReporter extends MetricReporter {
         this.scheduler = scheduler;
 
         this.logMetadata = {
-            tags,
             interval,
+            tags,
             unit,
         };
 
