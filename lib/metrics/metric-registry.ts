@@ -31,12 +31,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     private defaultClock: Clock = new StdClock();
-    private counters: Map<string, Counter> = new Map();
-    private gauges: Map<string, Gauge<any>> = new Map();
-    private histograms: Map<string, Histogram> = new Map();
-    private meters: Map<string, Meter> = new Map();
-    private timers: Map<string, Timer> = new Map();
-    private metrics: Map<string, Metric> = new Map();
+    private metrics: Metric[] = [];
     private nameFactory: NameFactory = MetricRegistry.defaultNameFactory;
     private listeners: MetricRegistryListener[] = [];
 
@@ -65,115 +60,192 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     public getCounters(): Map<string, Counter> {
-        return this.counters;
+        const map: Map<string, Counter> = new Map();
+        this.metrics
+            .filter(this.isCounter)
+            .forEach((metric) => map.set(metric.getName(), metric as Counter));
+        return map;
     }
 
     public getGauges(): Map<string, Gauge<any>> {
-        return this.gauges;
+        const map: Map<string, Gauge<any>> = new Map();
+        this.metrics
+            .filter(this.isGauge)
+            .forEach((metric) => map.set(metric.getName(), metric as Gauge<any>));
+        return map;
     }
 
     public getHistograms(): Map<string, Histogram> {
-        return this.histograms;
+        const map: Map<string, Histogram> = new Map();
+        this.metrics
+            .filter(this.isHistogram)
+            .forEach((metric) => map.set(metric.getName(), metric as Histogram));
+        return map;
     }
 
     public getMeters(): Map<string, Meter> {
-        return this.meters;
+        const map: Map<string, Meter> = new Map();
+        this.metrics
+            .filter(this.isMeter)
+            .forEach((metric) => map.set(metric.getName(), metric as Meter));
+        return map;
     }
 
     public getTimers(): Map<string, Timer> {
-        return this.timers;
+        const map: Map<string, Timer> = new Map();
+        this.metrics
+            .filter(this.isTimer)
+            .forEach((metric) => map.set(metric.getName(), metric as Timer));
+        return map;
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getMetricsByName} instead
+     */
     public getMetric(name: string): Metric {
-        return this.metrics.get(name);
+        return this.getFirstByName(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getCountersByName} instead
+     */
     public getCounter(name: string): Counter {
-        return this.counters.get(name);
+        return this.getFirstByName<Counter>(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getGaugesByName} instead
+     */
     public getGauge(name: string): Gauge<any> {
-        return this.gauges.get(name);
+        return this.getFirstByName<Gauge<any>>(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getHistogramsByName} instead
+     */
     public getHistogram(name: string): Histogram {
-        return this.histograms.get(name);
+        return this.getFirstByName<Histogram>(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getMetersByName} instead
+     */
     public getMeter(name: string): Meter {
-        return this.meters.get(name);
+        return this.getFirstByName<Meter>(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link getTimersByName} instead
+     */
     public getTimer(name: string): Timer {
-        return this.timers.get(name);
+        return this.getFirstByName<Timer>(name);
     }
 
+    public getMetricsByName(name: string): Metric[] {
+        return this.getByName(name);
+    }
+
+    public getCountersByName(name: string): Counter[] {
+        return this.getByName<Counter>(name);
+    }
+
+    public getGaugesByName(name: string): Array<Gauge<any>> {
+        return this.getByName<Gauge<any>>(name);
+    }
+
+    public getHistogramsByname(name: string): Histogram[] {
+        return this.getByName<Histogram>(name);
+    }
+
+    public getMetersByName(name: string): Meter[] {
+        return this.getByName<Meter>(name);
+    }
+
+    public getTimersByName(name: string): Timer[] {
+        return this.getByName<Timer>(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeMetric(name: string): void {
-        this.counters.delete(name);
-        this.histograms.delete(name);
-        this.meters.delete(name);
-        this.gauges.delete(name);
-        this.timers.delete(name);
+        const metrics: Metric[] = this.getByName(name);
 
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        if (metrics.length > 0) {
+            const index = this.metrics.indexOf(metrics[0], 0);
+            if (index > -1) {
+                this.metrics.splice(index, 1);
+            }
+            this.fireMetricRemoved(name, metrics[0]);
+        }
     }
 
+    public removeMetrics(name: string): void {
+        const metrics: Metric[] = this.getByName(name);
+
+        metrics.forEach((metric) => {
+            const index = this.metrics.indexOf(metric, 0);
+            if (index > -1) {
+                this.metrics.splice(index, 1);
+            }
+            this.fireMetricRemoved(name, metric);
+        });
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeCounter(name: string): void {
-        this.counters.delete(name);
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        this.removeMetric(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeGauge(name: string): void {
-        this.gauges.delete(name);
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        this.removeMetric(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeHistogram(name: string): void {
-        this.histograms.delete(name);
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        this.removeMetric(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeMeter(name: string): void {
-        this.meters.delete(name);
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        this.removeMetric(name);
     }
 
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
     public removeTimer(name: string): void {
-        this.timers.delete(name);
-        const metric = this.metrics.get(name);
-        this.metrics.delete(name);
-        this.fireMetricRemoved(name, metric);
+        this.removeMetric(name);
     }
 
-    public getMetrics(): Map<string, Metric> {
+    public getMetrics(): Metric[] {
         return this.metrics;
     }
 
     public newCounter(name: string, group: string = null): Counter {
-        const counter = new Counter();
+        const counter = new Counter(name);
         if (!!group) {
             counter.setGroup(group);
         }
-        this.register(name, counter);
+        this.register(counter.getName(), counter);
         return counter;
     }
 
     public newMeter(name: string, group: string = null, clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
-        const meter = new Meter(clock, sampleRate);
+        const meter = new Meter(clock, sampleRate, name);
         if (!!group) {
             meter.setGroup(group);
         }
-        this.register(name, meter);
+        this.register(meter.getName(), meter);
         return meter;
     }
 
@@ -181,11 +253,11 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const histogram = new Histogram(reservoir);
+        const histogram = new Histogram(reservoir, name);
         if (!!group) {
             histogram.setGroup(group);
         }
-        this.register(name, histogram);
+        this.register(histogram.getName(), histogram);
         return histogram;
     }
 
@@ -193,11 +265,11 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const timer = new Timer(clock, reservoir);
+        const timer = new Timer(clock, reservoir, name);
         if (!!group) {
             timer.setGroup(group);
         }
-        this.register(name, timer);
+        this.register(timer.getName(), timer);
         return timer;
     }
 
@@ -205,34 +277,43 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         if (!!group) {
             metric.setGroup(group);
         }
-        name = this.generateName(name, metric);
+
+        metric.setName(this.generateName(metric.getName(), metric));
+
         if (metric instanceof Meter) {
-            this.meters.set(name, metric);
-            this.metrics.set(name, metric);
+            this.metrics.push(metric);
             this.fireMetricAdded(name, metric);
         } else if (metric instanceof Counter) {
-            this.counters.set(name, metric);
-            this.metrics.set(name, metric);
+            this.metrics.push(metric);
             this.fireMetricAdded(name, metric);
         } else if (this.isGauge(metric)) {
-            this.gauges.set(name, metric);
-            this.metrics.set(name, metric);
+            this.metrics.push(metric);
             this.fireMetricAdded(name, metric);
         } else if (metric instanceof Histogram) {
-            this.histograms.set(name, metric);
-            this.metrics.set(name, metric);
+            this.metrics.push(metric);
             this.fireMetricAdded(name, metric);
         } else if (metric instanceof Timer) {
-            this.timers.set(name, metric);
-            this.metrics.set(name, metric);
+            this.metrics.push(metric);
             this.fireMetricAdded(name, metric);
         } else if (this.isMetricSet(metric)) {
             const registry = this;
-            new Map(metric.getMetrics()).forEach((m: Metric, n: string) => {
-                const metricName = this.nameFactory(name, n, m);
+            metric.getMetrics().forEach((m: Metric) => {
+                const metricName = this.nameFactory(name, m.getName(), m);
                 registry.register(metricName, m);
             });
         }
+    }
+
+    private getFirstByName<T extends Metric>(name: string): T {
+        const arr: Metric[] = this.getByName(name);
+        if (arr.length === 0) {
+            return null;
+        }
+        return arr[0] as T;
+    }
+
+    private getByName<T extends Metric>(name: string): T[] {
+        return this.metrics.filter((metric) => metric.getName() === name) as T[];
     }
 
     private generateName(name: string, metric: Metric): string {
@@ -240,6 +321,22 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             return `${metric.getGroup()}.${name}`;
         }
         return name;
+    }
+
+    private isCounter(instance: Metric): instance is Counter {
+        return instance instanceof Counter;
+    }
+
+    private isHistogram(instance: Metric): instance is Histogram {
+        return instance instanceof Histogram;
+    }
+
+    private isMeter(instance: Metric): instance is Meter {
+        return instance instanceof Meter;
+    }
+
+    private isTimer(instance: Metric): instance is Timer {
+        return instance instanceof Timer;
     }
 
     private isGauge<T>(instance: any): instance is Gauge<T> {

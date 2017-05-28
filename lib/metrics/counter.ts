@@ -8,6 +8,11 @@ export class Counter extends BaseMetric implements Counting, Metric {
 
     private count: number = 0;
 
+    public constructor(name?: string) {
+        super();
+        this.name = name;
+    }
+
     public increment(value: number): void {
         this.count += value;
     }
