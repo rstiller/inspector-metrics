@@ -11,6 +11,11 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
 
     private value: number = 0;
 
+    public constructor(name?: string) {
+        super();
+        this.name = name;
+    }
+
     public getValue(): number {
         return this.value;
     }

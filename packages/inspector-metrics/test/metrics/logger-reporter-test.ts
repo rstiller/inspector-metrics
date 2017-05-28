@@ -131,7 +131,7 @@ export class LoggerReporterTest {
 
     @test
     public "gauge reporting"(): void {
-        this.registry.register("gauge1", new SimpleGauge());
+        this.registry.register("gauge1", new SimpleGauge("gauge1"));
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
