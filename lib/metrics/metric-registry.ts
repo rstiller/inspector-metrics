@@ -155,6 +155,17 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             .map((registration) => registration.metricRef as Timer);
     }
 
+    public getMetrics(): Map<string, Metric> {
+        const map: Map<string, Metric> = new Map();
+        this.metrics
+            .forEach((registration) => map.set(registration.name, registration.metricRef));
+        return map;
+    }
+
+    public getMetricList(): Metric[] {
+        return this.metrics.map((metric) => metric.metricRef);
+    }
+
     /**
      * @deprecated since version 1.3 - use {@link getMetricsByName} instead
      */
@@ -285,10 +296,6 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public removeTimer(name: string): void {
         this.removeMetric(name);
-    }
-
-    public getMetrics(): Metric[] {
-        return this.metrics.map((metric) => metric.metricRef);
     }
 
     public newCounter(name: string, group: string = null): Counter {
