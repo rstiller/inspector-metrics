@@ -26,7 +26,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
-        "removeComments": true,
+        "removeComments": false,
         "sourceRoot": "./lib/",
         "rootDir": "./",
         "charset": "utf-8",
