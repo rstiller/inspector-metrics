@@ -4,10 +4,12 @@
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
-  "licenses": [{
-    "type": "MIT",
-    "url": "https://www.opensource.org/licenses/mit-license.php"
-  }],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/rstiller/inspector-metrics"
@@ -37,9 +39,17 @@
     "@types/sinon-chai": "^2.7"
   },
   "dependencies": {
-    "async": "^2.2",
+    "@types/node": "^7.0.22",
+    "@types/sinon": "^2.2.2",
+    "async": "^2.4.1",
     "lodash": "^4.17",
-    "source-map-support": "^0.4"
+    "mocha": "^3.4.2",
+    "mocha-typescript": "^1.1.4",
+    "npm-check": "^5.4.4",
+    "sinon": "^2.3.2",
+    "source-map-support": "^0.4",
+    "tslint": "^5.3.2",
+    "typescript": "^2.3.3"
   },
   "files": [
     "build",
@@ -59,11 +69,22 @@
     "test:jenkins": "mocha --opts mocha.jenkins.opts"
   },
   "nyc": {
-    "include": ["lib/*.ts", "lib/**/*.ts"],
-    "exclude": ["test/*"],
-    "extension": [".ts"],
+    "include": [
+      "lib/*.ts",
+      "lib/**/*.ts"
+    ],
+    "exclude": [
+      "test/*"
+    ],
+    "extension": [
+      ".ts"
+    ],
     "require": [],
-    "reporter": ["json", "html", "cobertura"],
+    "reporter": [
+      "json",
+      "html",
+      "cobertura"
+    ],
     "all": true
   }
 }
