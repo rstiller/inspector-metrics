@@ -1,7 +1,6 @@
 import "source-map-support/register";
 
 import * as async from "async";
-import * as _ from "lodash";
 
 import { Clock, StdClock } from "./clock";
 import { Counter } from "./counter";
@@ -29,8 +28,14 @@ export class LoggerReporter extends MetricReporter {
     private log: Logger;
     private scheduler: Scheduler;
 
-    public constructor(log: Logger = console, interval: number = 1000, unit: TimeUnit = MILLISECOND,
-                       tags: Map<string, string> = new Map(), clock: Clock = new StdClock(), scheduler: Scheduler = setInterval) {
+    public constructor(
+        log: Logger = console,
+        interval: number = 1000,
+        unit: TimeUnit = MILLISECOND,
+        tags: Map<string, string> = new Map(),
+        clock: Clock = new StdClock(),
+        scheduler: Scheduler = setInterval) {
+
         super();
 
         this.interval = interval;
@@ -39,12 +44,7 @@ export class LoggerReporter extends MetricReporter {
         this.clock = clock;
         this.log = log;
         this.scheduler = scheduler;
-
-        this.logMetadata = {
-            interval,
-            tags,
-            unit,
-        };
+        this.logMetadata = { interval, tags, unit };
 
         this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
             task(callback);
@@ -61,9 +61,7 @@ export class LoggerReporter extends MetricReporter {
 
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = this.scheduler(() => {
-            this.report();
-        }, interval);
+        this.timer = this.scheduler(() => this.report(), interval);
     }
 
     public stop(): void {
@@ -89,15 +87,16 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportCounters(registry: MetricRegistry, date: Date): void {
-        const counters = registry.getCounters();
+        const counters = registry.getCounterList();
         if (!!counters) {
-            const logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "counter",
                 timestamp: date,
             });
-            counters.forEach((counter: Counter, name: string) => {
+            counters.forEach((counter: Counter) => {
                 if (!isNaN(counter.getCount())) {
+                    const name = counter.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = counter.getGroup();
                     logMetadata.tags = this.buildTags(registry, counter);
@@ -108,15 +107,16 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportGauges(registry: MetricRegistry, date: Date): void {
-        const gauges = registry.getGauges();
+        const gauges = registry.getGaugeList();
         if (!!gauges) {
-            const logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "gauge",
                 timestamp: date,
             });
-            gauges.forEach((gauge: Gauge<any>, name: string) => {
+            gauges.forEach((gauge: Gauge<any>) => {
                 if (!isNaN(gauge.getValue())) {
+                    const name = gauge.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = gauge.getGroup();
                     logMetadata.tags = this.buildTags(registry, gauge);
@@ -127,15 +127,16 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportHistograms(registry: MetricRegistry, date: Date): void {
-        const histograms = registry.getHistograms();
+        const histograms = registry.getHistogramList();
         if (!!histograms) {
-            const logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "histogram",
                 timestamp: date,
             });
-            histograms.forEach((histogram: Histogram, name: string) => {
+            histograms.forEach((histogram: Histogram) => {
                 if (!isNaN(histogram.getCount())) {
+                    const name = histogram.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = histogram.getGroup();
                     logMetadata.tags = this.buildTags(registry, histogram);
@@ -160,15 +161,16 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportMeters(registry: MetricRegistry, date: Date): void {
-        const meters = registry.getMeters();
+        const meters = registry.getMeterList();
         if (!!meters) {
-            const logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "meter",
                 timestamp: date,
             });
-            meters.forEach((meter: Meter, name: string) => {
+            meters.forEach((meter: Meter) => {
                 if (!isNaN(meter.getCount())) {
+                    const name = meter.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = meter.getGroup();
                     logMetadata.tags = this.buildTags(registry, meter);
@@ -186,15 +188,16 @@ export class LoggerReporter extends MetricReporter {
     }
 
     private reportTimers(registry: MetricRegistry, date: Date): void {
-        const timers = registry.getTimers();
+        const timers = registry.getTimerList();
         if (!!timers) {
-            const logMetadata = _.extend({}, this.logMetadata, {
+            const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "timer",
                 timestamp: date,
             });
-            timers.forEach((timer: Timer, name: string) => {
+            timers.forEach((timer: Timer) => {
                 if (!isNaN(timer.getCount())) {
+                    const name = timer.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = timer.getGroup();
                     logMetadata.tags = this.buildTags(registry, timer);
