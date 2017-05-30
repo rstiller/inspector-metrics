@@ -2,10 +2,27 @@
 import "source-map-support/register";
 
 import * as async from "async";
-
-import { IClusterConfig, InfluxDB, IPoint } from "influx";
-
-import { Clock, Counter, Gauge, Histogram, Logger, Meter, Metric, MetricRegistry, MetricReporter, MILLISECOND, StdClock, Taggable, Timer, TimeUnit } from "inspector-metrics";
+import {
+    IClusterConfig,
+    InfluxDB,
+    IPoint,
+} from "influx";
+import {
+    Clock,
+    Counter,
+    Gauge,
+    Histogram,
+    Logger,
+    Meter,
+    Metric,
+    MetricRegistry,
+    MetricReporter,
+    MILLISECOND,
+    StdClock,
+    Taggable,
+    Timer,
+    TimeUnit,
+} from "inspector-metrics";
 
 export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
@@ -21,7 +38,13 @@ export class InfluxMetricReporter extends MetricReporter {
     private queue: AsyncQueue<any>;
     private log: Logger = console;
 
-    public constructor(dbConfig: IClusterConfig, interval: number = 1000, unit: TimeUnit = MILLISECOND, tags: Map<string, string> = new Map(), clock: Clock = new StdClock()) {
+    public constructor(
+        dbConfig: IClusterConfig,
+        interval: number = 1000,
+        unit: TimeUnit = MILLISECOND,
+        tags: Map<string, string> = new Map(),
+        clock: Clock = new StdClock()) {
+
         super();
 
         const database = dbConfig.database;
@@ -34,11 +57,11 @@ export class InfluxMetricReporter extends MetricReporter {
         this.db = new InfluxDB(dbConfig);
 
         this.logMetadata = {
-            tags,
-            interval,
-            unit,
             database,
             hosts: dbConfig.hosts,
+            interval,
+            tags,
+            unit,
         };
 
         this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
@@ -69,9 +92,7 @@ export class InfluxMetricReporter extends MetricReporter {
 
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = setInterval(() => {
-            this.report();
-        }, interval);
+        this.timer = setInterval(() => this.report(), interval);
     }
 
     public stop(): void {
@@ -87,17 +108,22 @@ export class InfluxMetricReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
-        this.reportMetrics(registry.getCounters(),   now, "counter",   (name: string, counter: Counter, date: Date)     => this.reportCounter(name, counter, date));
-        this.reportMetrics(registry.getGauges(),     now, "gauge",     (name: string, gauge: Gauge<any>, date: Date)    => this.reportGauge(name, gauge, date));
-        this.reportMetrics(registry.getHistograms(), now, "histogram", (name: string, histogram: Histogram, date: Date) => this.reportHistogram(name, histogram, date));
-        this.reportMetrics(registry.getMeters(),     now, "meter",     (name: string, meter: Meter, date: Date)         => this.reportMeter(name, meter, date));
-        this.reportMetrics(registry.getTimers(),     now, "timer",     (name: string, timer: Timer, date: Date)         => this.reportTimer(name, timer, date));
+        this.reportMetrics(registry.getCounterList(),   now, "counter",   (counter: Counter, date: Date)     => this.reportCounter(counter, date));
+        this.reportMetrics(registry.getGaugeList(),     now, "gauge",     (gauge: Gauge<any>, date: Date)    => this.reportGauge(gauge, date));
+        this.reportMetrics(registry.getHistogramList(), now, "histogram", (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date));
+        this.reportMetrics(registry.getMeterList(),     now, "meter",     (meter: Meter, date: Date)         => this.reportMeter(meter, date));
+        this.reportMetrics(registry.getTimerList(),     now, "timer",     (timer: Timer, date: Date)         => this.reportTimer(timer, date));
     }
 
-    private reportMetrics<T extends Metric>(metrics: Map<string, T>, date: Date, type: MetricType, reportFunction: (name: string, metric: Metric, date: Date) => IPoint): void {
+    private reportMetrics<T extends Metric>(
+        metrics: T[],
+        date: Date,
+        type: MetricType,
+        reportFunction: (metric: Metric, date: Date) => IPoint): void {
+
         const points: IPoint[] = [];
-        metrics.forEach((counter, name) => {
-            const point: IPoint = reportFunction(name, counter, date);
+        metrics.forEach((metric) => {
+            const point: IPoint = reportFunction(metric, date);
             if (!!point) {
                 points.push(point);
             }
@@ -107,7 +133,7 @@ export class InfluxMetricReporter extends MetricReporter {
         }
     }
 
-    private reportCounter(name: string, counter: Counter, date: Date): IPoint {
+    private reportCounter(counter: Counter, date: Date): IPoint {
         if (isNaN(counter.getCount())) {
             return null;
         }
@@ -115,13 +141,13 @@ export class InfluxMetricReporter extends MetricReporter {
             fields: {
                 value: counter.getCount(),
             },
-            measurement: name,
+            measurement: counter.getName(),
             tags: this.buildTags(counter),
             timestamp: date,
         };
     }
 
-    private reportGauge(name: string, gauge: Gauge<any>, date: Date): IPoint {
+    private reportGauge(gauge: Gauge<any>, date: Date): IPoint {
         if (isNaN(gauge.getValue())) {
             return null;
         }
@@ -129,13 +155,13 @@ export class InfluxMetricReporter extends MetricReporter {
             fields: {
                 value: gauge.getValue(),
             },
-            measurement: name,
+            measurement: gauge.getName(),
             tags: this.buildTags(gauge),
             timestamp: date,
         };
     }
 
-    private reportHistogram(name: string, histogram: Histogram, date: Date): IPoint {
+    private reportHistogram(histogram: Histogram, date: Date): IPoint {
         if (isNaN(histogram.getCount())) {
             return null;
         }
@@ -155,13 +181,13 @@ export class InfluxMetricReporter extends MetricReporter {
                 p999: this.getNumber(snapshot.get999thPercentile()),
                 stddev: this.getNumber(snapshot.getStdDev()),
             },
-            measurement: name,
+            measurement: histogram.getName(),
             tags: this.buildTags(histogram),
             timestamp: date,
         };
     }
 
-    private reportMeter(name: string, meter: Meter, date: Date): IPoint {
+    private reportMeter(meter: Meter, date: Date): IPoint {
         if (isNaN(meter.getCount())) {
             return null;
         }
@@ -173,13 +199,13 @@ export class InfluxMetricReporter extends MetricReporter {
                 m5_rate: this.getNumber(meter.get5MinuteRate()),
                 mean_rate: this.getNumber(meter.getMeanRate()),
             },
-            measurement: name,
+            measurement: meter.getName(),
             tags: this.buildTags(meter),
             timestamp: date,
         };
     }
 
-    private reportTimer(name: string, timer: Timer, date: Date): IPoint {
+    private reportTimer(timer: Timer, date: Date): IPoint {
         if (isNaN(timer.getCount())) {
             return null;
         }
@@ -202,7 +228,7 @@ export class InfluxMetricReporter extends MetricReporter {
                 p999: this.getNumber(snapshot.get999thPercentile()),
                 stddev: this.getNumber(snapshot.getStdDev()),
             },
-            measurement: name,
+            measurement: timer.getName(),
             tags: this.buildTags(timer),
             timestamp: date,
         };
@@ -219,13 +245,13 @@ export class InfluxMetricReporter extends MetricReporter {
         this.queue.push((callback: () => void) => {
             this.db.writePoints(points)
                 .then(() => {
-                    if (!!this.log) {
+                    if (this.log) {
                         this.log.debug(`wrote ${type} metrics`, this.logMetadata);
                     }
                     callback();
                 })
                 .catch((reason) => {
-                    if (!!this.log) {
+                    if (this.log) {
                         this.log.error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
                     }
                     callback();
