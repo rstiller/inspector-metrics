@@ -56,6 +56,8 @@
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "clean": "rm -fr build coverage",
     "compile": "tsc -p .",
+    "build": "npm run clean && npm run compile",
+    "prepublish": "npm run build",
     "test": "mocha --opts mocha.opts",
     "test:jenkins": "mocha --opts mocha.jenkins.opts"
   },
