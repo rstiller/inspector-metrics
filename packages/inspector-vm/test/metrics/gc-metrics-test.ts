@@ -19,11 +19,16 @@ export class GCMetricsTest {
 
         expect(metric).to.exist;
 
-        const majorRuns: Timer = metric.getMetrics().get("majorGCRuns") as Timer;
-        // tslint:disable-next-line:no-console
-        console.log();
+        const majorRuns: Timer = metric.getMetricList()
+            .filter((m) => {
+                return m.getName() === "runs" && m.getTag("type") === "major";
+            })[0] as Timer;
+
+        // causing garbage collaction ...
         while (majorRuns.getCount() <= 0) {
-            crypto.randomBytes(1024);
+            for (let i = 0; i < 100; i++) {
+                crypto.randomBytes(1024 * 16);
+            }
         }
     }
 
