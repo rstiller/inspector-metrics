@@ -15,7 +15,7 @@ export class GCMetricsTest {
     @test
     @timeout(10000)
     public checkGCActivity(): void {
-        const metric: GCMetrics = new GCMetrics(new StdClock());
+        const metric: GCMetrics = new GCMetrics("vm", new StdClock());
 
         expect(metric).to.exist;
 
@@ -34,7 +34,7 @@ export class GCMetricsTest {
 
     @test
     public settingGroup(): void {
-        const metric: GCMetrics = new GCMetrics(new StdClock());
+        const metric: GCMetrics = new GCMetrics("vm", new StdClock());
 
         expect(metric.getGroup()).to.equal("gc");
         metric.getMetricList().forEach((submetric) => {
@@ -50,7 +50,7 @@ export class GCMetricsTest {
 
     @test
     public settingTag(): void {
-        const metric: GCMetrics = new GCMetrics(new StdClock());
+        const metric: GCMetrics = new GCMetrics("vm", new StdClock());
 
         metric.setTag("type", "value");
         expect(metric.getTag("type")).to.equal("value");

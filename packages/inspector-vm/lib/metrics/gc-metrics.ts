@@ -81,8 +81,9 @@ export class GCMetrics extends BaseMetric implements MetricSet {
     private usedHeapSize: SimpleGauge = new SimpleGauge("usedHeapSize");
     private heapSizeLimit: SimpleGauge = new SimpleGauge("heapSizeLimit");
 
-    public constructor(clock: Clock) {
+    public constructor(name: string, clock: Clock) {
         super();
+        this.name = name;
 
         this.minorRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
         this.minorRuns.setTag("type", "minor");
