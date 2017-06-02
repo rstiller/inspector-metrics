@@ -32,6 +32,7 @@
     "npm-check": "^5.4.4",
     "nyc": "^10.3.2",
     "reflect-metadata": "^0.1.10",
+    "rimraf": "^2.6.1",
     "ts-node": "^3.0.4",
     "tslint": "^5.3.2",
     "typescript": "^2.3.3"
@@ -54,7 +55,7 @@
     "check:lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
     "check:coverage": "nyc npm run test:jenkins",
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
-    "clean": "rm -fr build coverage",
+    "clean": "rimraf build coverage",
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile",
     "prepublish": "npm run build",
