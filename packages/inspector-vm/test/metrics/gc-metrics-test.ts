@@ -13,8 +13,8 @@ const expect = chai.expect;
 export class GCMetricsTest {
 
     @test
-    @timeout(60000)
-    public checkNothing(): void {
+    @timeout(10000)
+    public checkGCActivity(): void {
         const metric: GCMetrics = new GCMetrics(new StdClock());
 
         expect(metric).to.exist;
@@ -24,12 +24,45 @@ export class GCMetricsTest {
                 return m.getName() === "runs" && m.getTag("type") === "major";
             })[0] as Timer;
 
-        // causing garbage collaction ...
+        // causing garbage collection ...
         while (majorRuns.getCount() <= 0) {
-            for (let i = 0; i < 100; i++) {
+            for (let i = 0; i < 1000; i++) {
                 crypto.randomBytes(1024 * 16);
             }
         }
+    }
+
+    @test
+    public settingGroup(): void {
+        const metric: GCMetrics = new GCMetrics(new StdClock());
+
+        expect(metric.getGroup()).to.equal("gc");
+        metric.getMetricList().forEach((submetric) => {
+            expect(submetric.getGroup()).to.equal("gc");
+        });
+
+        metric.setGroup("abc");
+        expect(metric.getGroup()).to.equal("abc");
+        metric.getMetricList().forEach((submetric) => {
+            expect(submetric.getGroup()).to.equal("abc");
+        });
+    }
+
+    @test
+    public settingTag(): void {
+        const metric: GCMetrics = new GCMetrics(new StdClock());
+
+        metric.setTag("type", "value");
+        expect(metric.getTag("type")).to.equal("value");
+        metric.getMetricList().forEach((submetric) => {
+            expect(submetric.getTag("type")).to.equal("value");
+        });
+
+        metric.removeTag("type");
+        expect(metric.getTag("type")).to.not.exist;
+        metric.getMetricList().forEach((submetric) => {
+            expect(submetric.getTag("type")).to.not.exist;
+        });
     }
 
 }
