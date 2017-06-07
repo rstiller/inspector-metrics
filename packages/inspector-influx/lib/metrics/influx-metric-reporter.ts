@@ -133,7 +133,8 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportCounter(counter: Counter, date: Date): IPoint {
-        if (isNaN(counter.getCount())) {
+        const value = counter.getCount();
+        if (!value || isNaN(value)) {
             return null;
         }
         return {
@@ -147,7 +148,8 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportGauge(gauge: Gauge<any>, date: Date): IPoint {
-        if (isNaN(gauge.getValue())) {
+        const value = gauge.getValue();
+        if (!value || isNaN(value)) {
             return null;
         }
         return {
@@ -161,7 +163,8 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportHistogram(histogram: Histogram, date: Date): IPoint {
-        if (isNaN(histogram.getCount())) {
+        const value = histogram.getCount();
+        if (!value || isNaN(value)) {
             return null;
         }
         const snapshot = histogram.getSnapshot();
@@ -187,7 +190,8 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportMeter(meter: Meter, date: Date): IPoint {
-        if (isNaN(meter.getCount())) {
+        const value = meter.getCount();
+        if (!value || isNaN(value)) {
             return null;
         }
         return {
@@ -205,7 +209,8 @@ export class InfluxMetricReporter extends MetricReporter {
     }
 
     private reportTimer(timer: Timer, date: Date): IPoint {
-        if (isNaN(timer.getCount())) {
+        const value = timer.getCount();
+        if (!value || isNaN(value)) {
             return null;
         }
         const snapshot = timer.getSnapshot();
