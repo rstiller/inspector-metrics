@@ -1,11 +1,7 @@
 import "source-map-support/register";
 
 import * as async from "async";
-import {
-    IClusterConfig,
-    InfluxDB,
-    IPoint,
-} from "influx";
+import { IPoint } from "influx";
 import {
     Clock,
     Counter,
@@ -25,10 +21,15 @@ import {
 
 export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
+export interface Sender {
+    isReady(): Promise<boolean>;
+    init(): Promise<any>;
+    send(points: IPoint[]): Promise<any>;
+}
+
 export class InfluxMetricReporter extends MetricReporter {
 
     private clock: Clock;
-    private db: InfluxDB;
     private timer: NodeJS.Timer;
     private interval: number;
     private unit: TimeUnit;
@@ -36,28 +37,23 @@ export class InfluxMetricReporter extends MetricReporter {
     private logMetadata: any;
     private queue: AsyncQueue<any>;
     private log: Logger = console;
+    private sender: Sender;
 
     public constructor(
-        dbConfig: IClusterConfig,
+        sender: Sender,
         interval: number = 1000,
         unit: TimeUnit = MILLISECOND,
         tags: Map<string, string> = new Map(),
         clock: Clock = new StdClock()) {
-
         super();
 
-        const database = dbConfig.database;
-
+        this.sender = sender;
         this.interval = interval;
         this.unit = unit;
         this.tags = tags;
         this.clock = clock;
 
-        this.db = new InfluxDB(dbConfig);
-
         this.logMetadata = {
-            database,
-            hosts: dbConfig.hosts,
             interval,
             tags,
             unit,
@@ -72,13 +68,8 @@ export class InfluxMetricReporter extends MetricReporter {
             unlock = callback;
         });
 
-        this.db.getDatabaseNames().then((names: string[]) => {
-            if (!names.find((value: string, index: number, arr: string[]) => value.localeCompare(database) === 0)) {
-                return this.db.createDatabase(database);
-            }
-            return Promise.resolve(null);
-        })
-        .then(() => unlock());
+        this.sender.init()
+            .then(() => unlock());
     }
 
     public getLog(): Logger {
@@ -98,8 +89,9 @@ export class InfluxMetricReporter extends MetricReporter {
         this.timer.unref();
     }
 
-    private report(): void {
-        if (!!this.db && !!this.metricRegistries && this.metricRegistries.length > 0) {
+    private async report() {
+        const senderReady = await this.sender.isReady();
+        if (senderReady && this.metricRegistries && this.metricRegistries.length > 0) {
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
     }
@@ -137,11 +129,15 @@ export class InfluxMetricReporter extends MetricReporter {
         if (!value || isNaN(value)) {
             return null;
         }
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(counter);
+        const measurement = this.getMeasurementName(counter);
+
+        fields[`${fieldNamePrefix}count`] = counter.getCount();
+
         return {
-            fields: {
-                value: counter.getCount(),
-            },
-            measurement: counter.getName(),
+            fields,
+            measurement,
             tags: this.buildTags(counter),
             timestamp: date,
         };
@@ -152,11 +148,15 @@ export class InfluxMetricReporter extends MetricReporter {
         if (!value || isNaN(value)) {
             return null;
         }
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(gauge);
+        const measurement = this.getMeasurementName(gauge);
+
+        fields[`${fieldNamePrefix}value`] = gauge.getValue();
+
         return {
-            fields: {
-                value: gauge.getValue(),
-            },
-            measurement: gauge.getName(),
+            fields,
+            measurement,
             tags: this.buildTags(gauge),
             timestamp: date,
         };
@@ -168,22 +168,25 @@ export class InfluxMetricReporter extends MetricReporter {
             return null;
         }
         const snapshot = histogram.getSnapshot();
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(histogram);
+        const measurement = this.getMeasurementName(histogram);
+
+        fields[`${fieldNamePrefix}count`] = histogram.getCount();
+        fields[`${fieldNamePrefix}max`] = this.getNumber(snapshot.getMax());
+        fields[`${fieldNamePrefix}mean`] = this.getNumber(snapshot.getMean());
+        fields[`${fieldNamePrefix}min`] = this.getNumber(snapshot.getMin());
+        fields[`${fieldNamePrefix}p50`] = this.getNumber(snapshot.getMedian());
+        fields[`${fieldNamePrefix}p75`] = this.getNumber(snapshot.get75thPercentile());
+        fields[`${fieldNamePrefix}p95`] = this.getNumber(snapshot.get95thPercentile());
+        fields[`${fieldNamePrefix}p98`] = this.getNumber(snapshot.get98thPercentile());
+        fields[`${fieldNamePrefix}p99`] = this.getNumber(snapshot.get99thPercentile());
+        fields[`${fieldNamePrefix}p999`] = this.getNumber(snapshot.get999thPercentile());
+        fields[`${fieldNamePrefix}stddev`] = this.getNumber(snapshot.getStdDev());
 
         return {
-            fields: {
-                count: histogram.getCount(),
-                max: this.getNumber(snapshot.getMax()),
-                mean: this.getNumber(snapshot.getMean()),
-                min: this.getNumber(snapshot.getMin()),
-                p50: this.getNumber(snapshot.getMedian()),
-                p75: this.getNumber(snapshot.get75thPercentile()),
-                p95: this.getNumber(snapshot.get95thPercentile()),
-                p98: this.getNumber(snapshot.get98thPercentile()),
-                p99: this.getNumber(snapshot.get99thPercentile()),
-                p999: this.getNumber(snapshot.get999thPercentile()),
-                stddev: this.getNumber(snapshot.getStdDev()),
-            },
-            measurement: histogram.getName(),
+            fields,
+            measurement,
             tags: this.buildTags(histogram),
             timestamp: date,
         };
@@ -194,15 +197,19 @@ export class InfluxMetricReporter extends MetricReporter {
         if (!value || isNaN(value)) {
             return null;
         }
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(meter);
+        const measurement = this.getMeasurementName(meter);
+
+        fields[`${fieldNamePrefix}count`] = meter.getCount();
+        fields[`${fieldNamePrefix}m15_rate`] = this.getNumber(meter.get15MinuteRate());
+        fields[`${fieldNamePrefix}m1_rate`] = this.getNumber(meter.get1MinuteRate());
+        fields[`${fieldNamePrefix}m5_rate`] = this.getNumber(meter.get5MinuteRate());
+        fields[`${fieldNamePrefix}mean_rate`] = this.getNumber(meter.getMeanRate());
+
         return {
-            fields: {
-                count: meter.getCount(),
-                m15_rate: this.getNumber(meter.get15MinuteRate()),
-                m1_rate: this.getNumber(meter.get1MinuteRate()),
-                m5_rate: this.getNumber(meter.get5MinuteRate()),
-                mean_rate: this.getNumber(meter.getMeanRate()),
-            },
-            measurement: meter.getName(),
+            fields,
+            measurement,
             tags: this.buildTags(meter),
             timestamp: date,
         };
@@ -214,28 +221,46 @@ export class InfluxMetricReporter extends MetricReporter {
             return null;
         }
         const snapshot = timer.getSnapshot();
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(timer);
+        const measurement = this.getMeasurementName(timer);
+
+        fields[`${fieldNamePrefix}count`] = timer.getCount();
+        fields[`${fieldNamePrefix}m15_rate`] = this.getNumber(timer.get15MinuteRate());
+        fields[`${fieldNamePrefix}m1_rate`] = this.getNumber(timer.get1MinuteRate());
+        fields[`${fieldNamePrefix}m5_rate`] = this.getNumber(timer.get5MinuteRate());
+        fields[`${fieldNamePrefix}max`] = this.getNumber(snapshot.getMax());
+        fields[`${fieldNamePrefix}mean`] = this.getNumber(snapshot.getMean());
+        fields[`${fieldNamePrefix}mean_rate`] = this.getNumber(timer.getMeanRate());
+        fields[`${fieldNamePrefix}min`] = this.getNumber(snapshot.getMin());
+        fields[`${fieldNamePrefix}p50`] = this.getNumber(snapshot.getMedian());
+        fields[`${fieldNamePrefix}p75`] = this.getNumber(snapshot.get75thPercentile());
+        fields[`${fieldNamePrefix}p95`] = this.getNumber(snapshot.get95thPercentile());
+        fields[`${fieldNamePrefix}p98`] = this.getNumber(snapshot.get98thPercentile());
+        fields[`${fieldNamePrefix}p99`] = this.getNumber(snapshot.get99thPercentile());
+        fields[`${fieldNamePrefix}p999`] = this.getNumber(snapshot.get999thPercentile());
+        fields[`${fieldNamePrefix}stddev`] = this.getNumber(snapshot.getStdDev());
+
         return {
-            fields: {
-                count: timer.getCount(),
-                m15_rate: this.getNumber(timer.get15MinuteRate()),
-                m1_rate: this.getNumber(timer.get1MinuteRate()),
-                m5_rate: this.getNumber(timer.get5MinuteRate()),
-                max: this.getNumber(snapshot.getMax()),
-                mean: this.getNumber(snapshot.getMean()),
-                mean_rate: this.getNumber(timer.getMeanRate()),
-                min: this.getNumber(snapshot.getMin()),
-                p50: this.getNumber(snapshot.getMedian()),
-                p75: this.getNumber(snapshot.get75thPercentile()),
-                p95: this.getNumber(snapshot.get95thPercentile()),
-                p98: this.getNumber(snapshot.get98thPercentile()),
-                p99: this.getNumber(snapshot.get99thPercentile()),
-                p999: this.getNumber(snapshot.get999thPercentile()),
-                stddev: this.getNumber(snapshot.getStdDev()),
-            },
-            measurement: timer.getName(),
+            fields,
+            measurement,
             tags: this.buildTags(timer),
             timestamp: date,
         };
+    }
+
+    private getFieldNamePrefix(metric: Metric): string {
+        if (metric.getGroup()) {
+            return `${metric.getName()}.`;
+        }
+        return "";
+    }
+
+    private getMeasurementName(metric: Metric): string {
+        if (metric.getGroup()) {
+            return metric.getGroup();
+        }
+        return metric.getName();
     }
 
     private buildTags(taggable: Taggable): { [key: string]: string } {
@@ -245,21 +270,20 @@ export class InfluxMetricReporter extends MetricReporter {
         return tags;
     }
 
-    private sendPoints(points: IPoint[], type: MetricType): void {
-        this.queue.push((callback: () => void) => {
-            this.db.writePoints(points)
-                .then(() => {
-                    if (this.log) {
-                        this.log.debug(`wrote ${type} metrics`, this.logMetadata);
-                    }
-                    callback();
-                })
-                .catch((reason) => {
-                    if (this.log) {
-                        this.log.error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
-                    }
-                    callback();
-                });
+    private sendPoints(points: IPoint[], type: MetricType) {
+        this.queue.push(async (callback: () => void) => {
+            try {
+                await this.sender.send(points);
+                if (this.log) {
+                    this.log.debug(`wrote ${type} metrics`, this.logMetadata);
+                }
+            } catch (reason) {
+                if (this.log) {
+                    this.log.error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
+                }
+            } finally {
+                callback();
+            }
         });
     }
 

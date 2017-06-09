@@ -1,1 +1,2 @@
-export * from "./influx-metric-reporter";
+export * from "./DefaultSender";
+export * from "./InfluxMetricReporter";

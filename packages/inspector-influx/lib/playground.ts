@@ -1,31 +1,40 @@
 import { MetricRegistry, Timer } from "inspector-metrics";
-import { InfluxMetricReporter } from "./metrics/influx-metric-reporter";
+import { DefaultSender } from "./metrics/DefaultSender";
+import { InfluxMetricReporter } from "./metrics/InfluxMetricReporter";
 
 // influxdb config from https://github.com/node-influx/node-influx/blob/master/src/index.ts#L80
 const dbConfig = {
     database: "example-db",
     hosts: [
-        { host: "influx", port: 8086 },
+        { host: "127.0.0.1", port: 32768 },
     ],
     password: "admin",
     username: "admin",
 };
 
-const reporter: InfluxMetricReporter = new InfluxMetricReporter(dbConfig);
+const sender = new DefaultSender(dbConfig);
+const reporter: InfluxMetricReporter = new InfluxMetricReporter(sender);
 const registry: MetricRegistry = new MetricRegistry();
-const requests: Timer = registry.newTimer("requests");
+const requests1: Timer = registry.newTimer("requests1");
+const requests2: Timer = registry.newTimer("requests2");
+const requests3: Timer = registry.newTimer("requests3");
 
-requests.setTag("host", "localhost");
+requests1.setGroup("requests");
+requests2.setGroup("requests");
 
+requests1.setTag("host", "127.0.0.1");
+requests2.setTag("host", "127.0.0.2");
+requests3.setTag("host", "127.0.0.3");
+
+// quick & dirty hack ...
+global.console.debug = global.console.info;
 reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
 reporter.start();
 
-// example usage
 setInterval(() => {
-    // should report a few milliseconds
-    requests.time(() => {
+    requests1.time(() => {
         let a = 0;
         const b = 1;
         for (let i = 0; i < 1e6; i++) {
@@ -33,3 +42,23 @@ setInterval(() => {
         }
     });
 }, 100);
+
+setInterval(() => {
+    requests2.time(() => {
+        let a = 0;
+        const b = 1;
+        for (let i = 0; i < 1e6; i++) {
+            a = b + i;
+        }
+    });
+}, 50);
+
+setInterval(() => {
+    requests3.time(() => {
+        let a = 0;
+        const b = 1;
+        for (let i = 0; i < 1e6; i++) {
+            a = b + i;
+        }
+    });
+}, 25);
