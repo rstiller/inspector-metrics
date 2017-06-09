@@ -38,19 +38,19 @@ export class MetricRegistration<T extends Metric> {
 export class MetricRegistry extends BaseMetric implements MetricSet {
 
     public static isCounter(instance: any): instance is Counter {
-        return instance.metricRef instanceof Counter;
+        return instance instanceof Counter || instance.metricRef instanceof Counter;
     }
 
     public static isHistogram(instance: any): instance is Histogram {
-        return instance.metricRef instanceof Histogram;
+        return instance instanceof Histogram || instance.metricRef instanceof Histogram;
     }
 
     public static isMeter(instance: any): instance is Meter {
-        return instance.metricRef instanceof Meter;
+        return instance instanceof Meter || instance.metricRef instanceof Meter;
     }
 
     public static isTimer(instance: any): instance is Timer {
-        return instance.metricRef instanceof Timer;
+        return instance instanceof Timer || instance.metricRef instanceof Timer;
     }
 
     public static isGauge<T>(instance: any): instance is Gauge<T> {
