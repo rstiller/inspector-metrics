@@ -37,6 +37,32 @@ export class MetricRegistration<T extends Metric> {
 
 export class MetricRegistry extends BaseMetric implements MetricSet {
 
+    public static isCounter(instance: any): instance is Counter {
+        return instance.metricRef instanceof Counter;
+    }
+
+    public static isHistogram(instance: any): instance is Histogram {
+        return instance.metricRef instanceof Histogram;
+    }
+
+    public static isMeter(instance: any): instance is Meter {
+        return instance.metricRef instanceof Meter;
+    }
+
+    public static isTimer(instance: any): instance is Timer {
+        return instance.metricRef instanceof Timer;
+    }
+
+    public static isGauge<T>(instance: any): instance is Gauge<T> {
+        const directGauge: boolean = !!instance.getValue && instance.getValue instanceof Function;
+        const gaugeRegistration: boolean = !!instance.metricRef && !!instance.metricRef.getValue && instance.metricRef.getValue instanceof Function;
+        return directGauge || gaugeRegistration;
+    }
+
+    public static isMetricSet(instance: any): instance is MetricSet {
+        return !!instance.getMetrics && instance.getMetrics instanceof Function;
+    }
+
     private static defaultNameFactory(baseName: string, metricName: string, metric: Metric): string {
         return baseName + "." + metricName;
     }
@@ -76,7 +102,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     public getCounters(): Map<string, Counter> {
         const map: Map<string, Counter> = new Map();
         this.metrics
-            .filter(this.isCounter)
+            .filter(MetricRegistry.isCounter)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Counter));
         return map;
     }
@@ -87,7 +113,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     public getGauges(): Map<string, Gauge<any>> {
         const map: Map<string, Gauge<any>> = new Map();
         this.metrics
-            .filter(this.isGauge)
+            .filter(MetricRegistry.isGauge)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Gauge<any>));
         return map;
     }
@@ -98,7 +124,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     public getHistograms(): Map<string, Histogram> {
         const map: Map<string, Histogram> = new Map();
         this.metrics
-            .filter(this.isHistogram)
+            .filter(MetricRegistry.isHistogram)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Histogram));
         return map;
     }
@@ -109,7 +135,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     public getMeters(): Map<string, Meter> {
         const map: Map<string, Meter> = new Map();
         this.metrics
-            .filter(this.isMeter)
+            .filter(MetricRegistry.isMeter)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Meter));
         return map;
     }
@@ -120,38 +146,38 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     public getTimers(): Map<string, Timer> {
         const map: Map<string, Timer> = new Map();
         this.metrics
-            .filter(this.isTimer)
+            .filter(MetricRegistry.isTimer)
             .forEach((registration) => map.set(registration.name, registration.metricRef as Timer));
         return map;
     }
 
     public getCounterList(): Counter[] {
         return this.metrics
-            .filter(this.isCounter)
+            .filter(MetricRegistry.isCounter)
             .map((registration) => registration.metricRef as Counter);
     }
 
     public getGaugeList(): Array<Gauge<any>> {
         return this.metrics
-            .filter(this.isGauge)
+            .filter(MetricRegistry.isGauge)
             .map((registration) => registration.metricRef as Gauge<any>);
     }
 
     public getHistogramList(): Histogram[] {
         return this.metrics
-            .filter(this.isHistogram)
+            .filter(MetricRegistry.isHistogram)
             .map((registration) => registration.metricRef as Histogram);
     }
 
     public getMeterList(): Meter[] {
         return this.metrics
-            .filter(this.isMeter)
+            .filter(MetricRegistry.isMeter)
             .map((registration) => registration.metricRef as Meter);
     }
 
     public getTimerList(): Timer[] {
         return this.metrics
-            .filter(this.isTimer)
+            .filter(MetricRegistry.isTimer)
             .map((registration) => registration.metricRef as Timer);
     }
 
@@ -349,12 +375,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
 
         if (metric instanceof Meter ||
             metric instanceof Counter ||
-            this.isGauge(metric) ||
+            MetricRegistry.isGauge<any>(metric) ||
             metric instanceof Histogram ||
             metric instanceof Timer) {
             this.metrics.push(new MetricRegistration(metric));
             this.fireMetricAdded(name, metric);
-        } else if (this.isMetricSet(metric)) {
+        } else if (MetricRegistry.isMetricSet(metric)) {
             metric.getMetrics().forEach((m: Metric) => {
                 const metricName = this.nameFactory(name, m.getName(), m);
                 this.register(metricName, m);
@@ -381,32 +407,6 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             return `${metric.getGroup()}.${name}`;
         }
         return name;
-    }
-
-    private isCounter(instance: any): instance is Counter {
-        return instance.metricRef instanceof Counter;
-    }
-
-    private isHistogram(instance: any): instance is Histogram {
-        return instance.metricRef instanceof Histogram;
-    }
-
-    private isMeter(instance: any): instance is Meter {
-        return instance.metricRef instanceof Meter;
-    }
-
-    private isTimer(instance: any): instance is Timer {
-        return instance.metricRef instanceof Timer;
-    }
-
-    private isGauge<T>(instance: any): instance is Gauge<T> {
-        const directGauge: boolean = !!instance.getValue && instance.getValue instanceof Function;
-        const gaugeRegistration: boolean = !!instance.metricRef && !!instance.metricRef.getValue && instance.metricRef.getValue instanceof Function;
-        return directGauge || gaugeRegistration;
-    }
-
-    private isMetricSet(instance: any): instance is MetricSet {
-        return !!instance.getMetrics && instance.getMetrics instanceof Function;
     }
 
     private fireMetricAdded(name: string, metric: Metric): void {
