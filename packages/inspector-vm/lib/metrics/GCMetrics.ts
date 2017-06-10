@@ -3,11 +3,11 @@ import "source-map-support/register";
 import {
     BaseMetric,
     Clock,
-    DefaultReservoir,
     Metric,
     MetricSet,
     NANOSECOND,
     SimpleGauge,
+    SlidingWindowReservoir,
     Timer,
 } from "inspector-metrics";
 
@@ -85,19 +85,19 @@ export class GCMetrics extends BaseMetric implements MetricSet {
         super();
         this.name = name;
 
-        this.minorRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
+        this.minorRuns = new Timer(clock, new SlidingWindowReservoir(1024), "runs");
         this.minorRuns.setTag("type", "minor");
 
-        this.majorRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
+        this.majorRuns = new Timer(clock, new SlidingWindowReservoir(1024), "runs");
         this.majorRuns.setTag("type", "major");
 
-        this.incrementalMarkingRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
+        this.incrementalMarkingRuns = new Timer(clock, new SlidingWindowReservoir(1024), "runs");
         this.incrementalMarkingRuns.setTag("type", "IncrementalMarking");
 
-        this.phantomCallbackProcessingRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
+        this.phantomCallbackProcessingRuns = new Timer(clock, new SlidingWindowReservoir(1024), "runs");
         this.phantomCallbackProcessingRuns.setTag("type", "PhantomCallbackProcessing");
 
-        this.allRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
+        this.allRuns = new Timer(clock, new SlidingWindowReservoir(1024), "runs");
         this.allRuns.setTag("type", "all");
 
         this.metrics.push(this.minorRuns);
@@ -154,8 +154,6 @@ export class GCMetrics extends BaseMetric implements MetricSet {
                 }
             });
         });
-
-        this.setGroup("gc");
     }
 
     public getMetrics(): Map<string, Metric> {

@@ -3,9 +3,9 @@ import * as crypto from "crypto";
 import "source-map-support/register";
 
 import * as chai from "chai";
-import { StdClock, Timer } from "inspector-metrics";
+import { MetricRegistry, StdClock, Timer } from "inspector-metrics";
 import { suite, test, timeout } from "mocha-typescript";
-import { GCMetrics } from "../../lib/metrics/gc-metrics";
+import { GCMetrics } from "../../lib/metrics/GCMetrics";
 
 const expect = chai.expect;
 
@@ -36,9 +36,9 @@ export class GCMetricsTest {
     public settingGroup(): void {
         const metric: GCMetrics = new GCMetrics("vm", new StdClock());
 
-        expect(metric.getGroup()).to.equal("gc");
+        expect(metric.getGroup()).to.not.exist;
         metric.getMetricList().forEach((submetric) => {
-            expect(submetric.getGroup()).to.equal("gc");
+            expect(submetric.getGroup()).to.not.exist;
         });
 
         metric.setGroup("abc");
@@ -62,6 +62,19 @@ export class GCMetricsTest {
         expect(metric.getTag("type")).to.not.exist;
         metric.getMetricList().forEach((submetric) => {
             expect(submetric.getTag("type")).to.not.exist;
+        });
+    }
+
+    @test
+    public checkRegistration(): void {
+        const registry = new MetricRegistry();
+        const metric: GCMetrics = new GCMetrics("vm", new StdClock());
+
+        registry.registerMetric(metric);
+
+        expect(registry.getMetricList()).to.have.length(metric.getMetricList().length);
+        registry.getMetricList().forEach((submetric) => {
+            expect(submetric.getGroup()).to.equal("vm");
         });
     }
 

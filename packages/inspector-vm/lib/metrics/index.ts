@@ -1,1 +1,1 @@
-export * from "./gc-metrics";
+export * from "./GCMetrics";
