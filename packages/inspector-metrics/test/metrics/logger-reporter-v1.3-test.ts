@@ -83,8 +83,8 @@ export class LoggerReporterTest {
         gauge1.setTag("type", "abc");
         gauge2.setTag("type", "def");
 
-        this.registry.register(gauge1.getName(), gauge1);
-        this.registry.register(gauge2.getName(), gauge2);
+        this.registry.registerMetric(gauge1);
+        this.registry.registerMetric(gauge2);
 
         const metrics = this.registry.getMetricList();
         expect(metrics).to.have.length(2);

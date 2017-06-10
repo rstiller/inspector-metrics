@@ -71,11 +71,14 @@ requestCount.reset();
 ### Gauge
 
 ```typescript
-import { Gauge, MetricRegistry, SimpleGauge } from "inspector-metrics";
+import { BaseMetric, Gauge, MetricRegistry, SimpleGauge } from "inspector-metrics";
 
-class ArrayLengthGauge extends Gauge<number> {
+class ArrayLengthGauge extends BaseMetric implements Gauge<number> {
 
-    public constructor(private a: Array<any>) {}
+    public constructor(name: string, private a: Array<any>) {
+        super();
+        this.name = name;
+    }
 
     public getValue(): number {
         return this.a.length;
@@ -84,12 +87,12 @@ class ArrayLengthGauge extends Gauge<number> {
 }
 
 const registry = new MetricRegistry();
-const queueSize: Gauge<number> = new SimpleGauge();
+const queueSize: Gauge<number> = new SimpleGauge("requestCount");
 let myArray: number[] = [];
-const arrayLength: Gauge<number> = new ArrayLengthGauge(myArray);
+const arrayLength: Gauge<number> = new ArrayLengthGauge("arrayLength", myArray);
 
-registry.register("requestCount", queueSize);
-registry.register("arrayLength", arrayLength);
+registry.registerMetric(queueSize);
+registry.registerMetric(arrayLength);
 
 queueSize.setValue(12345);
 
@@ -229,8 +232,8 @@ const capacity: Gauge<number> = ...;
 const queueSize: Gauge<number> = ...;
 
 // all values grouped as buffer
-registry.register("elements", queueSize, "buffer");
-registry.register("capacity", capacity, "buffer");
+registry.registerMetric(queueSize, "buffer");
+registry.registerMetric(capacity, "buffer");
 // counts the number of allocations during the execution of the application
 registry.newCounter("newAllocations", "buffer");
 

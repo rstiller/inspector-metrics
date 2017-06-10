@@ -1,6 +1,6 @@
 {
   "name": "inspector-metrics",
-  "version": "1.4.2",
+  "version": "1.5.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -39,8 +39,16 @@
     "typescript": "^2.3.3"
   },
   "dependencies": {
+    "@types/node": "^7.0.29",
+    "@types/sinon": "^2.3.1",
+    "@types/sinon-chai": "^2.7.28",
     "async": "^2.4.1",
-    "source-map-support": "^0.4"
+    "chai": "^4.0.2",
+    "sinon": "^2.3.4",
+    "source-map-support": "^0.4",
+    "ts-node": "^3.0.6",
+    "tslint": "^5.4.3",
+    "typescript": "^2.3.4"
   },
   "files": [
     "build",
