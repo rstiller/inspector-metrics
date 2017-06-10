@@ -5,4 +5,4 @@
 --compilers ts:ts-node/register
 --bail
 --full-trace
-test/**/*-test.ts
+test/**/*Test.ts
