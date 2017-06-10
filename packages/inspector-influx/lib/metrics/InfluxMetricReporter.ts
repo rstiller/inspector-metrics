@@ -133,7 +133,7 @@ export class InfluxMetricReporter extends MetricReporter {
         const fieldNamePrefix = this.getFieldNamePrefix(counter);
         const measurement = this.getMeasurementName(counter);
 
-        fields[`${fieldNamePrefix}count`] = counter.getCount();
+        fields[`${fieldNamePrefix}count`] = counter.getCount() || 0;
 
         return {
             fields,
@@ -152,7 +152,7 @@ export class InfluxMetricReporter extends MetricReporter {
         const fieldNamePrefix = this.getFieldNamePrefix(gauge);
         const measurement = this.getMeasurementName(gauge);
 
-        fields[`${fieldNamePrefix}value`] = gauge.getValue();
+        fields[`${fieldNamePrefix}value`] = gauge.getValue() || 0;
 
         return {
             fields,
@@ -172,7 +172,7 @@ export class InfluxMetricReporter extends MetricReporter {
         const fieldNamePrefix = this.getFieldNamePrefix(histogram);
         const measurement = this.getMeasurementName(histogram);
 
-        fields[`${fieldNamePrefix}count`] = histogram.getCount();
+        fields[`${fieldNamePrefix}count`] = histogram.getCount() || 0;
         fields[`${fieldNamePrefix}max`] = this.getNumber(snapshot.getMax());
         fields[`${fieldNamePrefix}mean`] = this.getNumber(snapshot.getMean());
         fields[`${fieldNamePrefix}min`] = this.getNumber(snapshot.getMin());
@@ -201,7 +201,7 @@ export class InfluxMetricReporter extends MetricReporter {
         const fieldNamePrefix = this.getFieldNamePrefix(meter);
         const measurement = this.getMeasurementName(meter);
 
-        fields[`${fieldNamePrefix}count`] = meter.getCount();
+        fields[`${fieldNamePrefix}count`] = meter.getCount() || 0;
         fields[`${fieldNamePrefix}m15_rate`] = this.getNumber(meter.get15MinuteRate());
         fields[`${fieldNamePrefix}m1_rate`] = this.getNumber(meter.get1MinuteRate());
         fields[`${fieldNamePrefix}m5_rate`] = this.getNumber(meter.get5MinuteRate());
@@ -225,7 +225,7 @@ export class InfluxMetricReporter extends MetricReporter {
         const fieldNamePrefix = this.getFieldNamePrefix(timer);
         const measurement = this.getMeasurementName(timer);
 
-        fields[`${fieldNamePrefix}count`] = timer.getCount();
+        fields[`${fieldNamePrefix}count`] = timer.getCount() || 0;
         fields[`${fieldNamePrefix}m15_rate`] = this.getNumber(timer.get15MinuteRate());
         fields[`${fieldNamePrefix}m1_rate`] = this.getNumber(timer.get1MinuteRate());
         fields[`${fieldNamePrefix}m5_rate`] = this.getNumber(timer.get5MinuteRate());
@@ -289,7 +289,7 @@ export class InfluxMetricReporter extends MetricReporter {
 
     private getNumber(value: number): number {
         if (isNaN(value)) {
-            return null;
+            return 0;
         }
         return value;
     }
