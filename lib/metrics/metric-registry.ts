@@ -366,6 +366,46 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         return timer;
     }
 
+    /**
+     * Registers the given metric under it's name in this registry.
+     *
+     * If the metric is a metric-set the child-metrics are
+     * registered using their names the name of the metric-set is set as group.
+     *
+     * @param {Metric} metric
+     * @param {string} [group=null]
+     *
+     * @memberof MetricRegistry
+     */
+    public registerMetric(metric: Metric, group: string = null): void {
+        if (!!group) {
+            metric.setGroup(group);
+        }
+
+        if (metric instanceof Meter ||
+            metric instanceof Counter ||
+            MetricRegistry.isGauge<any>(metric) ||
+            metric instanceof Histogram ||
+            metric instanceof Timer) {
+            this.metrics.push(new MetricRegistration(metric));
+            this.fireMetricAdded(metric.getName(), metric);
+        } else if (MetricRegistry.isMetricSet(metric)) {
+            metric.getMetricList().forEach((m: Metric) => {
+                m.setGroup(metric.getName());
+                this.registerMetric(m);
+            });
+        }
+    }
+
+    /**
+     * Registeres a metric by name
+     *
+     * @param {string} name
+     * @param {Metric} metric
+     * @param {string} [group=null]
+     * @deprecated since version 1.5 - use {@link registerMetric} instead
+     * @memberof MetricRegistry
+     */
     public register(name: string, metric: Metric, group: string = null): void {
         if (!!group) {
             metric.setGroup(group);
