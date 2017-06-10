@@ -1,6 +1,6 @@
 {
   "name": "inspector-influx",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -40,7 +40,7 @@
   "dependencies": {
     "async": "^2.4.1",
     "influx": "^5.0.7",
-    "inspector-metrics": "^1.5.0",
+    "inspector-metrics": "^1.5.1",
     "source-map-support": "^0.4.15"
   },
   "files": [
