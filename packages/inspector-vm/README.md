@@ -33,11 +33,11 @@ const registry: MetricRegistry = ...;
 // instance the memory metric, contains
 //   - space statistics
 //   - memory statistics
-const gcMetrics: V8MemoryMetrics = new V8MemoryMetrics("v8", registry.getDefaultClock());
+const memoryMetrics: V8MemoryMetrics = new V8MemoryMetrics("v8", registry.getDefaultClock());
 
 // metric is registered und the name "v8"
 // defaults to group "gc"
-registry.register(gcMetrics.getName(), gcMetrics);
+registry.register(memoryMetrics.getName(), memoryMetrics);
 
 // setup reporter ...
 ```
