@@ -1,6 +1,6 @@
 {
   "name": "inspector-vm",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -17,24 +17,28 @@
   "keywords": [
     "metrics",
     "typescript",
-    "vm"
+    "vm",
+    "v8"
   ],
+  "engines": {
+    "node": ">= 8",
+    "npm": ">= 5"
+  },
   "devDependencies": {
     "@types/chai": "^3.5.2",
     "@types/mocha": "^2.2.41",
-    "@types/node": "^7.0.29",
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2",
-    "mocha-typescript": "^1.1.4",
-    "npm-check": "^5.4.4",
+    "@types/node": "^7.0.39",
+    "chai": "^4.1.0",
+    "mocha": "^3.5.0",
+    "mocha-typescript": "^1.1.7",
+    "npm-check": "^5.4.5",
     "nyc": "^10.3.2",
     "rimraf": "^2.6.1",
-    "ts-node": "^3.0.6",
-    "tslint": "^5.4.3",
-    "typescript": "^2.3.4"
+    "ts-node": "^3.3.0",
+    "tslint": "^5.5.0",
+    "typescript": "^2.4.2"
   },
   "dependencies": {
-    "gc-heap-stats": "^1.0.0",
     "inspector-metrics": "^1.5.1",
     "source-map-support": "^0.4.15"
   },
@@ -53,7 +57,7 @@
     "clean": "rimraf build coverage",
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "mocha --opts mocha.opts",
     "test:jenkins": "mocha --opts mocha.jenkins.opts"
   },

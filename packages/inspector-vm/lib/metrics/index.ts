@@ -1,1 +1,1 @@
-export * from "./GCMetrics";
+export * from "./V8MemoryMetrics";
