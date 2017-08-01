@@ -19,6 +19,8 @@ NodeJS VM Metric Collector
 
 ## install
 
+This library is meant to be used with `typescript` / `nodejs`.
+
 `npm install --save inspector-vm`
 
 ## basic usage
