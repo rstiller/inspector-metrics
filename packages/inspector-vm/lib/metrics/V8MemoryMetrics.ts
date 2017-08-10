@@ -2,7 +2,6 @@ import "source-map-support/register";
 
 import {
     BaseMetric,
-    Clock,
     Metric,
     MetricSet,
     SimpleGauge,
@@ -49,7 +48,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
     private peakMallocedMemory: SimpleGauge = new SimpleGauge("peakMallocedMemory");
     private intervalRef: NodeJS.Timer;
 
-    public constructor(name: string, clock: Clock, sampleRate = 1000) {
+    public constructor(name: string, sampleRate = 1000) {
         super();
         this.name = name;
 

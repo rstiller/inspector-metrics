@@ -2,18 +2,18 @@
 import "source-map-support/register";
 
 import * as chai from "chai";
-import { MetricRegistry } from "inspector-metrics";
+import { MetricRegistry, StdClock } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
-import { V8MemoryMetrics } from "../../lib/metrics/V8MemoryMetrics";
+import { V8GCMetrics } from "../../lib/metrics/V8GCMetrics";
 
 const expect = chai.expect;
 
 @suite
-export class V8MemoryMetricsTest {
+export class V8GCMetricsTest {
 
     @test
     public settingGroup(): void {
-        const metric: V8MemoryMetrics = new V8MemoryMetrics("v8");
+        const metric: V8GCMetrics = new V8GCMetrics("v8", new StdClock());
 
         expect(metric.getGroup()).to.not.exist;
         metric.getMetrics().forEach((submetric) => {
@@ -29,7 +29,7 @@ export class V8MemoryMetricsTest {
 
     @test
     public settingTag(): void {
-        const metric: V8MemoryMetrics = new V8MemoryMetrics("v8");
+        const metric: V8GCMetrics = new V8GCMetrics("v8", new StdClock());
 
         metric.setTag("type", "value");
         expect(metric.getTag("type")).to.equal("value");
@@ -47,7 +47,7 @@ export class V8MemoryMetricsTest {
     @test
     public checkRegistration(): void {
         const registry = new MetricRegistry();
-        const metric: V8MemoryMetrics = new V8MemoryMetrics("v8");
+        const metric: V8GCMetrics = new V8GCMetrics("v8", new StdClock());
 
         registry.registerMetric(metric);
 
