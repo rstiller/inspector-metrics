@@ -40,6 +40,12 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
         this.allRuns = new Timer(clock, new DefaultReservoir(1024), "runs");
         this.allRuns.setTag("type", "all");
 
+        this.metrics.push(this.allRuns);
+        this.metrics.push(this.incrementalMarkingRuns);
+        this.metrics.push(this.majorRuns);
+        this.metrics.push(this.minorRuns);
+        this.metrics.push(this.phantomCallbackProcessingRuns);
+
         const gc = GC();
         const slf = this;
         gc.on("stats", function(stats: any) {
