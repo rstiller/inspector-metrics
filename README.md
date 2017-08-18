@@ -183,6 +183,11 @@ callStats.time(() => {
     // some time has passed
 });
 
+// works with promise too
+await callStats.timeAsync(async () => {
+    // some time has passed
+});
+
 snapshot = callStats.getSnapshot();
 // snapshot gets updated through time function ...
 snapshot.getMean();
