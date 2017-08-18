@@ -18,6 +18,10 @@
     "metrics",
     "typescript"
   ],
+  "engines": {
+    "node": ">= 6",
+    "npm": ">= 3"
+  },
   "devDependencies": {
     "@types/async": "^2.0.41",
     "@types/chai": "^3.4",
@@ -57,7 +61,7 @@
     "clean": "rimraf build coverage",
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile",
-    "prepublish": "npm run build",
+    "prepublishOnly": "npm run build",
     "test": "mocha --opts mocha.opts",
     "test:jenkins": "mocha --opts mocha.jenkins.opts"
   },
