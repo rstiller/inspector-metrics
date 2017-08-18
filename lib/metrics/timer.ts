@@ -85,13 +85,16 @@ export class Timer extends BaseMetric implements Metered, Sampling {
         }
     }
 
-    public async timeAsync(f: () => Promise<any>): Promise<void> {
+    public timeAsync(f: () => Promise<any>): Promise<void> {
         const startTime: Time = this.clock.time();
-        try {
-            await f();
-        } finally {
-            this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
-        }
+        return f()
+            .then(() => {
+                this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+            })
+            .catch((err) => {
+                this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+                throw err;
+            });
     }
 
     public newStopWatch(): StopWatch {
