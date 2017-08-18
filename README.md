@@ -1,7 +1,24 @@
 # inspector-metrics
 Typescript Metrics Library (copied from http://metrics.dropwizard.io)
 
+<p align="center">
+    <a href="https://www.npmjs.org/package/inspector-metrics">
+        <img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version">
+    </a>
+    <a href="https://www.npmjs.org/package/inspector-metrics">
+        <img src="https://img.shields.io/npm/l/inspector-metrics.svg" alt="License">
+    </a>
+    <a href="https://travis-ci.org/rstiller/inspector-metrics">
+        <img src="http://img.shields.io/travis/rstiller/inspector-metrics/master.svg" alt="Build Status">
+    </a>
+    <a href="https://david-dm.org/rstiller/inspector-metrics">
+        <img src="https://img.shields.io/david/rstiller/inspector-metrics.svg" alt="Dependencies Status">
+    </a>
+</p>
+
 ## install
+
+This library is meant to be used with `typescript` / `nodejs`.
 
 `npm install --save inspector-metrics`
 
