@@ -480,6 +480,62 @@ export class TimerTest {
         expect(snapshot.getStdDev()).to.be.NaN;
     }
 
+    @test
+    public async "add duration with async time function"() {
+        this.clock.setCurrentTime({
+            milliseconds: 0,
+            nanoseconds: 0,
+        });
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+
+        expect(timer.getCount()).to.equal(0);
+        expect(timer.get15MinuteRate()).to.equal(0);
+        expect(timer.get5MinuteRate()).to.equal(0);
+        expect(timer.get1MinuteRate()).to.equal(0);
+        expect(timer.getMeanRate()).to.equal(0);
+
+        let snapshot: Snapshot = timer.getSnapshot();
+        expect(snapshot.get75thPercentile()).to.equal(0);
+        expect(snapshot.get95thPercentile()).to.equal(0);
+        expect(snapshot.get98thPercentile()).to.equal(0);
+        expect(snapshot.get99thPercentile()).to.equal(0);
+        expect(snapshot.get999thPercentile()).to.equal(0);
+        expect(snapshot.getMax()).to.be.undefined;
+        expect(snapshot.getMean()).to.equal(0);
+        expect(snapshot.getMedian()).to.equal(0);
+        expect(snapshot.getMin()).to.be.undefined;
+        expect(snapshot.getStdDev()).to.equal(0);
+
+        await timer.timeAsync(async () => {
+            this.clock.setCurrentTime({
+                milliseconds: 10,
+                nanoseconds: 0,
+            });
+        });
+        this.clock.setCurrentTime({
+            milliseconds: 1001,
+            nanoseconds: 0,
+        });
+
+        expect(timer.getCount()).to.equal(1);
+        expect(timer.get15MinuteRate()).to.greaterThan(0);
+        expect(timer.get5MinuteRate()).to.greaterThan(0);
+        expect(timer.get1MinuteRate()).to.greaterThan(0);
+        expect(timer.getMeanRate()).to.lessThan(1);
+
+        snapshot = timer.getSnapshot();
+        expect(snapshot.get75thPercentile()).to.equal(10000000);
+        expect(snapshot.get95thPercentile()).to.equal(10000000);
+        expect(snapshot.get98thPercentile()).to.equal(10000000);
+        expect(snapshot.get99thPercentile()).to.equal(10000000);
+        expect(snapshot.get999thPercentile()).to.equal(10000000);
+        expect(snapshot.getMax()).to.equal(10000000);
+        expect(snapshot.getMean()).to.equal(10000000);
+        expect(snapshot.getMedian()).to.equal(10000000);
+        expect(snapshot.getMin()).to.equal(10000000);
+        expect(snapshot.getStdDev()).to.be.NaN;
+    }
+
 }
 
 @suite
