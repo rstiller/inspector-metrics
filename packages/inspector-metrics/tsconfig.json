@@ -6,7 +6,7 @@
         "module": "none",
         "target": "es2017",
         "sourceMap": true,
-        "newLine": "LF",
+        "newLine": "lf",
         "moduleResolution": "node",
         "noLib": false,
         "noImplicitAny": true,
