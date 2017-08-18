@@ -481,7 +481,7 @@ export class TimerTest {
     }
 
     @test
-    public async "add duration with async time function"() {
+    public "add duration with async time function"(callback: () => any): void {
         this.clock.setCurrentTime({
             milliseconds: 0,
             nanoseconds: 0,
@@ -506,34 +506,40 @@ export class TimerTest {
         expect(snapshot.getMin()).to.be.undefined;
         expect(snapshot.getStdDev()).to.equal(0);
 
-        await timer.timeAsync(async () => {
+        timer.timeAsync(() => {
+            return new Promise((resolve) => {
+                this.clock.setCurrentTime({
+                    milliseconds: 10,
+                    nanoseconds: 0,
+                });
+                resolve();
+            });
+        })
+        .then(() => {
             this.clock.setCurrentTime({
-                milliseconds: 10,
+                milliseconds: 1001,
                 nanoseconds: 0,
             });
-        });
-        this.clock.setCurrentTime({
-            milliseconds: 1001,
-            nanoseconds: 0,
-        });
 
-        expect(timer.getCount()).to.equal(1);
-        expect(timer.get15MinuteRate()).to.greaterThan(0);
-        expect(timer.get5MinuteRate()).to.greaterThan(0);
-        expect(timer.get1MinuteRate()).to.greaterThan(0);
-        expect(timer.getMeanRate()).to.lessThan(1);
+            expect(timer.getCount()).to.equal(1);
+            expect(timer.get15MinuteRate()).to.greaterThan(0);
+            expect(timer.get5MinuteRate()).to.greaterThan(0);
+            expect(timer.get1MinuteRate()).to.greaterThan(0);
+            expect(timer.getMeanRate()).to.lessThan(1);
 
-        snapshot = timer.getSnapshot();
-        expect(snapshot.get75thPercentile()).to.equal(10000000);
-        expect(snapshot.get95thPercentile()).to.equal(10000000);
-        expect(snapshot.get98thPercentile()).to.equal(10000000);
-        expect(snapshot.get99thPercentile()).to.equal(10000000);
-        expect(snapshot.get999thPercentile()).to.equal(10000000);
-        expect(snapshot.getMax()).to.equal(10000000);
-        expect(snapshot.getMean()).to.equal(10000000);
-        expect(snapshot.getMedian()).to.equal(10000000);
-        expect(snapshot.getMin()).to.equal(10000000);
-        expect(snapshot.getStdDev()).to.be.NaN;
+            snapshot = timer.getSnapshot();
+            expect(snapshot.get75thPercentile()).to.equal(10000000);
+            expect(snapshot.get95thPercentile()).to.equal(10000000);
+            expect(snapshot.get98thPercentile()).to.equal(10000000);
+            expect(snapshot.get99thPercentile()).to.equal(10000000);
+            expect(snapshot.get999thPercentile()).to.equal(10000000);
+            expect(snapshot.getMax()).to.equal(10000000);
+            expect(snapshot.getMean()).to.equal(10000000);
+            expect(snapshot.getMedian()).to.equal(10000000);
+            expect(snapshot.getMin()).to.equal(10000000);
+            expect(snapshot.getStdDev()).to.be.NaN;
+        })
+        .then(callback);
     }
 
 }
