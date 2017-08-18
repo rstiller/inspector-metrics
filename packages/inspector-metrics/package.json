@@ -19,28 +19,28 @@
     "typescript"
   ],
   "devDependencies": {
-    "@types/async": "^2.0",
+    "@types/async": "^2.0.41",
     "@types/chai": "^3.4",
     "@types/mocha": "^2.2",
-    "@types/node": "^7.0.29",
-    "@types/sinon": "^2.3.1",
+    "@types/node": "^7.0.42",
+    "@types/sinon": "^2.3.3",
     "@types/sinon-chai": "^2.7.28",
-    "chai": "^4.0.2",
-    "mocha": "^3.4.2",
-    "mocha-typescript": "^1.1.4",
-    "npm-check": "^5.4.4",
+    "chai": "^4.1.1",
+    "mocha": "^3.5.0",
+    "mocha-typescript": "^1.1.7",
+    "npm-check": "^5.4.5",
     "nyc": "^10.2",
     "reflect-metadata": "^0.1",
     "rimraf": "^2.6.1",
-    "sinon": "^2.3.4",
-    "sinon-chai": "^2.9",
-    "ts-node": "^3.0.6",
-    "tslint": "^5.4.3",
-    "typescript": "^2.3.4"
+    "sinon": "^2.4.1",
+    "sinon-chai": "^2.13.0",
+    "ts-node": "^3.3.0",
+    "tslint": "^5.6.0",
+    "typescript": "^2.5.0"
   },
   "dependencies": {
-    "async": "^2.4.1",
-    "source-map-support": "^0.4"
+    "async": "^2.5.0",
+    "source-map-support": "^0.4.16"
   },
   "files": [
     "build",
