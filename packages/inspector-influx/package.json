@@ -44,7 +44,7 @@
   "dependencies": {
     "async": "^2.5.0",
     "influx": "^5.0.7",
-    "inspector-metrics": "^1.5.4",
+    "inspector-metrics": "^1.7.0",
     "source-map-support": "^0.4.16"
   },
   "files": [
