@@ -2,7 +2,23 @@
 Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts) for
 [InfluxDB](https://docs.influxdata.com/influxdb/).
 
-This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and for nodejs only.
+<p align="center">
+    <a href="https://www.npmjs.org/package/inspector-influx">
+        <img src="https://img.shields.io/npm/v/inspector-influx.svg" alt="NPM Version">
+    </a>
+    <a href="https://www.npmjs.org/package/inspector-influx">
+        <img src="https://img.shields.io/npm/l/inspector-influx.svg" alt="License">
+    </a>
+    <a href="https://travis-ci.org/rstiller/inspector-influx">
+        <img src="http://img.shields.io/travis/rstiller/inspector-influx/master.svg" alt="Build Status">
+    </a>
+    <a href="https://david-dm.org/rstiller/inspector-influx">
+        <img src="https://img.shields.io/david/rstiller/inspector-influx.svg" alt="Dependencies Status">
+    </a>
+</p>
+
+This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and
+is meant to be used with `typescript` / `nodejs`.  
 It uses [node-influx](https://github.com/node-influx/node-influx) as influxdb client.
 
 ## install
