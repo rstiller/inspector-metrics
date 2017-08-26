@@ -10,6 +10,9 @@ export interface Metric extends Groupable, Taggable {
 
 export abstract class BaseMetric implements Metric {
 
+    private static COUNTER = 0;
+
+    public readonly id: number = BaseMetric.COUNTER++;
     protected tags: Map<string, string> = new Map();
     protected group: string;
     protected name: string;
