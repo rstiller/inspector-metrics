@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -exuo pipefail
+set -e
 
 docker-compose up -d influx grafana
 docker-compose run --rm test
