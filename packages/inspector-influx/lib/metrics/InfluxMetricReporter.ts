@@ -38,6 +38,7 @@ export class InfluxMetricReporter extends MetricReporter {
     private queue: AsyncQueue<any>;
     private log: Logger = console;
     private sender: Sender;
+    private metricStates: Map<number, number> = new Map();
 
     public constructor(
         sender: Sender,
@@ -107,24 +108,47 @@ export class InfluxMetricReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
-        this.reportMetrics(registry.getCounterList(),   now, "counter",   (counter: Counter, date: Date)     => this.reportCounter(counter, date));
-        this.reportMetrics(registry.getGaugeList(),     now, "gauge",     (gauge: Gauge<any>, date: Date)    => this.reportGauge(gauge, date));
-        this.reportMetrics(registry.getHistogramList(), now, "histogram", (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date));
-        this.reportMetrics(registry.getMeterList(),     now, "meter",     (meter: Meter, date: Date)         => this.reportMeter(meter, date));
-        this.reportMetrics(registry.getTimerList(),     now, "timer",     (timer: Timer, date: Date)         => this.reportTimer(timer, date));
+        this.reportMetrics(registry.getCounterList(), now, "counter",
+            (counter: Counter, date: Date) => this.reportCounter(counter, date),
+            (counter: Counter) => counter.getCount());
+        this.reportMetrics(registry.getGaugeList(), now, "gauge",
+            (gauge: Gauge<any>, date: Date) => this.reportGauge(gauge, date),
+            (gauge: Gauge<any>) => gauge.getValue());
+        this.reportMetrics(registry.getHistogramList(), now, "histogram",
+            (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date),
+            (histogram: Histogram) => histogram.getCount());
+        this.reportMetrics(registry.getMeterList(), now, "meter",
+            (meter: Meter, date: Date) => this.reportMeter(meter, date),
+            (meter: Meter) => meter.getCount());
+        this.reportMetrics(registry.getTimerList(), now, "timer",
+            (timer: Timer, date: Date) => this.reportTimer(timer, date),
+            (timer: Timer) => timer.getCount());
     }
 
     private reportMetrics<T extends Metric>(
         metrics: T[],
         date: Date,
         type: MetricType,
-        reportFunction: (metric: Metric, date: Date) => IPoint): void {
+        reportFunction: (metric: Metric, date: Date) => IPoint,
+        lastModifiedFunction: (metric: Metric) => number): void {
 
         const points: IPoint[] = [];
         metrics.forEach((metric) => {
-            const point: IPoint = reportFunction(metric, date);
-            if (!!point) {
-                points.push(point);
+            const metricId = (metric as any).id;
+            let changed = true;
+            if (metricId) {
+                const lastValue = lastModifiedFunction(metric);
+                if (this.metricStates.has(metricId)) {
+                    changed = this.metricStates.get(metricId) !== lastValue;
+                }
+                this.metricStates.set(metricId, lastValue);
+            }
+
+            if (changed) {
+                const point = reportFunction(metric, date);
+                if (!!point) {
+                    points.push(point);
+                }
             }
         });
         if (points.length > 0) {
