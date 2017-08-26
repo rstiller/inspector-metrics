@@ -72,6 +72,14 @@ export class InfluxMetricReporter extends MetricReporter {
             .then(() => unlock());
     }
 
+    public getTags(): Map<string, string> {
+        return this.tags;
+    }
+
+    public setTags(tags: Map<string, string>): void {
+        this.tags = tags;
+    }
+
     public getLog(): Logger {
         return this.log;
     }
