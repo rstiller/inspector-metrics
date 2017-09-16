@@ -16,6 +16,7 @@ export * from "./metric";
 export * from "./moving-average";
 export * from "./reservoir";
 export * from "./sampling";
+export * from "./size-gauge";
 export * from "./snapshot";
 export * from "./taggable";
 export * from "./time-unit";
