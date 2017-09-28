@@ -183,10 +183,10 @@ export class InfluxMetricReporter extends MetricReporter {
             changed = metricEntry.lastValue !== lastValue;
             if (!changed) {
                 changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-                if (changed) {
-                    metricEntry.lastReport = date.getTime();
-                }
             }
+        }
+        if (changed) {
+            metricEntry.lastReport = date.getTime();
         }
         this.metricStates.set(metricId, metricEntry);
         return changed;
