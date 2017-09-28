@@ -13,6 +13,7 @@ import {
     MetricRegistry,
     MetricReporter,
     MILLISECOND,
+    MINUTE,
     StdClock,
     Taggable,
     Timer,
@@ -27,25 +28,43 @@ export interface Sender {
     send(points: IPoint[]): Promise<any>;
 }
 
+interface MetricEntry {
+    lastReport: number;
+    lastValue: number;
+}
+
 export class InfluxMetricReporter extends MetricReporter {
 
     private clock: Clock;
     private timer: NodeJS.Timer;
     private interval: number;
+    private minReportingTimeout: number;
     private unit: TimeUnit;
     private tags: Map<string, string>;
     private logMetadata: any;
     private queue: AsyncQueue<any>;
     private log: Logger = console;
     private sender: Sender;
-    private metricStates: Map<number, number> = new Map();
+    private metricStates: Map<number, MetricEntry> = new Map();
 
+    /**
+     * Creates an instance of InfluxMetricReporter.
+     *
+     * @param {Sender} sender The influx sender instance.
+     * @param {number} [interval=1000] The reporting interval.
+     * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
+     * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
+     * @param {Clock} [clock=new StdClock()] The clock - used to determine the timestamp of the metrics while reporting.
+     * @param {number} [minReportingTimeout=1] The time in minutes the report sends even unchanged metrics.
+     * @memberof InfluxMetricReporter
+     */
     public constructor(
         sender: Sender,
         interval: number = 1000,
         unit: TimeUnit = MILLISECOND,
         tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock()) {
+        clock: Clock = new StdClock(),
+        minReportingTimeout = 1) {
         super();
 
         this.sender = sender;
@@ -53,6 +72,7 @@ export class InfluxMetricReporter extends MetricReporter {
         this.unit = unit;
         this.tags = tags;
         this.clock = clock;
+        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
 
         this.logMetadata = {
             interval,
@@ -137,11 +157,7 @@ export class InfluxMetricReporter extends MetricReporter {
             const metricId = (metric as any).id;
             let changed = true;
             if (metricId) {
-                const lastValue = lastModifiedFunction(metric);
-                if (this.metricStates.has(metricId)) {
-                    changed = this.metricStates.get(metricId) !== lastValue;
-                }
-                this.metricStates.set(metricId, lastValue);
+                changed = this.hasChanged(metricId, lastModifiedFunction(metric), date);
             }
 
             if (changed) {
@@ -154,6 +170,26 @@ export class InfluxMetricReporter extends MetricReporter {
         if (points.length > 0) {
             this.sendPoints(points, type);
         }
+    }
+
+    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
+        let changed = true;
+        let metricEntry = {
+            lastReport: 0,
+            lastValue,
+        };
+        if (this.metricStates.has(metricId)) {
+            metricEntry = this.metricStates.get(metricId);
+            changed = metricEntry.lastValue !== lastValue;
+            if (!changed) {
+                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
+                if (changed) {
+                    metricEntry.lastReport = date.getTime();
+                }
+            }
+        }
+        this.metricStates.set(metricId, metricEntry);
+        return changed;
     }
 
     private reportCounter(counter: Counter, date: Date): IPoint {
