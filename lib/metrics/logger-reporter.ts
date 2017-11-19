@@ -1,7 +1,5 @@
 import "source-map-support/register";
 
-import * as async from "async";
-
 import { Clock, StdClock } from "./clock";
 import { Counter } from "./counter";
 import { Gauge } from "./gauge";
@@ -24,7 +22,6 @@ export class LoggerReporter extends MetricReporter {
     private unit: TimeUnit;
     private tags: Map<string, string>;
     private logMetadata: any;
-    private queue: AsyncQueue<any>;
     private log: Logger;
     private scheduler: Scheduler;
 
@@ -44,11 +41,7 @@ export class LoggerReporter extends MetricReporter {
         this.clock = clock;
         this.log = log;
         this.scheduler = scheduler;
-        this.logMetadata = { interval, tags, unit };
-
-        this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
-            task(callback);
-        }, 1);
+        this.logMetadata = { interval, tags: this.tags, unit };
     }
 
     public getLog(): Logger {
