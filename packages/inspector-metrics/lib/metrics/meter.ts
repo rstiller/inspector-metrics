@@ -30,7 +30,7 @@ export class Meter extends BaseMetric implements Metered {
         this.startTime = clock.time();
         this.lastTime = this.startTime;
         this.sampleRate = sampleRate;
-        this.interval = Meter.SECOND_1_NANOS / sampleRate;
+        this.interval = Meter.SECOND_1_NANOS / this.sampleRate;
     }
 
     public mark(value: number): void {
