@@ -92,6 +92,10 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
         }, sampleRate);
     }
 
+    public stop(): void {
+        this.intervalRef.unref();
+    }
+
     public getMetrics(): Map<string, Metric> {
         const map: Map<string, Metric> = new Map();
         this.metrics.forEach((metric) => map.set(metric.getName(), metric));
