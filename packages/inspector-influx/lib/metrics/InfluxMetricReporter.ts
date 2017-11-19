@@ -42,7 +42,7 @@ export class InfluxMetricReporter extends MetricReporter {
     private unit: TimeUnit;
     private tags: Map<string, string>;
     private logMetadata: any;
-    private queue: AsyncQueue<any>;
+    private queue: async.AsyncQueue<any>;
     private log: Logger = console;
     private sender: Sender;
     private metricStates: Map<number, MetricEntry> = new Map();

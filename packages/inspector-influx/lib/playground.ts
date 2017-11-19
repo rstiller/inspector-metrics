@@ -32,7 +32,7 @@ reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
 reporter.start();
-
+/*
 setInterval(() => {
     requests1.time(() => {
         let a = 0;
@@ -62,3 +62,4 @@ setInterval(() => {
         }
     });
 }, 25);
+*/
