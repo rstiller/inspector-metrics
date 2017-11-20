@@ -25,6 +25,8 @@ export class V8MemoryMetricsTest {
         metric.getMetrics().forEach((submetric) => {
             expect(submetric.getGroup()).to.equal("abc");
         });
+
+        metric.stop();
     }
 
     @test
@@ -42,6 +44,8 @@ export class V8MemoryMetricsTest {
         metric.getMetrics().forEach((submetric) => {
             expect(submetric.getTag("type")).to.not.exist;
         });
+
+        metric.stop();
     }
 
     @test
@@ -55,6 +59,8 @@ export class V8MemoryMetricsTest {
         registry.getMetrics().forEach((submetric) => {
             expect(submetric.getGroup()).to.equal("v8");
         });
+
+        metric.stop();
     }
 
 }

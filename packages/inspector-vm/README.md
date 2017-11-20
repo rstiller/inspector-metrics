@@ -27,7 +27,7 @@ This library is meant to be used with `typescript` / `nodejs`.
 
 ```typescript
 import { MetricRegistry } from "inspector-metrics";
-import { V8MemoryMetrics } from "inspector-vm";
+import { V8MemoryMetrics, V8GCMetrics } from "inspector-vm";
 
 // get a registry
 const registry: MetricRegistry = ...;
@@ -36,12 +36,18 @@ const registry: MetricRegistry = ...;
 //   - space statistics
 //   - memory statistics
 const memoryMetrics: V8MemoryMetrics = new V8MemoryMetrics("v8", registry.getDefaultClock());
+//   - gc statistics
+const gcMetrics: V8GCMetrics = new V8GCMetrics("gc", registry.getDefaultClock());
 
 // metric is registered und the name "v8"
 // defaults to group "gc"
 registry.register(memoryMetrics.getName(), memoryMetrics);
 
 // setup reporter ...
+
+// note that unstopped metrics can cause the application to keep running
+gcMetrics.stop();
+memoryMetrics.stop();
 ```
 
 ## License

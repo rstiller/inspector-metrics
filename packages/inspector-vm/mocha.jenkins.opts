@@ -3,7 +3,6 @@
 --reporter xunit
 --reporter-options output=reports/results.xml
 --watch-extensions ts
---compilers ts:ts-node/register
 --bail
 --full-trace
 test/**/*Test.ts

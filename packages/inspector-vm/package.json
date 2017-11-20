@@ -1,6 +1,6 @@
 {
   "name": "inspector-vm",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -25,14 +25,14 @@
     "npm": ">= 5"
   },
   "devDependencies": {
-    "@types/chai": "^3.5.2",
+    "@types/chai": "^4.0.5",
     "@types/mocha": "^2.2.44",
-    "@types/node": "^7.0.48",
+    "@types/node": "^8.0.53",
     "chai": "^4.1.2",
-    "mocha": "^3.5.3",
+    "mocha": "^4.0.1",
     "mocha-typescript": "^1.1.12",
     "npm-check": "^5.5.2",
-    "nyc": "^10.3.2",
+    "nyc": "^11.3.0",
     "rimraf": "^2.6.2",
     "ts-node": "^3.3.0",
     "tslint": "^5.8.0",
@@ -40,8 +40,8 @@
   },
   "dependencies": {
     "gc-stats": "^1.0.2",
-    "inspector-metrics": "^1.8.2",
-    "source-map-support": "^0.4.18"
+    "inspector-metrics": "^1.8.3",
+    "source-map-support": "^0.5.0"
   },
   "files": [
     "build",

@@ -1,5 +1,6 @@
 import "source-map-support/register";
 
+import { EventEmitter } from "events";
 import {
     BaseMetric,
     Clock,
@@ -20,6 +21,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
     private incrementalMarkingRuns: Timer;
     private phantomCallbackProcessingRuns: Timer;
     private allRuns: Timer;
+    private gc: EventEmitter;
 
     public constructor(name: string, clock: Clock) {
         super();
@@ -46,9 +48,9 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
         this.metrics.push(this.minorRuns);
         this.metrics.push(this.phantomCallbackProcessingRuns);
 
-        const gc = GC();
         const slf = this;
-        gc.on("stats", function(stats: any) {
+        this.gc = GC();
+        this.gc.on("stats", function(stats: any) {
             const duration = stats.pause;
 
             switch (stats.gctype) {
@@ -69,6 +71,10 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
                     break;
             }
         });
+    }
+
+    public stop(): void {
+        this.gc.removeAllListeners();
     }
 
     public getMetrics(): Map<string, Metric> {
