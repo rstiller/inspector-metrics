@@ -24,22 +24,22 @@
     "npm": ">= 5"
   },
   "devDependencies": {
-    "@types/async": "^2.0.45",
-    "@types/chai": "^4.0.5",
-    "@types/lodash": "^4.14.85",
-    "@types/mocha": "^2.2.44",
-    "@types/node": "^8.0.53",
-    "@types/sinon": "^4.0.0",
+    "@types/async": "^2.0.46",
+    "@types/chai": "^4.1.0",
+    "@types/lodash": "^4.14.92",
+    "@types/mocha": "^2.2.46",
+    "@types/node": "^8.5.8",
+    "@types/sinon": "^4.1.2",
     "@types/sinon-chai": "^2.7.29",
-    "mocha": "^4.0.1",
+    "mocha": "^4.1.0",
     "mocha-typescript": "^1.1.12",
     "npm-check": "^5.5.2",
-    "nyc": "^11.3.0",
+    "nyc": "^11.4.1",
     "reflect-metadata": "^0.1.10",
     "rimraf": "^2.6.1",
     "ts-node": "^3.3.0",
-    "tslint": "^5.8.0",
-    "typescript": "^2.6.1"
+    "tslint": "^5.9.0",
+    "typescript": "^2.6.2"
   },
   "dependencies": {
     "async": "^2.6.0",
