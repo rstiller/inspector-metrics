@@ -40,6 +40,7 @@
     "sinon-chai": "^2.14.0",
     "ts-node": "^3.3.0",
     "tslint": "^5.9.0",
+    "typedoc": "^0.9.0",
     "typescript": "^2.6.2"
   },
   "dependencies": {
@@ -47,6 +48,7 @@
     "source-map-support": "^0.5.0"
   },
   "files": [
+    "docs",
     "build",
     "lib",
     "test",
@@ -59,8 +61,9 @@
     "check:coverage": "nyc npm run test:jenkins",
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "clean": "rimraf build coverage",
+    "docs:generate": "typedoc --out ./docs --mode modules --module none ./lib",
     "compile": "tsc -p .",
-    "build": "npm run clean && npm run compile",
+    "build": "npm run clean && npm run compile && npm run docs:generate",
     "prepublishOnly": "npm run build",
     "test": "mocha --opts mocha.opts",
     "test:jenkins": "mocha --opts mocha.jenkins.opts"

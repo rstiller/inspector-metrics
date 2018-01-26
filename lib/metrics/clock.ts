@@ -1,15 +1,21 @@
 import "source-map-support/register";
 
+/**
+ * Represents a point in time.
+ */
 export interface Time {
     milliseconds: number;
     nanoseconds: number;
 }
 
 /**
- * Gets the difference in nanoseconds.
+ * Gets the time elapsed from parameter one to parameter two in nanoseconds.
+ *
+ * Also assumes that the first point in time time is elder than the sesond point in time.
  *
  * @param one time sample
  * @param two time sample
+ * @returns a duration in nanoseconds
  */
 export function diff(one: Time, two: Time): number {
     if (!one || !two) {
@@ -20,14 +26,26 @@ export function diff(one: Time, two: Time): number {
     return twoValue - oneValue;
 }
 
+/**
+ * Abstraction of a clock. Used to determine progress in time.
+ */
 export abstract class Clock {
 
+    /**
+     * Gets the current point in time according to the logic of the clock implementation.
+     */
     public abstract time(): Time;
 
 }
 
+/**
+ * Default implementation of a Clock. Uses Date.now() as source of truth.
+ */
 export class StdClock extends Clock {
 
+    /**
+     * Returns a Time object whos nanoseconds component is always zero.
+     */
     public time(): Time {
         const time = {
             milliseconds: Date.now(),
