@@ -25,6 +25,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.1.0",
+    "@types/elasticsearch": "^5.0.19",
     "@types/lodash": "^4.14.92",
     "@types/mocha": "^2.2.46",
     "@types/node": "^8.5.8",
@@ -41,6 +42,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
+    "elasticsearch": "^14.0.0",
     "inspector-metrics": "^1.8.3",
     "source-map-support": "^0.5.0"
   },

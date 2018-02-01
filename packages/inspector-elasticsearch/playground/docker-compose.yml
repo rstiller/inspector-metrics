@@ -1,0 +1,75 @@
+version: "3.3"
+
+services:
+  
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "9200:9200"
+    environment:
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - bootstrap.memory_lock=true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:9200"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    cap_add:
+      - IPC_LOCK
+    networks:
+      default:
+        aliases:
+         - elasticsearch
+    hostname: elasticsearch
+  
+  kibana:
+    build:
+      context: ./kibana
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "5601:5601"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - kibana
+    hostname: kibana
+  
+  grafana:
+    build:
+      context: ./grafana
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - grafana
+    hostname: grafana
+  
+  test:
+    build:
+      context: ./nodejs
+      args:
+        TZ: Europe/Berlin
+    command: ["node", "/dev/test/build/lib/playground.js"]
+    working_dir: "/dev/test"
+    restart: never
+    volumes:
+      - "./:/dev/test"
+    networks:
+      default:
