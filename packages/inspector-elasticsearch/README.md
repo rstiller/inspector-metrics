@@ -123,7 +123,7 @@ const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(
 
 To use the playground you need to have `docker` and `docker-compose` installed.
 
-```shell
+```bash
 npm run compile
 # running playground script
 playground/playground.sh
@@ -135,7 +135,7 @@ playground/playground.sh
 1. Add a new Data Source (type: elasticsearch, host / url: http://elasticsearch:9200)
 1. Create a new graph
 
-[!docs/grafana.png]()
+![](docs/grafana.png)
 
 ### view data in kibana
 
@@ -143,7 +143,7 @@ playground/playground.sh
 1. Add a new index pattern like `metric-*`
 1. Discover data
 
-[!docs/kibana.png]()
+![](docs/kibana.png)
 
 ## License
 
