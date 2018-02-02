@@ -38,6 +38,7 @@ The library ships with a default `console` `MetricReporter`.
 
 Some other reporter:
 * [Influx](https://github.com/rstiller/inspector-influx)
+* [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
 
 ```typescript
 import { LoggerReporter, MetricRegistry, Timer } from "inspector-metrics";
