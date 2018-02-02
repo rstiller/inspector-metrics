@@ -28,7 +28,122 @@ It uses [elasticsearch-js](https://github.com/elastic/elasticsearch-js) as elast
 ## basic usage
 
 ```typescript
+import { MetricRegistry } from "inspector-metrics";
+import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
+import { ConfigOptions } from "elasticsearch";
+
+const reporterConfig: ConfigOptions = {
+    apiVersion: "6.0",
+    host: "localhost:9200",
+};
+// instance the elasticsearch reporter
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(reporterConfig);
+const registry: MetricRegistry = new MetricRegistry();
+
+// add the registry to the reporter
+reporter.addMetricRegistry(registry);
+// start reporting
+reporter.start();
 ```
+
+### determine the indexname for a metric
+
+```typescript
+import { MetricRegistry } from "inspector-metrics";
+import {
+    ElasticsearchMetricReporter,
+    MetricInfoDeterminator
+} from "inspector-elasticsearch";
+import { ConfigOptions } from "elasticsearch";
+
+const reporterConfig: ConfigOptions = { ... };
+// computes the name of the index using the timestamp of the metric
+const indexnameGenerator: MetricInfoDeterminator = (
+    registry: MetricRegistry,
+    metric: Metric,
+    type: MetricType,
+    date: Date) => {
+    
+    const day = date.getDate();
+    const dayPrefix: string = (day >= 10) ? "" : "0";
+    const month = date.getMonth() + 1;
+    const monthPrefix: string = (month >= 10) ? "" : "0";
+    return `metrics-${date.getFullYear()}-${monthPrefix}${month}-${dayPrefix}${day}`;
+};
+// the indexname generator needs to be specified when instancing the reporter
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(
+    reporterConfig,
+    ElasticsearchMetricReporter.defaultDocumentBuilder(),
+    indexnameGenerator,
+);
+```
+
+### build a metric document
+
+```typescript
+import { MetricRegistry } from "inspector-metrics";
+import {
+    ElasticsearchMetricReporter,
+    MetricDocumentBuilder,
+    MetricType
+} from "inspector-elasticsearch";
+import { ConfigOptions } from "elasticsearch";
+
+const reporterConfig: ConfigOptions = { ... };
+// only build documents for counter metrics
+const counterOnlyDocumentBuilder: MetricDocumentBuilder = (
+    registry: MetricRegistry,
+    metric: Metric,
+    type: MetricType,
+    timestamp: Date,
+    commonTags: Map<string, string>) => {
+
+    if (metric instanceof Counter) {
+        const tags = ElasticsearchMetricReporter.buildTags(commonTags, metric);
+        const name = metric.getName();
+        const group = metric.getGroup();
+        return { name, group, tags, timestamp, values: { 'count': metric.getCount() }, type };
+
+    } else {
+        // null values will not be reported / published
+        return null;
+    }
+};
+
+// the document builder needs to be specified when instancing the reporter
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(
+    reporterConfig,
+    counterOnlyDocumentBuilder,
+);
+```
+
+## dev
+
+### using the playground
+
+To use the playground you need to have `docker` and `docker-compose` installed.
+
+```shell
+npm run compile
+# running playground script
+playground/playground.sh
+```
+
+### view data in grafana
+
+1. Navigate to `http://localhost:3000`
+1. Add a new Data Source (type: elasticsearch, host / url: http://elasticsearch:9200)
+1. Create a new graph
+
+[!docs/grafana.png]()
+
+### view data in kibana
+
+1. Navigate to `http://localhost:5601`
+1. Add a new index pattern like `metric-*`
+1. Discover data
+
+[!docs/kibana.png]()
 
 ## License
 

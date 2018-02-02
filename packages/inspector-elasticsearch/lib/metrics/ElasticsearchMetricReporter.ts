@@ -19,29 +19,78 @@ import {
     TimeUnit,
 } from "inspector-metrics";
 
+interface MetricEntry {
+    lastReport: number;
+    lastValue: number;
+}
+
 export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
 export type MetricInfoDeterminator = (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) => string;
 
 export type MetricDocumentBuilder = (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date, tags: Map<string, string>) => {};
 
-interface MetricEntry {
-    lastReport: number;
-    lastValue: number;
-}
-
+/**
+ * A MetricReporter extension used to publish metric values to elasticsearch.
+ *
+ * @export
+ * @class ElasticsearchMetricReporter
+ * @extends {MetricReporter}
+ */
 export class ElasticsearchMetricReporter extends MetricReporter {
 
+    /**
+     * Returns a {MetricInfoDeterminator} that returns 'metric' as type.
+     *
+     * @static
+     * @returns {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporter
+     */
     public static defaultTypeDeterminator(): MetricInfoDeterminator {
         return (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) => "metric";
     }
 
+    /**
+     * Returns a {MetricInfoDeterminator} that returns an indexname like '<baseName>-yyyy-mm-dd'.
+     *
+     * @static
+     * @param {string} baseName The
+     * @returns {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporter
+     */
     public static dailyIndex(baseName: string): MetricInfoDeterminator {
         return (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) => {
-            return `${baseName}-${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+            const day = date.getDate();
+            const dayPrefix: string = (day >= 10) ? "" : "0";
+            const month = date.getMonth() + 1;
+            const monthPrefix: string = (month >= 10) ? "" : "0";
+            return `${baseName}-${date.getFullYear()}-${monthPrefix}${month}-${dayPrefix}${day}`;
         };
     }
 
+    /**
+     * Returns a {MetricDocumentBuilder} that builds an object for a metric like this:
+     *
+     * {
+     *
+     *  name: ..., // name of metric
+     *
+     *  group: ..., // group of metric
+     *
+     *  timestamp: ..., // timestamp from parameter
+     *
+     *  tags: ..., // combined tags from this reporter and the metric
+     *
+     *  values..., // metric specific values
+     *
+     *  type..., // metric type
+     *
+     * }
+     *
+     * @static
+     * @returns {MetricDocumentBuilder}
+     * @memberof ElasticsearchMetricReporter
+     */
     public static defaultDocumentBuilder(): MetricDocumentBuilder {
         return (registry: MetricRegistry, metric: Metric, type: MetricType, timestamp: Date, commonTags: Map<string, string>) => {
             let values = null;
@@ -69,21 +118,31 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         };
     }
 
-    private static buildTags(commonTags: Map<string, string>, taggable: Taggable): { [key: string]: string } {
+    /**
+     * Combines all specified tags.
+     *
+     * @static
+     * @param {Map<string, string>} commonTags - read-only tags from reporter - get with reporter.getTags().
+     * @param {Taggable} taggable - mostly a metric with tags.
+     * @returns {{ [key: string]: string }} Returns a key-value object with all tags combined.
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static buildTags(commonTags: Map<string, string>, taggable: Taggable): { [key: string]: string } {
         const tags: { [x: string]: string } = {};
         commonTags.forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;
     }
 
-    private static getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
-    }
-
-    private static getCounterValues(counter: Counter): {} {
+    /**
+     * Gets the values for the specified counter metric.
+     *
+     * @static
+     * @param {Counter} counter
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getCounterValues(counter: Counter): {} {
         const count = counter.getCount();
         if (!count || isNaN(count)) {
             return null;
@@ -91,7 +150,15 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return { count };
     }
 
-    private static getGaugeValue(gauge: Gauge<any>): {} {
+    /**
+     * Gets the values for the specified {Gauge} metric.
+     *
+     * @static
+     * @param {Gauge<any>} gauge
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getGaugeValue(gauge: Gauge<any>): {} {
         const value = gauge.getValue();
         if (!value || isNaN(value)) {
             return null;
@@ -99,7 +166,15 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return { value };
     }
 
-    private static getHistogramValues(histogram: Histogram): {} {
+    /**
+     * Gets the values for the specified {Histogram} metric.
+     *
+     * @static
+     * @param {Histogram} histogram
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getHistogramValues(histogram: Histogram): {} {
         const value = histogram.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -122,7 +197,15 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return values;
     }
 
-    private static getMeterValues(meter: Meter): {} {
+    /**
+     * Gets the values for the specified {Meter} metric.
+     *
+     * @static
+     * @param {Meter} meter
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getMeterValues(meter: Meter): {} {
         const value = meter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -138,7 +221,15 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return values;
     }
 
-    private static getTimerValues(timer: Timer): {} {
+    /**
+     * Gets the values for the specified {Timer} metric.
+     *
+     * @static
+     * @param {Timer} timer
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getTimerValues(timer: Timer): {} {
         const value = timer.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -165,6 +256,13 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return values;
     }
 
+    private static getNumber(value: number): number {
+        if (isNaN(value)) {
+            return 0;
+        }
+        return value;
+    }
+
     private clock: Clock;
     private timer: NodeJS.Timer;
     private interval: number;
@@ -182,12 +280,15 @@ export class ElasticsearchMetricReporter extends MetricReporter {
     /**
      * Creates an instance of ElasticsearchMetricReporter.
      *
+     * @param {ConfigOptions} clientOptions Elasticsearch client config.
+     * @param {MetricDocumentBuilder} [metricDocumentBuilder=ElasticsearchMetricReporter.defaultDocumentBuilder()] A function that constructs an object of a metric that's gonna be indexed.
+     * @param {MetricInfoDeterminator} [indexnameDeterminator=ElasticsearchMetricReporter.dailyIndex("metric")] A function that determines the name of the index for a given metric.
+     * @param {MetricInfoDeterminator} [typeDeterminator=ElasticsearchMetricReporter.defaultTypeDeterminator()] A function that determines the name of the type for a given metric.
      * @param {number} [interval=1000] The reporting interval.
      * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
      * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
      * @param {Clock} [clock=new StdClock()] The clock - used to determine the timestamp of the metrics while reporting.
      * @param {number} [minReportingTimeout=1] The time in minutes the reporter sends even unchanged metrics.
-     * @memberof InfluxMetricReporter
      */
     public constructor(
         clientOptions: ConfigOptions,
@@ -235,11 +336,21 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         this.log = log;
     }
 
+    /**
+     * Starts the logger reporting loop using {setInterval()}.
+     *
+     * @memberof ElasticsearchMetricReporter
+     */
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
         this.timer = setInterval(() => this.report(), interval);
     }
 
+    /**
+     * Stopps reporting metrics.
+     *
+     * @memberof ElasticsearchMetricReporter
+     */
     public stop(): void {
         this.timer.unref();
     }
