@@ -4,7 +4,7 @@ services:
   
   elasticsearch:
     build:
-      context: ./elasticsearch
+      context: ./playground/elasticsearch
       args:
         TZ: Europe/Berlin
     ports:
@@ -35,7 +35,7 @@ services:
   
   kibana:
     build:
-      context: ./kibana
+      context: ./playground/kibana
       args:
         TZ: Europe/Berlin
     ports:
@@ -49,7 +49,7 @@ services:
   
   grafana:
     build:
-      context: ./grafana
+      context: ./playground/grafana
       args:
         TZ: Europe/Berlin
     ports:
@@ -63,7 +63,7 @@ services:
   
   test:
     build:
-      context: ./nodejs
+      context: ./playground/nodejs
       args:
         TZ: Europe/Berlin
     command: ["node", "/dev/test/build/lib/playground.js"]
