@@ -1,0 +1,48 @@
+version: "3.3"
+
+services:
+
+  grafana:
+    build:
+      context: ./playground/grafana
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - grafana
+    hostname: grafana
+
+  graphite:
+    build:
+      context: ./playground/graphite
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "80:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - graphite
+    hostname: graphite
+  
+  test:
+    build:
+      context: ./playground/nodejs
+      args:
+        TZ: Europe/Berlin
+    command: ["node", "/dev/test/build/lib/playground.js"]
+    working_dir: "/dev/test"
+    restart: never
+    volumes:
+      - "./:/dev/test"
+    networks:
+      default:
