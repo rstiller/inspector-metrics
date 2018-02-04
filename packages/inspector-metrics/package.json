@@ -62,6 +62,7 @@
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "clean": "rimraf build coverage",
     "docs:generate": "typedoc --out ./docs --mode modules --module none ./lib",
+    "docs:publish": "git subtree push --prefix docs/ origin gh-pages",
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile && npm run docs:generate",
     "prepublishOnly": "npm run build",
