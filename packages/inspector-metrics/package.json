@@ -48,7 +48,6 @@
     "source-map-support": "^0.5.0"
   },
   "files": [
-    "docs",
     "build",
     "lib",
     "test",
