@@ -37,8 +37,9 @@ Supported metric types:
 The library ships with a default `console` `MetricReporter`.
 
 Some other reporter:
-* [Influx](https://github.com/rstiller/inspector-influx)
+* [Carbon / Graphite](https://github.com/rstiller/inspector-carbon)
 * [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
+* [Influx](https://github.com/rstiller/inspector-influx)
 
 ```typescript
 import { LoggerReporter, MetricRegistry, Timer } from "inspector-metrics";
