@@ -28,7 +28,52 @@ It uses [node-graphite](https://github.com/felixge/node-graphite) as graphite/ca
 ## basic usage
 
 ```typescript
+import { MetricRegistry } from "inspector-metrics";
+import { CarbonMetricReporter } from "inspector-carbon";
+
+// instance the carbon reporter
+const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
+const registry: MetricRegistry = new MetricRegistry();
+
+// add the registry to the reporter
+reporter.addMetricRegistry(registry);
+// start reporting
+reporter.start();
 ```
+
+### set common tags for all metrics
+
+```typescript
+import { MetricRegistry } from "inspector-metrics";
+import { CarbonMetricReporter } from "inspector-carbon";
+
+// instance the carbon reporter
+const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
+
+// set common tags for all metrics
+reporter.getTags().set("app-name", "my-service");
+reporter.getTags().set("app-version", "v1.2.3");
+```
+
+## dev
+
+### using the playground
+
+To use the playground you need to have `docker` and `docker-compose` installed.
+
+```bash
+npm run compile
+# running playground script
+playground/playground.sh
+```
+
+### view data in grafana
+
+1. Navigate to `http://localhost:3000`
+1. Add a new Data Source (type: graphite, host / url: http://graphite/)
+1. Create a new graph
+
+![](docs/grafana.png)
 
 ## License
 

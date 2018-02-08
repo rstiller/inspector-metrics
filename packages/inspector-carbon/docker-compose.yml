@@ -33,7 +33,7 @@ services:
         aliases:
          - graphite
     hostname: graphite
-  
+
   test:
     build:
       context: ./playground/nodejs
@@ -41,7 +41,7 @@ services:
         TZ: Europe/Berlin
     command: ["node", "/dev/test/build/lib/playground.js"]
     working_dir: "/dev/test"
-    restart: never
+    restart: "no"
     volumes:
       - "./:/dev/test"
     networks:

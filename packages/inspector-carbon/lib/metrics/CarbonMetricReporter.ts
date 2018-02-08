@@ -28,6 +28,7 @@ export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
 export class CarbonMetricReporter extends MetricReporter {
 
+    private host: string;
     private clock: Clock;
     private timer: NodeJS.Timer;
     private interval: number;
@@ -59,6 +60,7 @@ export class CarbonMetricReporter extends MetricReporter {
         minReportingTimeout = 1) {
         super();
 
+        this.host = host;
         this.interval = interval;
         this.unit = unit;
         this.tags = tags;
@@ -70,8 +72,6 @@ export class CarbonMetricReporter extends MetricReporter {
             tags,
             unit,
         };
-
-        this.client = graphite.createClient(host);
     }
 
     public getTags(): Map<string, string> {
@@ -92,11 +92,14 @@ export class CarbonMetricReporter extends MetricReporter {
 
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
+
+        this.client = graphite.createClient(this.host);
         this.timer = setInterval(() => this.report(), interval);
     }
 
     public stop(): void {
         this.timer.unref();
+        this.client.end();
     }
 
     private async report() {
@@ -130,7 +133,6 @@ export class CarbonMetricReporter extends MetricReporter {
         reportFunction: (metric: Metric, date: Date) => {},
         lastModifiedFunction: (metric: Metric) => number): void {
 
-        const measurements: Array<{}> = [];
         metrics.forEach((metric) => {
             const metricId = (metric as any).id;
             let changed = true;
@@ -141,13 +143,19 @@ export class CarbonMetricReporter extends MetricReporter {
             if (changed) {
                 const measurement = reportFunction(metric, date);
                 if (!!measurement) {
-                    measurements.push(measurement);
+                    this.sendMetric(metric, date, measurement);
                 }
             }
         });
-        if (measurements.length > 0) {
-            // TODO:
-        }
+    }
+
+    private sendMetric(metric: Metric, timestamp: Date, measurement: {}) {
+        const tags = this.buildTags(this.getTags(), metric);
+        this.client.writeTagged(measurement, tags, timestamp, (err: any) => {
+            if (err != null) {
+                this.log.error(err, this.logMetadata);
+            }
+        });
     }
 
     private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
@@ -168,6 +176,120 @@ export class CarbonMetricReporter extends MetricReporter {
         }
         this.metricStates.set(metricId, metricEntry);
         return changed;
+    }
+
+    private buildTags(commonTags: Map<string, string>, taggable: Taggable): { [key: string]: string } {
+        const tags: { [x: string]: string } = {};
+        commonTags.forEach((tag, key) => tags[key] = tag);
+        taggable.getTags().forEach((tag, key) => tags[key] = tag);
+        return tags;
+    }
+
+    private getNumber(value: number): number {
+        if (isNaN(value)) {
+            return 0;
+        }
+        return value;
+    }
+
+    private reportCounter(counter: Counter, date: Date): {} {
+        const value = counter.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const measurement: any = {
+            group: counter.getGroup(),
+            name: counter.getName(),
+        };
+        measurement[`count`] = counter.getCount() || 0;
+
+        return measurement;
+    }
+
+    private reportGauge(gauge: Gauge<any>, date: Date): {} {
+        const value = gauge.getValue();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const measurement: any = {
+            group: gauge.getGroup(),
+            name: gauge.getName(),
+        };
+        measurement[`value`] = gauge.getValue() || 0;
+
+        return measurement;
+    }
+
+    private reportHistogram(histogram: Histogram, date: Date): {} {
+        const value = histogram.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const snapshot = histogram.getSnapshot();
+        const measurement: any = {
+            group: histogram.getGroup(),
+            name: histogram.getName(),
+        };
+        measurement[`count`] = histogram.getCount() || 0;
+        measurement[`max`] = this.getNumber(snapshot.getMax());
+        measurement[`mean`] = this.getNumber(snapshot.getMean());
+        measurement[`min`] = this.getNumber(snapshot.getMin());
+        measurement[`p50`] = this.getNumber(snapshot.getMedian());
+        measurement[`p75`] = this.getNumber(snapshot.get75thPercentile());
+        measurement[`p95`] = this.getNumber(snapshot.get95thPercentile());
+        measurement[`p98`] = this.getNumber(snapshot.get98thPercentile());
+        measurement[`p99`] = this.getNumber(snapshot.get99thPercentile());
+        measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
+        measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
+
+        return measurement;
+    }
+
+    private reportMeter(meter: Meter, date: Date): {} {
+        const value = meter.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const measurement: any = {
+            group: meter.getGroup(),
+            name: meter.getName(),
+        };
+        measurement[`count`] = meter.getCount() || 0;
+        measurement[`m15_rate`] = this.getNumber(meter.get15MinuteRate());
+        measurement[`m1_rate`] = this.getNumber(meter.get1MinuteRate());
+        measurement[`m5_rate`] = this.getNumber(meter.get5MinuteRate());
+        measurement[`mean_rate`] = this.getNumber(meter.getMeanRate());
+
+        return measurement;
+    }
+
+    private reportTimer(timer: Timer, date: Date): {} {
+        const value = timer.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const snapshot = timer.getSnapshot();
+        const measurement: any = {
+            group: timer.getGroup(),
+            name: timer.getName(),
+        };
+        measurement[`count`] = timer.getCount() || 0;
+        measurement[`m15_rate`] = this.getNumber(timer.get15MinuteRate());
+        measurement[`m1_rate`] = this.getNumber(timer.get1MinuteRate());
+        measurement[`m5_rate`] = this.getNumber(timer.get5MinuteRate());
+        measurement[`max`] = this.getNumber(snapshot.getMax());
+        measurement[`mean`] = this.getNumber(snapshot.getMean());
+        measurement[`mean_rate`] = this.getNumber(timer.getMeanRate());
+        measurement[`min`] = this.getNumber(snapshot.getMin());
+        measurement[`p50`] = this.getNumber(snapshot.getMedian());
+        measurement[`p75`] = this.getNumber(snapshot.get75thPercentile());
+        measurement[`p95`] = this.getNumber(snapshot.get95thPercentile());
+        measurement[`p98`] = this.getNumber(snapshot.get98thPercentile());
+        measurement[`p99`] = this.getNumber(snapshot.get99thPercentile());
+        measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
+        measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
+
+        return measurement;
     }
 
 }
