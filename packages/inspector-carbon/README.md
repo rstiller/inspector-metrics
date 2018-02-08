@@ -70,7 +70,7 @@ playground/playground.sh
 ### view data in grafana
 
 1. Navigate to `http://localhost:3000`
-1. Add a new Data Source (type: graphite, host / url: http://graphite/)
+1. Add a new Data Source (type: graphite, username / password: root/root, host / url: http://graphite/)
 1. Create a new graph
 
 ![](docs/grafana.png)
