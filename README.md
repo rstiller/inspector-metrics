@@ -28,11 +28,11 @@ At least a `MetricRegistry`, a `Metric` and a `MetricReporter` is necessary
 to use the library.
 
 Supported metric types:
-* Counter
-* Gauge
-* Histogram
-* Meter
-* Timer
+* Counter - measures an integer value (e.g. "how many time was my function called")
+* Gauge - measurement of a value (e.g. "number of waiting threads on a resource")
+* Histogram - measures the statistical distribution of all values
+* Meter - measures the rate of events over time (e.g. "requests per second")
+* Timer - measures call-rate of a function and the distribution of the duration of all calls
 
 The library ships with a default `console` `MetricReporter`.
 
