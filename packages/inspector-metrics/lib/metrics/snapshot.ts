@@ -24,7 +24,7 @@ export class SimpleSnapshot implements Snapshot {
 
     public constructor(values: number[]) {
         this.values = values.slice(0, values.length);
-        this.values = this.values.sort();
+        this.values = this.values.sort((a, b) => a - b);
     }
 
     public get75thPercentile(): number {
