@@ -1,6 +1,6 @@
 {
   "name": "inspector-influx",
-  "version": "1.4.4",
+  "version": "1.4.5",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -24,28 +24,28 @@
     "npm": ">= 5"
   },
   "devDependencies": {
-    "@types/async": "^2.0.46",
-    "@types/chai": "^4.1.0",
-    "@types/lodash": "^4.14.92",
-    "@types/mocha": "^2.2.46",
-    "@types/node": "^8.5.8",
-    "@types/sinon": "^4.1.2",
-    "@types/sinon-chai": "^2.7.29",
-    "mocha": "^4.1.0",
-    "mocha-typescript": "^1.1.12",
-    "npm-check": "^5.5.2",
-    "nyc": "^11.4.1",
-    "reflect-metadata": "^0.1.10",
-    "rimraf": "^2.6.1",
-    "ts-node": "^3.3.0",
-    "tslint": "^5.9.0",
-    "typescript": "^2.6.2"
+    "@types/async": "^2.0.49",
+    "@types/chai": "^4.1.4",
+    "@types/lodash": "^4.14.110",
+    "@types/mocha": "^5.2.4",
+    "@types/node": "^10.5.2",
+    "@types/sinon": "^5.0.1",
+    "@types/sinon-chai": "^3.2.0",
+    "mocha": "^5.2.0",
+    "mocha-typescript": "^1.1.16",
+    "npm-check": "^5.7.1",
+    "nyc": "13.0.0",
+    "reflect-metadata": "^0.1.12",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.0",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
   },
   "dependencies": {
-    "async": "^2.6.0",
+    "async": "^2.6.1",
     "influx": "^5.0.7",
-    "inspector-metrics": "^1.8.3",
-    "source-map-support": "^0.5.0"
+    "inspector-metrics": "^1.8.7",
+    "source-map-support": "^0.5.6"
   },
   "files": [
     "build",
