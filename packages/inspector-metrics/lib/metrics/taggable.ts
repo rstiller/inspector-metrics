@@ -7,7 +7,7 @@ import "source-map-support/register";
  * @interface Taggable
  */
 export interface Taggable {
-    
+
     /**
      * Gets all tags.
      *
@@ -15,7 +15,7 @@ export interface Taggable {
      * @memberof Taggable
      */
     getTags(): Map<string, string>;
-    
+
     /**
      * Gets the specified tag or {@code null}.
      *
@@ -24,7 +24,7 @@ export interface Taggable {
      * @memberof Taggable
      */
     getTag(name: string): string;
-    
+
     /**
      * Sets the specified tag.
      *
@@ -33,7 +33,7 @@ export interface Taggable {
      * @memberof Taggable
      */
     setTag(name: string, value: string): void;
-    
+
     /**
      * Removes the specified tag.
      *

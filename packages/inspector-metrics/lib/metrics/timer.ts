@@ -45,7 +45,7 @@ export class StopWatch {
 
     /**
      * Creates an instance of StopWatch.
-     * 
+     *
      * @param {Clock} clock
      * @param {Timer} timer
      * @memberof StopWatch
@@ -115,7 +115,7 @@ export class Timer extends BaseMetric implements Metered, Sampling {
 
     /**
      * Creates an instance of Timer.
-     * 
+     *
      * @param {Clock} clock
      * @param {Reservoir} reservoir
      * @param {string} [name]
@@ -172,7 +172,7 @@ export class Timer extends BaseMetric implements Metered, Sampling {
     public get15MinuteRate(): number {
         return this.meter.get15MinuteRate();
     }
-    
+
     /**
      * Gets the average rate per second of last 5 minutes.
      *
@@ -182,7 +182,7 @@ export class Timer extends BaseMetric implements Metered, Sampling {
     public get5MinuteRate(): number {
         return this.meter.get5MinuteRate();
     }
-    
+
     /**
      * Gets the average rate per second of last minute.
      *
@@ -218,7 +218,7 @@ export class Timer extends BaseMetric implements Metered, Sampling {
             this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
         }
     }
-    
+
     /**
      * Measures the duration of the passed function's invocation
      * asynchronously and adds it to the pool.

@@ -9,7 +9,7 @@ import { Snapshot } from "./snapshot";
  * @interface Sampling
  */
 export interface Sampling {
-    
+
     /**
      * Gets the snapshot of values.
      *

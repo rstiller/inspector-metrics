@@ -12,7 +12,7 @@ import { Taggable } from "./taggable";
  * @extends {Taggable}
  */
 export interface Metric extends Groupable, Taggable {
-    
+
     /**
      * Gets the name of the metric.
      *
@@ -20,7 +20,7 @@ export interface Metric extends Groupable, Taggable {
      * @memberof Metric
      */
     getName(): string;
-    
+
     /**
      * Sets the name of the metric.
      *

@@ -9,7 +9,7 @@ import { NANOSECOND, TimeUnit } from "./time-unit";
  * @interface MovingAverage
  */
 export interface MovingAverage {
-    
+
     /**
      * Gets the alpha value.
      *
@@ -112,7 +112,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
 
     /**
      * Creates an instance of ExponentiallyWeightedMovingAverage.
-     * 
+     *
      * @param {number} alpha
      * @param {number} interval
      * @param {TimeUnit} unit
@@ -172,9 +172,9 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
     /**
      * Updates the current average by multiplying the alpha value with the difference
      * of the last average and the current average.
-     * 
+     *
      * Averages are calculated by dividing the sum through the sampling interval.
-     * 
+     *
      * If the alpha value is high the last average has more weight and vice versa.
      *
      * @memberof ExponentiallyWeightedMovingAverage

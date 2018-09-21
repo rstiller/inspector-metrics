@@ -19,7 +19,7 @@ export class TimeUnit {
 
     /**
      * Creates an instance of TimeUnit.
-     * 
+     *
      * @param {number} nanosecondsPerUnit
      * @memberof TimeUnit
      */
@@ -39,9 +39,9 @@ export class TimeUnit {
 
     /**
      * Converts the given value to the time unit specified.
-     * 
+     *
      * E.g.:
-     * 
+     *
      * NANOSECOND.convertTo(1000, MICROSECOND) equals 1 microsecond.
      * MICROSECOND.convertTo(1000, NANOSECOND) equals 1000000 nanoseconds.
      *

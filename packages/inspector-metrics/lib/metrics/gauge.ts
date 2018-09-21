@@ -11,7 +11,7 @@ import { BaseMetric, Metric } from "./metric";
  * @template T
  */
 export interface Gauge<T> extends Metric {
-    
+
     /**
      * Gets the current value of the gauge.
      *
@@ -43,7 +43,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
 
     /**
      * Creates an instance of SimpleGauge with an optional name.
-     * 
+     *
      * @param {string} [name] optional metric name.
      * @memberof SimpleGauge
      */

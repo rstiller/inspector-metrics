@@ -37,7 +37,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
 
     /**
      * Creates an instance of Histogram.
-     * 
+     *
      * @param {Reservoir} reservoir the number reservoir used
      * @param {string} [name] an optional metric name
      * @memberof Histogram

@@ -90,7 +90,7 @@ export class LoggerReporter extends MetricReporter {
 
     /**
      * Creates an instance of LoggerReporter.
-     * 
+     *
      * @param {Logger} [log=console]
      * @param {number} [interval=1000]
      * @param {TimeUnit} [unit=MILLISECOND]
@@ -193,10 +193,10 @@ export class LoggerReporter extends MetricReporter {
      * Reports the given {@link Counter} at 'info' level using the
      * {@link LoggerReporter#log} instance if the value of
      * {@link Counter#getCount()} is a valid number.
-     * 
+     *
      * Reported fields:
      * - count
-     * 
+     *
      * Also the metadata (tags, metric group, metric name) and the date gets reported.
      *
      * @private

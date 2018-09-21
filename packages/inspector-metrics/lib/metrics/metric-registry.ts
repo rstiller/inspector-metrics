@@ -24,7 +24,7 @@ export class MetricRegistryListenerRegistration {
 
     /**
      * Creates an instance of MetricRegistryListenerRegistration.
-     * 
+     *
      * @param {MetricRegistryListener} listener
      * @param {MetricRegistry} registry
      * @memberof MetricRegistryListenerRegistration
@@ -68,7 +68,7 @@ export class MetricRegistration<T extends Metric> {
 
     /**
      * Creates an instance of MetricRegistration.
-     * 
+     *
      * @param {T} metricRef
      * @memberof MetricRegistration
      */
@@ -148,7 +148,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public static isGauge<T>(instance: any): instance is Gauge<T> {
         const directGauge: boolean = !!instance.getValue && instance.getValue instanceof Function;
-        const gaugeRegistration: boolean = !!instance.metricRef && !!instance.metricRef.getValue && instance.metricRef.getValue instanceof Function;
+        const gaugeRegistration =   !!instance.metricRef &&
+                                    !!instance.metricRef.getValue &&
+                                    instance.metricRef.getValue instanceof Function;
         return directGauge || gaugeRegistration;
     }
 
@@ -615,7 +617,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @returns {Meter}
      * @memberof MetricRegistry
      */
-    public newMeter(name: string, group: string = null, clock: Clock = this.defaultClock, sampleRate: number = 1): Meter {
+    public newMeter(
+        name: string,
+        group: string = null,
+        clock: Clock = this.defaultClock,
+        sampleRate: number = 1): Meter {
+
         const meter = new Meter(clock, sampleRate, name);
         if (!!group) {
             meter.setGroup(group);
@@ -657,7 +664,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @returns {Timer}
      * @memberof MetricRegistry
      */
-    public newTimer(name: string, group: string = null, clock: Clock = this.defaultClock, reservoir: Reservoir = null): Timer {
+    public newTimer(
+        name: string,
+        group: string = null,
+        clock: Clock = this.defaultClock,
+        reservoir: Reservoir = null): Timer {
+
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }

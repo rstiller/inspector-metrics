@@ -10,7 +10,7 @@ import { Metric } from "./metric";
  * @extends {Metric}
  */
 export interface MetricSet extends Metric {
-    
+
     /**
      * Gets a mapping from names to metric instances.
      *
@@ -19,7 +19,7 @@ export interface MetricSet extends Metric {
      * @memberof MetricSet
      */
     getMetrics(): Map<string, Metric>;
-    
+
     /**
      * Gets a list of all {@link Metric} instances.
      *

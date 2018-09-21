@@ -8,7 +8,7 @@ import "source-map-support/register";
  * @interface Groupable
  */
 export interface Groupable {
-    
+
     /**
      * Gets the group name.
      *
@@ -16,7 +16,7 @@ export interface Groupable {
      * @memberof Groupable
      */
     getGroup(): string;
-    
+
     /**
      * Sets the group name.
      *

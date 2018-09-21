@@ -15,7 +15,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     get75thPercentile(): number;
-    
+
     /**
      * Gets the value of 95% boundary.
      *
@@ -23,7 +23,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     get95thPercentile(): number;
-    
+
     /**
      * Gets the value of 98% boundary.
      *
@@ -31,7 +31,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     get98thPercentile(): number;
-    
+
     /**
      * Gets the value of 99.9% boundary.
      *
@@ -39,7 +39,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     get999thPercentile(): number;
-    
+
     /**
      * Gets the value of 99% boundary.
      *
@@ -47,7 +47,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     get99thPercentile(): number;
-    
+
     /**
      * Gets the value of 50% boundary.
      *
@@ -55,7 +55,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getMedian(): number;
-    
+
     /**
      * Gets the maximum value.
      *
@@ -63,7 +63,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getMax(): number;
-    
+
     /**
      * Gets the minimum value.
      *
@@ -71,7 +71,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getMin(): number;
-    
+
     /**
      * Gets all values.
      *
@@ -79,7 +79,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getValues(): number[];
-    
+
     /**
      * Gets the number of values.
      *
@@ -87,7 +87,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     size(): number;
-    
+
     /**
      * Gets the average of all values.
      *
@@ -95,7 +95,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getMean(): number;
-    
+
     /**
      * Gets the average deviation among the values.
      *
@@ -103,7 +103,7 @@ export interface Snapshot {
      * @memberof Snapshot
      */
     getStdDev(): number;
-    
+
     /**
      * Gets the value of boundary specified.
      *
@@ -135,7 +135,7 @@ export class SimpleSnapshot implements Snapshot {
 
     /**
      * Creates an instance of SimpleSnapshot.
-     * 
+     *
      * @param {number[]} values
      * @memberof SimpleSnapshot
      */
@@ -153,7 +153,7 @@ export class SimpleSnapshot implements Snapshot {
     public get75thPercentile(): number {
         return this.getValue(0.75);
     }
-    
+
     /**
      * Calls getValue(0.95) to get the value of the 95% boundary
      *
@@ -283,17 +283,17 @@ export class SimpleSnapshot implements Snapshot {
 
     /**
      * Gets the value of the boundary specified.
-     * 
+     *
      * E.g. considering the following values (sorted): [12, 20, 22, 25, 30, 32, 40, 50, 55, 56]
-     * 
+     *
      * quantile | position / index | value
-     * 
+     *
      * 0.25 | 3 | 24.25
-     * 
+     *
      * 0.5 | 5 | 36
-     * 
+     *
      * 0.75 | 8 | 51,25
-     * 
+     *
      * 0.95 | 10 | NaN
      *
      * @param {number} quantile
