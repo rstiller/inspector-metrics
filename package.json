@@ -1,5 +1,6 @@
 {
   "name": "inspector-metrics",
+  "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
   "version": "1.8.7",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
@@ -16,6 +17,7 @@
   },
   "keywords": [
     "metrics",
+    "monitoring",
     "typescript"
   ],
   "engines": {
@@ -58,7 +60,7 @@
     "check:coverage": "nyc npm run test:jenkins",
     "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "clean": "rimraf build coverage",
-    "docs:generate": "typedoc --ignoreCompilerErrors --out ./docs --mode modules --module none ./lib",
+    "docs:generate": "typedoc --ignoreCompilerErrors --out ./docs --mode modules --gitRevision master --target ES5 --module none ./lib",
     "docs:publish": "git subtree push --prefix docs/ origin gh-pages",
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile && npm run docs:generate",

@@ -1,5 +1,5 @@
 # inspector-metrics
-Typescript Metrics Library (copied from http://metrics.dropwizard.io)
+Monitoring / metric library similar to http://metrics.dropwizard.io
 
 <p align="center">
     <a href="https://www.npmjs.org/package/inspector-metrics">
