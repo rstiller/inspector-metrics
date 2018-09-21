@@ -14,17 +14,91 @@ import { Timer } from "./timer";
 
 export type Scheduler = (prog: () => void, interval: number) => NodeJS.Timer;
 
+/**
+ * Standard implementation of a {@link MetricReporter} that uses a {@link Logger} instance.
+ *
+ * @export
+ * @class LoggerReporter
+ * @extends {MetricReporter}
+ */
 export class LoggerReporter extends MetricReporter {
 
+    /**
+     * Clock used to display the time in a logline.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof LoggerReporter
+     */
     private clock: Clock;
+    /**
+     * Timer instance returned from the scheduler.
+     *
+     * @private
+     * @type {NodeJS.Timer}
+     * @memberof LoggerReporter
+     */
     private timer: NodeJS.Timer;
+    /**
+     * Reporting interval.
+     *
+     * @private
+     * @type {number}
+     * @memberof LoggerReporter
+     */
     private interval: number;
+    /**
+     * Time unit of the reporting interval.
+     *
+     * @private
+     * @type {TimeUnit}
+     * @memberof LoggerReporter
+     */
     private unit: TimeUnit;
+    /**
+     * Tags to apply for this reporter instance.
+     *
+     * @private
+     * @type {Map<string, string>}
+     * @memberof LoggerReporter
+     */
     private tags: Map<string, string>;
+    /**
+     * The metadata object passed to the {@link Logger} instance.
+     *
+     * @private
+     * @type {*}
+     * @memberof LoggerReporter
+     */
     private logMetadata: any;
+    /**
+     * The {@link Logger} instance.
+     *
+     * @private
+     * @type {Logger}
+     * @memberof LoggerReporter
+     */
     private log: Logger;
+    /**
+     * The scheduler function used to trigger a scheduling process.
+     *
+     * @private
+     * @type {Scheduler}
+     * @memberof LoggerReporter
+     */
     private scheduler: Scheduler;
 
+    /**
+     * Creates an instance of LoggerReporter.
+     * 
+     * @param {Logger} [log=console]
+     * @param {number} [interval=1000]
+     * @param {TimeUnit} [unit=MILLISECOND]
+     * @param {Map<string, string>} [tags=new Map()]
+     * @param {Clock} [clock=new StdClock()]
+     * @param {Scheduler} [scheduler=setInterval]
+     * @memberof LoggerReporter
+     */
     public constructor(
         log: Logger = console,
         interval: number = 1000,
@@ -44,31 +118,67 @@ export class LoggerReporter extends MetricReporter {
         this.logMetadata = { interval, tags: this.tags, unit };
     }
 
+    /**
+     * Gets the {@link Logger} instance.
+     *
+     * @returns {Logger}
+     * @memberof LoggerReporter
+     */
     public getLog(): Logger {
         return this.log;
     }
 
+    /**
+     * Sets the {@link Logger} instance.
+     *
+     * @param {Logger} log
+     * @memberof LoggerReporter
+     */
     public setLog(log: Logger): void {
         this.log = log;
     }
 
+    /**
+     * Starts the scheduler with the {@link LoggerReporter#interval}.
+     *
+     * @memberof LoggerReporter
+     */
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
         this.timer = this.scheduler(() => this.report(), interval);
     }
 
+    /**
+     * Stops the scheduled job using the {@link LoggerReporter#timer} instance.
+     *
+     * @memberof LoggerReporter
+     */
     public stop(): void {
         if (!!this.timer) {
             this.timer.unref();
         }
     }
 
+    /**
+     * Called periodically by the scheduled job - calls {@link LoggerReporter#reportMetricRegistry}
+     * for every added {@link MetricRegistry}.
+     *
+     * @private
+     * @memberof LoggerReporter
+     */
     private report(): void {
         if (!!this.log && !!this.metricRegistries && this.metricRegistries.length > 0) {
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
     }
 
+    /**
+     * Call the dedicated reporting function for the specified {@link MetricRegistry}.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @memberof LoggerReporter
+     */
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
@@ -79,6 +189,21 @@ export class LoggerReporter extends MetricReporter {
         this.reportTimers(registry, now);
     }
 
+    /**
+     * Reports the given {@link Counter} at 'info' level using the
+     * {@link LoggerReporter#log} instance if the value of
+     * {@link Counter#getCount()} is a valid number.
+     * 
+     * Reported fields:
+     * - count
+     * 
+     * Also the metadata (tags, metric group, metric name) and the date gets reported.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @memberof LoggerReporter
+     */
     private reportCounters(registry: MetricRegistry, date: Date): void {
         const counters = registry.getCounterList();
         if (!!counters) {
@@ -99,6 +224,21 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Reports the given {@link Gauge} at 'info' level using the
+     * {@link LoggerReporter#log} instance only if the gauge's
+     * value is a valid number.
+     *
+     * Reported fields:
+     * - value
+     *
+     * Also the metadata (tags, metric group, metric name) and the date gets reported.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @memberof LoggerReporter
+     */
     private reportGauges(registry: MetricRegistry, date: Date): void {
         const gauges = registry.getGaugeList();
         if (!!gauges) {
@@ -119,6 +259,31 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Reports the given {@link Histogram} at 'info' level using the
+     * {@link LoggerReporter#log} instance if the value of
+     * {@link Histogram#getCount()} is a valid number.
+     *
+     * Reported fields:
+     * - count
+     * - max (max value)
+     * - mean (mean value)
+     * - min (min value)
+     * - p50 (value of the 50% boundary)
+     * - p75 (value of the 75% boundary)
+     * - p95 (value of the 95% boundary)
+     * - p98 (value of the 98% boundary)
+     * - p99 (value of the 99% boundary)
+     * - p999 (value of the 99.9% boundary)
+     * - stddev (average deviation among the values)
+     *
+     * Also the metadata (tags, metric group, metric name) and the date gets reported.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @memberof LoggerReporter
+     */
     private reportHistograms(registry: MetricRegistry, date: Date): void {
         const histograms = registry.getHistogramList();
         if (!!histograms) {
@@ -153,6 +318,25 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Reports the given {@link Meter} at 'info' level using the
+     * {@link LoggerReporter#log} instance if the value of
+     * {@link Meter#getCount()} is a valid number.
+     *
+     * Reported fields:
+     * - count
+     * - m15_rate (15 min rate)
+     * - m5_rate (5 min rate)
+     * - m1_rate (1 min rate)
+     * - mean_rate
+     *
+     * Also the metadata (tags, metric group, metric name) and the date gets reported.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @memberof LoggerReporter
+     */
     private reportMeters(registry: MetricRegistry, date: Date): void {
         const meters = registry.getMeterList();
         if (!!meters) {
@@ -180,6 +364,35 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Reports the given {@link Timer} at 'info' level using the
+     * {@link LoggerReporter#log} instance if the value of
+     * {@link Timer#getCount()} is a valid number.
+     *
+     * Reported fields:
+     * - count
+     * - max (max value)
+     * - mean (mean value)
+     * - min (min value)
+     * - p50 (value of the 50% boundary)
+     * - p75 (value of the 75% boundary)
+     * - p95 (value of the 95% boundary)
+     * - p98 (value of the 98% boundary)
+     * - p99 (value of the 99% boundary)
+     * - p999 (value of the 99.9% boundary)
+     * - stddev (average deviation among the values)
+     * - m15_rate (15 min rate)
+     * - m5_rate (5 min rate)
+     * - m1_rate (1 min rate)
+     * - mean_rate
+     *
+     * Also the metadata (tags, metric group, metric name) and the date gets reported.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @memberof LoggerReporter
+     */
     private reportTimers(registry: MetricRegistry, date: Date): void {
         const timers = registry.getTimerList();
         if (!!timers) {
@@ -218,6 +431,15 @@ export class LoggerReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Combines the tags from the {@link MetricRegistry} and the {@link Metric}.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @param {Taggable} taggable
+     * @returns {{ [key: string]: string; }}
+     * @memberof LoggerReporter
+     */
     private buildTags(registry: MetricRegistry, taggable: Taggable): { [key: string]: string; } {
         const tags: { [x: string]: string } = {};
         registry.getTags().forEach((tag, key) => tags[key] = tag);
@@ -225,6 +447,14 @@ export class LoggerReporter extends MetricReporter {
         return tags;
     }
 
+    /**
+     * Returns {@code null} if the value is not a number - otherwise the value.
+     *
+     * @private
+     * @param {number} value
+     * @returns {number}
+     * @memberof LoggerReporter
+     */
     private getNumber(value: number): number {
         if (isNaN(value)) {
             return null;

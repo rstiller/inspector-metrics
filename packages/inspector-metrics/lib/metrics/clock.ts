@@ -2,6 +2,9 @@ import "source-map-support/register";
 
 /**
  * Represents a point in time.
+ *
+ * @export
+ * @interface Time
  */
 export interface Time {
     milliseconds: number;
@@ -13,9 +16,10 @@ export interface Time {
  *
  * Also assumes that the first point in time time is elder than the sesond point in time.
  *
- * @param one time sample
- * @param two time sample
- * @returns a duration in nanoseconds
+ * @export
+ * @param {Time} one time sample
+ * @param {Time} two time sample
+ * @returns {number} a duration in nanoseconds
  */
 export function diff(one: Time, two: Time): number {
     if (!one || !two) {
@@ -28,11 +32,19 @@ export function diff(one: Time, two: Time): number {
 
 /**
  * Abstraction of a clock. Used to determine progress in time.
+ *
+ * @export
+ * @abstract
+ * @class Clock
  */
 export abstract class Clock {
 
     /**
      * Gets the current point in time according to the logic of the clock implementation.
+     *
+     * @abstract
+     * @returns {Time}
+     * @memberof Clock
      */
     public abstract time(): Time;
 
@@ -40,11 +52,18 @@ export abstract class Clock {
 
 /**
  * Default implementation of a Clock. Uses Date.now() as source of truth.
+ *
+ * @export
+ * @class StdClock
+ * @extends {Clock}
  */
 export class StdClock extends Clock {
 
     /**
      * Returns a Time object whos nanoseconds component is always zero.
+     *
+     * @returns {Time}
+     * @memberof StdClock
      */
     public time(): Time {
         const time = {
