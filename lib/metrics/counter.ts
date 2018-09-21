@@ -26,7 +26,7 @@ export class Counter extends BaseMetric implements Counting, Metric {
 
     /**
      * Creates an instance of Counter.
-     * 
+     *
      * @param {string} [name] optional name of the counter
      * @memberof Counter
      */

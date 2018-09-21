@@ -10,7 +10,7 @@ import { Metric } from "./metric";
  * @extends {Metric}
  */
 export interface Counting extends Metric {
-    
+
     /**
      * Gets the current count - e.g. the number of samples in Histogram or the value of a counter.
      *

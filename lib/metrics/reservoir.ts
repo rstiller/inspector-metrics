@@ -9,7 +9,7 @@ import { SimpleSnapshot, Snapshot } from "./snapshot";
  * @interface Reservoir
  */
 export interface Reservoir {
-    
+
     /**
      * Gets the capacity of this reservoir.
      *
@@ -17,7 +17,7 @@ export interface Reservoir {
      * @memberof Reservoir
      */
     size(): number;
-    
+
     /**
      * Adds a value to the reservoir.
      *
@@ -25,7 +25,7 @@ export interface Reservoir {
      * @memberof Reservoir
      */
     update(value: number): void;
-    
+
     /**
      * Creates a new snapshot of this reservoir.
      *
@@ -66,7 +66,7 @@ export class DefaultReservoir implements Reservoir {
 
     /**
      * Creates an instance of DefaultReservoir.
-     * 
+     *
      * @param {number} maxSize
      * @memberof DefaultReservoir
      */
@@ -150,7 +150,7 @@ export class SlidingWindowReservoir implements Reservoir {
 
     /**
      * Creates an instance of SlidingWindowReservoir.
-     * 
+     *
      * @param {number} maxSize
      * @memberof SlidingWindowReservoir
      */

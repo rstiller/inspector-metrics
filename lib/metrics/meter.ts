@@ -124,7 +124,7 @@ export class Meter extends BaseMetric implements Metered {
 
     /**
      * Creates an instance of Meter.
-     * 
+     *
      * @param {Clock} clock Clock to determine update events.
      * @param {number} sampleRate number of samples per seconds.
      * @param {string} [name] optional metric name.

@@ -120,10 +120,13 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
      * Creates an instance of SizeGauge.
      *
      * @param {string} name The name of the metric
-     * @param {(LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface)} collection The collection to get the size / length from.
+     * @param collection The collection to get the size / length from.
      * @memberof SizeGauge
      */
-    public constructor(name: string, collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface) {
+    public constructor(
+        name: string,
+        collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface) {
+
         super();
         this.setName(name);
 
