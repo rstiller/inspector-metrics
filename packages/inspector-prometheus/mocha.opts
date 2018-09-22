@@ -1,0 +1,7 @@
+--require source-map-support/register
+--require ts-node/register
+--reporter dot
+--watch-extensions ts
+--bail
+--full-trace
+test/**/*Test.ts

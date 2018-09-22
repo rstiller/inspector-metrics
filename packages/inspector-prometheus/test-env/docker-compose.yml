@@ -1,0 +1,68 @@
+version: "3"
+
+services:
+
+  test:
+    build:
+      context: ..
+      args:
+        TZ: Europe/Berlin
+    restart: "no"
+    hostname: playground
+    depends_on:
+      - prometheus
+      - pushgateway
+    volumes:
+      - ./:/opt/playground/
+    networks:
+      - inspector-prometheus-playground
+    working_dir: "/opt/playground"
+    command: ["/usr/bin/wait-for-it.sh", "pushgateway:9091", "--", "node", "build/lib/playground.js"]
+
+  grafana:
+    build:
+      context: ./grafana
+      args:
+        TZ: Europe/Berlin
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - grafana-logs:/var/log/grafana
+    ports:
+      - "3000"
+    restart: "no"
+    hostname: grafana
+    depends_on:
+      - prometheus
+    networks:
+      - inspector-prometheus-playground
+
+  pushgateway:
+    build:
+      context: ./pushgateway
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "9091"
+    restart: "no"
+    hostname: pushgateway
+    networks:
+      - inspector-prometheus-playground
+
+  prometheus:
+    build:
+      context: ./prometheus
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "9091"
+    restart: "no"
+    hostname: prometheus
+    networks:
+      - inspector-prometheus-playground
+
+networks:
+  inspector-prometheus-playground:
+
+volumes:
+  grafana-data:
+  grafana-logs:
