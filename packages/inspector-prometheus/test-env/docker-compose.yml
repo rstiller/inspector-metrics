@@ -28,7 +28,7 @@ services:
       - grafana-data:/var/lib/grafana
       - grafana-logs:/var/log/grafana
     ports:
-      - "3000"
+      - "3000:3000"
     restart: "no"
     hostname: grafana
     depends_on:
@@ -40,7 +40,7 @@ services:
     build:
       context: ./pushgateway
       args:
-        TZ: Europe/Berlin
+        TZ: CET-1CEST
     ports:
       - "9091"
     restart: "no"
@@ -52,9 +52,9 @@ services:
     build:
       context: ./prometheus
       args:
-        TZ: Europe/Berlin
+        TZ: CET-1CEST
     ports:
-      - "9091"
+      - "9090"
     restart: "no"
     hostname: prometheus
     networks:

@@ -2,5 +2,8 @@ FROM prom/prometheus
 
 ARG TZ
 ENV TZ=$TZ
-RUN echo $TZ | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+USER root
+RUN echo $TZ > /etc/TZ
+RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
+USER nobody
