@@ -69,6 +69,22 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Base-class for metric-reporter implementations.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>abstract</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>MetricReporter</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -112,9 +128,22 @@
 					<div class="tsd-signature tsd-kind-icon">metric<wbr>Registries<span class="tsd-signature-symbol">:</span> <a href="_metric_registry_.metricregistry.html" class="tsd-signature-type">MetricRegistry</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-reporter.ts#L7">metric-reporter.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts#L21">metric-reporter.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p><a href="_metric_registry_.metricregistry.html">MetricRegistry</a> instances.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{MetricRegistry[]}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>MetricReporter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -129,9 +158,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-reporter.ts#L13">metric-reporter.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts#L45">metric-reporter.ts:45</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds a new <a href="_metric_registry_.metricregistry.html">MetricRegistry</a> to be reported.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricReporter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -152,9 +191,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-reporter.ts#L17">metric-reporter.ts:17</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts#L55">metric-reporter.ts:55</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes the given <a href="_metric_registry_.metricregistry.html">MetricRegistry</a> if it was previously added.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricReporter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -167,7 +216,7 @@
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="start" class="tsd-anchor"></a>
-					<h3>start</h3>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> start</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">start<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
@@ -175,16 +224,28 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-reporter.ts#L9">metric-reporter.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts#L29">metric-reporter.ts:29</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Implementations start reporting metrics when called.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>abstract</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricReporter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="stop" class="tsd-anchor"></a>
-					<h3>stop</h3>
+					<h3><span class="tsd-flag ts-flagAbstract">Abstract</span> stop</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
 						<li class="tsd-signature tsd-kind-icon">stop<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
@@ -192,9 +253,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-reporter.ts#L11">metric-reporter.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts#L37">metric-reporter.ts:37</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Implementations stop reporting metrics when called.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>abstract</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricReporter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>

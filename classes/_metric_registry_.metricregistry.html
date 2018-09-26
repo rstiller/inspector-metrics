@@ -69,6 +69,26 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A metric registry manages metric instances.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>MetricRegistry</p>
+						</dd>
+						<dt>extends</dt>
+						<dd><p>{BaseMetric}</p>
+						</dd>
+						<dt>implements</dt>
+						<dd><p>{MetricSet}</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -185,9 +205,22 @@
 					<div class="tsd-signature tsd-kind-icon">default<wbr>Clock<span class="tsd-signature-symbol">:</span> <a href="_clock_.clock.html" class="tsd-signature-type">Clock</a><span class="tsd-signature-symbol"> =&nbsp;new StdClock()</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L70">metric-registry.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L191">metric-registry.ts:191</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Default clock instance if no clock instance if provided.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Clock}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>MetricRegistry</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="group" class="tsd-anchor"></a>
@@ -196,9 +229,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#group">group</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L17">metric.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L78">metric.ts:78</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The group set to this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -207,9 +253,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L15">metric.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L62">metric.ts:62</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique id of this metric instance.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="listeners" class="tsd-anchor"></a>
@@ -217,9 +276,22 @@
 					<div class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_metric_registry_listener_.metricregistrylistener.html" class="tsd-signature-type">MetricRegistryListener</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L73">metric-registry.ts:73</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L215">metric-registry.ts:215</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A collection of metric listeners.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{MetricRegistryListener[]}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>MetricRegistry</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="metrics" class="tsd-anchor"></a>
@@ -227,9 +299,22 @@
 					<div class="tsd-signature tsd-kind-icon">metrics<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="_metric_registry_.metricregistration.html" class="tsd-signature-type">MetricRegistration</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_metric_.metric.html" class="tsd-signature-type">Metric</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> =&nbsp;[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L71">metric-registry.ts:71</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L199">metric-registry.ts:199</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A collection metric references.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Array&lt;MetricRegistration<Metric>&gt;}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>MetricRegistry</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="name" class="tsd-anchor"></a>
@@ -238,9 +323,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L18">metric.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L86">metric.ts:86</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="namefactory" class="tsd-anchor"></a>
@@ -248,9 +346,22 @@
 					<div class="tsd-signature tsd-kind-icon">name<wbr>Factory<span class="tsd-signature-symbol">:</span> <a href="../modules/_metric_registry_.html#namefactory" class="tsd-signature-type">NameFactory</a><span class="tsd-signature-symbol"> =&nbsp;MetricRegistry.defaultNameFactory</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L72">metric-registry.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L207">metric-registry.ts:207</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name factory to build metric names.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{NameFactory}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>MetricRegistry</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="tags" class="tsd-anchor"></a>
@@ -259,9 +370,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tags">tags</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L16">metric.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L70">metric.ts:70</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Maps of tags for this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Map&lt;string, string&gt;}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -276,9 +400,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L75">metric-registry.ts:75</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L225">metric-registry.ts:225</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds the specified listener and returns the corrsponding
+									registration object.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -299,9 +434,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L452">metric-registry.ts:452</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L802">metric-registry.ts:802</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Invokes all metric listeners when a new metric was added.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -325,9 +470,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L456">metric-registry.ts:456</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L814">metric-registry.ts:814</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Invokes all metric listeners when a metric was removed.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -351,9 +506,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L445">metric-registry.ts:445</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L787">metric-registry.ts:787</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Builds the name of the metric.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -377,9 +542,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L439">metric-registry.ts:439</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L772">metric-registry.ts:772</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all metric instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>template</dt>
+									<dd><p>T</p>
+									</dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -406,7 +584,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L205">metric-registry.ts:205</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L421">metric-registry.ts:421</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -436,9 +614,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L154">metric-registry.ts:154</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L334">metric-registry.ts:334</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the list of all managed counter instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_counter_.counter.html" class="tsd-signature-type">Counter</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
@@ -453,7 +641,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L102">metric-registry.ts:102</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L276">metric-registry.ts:276</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -477,9 +665,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L241">metric-registry.ts:241</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L471">metric-registry.ts:471</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all managed counter instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -500,9 +698,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L91">metric-registry.ts:91</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L259">metric-registry.ts:259</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the default clock.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_clock_.clock.html" class="tsd-signature-type">Clock</a></h4>
 						</li>
 					</ul>
@@ -517,9 +725,22 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L431">metric-registry.ts:431</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L755">metric-registry.ts:755</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Finds the first metric instance by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>template</dt>
+									<dd><p>T</p>
+									</dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -546,7 +767,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L212">metric-registry.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L428">metric-registry.ts:428</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -576,9 +797,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L160">metric-registry.ts:160</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L346">metric-registry.ts:346</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the list of all managed gauge instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_gauge_.gauge.html" class="tsd-signature-type">Gauge</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -593,7 +824,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L113">metric-registry.ts:113</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L287">metric-registry.ts:287</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -617,9 +848,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L245">metric-registry.ts:245</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L482">metric-registry.ts:482</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all managed gauge instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -642,7 +883,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#getgroup">getGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getgroup">getGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L28">metric.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L96">metric.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -659,7 +900,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L219">metric-registry.ts:219</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L435">metric-registry.ts:435</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -689,9 +930,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L166">metric-registry.ts:166</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L358">metric-registry.ts:358</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the list of all managed histogram instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_histogram_.histogram.html" class="tsd-signature-type">Histogram</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
@@ -706,7 +957,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L124">metric-registry.ts:124</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L298">metric-registry.ts:298</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -730,9 +981,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L249">metric-registry.ts:249</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L493">metric-registry.ts:493</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all managed histogram instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -753,7 +1014,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L226">metric-registry.ts:226</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L442">metric-registry.ts:442</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -783,9 +1044,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L172">metric-registry.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L370">metric-registry.ts:370</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the list of all managed meter instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_meter_.meter.html" class="tsd-signature-type">Meter</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
@@ -800,7 +1071,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L135">metric-registry.ts:135</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L309">metric-registry.ts:309</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -824,9 +1095,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L253">metric-registry.ts:253</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L504">metric-registry.ts:504</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all managed meter instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -847,7 +1128,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L198">metric-registry.ts:198</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L414">metric-registry.ts:414</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -878,9 +1159,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#getmetriclist">getMetricList</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L191">metric-registry.ts:191</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L407">metric-registry.ts:407</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a list of all managed metric instances regardless of the type.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_metric_.metric.html" class="tsd-signature-type">Metric</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
@@ -896,9 +1187,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#getmetrics">getMetrics</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L184">metric-registry.ts:184</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L394">metric-registry.ts:394</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets a mapping of all managed metric instances regardless of the type.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/_metric_.metric.html" class="tsd-signature-type">Metric</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
@@ -913,9 +1214,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L237">metric-registry.ts:237</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L460">metric-registry.ts:460</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all mamanged metric instance by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -938,7 +1249,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#getname">getName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getname">getName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L20">metric.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L88">metric.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -957,7 +1268,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#gettag">getTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettag">getTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L40">metric.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L108">metric.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -982,7 +1293,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#gettags">getTags</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettags">getTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L36">metric.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L104">metric.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -999,7 +1310,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L233">metric-registry.ts:233</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L449">metric-registry.ts:449</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1029,9 +1340,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L178">metric-registry.ts:178</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L382">metric-registry.ts:382</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the list of all managed timer instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_timer_.timer.html" class="tsd-signature-type">Timer</a><span class="tsd-signature-symbol">[]</span></h4>
 						</li>
 					</ul>
@@ -1046,7 +1367,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L146">metric-registry.ts:146</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L320">metric-registry.ts:320</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1070,9 +1391,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L257">metric-registry.ts:257</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L515">metric-registry.ts:515</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets all managed timer instances by name.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1093,9 +1424,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L327">metric-registry.ts:327</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L600">metric-registry.ts:600</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Builds a new counter with the given name and adds it
+									to the registry.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1119,9 +1461,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L345">metric-registry.ts:345</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L644">metric-registry.ts:644</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Builds a new histogram with the given name and adds it
+									to the registry.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1148,9 +1501,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L336">metric-registry.ts:336</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L620">metric-registry.ts:620</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Builds a new meter with the given name and adds it
+									to the registry.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1180,9 +1544,20 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L357">metric-registry.ts:357</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L667">metric-registry.ts:667</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Builds a new timer with the given name and adds it
+									to the registry.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1212,7 +1587,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L409">metric-registry.ts:409</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L724">metric-registry.ts:724</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1254,7 +1629,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L380">metric-registry.ts:380</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L695">metric-registry.ts:695</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1292,7 +1667,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L295">metric-registry.ts:295</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L559">metric-registry.ts:559</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1322,7 +1697,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L302">metric-registry.ts:302</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L566">metric-registry.ts:566</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1352,7 +1727,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L309">metric-registry.ts:309</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L573">metric-registry.ts:573</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1382,9 +1757,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L80">metric-registry.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L236">metric-registry.ts:236</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes a listener manually.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1405,7 +1790,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L316">metric-registry.ts:316</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L580">metric-registry.ts:580</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1435,7 +1820,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L264">metric-registry.ts:264</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L522">metric-registry.ts:522</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1465,9 +1850,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L278">metric-registry.ts:278</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L542">metric-registry.ts:542</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all managed metric instances by name regardless of the type.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1490,7 +1885,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#removetag">removeTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#removetag">removeTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L48">metric.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L116">metric.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1513,7 +1908,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L323">metric-registry.ts:323</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L587">metric-registry.ts:587</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1543,9 +1938,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L95">metric-registry.ts:95</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L269">metric-registry.ts:269</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the default clock.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1568,7 +1973,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#setgroup">setGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setgroup">setGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L32">metric.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L100">metric.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1593,7 +1998,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#setname">setName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setname">setName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L24">metric.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L92">metric.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1616,9 +2021,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L87">metric-registry.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L249">metric-registry.ts:249</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the default name factory for metric instances.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1641,7 +2056,7 @@
 								<p>Implementation of <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.<a href="../interfaces/_metric_set_.metricset.html#settag">setTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#settag">setTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L44">metric.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L112">metric.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1668,7 +2083,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tostring">toString</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L52">metric.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L120">metric.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1685,9 +2100,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L66">metric-registry.ts:66</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L180">metric-registry.ts:180</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Standard function to generate the name for a metric.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1714,9 +2141,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L40">metric-registry.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L100">metric-registry.ts:100</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="_counter_.counter.html">Counter</a> or a reference one.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1737,9 +2176,24 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L56">metric-registry.ts:56</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L149">metric-registry.ts:149</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="../interfaces/_gauge_.gauge.html">Gauge</a> or a reference one.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>template</dt>
+									<dd><p>T</p>
+									</dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
 							<ul class="tsd-type-parameters">
 								<li>
@@ -1766,9 +2220,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L44">metric-registry.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L112">metric-registry.ts:112</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="_histogram_.histogram.html">Histogram</a> or a reference one.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1789,9 +2255,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L48">metric-registry.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L124">metric-registry.ts:124</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="_meter_.meter.html">Meter</a> or a reference one.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1812,9 +2290,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L62">metric-registry.ts:62</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L165">metric-registry.ts:165</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="../interfaces/_metric_set_.metricset.html">MetricSet</a>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -1835,9 +2325,21 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric-registry.ts#L52">metric-registry.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-registry.ts#L136">metric-registry.ts:136</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Determines if the specified object is a <a href="_timer_.timer.html">Timer</a> or a reference one.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>MetricRegistry</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
