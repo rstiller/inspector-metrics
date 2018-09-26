@@ -65,7 +65,7 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="inspector-metrics">inspector-metrics</h1>
-				<p>Typescript Metrics Library (copied from <a href="http://metrics.dropwizard.io">http://metrics.dropwizard.io</a>)</p>
+				<p>Monitoring / metric library similar to <a href="http://metrics.dropwizard.io">http://metrics.dropwizard.io</a></p>
 				<p align="center">
 					<a href="https://www.npmjs.org/package/inspector-metrics">
 						<img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version">
@@ -88,17 +88,18 @@
 				to use the library.</p>
 				<p>Supported metric types:</p>
 				<ul>
-					<li>Counter</li>
-					<li>Gauge</li>
-					<li>Histogram</li>
-					<li>Meter</li>
-					<li>Timer</li>
+					<li>Counter - measures an integer value (e.g. &quot;how many time was my function called&quot;)</li>
+					<li>Gauge - measurement of a value (e.g. &quot;number of waiting threads on a resource&quot;)</li>
+					<li>Histogram - measures the statistical distribution of all values</li>
+					<li>Meter - measures the rate of events over time (e.g. &quot;requests per second&quot;)</li>
+					<li>Timer - measures call-rate of a function and the distribution of the duration of all calls</li>
 				</ul>
 				<p>The library ships with a default <code>console</code> <code>MetricReporter</code>.</p>
 				<p>Some other reporter:</p>
 				<ul>
-					<li><a href="https://github.com/rstiller/inspector-influx">Influx</a></li>
+					<li><a href="https://github.com/rstiller/inspector-carbon">Carbon / Graphite</a></li>
 					<li><a href="https://github.com/rstiller/inspector-elasticsearch">Elasticsearch</a></li>
+					<li><a href="https://github.com/rstiller/inspector-influx">Influx</a></li>
 				</ul>
 				<pre><code class="lang-typescript"><span class="hljs-keyword">import</span> { LoggerReporter, MetricRegistry, Timer } <span class="hljs-keyword">from</span> <span class="hljs-string">"inspector-metrics"</span>;
 
