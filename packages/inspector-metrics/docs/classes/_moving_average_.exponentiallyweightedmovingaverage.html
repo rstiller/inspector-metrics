@@ -69,6 +69,23 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Calculates the moving average with an exponential alpha value.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>ExponentiallyWeightedMovingAverage</p>
+						</dd>
+						<dt>implements</dt>
+						<dd><p>{MovingAverage}</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -135,9 +152,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L26">moving-average.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L111">moving-average.ts:111</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of ExponentiallyWeightedMovingAverage.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -163,9 +190,22 @@
 					<div class="tsd-signature tsd-kind-icon">alpha<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L21">moving-average.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L71">moving-average.ts:71</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Alpha component (weight) of the moving average.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="avg" class="tsd-anchor"></a>
@@ -173,9 +213,22 @@
 					<div class="tsd-signature tsd-kind-icon">avg<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;-1.0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L24">moving-average.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L95">moving-average.ts:95</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current average.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="interval" class="tsd-anchor"></a>
@@ -183,9 +236,22 @@
 					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L22">moving-average.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L79">moving-average.ts:79</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The sampling interval.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="sum" class="tsd-anchor"></a>
@@ -193,9 +259,22 @@
 					<div class="tsd-signature tsd-kind-icon">sum<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L23">moving-average.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L87">moving-average.ts:87</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The sum of all values passed to the update function.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="timeunitinnanoseconds" class="tsd-anchor"></a>
@@ -203,9 +282,22 @@
 					<div class="tsd-signature tsd-kind-icon">time<wbr>Unit<wbr>InNanoseconds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L25">moving-average.ts:25</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L103">moving-average.ts:103</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Multiplier of the time unit specified in the constructor in nanoseconds.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="unit" class="tsd-anchor"></a>
@@ -213,9 +305,22 @@
 					<div class="tsd-signature tsd-kind-icon">unit<span class="tsd-signature-symbol">:</span> <a href="_time_unit_.timeunit.html" class="tsd-signature-type">TimeUnit</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L26">moving-average.ts:26</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L111">moving-average.ts:111</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The time unit of the sampling rate.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{TimeUnit}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>ExponentiallyWeightedMovingAverage</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-static">
 					<a name="alpha_15_minute_1_second_samplerate" class="tsd-anchor"></a>
@@ -223,7 +328,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>15_<wbr>MINUTE_<wbr>1_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(1 / (60 * 15)))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L18">moving-average.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L61">moving-average.ts:61</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -233,7 +338,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>15_<wbr>MINUTE_<wbr>5_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(5 / (60 * 15)))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L19">moving-average.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L62">moving-average.ts:62</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -243,7 +348,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>1_MINUTE_<wbr>1_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(1 / 60))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L14">moving-average.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L57">moving-average.ts:57</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -253,7 +358,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>1_MINUTE_<wbr>5_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(5 / 60))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L15">moving-average.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L58">moving-average.ts:58</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -263,7 +368,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>5_MINUTE_<wbr>1_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(1 / (60 * 5)))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L16">moving-average.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L59">moving-average.ts:59</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -273,7 +378,7 @@
 					<div class="tsd-signature tsd-kind-icon">ALPHA_<wbr>5_MINUTE_<wbr>5_SECOND_<wbr>SAMPLERATE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;1 - Math.exp(-(5 / (60 * 5)))</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L17">moving-average.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L60">moving-average.ts:60</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -291,9 +396,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_moving_average_.movingaverage.html">MovingAverage</a>.<a href="../interfaces/_moving_average_.movingaverage.html#getalpha">getAlpha</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L35">moving-average.ts:35</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L134">moving-average.ts:134</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the alpha value.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -309,9 +424,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_moving_average_.movingaverage.html">MovingAverage</a>.<a href="../interfaces/_moving_average_.movingaverage.html#getaverage">getAverage</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L43">moving-average.ts:43</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L155">moving-average.ts:155</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the average in the specified time unit.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -332,9 +457,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L39">moving-average.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L144">moving-average.ts:144</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the time unit.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <a href="_time_unit_.timeunit.html" class="tsd-signature-type">TimeUnit</a></h4>
 						</li>
 					</ul>
@@ -350,9 +485,22 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_moving_average_.movingaverage.html">MovingAverage</a>.<a href="../interfaces/_moving_average_.movingaverage.html#tick">tick</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L54">moving-average.ts:54</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L182">moving-average.ts:182</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the current average by multiplying the alpha value with the difference
+									of the last average and the current average.</p>
+								</div>
+								<p>Averages are calculated by dividing the sum through the sampling interval.</p>
+								<p>If the alpha value is high the last average has more weight and vice versa.</p>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -368,9 +516,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_moving_average_.movingaverage.html">MovingAverage</a>.<a href="../interfaces/_moving_average_.movingaverage.html#update">update</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/moving-average.ts#L50">moving-average.ts:50</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/moving-average.ts#L168">moving-average.ts:168</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds the value to the current sum.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>ExponentiallyWeightedMovingAverage</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>

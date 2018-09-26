@@ -69,6 +69,26 @@
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Standard implementation of a rate-measuring metrics.</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
+						<dt>class</dt>
+						<dd><p>Meter</p>
+						</dd>
+						<dt>extends</dt>
+						<dd><p>{BaseMetric}</p>
+						</dd>
+						<dt>implements</dt>
+						<dd><p>{Metered}</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -158,16 +178,36 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L24">meter.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L123">meter.ts:123</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of Meter.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>clock: <a href="_clock_.clock.html" class="tsd-signature-type">Clock</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Clock to determine update events.</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5>sampleRate: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>number of samples per seconds.</p>
+										</div>
+									</div>
 								</li>
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
@@ -186,9 +226,22 @@
 					<div class="tsd-signature tsd-kind-icon">avg15<wbr>Minute<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_moving_average_.movingaverage.html" class="tsd-signature-type">MovingAverage</a><span class="tsd-signature-symbol"> =&nbsp;new ExponentiallyWeightedMovingAverage(Meter.AVG_15_MINUTE, 1, SECOND)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L24">meter.ts:24</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L123">meter.ts:123</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Moving average for 15 minutes.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{MovingAverage}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="avg1minute" class="tsd-anchor"></a>
@@ -196,9 +249,22 @@
 					<div class="tsd-signature tsd-kind-icon">avg1<wbr>Minute<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_moving_average_.movingaverage.html" class="tsd-signature-type">MovingAverage</a><span class="tsd-signature-symbol"> =&nbsp;new ExponentiallyWeightedMovingAverage(Meter.AVG_1_MINUTE, 1, SECOND)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L22">meter.ts:22</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L107">meter.ts:107</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Moving average for 1 minute.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{MovingAverage}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="avg5minute" class="tsd-anchor"></a>
@@ -206,9 +272,22 @@
 					<div class="tsd-signature tsd-kind-icon">avg5<wbr>Minute<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_moving_average_.movingaverage.html" class="tsd-signature-type">MovingAverage</a><span class="tsd-signature-symbol"> =&nbsp;new ExponentiallyWeightedMovingAverage(Meter.AVG_5_MINUTE, 1, SECOND)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L23">meter.ts:23</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L115">meter.ts:115</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Moving average for 5 minutes.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{MovingAverage}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="clock" class="tsd-anchor"></a>
@@ -216,9 +295,22 @@
 					<div class="tsd-signature tsd-kind-icon">clock<span class="tsd-signature-symbol">:</span> <a href="_clock_.clock.html" class="tsd-signature-type">Clock</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L16">meter.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L59">meter.ts:59</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Clock used to determine if a new update of the averages is needed.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Clock}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="count" class="tsd-anchor"></a>
@@ -226,9 +318,22 @@
 					<div class="tsd-signature tsd-kind-icon">count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;0</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L19">meter.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L83">meter.ts:83</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Continuous counter incremented in the {@link Meter#mark} method.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="group" class="tsd-anchor"></a>
@@ -237,9 +342,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#group">group</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L17">metric.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L78">metric.ts:78</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The group set to this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited">
 					<a name="id" class="tsd-anchor"></a>
@@ -248,9 +366,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L15">metric.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L62">metric.ts:62</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The unique id of this metric instance.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="interval" class="tsd-anchor"></a>
@@ -258,9 +389,22 @@
 					<div class="tsd-signature tsd-kind-icon">interval<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L21">meter.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L99">meter.ts:99</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Max age of the last update in nanoseconds.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="lasttime" class="tsd-anchor"></a>
@@ -268,9 +412,22 @@
 					<div class="tsd-signature tsd-kind-icon">last<wbr>Time<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_clock_.time.html" class="tsd-signature-type">Time</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L18">meter.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L75">meter.ts:75</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Timestamp used to determine when a new update of the 1, 5 and 15 mins averages is needed.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Time}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="name" class="tsd-anchor"></a>
@@ -279,9 +436,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L18">metric.ts:18</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L86">metric.ts:86</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The name of this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="samplerate" class="tsd-anchor"></a>
@@ -289,9 +459,22 @@
 					<div class="tsd-signature tsd-kind-icon">sample<wbr>Rate<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L20">meter.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L91">meter.ts:91</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of samples per second.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{number}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
 					<a name="starttime" class="tsd-anchor"></a>
@@ -299,9 +482,22 @@
 					<div class="tsd-signature tsd-kind-icon">start<wbr>Time<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_clock_.time.html" class="tsd-signature-type">Time</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L17">meter.ts:17</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L67">meter.ts:67</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Starttime as a reference for calculating the mean-rate.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Time}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="tags" class="tsd-anchor"></a>
@@ -310,9 +506,22 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tags">tags</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L16">metric.ts:16</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L70">metric.ts:70</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Maps of tags for this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{Map&lt;string, string&gt;}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="avg_15_minute" class="tsd-anchor"></a>
@@ -320,9 +529,21 @@
 					<div class="tsd-signature tsd-kind-icon">AVG_<wbr>15_<wbr>MINUTE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;ExponentiallyWeightedMovingAverage.ALPHA_15_MINUTE_1_SECOND_SAMPLERATE</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L13">meter.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L42">meter.ts:42</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Alpha value for 15 mins within a <a href="_moving_average_.exponentiallyweightedmovingaverage.html">ExponentiallyWeightedMovingAverage</a>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="avg_1_minute" class="tsd-anchor"></a>
@@ -330,9 +551,21 @@
 					<div class="tsd-signature tsd-kind-icon">AVG_<wbr>1_MINUTE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;ExponentiallyWeightedMovingAverage.ALPHA_1_MINUTE_1_SECOND_SAMPLERATE</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L11">meter.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L26">meter.ts:26</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Alpha value for 1 min within a <a href="_moving_average_.exponentiallyweightedmovingaverage.html">ExponentiallyWeightedMovingAverage</a>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="avg_5_minute" class="tsd-anchor"></a>
@@ -340,9 +573,21 @@
 					<div class="tsd-signature tsd-kind-icon">AVG_<wbr>5_MINUTE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;ExponentiallyWeightedMovingAverage.ALPHA_5_MINUTE_1_SECOND_SAMPLERATE</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L12">meter.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L34">meter.ts:34</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Alpha value for 5 mins within a <a href="_moving_average_.exponentiallyweightedmovingaverage.html">ExponentiallyWeightedMovingAverage</a>.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private tsd-is-static">
 					<a name="second_1_nanos" class="tsd-anchor"></a>
@@ -350,9 +595,21 @@
 					<div class="tsd-signature tsd-kind-icon">SECOND_<wbr>1_NANOS<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> =&nbsp;SECOND.convertTo(1, NANOSECOND)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L14">meter.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L50">meter.ts:50</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>1 second in nanoseconds.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>static</dt>
+							<dd></dd>
+							<dt>memberof</dt>
+							<dd><p>Meter</p>
+							</dd>
+						</dl>
+					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
@@ -368,9 +625,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get15minuterate">get15MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L48">meter.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L173">meter.ts:173</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the 15 minutes average if needed and returns the rate per second.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -386,9 +653,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get1minuterate">get1MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L58">meter.ts:58</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L195">meter.ts:195</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the 1 minute average if needed and returns the rate per second.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -404,9 +681,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get5minuterate">get5MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L53">meter.ts:53</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L184">meter.ts:184</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the 5 minutes average if needed and returns the rate per second.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -422,9 +709,19 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getcount">getCount</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L44">meter.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L163">meter.ts:163</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the number of events.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
 						</li>
 					</ul>
@@ -441,7 +738,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getgroup">getGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getgroup">getGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L28">metric.ts:28</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L96">metric.ts:96</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -459,10 +756,21 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getmeanrate">getMeanRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L63">meter.ts:63</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L206">meter.ts:206</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the mean rate : {@link Meter#count} divided through seconds passed since {@link Meter#startTime}).</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+							<p>either 0 or the mean rate.</p>
 						</li>
 					</ul>
 				</section>
@@ -478,7 +786,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getname">getName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getname">getName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L20">metric.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L88">metric.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -497,7 +805,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#gettag">getTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettag">getTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L40">metric.ts:40</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L108">metric.ts:108</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -522,7 +830,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#gettags">getTags</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettags">getTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L36">metric.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L104">metric.ts:104</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -539,9 +847,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L36">meter.ts:36</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L149">meter.ts:149</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Increases the counter and updates the averages.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -564,7 +882,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#removetag">removeTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#removetag">removeTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L48">metric.ts:48</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L116">metric.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -589,7 +907,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#setgroup">setGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setgroup">setGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L32">metric.ts:32</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L100">metric.ts:100</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -614,7 +932,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#setname">setName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setname">setName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L24">metric.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L92">metric.ts:92</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -639,7 +957,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#settag">setTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#settag">setTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L44">metric.ts:44</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L112">metric.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -665,13 +983,26 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L72">meter.ts:72</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L222">meter.ts:222</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calls the {@link MovingAverage#tick} for each tick.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>ticks: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>number of updates.</p>
+									</div>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -688,9 +1019,19 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/meter.ts#L80">meter.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/meter.ts#L236">meter.ts:236</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks for if an update of the averages is needed and if so updates the {@link Meter#lastTime}.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Meter</p>
+									</dd>
+								</dl>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
 						</li>
 					</ul>
@@ -706,7 +1047,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tostring">toString</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/d96a816/lib/metrics/metric.ts#L52">metric.ts:52</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L120">metric.ts:120</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
