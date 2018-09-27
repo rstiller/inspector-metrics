@@ -2,5 +2,8 @@
 
 set -e
 
-docker-compose up -d prometheus grafana
-docker-compose run --rm test
+DC=`which docker-compose || which docker-compose.exe`
+
+npm run build
+"${DC}" up -d prometheus grafana
+"${DC}" run --rm test

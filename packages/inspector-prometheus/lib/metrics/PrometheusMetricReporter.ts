@@ -1,6 +1,27 @@
 import "source-map-support";
 
-import { MetricReporter } from "inspector-metrics";
+import {
+    Clock,
+    Counter,
+    Gauge,
+    Histogram,
+    Logger,
+    Meter,
+    Metric,
+    MetricRegistry,
+    MetricReporter,
+    MILLISECOND,
+    MINUTE,
+    StdClock,
+    Taggable,
+    Timer,
+    TimeUnit,
+} from "inspector-metrics";
+
+interface MetricEntry {
+    lastReport: number;
+    lastValue: number;
+}
 
 /**
  * Metric reporter for both prometheus and pushgateway.
@@ -12,17 +33,220 @@ import { MetricReporter } from "inspector-metrics";
  */
 export class PrometheusMetricReporter extends MetricReporter {
 
-    reportMetrics(): String {
+    private includeTimestamp: boolean;
+    private clock: Clock;
+    private timer: NodeJS.Timer;
+    private interval: number;
+    private minReportingTimeout: number;
+    private unit: TimeUnit;
+    private tags: Map<string, string>;
+    // private logMetadata: any;
+    private log: Logger = console;
+    private metricStates: Map<number, MetricEntry> = new Map();
+
+    public constructor(
+        includeTimestamp: boolean = false,
+        interval: number = 5000,
+        unit: TimeUnit = MILLISECOND,
+        tags: Map<string, string> = new Map(),
+        clock: Clock = new StdClock(),
+        minReportingTimeout = 1) {
+        super();
+
+        this.includeTimestamp = includeTimestamp;
+        this.interval = interval;
+        this.unit = unit;
+        this.tags = tags;
+        this.clock = clock;
+        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+
+        // this.logMetadata = {
+        //     interval,
+        //     tags,
+        //     unit,
+        // };
+    }
+
+    public getTags(): Map<string, string> {
+        return this.tags;
+    }
+
+    public setTags(tags: Map<string, string>): void {
+        this.tags = tags;
+    }
+
+    public getLog(): Logger {
+        return this.log;
+    }
+
+    public setLog(log: Logger): void {
+        this.log = log;
+    }
+
+    public getMetricsString(): string {
+        if (this.metricRegistries && this.metricRegistries.length > 0) {
+            return this.metricRegistries
+                .map((registry) => this.reportMetricRegistry(registry))
+                .join("");
+        }
+        return "";
+    }
+
+    public start(): void {
+        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
+        this.timer = setInterval(() => this.report(), interval);
+    }
+
+    public stop(): void {
+        this.timer.unref();
+    }
+
+    private async report() {
+        if (this.metricRegistries && this.metricRegistries.length > 0) {
+            this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
+        }
+    }
+
+    private reportMetricRegistry(r: MetricRegistry): string {
+        const now: Date = new Date(this.clock.time().milliseconds);
+
+        const counters = this.reportMetrics(r.getCounterList(), now,
+            (c: Counter) => this.getCounterString(now, c),
+            (c: Counter) => c.getCount());
+        const gauges = this.reportMetrics(r.getGaugeList(), now,
+            (g: Gauge<any>) => this.getGaugeString(now, g),
+            (g: Gauge<any>) => g.getValue());
+        const histograms = this.reportMetrics(r.getHistogramList(), now,
+            (h: Histogram) => this.getHistogramString(now, h),
+            (h: Histogram) => h.getCount());
+        const meters = this.reportMetrics(r.getMeterList(), now,
+            (m: Meter) => this.getMeterString(now, m),
+            (m: Meter) => m.getCount());
+        const timers = this.reportMetrics(r.getTimerList(), now,
+            (t: Timer) => this.getTimerString(now, t),
+            (t: Timer) => t.getCount());
+
+        return counters
+            .concat(gauges)
+            .concat(histograms)
+            .concat(meters)
+            .concat(timers)
+            .join("");
+    }
+
+    private reportMetrics<T extends Metric>(
+        metrics: T[],
+        date: Date,
+        reportFn: (metric: T) => string,
+        lastFn: (metric: Metric) => number): string[] {
+
+        return metrics
+            .filter((metric) => !(metric as any).id || this.hasChanged((metric as any).id, lastFn(metric), date))
+            .map((metric) => reportFn(metric));
+    }
+
+    private getCounterString(now: Date, counter: Counter): string {
         // TODO:
         return "";
     }
 
-    start(): void {
+    private getGaugeString(now: Date, gauge: Gauge<any>): string {
         // TODO:
+        return "";
     }
 
-    stop(): void {
+    private getHistogramString(now: Date, histogram: Histogram): string {
         // TODO:
+        return "";
+    }
+
+    private getMeterString(now: Date, meter: Meter): string {
+        // TODO:
+        return "";
+    }
+
+    private getTimerString(now: Date, timer: Timer): string {
+        const value = timer.getCount();
+        if (isNaN(value)) {
+            return "";
+        }
+
+        const metricName = this.getMetricName(timer);
+        const snapshot = timer.getSnapshot();
+        const values: { [key: string]: number; } = {
+            count: timer.getCount() || 0,
+            m15_rate: this.getNumber(timer.get15MinuteRate()),
+            m1_rate: this.getNumber(timer.get1MinuteRate()),
+            m5_rate: this.getNumber(timer.get5MinuteRate()),
+            max: this.getNumber(snapshot.getMax()),
+            mean: this.getNumber(snapshot.getMean()),
+            mean_rate: this.getNumber(timer.getMeanRate()),
+            min: this.getNumber(snapshot.getMin()),
+            p50: this.getNumber(snapshot.getMedian()),
+            p75: this.getNumber(snapshot.get75thPercentile()),
+            p95: this.getNumber(snapshot.get95thPercentile()),
+            p98: this.getNumber(snapshot.get98thPercentile()),
+            p99: this.getNumber(snapshot.get99thPercentile()),
+            p999: this.getNumber(snapshot.get999thPercentile()),
+            stddev: this.getNumber(snapshot.getStdDev()),
+        };
+        let timestamp = "";
+
+        if (this.includeTimestamp) {
+            timestamp = ` ${now.getUTCMilliseconds()}`;
+        }
+
+        const tags = this.buildTags(timer);
+        const tagStr = Object
+            .keys(tags)
+            .map((tag) => `${tag}="${tags[tag]}"`)
+            .join(",");
+
+        return Object
+            .keys(values)
+            .map((field) => `${metricName}_${field}{${tagStr}} ${values[field]}${timestamp}\n`)
+            .join("");
+    }
+
+    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
+        let changed = true;
+        let metricEntry = {
+            lastReport: 0,
+            lastValue,
+        };
+        if (this.metricStates.has(metricId)) {
+            metricEntry = this.metricStates.get(metricId);
+            changed = metricEntry.lastValue !== lastValue;
+            if (!changed) {
+                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
+            }
+        }
+        if (changed) {
+            metricEntry.lastReport = date.getTime();
+        }
+        this.metricStates.set(metricId, metricEntry);
+        return changed;
+    }
+
+    private getMetricName(metric: Metric): string {
+        if (metric.getGroup()) {
+            return `${metric.getGroup()}:${metric.getName()}`;
+        }
+        return metric.getName();
+    }
+
+    private buildTags(taggable: Taggable): { [key: string]: string } {
+        const tags: { [x: string]: string } = {};
+        this.tags.forEach((tag, key) => tags[key] = tag);
+        taggable.getTags().forEach((tag, key) => tags[key] = tag);
+        return tags;
+    }
+
+    private getNumber(value: number): number {
+        if (isNaN(value)) {
+            return 0;
+        }
+        return value;
     }
 
 }

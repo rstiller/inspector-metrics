@@ -4,7 +4,7 @@ services:
 
   test:
     build:
-      context: ..
+      context: ./test-env/
       args:
         TZ: Europe/Berlin
     restart: "no"
@@ -21,7 +21,7 @@ services:
 
   grafana:
     build:
-      context: ./grafana
+      context: ./test-env/grafana
       args:
         TZ: Europe/Berlin
     volumes:
@@ -38,7 +38,7 @@ services:
 
   pushgateway:
     build:
-      context: ./pushgateway
+      context: ./test-env/pushgateway
       args:
         TZ: CET-1CEST
     ports:
@@ -50,7 +50,7 @@ services:
 
   prometheus:
     build:
-      context: ./prometheus
+      context: ./test-env/prometheus
       args:
         TZ: CET-1CEST
     ports:
