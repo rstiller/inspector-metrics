@@ -1,5 +1,6 @@
 {
   "name": "inspector-prometheus",
+  "description": "Prometheus / Pushgateway metric reporter for nodejs",
   "version": "1.0.0-beta.1",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
@@ -32,6 +33,7 @@
     "@types/node": "^10.11.2",
     "@types/sinon": "^5.0.2",
     "@types/sinon-chai": "^3.2.0",
+    "chai": "^4.2.0",
     "mocha": "^5.2.0",
     "mocha-typescript": "^1.1.17",
     "npm-check": "^5.9.0",

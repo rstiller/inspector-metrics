@@ -145,58 +145,26 @@ export class PrometheusMetricReporter extends MetricReporter {
             .map((metric) => reportFn(metric));
     }
 
-    private getCounterString(now: Date, counter: Counter): string {
-        // TODO:
-        return "";
-    }
+    private getMetricString<T extends Metric>(
+        now: Date,
+        metric: T,
+        canReport: (metric: T) => boolean,
+        getValues: (metric: T) => { [key: string]: number; },
+        ): string {
 
-    private getGaugeString(now: Date, gauge: Gauge<any>): string {
-        // TODO:
-        return "";
-    }
-
-    private getHistogramString(now: Date, histogram: Histogram): string {
-        // TODO:
-        return "";
-    }
-
-    private getMeterString(now: Date, meter: Meter): string {
-        // TODO:
-        return "";
-    }
-
-    private getTimerString(now: Date, timer: Timer): string {
-        const value = timer.getCount();
-        if (isNaN(value)) {
+        if (!canReport(metric)) {
             return "";
         }
 
-        const metricName = this.getMetricName(timer);
-        const snapshot = timer.getSnapshot();
-        const values: { [key: string]: number; } = {
-            count: timer.getCount() || 0,
-            m15_rate: this.getNumber(timer.get15MinuteRate()),
-            m1_rate: this.getNumber(timer.get1MinuteRate()),
-            m5_rate: this.getNumber(timer.get5MinuteRate()),
-            max: this.getNumber(snapshot.getMax()),
-            mean: this.getNumber(snapshot.getMean()),
-            mean_rate: this.getNumber(timer.getMeanRate()),
-            min: this.getNumber(snapshot.getMin()),
-            p50: this.getNumber(snapshot.getMedian()),
-            p75: this.getNumber(snapshot.get75thPercentile()),
-            p95: this.getNumber(snapshot.get95thPercentile()),
-            p98: this.getNumber(snapshot.get98thPercentile()),
-            p99: this.getNumber(snapshot.get99thPercentile()),
-            p999: this.getNumber(snapshot.get999thPercentile()),
-            stddev: this.getNumber(snapshot.getStdDev()),
-        };
+        const metricName = this.getMetricName(metric);
+        const values = getValues(metric);
         let timestamp = "";
 
         if (this.includeTimestamp) {
             timestamp = ` ${now.getUTCMilliseconds()}`;
         }
 
-        const tags = this.buildTags(timer);
+        const tags = this.buildTags(metric);
         const tagStr = Object
             .keys(tags)
             .map((tag) => `${tag}="${tags[tag]}"`)
@@ -204,8 +172,96 @@ export class PrometheusMetricReporter extends MetricReporter {
 
         return Object
             .keys(values)
-            .map((field) => `${metricName}_${field}{${tagStr}} ${values[field]}${timestamp}\n`)
+            .map((field) =>
+                `# HELP ${metricName}_${field} ${metricName}_${field} description\n` +
+                `# TYPE ${metricName}_${field} untyped\n` +
+                `${metricName}_${field}{${tagStr}} ${values[field]}${timestamp}\n`)
             .join("");
+    }
+
+    private getCounterString(now: Date, counter: Counter): string {
+        return this.getMetricString(
+            now,
+            counter,
+            (metric) => !isNaN(counter.getCount()),
+            (metric) => ({
+                count: counter.getCount() || 0,
+            }));
+    }
+
+    private getGaugeString(now: Date, gauge: Gauge<any>): string {
+        return this.getMetricString(
+            now,
+            gauge,
+            (metric) => !isNaN(gauge.getValue()),
+            (metric) => ({
+                value: gauge.getValue(),
+            }));
+    }
+
+    private getHistogramString(now: Date, histogram: Histogram): string {
+        return this.getMetricString(
+            now,
+            histogram,
+            (metric) => !isNaN(histogram.getCount()),
+            (metric) => {
+                const snapshot = histogram.getSnapshot();
+                return {
+                    max: this.getNumber(snapshot.getMax()),
+                    mean: this.getNumber(snapshot.getMean()),
+                    min: this.getNumber(snapshot.getMin()),
+                    p50: this.getNumber(snapshot.getMedian()),
+                    p75: this.getNumber(snapshot.get75thPercentile()),
+                    p95: this.getNumber(snapshot.get95thPercentile()),
+                    p98: this.getNumber(snapshot.get98thPercentile()),
+                    p99: this.getNumber(snapshot.get99thPercentile()),
+                    p999: this.getNumber(snapshot.get999thPercentile()),
+                    stddev: this.getNumber(snapshot.getStdDev()),
+                };
+            });
+    }
+
+    private getMeterString(now: Date, meter: Meter): string {
+        return this.getMetricString(
+            now,
+            meter,
+            (metric) => !isNaN(meter.getCount()),
+            (metric) => {
+                return {
+                    count: meter.getCount() || 0,
+                    m15_rate: this.getNumber(meter.get15MinuteRate()),
+                    m1_rate: this.getNumber(meter.get1MinuteRate()),
+                    m5_rate: this.getNumber(meter.get5MinuteRate()),
+                    mean_rate: this.getNumber(meter.getMeanRate()),
+                };
+            });
+    }
+
+    private getTimerString(now: Date, timer: Timer): string {
+        return this.getMetricString(
+            now,
+            timer,
+            (metric) => !isNaN(timer.getCount()),
+            (metric) => {
+                const snapshot = timer.getSnapshot();
+                return {
+                    count: timer.getCount() || 0,
+                    m15_rate: this.getNumber(timer.get15MinuteRate()),
+                    m1_rate: this.getNumber(timer.get1MinuteRate()),
+                    m5_rate: this.getNumber(timer.get5MinuteRate()),
+                    max: this.getNumber(snapshot.getMax()),
+                    mean: this.getNumber(snapshot.getMean()),
+                    mean_rate: this.getNumber(timer.getMeanRate()),
+                    min: this.getNumber(snapshot.getMin()),
+                    p50: this.getNumber(snapshot.getMedian()),
+                    p75: this.getNumber(snapshot.get75thPercentile()),
+                    p95: this.getNumber(snapshot.get95thPercentile()),
+                    p98: this.getNumber(snapshot.get98thPercentile()),
+                    p99: this.getNumber(snapshot.get99thPercentile()),
+                    p999: this.getNumber(snapshot.get999thPercentile()),
+                    stddev: this.getNumber(snapshot.getStdDev()),
+                };
+            });
     }
 
     private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
