@@ -1,6 +1,7 @@
 import "source-map-support/register";
 
 import { Counting } from "./counting";
+import { Int64Wrapper } from "./int64";
 import { BaseMetric, Metric } from "./metric";
 import { Reservoir } from "./reservoir";
 import { Sampling } from "./sampling";
@@ -42,7 +43,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling,
      * @type {number}
      * @memberof Histogram
      */
-    private sum: number = 0;
+    private sum: Int64Wrapper = new Int64Wrapper();
 
     /**
      * Creates an instance of Histogram.
@@ -67,7 +68,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling,
      */
     public update(value: number): void {
         this.count += 1;
-        this.sum += value;
+        this.sum.add(value);
         this.reservoir.update(value);
     }
 
@@ -97,7 +98,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling,
      * @returns {number}
      * @memberof Histogram
      */
-    public getSum(): number {
+    public getSum(): Int64Wrapper {
         return this.sum;
     }
 
