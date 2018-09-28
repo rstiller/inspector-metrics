@@ -2,6 +2,7 @@ import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
 import { Histogram } from "./histogram";
+import { Int64Wrapper } from "./int64";
 import { Meter } from "./meter";
 import { Metered } from "./metered";
 import { BaseMetric } from "./metric";
@@ -172,7 +173,7 @@ export class Timer extends BaseMetric implements Metered, Sampling, Summarizing 
      * @returns {number}
      * @memberof Timer
      */
-    public getSum(): number {
+    public getSum(): Int64Wrapper {
         return this.histogram.getSum();
     }
 

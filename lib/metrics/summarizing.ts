@@ -1,4 +1,5 @@
 import "source-map-support/register";
+import { Int64Wrapper } from "./int64";
 
 /**
  * Interface fo all metric classes that build a sum of values.
@@ -14,6 +15,6 @@ export interface Summarizing {
      * @returns {number}
      * @memberof Summarizing
      */
-    getSum(): number;
+    getSum(): Int64Wrapper;
 
 }
