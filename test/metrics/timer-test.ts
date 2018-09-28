@@ -43,6 +43,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -63,6 +64,7 @@ export class TimerTest {
         timer.addDuration(-1, NANOSECOND);
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -90,6 +92,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -110,6 +113,7 @@ export class TimerTest {
         timer.addDuration(10, MICROSECOND);
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(10000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -137,6 +141,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -159,6 +164,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(3);
+        expect(timer.getSum()).to.equal(60000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -186,6 +192,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -210,6 +217,7 @@ export class TimerTest {
         timer.addDuration(10, MICROSECOND);
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(10000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -237,6 +245,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -263,6 +272,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(3);
+        expect(timer.getSum()).to.equal(60000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -290,6 +300,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -316,6 +327,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(3);
+        expect(timer.getSum()).to.equal(60000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -342,6 +354,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(6);
+        expect(timer.getSum()).to.equal(120000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -369,6 +382,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -395,6 +409,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(3);
+        expect(timer.getSum()).to.equal(60000);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -421,6 +436,7 @@ export class TimerTest {
         timer.addDuration(30, MICROSECOND);
 
         expect(timer.getCount()).to.equal(6);
+        expect(timer.getSum()).to.equal(120000);
         expect(timer.get15MinuteRate()).to.greaterThan(0);
         expect(timer.get5MinuteRate()).to.greaterThan(0);
         expect(timer.get1MinuteRate()).to.greaterThan(0);
@@ -448,6 +464,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -477,6 +494,7 @@ export class TimerTest {
         });
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(10000000);
         expect(timer.get15MinuteRate()).to.greaterThan(0);
         expect(timer.get5MinuteRate()).to.greaterThan(0);
         expect(timer.get1MinuteRate()).to.greaterThan(0);
@@ -504,6 +522,7 @@ export class TimerTest {
         const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -537,6 +556,7 @@ export class TimerTest {
             });
 
             expect(timer.getCount()).to.equal(1);
+            expect(timer.getSum()).to.equal(10000000);
             expect(timer.get15MinuteRate()).to.greaterThan(0);
             expect(timer.get5MinuteRate()).to.greaterThan(0);
             expect(timer.get1MinuteRate()).to.greaterThan(0);
@@ -574,6 +594,7 @@ export class StopWatchTest {
         const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -595,6 +616,7 @@ export class StopWatchTest {
         stopWatch.stop();
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -623,6 +645,7 @@ export class StopWatchTest {
         const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -655,6 +678,7 @@ export class StopWatchTest {
         });
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(10000000);
         expect(timer.get15MinuteRate()).to.greaterThan(0);
         expect(timer.get5MinuteRate()).to.greaterThan(0);
         expect(timer.get1MinuteRate()).to.greaterThan(0);
@@ -683,6 +707,7 @@ export class StopWatchTest {
         const stopWatch: StopWatch = timer.newStopWatch();
 
         expect(timer.getCount()).to.equal(0);
+        expect(timer.getSum()).to.equal(0);
         expect(timer.get15MinuteRate()).to.equal(0);
         expect(timer.get5MinuteRate()).to.equal(0);
         expect(timer.get1MinuteRate()).to.equal(0);
@@ -715,6 +740,7 @@ export class StopWatchTest {
         });
 
         expect(timer.getCount()).to.equal(1);
+        expect(timer.getSum()).to.equal(10000000);
         expect(timer.get15MinuteRate()).to.greaterThan(0);
         expect(timer.get5MinuteRate()).to.greaterThan(0);
         expect(timer.get1MinuteRate()).to.greaterThan(0);
@@ -747,6 +773,7 @@ export class StopWatchTest {
         });
 
         expect(timer.getCount()).to.equal(2);
+        expect(timer.getSum()).to.equal(20000000);
         expect(timer.get15MinuteRate()).to.greaterThan(0);
         expect(timer.get5MinuteRate()).to.greaterThan(0);
         expect(timer.get1MinuteRate()).to.greaterThan(0);
