@@ -12,7 +12,7 @@ export interface Summarizing {
     /**
      * Gets the sum of values.
      *
-     * @returns {number}
+     * @returns {Int64Wrapper}
      * @memberof Summarizing
      */
     getSum(): Int64Wrapper;
