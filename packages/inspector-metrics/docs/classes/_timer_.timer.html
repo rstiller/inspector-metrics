@@ -112,6 +112,7 @@
 					<li><a href="../interfaces/_metric_.metric.html" class="tsd-signature-type">Metric</a></li>
 					<li><a href="../interfaces/_metered_.metered.html" class="tsd-signature-type">Metered</a></li>
 					<li><a href="../interfaces/_sampling_.sampling.html" class="tsd-signature-type">Sampling</a></li>
+					<li><a href="../interfaces/_summarizing_.summarizing.html" class="tsd-signature-type">Summarizing</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -128,6 +129,7 @@
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_timer_.timer.html#clock" class="tsd-kind-icon">clock</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_timer_.timer.html#description" class="tsd-kind-icon">description</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected"><a href="_timer_.timer.html#group" class="tsd-kind-icon">group</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_timer_.timer.html#histogram" class="tsd-kind-icon">histogram</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#id" class="tsd-kind-icon">id</a></li>
@@ -144,14 +146,17 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#get1minuterate" class="tsd-kind-icon">get1<wbr>Minute<wbr>Rate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#get5minuterate" class="tsd-kind-icon">get5<wbr>Minute<wbr>Rate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#getcount" class="tsd-kind-icon">get<wbr>Count</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#getdescription" class="tsd-kind-icon">get<wbr>Description</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#getgroup" class="tsd-kind-icon">get<wbr>Group</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#getmeanrate" class="tsd-kind-icon">get<wbr>Mean<wbr>Rate</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#getname" class="tsd-kind-icon">get<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#getsnapshot" class="tsd-kind-icon">get<wbr>Snapshot</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#getsum" class="tsd-kind-icon">get<wbr>Sum</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#gettag" class="tsd-kind-icon">get<wbr>Tag</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#gettags" class="tsd-kind-icon">get<wbr>Tags</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_timer_.timer.html#newstopwatch" class="tsd-kind-icon">new<wbr>Stop<wbr>Watch</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#removetag" class="tsd-kind-icon">remove<wbr>Tag</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#setdescription" class="tsd-kind-icon">set<wbr>Description</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#setgroup" class="tsd-kind-icon">set<wbr>Group</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#setname" class="tsd-kind-icon">set<wbr>Name</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><a href="_timer_.timer.html#settag" class="tsd-kind-icon">set<wbr>Tag</a></li>
@@ -169,13 +174,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Timer<span class="tsd-signature-symbol">(</span>clock<span class="tsd-signature-symbol">: </span><a href="_clock_.clock.html" class="tsd-signature-type">Clock</a>, reservoir<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reservoir_.reservoir.html" class="tsd-signature-type">Reservoir</a>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_timer_.timer.html" class="tsd-signature-type">Timer</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Timer<span class="tsd-signature-symbol">(</span>clock<span class="tsd-signature-symbol">: </span><a href="_clock_.clock.html" class="tsd-signature-type">Clock</a>, reservoir<span class="tsd-signature-symbol">: </span><a href="../interfaces/_reservoir_.reservoir.html" class="tsd-signature-type">Reservoir</a>, name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_timer_.timer.html" class="tsd-signature-type">Timer</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L114">timer.ts:114</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L116">timer.ts:116</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -199,6 +204,9 @@
 								<li>
 									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
 								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">string</span></h5>
+								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_timer_.timer.html" class="tsd-signature-type">Timer</a></h4>
 						</li>
@@ -213,7 +221,7 @@
 					<div class="tsd-signature tsd-kind-icon">clock<span class="tsd-signature-symbol">:</span> <a href="_clock_.clock.html" class="tsd-signature-type">Clock</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L98">timer.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L100">timer.ts:100</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -231,13 +239,37 @@
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+					<a name="description" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> description</h3>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#description">description</a></p>
+						<ul>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L110">metric.ts:110</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The description of this metric.</p>
+						</div>
+						<dl class="tsd-comment-tags">
+							<dt>type</dt>
+							<dd><p>{string}</p>
+							</dd>
+							<dt>memberof</dt>
+							<dd><p>BaseMetric</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 					<a name="group" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagProtected">Protected</span> group</h3>
 					<div class="tsd-signature tsd-kind-icon">group<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#group">group</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L78">metric.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L94">metric.ts:94</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -260,7 +292,7 @@
 					<div class="tsd-signature tsd-kind-icon">histogram<span class="tsd-signature-symbol">:</span> <a href="_histogram_.histogram.html" class="tsd-signature-type">Histogram</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L114">timer.ts:114</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L116">timer.ts:116</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -284,7 +316,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#id">id</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L62">metric.ts:62</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L78">metric.ts:78</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -307,7 +339,7 @@
 					<div class="tsd-signature tsd-kind-icon">meter<span class="tsd-signature-symbol">:</span> <a href="_meter_.meter.html" class="tsd-signature-type">Meter</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L106">timer.ts:106</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L108">timer.ts:108</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -331,7 +363,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#name">name</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L86">metric.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L102">metric.ts:102</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -355,7 +387,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tags">tags</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L70">metric.ts:70</a></li>
+							<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L86">metric.ts:86</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -385,7 +417,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L139">timer.ts:139</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L143">timer.ts:143</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -422,7 +454,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get15minuterate">get15MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L172">timer.ts:172</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L186">timer.ts:186</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -450,7 +482,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get1minuterate">get1MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L192">timer.ts:192</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L206">timer.ts:206</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -478,7 +510,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#get5minuterate">get5MinuteRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L182">timer.ts:182</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L196">timer.ts:196</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -506,7 +538,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getcount">getCount</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L162">timer.ts:162</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L166">timer.ts:166</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -524,6 +556,25 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="getdescription" class="tsd-anchor"></a>
+					<h3>get<wbr>Description</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Description<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getdescription">getDescription</a></p>
+								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getdescription">getDescription</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L120">metric.ts:120</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="getgroup" class="tsd-anchor"></a>
 					<h3>get<wbr>Group</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
@@ -535,7 +586,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getgroup">getGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getgroup">getGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L96">metric.ts:96</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L128">metric.ts:128</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -553,7 +604,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getmeanrate">getMeanRate</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L202">timer.ts:202</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L216">timer.ts:216</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -582,7 +633,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#getname">getName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#getname">getName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L88">metric.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L112">metric.ts:112</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -600,7 +651,7 @@
 							<aside class="tsd-sources">
 								<p>Implementation of <a href="../interfaces/_sampling_.sampling.html">Sampling</a>.<a href="../interfaces/_sampling_.sampling.html#getsnapshot">getSnapshot</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L152">timer.ts:152</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L156">timer.ts:156</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -617,6 +668,34 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsum" class="tsd-anchor"></a>
+					<h3>get<wbr>Sum</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Sum<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_int64_.int64wrapper.html" class="tsd-signature-type">Int64Wrapper</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_summarizing_.summarizing.html">Summarizing</a>.<a href="../interfaces/_summarizing_.summarizing.html#getsum">getSum</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L176">timer.ts:176</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Gets the sum from the embedded <a href="_histogram_.histogram.html">Histogram</a>.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Timer</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="_int64_.int64wrapper.html" class="tsd-signature-type">Int64Wrapper</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 					<a name="gettag" class="tsd-anchor"></a>
 					<h3>get<wbr>Tag</h3>
@@ -629,7 +708,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#gettag">getTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettag">getTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L108">metric.ts:108</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L140">metric.ts:140</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -654,7 +733,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#gettags">getTags</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#gettags">getTags</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L104">metric.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L136">metric.ts:136</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
@@ -671,7 +750,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L247">timer.ts:247</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L261">timer.ts:261</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -700,13 +779,38 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#removetag">removeTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#removetag">removeTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L116">metric.ts:116</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L148">metric.ts:148</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>name: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+					<a name="setdescription" class="tsd-anchor"></a>
+					<h3>set<wbr>Description</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Description<span class="tsd-signature-symbol">(</span>description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#setdescription">setDescription</a></p>
+								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setdescription">setDescription</a></p>
+								<ul>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L124">metric.ts:124</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>description: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
@@ -725,7 +829,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#setgroup">setGroup</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setgroup">setGroup</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L100">metric.ts:100</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L132">metric.ts:132</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -750,7 +854,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#setname">setName</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#setname">setName</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L92">metric.ts:92</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L116">metric.ts:116</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -775,7 +879,7 @@
 								<p>Implementation of <a href="../interfaces/_metered_.metered.html">Metered</a>.<a href="../interfaces/_metered_.metered.html#settag">setTag</a></p>
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#settag">setTag</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L112">metric.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L144">metric.ts:144</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -801,7 +905,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L213">timer.ts:213</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L227">timer.ts:227</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -847,7 +951,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L229">timer.ts:229</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/timer.ts#L243">timer.ts:243</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -894,7 +998,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from <a href="_metric_.basemetric.html">BaseMetric</a>.<a href="_metric_.basemetric.html#tostring">toString</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L120">metric.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric.ts#L152">metric.ts:152</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -908,75 +1012,6 @@
 				<ul>
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_clock_.html">"clock"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_counter_.html">"counter"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_counting_.html">"counting"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_gauge_.html">"gauge"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_groupable_.html">"groupable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_histogram_.html">"histogram"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_logger_.html">"logger"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_logger_reporter_.html">"logger-<wbr>reporter"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_meter_.html">"meter"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metered_.html">"metered"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metric_.html">"metric"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metric_registry_.html">"metric-<wbr>registry"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metric_registry_listener_.html">"metric-<wbr>registry-<wbr>listener"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metric_reporter_.html">"metric-<wbr>reporter"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_metric_set_.html">"metric-<wbr>set"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_moving_average_.html">"moving-<wbr>average"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_reservoir_.html">"reservoir"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_sampling_.html">"sampling"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_size_gauge_.html">"size-<wbr>gauge"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_snapshot_.html">"snapshot"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_taggable_.html">"taggable"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_time_unit_.html">"time-<wbr>unit"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_timer_.html">"timer"</a>
@@ -998,6 +1033,9 @@
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
 								<a href="_timer_.timer.html#clock" class="tsd-kind-icon">clock</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
+								<a href="_timer_.timer.html#description" class="tsd-kind-icon">description</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected">
 								<a href="_timer_.timer.html#group" class="tsd-kind-icon">group</a>
@@ -1033,6 +1071,9 @@
 								<a href="_timer_.timer.html#getcount" class="tsd-kind-icon">get<wbr>Count</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_timer_.timer.html#getdescription" class="tsd-kind-icon">get<wbr>Description</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_timer_.timer.html#getgroup" class="tsd-kind-icon">get<wbr>Group</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -1043,6 +1084,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_timer_.timer.html#getsnapshot" class="tsd-kind-icon">get<wbr>Snapshot</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_timer_.timer.html#getsum" class="tsd-kind-icon">get<wbr>Sum</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_timer_.timer.html#gettag" class="tsd-kind-icon">get<wbr>Tag</a>
@@ -1055,6 +1099,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_timer_.timer.html#removetag" class="tsd-kind-icon">remove<wbr>Tag</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
+								<a href="_timer_.timer.html#setdescription" class="tsd-kind-icon">set<wbr>Description</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited">
 								<a href="_timer_.timer.html#setgroup" class="tsd-kind-icon">set<wbr>Group</a>
