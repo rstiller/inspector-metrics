@@ -121,14 +121,17 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
      *
      * @param {string} name The name of the metric
      * @param collection The collection to get the size / length from.
+     * @param {string} [description] The description of the metric
      * @memberof SizeGauge
      */
     public constructor(
         name: string,
-        collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface) {
+        collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface,
+        description?: string) {
 
         super();
         this.setName(name);
+        this.setDescription(description);
 
         if (SizeGauge.isLengthAttributeInterface(collection)) {
             this.extractor = () => collection.length;
