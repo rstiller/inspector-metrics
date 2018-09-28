@@ -5,6 +5,7 @@ import { BaseMetric, Metric } from "./metric";
 import { Reservoir } from "./reservoir";
 import { Sampling } from "./sampling";
 import { Snapshot } from "./snapshot";
+import { Summarizing } from "./summarizing";
 
 /**
  * Represents the distribution of values - e.g. number of logged-in users, search result count.
@@ -16,7 +17,7 @@ import { Snapshot } from "./snapshot";
  * @implements {Metric}
  * @implements {Sampling}
  */
-export class Histogram extends BaseMetric implements Counting, Metric, Sampling {
+export class Histogram extends BaseMetric implements Counting, Metric, Sampling, Summarizing {
 
     /**
      * The value reservoir used to do sampling.
@@ -34,6 +35,14 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
      * @memberof Histogram
      */
     private count: number = 0;
+    /**
+     * Sum of all values.
+     *
+     * @private
+     * @type {number}
+     * @memberof Histogram
+     */
+    private sum: number = 0;
 
     /**
      * Creates an instance of Histogram.
@@ -58,6 +67,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
      */
     public update(value: number): void {
         this.count += 1;
+        this.sum += value;
         this.reservoir.update(value);
     }
 
@@ -79,6 +89,16 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
      */
     public getCount(): number {
         return this.count;
+    }
+
+    /**
+     * Gets the sum of all values.
+     *
+     * @returns {number}
+     * @memberof Histogram
+     */
+    public getSum(): number {
+        return this.sum;
     }
 
 }

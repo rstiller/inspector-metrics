@@ -8,6 +8,7 @@ import { BaseMetric } from "./metric";
 import { Reservoir } from "./reservoir";
 import { Sampling } from "./sampling";
 import { Snapshot } from "./snapshot";
+import { Summarizing } from "./summarizing";
 import { NANOSECOND, TimeUnit } from "./time-unit";
 
 /**
@@ -86,7 +87,7 @@ export class StopWatch {
  * @implements {Metered}
  * @implements {Sampling}
  */
-export class Timer extends BaseMetric implements Metered, Sampling {
+export class Timer extends BaseMetric implements Metered, Sampling, Summarizing {
 
     /**
      * Used to determine a duration.
@@ -163,6 +164,16 @@ export class Timer extends BaseMetric implements Metered, Sampling {
      */
     public getCount(): number {
         return this.histogram.getCount();
+    }
+
+    /**
+     * Gets the sum from the embedded {@link Histogram}.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public getSum(): number {
+        return this.histogram.getSum();
     }
 
     /**
