@@ -594,11 +594,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} [group=null]
+     * @param {string} [description=null]
      * @returns {Counter}
      * @memberof MetricRegistry
      */
-    public newCounter(name: string, group: string = null): Counter {
-        const counter = new Counter(name);
+    public newCounter(name: string, group: string = null, description: string = null): Counter {
+        const counter = new Counter(name, description);
         if (!!group) {
             counter.setGroup(group);
         }
@@ -614,6 +615,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @param {string} [group=null]
      * @param {Clock} [clock=this.defaultClock]
      * @param {number} [sampleRate=1]
+     * @param {string} [description=null]
      * @returns {Meter}
      * @memberof MetricRegistry
      */
@@ -621,9 +623,10 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         name: string,
         group: string = null,
         clock: Clock = this.defaultClock,
-        sampleRate: number = 1): Meter {
+        sampleRate: number = 1,
+        description: string = null): Meter {
 
-        const meter = new Meter(clock, sampleRate, name);
+        const meter = new Meter(clock, sampleRate, name, description);
         if (!!group) {
             meter.setGroup(group);
         }
@@ -637,15 +640,20 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} [group=null]
+     * @param {string} [description=null]
      * @param {Reservoir} [reservoir=null]
      * @returns {Histogram}
      * @memberof MetricRegistry
      */
-    public newHistogram(name: string, group: string = null, reservoir: Reservoir = null): Histogram {
+    public newHistogram(
+        name: string,
+        group: string = null,
+        reservoir: Reservoir = null,
+        description: string = null): Histogram {
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const histogram = new Histogram(reservoir, name);
+        const histogram = new Histogram(reservoir, name, description);
         if (!!group) {
             histogram.setGroup(group);
         }
@@ -659,6 +667,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} [group=null]
+     * @param {string} [description=null]
      * @param {Clock} [clock=this.defaultClock]
      * @param {Reservoir} [reservoir=null]
      * @returns {Timer}
@@ -668,12 +677,13 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         name: string,
         group: string = null,
         clock: Clock = this.defaultClock,
-        reservoir: Reservoir = null): Timer {
+        reservoir: Reservoir = null,
+        description: string = null): Timer {
 
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const timer = new Timer(clock, reservoir, name);
+        const timer = new Timer(clock, reservoir, name, description);
         if (!!group) {
             timer.setGroup(group);
         }
@@ -692,9 +702,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @memberof MetricRegistry
      */
-    public registerMetric(metric: Metric, group: string = null): void {
+    public registerMetric(metric: Metric, group: string = null, description: string = null): void {
         if (!!group) {
             metric.setGroup(group);
+        }
+        if (!!description) {
+            metric.setDescription(description);
         }
 
         if (metric instanceof Meter ||
@@ -721,9 +734,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @deprecated since version 1.5 - use {@link registerMetric} instead
      * @memberof MetricRegistry
      */
-    public register(name: string, metric: Metric, group: string = null): void {
+    public register(name: string, metric: Metric, group: string = null, description: string = null): void {
         if (!!group) {
             metric.setGroup(group);
+        }
+        if (!!description) {
+            metric.setDescription(description);
         }
 
         metric.setName(this.generateName(name, metric));

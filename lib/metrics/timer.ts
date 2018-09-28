@@ -119,12 +119,14 @@ export class Timer extends BaseMetric implements Metered, Sampling {
      * @param {Clock} clock
      * @param {Reservoir} reservoir
      * @param {string} [name]
+     * @param {string} [description]
      * @memberof Timer
      */
-    public constructor(clock: Clock, reservoir: Reservoir, name?: string) {
+    public constructor(clock: Clock, reservoir: Reservoir, name?: string, description?: string) {
         super();
         this.clock = clock;
         this.name = name;
+        this.description = description;
         this.meter = new Meter(clock, 1, name);
         this.histogram = new Histogram(reservoir, name);
     }
