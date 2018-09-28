@@ -1,3 +1,4 @@
+// tslint:disable:no-unused-expression
 import "reflect-metadata";
 import "source-map-support/register";
 
@@ -13,6 +14,21 @@ const expect = chai.expect;
 export class MeterTest {
 
     private clock: MockedClock = new MockedClock();
+
+    @test
+    public "check name and description"(): void {
+        let meter: Meter = new Meter(this.clock, 1);
+        expect(meter.getName()).to.be.undefined;
+        expect(meter.getDescription()).to.be.undefined;
+
+        meter = new Meter(this.clock, 1, "meter-name");
+        expect(meter.getName()).to.equal("meter-name");
+        expect(meter.getDescription()).to.be.undefined;
+
+        meter = new Meter(this.clock, 1, "meter-name", "meter-description");
+        expect(meter.getName()).to.equal("meter-name");
+        expect(meter.getDescription()).to.equal("meter-description");
+    }
 
     @test
     public "single mark and check rates with no tick"(): void {

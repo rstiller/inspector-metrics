@@ -29,6 +29,22 @@ export interface Metric extends Groupable, Taggable {
      */
     setName(name: string): void;
 
+    /**
+     * Gets the description of the metric.
+     *
+     * @returns {string}
+     * @memberof Metric
+     */
+    getDescription(): string;
+
+    /**
+     * Sets the description of the metric.
+     *
+     * @param {string} description
+     * @memberof Metric
+     */
+    setDescription(description: string): void;
+
 }
 
 /**
@@ -84,6 +100,14 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     protected name: string;
+    /**
+     * The description of this metric.
+     *
+     * @protected
+     * @type {string}
+     * @memberof BaseMetric
+     */
+    protected description: string;
 
     public getName(): string {
         return this.name;
@@ -91,6 +115,14 @@ export abstract class BaseMetric implements Metric {
 
     public setName(name: string): void {
         this.name = name;
+    }
+
+    public getDescription(): string {
+        return this.description;
+    }
+
+    public setDescription(description: string): void {
+        this.description = description;
     }
 
     public getGroup(): string {

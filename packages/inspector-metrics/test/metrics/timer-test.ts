@@ -20,6 +20,21 @@ export class TimerTest {
     private clock: MockedClock = new MockedClock();
 
     @test
+    public "check name and description"(): void {
+        let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3));
+        expect(timer.getName()).to.be.undefined;
+        expect(timer.getDescription()).to.be.undefined;
+
+        timer = new Timer(this.clock, new SlidingWindowReservoir(3), "timer-name");
+        expect(timer.getName()).to.equal("timer-name");
+        expect(timer.getDescription()).to.be.undefined;
+
+        timer = new Timer(this.clock, new SlidingWindowReservoir(3), "timer-name", "timer-description");
+        expect(timer.getName()).to.equal("timer-name");
+        expect(timer.getDescription()).to.equal("timer-description");
+    }
+
+    @test
     public "negative duration"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,

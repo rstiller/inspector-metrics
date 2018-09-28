@@ -15,6 +15,21 @@ const expect = chai.expect;
 export class HistogramTest {
 
     @test
+    public "check name and description"(): void {
+        let histogram: Histogram = new Histogram(new DefaultReservoir(1024));
+        expect(histogram.getName()).to.be.undefined;
+        expect(histogram.getDescription()).to.be.undefined;
+
+        histogram = new Histogram(new DefaultReservoir(1024), "histogram-name");
+        expect(histogram.getName()).to.equal("histogram-name");
+        expect(histogram.getDescription()).to.be.undefined;
+
+        histogram = new Histogram(new DefaultReservoir(1024), "histogram-name", "histogram-description");
+        expect(histogram.getName()).to.equal("histogram-name");
+        expect(histogram.getDescription()).to.equal("histogram-description");
+    }
+
+    @test
     public "simple count and get"(): void {
         const histogram: Histogram = new Histogram(new DefaultReservoir(1024));
         expect(histogram.getCount()).to.equal(0);

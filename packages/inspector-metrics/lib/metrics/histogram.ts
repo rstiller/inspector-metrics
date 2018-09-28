@@ -40,12 +40,14 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling 
      *
      * @param {Reservoir} reservoir the number reservoir used
      * @param {string} [name] an optional metric name
+     * @param {string} [description] an optional metric description
      * @memberof Histogram
      */
-    public constructor(reservoir: Reservoir, name?: string) {
+    public constructor(reservoir: Reservoir, name?: string, description?: string) {
         super();
-        this.name = name;
         this.reservoir = reservoir;
+        this.name = name;
+        this.description = description;
     }
 
     /**

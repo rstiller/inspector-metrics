@@ -128,11 +128,13 @@ export class Meter extends BaseMetric implements Metered {
      * @param {Clock} clock Clock to determine update events.
      * @param {number} sampleRate number of samples per seconds.
      * @param {string} [name] optional metric name.
+     * @param {string} [description] optional metric description.
      * @memberof Meter
      */
-    public constructor(clock: Clock, sampleRate: number, name?: string) {
+    public constructor(clock: Clock, sampleRate: number, name?: string, description?: string) {
         super();
         this.name = name;
+        this.description = description;
         this.clock = clock;
         this.startTime = clock.time();
         this.lastTime = this.startTime;

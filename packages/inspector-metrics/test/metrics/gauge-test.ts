@@ -1,3 +1,4 @@
+// tslint:disable:no-unused-expression
 import "reflect-metadata";
 import "source-map-support/register";
 
@@ -10,6 +11,21 @@ const expect = chai.expect;
 
 @suite
 export class SimpleGaugeTest {
+
+    @test
+    public "check name and description"(): void {
+        let gauge: SimpleGauge = new SimpleGauge();
+        expect(gauge.getName()).to.be.undefined;
+        expect(gauge.getDescription()).to.be.undefined;
+
+        gauge = new SimpleGauge("gauge-name");
+        expect(gauge.getName()).to.equal("gauge-name");
+        expect(gauge.getDescription()).to.be.undefined;
+
+        gauge = new SimpleGauge("gauge-name", "gauge-description");
+        expect(gauge.getName()).to.equal("gauge-name");
+        expect(gauge.getDescription()).to.equal("gauge-description");
+    }
 
     @test
     public "check set and get value"(): void {

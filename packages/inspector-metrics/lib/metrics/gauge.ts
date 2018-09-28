@@ -45,11 +45,13 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
      * Creates an instance of SimpleGauge with an optional name.
      *
      * @param {string} [name] optional metric name.
+     * @param {string} [description] optional metric description.
      * @memberof SimpleGauge
      */
-    public constructor(name?: string) {
+    public constructor(name?: string, description?: string) {
         super();
         this.name = name;
+        this.description = description;
     }
 
     /**
