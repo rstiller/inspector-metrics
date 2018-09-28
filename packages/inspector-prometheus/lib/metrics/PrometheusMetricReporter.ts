@@ -5,7 +5,6 @@ import {
     Counter,
     Gauge,
     Histogram,
-    Logger,
     Meter,
     Metric,
     MetricRegistry,
@@ -15,7 +14,6 @@ import {
     StdClock,
     Taggable,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 interface MetricEntry {
@@ -24,9 +22,10 @@ interface MetricEntry {
 }
 
 /**
- * Metric reporter for both prometheus and pushgateway.
+ * Metric reporter for prometheus.
  *
- * @see https://prometheus.io/docs/concepts/data_model
+ * @see https://prometheus.io/docs/concepts/
+ * @see https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format
  * @export
  * @class PrometheusMetricReporter
  * @extends {MetricReporter}
@@ -35,36 +34,21 @@ export class PrometheusMetricReporter extends MetricReporter {
 
     private includeTimestamp: boolean;
     private clock: Clock;
-    private timer: NodeJS.Timer;
-    private interval: number;
     private minReportingTimeout: number;
-    private unit: TimeUnit;
     private tags: Map<string, string>;
-    // private logMetadata: any;
-    private log: Logger = console;
     private metricStates: Map<number, MetricEntry> = new Map();
 
     public constructor(
         includeTimestamp: boolean = false,
-        interval: number = 5000,
-        unit: TimeUnit = MILLISECOND,
         tags: Map<string, string> = new Map(),
         clock: Clock = new StdClock(),
         minReportingTimeout = 1) {
         super();
 
         this.includeTimestamp = includeTimestamp;
-        this.interval = interval;
-        this.unit = unit;
         this.tags = tags;
         this.clock = clock;
         this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
-
-        // this.logMetadata = {
-        //     interval,
-        //     tags,
-        //     unit,
-        // };
     }
 
     public getTags(): Map<string, string> {
@@ -73,14 +57,6 @@ export class PrometheusMetricReporter extends MetricReporter {
 
     public setTags(tags: Map<string, string>): void {
         this.tags = tags;
-    }
-
-    public getLog(): Logger {
-        return this.log;
-    }
-
-    public setLog(log: Logger): void {
-        this.log = log;
     }
 
     public getMetricsString(): string {
@@ -93,18 +69,9 @@ export class PrometheusMetricReporter extends MetricReporter {
     }
 
     public start(): void {
-        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = setInterval(() => this.report(), interval);
     }
 
     public stop(): void {
-        this.timer.unref();
-    }
-
-    private async report() {
-        if (this.metricRegistries && this.metricRegistries.length > 0) {
-            this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
-        }
     }
 
     private reportMetricRegistry(r: MetricRegistry): string {
