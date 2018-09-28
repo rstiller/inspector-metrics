@@ -170,7 +170,7 @@ export class Timer extends BaseMetric implements Metered, Sampling, Summarizing 
     /**
      * Gets the sum from the embedded {@link Histogram}.
      *
-     * @returns {number}
+     * @returns {Int64Wrapper}
      * @memberof Timer
      */
     public getSum(): Int64Wrapper {

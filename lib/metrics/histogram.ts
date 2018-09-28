@@ -95,7 +95,7 @@ export class Histogram extends BaseMetric implements Counting, Metric, Sampling,
     /**
      * Gets the sum of all values.
      *
-     * @returns {number}
+     * @returns {Int64Wrapper}
      * @memberof Histogram
      */
     public getSum(): Int64Wrapper {
