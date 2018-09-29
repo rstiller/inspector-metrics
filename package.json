@@ -64,7 +64,7 @@
     "coverage": "nyc npm run test",
     "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
-    "publishDocs": "git subtree push --squash --prefix docs origin gh-pages",
+    "publishDocs": "cd docs && git add --all . && git commit -m 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
     "precompodoc": "npm run coverage",
     "prepublishDocs": "npm run compodoc",
     "prepublishOnly": "npm run build",
