@@ -24,6 +24,42 @@ interface MetricEntry {
 
 type MetricType = "counter" | "gauge" | "histogram" | "summary" | "untyped";
 
+export class Buckets {
+
+    public static linear(start: number, bucketWidth: number, count: number) {
+        const buckets = new Buckets();
+        buckets.boundaries = new Array(count);
+        for (let i = 0; i < count; i++) {
+            buckets.boundaries[i] = start;
+            start += bucketWidth;
+        }
+        return buckets;
+    }
+
+    public static exponential(initial: number, factor: number, count: number) {
+        const buckets = new Buckets();
+        buckets.boundaries = new Array(count);
+        for (let i = 0; i < count; i++) {
+            buckets.boundaries[i] = initial;
+            initial *= factor;
+        }
+        return buckets;
+    }
+
+    constructor(
+        public boundaries: number[] = [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
+    ) {}
+
+}
+
+export class Percentiles {
+
+    constructor(
+        public boundaries: number[] = [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999],
+    ) {}
+
+}
+
 export class Options {
     constructor(
         public includeTimestamp: boolean = false,
