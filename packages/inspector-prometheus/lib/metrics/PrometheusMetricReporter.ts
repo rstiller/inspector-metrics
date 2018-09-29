@@ -21,6 +21,14 @@ interface MetricEntry {
     lastValue: number;
 }
 
+export class Options {
+    constructor(
+        public includeTimestamp: boolean = false,
+        public emitComments: boolean = true,
+        public useUntyped: boolean = false,
+    ) {}
+}
+
 /**
  * Metric reporter for prometheus.
  *
@@ -32,23 +40,34 @@ interface MetricEntry {
  */
 export class PrometheusMetricReporter extends MetricReporter {
 
-    private includeTimestamp: boolean;
+    private options: Options;
     private clock: Clock;
     private minReportingTimeout: number;
     private tags: Map<string, string>;
     private metricStates: Map<number, MetricEntry> = new Map();
+    private counterType: string = "counter";
+    private gaugeType: string = "gauge";
+    private histogramType: string = "histogram";
+    private summaryType: string = "summary";
 
     public constructor(
-        includeTimestamp: boolean = false,
+        options: Options = new Options(),
         tags: Map<string, string> = new Map(),
         clock: Clock = new StdClock(),
         minReportingTimeout = 1) {
         super();
 
-        this.includeTimestamp = includeTimestamp;
+        this.options = options;
         this.tags = tags;
         this.clock = clock;
         this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+
+        if (options.useUntyped) {
+            this.counterType = "untyped";
+            this.gaugeType = "untyped";
+            this.histogramType = "untyped";
+            this.summaryType = "untyped";
+        }
     }
 
     public getTags(): Map<string, string> {
@@ -115,6 +134,7 @@ export class PrometheusMetricReporter extends MetricReporter {
     private getMetricString<T extends Metric>(
         now: Date,
         metric: T,
+        metricType: string,
         canReport: (metric: T) => boolean,
         getValues: (metric: T) => { [key: string]: number; },
         ): string {
@@ -127,7 +147,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         const values = getValues(metric);
         let timestamp = "";
 
-        if (this.includeTimestamp) {
+        if (this.options.includeTimestamp) {
             timestamp = ` ${now.getUTCMilliseconds()}`;
         }
 
@@ -141,7 +161,7 @@ export class PrometheusMetricReporter extends MetricReporter {
             .keys(values)
             .map((field) =>
                 `# HELP ${metricName}_${field} ${metricName}_${field} description\n` +
-                `# TYPE ${metricName}_${field} untyped\n` +
+                `# TYPE ${metricName}_${field} ${metricType}\n` +
                 `${metricName}_${field}{${tagStr}} ${values[field]}${timestamp}\n`)
             .join("");
     }
@@ -150,9 +170,10 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             counter,
+            this.counterType,
             (metric) => !isNaN(counter.getCount()),
             (metric) => ({
-                count: counter.getCount() || 0,
+                total: counter.getCount() || 0,
             }));
     }
 
@@ -160,6 +181,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             gauge,
+            this.gaugeType,
             (metric) => !isNaN(gauge.getValue()),
             (metric) => ({
                 value: gauge.getValue(),
@@ -170,6 +192,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             histogram,
+            this.histogramType,
             (metric) => !isNaN(histogram.getCount()),
             (metric) => {
                 const snapshot = histogram.getSnapshot();
@@ -192,6 +215,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             meter,
+            this.histogramType,
             (metric) => !isNaN(meter.getCount()),
             (metric) => {
                 return {
@@ -208,6 +232,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             timer,
+            this.summaryType,
             (metric) => !isNaN(timer.getCount()),
             (metric) => {
                 const snapshot = timer.getSnapshot();

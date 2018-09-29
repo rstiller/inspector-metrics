@@ -39,27 +39,27 @@ export class ReporterTest {
 
         expect(this.reporter.getMetricsString()).to.be
             .equal(
-                "# HELP test_counter_count test_counter_count description\n" +
-                "# TYPE test_counter_count untyped\n" +
-                "test_counter_count{} 0\n",
+                "# HELP test_counter_total test_counter_total description\n" +
+                "# TYPE test_counter_total counter\n" +
+                "test_counter_total{} 0\n",
             );
 
         counter.increment(1);
 
         expect(this.reporter.getMetricsString()).to.be
             .equal(
-                "# HELP test_counter_count test_counter_count description\n" +
-                "# TYPE test_counter_count untyped\n" +
-                "test_counter_count{} 1\n",
+                "# HELP test_counter_total test_counter_total description\n" +
+                "# TYPE test_counter_total counter\n" +
+                "test_counter_total{} 1\n",
             );
 
         counter.decrement(2);
 
         expect(this.reporter.getMetricsString()).to.be
             .equal(
-                "# HELP test_counter_count test_counter_count description\n" +
-                "# TYPE test_counter_count untyped\n" +
-                "test_counter_count{} -1\n",
+                "# HELP test_counter_total test_counter_total description\n" +
+                "# TYPE test_counter_total counter\n" +
+                "test_counter_total{} -1\n",
             );
     }
 
