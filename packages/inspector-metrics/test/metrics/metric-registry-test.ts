@@ -42,6 +42,27 @@ export class MetricRegistryTest {
     }
 
     @test
+    public "check monotone and non-monotone counters"(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        expect(registry.getCounterList()).to.have.lengthOf(0);
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(0);
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+
+        registry.newCounter("counter1");
+
+        expect(registry.getCounterList()).to.have.lengthOf(1);
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(0);
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+
+        registry.newMonotoneCounter("monotone-counter1");
+
+        expect(registry.getCounterList()).to.have.lengthOf(1);
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(1);
+        expect(registry.getMetrics()).to.satisfy(mapSize(2));
+    }
+
+    @test
     public "add, set, remove and check counters"(): void {
         const registry: MetricRegistry = new MetricRegistry();
 

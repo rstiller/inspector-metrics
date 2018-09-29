@@ -90,7 +90,7 @@ export class MetricRegistration<T extends Metric> {
 export class MetricRegistry extends BaseMetric implements MetricSet {
 
     /**
-     * Determines if the specified object is a {@link Counter} or a reference one.
+     * Determines if the specified object is a {@link Counter} or references one.
      *
      * @static
      * @param {*} instance
@@ -102,7 +102,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Determines if the specified object is a {@link MonotoneCounter} or a reference one.
+     * Determines if the specified object is a {@link MonotoneCounter} or {@link Counter} or references one of them.
      *
      * @static
      * @param {*} instance
@@ -114,7 +114,20 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Determines if the specified object is a {@link Histogram} or a reference one.
+     * Determines if the specified object is a {@link MonotoneCounter} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public static isPureMonotoneCounter(instance: any): instance is MonotoneCounter {
+        return (instance instanceof MonotoneCounter || instance.metricRef instanceof MonotoneCounter) &&
+                !MetricRegistry.isCounter(instance);
+    }
+
+    /**
+     * Determines if the specified object is a {@link Histogram} or references one.
      *
      * @static
      * @param {*} instance
@@ -126,7 +139,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Determines if the specified object is a {@link Meter} or a reference one.
+     * Determines if the specified object is a {@link Meter} or references one.
      *
      * @static
      * @param {*} instance
@@ -138,7 +151,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Determines if the specified object is a {@link Timer} or a reference one.
+     * Determines if the specified object is a {@link Timer} or references one.
      *
      * @static
      * @param {*} instance
@@ -150,7 +163,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Determines if the specified object is a {@link Gauge} or a reference one.
+     * Determines if the specified object is a {@link Gauge} or references one.
      *
      * @static
      * @template T
@@ -357,7 +370,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public getMonotoneCounterList(): MonotoneCounter[] {
         return this.metrics
-            .filter(MetricRegistry.isMonotoneCounter)
+            .filter(MetricRegistry.isPureMonotoneCounter)
             .map((registration) => registration.metricRef as MonotoneCounter);
     }
 

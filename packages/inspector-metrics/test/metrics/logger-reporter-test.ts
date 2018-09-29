@@ -124,13 +124,13 @@ export class LoggerReporterTest {
 
         expect(this.loggerSpy.callCount).to.equal(2);
         let logMetadata = this.loggerSpy.getCall(0).args[1];
-        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement).to.equal("monotone-counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
         expect(logMetadata.tags).to.not.be.null;
 
         logMetadata = this.loggerSpy.getCall(1).args[1];
-        expect(logMetadata.measurement).to.equal("monotone-counter1");
+        expect(logMetadata.measurement).to.equal("counter1");
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
         expect(logMetadata.tags).to.not.be.null;
