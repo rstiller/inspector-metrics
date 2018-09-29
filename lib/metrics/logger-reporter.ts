@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
-import { MonotoneCounter } from "./counter";
+import { Counter, MonotoneCounter } from "./counter";
 import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Logger } from "./logger";
@@ -205,15 +205,28 @@ export class LoggerReporter extends MetricReporter {
      * @memberof LoggerReporter
      */
     private reportCounters(registry: MetricRegistry, date: Date): void {
-        const counters = registry.getMonotoneCounterList();
+        let counters = registry.getMonotoneCounterList();
+        const logMetadata = Object.assign({}, this.logMetadata, {
+            measurement: "",
+            measurement_type: "counter",
+            timestamp: date,
+        });
 
         if (!!counters) {
-            const logMetadata = Object.assign({}, this.logMetadata, {
-                measurement: "",
-                measurement_type: "counter",
-                timestamp: date,
-            });
             counters.forEach((counter: MonotoneCounter) => {
+                if (!isNaN(counter.getCount())) {
+                    const name = counter.getName();
+                    logMetadata.measurement = name;
+                    logMetadata.group = counter.getGroup();
+                    logMetadata.tags = this.buildTags(registry, counter);
+                    this.log.info(`${date} - counter ${name}: ${counter.getCount()}`, Object.assign({}, logMetadata));
+                }
+            });
+        }
+
+        counters = registry.getCounterList();
+        if (!!counters) {
+            counters.forEach((counter: Counter) => {
                 if (!isNaN(counter.getCount())) {
                     const name = counter.getName();
                     logMetadata.measurement = name;
