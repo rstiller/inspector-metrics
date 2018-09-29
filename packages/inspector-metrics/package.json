@@ -25,6 +25,7 @@
     "npm": ">= 3"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.5",
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.4",
     "@types/node": "^10.5.2",
@@ -41,7 +42,6 @@
     "sinon-chai": "^3.2.0",
     "ts-node": "^7.0.0",
     "tslint": "^5.10.0",
-    "typedoc": "^0.11.1",
     "typescript": "^2.9.2"
   },
   "dependencies": {
@@ -57,15 +57,16 @@
     "tslint.json"
   ],
   "scripts": {
-    "check:lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
-    "check:coverage": "nyc npm run test:jenkins",
-    "check:deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+    "build": "npm run clean && npm run lint && npm run compile && npm run compodoc",
     "clean": "rimraf build coverage docs",
-    "docs:prepare": "git subtree add --prefix docs/ origin gh-pages",
-    "docs:generate": "typedoc --ignoreCompilerErrors --out ./docs --mode modules --gitRevision master --target ES5 --module none ./lib",
-    "docs:publish": "git subtree push --prefix docs/ origin gh-pages",
     "compile": "tsc -p .",
-    "build": "npm run clean && npm run compile && npm run docs:generate",
+    "compodoc": "compodoc lib -p tsconfig.json --output docs --disableGraph --unitTestCoverage ./coverage/coverage-summary.json",
+    "coverage": "nyc npm run test",
+    "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+    "lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",
+    "publishDocs": "git subtree push --squash --prefix docs origin gh-pages",
+    "precompodoc": "npm run coverage",
+    "prepublishDocs": "npm run compodoc",
     "prepublishOnly": "npm run build",
     "test": "mocha --opts mocha.opts"
   },
@@ -82,9 +83,7 @@
     ],
     "require": [],
     "reporter": [
-      "json",
-      "html",
-      "cobertura"
+      "json-summary"
     ],
     "all": true
   }
