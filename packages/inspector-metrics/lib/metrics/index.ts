@@ -7,6 +7,7 @@ export * from "./histogram";
 export * from "./int64";
 export * from "./logger-reporter";
 export * from "./logger";
+export * from "./metadata-container";
 export * from "./meter";
 export * from "./metered";
 export * from "./metric-registry";

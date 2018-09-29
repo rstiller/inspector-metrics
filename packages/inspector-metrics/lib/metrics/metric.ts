@@ -1,6 +1,7 @@
 import "source-map-support/register";
 
 import { Groupable } from "./groupable";
+import { MetadataContainer } from "./metadata-container";
 import { Taggable } from "./taggable";
 
 /**
@@ -11,7 +12,7 @@ import { Taggable } from "./taggable";
  * @extends {Groupable}
  * @extends {Taggable}
  */
-export interface Metric extends Groupable, Taggable {
+export interface Metric extends Groupable, MetadataContainer, Taggable {
 
     /**
      * Gets the name of the metric.
@@ -108,6 +109,32 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     protected description: string;
+    /**
+     * The metadata associated with an instance of class.
+     *
+     * @protected
+     * @type {Map<string, any>}
+     * @memberof BaseMetric
+     */
+    protected metadata: Map<string, any> = new Map();
+
+    public getMetadataMap(): Map<string, any> {
+        return this.metadata;
+    }
+
+    public getMetadata<T>(name: string): T {
+        return this.metadata.get(name) as T;
+    }
+
+    public removeMetadata<T>(name: string): T {
+        const value = this.metadata.get(name) as T;
+        this.metadata.delete(name);
+        return value;
+    }
+
+    public setMetadata<T>(name: string, value: T): void {
+        this.metadata.set(name, value);
+    }
 
     public getName(): string {
         return this.name;
