@@ -9,7 +9,7 @@ import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import { StdClock } from "../../lib/metrics/clock";
-import { Counter } from "../../lib/metrics/counter";
+import { Counter, MonotoneCounter } from "../../lib/metrics/counter";
 import { SimpleGauge } from "../../lib/metrics/gauge";
 import { Histogram } from "../../lib/metrics/histogram";
 import { Meter } from "../../lib/metrics/meter";
@@ -77,6 +77,53 @@ export class MetricRegistryTest {
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
         expect(registry.getCounter("counter1")).to.not.exist;
         expect(registry.getMetric("counter1")).to.not.exist;
+    }
+
+    @test
+    public "add, set, remove and check monotone counters"(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        expect(registry.getCounterList()).to.have.lengthOf(0);
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(0);
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+
+        const counter = registry.newMonotoneCounter("monotone-counter1");
+        expect(counter).to.be.not.null;
+        expect(counter).to.be.instanceof(MonotoneCounter);
+
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(1);
+        expect(registry.getCounterList()).to.have.lengthOf(0);
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+        expect(registry.getCounter("monotone-counter1")).to.be.equal(counter);
+        expect(registry.getMonotoneCountersByName("monotone-counter1")[0]).to.be.equal(counter);
+        expect(registry.getMetric("monotone-counter1")).to.be.equal(counter);
+
+        registry.removeCounter("monotone-counter1");
+
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(0);
+        expect(registry.getCounters()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+        expect(registry.getCounter("monotone-counter1")).to.not.exist;
+        expect(registry.getMonotoneCountersByName("monotone-counter1")).to.have.lengthOf(0);
+        expect(registry.getMetric("monotone-counter1")).to.not.exist;
+
+        registry.register("monotone-counter1", counter);
+
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(1);
+        expect(registry.getCounters()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+        expect(registry.getMonotoneCountersByName("monotone-counter1")[0]).to.be.equal(counter);
+        expect(registry.getCounter("monotone-counter1")).to.be.equal(counter);
+        expect(registry.getMetric("monotone-counter1")).to.be.equal(counter);
+
+        registry.removeMetric("monotone-counter1");
+
+        expect(registry.getMonotoneCounterList()).to.have.lengthOf(0);
+        expect(registry.getCounters()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+        expect(registry.getMonotoneCountersByName("monotone-counter1")).to.have.lengthOf(0);
+        expect(registry.getCounter("monotone-counter1")).to.not.exist;
+        expect(registry.getMetric("monotone-counter1")).to.not.exist;
     }
 
     @test
