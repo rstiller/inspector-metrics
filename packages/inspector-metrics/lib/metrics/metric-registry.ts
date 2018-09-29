@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
-import { Counter } from "./counter";
+import { Counter, MonotoneCounter } from "./counter";
 import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
@@ -99,6 +99,18 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public static isCounter(instance: any): instance is Counter {
         return instance instanceof Counter || instance.metricRef instanceof Counter;
+    }
+
+    /**
+     * Determines if the specified object is a {@link MonotoneCounter} or a reference one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public static isMonotoneCounter(instance: any): instance is MonotoneCounter {
+        return instance instanceof MonotoneCounter || instance.metricRef instanceof MonotoneCounter;
     }
 
     /**
@@ -338,6 +350,18 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
+     * Gets the list of all managed monotone counter instances.
+     *
+     * @returns {MonotoneCounter[]}
+     * @memberof MetricRegistry
+     */
+    public getMonotoneCounterList(): MonotoneCounter[] {
+        return this.metrics
+            .filter(MetricRegistry.isMonotoneCounter)
+            .map((registration) => registration.metricRef as MonotoneCounter);
+    }
+
+    /**
      * Gets the list of all managed gauge instances.
      *
      * @returns {Array<Gauge<any>>}
@@ -470,6 +494,17 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public getCountersByName(name: string): Counter[] {
         return this.getByName<Counter>(name);
+    }
+
+    /**
+     * Gets all managed monotone counter instances by name.
+     *
+     * @param {string} name
+     * @returns {MonotoneCounter[]}
+     * @memberof MetricRegistry
+     */
+    public getMonotoneCountersByName(name: string): MonotoneCounter[] {
+        return this.getByName<MonotoneCounter>(name);
     }
 
     /**
@@ -608,6 +643,25 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
+     * Builds a new monotone counter with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group=null]
+     * @param {string} [description=null]
+     * @returns {MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public newMonotoneCounter(name: string, group: string = null, description: string = null): MonotoneCounter {
+        const counter = new MonotoneCounter(name, description);
+        if (!!group) {
+            counter.setGroup(group);
+        }
+        this.register(counter.getName(), counter);
+        return counter;
+    }
+
+    /**
      * Builds a new meter with the given name and adds it
      * to the registry.
      *
@@ -712,6 +766,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
 
         if (metric instanceof Meter ||
             metric instanceof Counter ||
+            metric instanceof MonotoneCounter ||
             MetricRegistry.isGauge<any>(metric) ||
             metric instanceof Histogram ||
             metric instanceof Timer) {
@@ -746,6 +801,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
 
         if (metric instanceof Meter ||
             metric instanceof Counter ||
+            metric instanceof MonotoneCounter ||
             MetricRegistry.isGauge<any>(metric) ||
             metric instanceof Histogram ||
             metric instanceof Timer) {

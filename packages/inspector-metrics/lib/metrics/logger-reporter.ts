@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
-import { Counter } from "./counter";
+import { MonotoneCounter } from "./counter";
 import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Logger } from "./logger";
@@ -190,9 +190,9 @@ export class LoggerReporter extends MetricReporter {
     }
 
     /**
-     * Reports the given {@link Counter} at 'info' level using the
+     * Reports the given {@link Counter} and {@link MonotoneCounter} at 'info' level using the
      * {@link LoggerReporter#log} instance if the value of
-     * {@link Counter#getCount()} is a valid number.
+     * {@link Counter#getCount()} or {@link MonotoneCounter#getCount()} is a valid number.
      *
      * Reported fields:
      * - count
@@ -205,20 +205,21 @@ export class LoggerReporter extends MetricReporter {
      * @memberof LoggerReporter
      */
     private reportCounters(registry: MetricRegistry, date: Date): void {
-        const counters = registry.getCounterList();
+        const counters = registry.getMonotoneCounterList();
+
         if (!!counters) {
             const logMetadata = Object.assign({}, this.logMetadata, {
                 measurement: "",
                 measurement_type: "counter",
                 timestamp: date,
             });
-            counters.forEach((counter: Counter) => {
+            counters.forEach((counter: MonotoneCounter) => {
                 if (!isNaN(counter.getCount())) {
                     const name = counter.getName();
                     logMetadata.measurement = name;
                     logMetadata.group = counter.getGroup();
                     logMetadata.tags = this.buildTags(registry, counter);
-                    this.log.info(`${date} - counter ${name}: ${counter.getCount()}`, logMetadata);
+                    this.log.info(`${date} - counter ${name}: ${counter.getCount()}`, Object.assign({}, logMetadata));
                 }
             });
         }
@@ -253,7 +254,7 @@ export class LoggerReporter extends MetricReporter {
                     logMetadata.measurement = name;
                     logMetadata.group = gauge.getGroup();
                     logMetadata.tags = this.buildTags(registry, gauge);
-                    this.log.info(`${date} - gauge ${name}: ${gauge.getValue()}`, logMetadata);
+                    this.log.info(`${date} - gauge ${name}: ${gauge.getValue()}`, Object.assign({}, logMetadata));
                 }
             });
         }
@@ -312,7 +313,7 @@ export class LoggerReporter extends MetricReporter {
                                     \n\tp99: ${this.getNumber(snapshot.get99thPercentile())}\
                                     \n\tp999: ${this.getNumber(snapshot.get999thPercentile())}\
                                     \n\tstddev: ${this.getNumber(snapshot.getStdDev())}`,
-                                    logMetadata);
+                                    Object.assign({}, logMetadata));
                 }
             });
         }
@@ -358,7 +359,7 @@ export class LoggerReporter extends MetricReporter {
                                     \n\tm5_rate: ${this.getNumber(meter.get5MinuteRate())}\
                                     \n\tm1_rate: ${this.getNumber(meter.get1MinuteRate())}\
                                     \n\tmean_rate: ${this.getNumber(meter.getMeanRate())}`,
-                                    logMetadata);
+                                    Object.assign({}, logMetadata));
                 }
             });
         }
@@ -425,7 +426,7 @@ export class LoggerReporter extends MetricReporter {
                                     \n\tp99: ${this.getNumber(snapshot.get99thPercentile())}\
                                     \n\tp999: ${this.getNumber(snapshot.get999thPercentile())}\
                                     \n\tstddev: ${this.getNumber(snapshot.getStdDev())}`,
-                                    logMetadata);
+                                    Object.assign({}, logMetadata));
                 }
             });
         }

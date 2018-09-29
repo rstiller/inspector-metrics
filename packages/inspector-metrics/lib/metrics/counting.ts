@@ -3,7 +3,7 @@ import "source-map-support/register";
 import { Metric } from "./metric";
 
 /**
- * Represents everything that is countable ({@link Counter}, {@link Histogram}).
+ * Represents everything that is countable ({@link Counter}, {@link MonotoneCounter}, {@link Histogram}).
  *
  * @export
  * @interface Counting
