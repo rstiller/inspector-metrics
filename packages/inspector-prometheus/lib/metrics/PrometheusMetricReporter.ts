@@ -11,6 +11,7 @@ import {
     MetricReporter,
     MILLISECOND,
     MINUTE,
+    MonotoneCounter,
     StdClock,
     Taggable,
     Timer,
@@ -20,6 +21,8 @@ interface MetricEntry {
     lastReport: number;
     lastValue: number;
 }
+
+type MetricType = "counter" | "gauge" | "histogram" | "summary" | "untyped";
 
 export class Options {
     constructor(
@@ -40,15 +43,19 @@ export class Options {
  */
 export class PrometheusMetricReporter extends MetricReporter {
 
+    private static isEmpty(value: string): boolean {
+        return !value || value.trim() === "";
+    }
+
     private options: Options;
     private clock: Clock;
     private minReportingTimeout: number;
     private tags: Map<string, string>;
     private metricStates: Map<number, MetricEntry> = new Map();
-    private counterType: string = "counter";
-    private gaugeType: string = "gauge";
-    private histogramType: string = "histogram";
-    private summaryType: string = "summary";
+    private counterType: MetricType = "counter";
+    private gaugeType: MetricType = "gauge";
+    private histogramType: MetricType = "histogram";
+    private summaryType: MetricType = "summary";
 
     public constructor(
         options: Options = new Options(),
@@ -82,9 +89,9 @@ export class PrometheusMetricReporter extends MetricReporter {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             return this.metricRegistries
                 .map((registry) => this.reportMetricRegistry(registry))
-                .join("");
+                .join("") + "\n";
         }
-        return "";
+        return "\n";
     }
 
     public start(): void {
@@ -96,8 +103,11 @@ export class PrometheusMetricReporter extends MetricReporter {
     private reportMetricRegistry(r: MetricRegistry): string {
         const now: Date = new Date(this.clock.time().milliseconds);
 
+        const monotoneCounters = this.reportMetrics(r.getMonotoneCounterList(), now,
+            (c: MonotoneCounter) => this.getCounterString(now, c),
+            (c: MonotoneCounter) => c.getCount());
         const counters = this.reportMetrics(r.getCounterList(), now,
-            (c: Counter) => this.getCounterString(now, c),
+            (c: Counter) => this.getCounterGaugeString(now, c),
             (c: Counter) => c.getCount());
         const gauges = this.reportMetrics(r.getGaugeList(), now,
             (g: Gauge<any>) => this.getGaugeString(now, g),
@@ -112,12 +122,14 @@ export class PrometheusMetricReporter extends MetricReporter {
             (t: Timer) => this.getTimerString(now, t),
             (t: Timer) => t.getCount());
 
-        return counters
+        return []
+            .concat(monotoneCounters)
+            .concat(counters)
             .concat(gauges)
             .concat(histograms)
             .concat(meters)
             .concat(timers)
-            .join("");
+            .join("\n");
     }
 
     private reportMetrics<T extends Metric>(
@@ -134,7 +146,7 @@ export class PrometheusMetricReporter extends MetricReporter {
     private getMetricString<T extends Metric>(
         now: Date,
         metric: T,
-        metricType: string,
+        metricType: MetricType,
         canReport: (metric: T) => boolean,
         getValues: (metric: T) => { [key: string]: number; },
         ): string {
@@ -159,21 +171,53 @@ export class PrometheusMetricReporter extends MetricReporter {
 
         return Object
             .keys(values)
-            .map((field) =>
-                `# HELP ${metricName}_${field} ${metricName}_${field} description\n` +
-                `# TYPE ${metricName}_${field} ${metricType}\n` +
-                `${metricName}_${field}{${tagStr}} ${values[field]}${timestamp}\n`)
+            .map((field) => {
+                const fieldStr = PrometheusMetricReporter.isEmpty(field) ? "" : `_${field}`;
+                let description = metric.getDescription();
+                let valueStr = `${values[field]}`;
+
+                if (PrometheusMetricReporter.isEmpty(description)) {
+                    description = `${metricName}${fieldStr} description`;
+                }
+
+                if (!Number.isFinite(values[field])) {
+                    if (values[field] === -Infinity) {
+                        valueStr = "-Inf";
+                    } else if (values[field] === Infinity) {
+                        valueStr = "+Inf";
+                    }
+                }
+
+                if (this.options.emitComments === true) {
+                    return  `# HELP ${metricName}${fieldStr} ${description}\n` +
+                            `# TYPE ${metricName}${fieldStr} ${metricType}\n` +
+                            `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
+                } else {
+                    return `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
+                }
+            })
             .join("");
     }
 
-    private getCounterString(now: Date, counter: Counter): string {
+    private getCounterString(now: Date, counter: MonotoneCounter): string {
         return this.getMetricString(
             now,
             counter,
             this.counterType,
-            (metric) => !isNaN(counter.getCount()),
+            (metric) => true,
             (metric) => ({
                 total: counter.getCount() || 0,
+            }));
+    }
+
+    private getCounterGaugeString(now: Date, counter: Counter): string {
+        return this.getMetricString(
+            now,
+            counter,
+            this.gaugeType,
+            (metric) => true,
+            (metric) => ({
+                "": counter.getCount() || 0,
             }));
     }
 
@@ -182,9 +226,9 @@ export class PrometheusMetricReporter extends MetricReporter {
             now,
             gauge,
             this.gaugeType,
-            (metric) => !isNaN(gauge.getValue()),
+            (metric) => true,
             (metric) => ({
-                value: gauge.getValue(),
+                "": gauge.getValue(),
             }));
     }
 
