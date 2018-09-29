@@ -67,8 +67,7 @@
     "compile": "tsc -p .",
     "build": "npm run clean && npm run compile && npm run docs:generate",
     "prepublishOnly": "npm run build",
-    "test": "mocha --opts mocha.opts",
-    "test:jenkins": "mocha --opts mocha.jenkins.opts"
+    "test": "mocha --opts mocha.opts"
   },
   "nyc": {
     "include": [
