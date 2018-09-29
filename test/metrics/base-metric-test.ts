@@ -38,6 +38,33 @@ export class BaseMetricTest {
     }
 
     @test
+    public "add metadata, set metadata, remove metadata, check metadata"(): void {
+        const baseMetric: BaseMetric = new TestMetric();
+
+        expect(baseMetric.getMetadataMap()).to.be.a("Map");
+        expect(baseMetric.getMetadataMap()).to.satisfy((map: Map<string, any>) => map.size === 0);
+
+        baseMetric.setMetadata("config1", 123);
+        baseMetric.setMetadata("config2", "Test");
+
+        expect(baseMetric.getMetadataMap()).to.satisfy((map: Map<string, any>) => map.size === 2);
+        expect(baseMetric.getMetadata("config1")).to.equal(123);
+        expect(baseMetric.getMetadata("config2")).to.equal("Test");
+
+        baseMetric.setMetadata("config1", 456);
+        baseMetric.setMetadata("config2", "config test 2");
+
+        expect(baseMetric.getMetadataMap()).to.satisfy((map: Map<string, string>) => map.size === 2);
+        expect(baseMetric.getMetadata("config1")).to.equal(456);
+        expect(baseMetric.getMetadata("config2")).to.equal("config test 2");
+
+        baseMetric.removeMetadata("config2");
+
+        expect(baseMetric.getMetadataMap()).to.satisfy((map: Map<string, string>) => map.size === 1);
+        expect(baseMetric.getMetadata("config1")).to.equal(456);
+    }
+
+    @test
     public "set group, check group"(): void {
         const baseMetric: BaseMetric = new TestMetric();
 

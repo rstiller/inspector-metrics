@@ -6,6 +6,9 @@ Monitoring / metric library similar to http://metrics.dropwizard.io
         <img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version">
     </a>
     <a href="https://www.npmjs.org/package/inspector-metrics">
+        <img src="https://img.shields.io/npm/dm/inspector-metrics.svg" alt="Downloads per Month">
+    </a>
+    <a href="https://www.npmjs.org/package/inspector-metrics">
         <img src="https://img.shields.io/npm/l/inspector-metrics.svg" alt="License">
     </a>
     <a href="https://travis-ci.org/rstiller/inspector-metrics">
@@ -28,7 +31,8 @@ At least a `MetricRegistry`, a `Metric` and a `MetricReporter` is necessary
 to use the library.
 
 Supported metric types:
-* Counter - measures an integer value (e.g. "how many time was my function called")
+* Counter - measures an integer value (e.g. "how many time was my function called, number of bookings in a sales system")
+* MonotoneCounter - a monotonically increasing integer value (e.g. "error count")
 * Gauge - measurement of a value (e.g. "number of waiting threads on a resource")
 * Histogram - measures the statistical distribution of all values
 * Meter - measures the rate of events over time (e.g. "requests per second")
@@ -85,6 +89,26 @@ requestCount.decrement(1);
 requestCount.getCount();
 
 requestCount.reset();
+```
+
+### MonotoneCounter
+
+```typescript
+import { MonotoneCounter, MetricRegistry } from "inspector-metrics";
+
+const registry = new MetricRegistry();
+const errorCount: MonotoneCounter = registry.newMonotoneCounter("errorCount");
+
+// +1
+errorCount.increment(1);
+
+// causes error
+errorCount.increment(-1);
+
+// =1
+errorCount.getCount();
+
+errorCount.reset();
 ```
 
 ### Gauge
