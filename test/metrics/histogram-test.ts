@@ -6,6 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
+import { Buckets } from "../../lib/metrics";
 import { Histogram } from "../../lib/metrics/histogram";
 import { DefaultReservoir } from "../../lib/metrics/reservoir";
 
@@ -226,6 +227,87 @@ export class HistogramTest {
         expect(snapshot2.getMin()).to.be.gte(1);
         expect(snapshot2.getStdDev()).to.be.gte(Math.sqrt(2));
         expect(snapshot2.size()).to.equal(2);
+    }
+
+    @test
+    public "check bucket counting"(): void {
+        const buckets = Buckets.linear(10, 10, 10);
+        const histogram: Histogram = new Histogram(new DefaultReservoir(1024), "name", "description", buckets);
+
+        expect(histogram.getBuckets()).to.be.equal(buckets);
+        expect(histogram.getBuckets().boundaries).to.deep.equal([
+            10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
+        ]);
+        expect(histogram.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 10);
+
+        histogram.update(44);
+        expect(histogram.getCount()).to.be.equal(1);
+        expect(histogram.getCounts().get(10)).to.be.equal(0);
+        expect(histogram.getCounts().get(20)).to.be.equal(0);
+        expect(histogram.getCounts().get(30)).to.be.equal(0);
+        expect(histogram.getCounts().get(40)).to.be.equal(0);
+        expect(histogram.getCounts().get(50)).to.be.equal(1);
+        expect(histogram.getCounts().get(60)).to.be.equal(1);
+        expect(histogram.getCounts().get(70)).to.be.equal(1);
+        expect(histogram.getCounts().get(80)).to.be.equal(1);
+        expect(histogram.getCounts().get(90)).to.be.equal(1);
+        expect(histogram.getCounts().get(100)).to.be.equal(1);
+
+        histogram.update(1000);
+        expect(histogram.getCount()).to.be.equal(2);
+        expect(histogram.getCounts().get(10)).to.be.equal(0);
+        expect(histogram.getCounts().get(20)).to.be.equal(0);
+        expect(histogram.getCounts().get(30)).to.be.equal(0);
+        expect(histogram.getCounts().get(40)).to.be.equal(0);
+        expect(histogram.getCounts().get(50)).to.be.equal(1);
+        expect(histogram.getCounts().get(60)).to.be.equal(1);
+        expect(histogram.getCounts().get(70)).to.be.equal(1);
+        expect(histogram.getCounts().get(80)).to.be.equal(1);
+        expect(histogram.getCounts().get(90)).to.be.equal(1);
+        expect(histogram.getCounts().get(100)).to.be.equal(1);
+
+        histogram.update(10);
+        expect(histogram.getCount()).to.be.equal(3);
+        expect(histogram.getCounts().get(10)).to.be.equal(0);
+        expect(histogram.getCounts().get(20)).to.be.equal(1);
+        expect(histogram.getCounts().get(30)).to.be.equal(1);
+        expect(histogram.getCounts().get(40)).to.be.equal(1);
+        expect(histogram.getCounts().get(50)).to.be.equal(2);
+        expect(histogram.getCounts().get(60)).to.be.equal(2);
+        expect(histogram.getCounts().get(70)).to.be.equal(2);
+        expect(histogram.getCounts().get(80)).to.be.equal(2);
+        expect(histogram.getCounts().get(90)).to.be.equal(2);
+        expect(histogram.getCounts().get(100)).to.be.equal(2);
+    }
+
+    @test
+    public "check bucket counting more than reservoir capacity"(): void {
+        const buckets = Buckets.linear(10, 10, 5);
+        const histogram: Histogram = new Histogram(new DefaultReservoir(3), "name", "description", buckets);
+
+        expect(histogram.getBuckets()).to.be.equal(buckets);
+        expect(histogram.getBuckets().boundaries).to.deep.equal([
+            10, 20, 30, 40, 50,
+        ]);
+        expect(histogram.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5);
+
+        histogram.update(5);
+        histogram.update(10);
+        histogram.update(15);
+        histogram.update(20);
+        histogram.update(25);
+        histogram.update(30);
+        histogram.update(35);
+        histogram.update(40);
+        histogram.update(45);
+        histogram.update(50);
+
+        expect(histogram.getCount()).to.be.equal(10);
+        expect(histogram.getCounts().get(10)).to.be.equal(1);
+        expect(histogram.getCounts().get(20)).to.be.equal(3);
+        expect(histogram.getCounts().get(30)).to.be.equal(5);
+        expect(histogram.getCounts().get(40)).to.be.equal(7);
+        expect(histogram.getCounts().get(50)).to.be.equal(9);
     }
 
 }

@@ -120,22 +120,13 @@ export interface BucketCounting extends Metric {
     getBuckets(): Buckets;
 
     /**
-     * Sets the current Bucket boundary config.
-     * This may reset countings done so far.
-     *
-     * @param {Buckets} buckets
-     * @memberof BucketCounting
-     */
-    setBuckets(buckets: Buckets): void;
-
-    /**
      * Gets a mapping from the boundary to the count of events
      * within the corresponding boundary.
      * The meaning of the count is implementation specific.
      *
-     * @returns {{ [boundary: number]: number }}
+     * @returns {Map<number, number>}
      * @memberof BucketCounting
      */
-    getCounts(): { [boundary: number]: number };
+    getCounts(): Map<number, number>;
 
 }

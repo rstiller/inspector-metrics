@@ -6,6 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
+import { Buckets } from "../../lib/metrics";
 import { SlidingWindowReservoir } from "../../lib/metrics/reservoir";
 import { Snapshot } from "../../lib/metrics/snapshot";
 import { MICROSECOND, NANOSECOND } from "../../lib/metrics/time-unit";
@@ -575,6 +576,75 @@ export class TimerTest {
             expect(snapshot.getStdDev()).to.be.NaN;
         })
         .then(callback);
+    }
+
+    @test
+    public "check bucket counting"(): void {
+        const buckets = Buckets.linear(100, 200, 5);
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3), "name", "description", buckets);
+
+        expect(timer.getBuckets()).to.be.equal(buckets);
+        expect(timer.getBuckets().boundaries).to.deep.equal([
+            100, 300, 500, 700, 900,
+        ]);
+        expect(timer.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5);
+
+        timer.addDuration(101, NANOSECOND);
+
+        expect(timer.getCount()).to.be.equal(1);
+        expect(timer.getCounts().get(100)).to.be.equal(0);
+        expect(timer.getCounts().get(300)).to.be.equal(1);
+        expect(timer.getCounts().get(500)).to.be.equal(1);
+        expect(timer.getCounts().get(700)).to.be.equal(1);
+        expect(timer.getCounts().get(900)).to.be.equal(1);
+
+        timer.addDuration(1001, NANOSECOND);
+
+        expect(timer.getCount()).to.be.equal(2);
+        expect(timer.getCounts().get(100)).to.be.equal(0);
+        expect(timer.getCounts().get(300)).to.be.equal(1);
+        expect(timer.getCounts().get(500)).to.be.equal(1);
+        expect(timer.getCounts().get(700)).to.be.equal(1);
+        expect(timer.getCounts().get(900)).to.be.equal(1);
+
+        timer.addDuration(50, NANOSECOND);
+
+        expect(timer.getCount()).to.be.equal(3);
+        expect(timer.getCounts().get(100)).to.be.equal(1);
+        expect(timer.getCounts().get(300)).to.be.equal(2);
+        expect(timer.getCounts().get(500)).to.be.equal(2);
+        expect(timer.getCounts().get(700)).to.be.equal(2);
+        expect(timer.getCounts().get(900)).to.be.equal(2);
+    }
+
+    @test
+    public "check bucket counting more than reservoir capacity"(): void {
+        const buckets = Buckets.linear(100, 200, 5);
+        const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3), "name", "description", buckets);
+
+        expect(timer.getBuckets()).to.be.equal(buckets);
+        expect(timer.getBuckets().boundaries).to.deep.equal([
+            100, 300, 500, 700, 900,
+        ]);
+        expect(timer.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5);
+
+        timer.addDuration(50, NANOSECOND);
+        timer.addDuration(100, NANOSECOND);
+        timer.addDuration(150, NANOSECOND);
+        timer.addDuration(200, NANOSECOND);
+        timer.addDuration(250, NANOSECOND);
+        timer.addDuration(300, NANOSECOND);
+        timer.addDuration(350, NANOSECOND);
+        timer.addDuration(400, NANOSECOND);
+        timer.addDuration(450, NANOSECOND);
+        timer.addDuration(500, NANOSECOND);
+
+        expect(timer.getCount()).to.be.equal(10);
+        expect(timer.getCounts().get(100)).to.be.equal(1);
+        expect(timer.getCounts().get(300)).to.be.equal(5);
+        expect(timer.getCounts().get(500)).to.be.equal(9);
+        expect(timer.getCounts().get(700)).to.be.equal(10);
+        expect(timer.getCounts().get(900)).to.be.equal(10);
     }
 
 }
