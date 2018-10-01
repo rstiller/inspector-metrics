@@ -1,0 +1,1232 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>MetricRegistration</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/metric-registry.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Proxy object for a metric (one metric can be registered with multiple names e.g. in different groups).</p>
+
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#metricRef">metricRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#name">name</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(metricRef: T)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">lib/metrics/metric-registry.ts:68</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of MetricRegistration.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>metricRef</td>
+                                                  
+                                                        <td>
+                                                                    <code>T</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="metricRef"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            metricRef
+                            </b>
+                            <a href="#metricRef"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>metricRef:     <code>T</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>T</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">lib/metrics/metric-registry.ts:61</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The metric instance.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            name
+                            </b>
+                            <a href="#name"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>name:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">lib/metrics/metric-registry.ts:68</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The name the metric is registered with.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+
+import { Clock, StdClock } from &quot;./clock&quot;;
+import { Counter, MonotoneCounter } from &quot;./counter&quot;;
+import { Buckets } from &quot;./counting&quot;;
+import { Gauge } from &quot;./gauge&quot;;
+import { Histogram } from &quot;./histogram&quot;;
+import { Meter } from &quot;./meter&quot;;
+import { BaseMetric, Metric } from &quot;./metric&quot;;
+import { MetricRegistryListener } from &quot;./metric-registry-listener&quot;;
+import { MetricSet } from &quot;./metric-set&quot;;
+import { Reservoir, SlidingWindowReservoir } from &quot;./reservoir&quot;;
+import { Timer } from &quot;./timer&quot;;
+
+export type NameFactory &#x3D; (baseName: string, metricName: string, metric: Metric) &#x3D;&gt; string;
+
+/**
+ * Represents a registration of a {@link MetricRegistryListener}.
+ * This instance can be used to safely remove the listener from registry again.
+ *
+ * @export
+ * @class MetricRegistryListenerRegistration
+ */
+export class MetricRegistryListenerRegistration {
+
+    /**
+     * Creates an instance of MetricRegistryListenerRegistration.
+     *
+     * @param {MetricRegistryListener} listener
+     * @param {MetricRegistry} registry
+     * @memberof MetricRegistryListenerRegistration
+     */
+    public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) {}
+
+    /**
+     * Removes the managed listener from the metric registry.
+     *
+     * @memberof MetricRegistryListenerRegistration
+     */
+    public remove(): void {
+        this.registry.removeListener(this.listener);
+    }
+
+}
+
+/**
+ * Proxy object for a metric (one metric can be registered with multiple names e.g. in different groups).
+ *
+ * @export
+ * @class MetricRegistration
+ * @template T
+ */
+export class MetricRegistration&lt;T extends Metric&gt; {
+
+    /**
+     * The metric instance.
+     *
+     * @type {T}
+     * @memberof MetricRegistration
+     */
+    public metricRef: T;
+    /**
+     * The name the metric is registered with.
+     *
+     * @type {string}
+     * @memberof MetricRegistration
+     */
+    public name: string;
+
+    /**
+     * Creates an instance of MetricRegistration.
+     *
+     * @param {T} metricRef
+     * @memberof MetricRegistration
+     */
+    public constructor(metricRef: T) {
+        this.metricRef &#x3D; metricRef;
+        this.name &#x3D; metricRef.getName();
+    }
+
+}
+
+/**
+ * A metric registry manages metric instances.
+ *
+ * @export
+ * @class MetricRegistry
+ * @extends {BaseMetric}
+ * @implements {MetricSet}
+ */
+export class MetricRegistry extends BaseMetric implements MetricSet {
+
+    /**
+     * Determines if the specified object is a {@link Counter} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is Counter}
+     * @memberof MetricRegistry
+     */
+    public static isCounter(instance: any): instance is Counter {
+        return instance instanceof Counter || instance.metricRef instanceof Counter;
+    }
+
+    /**
+     * Determines if the specified object is a {@link MonotoneCounter} or {@link Counter} or references one of them.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public static isMonotoneCounter(instance: any): instance is MonotoneCounter {
+        return instance instanceof MonotoneCounter || instance.metricRef instanceof MonotoneCounter;
+    }
+
+    /**
+     * Determines if the specified object is a {@link MonotoneCounter} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public static isPureMonotoneCounter(instance: any): instance is MonotoneCounter {
+        return (instance instanceof MonotoneCounter || instance.metricRef instanceof MonotoneCounter) &amp;&amp;
+                !MetricRegistry.isCounter(instance);
+    }
+
+    /**
+     * Determines if the specified object is a {@link Histogram} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is Histogram}
+     * @memberof MetricRegistry
+     */
+    public static isHistogram(instance: any): instance is Histogram {
+        return instance instanceof Histogram || instance.metricRef instanceof Histogram;
+    }
+
+    /**
+     * Determines if the specified object is a {@link Meter} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is Meter}
+     * @memberof MetricRegistry
+     */
+    public static isMeter(instance: any): instance is Meter {
+        return instance instanceof Meter || instance.metricRef instanceof Meter;
+    }
+
+    /**
+     * Determines if the specified object is a {@link Timer} or references one.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is Timer}
+     * @memberof MetricRegistry
+     */
+    public static isTimer(instance: any): instance is Timer {
+        return instance instanceof Timer || instance.metricRef instanceof Timer;
+    }
+
+    /**
+     * Determines if the specified object is a {@link Gauge} or references one.
+     *
+     * @static
+     * @template T
+     * @param {*} instance
+     * @returns {instance is Gauge&lt;T&gt;}
+     * @memberof MetricRegistry
+     */
+    public static isGauge&lt;T&gt;(instance: any): instance is Gauge&lt;T&gt; {
+        const directGauge: boolean &#x3D; !!instance.getValue &amp;&amp; instance.getValue instanceof Function;
+        const gaugeRegistration &#x3D;   !!instance.metricRef &amp;&amp;
+                                    !!instance.metricRef.getValue &amp;&amp;
+                                    instance.metricRef.getValue instanceof Function;
+        return directGauge || gaugeRegistration;
+    }
+
+    /**
+     * Determines if the specified object is a {@link MetricSet}.
+     *
+     * @static
+     * @param {*} instance
+     * @returns {instance is MetricSet}
+     * @memberof MetricRegistry
+     */
+    public static isMetricSet(instance: any): instance is MetricSet {
+        return !!instance.getMetrics &amp;&amp; instance.getMetrics instanceof Function;
+    }
+
+    /**
+     * Standard function to generate the name for a metric.
+     *
+     * @private
+     * @static
+     * @param {string} baseName
+     * @param {string} metricName
+     * @param {Metric} metric
+     * @returns {string}
+     * @memberof MetricRegistry
+     */
+    private static defaultNameFactory(baseName: string, metricName: string, metric: Metric): string {
+        return baseName + &quot;.&quot; + metricName;
+    }
+
+    /**
+     * Default clock instance if no clock instance if provided.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof MetricRegistry
+     */
+    private defaultClock: Clock &#x3D; new StdClock();
+    /**
+     * A collection metric references.
+     *
+     * @private
+     * @type {Array&lt;MetricRegistration&lt;Metric&gt;&gt;}
+     * @memberof MetricRegistry
+     */
+    private metrics: Array&lt;MetricRegistration&lt;Metric&gt;&gt; &#x3D; [];
+    /**
+     * The name factory to build metric names.
+     *
+     * @private
+     * @type {NameFactory}
+     * @memberof MetricRegistry
+     */
+    private nameFactory: NameFactory &#x3D; MetricRegistry.defaultNameFactory;
+    /**
+     * A collection of metric listeners.
+     *
+     * @private
+     * @type {MetricRegistryListener[]}
+     * @memberof MetricRegistry
+     */
+    private listeners: MetricRegistryListener[] &#x3D; [];
+
+    /**
+     * Adds the specified listener and returns the corrsponding
+     * registration object.
+     *
+     * @param {MetricRegistryListener} listener
+     * @returns {MetricRegistryListenerRegistration}
+     * @memberof MetricRegistry
+     */
+    public addListener(listener: MetricRegistryListener): MetricRegistryListenerRegistration {
+        this.listeners.push(listener);
+        return new MetricRegistryListenerRegistration(listener, this);
+    }
+
+    /**
+     * Removes a listener manually.
+     *
+     * @param {MetricRegistryListener} listener
+     * @memberof MetricRegistry
+     */
+    public removeListener(listener: MetricRegistryListener): void {
+        const index &#x3D; this.listeners.indexOf(listener);
+        if (index &gt; -1) {
+            delete this.listeners[index];
+        }
+    }
+
+    /**
+     * Sets the default name factory for metric instances.
+     *
+     * @param {NameFactory} nameFactory
+     * @memberof MetricRegistry
+     */
+    public setNameFactory(nameFactory: NameFactory): void {
+        this.nameFactory &#x3D; nameFactory;
+    }
+
+    /**
+     * Gets the default clock.
+     *
+     * @returns {Clock}
+     * @memberof MetricRegistry
+     */
+    public getDefaultClock(): Clock {
+        return this.defaultClock;
+    }
+
+    /**
+     * Sets the default clock.
+     *
+     * @param {Clock} defaultClock
+     * @memberof MetricRegistry
+     */
+    public setDefaultClock(defaultClock: Clock): void {
+        this.defaultClock &#x3D; defaultClock;
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getCounterList} instead
+     */
+    public getCounters(): Map&lt;string, Counter&gt; {
+        const map: Map&lt;string, Counter&gt; &#x3D; new Map();
+        this.metrics
+            .filter(MetricRegistry.isCounter)
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef as Counter));
+        return map;
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getGaugeList} instead
+     */
+    public getGauges(): Map&lt;string, Gauge&lt;any&gt;&gt; {
+        const map: Map&lt;string, Gauge&lt;any&gt;&gt; &#x3D; new Map();
+        this.metrics
+            .filter(MetricRegistry.isGauge)
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef as Gauge&lt;any&gt;));
+        return map;
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getHistogramList} instead
+     */
+    public getHistograms(): Map&lt;string, Histogram&gt; {
+        const map: Map&lt;string, Histogram&gt; &#x3D; new Map();
+        this.metrics
+            .filter(MetricRegistry.isHistogram)
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef as Histogram));
+        return map;
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getMeterList} instead
+     */
+    public getMeters(): Map&lt;string, Meter&gt; {
+        const map: Map&lt;string, Meter&gt; &#x3D; new Map();
+        this.metrics
+            .filter(MetricRegistry.isMeter)
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef as Meter));
+        return map;
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getTimerList} instead
+     */
+    public getTimers(): Map&lt;string, Timer&gt; {
+        const map: Map&lt;string, Timer&gt; &#x3D; new Map();
+        this.metrics
+            .filter(MetricRegistry.isTimer)
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef as Timer));
+        return map;
+    }
+
+    /**
+     * Gets the list of all managed counter instances.
+     *
+     * @returns {Counter[]}
+     * @memberof MetricRegistry
+     */
+    public getCounterList(): Counter[] {
+        return this.metrics
+            .filter(MetricRegistry.isCounter)
+            .map((registration) &#x3D;&gt; registration.metricRef as Counter);
+    }
+
+    /**
+     * Gets the list of all managed monotone counter instances.
+     *
+     * @returns {MonotoneCounter[]}
+     * @memberof MetricRegistry
+     */
+    public getMonotoneCounterList(): MonotoneCounter[] {
+        return this.metrics
+            .filter(MetricRegistry.isPureMonotoneCounter)
+            .map((registration) &#x3D;&gt; registration.metricRef as MonotoneCounter);
+    }
+
+    /**
+     * Gets the list of all managed gauge instances.
+     *
+     * @returns {Array&lt;Gauge&lt;any&gt;&gt;}
+     * @memberof MetricRegistry
+     */
+    public getGaugeList(): Array&lt;Gauge&lt;any&gt;&gt; {
+        return this.metrics
+            .filter(MetricRegistry.isGauge)
+            .map((registration) &#x3D;&gt; registration.metricRef as Gauge&lt;any&gt;);
+    }
+
+    /**
+     * Gets the list of all managed histogram instances.
+     *
+     * @returns {Histogram[]}
+     * @memberof MetricRegistry
+     */
+    public getHistogramList(): Histogram[] {
+        return this.metrics
+            .filter(MetricRegistry.isHistogram)
+            .map((registration) &#x3D;&gt; registration.metricRef as Histogram);
+    }
+
+    /**
+     * Gets the list of all managed meter instances.
+     *
+     * @returns {Meter[]}
+     * @memberof MetricRegistry
+     */
+    public getMeterList(): Meter[] {
+        return this.metrics
+            .filter(MetricRegistry.isMeter)
+            .map((registration) &#x3D;&gt; registration.metricRef as Meter);
+    }
+
+    /**
+     * Gets the list of all managed timer instances.
+     *
+     * @returns {Timer[]}
+     * @memberof MetricRegistry
+     */
+    public getTimerList(): Timer[] {
+        return this.metrics
+            .filter(MetricRegistry.isTimer)
+            .map((registration) &#x3D;&gt; registration.metricRef as Timer);
+    }
+
+    /**
+     * Gets a mapping of all managed metric instances regardless of the type.
+     *
+     * @returns {Map&lt;string, Metric&gt;}
+     * @memberof MetricRegistry
+     */
+    public getMetrics(): Map&lt;string, Metric&gt; {
+        const map: Map&lt;string, Metric&gt; &#x3D; new Map();
+        this.metrics
+            .forEach((registration) &#x3D;&gt; map.set(registration.name, registration.metricRef));
+        return map;
+    }
+
+    /**
+     * Gets a list of all managed metric instances regardless of the type.
+     *
+     * @returns {Metric[]}
+     * @memberof MetricRegistry
+     */
+    public getMetricList(): Metric[] {
+        return this.metrics.map((metric) &#x3D;&gt; metric.metricRef);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getMetricsByName} instead
+     */
+    public getMetric(name: string): Metric {
+        return this.getFirstByName(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getCountersByName} instead
+     */
+    public getCounter(name: string): Counter {
+        return this.getFirstByName&lt;Counter&gt;(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getGaugesByName} instead
+     */
+    public getGauge(name: string): Gauge&lt;any&gt; {
+        return this.getFirstByName&lt;Gauge&lt;any&gt;&gt;(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getHistogramsByName} instead
+     */
+    public getHistogram(name: string): Histogram {
+        return this.getFirstByName&lt;Histogram&gt;(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getMetersByName} instead
+     */
+    public getMeter(name: string): Meter {
+        return this.getFirstByName&lt;Meter&gt;(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link getTimersByName} instead
+     */
+    public getTimer(name: string): Timer {
+        return this.getFirstByName&lt;Timer&gt;(name);
+    }
+
+    /**
+     * Gets all mamanged metric instance by name.
+     *
+     * @param {string} name
+     * @returns {Metric[]}
+     * @memberof MetricRegistry
+     */
+    public getMetricsByName(name: string): Metric[] {
+        return this.getByName(name);
+    }
+
+    /**
+     * Gets all managed counter instances by name.
+     *
+     * @param {string} name
+     * @returns {Counter[]}
+     * @memberof MetricRegistry
+     */
+    public getCountersByName(name: string): Counter[] {
+        return this.getByName&lt;Counter&gt;(name);
+    }
+
+    /**
+     * Gets all managed monotone counter instances by name.
+     *
+     * @param {string} name
+     * @returns {MonotoneCounter[]}
+     * @memberof MetricRegistry
+     */
+    public getMonotoneCountersByName(name: string): MonotoneCounter[] {
+        return this.getByName&lt;MonotoneCounter&gt;(name);
+    }
+
+    /**
+     * Gets all managed gauge instances by name.
+     *
+     * @param {string} name
+     * @returns {Array&lt;Gauge&lt;any&gt;&gt;}
+     * @memberof MetricRegistry
+     */
+    public getGaugesByName(name: string): Array&lt;Gauge&lt;any&gt;&gt; {
+        return this.getByName&lt;Gauge&lt;any&gt;&gt;(name);
+    }
+
+    /**
+     * Gets all managed histogram instances by name.
+     *
+     * @param {string} name
+     * @returns {Histogram[]}
+     * @memberof MetricRegistry
+     */
+    public getHistogramsByname(name: string): Histogram[] {
+        return this.getByName&lt;Histogram&gt;(name);
+    }
+
+    /**
+     * Gets all managed meter instances by name.
+     *
+     * @param {string} name
+     * @returns {Meter[]}
+     * @memberof MetricRegistry
+     */
+    public getMetersByName(name: string): Meter[] {
+        return this.getByName&lt;Meter&gt;(name);
+    }
+
+    /**
+     * Gets all managed timer instances by name.
+     *
+     * @param {string} name
+     * @returns {Timer[]}
+     * @memberof MetricRegistry
+     */
+    public getTimersByName(name: string): Timer[] {
+        return this.getByName&lt;Timer&gt;(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeMetric(name: string): void {
+        const metrics: Metric[] &#x3D; this.getByName(name);
+
+        if (metrics.length &gt; 0) {
+            const index &#x3D; this.metrics
+                .map((m) &#x3D;&gt; m.metricRef)
+                .indexOf(metrics[0], 0);
+            if (index &gt; -1) {
+                this.metrics.splice(index, 1);
+            }
+            this.fireMetricRemoved(name, metrics[0]);
+        }
+    }
+
+    /**
+     * Removes all managed metric instances by name regardless of the type.
+     *
+     * @param {string} name
+     * @memberof MetricRegistry
+     */
+    public removeMetrics(name: string): void {
+        const metrics: Metric[] &#x3D; this.getByName(name);
+
+        metrics.forEach((metric) &#x3D;&gt; {
+            const index &#x3D; this.metrics
+                .map((m) &#x3D;&gt; m.metricRef)
+                .indexOf(metric, 0);
+            if (index &gt; -1) {
+                this.metrics.splice(index, 1);
+            }
+            this.fireMetricRemoved(name, metric);
+        });
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeCounter(name: string): void {
+        this.removeMetric(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeGauge(name: string): void {
+        this.removeMetric(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeHistogram(name: string): void {
+        this.removeMetric(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeMeter(name: string): void {
+        this.removeMetric(name);
+    }
+
+    /**
+     * @deprecated since version 1.3 - use {@link removeMetrics} instead
+     */
+    public removeTimer(name: string): void {
+        this.removeMetric(name);
+    }
+
+    /**
+     * Builds a new counter with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group&#x3D;null]
+     * @param {string} [description&#x3D;null]
+     * @returns {Counter}
+     * @memberof MetricRegistry
+     */
+    public newCounter(name: string, group: string &#x3D; null, description: string &#x3D; null): Counter {
+        const counter &#x3D; new Counter(name, description);
+        if (!!group) {
+            counter.setGroup(group);
+        }
+        this.register(counter.getName(), counter);
+        return counter;
+    }
+
+    /**
+     * Builds a new monotone counter with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group&#x3D;null]
+     * @param {string} [description&#x3D;null]
+     * @returns {MonotoneCounter}
+     * @memberof MetricRegistry
+     */
+    public newMonotoneCounter(name: string, group: string &#x3D; null, description: string &#x3D; null): MonotoneCounter {
+        const counter &#x3D; new MonotoneCounter(name, description);
+        if (!!group) {
+            counter.setGroup(group);
+        }
+        this.register(counter.getName(), counter);
+        return counter;
+    }
+
+    /**
+     * Builds a new meter with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group&#x3D;null]
+     * @param {Clock} [clock&#x3D;this.defaultClock]
+     * @param {number} [sampleRate&#x3D;1]
+     * @param {string} [description&#x3D;null]
+     * @returns {Meter}
+     * @memberof MetricRegistry
+     */
+    public newMeter(
+        name: string,
+        group: string &#x3D; null,
+        clock: Clock &#x3D; this.defaultClock,
+        sampleRate: number &#x3D; 1,
+        description: string &#x3D; null): Meter {
+
+        const meter &#x3D; new Meter(clock, sampleRate, name, description);
+        if (!!group) {
+            meter.setGroup(group);
+        }
+        this.register(meter.getName(), meter);
+        return meter;
+    }
+
+    /**
+     * Builds a new histogram with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group&#x3D;null]
+     * @param {string} [description&#x3D;null]
+     * @param {Reservoir} [reservoir&#x3D;null]
+     * @returns {Histogram}
+     * @memberof MetricRegistry
+     */
+    public newHistogram(
+        name: string,
+        group: string &#x3D; null,
+        reservoir: Reservoir &#x3D; null,
+        description: string &#x3D; null,
+        buckets: Buckets &#x3D; new Buckets()): Histogram {
+
+        if (!reservoir) {
+            reservoir &#x3D; new SlidingWindowReservoir(1024);
+        }
+        const histogram &#x3D; new Histogram(reservoir, name, description, buckets);
+        if (!!group) {
+            histogram.setGroup(group);
+        }
+        this.register(histogram.getName(), histogram);
+        return histogram;
+    }
+
+    /**
+     * Builds a new timer with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {string} [group&#x3D;null]
+     * @param {string} [description&#x3D;null]
+     * @param {Clock} [clock&#x3D;this.defaultClock]
+     * @param {Reservoir} [reservoir&#x3D;null]
+     * @returns {Timer}
+     * @memberof MetricRegistry
+     */
+    public newTimer(
+        name: string,
+        group: string &#x3D; null,
+        clock: Clock &#x3D; this.defaultClock,
+        reservoir: Reservoir &#x3D; null,
+        description: string &#x3D; null,
+        buckets: Buckets &#x3D; new Buckets()): Timer {
+
+        if (!reservoir) {
+            reservoir &#x3D; new SlidingWindowReservoir(1024);
+        }
+        const timer &#x3D; new Timer(clock, reservoir, name, description, buckets);
+        if (!!group) {
+            timer.setGroup(group);
+        }
+        this.register(timer.getName(), timer);
+        return timer;
+    }
+
+    /**
+     * Registers the given metric under it&#x27;s name in this registry.
+     *
+     * If the metric is a metric-set the child-metrics are
+     * registered using their names the name of the metric-set is set as group.
+     *
+     * @param {Metric} metric
+     * @param {string} [group&#x3D;null]
+     *
+     * @memberof MetricRegistry
+     */
+    public registerMetric(metric: Metric, group: string &#x3D; null, description: string &#x3D; null): void {
+        if (!!group) {
+            metric.setGroup(group);
+        }
+        if (!!description) {
+            metric.setDescription(description);
+        }
+
+        if (metric instanceof Meter ||
+            metric instanceof Counter ||
+            metric instanceof MonotoneCounter ||
+            MetricRegistry.isGauge&lt;any&gt;(metric) ||
+            metric instanceof Histogram ||
+            metric instanceof Timer) {
+            this.metrics.push(new MetricRegistration(metric));
+            this.fireMetricAdded(metric.getName(), metric);
+        } else if (MetricRegistry.isMetricSet(metric)) {
+            metric.getMetricList().forEach((m: Metric) &#x3D;&gt; {
+                m.setGroup(metric.getName());
+                this.registerMetric(m);
+            });
+        }
+    }
+
+    /**
+     * Registeres a metric by name
+     *
+     * @param {string} name
+     * @param {Metric} metric
+     * @param {string} [group&#x3D;null]
+     * @deprecated since version 1.5 - use {@link registerMetric} instead
+     * @memberof MetricRegistry
+     */
+    public register(name: string, metric: Metric, group: string &#x3D; null, description: string &#x3D; null): void {
+        if (!!group) {
+            metric.setGroup(group);
+        }
+        if (!!description) {
+            metric.setDescription(description);
+        }
+
+        metric.setName(this.generateName(name, metric));
+
+        if (metric instanceof Meter ||
+            metric instanceof Counter ||
+            metric instanceof MonotoneCounter ||
+            MetricRegistry.isGauge&lt;any&gt;(metric) ||
+            metric instanceof Histogram ||
+            metric instanceof Timer) {
+            this.metrics.push(new MetricRegistration(metric));
+            this.fireMetricAdded(name, metric);
+        } else if (MetricRegistry.isMetricSet(metric)) {
+            metric.getMetrics().forEach((m: Metric) &#x3D;&gt; {
+                const metricName &#x3D; this.nameFactory(name, m.getName(), m);
+                this.register(metricName, m);
+            });
+        }
+    }
+
+    /**
+     * Finds the first metric instance by name.
+     *
+     * @private
+     * @template T
+     * @param {string} name
+     * @returns {T}
+     * @memberof MetricRegistry
+     */
+    private getFirstByName&lt;T extends Metric&gt;(name: string): T {
+        const arr: Metric[] &#x3D; this.getByName(name);
+        if (arr.length &#x3D;&#x3D;&#x3D; 0) {
+            return null;
+        }
+        return arr[0] as T;
+    }
+
+    /**
+     * Gets all metric instances by name.
+     *
+     * @private
+     * @template T
+     * @param {string} name
+     * @returns {T[]}
+     * @memberof MetricRegistry
+     */
+    private getByName&lt;T extends Metric&gt;(name: string): T[] {
+        return this.metrics
+            .filter((metric) &#x3D;&gt; metric.name &#x3D;&#x3D;&#x3D; name)
+            .map((metric) &#x3D;&gt; metric.metricRef) as T[];
+    }
+
+    /**
+     * Builds the name of the metric.
+     *
+     * @private
+     * @param {string} name
+     * @param {Metric} metric
+     * @returns {string}
+     * @memberof MetricRegistry
+     */
+    private generateName(name: string, metric: Metric): string {
+        if (!!metric.getGroup()) {
+            return &#x60;${metric.getGroup()}.${name}&#x60;;
+        }
+        return name;
+    }
+
+    /**
+     * Invokes all metric listeners when a new metric was added.
+     *
+     * @private
+     * @param {string} name
+     * @param {Metric} metric
+     * @memberof MetricRegistry
+     */
+    private fireMetricAdded(name: string, metric: Metric): void {
+        this.listeners.forEach((listener) &#x3D;&gt; listener.metricAdded(name, metric));
+    }
+
+    /**
+     * Invokes all metric listeners when a metric was removed.
+     *
+     * @private
+     * @param {string} name
+     * @param {Metric} metric
+     * @memberof MetricRegistry
+     */
+    private fireMetricRemoved(name: string, metric: Metric): void {
+        this.listeners.forEach((listener) &#x3D;&gt; listener.metricRemoved(name, metric));
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'MetricRegistration.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
