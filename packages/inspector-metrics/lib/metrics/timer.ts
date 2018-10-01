@@ -1,6 +1,7 @@
 import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
+import { BucketCounting, Buckets } from "./counting";
 import { Histogram } from "./histogram";
 import { Int64Wrapper } from "./int64";
 import { Meter } from "./meter";
@@ -88,7 +89,7 @@ export class StopWatch {
  * @implements {Metered}
  * @implements {Sampling}
  */
-export class Timer extends BaseMetric implements Metered, Sampling, Summarizing {
+export class Timer extends BaseMetric implements BucketCounting, Metered, Sampling, Summarizing {
 
     /**
      * Used to determine a duration.
@@ -122,15 +123,22 @@ export class Timer extends BaseMetric implements Metered, Sampling, Summarizing 
      * @param {Reservoir} reservoir
      * @param {string} [name]
      * @param {string} [description]
+     * @param {string} [buckets=new Buckets()]
      * @memberof Timer
      */
-    public constructor(clock: Clock, reservoir: Reservoir, name?: string, description?: string) {
+    public constructor(
+        clock: Clock,
+        reservoir: Reservoir,
+        name?: string,
+        description?: string,
+        buckets: Buckets = new Buckets()) {
+
         super();
         this.clock = clock;
         this.name = name;
         this.description = description;
         this.meter = new Meter(clock, 1, name);
-        this.histogram = new Histogram(reservoir, name);
+        this.histogram = new Histogram(reservoir, name, description, buckets);
     }
 
     /**
@@ -215,6 +223,26 @@ export class Timer extends BaseMetric implements Metered, Sampling, Summarizing 
      */
     public getMeanRate(): number {
         return this.meter.getMeanRate();
+    }
+
+    /**
+     * Gets the bucket config from the internal {@link Histogram} and therefore representing the durations.
+     *
+     * @returns {Buckets}
+     * @memberof Timer
+     */
+    public getBuckets(): Buckets {
+        return this.histogram.getBuckets();
+    }
+
+    /**
+     * Gets the bucket counts from the internal {@link Histogram}.
+     *
+     * @returns {Map<number, number>}
+     * @memberof Timer
+     */
+    public getCounts(): Map<number, number> {
+        return this.histogram.getCounts();
     }
 
     /**
