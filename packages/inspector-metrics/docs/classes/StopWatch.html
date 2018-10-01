@@ -1,0 +1,785 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>StopWatch</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/timer.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>A convenience wrapper class for a <a href="../classes/Timer.html">Timer</a> to measure durations.</p>
+
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#clock">clock</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#startTime">startTime</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#timer">timer</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#start">start</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#stop">stop</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(clock: <a href="../classes/Clock.html">Clock</a>, timer: <a href="../interfaces/Time.html">Timer</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">lib/metrics/timer.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of StopWatch.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>clock</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../classes/Clock.html" target="_self" >Clock</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>timer</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/Time.html" target="_self" >Timer</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clock"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            clock
+                            </b>
+                            <a href="#clock"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>clock:     <code><a href="../classes/Clock.html" target="_self" >Clock</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Clock.html" target="_self" >Clock</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">lib/metrics/timer.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Used to determine a duration.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="startTime"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            startTime
+                            </b>
+                            <a href="#startTime"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>startTime:     <code><a href="../interfaces/Time.html" target="_self" >Time</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Time.html" target="_self" >Time</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">lib/metrics/timer.ts:47</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Gets set when the start function is invoked using the clock.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="timer"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            timer
+                            </b>
+                            <a href="#timer"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>timer:     <code><a href="../interfaces/Time.html" target="_self" >Timer</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Time.html" target="_self" >Timer</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">lib/metrics/timer.ts:39</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The timer the duration is reported to.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="start"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            start
+                            </b>
+                            <a href="#start"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>start()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">lib/metrics/timer.ts:66</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Sets the startTime variable.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="stop"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            stop
+                            </b>
+                            <a href="#stop"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>stop()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">lib/metrics/timer.ts:76</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Adds the duration between the last invocation of the start function
+and this invocation to the timer in nanoseconds.</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+
+import { Clock, diff, Time } from &quot;./clock&quot;;
+import { BucketCounting, Buckets } from &quot;./counting&quot;;
+import { Histogram } from &quot;./histogram&quot;;
+import { Int64Wrapper } from &quot;./int64&quot;;
+import { Meter } from &quot;./meter&quot;;
+import { Metered } from &quot;./metered&quot;;
+import { BaseMetric } from &quot;./metric&quot;;
+import { Reservoir } from &quot;./reservoir&quot;;
+import { Sampling } from &quot;./sampling&quot;;
+import { Snapshot } from &quot;./snapshot&quot;;
+import { Summarizing } from &quot;./summarizing&quot;;
+import { NANOSECOND, TimeUnit } from &quot;./time-unit&quot;;
+
+/**
+ * A convenience wrapper class for a {@link Timer} to measure durations.
+ *
+ * @export
+ * @class StopWatch
+ */
+export class StopWatch {
+
+    /**
+     * Used to determine a duration.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof StopWatch
+     */
+    private clock: Clock;
+    /**
+     * The timer the duration is reported to.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof StopWatch
+     */
+    private timer: Timer;
+    /**
+     * Gets set when the start function is invoked using the clock.
+     *
+     * @private
+     * @type {Time}
+     * @memberof StopWatch
+     */
+    private startTime: Time;
+
+    /**
+     * Creates an instance of StopWatch.
+     *
+     * @param {Clock} clock
+     * @param {Timer} timer
+     * @memberof StopWatch
+     */
+    public constructor(clock: Clock, timer: Timer) {
+        this.clock &#x3D; clock;
+        this.timer &#x3D; timer;
+    }
+
+    /**
+     * Sets the startTime variable.
+     *
+     * @memberof StopWatch
+     */
+    public start(): void {
+        this.startTime &#x3D; this.clock.time();
+    }
+
+    /**
+     * Adds the duration between the last invocation of the start function
+     * and this invocation to the timer in nanoseconds.
+     *
+     * @memberof StopWatch
+     */
+    public stop(): void {
+        this.timer.addDuration(diff(this.startTime, this.clock.time()), NANOSECOND);
+    }
+
+}
+
+/**
+ * A Timer is a combination of a {@link Histogram} (for the duration of an event)
+ * and a {@link Meter} (for the rate of events).
+ *
+ * @export
+ * @class Timer
+ * @extends {BaseMetric}
+ * @implements {Metered}
+ * @implements {Sampling}
+ */
+export class Timer extends BaseMetric implements BucketCounting, Metered, Sampling, Summarizing {
+
+    /**
+     * Used to determine a duration.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof Timer
+     */
+    private clock: Clock;
+    /**
+     * Metric to measure the event rate.
+     *
+     * @private
+     * @type {Meter}
+     * @memberof Timer
+     */
+    private meter: Meter;
+    /**
+     * Metric to measure the duration of events.
+     *
+     * @private
+     * @type {Histogram}
+     * @memberof Timer
+     */
+    private histogram: Histogram;
+
+    /**
+     * Creates an instance of Timer.
+     *
+     * @param {Clock} clock
+     * @param {Reservoir} reservoir
+     * @param {string} [name]
+     * @param {string} [description]
+     * @param {string} [buckets&#x3D;new Buckets()]
+     * @memberof Timer
+     */
+    public constructor(
+        clock: Clock,
+        reservoir: Reservoir,
+        name?: string,
+        description?: string,
+        buckets: Buckets &#x3D; new Buckets()) {
+
+        super();
+        this.clock &#x3D; clock;
+        this.name &#x3D; name;
+        this.description &#x3D; description;
+        this.meter &#x3D; new Meter(clock, 1, name);
+        this.histogram &#x3D; new Histogram(reservoir, name, description, buckets);
+    }
+
+    /**
+     * Adds a duration manually.
+     *
+     * @param {number} duration
+     * @param {TimeUnit} unit
+     * @memberof Timer
+     */
+    public addDuration(duration: number, unit: TimeUnit): void {
+        if (duration &gt;&#x3D; 0) {
+            this.histogram.update(unit.convertTo(duration, NANOSECOND));
+            this.meter.mark(1);
+        }
+    }
+
+    /**
+     * Gets a snapshot from the embedded {@link Histogram}.
+     *
+     * @returns {Snapshot}
+     * @memberof Timer
+     */
+    public getSnapshot(): Snapshot {
+        return this.histogram.getSnapshot();
+    }
+
+    /**
+     * Gets the count from the embedded {@link Histogram}.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public getCount(): number {
+        return this.histogram.getCount();
+    }
+
+    /**
+     * Gets the sum from the embedded {@link Histogram}.
+     *
+     * @returns {Int64Wrapper}
+     * @memberof Timer
+     */
+    public getSum(): Int64Wrapper {
+        return this.histogram.getSum();
+    }
+
+    /**
+     * Gets the average rate per second of last 15 minutes.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public get15MinuteRate(): number {
+        return this.meter.get15MinuteRate();
+    }
+
+    /**
+     * Gets the average rate per second of last 5 minutes.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public get5MinuteRate(): number {
+        return this.meter.get5MinuteRate();
+    }
+
+    /**
+     * Gets the average rate per second of last minute.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public get1MinuteRate(): number {
+        return this.meter.get1MinuteRate();
+    }
+
+    /**
+     * Gets the mean rate from the embedded {@link Meter}.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public getMeanRate(): number {
+        return this.meter.getMeanRate();
+    }
+
+    /**
+     * Gets the bucket config from the internal {@link Histogram} and therefore representing the durations.
+     *
+     * @returns {Buckets}
+     * @memberof Timer
+     */
+    public getBuckets(): Buckets {
+        return this.histogram.getBuckets();
+    }
+
+    /**
+     * Gets the bucket counts from the internal {@link Histogram}.
+     *
+     * @returns {Map&lt;number, number&gt;}
+     * @memberof Timer
+     */
+    public getCounts(): Map&lt;number, number&gt; {
+        return this.histogram.getCounts();
+    }
+
+    /**
+     * Measures the duration of the passed function&#x27;s invocation
+     * synchronously and adds it to the pool.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public time(f: () &#x3D;&gt; void): void {
+        const startTime: Time &#x3D; this.clock.time();
+        try {
+            f();
+        } finally {
+            this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+        }
+    }
+
+    /**
+     * Measures the duration of the passed function&#x27;s invocation
+     * asynchronously and adds it to the pool.
+     *
+     * @returns {number}
+     * @memberof Timer
+     */
+    public timeAsync(f: () &#x3D;&gt; Promise&lt;any&gt;): Promise&lt;void&gt; {
+        const startTime: Time &#x3D; this.clock.time();
+        return f()
+            .then(() &#x3D;&gt; {
+                this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+            })
+            .catch((err) &#x3D;&gt; {
+                this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+                throw err;
+            });
+    }
+
+    /**
+     * Builds a new StopWatch.
+     *
+     * @returns {StopWatch}
+     * @memberof Timer
+     */
+    public newStopWatch(): StopWatch {
+        return new StopWatch(this.clock, this);
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'StopWatch.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
