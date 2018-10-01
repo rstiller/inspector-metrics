@@ -2,6 +2,7 @@ import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
 import { Counter, MonotoneCounter } from "./counter";
+import { Buckets } from "./counting";
 import { Gauge } from "./gauge";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
@@ -716,11 +717,13 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         name: string,
         group: string = null,
         reservoir: Reservoir = null,
-        description: string = null): Histogram {
+        description: string = null,
+        buckets: Buckets = new Buckets()): Histogram {
+
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const histogram = new Histogram(reservoir, name, description);
+        const histogram = new Histogram(reservoir, name, description, buckets);
         if (!!group) {
             histogram.setGroup(group);
         }
@@ -745,12 +748,13 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         group: string = null,
         clock: Clock = this.defaultClock,
         reservoir: Reservoir = null,
-        description: string = null): Timer {
+        description: string = null,
+        buckets: Buckets = new Buckets()): Timer {
 
         if (!reservoir) {
             reservoir = new SlidingWindowReservoir(1024);
         }
-        const timer = new Timer(clock, reservoir, name, description);
+        const timer = new Timer(clock, reservoir, name, description, buckets);
         if (!!group) {
             timer.setGroup(group);
         }
