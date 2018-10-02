@@ -1,6 +1,8 @@
 import "source-map-support";
 
 import {
+    BucketCounting,
+    Buckets,
     Clock,
     Counter,
     Gauge,
@@ -24,54 +26,6 @@ interface MetricEntry {
 }
 
 type MetricType = "counter" | "gauge" | "histogram" | "summary" | "untyped";
-
-export class Buckets {
-
-    public static readonly METADATA_NAME = "buckets";
-
-    public static linear(start: number, bucketWidth: number, count: number, precision = 10000): Buckets {
-        const buckets = new Buckets();
-        buckets.boundaries = new Array(count);
-        for (let i = 0; i < count; i++) {
-            buckets.boundaries[i] = start;
-            buckets.boundaries[i] *= precision;
-            buckets.boundaries[i] = Math.floor(buckets.boundaries[i]);
-            buckets.boundaries[i] /= precision;
-            start += bucketWidth;
-        }
-        return buckets;
-    }
-
-    public static exponential(initial: number, factor: number, count: number, precision = 10000): Buckets {
-        if (initial <= 0.0) {
-            throw new Error("initial values needs to be greater than 0.0");
-        }
-        if (count < 1.0) {
-            throw new Error("count needs to be at least 1");
-        }
-        if (factor <= 1.0) {
-            throw new Error("factor needs to be greater than 1.0");
-        }
-
-        const buckets = new Buckets();
-        buckets.boundaries = new Array(count);
-        buckets.boundaries[0] = initial;
-        for (let i = 1; i < count; i++) {
-            buckets.boundaries[i] = buckets.boundaries[i - 1] * factor;
-            buckets.boundaries[i] *= precision;
-            buckets.boundaries[i] = Math.floor(buckets.boundaries[i]);
-            buckets.boundaries[i] /= precision;
-        }
-        return buckets;
-    }
-
-    constructor(
-        public boundaries: number[] = [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
-    ) {
-        boundaries.sort((a: number, b: number) => a - b);
-    }
-
-}
 
 export class Percentiles {
 
@@ -117,7 +71,7 @@ export class PrometheusMetricReporter extends MetricReporter {
     }
 
     private static isNumber(value: any): value is number {
-        return value instanceof Number;
+        return typeof(value) === "number";
     }
 
     private options: Options;
@@ -229,6 +183,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         }
 
         const metricName = this.getMetricName(metric);
+        const description = this.getDescription(metric, metricName);
         const values = getValues(metric);
         const timestamp = this.getTimestamp(now);
         const tags = this.buildTags(metric, ["le", "quantile"]);
@@ -239,27 +194,24 @@ export class PrometheusMetricReporter extends MetricReporter {
         let additionalFields = "";
 
         if (metricType === "histogram") {
-            additionalFields = this.getBuckets(metric, metricName, values["count"] as number, tagStr);
+            additionalFields = this.getBuckets(metric as any, metricName, values["count"] as number, tagStr);
         } else if (metricType === "summary") {
             additionalFields = this.getQuantiles(metric as any, metricName, tagStr);
         }
 
-        return Object
+        let comments = "";
+        if (this.options.emitComments === true) {
+            comments =  `# HELP ${metricName} ${description}\n` +
+                        `# TYPE ${metricName} ${metricType}\n`;
+        }
+
+        return comments + additionalFields + Object
             .keys(values)
             .map((field) => {
                 const fieldStr = PrometheusMetricReporter.isEmpty(field) ? "" : `_${field}`;
-                const description = this.getDescription(metric, metricName);
                 const valueStr = this.getValue(values[field]);
 
-                if (this.options.emitComments === true) {
-                    return  `# HELP ${metricName} ${description}\n` +
-                            `# TYPE ${metricName} ${metricType}\n` +
-                            `${additionalFields}` +
-                            `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
-                } else {
-                    return  `${additionalFields}` +
-                            `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
-                }
+                return `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
             })
             .join("");
     }
@@ -290,25 +242,25 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.options.includeTimestamp ? ` ${now.getUTCMilliseconds()}` : "";
     }
 
-    private getBuckets<T extends Metric>(
+    private getBuckets<T extends Metric & BucketCounting>(
         metric: T,
         metricName: string,
         count: number,
         tagStr: string): string {
 
-        const buckets: Buckets = metric.getMetadata(Buckets.METADATA_NAME);
+        const buckets: Buckets = metric.getBuckets();
         if (buckets) {
             const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? ", " : "";
+            const bucketStrings: string[] = [];
 
-            return buckets
-                .boundaries
-                .map((boundary) => {
-                    // TODO:
-                    const value = 0;
-                    return `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${value}`;
-                })
-                .join("\n") +
-                `${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}`;
+            metric
+                .getCounts()
+                .forEach((bucketCount: number, boundary: number) => {
+                    bucketStrings.push(`${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}`);
+                });
+
+            return bucketStrings.join("\n") +
+                    `\n${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}\n`;
         }
 
         return "";
@@ -377,7 +329,7 @@ export class PrometheusMetricReporter extends MetricReporter {
             (metric) => !isNaN(histogram.getCount()),
             (metric) => ({
                 count: histogram.getCount() || 0,
-                sum: histogram.getSum().toString(),
+                sum: histogram.getSum().toString() || 0,
             }));
     }
 

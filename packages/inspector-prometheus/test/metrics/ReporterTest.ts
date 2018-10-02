@@ -4,7 +4,7 @@ import "reflect-metadata";
 import "source-map-support/register";
 
 import * as chai from "chai";
-import { MetricRegistry, SimpleGauge } from "inspector-metrics";
+import { Buckets, MetricRegistry, SimpleGauge } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import { PrometheusMetricReporter } from "../../lib/metrics";
 
@@ -35,7 +35,7 @@ export class ReporterTest {
 
     @test
     public "check existence of all monotone counter: no tags, no timestamp, no description"(): void {
-        const counter = this.registry.newMonotoneCounter("test_counter");
+        const counter = this.registry.newMonotoneCounter("test_counter_total");
 
         expect(this.reporter.getMetricsString()).to.be
             .equal(
@@ -148,6 +148,73 @@ export class ReporterTest {
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
                 "test_gauge{} -Inf\n\n",
+            );
+    }
+
+    @test
+    public "check existence of all histogram fields: no tags, no timestamp, no description"(): void {
+        const histogram = this.registry.newHistogram("test_histo", null, null, "help text", Buckets.linear(10, 10, 5));
+
+        expect(this.reporter.getMetricsString()).to.be
+            .equal(
+                "# HELP test_histo help text\n" +
+                "# TYPE test_histo histogram\n" +
+                "test_histo_bucket{le=\"10\"} 0\n" +
+                "test_histo_bucket{le=\"20\"} 0\n" +
+                "test_histo_bucket{le=\"30\"} 0\n" +
+                "test_histo_bucket{le=\"40\"} 0\n" +
+                "test_histo_bucket{le=\"50\"} 0\n" +
+                "test_histo_bucket{le=\"+Inf\"} 0\n" +
+                "test_histo_count{} 0\n" +
+                "test_histo_sum{} 0\n\n",
+            );
+
+        histogram.update(11);
+
+        expect(this.reporter.getMetricsString()).to.be
+            .equal(
+                "# HELP test_histo help text\n" +
+                "# TYPE test_histo histogram\n" +
+                "test_histo_bucket{le=\"10\"} 0\n" +
+                "test_histo_bucket{le=\"20\"} 1\n" +
+                "test_histo_bucket{le=\"30\"} 1\n" +
+                "test_histo_bucket{le=\"40\"} 1\n" +
+                "test_histo_bucket{le=\"50\"} 1\n" +
+                "test_histo_bucket{le=\"+Inf\"} 1\n" +
+                "test_histo_count{} 1\n" +
+                "test_histo_sum{} 11\n\n",
+            );
+
+        histogram.update(340);
+
+        expect(this.reporter.getMetricsString()).to.be
+            .equal(
+                "# HELP test_histo help text\n" +
+                "# TYPE test_histo histogram\n" +
+                "test_histo_bucket{le=\"10\"} 0\n" +
+                "test_histo_bucket{le=\"20\"} 1\n" +
+                "test_histo_bucket{le=\"30\"} 1\n" +
+                "test_histo_bucket{le=\"40\"} 1\n" +
+                "test_histo_bucket{le=\"50\"} 1\n" +
+                "test_histo_bucket{le=\"+Inf\"} 2\n" +
+                "test_histo_count{} 2\n" +
+                "test_histo_sum{} 351\n\n",
+            );
+
+        histogram.update(-119);
+
+        expect(this.reporter.getMetricsString()).to.be
+            .equal(
+                "# HELP test_histo help text\n" +
+                "# TYPE test_histo histogram\n" +
+                "test_histo_bucket{le=\"10\"} 1\n" +
+                "test_histo_bucket{le=\"20\"} 2\n" +
+                "test_histo_bucket{le=\"30\"} 2\n" +
+                "test_histo_bucket{le=\"40\"} 2\n" +
+                "test_histo_bucket{le=\"50\"} 2\n" +
+                "test_histo_bucket{le=\"+Inf\"} 3\n" +
+                "test_histo_count{} 3\n" +
+                "test_histo_sum{} 232\n\n",
             );
     }
 
