@@ -7,7 +7,7 @@ scrape_configs:
   metrics_path: /metrics
   static_configs:
     - targets:
-      - 192.168.0.161:8080
+      - 192.168.0.1:8080
 
 - job_name: pushgateway
   honor_labels: true

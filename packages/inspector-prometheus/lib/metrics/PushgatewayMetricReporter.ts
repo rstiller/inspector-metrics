@@ -44,7 +44,7 @@ export class PushgatewayMetricReporter extends MetricReporter {
         options: PushgatewayReporterOptions,
         interval: number = 15,
         unit: TimeUnit = SECOND,
-        logger: Logger = global.console,
+        logger: Logger = null,
         scheduler: Scheduler = setInterval) {
         super();
 

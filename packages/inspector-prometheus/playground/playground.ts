@@ -1,6 +1,6 @@
 // tslint:disable:no-console
 
-// import * as Hapi from "hapi";
+import * as Hapi from "hapi";
 import { MetricRegistry, Timer } from "inspector-metrics";
 import { PrometheusMetricReporter, PushgatewayMetricReporter } from "../lib/metrics";
 import { PushgatewayReporterOptions } from "../lib/metrics/";
@@ -35,35 +35,35 @@ const pushReporter = new PushgatewayMetricReporter(reporter, new PushgatewayRepo
 
 pushReporter.start();
 
-// const server = new Hapi.Server({
-//     host: "0.0.0.0",
-//     port: 8080,
-// });
+const server = new Hapi.Server({
+    host: "0.0.0.0",
+    port: 8080,
+});
 
-// server.route({
-//     method: "GET",
-//     path: "/metrics",
-//     handler(request, h) {
-//         console.log("reporting metrics");
-//         return h.response(reporter.getMetricsString())
-//             .code(200)
-//             .type("text/plain");
-//     },
-// });
+server.route({
+    method: "GET",
+    path: "/metrics",
+    handler(request, h) {
+        console.log("reporting metrics");
+        return h.response(reporter.getMetricsString())
+            .code(200)
+            .type("text/plain");
+    },
+});
 
-// async function start() {
+async function start() {
 
-//     try {
-//         await server.start();
-//     } catch (err) {
-//         console.log(err);
-//         process.exit(1);
-//     }
+    try {
+        await server.start();
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
 
-//     console.log("Server running at:", server.info.uri);
-// }
+    console.log("Server running at:", server.info.uri);
+}
 
-// start();
+start();
 
 setInterval(() => {
     requests1.time(() => {
