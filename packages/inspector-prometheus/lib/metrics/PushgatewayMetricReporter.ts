@@ -11,7 +11,23 @@ import {
 } from "inspector-metrics";
 import { PrometheusMetricReporter } from "./PrometheusMetricReporter";
 
+/**
+ * Configuration object for {@link PushgatewayMetricReporter}.
+ *
+ * @export
+ * @class PushgatewayReporterOptions
+ */
 export class PushgatewayReporterOptions {
+
+    /**
+     * Creates an instance of PushgatewayReporterOptions.
+     *
+     * @param {string} [host=""] the hostname or ip address of the pushgateway
+     * @param {number} [port=9091] the port of the pushgateway
+     * @param {string} [job=""] the id of the job
+     * @param {string} [instance=""] the id of this instance
+     * @memberof PushgatewayReporterOptions
+     */
     constructor(
         public readonly host: string = "",
         public readonly port: number = 9091,
@@ -19,10 +35,13 @@ export class PushgatewayReporterOptions {
         public readonly instance: string = "",
     ) {
     }
+
 }
 
 /**
  * Metric reporter for prometheus's pushgateway.
+ * Simply sends the output of the provided {@link PrometheusMetricReporter}
+ * to the configurated pushgateway using the text format.
  *
  * @see https://github.com/prometheus/pushgateway
  * @export
@@ -31,14 +50,76 @@ export class PushgatewayReporterOptions {
  */
 export class PushgatewayMetricReporter extends MetricReporter {
 
+    /**
+     * The reporter use ot generate the metrics string.
+     *
+     * @private
+     * @type {PrometheusMetricReporter}
+     * @memberof PushgatewayMetricReporter
+     */
     private reporter: PrometheusMetricReporter;
+    /**
+     * The configuration object.
+     *
+     * @private
+     * @type {PushgatewayReporterOptions}
+     * @memberof PushgatewayMetricReporter
+     */
     private options: PushgatewayReporterOptions;
+    /**
+     * The interval in {@link PushgatewayMetricReporter#unit} in which this reporter send data
+     * to the pushgateway.
+     *
+     * @private
+     * @type {number}
+     * @memberof PushgatewayMetricReporter
+     */
     private interval: number;
+    /**
+     * The time unit the reporting interval is interpreted with.
+     *
+     * @private
+     * @type {TimeUnit}
+     * @memberof PushgatewayMetricReporter
+     */
     private unit: TimeUnit;
+    /**
+     * A reference to the NodeJS Timer object created by the scheduler
+     * function - most likely the {@code setInterval()} function.
+     *
+     * @private
+     * @type {NodeJS.Timer}
+     * @memberof PushgatewayMetricReporter
+     */
     private timer: NodeJS.Timer;
+    /**
+     * A simplified logger interface to log response code and message of the pushgateway.
+     *
+     * @private
+     * @type {Logger}
+     * @memberof PushgatewayMetricReporter
+     */
     private logger: Logger;
+    /**
+     * The scheduler function used to schedule the reporting wit the given interval.
+     *
+     * @private
+     * @type {Scheduler}
+     * @memberof PushgatewayMetricReporter
+     */
     private scheduler: Scheduler;
 
+    /**
+     * Creates an instance of PushgatewayMetricReporter.
+     *
+     * @param {PrometheusMetricReporter} reporter
+     * @param {PushgatewayReporterOptions} options
+     * @param {number} [interval=15]
+     * @param {TimeUnit} [unit=SECOND]
+     * @param {Logger} [logger=null]
+     * @param {Scheduler} [scheduler=setInterval]
+     * @memberof PushgatewayMetricReporter
+     */
     public constructor(
         reporter: PrometheusMetricReporter,
         options: PushgatewayReporterOptions,
@@ -56,15 +137,36 @@ export class PushgatewayMetricReporter extends MetricReporter {
         this.scheduler = scheduler;
     }
 
+    /**
+     * Uses the scheduler function to call the {@link PushgatewayMetricReporter#report} function
+     * in the interval specified. The interval is converted into {@link MILLISECOND}s.
+     *
+     * @memberof PushgatewayMetricReporter
+     */
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
         this.timer = this.scheduler(() => this.report(), interval);
     }
 
+    /**
+     * Stops the scheduled reporting.
+     *
+     * @memberof PushgatewayMetricReporter
+     */
     public stop(): void {
-        this.timer.unref();
+        if (this.timer) {
+            this.timer.unref();
+        }
     }
 
+    /**
+     * Calls the reporter t generate the metrics in a valid prometheus text format.
+     * Sends the metrics via 'PUT' to the configured pushgateway.
+     *
+     * @private
+     * @returns {string}
+     * @memberof PushgatewayMetricReporter
+     */
     private report(): string {
         const payload = this.reporter.getMetricsString();
         const options = {
