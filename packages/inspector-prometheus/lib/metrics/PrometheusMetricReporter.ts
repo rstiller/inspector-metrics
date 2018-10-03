@@ -66,6 +66,11 @@ export class Options {
  */
 export class PrometheusMetricReporter extends MetricReporter {
 
+    private static readonly LABEL_NAME_REPLACEMENT_REGEXP = new RegExp("[^a-zA-Z0-9_]", "g");
+    private static readonly LABEL_NAME_START_EXCLUSION = ["_", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].sort();
+    private static readonly METRIC_NAME_REPLACEMENT_REGEXP = new RegExp("[^a-zA-Z0-9_:]", "g");
+    private static readonly METRIC_NAME_START_EXCLUSION = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"].sort();
+
     private static isEmpty(value: string): boolean {
         return !value || value.trim() === "";
     }
@@ -95,13 +100,6 @@ export class PrometheusMetricReporter extends MetricReporter {
         this.tags = tags;
         this.clock = clock;
         this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
-
-        if (options.useUntyped) {
-            this.counterType = "untyped";
-            this.gaugeType = "untyped";
-            this.histogramType = "untyped";
-            this.summaryType = "untyped";
-        }
     }
 
     public getTags(): Map<string, string> {
@@ -194,9 +192,13 @@ export class PrometheusMetricReporter extends MetricReporter {
         let additionalFields = "";
 
         if (metricType === "histogram") {
-            additionalFields = this.getBuckets(metric as any, metricName, values["count"] as number, tagStr);
+            additionalFields = this.getBuckets(metric as any, metricName, values["count"] as number, tagStr, timestamp);
         } else if (metricType === "summary") {
-            additionalFields = this.getQuantiles(metric as any, metricName, tagStr);
+            additionalFields = this.getQuantiles(metric as any, metricName, tagStr, timestamp);
+        }
+
+        if (this.options.useUntyped) {
+            metricType = "untyped";
         }
 
         let comments = "";
@@ -246,21 +248,24 @@ export class PrometheusMetricReporter extends MetricReporter {
         metric: T,
         metricName: string,
         count: number,
-        tagStr: string): string {
+        tagStr: string,
+        timestamp: string): string {
 
         const buckets: Buckets = metric.getBuckets();
         if (buckets) {
-            const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? ", " : "";
+            const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? "," : "";
             const bucketStrings: string[] = [];
 
             metric
                 .getCounts()
                 .forEach((bucketCount: number, boundary: number) => {
-                    bucketStrings.push(`${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}`);
+                    bucketStrings.push(
+                        `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}${timestamp}`,
+                    );
                 });
 
             return bucketStrings.join("\n") +
-                    `\n${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}\n`;
+                `\n${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}${timestamp}\n`;
         }
 
         return "";
@@ -269,23 +274,23 @@ export class PrometheusMetricReporter extends MetricReporter {
     private getQuantiles<T extends Metric & Sampling>(
         metric: T,
         metricName: string,
-        tagStr: string): string {
+        tagStr: string,
+        timestamp: string): string {
 
-        const quantiles: Percentiles = metric.getMetadata(Percentiles.METADATA_NAME);
-        if (quantiles) {
-            const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? ", " : "";
-            const snapshot = metric.getSnapshot();
-
-            return quantiles
-                .boundaries
-                .map((boundary) => {
-                    const value = snapshot.getValue(boundary);
-                    return `${metricName}{${tagStr}${tagPrefix}quantile="${boundary}"} ${value}`;
-                })
-                .join("\n");
+        let quantiles: Percentiles = metric.getMetadata(Percentiles.METADATA_NAME);
+        if (!quantiles) {
+            quantiles = new Percentiles();
         }
+        const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? "," : "";
+        const snapshot = metric.getSnapshot();
 
-        return "";
+        return quantiles
+            .boundaries
+            .map((boundary) => {
+                const value = snapshot.getValue(boundary);
+                return `${metricName}{${tagStr}${tagPrefix}quantile="${boundary}"} ${value}${timestamp}`;
+            })
+            .join("\n") + "\n";
     }
 
     private getCounterString(now: Date, counter: MonotoneCounter): string {
@@ -337,10 +342,10 @@ export class PrometheusMetricReporter extends MetricReporter {
         return this.getMetricString(
             now,
             meter,
-            this.counterType,
+            this.gaugeType,
             (metric) => !isNaN(meter.getCount()),
             (metric) => ({
-                total: meter.getCount() || 0,
+                "": meter.getCount() || 0,
             }));
     }
 
@@ -352,7 +357,7 @@ export class PrometheusMetricReporter extends MetricReporter {
             (metric) => !isNaN(timer.getCount()),
             (metric) => ({
                 count: timer.getCount() || 0,
-                sum: timer.getSum().toString(),
+                sum: timer.getSum().toString() || 0,
             }));
     }
 
@@ -377,10 +382,16 @@ export class PrometheusMetricReporter extends MetricReporter {
     }
 
     private getMetricName(metric: Metric): string {
+        let name = metric.getName();
         if (metric.getGroup()) {
-            return `${metric.getGroup()}:${metric.getName()}`;
+            name = `${metric.getGroup()}:${metric.getName()}`;
         }
-        return metric.getName();
+
+        name = name.replace(PrometheusMetricReporter.METRIC_NAME_REPLACEMENT_REGEXP, "_");
+        if (PrometheusMetricReporter.METRIC_NAME_START_EXCLUSION.indexOf(name.charAt(0)) !== -1) {
+            name = "_" + name.slice(1);
+        }
+        return name;
     }
 
     private buildTags(taggable: Taggable, exclude: string[]): { [key: string]: string } {
@@ -388,13 +399,17 @@ export class PrometheusMetricReporter extends MetricReporter {
 
         const tags: { [x: string]: string } = {};
         this.tags.forEach((value, key) => {
-            if (exclude.indexOf(key) === -1) {
-                tags[key] = value;
+            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+            if (exclude.indexOf(normalizedKey) === -1 &&
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                tags[normalizedKey] = value;
             }
         });
         taggable.getTags().forEach((value, key) => {
-            if (exclude.indexOf(key) === -1) {
-                tags[key] = value;
+            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+            if (exclude.indexOf(normalizedKey) === -1 &&
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                tags[normalizedKey] = value;
             }
         });
         return tags;
