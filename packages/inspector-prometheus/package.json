@@ -2,7 +2,7 @@
   "name": "inspector-prometheus",
   "description": "Prometheus / Pushgateway metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-prometheus/",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
