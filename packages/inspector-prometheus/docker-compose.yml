@@ -2,22 +2,20 @@ version: "3"
 
 services:
 
-  test:
-    build:
-      context: ./test-env/
-      args:
-        TZ: Europe/Berlin
-    restart: "no"
-    hostname: playground
-    depends_on:
-      - prometheus
-      - pushgateway
-    volumes:
-      - ./:/opt/playground/
-    networks:
-      - inspector-prometheus-playground
-    working_dir: "/opt/playground"
-    command: ["/usr/bin/wait-for-it.sh", "pushgateway:9091", "--", "node", "build/lib/playground.js"]
+  # test:
+  #   build:
+  #     context: ./test-env/
+  #     args:
+  #       TZ: Europe/Berlin
+  #   restart: "no"
+  #   hostname: playground
+  #   depends_on:
+  #     - prometheus
+  #     - pushgateway
+  #   volumes:
+  #     - ./:/opt/playground/
+  #   working_dir: "/opt/playground"
+  #   command: ["/usr/bin/wait-for-it.sh", "pushgateway:9091", "--", "node", "build/playground/playground.js"]
 
   grafana:
     build:
@@ -33,8 +31,6 @@ services:
     hostname: grafana
     depends_on:
       - prometheus
-    networks:
-      - inspector-prometheus-playground
 
   pushgateway:
     build:
@@ -42,26 +38,22 @@ services:
       args:
         TZ: CET-1CEST
     ports:
-      - "9091"
+      - "9091:9091"
     restart: "no"
     hostname: pushgateway
-    networks:
-      - inspector-prometheus-playground
 
   prometheus:
     build:
       context: ./test-env/prometheus
       args:
         TZ: CET-1CEST
+    command: ["--config.file", "/etc/prometheus/config.yml"]
     ports:
-      - "9090"
+      - "9090:9090"
     restart: "no"
     hostname: prometheus
-    networks:
-      - inspector-prometheus-playground
-
-networks:
-  inspector-prometheus-playground:
+    volumes:
+      - ./test-env/prometheus/config.yml:/etc/prometheus/config.yml
 
 volumes:
   grafana-data:
