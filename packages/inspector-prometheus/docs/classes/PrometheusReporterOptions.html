@@ -1,0 +1,1214 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-prometheus documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-prometheus documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>PrometheusReporterOptions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/PrometheusMetricReporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Configuration object for <a href="../classes/PrometheusMetricReporter.html">PrometheusMetricReporter</a>.</p>
+
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#emitComments">emitComments</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#includeTimestamp">includeTimestamp</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#useUntyped">useUntyped</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(includeTimestamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, emitComments: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, useUntyped: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">lib/metrics/PrometheusMetricReporter.ts:98</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of PrometheusReporterOptions.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>includeTimestamp</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>indicates if UTC converted timestamps should be appended to each metric data</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>emitComments</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>indicates if comments like HELP and TYPE should be emitted</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>useUntyped</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>indicates if the untyped should always be used</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="emitComments"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            emitComments
+                            </b>
+                            <a href="#emitComments"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>emitComments:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>true</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">lib/metrics/PrometheusMetricReporter.ts:111</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">indicates if comments like HELP and TYPE should be emitted</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="includeTimestamp"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            includeTimestamp
+                            </b>
+                            <a href="#includeTimestamp"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>includeTimestamp:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">lib/metrics/PrometheusMetricReporter.ts:110</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">indicates if UTC converted timestamps should be appended to each metric data</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="useUntyped"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            useUntyped
+                            </b>
+                            <a href="#useUntyped"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span><code>useUntyped:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">lib/metrics/PrometheusMetricReporter.ts:112</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description">indicates if the untyped should always be used</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support&quot;;
+
+import {
+    BucketCounting,
+    Buckets,
+    Clock,
+    Counter,
+    Gauge,
+    Histogram,
+    Meter,
+    Metric,
+    MetricRegistry,
+    MetricReporter,
+    MILLISECOND,
+    MINUTE,
+    MonotoneCounter,
+    Sampling,
+    StdClock,
+    Taggable,
+    Timer,
+} from &quot;inspector-metrics&quot;;
+
+/**
+ * Utility interface to track report-timestamps and -values of metric instances.
+ * This is directly linked to the minimum-reporting timeout, which ensures
+ * that a certain value gets reported at least in a certain amount of time
+ * e.g. every minute without the value being having changed. On the other hand
+ * to not report values that haven&#x27;t changed.
+ *
+ * @interface MetricEntry
+ */
+interface MetricEntry {
+    /**
+     * timestamp of the latest report.
+     *
+     * @type {number}
+     * @memberof MetricEntry
+     */
+    lastReport: number;
+    /**
+     * value that got reported as latest.
+     *
+     * @type {number}
+     * @memberof MetricEntry
+     */
+    lastValue: number;
+}
+
+/**
+ * Enumeration used to determine valid metric types of prometheus.
+ */
+type MetricType &#x3D; &quot;counter&quot; | &quot;gauge&quot; | &quot;histogram&quot; | &quot;summary&quot; | &quot;untyped&quot;;
+
+/**
+ * List of values between 0 and 1 representing the percent boundaries for reporting.
+ *
+ * @export
+ * @class Percentiles
+ */
+export class Percentiles {
+
+    /**
+     * Name constant for assigning an instance of this class as metadata to a metric instance.
+     *
+     * @static
+     * @memberof Percentiles
+     */
+    public static readonly METADATA_NAME &#x3D; &quot;quantiles&quot;;
+
+    /**
+     * Creates an instance of Percentiles.
+     *
+     * @param {number[]} [boundaries&#x3D;[0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]]
+     * @memberof Percentiles
+     */
+    constructor(
+        public boundaries: number[] &#x3D; [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999],
+    ) {
+        boundaries.sort((a: number, b: number) &#x3D;&gt; a - b);
+        boundaries.forEach((boundary) &#x3D;&gt; {
+            if (boundary &lt;&#x3D; 0.0) {
+                throw new Error(&quot;boundaries cannot be smaller or eqaul to 0.0&quot;);
+            }
+            if (boundary &gt;&#x3D; 1.0) {
+                throw new Error(&quot;boundaries cannot be greater or eqaul to 1.0&quot;);
+            }
+        });
+    }
+
+}
+
+/**
+ * Configuration object for {@link PrometheusMetricReporter}.
+ *
+ * @export
+ * @class PrometheusReporterOptions
+ */
+export class PrometheusReporterOptions {
+
+    /**
+     * Creates an instance of PrometheusReporterOptions.
+     *
+     * @param {boolean} [includeTimestamp&#x3D;false]
+     *  indicates if UTC converted timestamps should be appended to each metric data
+     * @param {boolean} [emitComments&#x3D;true] indicates if comments like HELP and TYPE should be emitted
+     * @param {boolean} [useUntyped&#x3D;false] indicates if the untyped should always be used
+     * @memberof PrometheusReporterOptions
+     */
+    constructor(
+        public includeTimestamp: boolean &#x3D; false,
+        public emitComments: boolean &#x3D; true,
+        public useUntyped: boolean &#x3D; false,
+    ) {}
+
+}
+
+/**
+ * Metric reporter for prometheus.
+ * This reporter only support the text format of prometheus / open-metrics.
+ *
+ * To get the metric report call the {@link PrometheusMetricReporter#getMetricsString} method.
+ *
+ * @see https://prometheus.io/docs/concepts/
+ * @see https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format
+ * @export
+ * @class PrometheusMetricReporter
+ * @extends {MetricReporter}
+ */
+export class PrometheusMetricReporter extends MetricReporter {
+
+    /**
+     * Used to replace unsupported characters from label name.
+     *
+     * @private
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    private static readonly LABEL_NAME_REPLACEMENT_REGEXP &#x3D; new RegExp(&quot;[^a-zA-Z0-9_]&quot;, &quot;g&quot;);
+    /**
+     * used to replace the first character of a label name if needed.
+     *
+     * @private
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    private static readonly LABEL_NAME_START_EXCLUSION &#x3D; [&quot;_&quot;, &quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;].sort();
+    /**
+     * Used to replace unsupported characters from metric name.
+     *
+     * @private
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    private static readonly METRIC_NAME_REPLACEMENT_REGEXP &#x3D; new RegExp(&quot;[^a-zA-Z0-9_:]&quot;, &quot;g&quot;);
+    /**
+     * used to replace the first character of a metric name if needed.
+     *
+     * @private
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    private static readonly METRIC_NAME_START_EXCLUSION &#x3D; [&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;, &quot;6&quot;, &quot;7&quot;, &quot;8&quot;, &quot;9&quot;].sort();
+
+    /**
+     * Checks if a given string is empty.
+     *
+     * @private
+     * @static
+     * @param {string} value
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    private static isEmpty(value: string): boolean {
+        return !value || value.trim() &#x3D;&#x3D;&#x3D; &quot;&quot;;
+    }
+
+    /**
+     * Checks if a given value is a number.
+     *
+     * @private
+     * @static
+     * @param {*} value
+     * @returns {value is number}
+     * @memberof PrometheusMetricReporter
+     */
+    private static isNumber(value: any): value is number {
+        return typeof(value) &#x3D;&#x3D;&#x3D; &quot;number&quot;;
+    }
+
+    /**
+     * Configuration for the rendering of the metric report.
+     *
+     * @private
+     * @type {PrometheusReporterOptions}
+     * @memberof PrometheusMetricReporter
+     */
+    private options: PrometheusReporterOptions;
+    /**
+     * Clack instance used to determine the time for reports and minimal-reporting feature.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof PrometheusMetricReporter
+     */
+    private clock: Clock;
+    /**
+     * Timeout in {@link MINUTE}s in which a certain metric needs to be included in the metric report.
+     *
+     * @private
+     * @type {number}
+     * @memberof PrometheusMetricReporter
+     */
+    private minReportingTimeout: number;
+    /**
+     * Common tags for this reporter.
+     *
+     * @private
+     * @type {Map&lt;string, string&gt;}
+     * @memberof PrometheusMetricReporter
+     */
+    private tags: Map&lt;string, string&gt;;
+    /**
+     * Keeps track of the reporting states for each metric.
+     *
+     * @private
+     * @type {Map&lt;number, MetricEntry&gt;}
+     * @memberof PrometheusMetricReporter
+     */
+    private metricStates: Map&lt;number, MetricEntry&gt; &#x3D; new Map();
+    /**
+     * The prometheus counter type string.
+     *
+     * @private
+     * @type {MetricType}
+     * @memberof PrometheusMetricReporter
+     */
+    private counterType: MetricType &#x3D; &quot;counter&quot;;
+    /**
+     * The prometheus gauge type string.
+     *
+     * @private
+     * @type {MetricType}
+     * @memberof PrometheusMetricReporter
+     */
+    private gaugeType: MetricType &#x3D; &quot;gauge&quot;;
+    /**
+     * The prometheus histogram type string.
+     *
+     * @private
+     * @type {MetricType}
+     * @memberof PrometheusMetricReporter
+     */
+    private histogramType: MetricType &#x3D; &quot;histogram&quot;;
+    /**
+     * The prometheus summary type string.
+     *
+     * @private
+     * @type {MetricType}
+     * @memberof PrometheusMetricReporter
+     */
+    private summaryType: MetricType &#x3D; &quot;summary&quot;;
+
+    /**
+     * Creates an instance of PrometheusMetricReporter.
+     *
+     * @param {PrometheusReporterOptions} [options&#x3D;new PrometheusReporterOptions()] configuration options
+     * @param {Map&lt;string, string&gt;} [tags&#x3D;new Map()]
+     * @param {Clock} [clock&#x3D;new StdClock()]
+     * @param {number} [minReportingTimeout&#x3D;1]
+     *     timeout in minutes a metric need to be included in the report without having changed
+     * @memberof PrometheusMetricReporter
+     */
+    public constructor(
+        options: PrometheusReporterOptions &#x3D; new PrometheusReporterOptions(),
+        tags: Map&lt;string, string&gt; &#x3D; new Map(),
+        clock: Clock &#x3D; new StdClock(),
+        minReportingTimeout &#x3D; 1) {
+        super();
+
+        this.options &#x3D; options;
+        this.tags &#x3D; tags;
+        this.clock &#x3D; clock;
+        this.minReportingTimeout &#x3D; MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+    }
+
+    /**
+     * Gets the tags of this reporter.
+     *
+     * @returns {Map&lt;string, string&gt;}
+     * @memberof PrometheusMetricReporter
+     */
+    public getTags(): Map&lt;string, string&gt; {
+        return this.tags;
+    }
+
+    /**
+     * Sets the tags for this reporter.
+     *
+     * @param {Map&lt;string, string&gt;} tags
+     * @memberof PrometheusMetricReporter
+     */
+    public setTags(tags: Map&lt;string, string&gt;): void {
+        this.tags &#x3D; tags;
+    }
+
+    /**
+     * Build the metric reporting string for all registered {@link MetricRegistry}s.
+     *
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    public getMetricsString(): string {
+        if (this.metricRegistries &amp;&amp; this.metricRegistries.length &gt; 0) {
+            return this.metricRegistries
+                .map((registry) &#x3D;&gt; this.reportMetricRegistry(registry))
+                .join(&quot;&quot;) + &quot;\n&quot;;
+        }
+        return &quot;\n&quot;;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @memberof PrometheusMetricReporter
+     */
+    public start(): void {
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @memberof PrometheusMetricReporter
+     */
+    public stop(): void {
+    }
+
+    /**
+     * Builds the reporting string for the specifed {@link MetricRegistry}.
+     *
+     * @private
+     * @param {MetricRegistry} r
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private reportMetricRegistry(r: MetricRegistry): string {
+        const now: Date &#x3D; new Date(this.clock.time().milliseconds);
+
+        const monotoneCounters &#x3D; this.reportMetrics(r.getMonotoneCounterList(), now,
+            (c: MonotoneCounter) &#x3D;&gt; this.getCounterString(now, c),
+            (c: MonotoneCounter) &#x3D;&gt; c.getCount());
+        const counters &#x3D; this.reportMetrics(r.getCounterList(), now,
+            (c: Counter) &#x3D;&gt; this.getCounterGaugeString(now, c),
+            (c: Counter) &#x3D;&gt; c.getCount());
+        const gauges &#x3D; this.reportMetrics(r.getGaugeList(), now,
+            (g: Gauge&lt;any&gt;) &#x3D;&gt; this.getGaugeString(now, g),
+            (g: Gauge&lt;any&gt;) &#x3D;&gt; g.getValue());
+        const histograms &#x3D; this.reportMetrics(r.getHistogramList(), now,
+            (h: Histogram) &#x3D;&gt; this.getHistogramString(now, h),
+            (h: Histogram) &#x3D;&gt; h.getCount());
+        const meters &#x3D; this.reportMetrics(r.getMeterList(), now,
+            (m: Meter) &#x3D;&gt; this.getMeterString(now, m),
+            (m: Meter) &#x3D;&gt; m.getCount());
+        const timers &#x3D; this.reportMetrics(r.getTimerList(), now,
+            (t: Timer) &#x3D;&gt; this.getTimerString(now, t),
+            (t: Timer) &#x3D;&gt; t.getCount());
+
+        return []
+            .concat(monotoneCounters)
+            .concat(counters)
+            .concat(gauges)
+            .concat(histograms)
+            .concat(meters)
+            .concat(timers)
+            .join(&quot;\n&quot;);
+    }
+
+    /**
+     * Builds the reporting string for a group of metrics with the same type.
+     *
+     * @private
+     * @template T
+     * @param {T[]} metrics
+     * @param {Date} date the date used to determine the timestamp from.
+     * @param {(metric: T) &#x3D;&gt; string} reportFn function called generate teh reporting string for a single metric
+     * @param {(metric: Metric) &#x3D;&gt; number} lastFn function to determine the latest value of a metric
+     * @returns {string[]}
+     * @memberof PrometheusMetricReporter
+     */
+    private reportMetrics&lt;T extends Metric&gt;(
+        metrics: T[],
+        date: Date,
+        reportFn: (metric: T) &#x3D;&gt; string,
+        lastFn: (metric: Metric) &#x3D;&gt; number): string[] {
+
+        return metrics
+            .filter((metric) &#x3D;&gt; !(metric as any).id || this.hasChanged((metric as any).id, lastFn(metric), date))
+            .map((metric) &#x3D;&gt; reportFn(metric));
+    }
+
+    /**
+     * Builds the metric string based on the specified type of the metric instance.
+     * Returns an empty string if the metric can&#x27;t be reported - determined with the
+     * specified function.
+     *
+     * @private
+     * @template T
+     * @param {Date} now
+     * @param {T} metric
+     * @param {MetricType} metricType
+     * @param {(metric: T) &#x3D;&gt; boolean} canReport
+     * @param {((metric: T) &#x3D;&gt; { [key: string]: number | string; })} getValues
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getMetricString&lt;T extends Metric&gt;(
+        now: Date,
+        metric: T,
+        metricType: MetricType,
+        canReport: (metric: T) &#x3D;&gt; boolean,
+        getValues: (metric: T) &#x3D;&gt; { [key: string]: number | string; },
+        ): string {
+
+        if (!canReport(metric)) {
+            return &quot;&quot;;
+        }
+
+        const metricName &#x3D; this.getMetricName(metric);
+        const description &#x3D; this.getDescription(metric, metricName);
+        const values &#x3D; getValues(metric);
+        const timestamp &#x3D; this.getTimestamp(now);
+        const tags &#x3D; this.buildTags(metric, [&quot;le&quot;, &quot;quantile&quot;]);
+        const tagStr &#x3D; Object
+            .keys(tags)
+            .map((tag) &#x3D;&gt; &#x60;${tag}&#x3D;&quot;${tags[tag]}&quot;&#x60;)
+            .join(&quot;,&quot;);
+        let additionalFields &#x3D; &quot;&quot;;
+
+        if (metricType &#x3D;&#x3D;&#x3D; &quot;histogram&quot;) {
+            additionalFields &#x3D; this.getBuckets(metric as any, metricName, values[&quot;count&quot;] as number, tagStr, timestamp);
+        } else if (metricType &#x3D;&#x3D;&#x3D; &quot;summary&quot;) {
+            additionalFields &#x3D; this.getQuantiles(metric as any, metricName, tagStr, timestamp);
+        }
+
+        if (this.options.useUntyped) {
+            metricType &#x3D; &quot;untyped&quot;;
+        }
+
+        let comments &#x3D; &quot;&quot;;
+        if (this.options.emitComments &#x3D;&#x3D;&#x3D; true) {
+            comments &#x3D;  &#x60;# HELP ${metricName} ${description}\n&#x60; +
+                        &#x60;# TYPE ${metricName} ${metricType}\n&#x60;;
+        }
+
+        return comments + additionalFields + Object
+            .keys(values)
+            .map((field) &#x3D;&gt; {
+                const fieldStr &#x3D; PrometheusMetricReporter.isEmpty(field) ? &quot;&quot; : &#x60;_${field}&#x60;;
+                const valueStr &#x3D; this.getValue(values[field]);
+
+                return &#x60;${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n&#x60;;
+            })
+            .join(&quot;&quot;);
+    }
+
+    /**
+     * Builds the description for a metric instance based on the description property.
+     * If no description was specified this function returns &#x27;&lt;metric_name&gt; description&#x27;.
+     *
+     * @private
+     * @template T
+     * @param {T} metric
+     * @param {string} metricName
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getDescription&lt;T extends Metric&gt;(metric: T, metricName: string): string {
+        let description &#x3D; metric.getDescription();
+        if (PrometheusMetricReporter.isEmpty(description)) {
+            description &#x3D; &#x60;${metricName} description&#x60;;
+        }
+        return description;
+    }
+
+    /**
+     * Gets a numeric value in the correct format (mainly used to format +Inf and -Inf)
+     *
+     * @private
+     * @param {*} value
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getValue(value: any): string {
+        let valueStr &#x3D; &#x60;${value}&#x60;;
+
+        if (PrometheusMetricReporter.isNumber(value) &amp;&amp; !Number.isFinite(value)) {
+            if (value &#x3D;&#x3D;&#x3D; -Infinity) {
+                valueStr &#x3D; &quot;-Inf&quot;;
+            } else if (value &#x3D;&#x3D;&#x3D; Infinity) {
+                valueStr &#x3D; &quot;+Inf&quot;;
+            }
+        }
+
+        return valueStr;
+    }
+
+    /**
+     * Gets the UTC timestamp.
+     *
+     * @private
+     * @param {Date} now
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getTimestamp(now: Date): string {
+        return this.options.includeTimestamp ? &#x60; ${now.getUTCMilliseconds()}&#x60; : &quot;&quot;;
+    }
+
+    /**
+     * Builds the string for bucket data lines.
+     *
+     * @private
+     * @template T
+     * @param {T} metric
+     * @param {string} metricName
+     * @param {number} count
+     * @param {string} tagStr
+     * @param {string} timestamp
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getBuckets&lt;T extends Metric &amp; BucketCounting&gt;(
+        metric: T,
+        metricName: string,
+        count: number,
+        tagStr: string,
+        timestamp: string): string {
+
+        const buckets: Buckets &#x3D; metric.getBuckets();
+        if (buckets) {
+            const tagPrefix &#x3D; !PrometheusMetricReporter.isEmpty(tagStr) ? &quot;,&quot; : &quot;&quot;;
+            const bucketStrings: string[] &#x3D; [];
+
+            metric
+                .getCounts()
+                .forEach((bucketCount: number, boundary: number) &#x3D;&gt; {
+                    bucketStrings.push(
+                        &#x60;${metricName}_bucket{${tagStr}${tagPrefix}le&#x3D;&quot;${boundary}&quot;} ${bucketCount}${timestamp}&#x60;,
+                    );
+                });
+
+            return bucketStrings.join(&quot;\n&quot;) +
+                &#x60;\n${metricName}_bucket{${tagStr}${tagPrefix}le&#x3D;&quot;+Inf&quot;} ${count}${timestamp}\n&#x60;;
+        }
+
+        return &quot;&quot;;
+    }
+
+    /**
+     * Builds the string for percentile data lines.
+     *
+     * @private
+     * @template T
+     * @param {T} metric
+     * @param {string} metricName
+     * @param {string} tagStr
+     * @param {string} timestamp
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getQuantiles&lt;T extends Metric &amp; Sampling&gt;(
+        metric: T,
+        metricName: string,
+        tagStr: string,
+        timestamp: string): string {
+
+        let quantiles: Percentiles &#x3D; metric.getMetadata(Percentiles.METADATA_NAME);
+        if (!quantiles) {
+            quantiles &#x3D; new Percentiles();
+        }
+        const tagPrefix &#x3D; !PrometheusMetricReporter.isEmpty(tagStr) ? &quot;,&quot; : &quot;&quot;;
+        const snapshot &#x3D; metric.getSnapshot();
+
+        return quantiles
+            .boundaries
+            .map((boundary) &#x3D;&gt; {
+                const value &#x3D; snapshot.getValue(boundary);
+                return &#x60;${metricName}{${tagStr}${tagPrefix}quantile&#x3D;&quot;${boundary}&quot;} ${value}${timestamp}&#x60;;
+            })
+            .join(&quot;\n&quot;) + &quot;\n&quot;;
+    }
+
+    /**
+     * Builds the reporting string for monotone counter types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {MonotoneCounter} counter
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getCounterString(now: Date, counter: MonotoneCounter): string {
+        return this.getMetricString(
+            now,
+            counter,
+            this.counterType,
+            (metric) &#x3D;&gt; true,
+            (metric) &#x3D;&gt; ({
+                &quot;&quot;: counter.getCount() || 0,
+            }));
+    }
+
+    /**
+     * Builds the reporting string for counter types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {Counter} counter
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getCounterGaugeString(now: Date, counter: Counter): string {
+        return this.getMetricString(
+            now,
+            counter,
+            this.gaugeType,
+            (metric) &#x3D;&gt; true,
+            (metric) &#x3D;&gt; ({
+                &quot;&quot;: counter.getCount() || 0,
+            }));
+    }
+
+    /**
+     * Builds the reporting string for gauge types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {Gauge&lt;any&gt;} gauge
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getGaugeString(now: Date, gauge: Gauge&lt;any&gt;): string {
+        return this.getMetricString(
+            now,
+            gauge,
+            this.gaugeType,
+            (metric) &#x3D;&gt; true,
+            (metric) &#x3D;&gt; ({
+                &quot;&quot;: gauge.getValue(),
+            }));
+    }
+
+    /**
+     * Builds the reporting string for histogram types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {Histogram} histogram
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getHistogramString(now: Date, histogram: Histogram): string {
+        return this.getMetricString(
+            now,
+            histogram,
+            this.histogramType,
+            (metric) &#x3D;&gt; !isNaN(histogram.getCount()),
+            (metric) &#x3D;&gt; ({
+                count: histogram.getCount() || 0,
+                sum: histogram.getSum().toString() || 0,
+            }));
+    }
+
+    /**
+     * Builds the reporting string for meter types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {Meter} meter
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getMeterString(now: Date, meter: Meter): string {
+        return this.getMetricString(
+            now,
+            meter,
+            this.gaugeType,
+            (metric) &#x3D;&gt; !isNaN(meter.getCount()),
+            (metric) &#x3D;&gt; ({
+                &quot;&quot;: meter.getCount() || 0,
+            }));
+    }
+
+    /**
+     * Builds the reporting string for timer types using {@link PrometheusMetricReporter#getMetricString}.
+     *
+     * @private
+     * @param {Date} now
+     * @param {Timer} timer
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getTimerString(now: Date, timer: Timer): string {
+        return this.getMetricString(
+            now,
+            timer,
+            this.summaryType,
+            (metric) &#x3D;&gt; !isNaN(timer.getCount()),
+            (metric) &#x3D;&gt; ({
+                count: timer.getCount() || 0,
+                sum: timer.getSum().toString() || 0,
+            }));
+    }
+
+    /**
+     * Determines if a metric instance has changed it&#x27;s value since the last check.
+     * This is always true is the minimal-reporting timeout was reached.
+     *
+     * @private
+     * @param {number} metricId
+     * @param {number} lastValue
+     * @param {Date} date
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
+        let changed &#x3D; true;
+        let metricEntry &#x3D; {
+            lastReport: 0,
+            lastValue,
+        };
+        if (this.metricStates.has(metricId)) {
+            metricEntry &#x3D; this.metricStates.get(metricId);
+            changed &#x3D; metricEntry.lastValue !&#x3D;&#x3D; lastValue;
+            if (!changed) {
+                changed &#x3D; metricEntry.lastReport + this.minReportingTimeout &lt; date.getTime();
+            }
+        }
+        if (changed) {
+            metricEntry.lastReport &#x3D; date.getTime();
+        }
+        this.metricStates.set(metricId, metricEntry);
+        return changed;
+    }
+
+    /**
+     * Gets the normalized metric name.
+     *
+     * @private
+     * @param {Metric} metric
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    private getMetricName(metric: Metric): string {
+        let name &#x3D; metric.getName();
+        if (metric.getGroup()) {
+            name &#x3D; &#x60;${metric.getGroup()}:${metric.getName()}&#x60;;
+        }
+
+        name &#x3D; name.replace(PrometheusMetricReporter.METRIC_NAME_REPLACEMENT_REGEXP, &quot;_&quot;);
+        if (PrometheusMetricReporter.METRIC_NAME_START_EXCLUSION.indexOf(name.charAt(0)) !&#x3D;&#x3D; -1) {
+            name &#x3D; &quot;_&quot; + name.slice(1);
+        }
+        return name;
+    }
+
+    /**
+     * Gets the mapping of tags with normalized names and filtered for reserved tags.
+     *
+     * @private
+     * @param {Taggable} taggable
+     * @param {string[]} exclude
+     * @returns {{ [key: string]: string }}
+     * @memberof PrometheusMetricReporter
+     */
+    private buildTags(taggable: Taggable, exclude: string[]): { [key: string]: string } {
+        exclude.sort();
+
+        const tags: { [x: string]: string } &#x3D; {};
+        this.tags.forEach((value, key) &#x3D;&gt; {
+            const normalizedKey &#x3D; key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, &quot;_&quot;);
+            if (exclude.indexOf(normalizedKey) &#x3D;&#x3D;&#x3D; -1 &amp;&amp;
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) &#x3D;&#x3D;&#x3D; -1) {
+                tags[normalizedKey] &#x3D; value;
+            }
+        });
+        taggable.getTags().forEach((value, key) &#x3D;&gt; {
+            const normalizedKey &#x3D; key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, &quot;_&quot;);
+            if (exclude.indexOf(normalizedKey) &#x3D;&#x3D;&#x3D; -1 &amp;&amp;
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) &#x3D;&#x3D;&#x3D; -1) {
+                tags[normalizedKey] &#x3D; value;
+            }
+        });
+        return tags;
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'PrometheusReporterOptions.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
