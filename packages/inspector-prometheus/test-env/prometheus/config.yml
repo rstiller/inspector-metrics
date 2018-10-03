@@ -8,3 +8,9 @@ scrape_configs:
   static_configs:
     - targets:
       - 192.168.0.161:8080
+
+- job_name: pushgateway
+  honor_labels: true
+  static_configs:
+    - targets:
+      - pushgateway:9091

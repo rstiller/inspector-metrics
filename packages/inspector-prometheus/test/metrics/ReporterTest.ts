@@ -13,7 +13,7 @@ import {
     Taggable,
 } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
-import { Options, Percentiles, PrometheusMetricReporter } from "../../lib/metrics";
+import { Percentiles, PrometheusMetricReporter, PrometheusReporterOptions } from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
 
 const expect = chai.expect;
@@ -369,7 +369,7 @@ export class ReporterTest {
     @test
     public "check mixed metrics with timestamp"(): void {
         this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 });
-        this.reporter = new PrometheusMetricReporter(new Options(true), undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter(new PrometheusReporterOptions(true), undefined, this.clock);
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -542,7 +542,8 @@ export class ReporterTest {
     public "check mixed metrics without comments"(): void {
         let taggable: Taggable = null;
 
-        this.reporter = new PrometheusMetricReporter(new Options(false, false, false), undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter(
+            new PrometheusReporterOptions(false, false, false), undefined, this.clock);
         this.reporter.addMetricRegistry(this.registry);
 
         taggable = this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -599,7 +600,8 @@ export class ReporterTest {
 
     @test
     public "check mixed metrics as untyped"(): void {
-        this.reporter = new PrometheusMetricReporter(new Options(false, true, true), undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter(
+            new PrometheusReporterOptions(false, true, true), undefined, this.clock);
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -674,7 +676,7 @@ export class ReporterTest {
 
     @test
     public "check matric name compatibility"(): void {
-        this.reporter = new PrometheusMetricReporter(new Options(false, false, false));
+        this.reporter = new PrometheusMetricReporter(new PrometheusReporterOptions(false, false, false));
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("__test1");

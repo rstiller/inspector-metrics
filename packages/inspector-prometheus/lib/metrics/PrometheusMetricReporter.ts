@@ -47,7 +47,7 @@ export class Percentiles {
 
 }
 
-export class Options {
+export class PrometheusReporterOptions {
     constructor(
         public includeTimestamp: boolean = false,
         public emitComments: boolean = true,
@@ -79,7 +79,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         return typeof(value) === "number";
     }
 
-    private options: Options;
+    private options: PrometheusReporterOptions;
     private clock: Clock;
     private minReportingTimeout: number;
     private tags: Map<string, string>;
@@ -90,7 +90,7 @@ export class PrometheusMetricReporter extends MetricReporter {
     private summaryType: MetricType = "summary";
 
     public constructor(
-        options: Options = new Options(),
+        options: PrometheusReporterOptions = new PrometheusReporterOptions(),
         tags: Map<string, string> = new Map(),
         clock: Clock = new StdClock(),
         minReportingTimeout = 1) {
