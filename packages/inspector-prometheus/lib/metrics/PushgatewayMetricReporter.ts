@@ -5,6 +5,7 @@ import {
     Logger,
     MetricReporter,
     MILLISECOND,
+    Scheduler,
     SECOND,
     TimeUnit,
 } from "inspector-metrics";
@@ -36,13 +37,15 @@ export class PushgatewayMetricReporter extends MetricReporter {
     private unit: TimeUnit;
     private timer: NodeJS.Timer;
     private logger: Logger;
+    private scheduler: Scheduler;
 
     public constructor(
         reporter: PrometheusMetricReporter,
         options: PushgatewayReporterOptions,
         interval: number = 15,
         unit: TimeUnit = SECOND,
-        logger: Logger = global.console) {
+        logger: Logger = global.console,
+        scheduler: Scheduler = setInterval) {
         super();
 
         this.interval = interval;
@@ -50,22 +53,23 @@ export class PushgatewayMetricReporter extends MetricReporter {
         this.reporter = reporter;
         this.options = options;
         this.logger = logger;
+        this.scheduler = scheduler;
     }
 
     public start(): void {
         const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = setInterval(() => this.report(), interval);
+        this.timer = this.scheduler(() => this.report(), interval);
     }
 
     public stop(): void {
         this.timer.unref();
     }
 
-    private async report() {
+    private report(): string {
         const payload = this.reporter.getMetricsString();
         const options = {
             headers: {
-                "Content-Length": Buffer.byteLength(payload),
+                "Content-Length": payload.length,
                 "Content-Type": "text/plain",
             },
             host: this.options.host,
@@ -75,10 +79,14 @@ export class PushgatewayMetricReporter extends MetricReporter {
         };
 
         const req = http.request(options, (res) => {
-            this.logger.debug(`${res.statusCode} ${res.statusMessage}`);
+            if (this.logger) {
+                this.logger.debug(`${res.statusCode} ${res.statusMessage}`);
+            }
         });
         req.write(payload);
         req.end();
+
+        return payload;
     }
 
 }

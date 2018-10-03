@@ -19,7 +19,7 @@ import { MockedClock } from "./mocked-clock";
 const expect = chai.expect;
 
 @suite
-export class ReporterTest {
+export class PrometheusReporterTest {
 
     private clock: MockedClock = new MockedClock();
     private registry: MetricRegistry;
