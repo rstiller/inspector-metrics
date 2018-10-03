@@ -44,6 +44,7 @@ Some other reporter:
 * [Carbon / Graphite](https://github.com/rstiller/inspector-carbon)
 * [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
 * [Influx](https://github.com/rstiller/inspector-influx)
+* [Prometheus / Pushgateway](https://github.com/rstiller/inspector-prometheus)
 
 ```typescript
 import { LoggerReporter, MetricRegistry, Timer } from "inspector-metrics";
