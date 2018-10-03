@@ -60,7 +60,7 @@ export class PushgatewayReporterTest {
             ),
             10,
             SECOND,
-            global.console,
+            null,
             this.schedulerSpy,
         );
     }
