@@ -4,7 +4,7 @@ services:
 
   grafana:
     build:
-      context: ./playground/grafana
+      context: ./test-env/grafana
       args:
         TZ: Europe/Berlin
     ports:
@@ -18,7 +18,7 @@ services:
 
   graphite:
     build:
-      context: ./playground/graphite
+      context: ./test-env/graphite
       args:
         TZ: Europe/Berlin
     ports:
@@ -34,15 +34,15 @@ services:
          - graphite
     hostname: graphite
 
-  test:
-    build:
-      context: ./playground/nodejs
-      args:
-        TZ: Europe/Berlin
-    command: ["node", "/dev/test/build/lib/playground.js"]
-    working_dir: "/dev/test"
-    restart: "no"
-    volumes:
-      - "./:/dev/test"
-    networks:
-      default:
+  # test:
+  #   build:
+  #     context: ./test-env/nodejs
+  #     args:
+  #       TZ: Europe/Berlin
+  #   command: ["node", "/dev/test/build/playground/playground.js"]
+  #   working_dir: "/dev/test"
+  #   restart: "no"
+  #   volumes:
+  #     - "./:/dev/test"
+  #   networks:
+  #     default:

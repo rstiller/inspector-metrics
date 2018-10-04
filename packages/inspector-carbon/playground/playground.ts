@@ -1,5 +1,5 @@
 import { MetricRegistry, Timer } from "inspector-metrics";
-import { CarbonMetricReporter } from "./metrics/CarbonMetricReporter";
+import { CarbonMetricReporter } from "../lib/metrics/CarbonMetricReporter";
 
 const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
 const registry: MetricRegistry = new MetricRegistry();

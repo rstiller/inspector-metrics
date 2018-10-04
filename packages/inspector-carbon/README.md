@@ -73,8 +73,6 @@ playground/playground.sh
 1. Add a new Data Source (type: graphite, username / password: root/root, host / url: http://graphite/)
 1. Create a new graph
 
-![](docs/grafana.png)
-
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)
