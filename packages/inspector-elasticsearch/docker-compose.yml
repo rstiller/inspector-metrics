@@ -4,7 +4,7 @@ services:
   
   elasticsearch:
     build:
-      context: ./playground/elasticsearch
+      context: ./test-env/elasticsearch
       args:
         TZ: Europe/Berlin
     ports:
@@ -35,7 +35,7 @@ services:
   
   kibana:
     build:
-      context: ./playground/kibana
+      context: ./test-env/kibana
       args:
         TZ: Europe/Berlin
     ports:
@@ -49,7 +49,7 @@ services:
   
   grafana:
     build:
-      context: ./playground/grafana
+      context: ./test-env/grafana
       args:
         TZ: Europe/Berlin
     ports:
@@ -61,15 +61,15 @@ services:
          - grafana
     hostname: grafana
   
-  test:
-    build:
-      context: ./playground/nodejs
-      args:
-        TZ: Europe/Berlin
-    command: ["node", "/dev/test/build/lib/playground.js"]
-    working_dir: "/dev/test"
-    restart: never
-    volumes:
-      - "./:/dev/test"
-    networks:
-      default:
+  # test:
+  #   build:
+  #     context: ./test-env/nodejs
+  #     args:
+  #       TZ: Europe/Berlin
+  #   command: ["node", "/dev/test/build/playground/playground.js"]
+  #   working_dir: "/dev/test"
+  #   restart: never
+  #   volumes:
+  #     - "./:/dev/test"
+  #   networks:
+  #     default:
