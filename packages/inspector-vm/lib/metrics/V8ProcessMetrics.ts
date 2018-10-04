@@ -9,17 +9,88 @@ import {
     SimpleGauge,
 } from "inspector-metrics";
 
+/**
+ * Metric set with values related to the nodejs process.
+ *
+ * @export
+ * @class V8ProcessMetrics
+ * @extends {BaseMetric}
+ * @implements {MetricSet}
+ */
 export class V8ProcessMetrics extends BaseMetric implements MetricSet {
 
+    /**
+     * Contains ll the metrics in this metric-set.
+     *
+     * @private
+     * @type {Metric[]}
+     * @memberof V8ProcessMetrics
+     */
     private metrics: Metric[] = [];
+    /**
+     * Tracks the active handle count.
+     *
+     * @private
+     * @type {SimpleGauge}
+     * @memberof V8ProcessMetrics
+     */
     private activeHandles: SimpleGauge;
+    /**
+     * Tracks the active request count.
+     *
+     * @private
+     * @type {SimpleGauge}
+     * @memberof V8ProcessMetrics
+     */
     private activeRequests: SimpleGauge;
+    /**
+     * Tracks the cpu system usage.
+     *
+     * @private
+     * @type {MonotoneCounter}
+     * @memberof V8ProcessMetrics
+     */
     private cpuSystemUsage: MonotoneCounter;
+    /**
+     * Tracks the cpu total usage.
+     *
+     * @private
+     * @type {MonotoneCounter}
+     * @memberof V8ProcessMetrics
+     */
     private cpuTotalUsage: MonotoneCounter;
+    /**
+     * Tracks the cpu user usage.
+     *
+     * @private
+     * @type {MonotoneCounter}
+     * @memberof V8ProcessMetrics
+     */
     private cpuUserUsage: MonotoneCounter;
+    /**
+     * The timer reference from the scheduler.
+     *
+     * @private
+     * @type {NodeJS.Timer}
+     * @memberof V8ProcessMetrics
+     */
     private timer: NodeJS.Timer;
+    /**
+     * Last cpu usage object.
+     *
+     * @private
+     * @type {NodeJS.CpuUsage}
+     * @memberof V8ProcessMetrics
+     */
     private lastUsage: NodeJS.CpuUsage;
 
+    /**
+     * Creates an instance of V8ProcessMetrics.
+     *
+     * @param {string} name
+     * @param {Scheduler} [scheduler=setInterval]
+     * @memberof V8ProcessMetrics
+     */
     public constructor(name: string, scheduler: Scheduler = setInterval) {
         super();
         this.name = name;
@@ -45,22 +116,45 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.timer = scheduler(() => this.update(), 1000);
     }
 
+    /**
+     * Stops the recording of process metrics.
+     *
+     * @memberof V8ProcessMetrics
+     */
     public stop(): void {
         if (this.timer) {
             this.timer.unref();
         }
     }
 
+    /**
+     * Gets all metrics.
+     *
+     * @returns {Map<string, Metric>}
+     * @memberof V8ProcessMetrics
+     */
     public getMetrics(): Map<string, Metric> {
         const map: Map<string, Metric> = new Map();
         this.metrics.forEach((metric) => map.set(metric.getName(), metric));
         return map;
     }
 
+    /**
+     * Gets all metrics.
+     *
+     * @returns {Metric[]}
+     * @memberof V8ProcessMetrics
+     */
     public getMetricList(): Metric[] {
         return this.metrics;
     }
 
+    /**
+     * Sets the group of this metric-set as well as all contained metrics.
+     *
+     * @param {string} group
+     * @memberof V8ProcessMetrics
+     */
     public setGroup(group: string): void {
         this.group = group;
 
@@ -71,6 +165,13 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.cpuUserUsage.setGroup(group);
     }
 
+    /**
+     * Sets the tags of this metric-set all contained metrics accordingly.
+     *
+     * @param {string} name
+     * @param {string} value
+     * @memberof V8ProcessMetrics
+     */
     public setTag(name: string, value: string): void {
         this.tags.set(name, value);
 
@@ -81,6 +182,12 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.cpuUserUsage.setTag(name, value);
     }
 
+    /**
+     * Removes the specified tag from this metric-set and all contained metrics accordingly.
+     *
+     * @param {string} name
+     * @memberof V8ProcessMetrics
+     */
     public removeTag(name: string): void {
         this.tags.delete(name);
 

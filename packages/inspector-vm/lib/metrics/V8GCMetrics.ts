@@ -13,16 +13,80 @@ import {
 
 const GC = require("gc-stats");
 
+/**
+ * Metric set with values related to nodejs GC.
+ *
+ * @export
+ * @class V8GCMetrics
+ * @extends {BaseMetric}
+ * @implements {MetricSet}
+ */
 export class V8GCMetrics extends BaseMetric implements MetricSet {
 
+    /**
+     * Contains ll the metrics in this metric-set.
+     *
+     * @private
+     * @type {Metric[]}
+     * @memberof V8GCMetrics
+     */
     private metrics: Metric[] = [];
+    /**
+     * Timer for the gc minor runs.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof V8GCMetrics
+     */
     private minorRuns: Timer;
+    /**
+     * Timer for the gc major runs.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof V8GCMetrics
+     */
     private majorRuns: Timer;
+    /**
+     * Timer for the gc incremental marking runs.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof V8GCMetrics
+     */
     private incrementalMarkingRuns: Timer;
+    /**
+     * Timer for the gc callback processing runs.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof V8GCMetrics
+     */
     private phantomCallbackProcessingRuns: Timer;
+    /**
+     * Timer for all gc runs.
+     *
+     * @private
+     * @type {Timer}
+     * @memberof V8GCMetrics
+     */
     private allRuns: Timer;
+    /**
+     * Garbage collection data emitter.
+     *
+     * @private
+     * @type {EventEmitter}
+     * @memberof V8GCMetrics
+     */
     private gc: EventEmitter;
 
+    /**
+     * Creates an instance of V8GCMetrics.
+     *
+     * @param {string} name
+     * @param {Clock} clock
+     * @memberof V8GCMetrics
+     */
     public constructor(name: string, clock: Clock) {
         super();
         this.name = name;
@@ -73,20 +137,43 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
         });
     }
 
+    /**
+     * Stops the recording of gc metrics.
+     *
+     * @memberof V8GCMetrics
+     */
     public stop(): void {
         this.gc.removeAllListeners();
     }
 
+    /**
+     * Gets all metrics.
+     *
+     * @returns {Map<string, Metric>}
+     * @memberof V8GCMetrics
+     */
     public getMetrics(): Map<string, Metric> {
         const map: Map<string, Metric> = new Map();
         this.metrics.forEach((metric) => map.set(metric.getName(), metric));
         return map;
     }
 
+    /**
+     * Gets all metrics.
+     *
+     * @returns {Metric[]}
+     * @memberof V8GCMetrics
+     */
     public getMetricList(): Metric[] {
         return this.metrics;
     }
 
+    /**
+     * Sets the group of this metric-set as well as all contained metrics.
+     *
+     * @param {string} group
+     * @memberof V8GCMetrics
+     */
     public setGroup(group: string): void {
         this.group = group;
 
@@ -97,6 +184,13 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
         this.phantomCallbackProcessingRuns.setGroup(group);
     }
 
+    /**
+     * Sets the tags of this metric-set all contained metrics accordingly.
+     *
+     * @param {string} name
+     * @param {string} value
+     * @memberof V8GCMetrics
+     */
     public setTag(name: string, value: string): void {
         this.tags.set(name, value);
 
@@ -107,6 +201,12 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
         this.phantomCallbackProcessingRuns.setTag(name, value);
     }
 
+    /**
+     * Removes the specified tag from this metric-set and all contained metrics accordingly.
+     *
+     * @param {string} name
+     * @memberof V8GCMetrics
+     */
     public removeTag(name: string): void {
         this.tags.delete(name);
 
