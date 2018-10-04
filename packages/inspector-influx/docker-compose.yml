@@ -4,7 +4,7 @@ services:
 
   test:
     build:
-      context: ..
+      context: .
       args:
         TZ: Europe/Berlin
     restart: "no"
@@ -13,14 +13,12 @@ services:
       - influx
     volumes:
       - ./:/opt/playground/
-    networks:
-      - inspector-influx-playground
     working_dir: "/opt/playground"
-    command: ["/usr/bin/wait-for-it.sh", "influx:8086", "--", "node", "build/lib/playground.js"]
+    command: ["/usr/bin/wait-for-it.sh", "influx:8086", "--", "node", "build/playground/playground.js"]
 
   grafana:
     build:
-      context: ./grafana
+      context: ./test-env/grafana
       args:
         TZ: Europe/Berlin
     volumes:
@@ -32,12 +30,10 @@ services:
     hostname: grafana
     depends_on:
       - influx
-    networks:
-      - inspector-influx-playground
 
   influx:
     build:
-      context: ./influx
+      context: ./test-env/influx
       args:
         TZ: Europe/Berlin
     volumes:
@@ -48,11 +44,6 @@ services:
       - "8086"
     restart: "no"
     hostname: influx
-    networks:
-      - inspector-influx-playground
-
-networks:
-  inspector-influx-playground:
 
 volumes:
   influx-data:
