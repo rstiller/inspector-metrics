@@ -1,6 +1,6 @@
 import { MetricRegistry, Timer } from "inspector-metrics";
-import { DefaultSender } from "./metrics/DefaultSender";
-import { InfluxMetricReporter } from "./metrics/InfluxMetricReporter";
+import { DefaultSender } from "../lib/metrics/DefaultSender";
+import { InfluxMetricReporter } from "../lib/metrics/InfluxMetricReporter";
 
 // influxdb config from https://github.com/node-influx/node-influx/blob/master/src/index.ts#L80
 const dbConfig = {
