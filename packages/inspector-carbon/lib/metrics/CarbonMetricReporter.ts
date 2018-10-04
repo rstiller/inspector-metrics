@@ -13,6 +13,7 @@ import {
     MetricReporter,
     MILLISECOND,
     MINUTE,
+    MonotoneCounter,
     StdClock,
     Taggable,
     Timer,
@@ -109,6 +110,9 @@ export class CarbonMetricReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
+        this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
+            (counter: MonotoneCounter, date: Date) => this.reportMonotoneCounter(counter, date),
+            (counter: MonotoneCounter) => counter.getCount());
         this.reportMetrics(registry.getCounterList(), now, "counter",
             (counter: Counter, date: Date) => this.reportCounter(counter, date),
             (counter: Counter) => counter.getCount());
@@ -190,6 +194,20 @@ export class CarbonMetricReporter extends MetricReporter {
             return 0;
         }
         return value;
+    }
+
+    private reportMonotoneCounter(counter: MonotoneCounter, date: Date): {} {
+        const value = counter.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const measurement: any = {
+            group: counter.getGroup(),
+            name: counter.getName(),
+        };
+        measurement[`count`] = counter.getCount() || 0;
+
+        return measurement;
     }
 
     private reportCounter(counter: Counter, date: Date): {} {
