@@ -28,7 +28,12 @@ export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
 export type MetricInfoDeterminator = (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) => string;
 
-export type MetricDocumentBuilder = (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date, tags: Map<string, string>) => {};
+export type MetricDocumentBuilder = (
+    registry: MetricRegistry,
+    metric: Metric,
+    type: MetricType,
+    date: Date,
+    tags: Map<string, string>) => {};
 
 /**
  * A MetricReporter extension used to publish metric values to elasticsearch.
@@ -92,7 +97,13 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * @memberof ElasticsearchMetricReporter
      */
     public static defaultDocumentBuilder(): MetricDocumentBuilder {
-        return (registry: MetricRegistry, metric: Metric, type: MetricType, timestamp: Date, commonTags: Map<string, string>) => {
+        return (
+            registry: MetricRegistry,
+            metric: Metric,
+            type: MetricType,
+            timestamp: Date,
+            commonTags: Map<string, string>) => {
+
             let values = null;
 
             if (metric instanceof Counter) {
@@ -281,9 +292,9 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * Creates an instance of ElasticsearchMetricReporter.
      *
      * @param {ConfigOptions} clientOptions Elasticsearch client config.
-     * @param {MetricDocumentBuilder} [metricDocumentBuilder=ElasticsearchMetricReporter.defaultDocumentBuilder()] A function that constructs an object of a metric that's gonna be indexed.
-     * @param {MetricInfoDeterminator} [indexnameDeterminator=ElasticsearchMetricReporter.dailyIndex("metric")] A function that determines the name of the index for a given metric.
-     * @param {MetricInfoDeterminator} [typeDeterminator=ElasticsearchMetricReporter.defaultTypeDeterminator()] A function that determines the name of the type for a given metric.
+     * @param [metricDocumentBuilder] A function that constructs an object of a metric that's gonna be indexed.
+     * @param [indexnameDeterminator] A function that determines the name of the index for a given metric.
+     * @param [typeDeterminator] A function that determines the name of the type for a given metric.
      * @param {number} [interval=1000] The reporting interval.
      * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
      * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
@@ -362,11 +373,16 @@ export class ElasticsearchMetricReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
-        this.reportMetrics(registry, registry.getCounterList(), now, "counter", (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry, registry.getGaugeList(), now, "gauge", (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry, registry.getHistogramList(), now, "histogram", (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry, registry.getMeterList(), now, "meter", (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry, registry.getTimerList(), now, "timer", (timer: Timer) => timer.getCount());
+        this.reportMetrics(registry, registry.getCounterList(), now, "counter",
+            (counter: Counter) => counter.getCount());
+        this.reportMetrics(registry, registry.getGaugeList(), now, "gauge",
+            (gauge: Gauge<any>) => gauge.getValue());
+        this.reportMetrics(registry, registry.getHistogramList(), now, "histogram",
+            (histogram: Histogram) => histogram.getCount());
+        this.reportMetrics(registry, registry.getMeterList(), now, "meter",
+            (meter: Meter) => meter.getCount());
+        this.reportMetrics(registry, registry.getTimerList(), now, "timer",
+            (timer: Timer) => timer.getCount());
     }
 
     private async reportMetrics<T extends Metric>(
@@ -401,7 +417,10 @@ export class ElasticsearchMetricReporter extends MetricReporter {
             try {
                 const response = await this.client.bulk({ body });
                 if (this.log) {
-                    this.log.debug(`took ${response.took}ms to write ${type} metrics - errors ${response.errors}`, this.logMetadata);
+                    this.log.debug(
+                        `took ${response.took}ms to write ${type} metrics - errors ${response.errors}`,
+                        this.logMetadata,
+                    );
                 }
             } catch (reason) {
                 if (this.log) {
