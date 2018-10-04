@@ -2,19 +2,19 @@ version: "3"
 
 services:
 
-  test:
-    build:
-      context: .
-      args:
-        TZ: Europe/Berlin
-    restart: "no"
-    hostname: playground
-    depends_on:
-      - influx
-    volumes:
-      - ./:/opt/playground/
-    working_dir: "/opt/playground"
-    command: ["/usr/bin/wait-for-it.sh", "influx:8086", "--", "node", "build/playground/playground.js"]
+  # test:
+  #   build:
+  #     context: .
+  #     args:
+  #       TZ: Europe/Berlin
+  #   restart: "no"
+  #   hostname: playground
+  #   depends_on:
+  #     - influx
+  #   volumes:
+  #     - ./:/opt/playground/
+  #   working_dir: "/opt/playground"
+  #   command: ["/usr/bin/wait-for-it.sh", "influx:8086", "--", "node", "build/playground/playground.js"]
 
   grafana:
     build:
@@ -25,7 +25,7 @@ services:
       - grafana-data:/var/lib/grafana
       - grafana-logs:/var/log/grafana
     ports:
-      - "3000"
+      - "3000:3000"
     restart: "no"
     hostname: grafana
     depends_on:
@@ -40,8 +40,7 @@ services:
       - influx-data:/var/lib/influxdb
       - influx-logs:/var/log/influxdb
     ports:
-      - "8083"
-      - "8086"
+      - "8086:8086"
     restart: "no"
     hostname: influx
 

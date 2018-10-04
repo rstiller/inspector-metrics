@@ -6,7 +6,7 @@ import { InfluxMetricReporter } from "../lib/metrics/InfluxMetricReporter";
 const dbConfig = {
     database: "example-db",
     hosts: [
-        { host: "127.0.0.1", port: 32768 },
+        { host: "127.0.0.1", port: 8086 },
     ],
     password: "admin",
     username: "admin",
@@ -32,7 +32,7 @@ reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
 reporter.start();
-/*
+
 setInterval(() => {
     requests1.time(() => {
         let a = 0;
@@ -40,6 +40,7 @@ setInterval(() => {
         for (let i = 0; i < 1e6; i++) {
             a = b + i;
         }
+        a = a + 0;
     });
 }, 100);
 
@@ -50,6 +51,7 @@ setInterval(() => {
         for (let i = 0; i < 1e6; i++) {
             a = b + i;
         }
+        a = a + 0;
     });
 }, 50);
 
@@ -60,6 +62,6 @@ setInterval(() => {
         for (let i = 0; i < 1e6; i++) {
             a = b + i;
         }
+        a = a + 0;
     });
 }, 25);
-*/
