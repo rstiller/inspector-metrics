@@ -8,7 +8,7 @@ import {
     SimpleGauge,
 } from "inspector-metrics";
 
-export class V8EventLoopLag extends BaseMetric implements MetricSet {
+export class V8EventLoop extends BaseMetric implements MetricSet {
 
     private metrics: Metric[] = [];
     private eventLoopLag: SimpleGauge;
