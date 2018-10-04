@@ -14,6 +14,7 @@ import {
     MetricReporter,
     MILLISECOND,
     MINUTE,
+    MonotoneCounter,
     StdClock,
     Taggable,
     Timer,
@@ -311,6 +312,9 @@ export class InfluxMetricReporter extends MetricReporter {
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
+        this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
+            (counter: MonotoneCounter, date: Date) => this.reportMonotoneCounter(counter, date),
+            (counter: MonotoneCounter) => counter.getCount());
         this.reportMetrics(registry.getCounterList(), now, "counter",
             (counter: Counter, date: Date) => this.reportCounter(counter, date),
             (counter: Counter) => counter.getCount());
@@ -398,6 +402,34 @@ export class InfluxMetricReporter extends MetricReporter {
         }
         this.metricStates.set(metricId, metricEntry);
         return changed;
+    }
+
+    /**
+     * Computes and reports the fields of the monotone-counter.
+     *
+     * @private
+     * @param {MonotoneCounter} counter
+     * @param {Date} date
+     * @returns {IPoint}
+     * @memberof InfluxMetricReporter
+     */
+    private reportMonotoneCounter(counter: MonotoneCounter, date: Date): IPoint {
+        const value = counter.getCount();
+        if (!value || isNaN(value)) {
+            return null;
+        }
+        const fields: any = {};
+        const fieldNamePrefix = this.getFieldNamePrefix(counter);
+        const measurement = this.getMeasurementName(counter);
+
+        fields[`${fieldNamePrefix}count`] = counter.getCount() || 0;
+
+        return {
+            fields,
+            measurement,
+            tags: this.buildTags(counter),
+            timestamp: date,
+        };
     }
 
     /**
