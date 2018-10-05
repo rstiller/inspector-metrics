@@ -17,17 +17,46 @@ import {
     Taggable,
     Timer,
     TimeUnit,
+    MonotoneCounter,
 } from "inspector-metrics";
 
+/**
+ * Entry interface to track the last value and timestamp of a metric instance.
+ *
+ * @interface MetricEntry
+ */
 interface MetricEntry {
+    /**
+     * Timestamp of the last reporting.
+     *
+     * @type {number}
+     * @memberof MetricEntry
+     */
     lastReport: number;
+
+    /**
+     * Last reported reference value.
+     *
+     * @type {number}
+     * @memberof MetricEntry
+     */
     lastValue: number;
 }
 
+/**
+ * Enumeration of all metric types.
+ */
 export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
+/**
+ * Interface for getting a certain information using the specified emtric metadata -
+ * e.g. name of the index, metric type, etc.
+ */
 export type MetricInfoDeterminator = (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) => string;
 
+/**
+ * Interface for building a document for a metric.
+ */
 export type MetricDocumentBuilder = (
     registry: MetricRegistry,
     metric: Metric,
@@ -45,7 +74,7 @@ export type MetricDocumentBuilder = (
 export class ElasticsearchMetricReporter extends MetricReporter {
 
     /**
-     * Returns a {MetricInfoDeterminator} that returns 'metric' as type.
+     * Returns a {@link MetricInfoDeterminator} that returns 'metric' as type.
      *
      * @static
      * @returns {MetricInfoDeterminator}
@@ -56,7 +85,7 @@ export class ElasticsearchMetricReporter extends MetricReporter {
     }
 
     /**
-     * Returns a {MetricInfoDeterminator} that returns an indexname like '<baseName>-yyyy-mm-dd'.
+     * Returns a {@link MetricInfoDeterminator} that returns an indexname like '<baseName>-yyyy-mm-dd'.
      *
      * @static
      * @param {string} baseName The
@@ -74,7 +103,7 @@ export class ElasticsearchMetricReporter extends MetricReporter {
     }
 
     /**
-     * Returns a {MetricDocumentBuilder} that builds an object for a metric like this:
+     * Returns a {@link MetricDocumentBuilder} that builds an object for a metric like this:
      *
      * {
      *
@@ -106,7 +135,9 @@ export class ElasticsearchMetricReporter extends MetricReporter {
 
             let values = null;
 
-            if (metric instanceof Counter) {
+            if (metric instanceof MonotoneCounter) {
+                values = ElasticsearchMetricReporter.getMonotoneCounterValues(metric);
+            } else if (metric instanceof Counter) {
                 values = ElasticsearchMetricReporter.getCounterValues(metric);
             } else if (metric instanceof Histogram) {
                 values = ElasticsearchMetricReporter.getHistogramValues(metric);
@@ -143,6 +174,22 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         commonTags.forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;
+    }
+
+    /**
+     * Gets the values for the specified monotone counter metric.
+     *
+     * @static
+     * @param {MonotoneCounter} counter
+     * @returns {{}}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public static getMonotoneCounterValues(counter: MonotoneCounter): {} {
+        const count = counter.getCount();
+        if (!count || isNaN(count)) {
+            return null;
+        }
+        return { count };
     }
 
     /**
@@ -267,6 +314,14 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return values;
     }
 
+    /**
+     * Either gets 0 or the specifed value.
+     *
+     * @private
+     * @param {number} value
+     * @returns {number}
+     * @memberof ElasticsearchMetricReporter
+     */
     private static getNumber(value: number): number {
         if (isNaN(value)) {
             return 0;
@@ -274,18 +329,109 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         return value;
     }
 
+    /**
+     * Clock used to determine the current timestamp.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof ElasticsearchMetricReporter
+     */
     private clock: Clock;
+    /**
+     * Reference for the object returned by the scheduler function.
+     *
+     * @private
+     * @type {NodeJS.Timer}
+     * @memberof ElasticsearchMetricReporter
+     */
     private timer: NodeJS.Timer;
+    /**
+     * Reporting interval.
+     *
+     * @private
+     * @type {number}
+     * @memberof ElasticsearchMetricReporter
+     */
     private interval: number;
+    /**
+     * Minimal timeout to include a metric instance into a reporting.
+     *
+     * @private
+     * @type {number}
+     * @memberof ElasticsearchMetricReporter
+     */
     private minReportingTimeout: number;
+    /**
+     * Time unit for the reporting interval.
+     *
+     * @private
+     * @type {TimeUnit}
+     * @memberof ElasticsearchMetricReporter
+     */
     private unit: TimeUnit;
+    /**
+     * Tags assigned to this reporter instance - reported for every metric instance.
+     *
+     * @private
+     * @type {Map<string, string>}
+     * @memberof ElasticsearchMetricReporter
+     */
     private tags: Map<string, string>;
+    /**
+     * Metadata for the logger.
+     *
+     * @private
+     * @type {*}
+     * @memberof ElasticsearchMetricReporter
+     */
     private logMetadata: any;
+    /**
+     * Minimal logger interface to report failures.
+     *
+     * @private
+     * @type {Logger}
+     * @memberof ElasticsearchMetricReporter
+     */
     private log: Logger = console;
+    /**
+     * Saves the state of each reported metrics.
+     *
+     * @private
+     * @type {Map<number, MetricEntry>}
+     * @memberof ElasticsearchMetricReporter
+     */
     private metricStates: Map<number, MetricEntry> = new Map();
+    /**
+     * Elasticsearch client used to do reporting.
+     *
+     * @private
+     * @type {Client}
+     * @memberof ElasticsearchMetricReporter
+     */
     private client: Client;
+    /**
+     * Used to get the name of the index.
+     *
+     * @private
+     * @type {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporter
+     */
     private indexnameDeterminator: MetricInfoDeterminator;
+    /**
+     * Used to get the type of the metric instance.
+     *
+     * @private
+     * @type {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporter
+     */
     private typeDeterminator: MetricInfoDeterminator;
+    /**
+     * Used to build the document for a metric.
+     *
+     * @private
+     * @type {MetricDocumentBuilder}
+     * @memberof ElasticsearchMetricReporter
+     */
     private metricDocumentBuilder: MetricDocumentBuilder;
 
     /**
@@ -331,18 +477,42 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         this.client = new Client(clientOptions);
     }
 
+    /**
+     * Gets the reporter tags.
+     *
+     * @returns {Map<string, string>}
+     * @memberof ElasticsearchMetricReporter
+     */
     public getTags(): Map<string, string> {
         return this.tags;
     }
 
+    /**
+     * Sets the reporter tags.
+     *
+     * @param {Map<string, string>} tags
+     * @memberof ElasticsearchMetricReporter
+     */
     public setTags(tags: Map<string, string>): void {
         this.tags = tags;
     }
 
+    /**
+     * Gets the logger instance.
+     *
+     * @returns {Logger}
+     * @memberof ElasticsearchMetricReporter
+     */
     public getLog(): Logger {
         return this.log;
     }
 
+    /**
+     * Sets the logger instance.
+     *
+     * @param {Logger} log
+     * @memberof ElasticsearchMetricReporter
+     */
     public setLog(log: Logger): void {
         this.log = log;
     }
@@ -363,16 +533,33 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * @memberof ElasticsearchMetricReporter
      */
     public stop(): void {
-        this.timer.unref();
+        if (this.timer) {
+            this.timer.unref();
+        }
     }
 
+    /**
+     * Reports the data points for each registered {@link MetricRegistry}.
+     *
+     * @private
+     * @memberof ElasticsearchMetricReporter
+     */
     private async report() {
         this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
     }
 
+    /**
+     * Reports the data points for the specified {@link MetricRegistry}.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @memberof ElasticsearchMetricReporter
+     */
     private reportMetricRegistry(registry: MetricRegistry): void {
         const now: Date = new Date(this.clock.time().milliseconds);
 
+        this.reportMetrics(registry, registry.getMonotoneCounterList(), now, "counter",
+            (counter: MonotoneCounter) => counter.getCount());
         this.reportMetrics(registry, registry.getCounterList(), now, "counter",
             (counter: Counter) => counter.getCount());
         this.reportMetrics(registry, registry.getGaugeList(), now, "gauge",
@@ -385,6 +572,20 @@ export class ElasticsearchMetricReporter extends MetricReporter {
             (timer: Timer) => timer.getCount());
     }
 
+    /**
+     * Reports a collection of metric instance for a certain type.
+     *
+     * @private
+     * @template T
+     * @param {MetricRegistry} registry
+     * @param {T[]} metrics
+     * @param {Date} date
+     * @param {MetricType} type
+     * @param {(metric: Metric) => number} lastModifiedFunction
+     *      function to determine if a metric has a different value since the last reporting.
+     * @returns {Promise<void>}
+     * @memberof ElasticsearchMetricReporter
+     */
     private async reportMetrics<T extends Metric>(
         registry: MetricRegistry,
         metrics: T[],
@@ -430,6 +631,17 @@ export class ElasticsearchMetricReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Determines if the specified metric has changed. This is always true if
+     * the minimum-reporting timeout was reached.
+     *
+     * @private
+     * @param {number} metricId
+     * @param {number} lastValue
+     * @param {Date} date
+     * @returns {boolean}
+     * @memberof ElasticsearchMetricReporter
+     */
     private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
         let changed = true;
         let metricEntry = {
