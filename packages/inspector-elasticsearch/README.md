@@ -126,7 +126,7 @@ To use the playground you need to have `docker` and `docker-compose` installed.
 ```bash
 npm run compile
 # running playground script
-playground/playground.sh
+./playground.sh
 ```
 
 ### view data in grafana
