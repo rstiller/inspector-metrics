@@ -13,11 +13,11 @@ import {
     MetricReporter,
     MILLISECOND,
     MINUTE,
+    MonotoneCounter,
     StdClock,
     Taggable,
     Timer,
     TimeUnit,
-    MonotoneCounter,
 } from "inspector-metrics";
 
 /**

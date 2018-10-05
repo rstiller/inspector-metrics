@@ -135,7 +135,7 @@ playground/playground.sh
 1. Add a new Data Source (type: elasticsearch, host / url: http://elasticsearch:9200)
 1. Create a new graph
 
-![](docs/grafana.png)
+![](assets/grafana.png)
 
 ### view data in kibana
 
@@ -143,7 +143,7 @@ playground/playground.sh
 1. Add a new index pattern like `metric-*`
 1. Discover data
 
-![](docs/kibana.png)
+![](assets/kibana.png)
 
 ## License
 
