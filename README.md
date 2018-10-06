@@ -34,6 +34,7 @@ Supported metric types:
 * Counter - measures an integer value (e.g. "how many time was my function called, number of bookings in a sales system")
 * MonotoneCounter - a monotonically increasing integer value (e.g. "error count")
 * Gauge - measurement of a value (e.g. "number of waiting threads on a resource")
+* HdrHistogram - recording and analyzing sampled data value counts across a configurable integer value range with configurable value precision
 * Histogram - measures the statistical distribution of all values
 * Meter - measures the rate of events over time (e.g. "requests per second")
 * Timer - measures call-rate of a function and the distribution of the duration of all calls
@@ -157,14 +158,37 @@ arrayLength.getValue();
 import { Histogram, MetricRegistry, Snapshot } from "inspector-metrics";
 
 const registry = new MetricRegistry();
-const entityCount: Histogram = registry.newHistogram("requestCount");
+// measures a duration / latency
+const requestLatency: Histogram = registry.newHistogram("requestLatency");
 
-entityCount.update(12345);
+requestLatency.update(12345);
+requestLatency.update(23456);
+requestLatency.update(34567);
 
-// 12345
-entityCount.getValue();
+// a copy of the current values
+const snapshot: Snapshot = requestLatency.getSnapshot();
 
-const snapshot: Snapshot = entityCount.getSnapshot();
+// mean count
+const mean: number = snapshot.getMean();
+```
+
+### HdrHistogram
+
+```typescript
+import { HdrHistogram, MetricRegistry, Snapshot } from "inspector-metrics";
+
+const registry = new MetricRegistry();
+// measures a duration / latency between 1 and 1000000000 nanoseconds
+const requestLatency: HdrHistogram = registry.newHdrHistogram("requestLatency", 1, 1000000000);
+
+// 102 microseconds in nanoseconds
+requestLatency.update(102000);
+// 4.390 milliseconds in nanoseconds
+requestLatency.update(4390000);
+
+// only snapshot interface - always uses the current values
+// since the native-hdr-histogram is used as a reference
+const snapshot: Snapshot = requestLatency.getSnapshot();
 
 // mean count
 const mean: number = snapshot.getMean();

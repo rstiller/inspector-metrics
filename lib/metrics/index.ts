@@ -3,6 +3,7 @@ export * from "./counter";
 export * from "./counting";
 export * from "./gauge";
 export * from "./groupable";
+export * from "./hdr-histogram";
 export * from "./histogram";
 export * from "./int64";
 export * from "./logger-reporter";
