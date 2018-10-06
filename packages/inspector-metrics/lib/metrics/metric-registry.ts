@@ -4,6 +4,7 @@ import { Clock, StdClock } from "./clock";
 import { Counter, MonotoneCounter } from "./counter";
 import { Buckets } from "./counting";
 import { Gauge } from "./gauge";
+import { HdrHistogram } from "./hdr-histogram";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
 import { BaseMetric, Metric } from "./metric";
@@ -700,6 +701,38 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         }
         this.register(meter.getName(), meter);
         return meter;
+    }
+
+    /**
+     * Builds a new hdr-histogram with the given name and adds it
+     * to the registry.
+     *
+     * @param {string} name
+     * @param {number} [lowest=1] is the lowest possible number that can be recorded
+     * @param {number} [max=100] is the maximum number that can be recorded
+     * @param {number} [figures=3]
+     *      the number of figures in a decimal number that will be maintained, must be between 1 and 5 (inclusive)
+     * @param {string} [group=null]
+     * @param {string} [description=null]
+     * @param {Reservoir} [reservoir=null]
+     * @returns {HdrHistogram}
+     * @memberof MetricRegistry
+     */
+    public newHdrHistogram(
+        name: string,
+        lowest: number = 1,
+        max: number = 100,
+        figures: number = 3,
+        group: string = null,
+        description: string = null,
+        buckets: Buckets = new Buckets()): HdrHistogram {
+
+        const histogram = new HdrHistogram(lowest, max, figures, name, description, buckets);
+        if (!!group) {
+            histogram.setGroup(group);
+        }
+        this.register(histogram.getName(), histogram);
+        return histogram;
     }
 
     /**
