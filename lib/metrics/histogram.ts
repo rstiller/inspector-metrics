@@ -27,7 +27,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {Reservoir}
      * @memberof Histogram
      */
-    private reservoir: Reservoir;
+    protected readonly reservoir: Reservoir;
     /**
      * Continuous number representing the update operations executed.
      *
@@ -35,7 +35,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {number}
      * @memberof Histogram
      */
-    private count: number = 0;
+    protected count: number = 0;
     /**
      * Sum of all values.
      *
@@ -43,7 +43,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {number}
      * @memberof Histogram
      */
-    private sum: Int64Wrapper = new Int64Wrapper();
+    protected sum: Int64Wrapper = new Int64Wrapper();
     /**
      * Contains all countings based on {@link Histogram#buckets}.
      *
@@ -51,7 +51,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {{ [boundary: number]: number }}
      * @memberof Histogram
      */
-    private readonly bucketCounts: Map<number, number> = new Map();
+    protected readonly bucketCounts: Map<number, number> = new Map();
     /**
      * The bucket config used to count.
      *
@@ -59,7 +59,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {Buckets}
      * @memberof Histogram
      */
-    private buckets: Buckets;
+    protected readonly buckets: Buckets;
 
     /**
      * Creates an instance of Histogram.

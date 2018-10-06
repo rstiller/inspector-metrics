@@ -148,6 +148,44 @@ export class MetricRegistryTest {
     }
 
     @test
+    public "add, set, remove and check hdr-histograms"(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+
+        const histogram = registry.newHdrHistogram("histogram1");
+        expect(histogram).to.be.not.null;
+        expect(histogram).to.be.instanceof(Histogram);
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(1));
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+        expect(registry.getHistogram("histogram1")).to.be.equal(histogram);
+        expect(registry.getMetric("histogram1")).to.be.equal(histogram);
+
+        registry.removeHistogram("histogram1");
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+        expect(registry.getHistogram("histogram1")).to.not.exist;
+        expect(registry.getMetric("histogram1")).to.not.exist;
+
+        registry.register("histogram1", histogram);
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(1));
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+        expect(registry.getHistogram("histogram1")).to.be.equal(histogram);
+        expect(registry.getMetric("histogram1")).to.be.equal(histogram);
+
+        registry.removeMetric("histogram1");
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+        expect(registry.getHistogram("histogram1")).to.not.exist;
+        expect(registry.getMetric("histogram1")).to.not.exist;
+    }
+
+    @test
     public "add, set, remove and check histograms"(): void {
         const registry: MetricRegistry = new MetricRegistry();
 
@@ -221,6 +259,30 @@ export class MetricRegistryTest {
         expect(registry.getMetrics()).to.satisfy(mapSize(0));
         expect(registry.getMeter("meter1")).to.not.exist;
         expect(registry.getMetric("meter1")).to.not.exist;
+    }
+
+    @test
+    public "check mix of histograms and hdr-histograms"(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
+
+        registry.newHistogram("histogram1");
+        registry.newHdrHistogram("hdr-histogram1");
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(2));
+        expect(registry.getMetrics()).to.satisfy(mapSize(2));
+
+        registry.removeHistogram("histogram1");
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(1));
+        expect(registry.getMetrics()).to.satisfy(mapSize(1));
+
+        registry.removeHistogram("hdr-histogram1");
+
+        expect(registry.getHistograms()).to.satisfy(mapSize(0));
+        expect(registry.getMetrics()).to.satisfy(mapSize(0));
     }
 
     @test
