@@ -11,8 +11,8 @@ import {
     MetricReporter,
     MILLISECOND,
     MonotoneCounter,
+    Scheduler,
     StdClock,
-    Taggable,
     Timer,
     TimeUnit,
 } from "inspector-metrics";
@@ -48,7 +48,7 @@ interface MetricEntry {
     lastValue: number;
 }
 
-export type ColumnType = "date" | "name" | "group" | "description" | "value" | "tags" | "type" | "metadata";
+export type ColumnType = "date" | "name" | "field" | "group" | "description" | "value" | "tags" | "type" | "metadata";
 export type Row = string[];
 export type Rows = Row[];
 
@@ -62,21 +62,69 @@ export interface CsvFileWriter {
     writeRow(metric: Metric, values: Row): Promise<void>;
 }
 
-export interface CsvMetricReporterOptions {
-    readonly interval: number;
-    readonly unit: TimeUnit;
-    readonly writeHeaders: boolean;
-    readonly useSingleQuotes: boolean;
-    readonly tagExportMode: ExportMode;
-    readonly metadataExportMode: ExportMode;
-    readonly delimiter: string;
-    readonly columns: ColumnType[];
-    readonly encoding: string;
-    readonly writer: CsvFileWriter;
-    readonly filename: () => Promise<string>;
-    readonly dir: () => Promise<string>;
-    readonly tagFilter: (metric: Metric, tag: string, value: string) => Promise<boolean>;
-    readonly metadataFilter: (metric: Metric, key: string, value: any) => Promise<boolean>;
+export class CsvMetricReporterOptions {
+
+    public readonly writer: CsvFileWriter;
+    public readonly interval: number;
+    public readonly unit: TimeUnit;
+    public readonly writeHeaders: boolean;
+    public readonly useSingleQuotes: boolean;
+    public readonly tagExportMode: ExportMode;
+    public readonly metadataExportMode: ExportMode;
+    public readonly delimiter: string;
+    public readonly columns: ColumnType[];
+    public readonly encoding: string;
+    public readonly filename: () => Promise<string>;
+    public readonly dir: () => Promise<string>;
+    public readonly tagFilter: (metric: Metric, tag: string, value: string) => Promise<boolean>;
+    public readonly metadataFilter: (metric: Metric, key: string, value: any) => Promise<boolean>;
+
+    public constructor({
+        writer,
+        interval = 1000,
+        unit = MILLISECOND,
+        writeHeaders = true,
+        useSingleQuotes = false,
+        tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        delimiter = ",",
+        columns = [],
+        encoding = "utf8",
+        filename = async () => "metrics.csv",
+        dir = async () => "/tmp",
+        tagFilter = async () => true,
+        metadataFilter = async () => true,
+    }: {
+        writer: CsvFileWriter,
+        interval?: number,
+        unit?: TimeUnit,
+        writeHeaders?: boolean,
+        useSingleQuotes?: boolean,
+        tagExportMode?: ExportMode,
+        metadataExportMode?: ExportMode,
+        delimiter?: string,
+        columns?: ColumnType[],
+        encoding?: string,
+        filename?: () => Promise<string>,
+        dir?: () => Promise<string>,
+        tagFilter?: (metric: Metric, tag: string, value: string) => Promise<boolean>,
+        metadataFilter?: (metric: Metric, key: string, value: any) => Promise<boolean>,
+    }) {
+        this.writer = writer;
+        this.interval = interval;
+        this.unit = unit;
+        this.writeHeaders = writeHeaders;
+        this.useSingleQuotes = useSingleQuotes;
+        this.tagExportMode = tagExportMode;
+        this.metadataExportMode = metadataExportMode;
+        this.delimiter = delimiter;
+        this.columns = columns;
+        this.encoding = encoding;
+        this.filename = filename;
+        this.dir = dir;
+        this.tagFilter = tagFilter;
+        this.metadataFilter = metadataFilter;
+    }
 }
 
 /**
@@ -88,27 +136,11 @@ export interface CsvMetricReporterOptions {
  */
 export class CsvMetricReporter extends MetricReporter {
 
-    public static readonly DEFAULT_OPTIONS: CsvMetricReporterOptions = Object.seal({
-        columns: [],
-        delimiter: ",",
-        dir: async () => "/tmp",
-        encoding: "utf8",
-        filename: async () => "metrics.csv",
-        interval: 1000,
-        metadataExportMode: ExportMode.ALL_IN_ONE_COLUMN,
-        metadataFilter: async () => true,
-        tagExportMode: ExportMode.ALL_IN_ONE_COLUMN,
-        tagFilter: async () => true,
-        unit: MILLISECOND,
-        useSingleQuotes: false,
-        writeHeaders: true,
-        writer: null,
-    });
-
     private readonly options: CsvMetricReporterOptions;
-    private tags: Map<string, string>;
+    // private tags: Map<string, string>;
     private clock: Clock;
     private minReportingTimeout: number;
+    private scheduler: Scheduler;
     private timer: NodeJS.Timer;
     private metricStates: Map<number, MetricEntry> = new Map();
 
@@ -125,18 +157,20 @@ export class CsvMetricReporter extends MetricReporter {
         options: CsvMetricReporterOptions,
         tags: Map<string, string> = new Map(),
         clock: Clock = new StdClock(),
-        minReportingTimeout = 1) {
+        minReportingTimeout = 1,
+        scheduler: Scheduler = setInterval) {
         super();
 
-        this.options = Object.assign({}, CsvMetricReporter.DEFAULT_OPTIONS, options);
-        this.tags = tags;
+        this.options = options;
+        // this.tags = tags;
         this.clock = clock;
         this.minReportingTimeout = minReportingTimeout;
+        this.scheduler = scheduler;
     }
 
     public start(): void {
         const interval: number = this.options.unit.convertTo(this.options.interval, MILLISECOND);
-        this.timer = setInterval(() => this.report(), interval);
+        this.timer = this.scheduler(() => this.report(), interval);
     }
 
     public stop(): void {
@@ -149,12 +183,25 @@ export class CsvMetricReporter extends MetricReporter {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const dir = await this.options.dir();
             const file = await this.options.filename();
-            // TODO:
-            const header: Row = [];
+            const header: Row = this.buildHeaders();
 
             this.options.writer.init(dir, file, header);
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
+    }
+
+    private buildHeaders(): Row {
+        const headers: Row = [];
+
+        for (const columnType of this.options.columns) {
+            if (columnType === "metadata") {
+            } else if (columnType === "tags") {
+            } else {
+                headers.push(columnType);
+            }
+        }
+
+        return headers;
     }
 
     private reportMetricRegistry(registry: MetricRegistry): void {
@@ -254,18 +301,18 @@ export class CsvMetricReporter extends MetricReporter {
         }
     }
 
-    private buildTags(taggable: Taggable): { [key: string]: string } {
-        const tags: { [x: string]: string } = {};
-        this.tags.forEach((tag, key) => tags[key] = tag);
-        taggable.getTags().forEach((tag, key) => tags[key] = tag);
-        return tags;
-    }
+    // private buildTags(taggable: Taggable): { [key: string]: string } {
+    //     const tags: { [x: string]: string } = {};
+    //     this.tags.forEach((tag, key) => tags[key] = tag);
+    //     taggable.getTags().forEach((tag, key) => tags[key] = tag);
+    //     return tags;
+    // }
 
-    private getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
-    }
+    // private getNumber(value: number): number {
+    //     if (isNaN(value)) {
+    //         return 0;
+    //     }
+    //     return value;
+    // }
 
 }
