@@ -13,6 +13,7 @@ import {
     MonotoneCounter,
     Scheduler,
     StdClock,
+    Taggable,
     Timer,
     TimeUnit,
 } from "inspector-metrics";
@@ -72,6 +73,8 @@ export class CsvMetricReporterOptions {
     public readonly tagExportMode: ExportMode;
     public readonly metadataExportMode: ExportMode;
     public readonly delimiter: string;
+    public readonly tagColumnPrefix: string;
+    public readonly metadataColumnPrefix: string;
     public readonly columns: ColumnType[];
     public readonly encoding: string;
     public readonly filename: () => Promise<string>;
@@ -88,6 +91,8 @@ export class CsvMetricReporterOptions {
         tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
         metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
         delimiter = ",",
+        tagColumnPrefix = "tag_",
+        metadataColumnPrefix = "meta_",
         columns = [],
         encoding = "utf8",
         filename = async () => "metrics.csv",
@@ -103,6 +108,8 @@ export class CsvMetricReporterOptions {
         tagExportMode?: ExportMode,
         metadataExportMode?: ExportMode,
         delimiter?: string,
+        tagColumnPrefix?: string,
+        metadataColumnPrefix?: string,
         columns?: ColumnType[],
         encoding?: string,
         filename?: () => Promise<string>,
@@ -118,6 +125,8 @@ export class CsvMetricReporterOptions {
         this.tagExportMode = tagExportMode;
         this.metadataExportMode = metadataExportMode;
         this.delimiter = delimiter;
+        this.tagColumnPrefix = tagColumnPrefix;
+        this.metadataColumnPrefix = metadataColumnPrefix;
         this.columns = columns;
         this.encoding = encoding;
         this.filename = filename;
@@ -137,7 +146,7 @@ export class CsvMetricReporterOptions {
 export class CsvMetricReporter extends MetricReporter {
 
     private readonly options: CsvMetricReporterOptions;
-    // private tags: Map<string, string>;
+    private tags: Map<string, string>;
     private clock: Clock;
     private minReportingTimeout: number;
     private scheduler: Scheduler;
@@ -168,6 +177,14 @@ export class CsvMetricReporter extends MetricReporter {
         this.scheduler = scheduler;
     }
 
+    public getTags(): Map<string, string> {
+        return this.tags;
+    }
+
+    public setTags(tags: Map<string, string>): void {
+        this.tags = tags;
+    }
+
     public start(): void {
         const interval: number = this.options.unit.convertTo(this.options.interval, MILLISECOND);
         this.timer = this.scheduler(() => this.report(), interval);
@@ -196,6 +213,21 @@ export class CsvMetricReporter extends MetricReporter {
         for (const columnType of this.options.columns) {
             if (columnType === "metadata") {
             } else if (columnType === "tags") {
+                if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+                    headers.push(columnType);
+                } else {
+                    const tags = new Set();
+                    this.tags.forEach((value, tag) => tags.add(tag));
+                    this.metricRegistries
+                        .map((registry) => registry.getMetricList())
+                        .map((metrics) => metrics.map((metric) => this.buildTags(metric)))
+                        .forEach((metricTagsArray) => {
+                            metricTagsArray.forEach((metricTags) => {
+                                Object.keys(metricTags).forEach((tag) => tags.add(tag));
+                            });
+                        });
+                    tags.forEach((tag) => headers.push(`${this.options.tagColumnPrefix}${tag}`));
+                }
             } else {
                 headers.push(columnType);
             }
@@ -301,12 +333,12 @@ export class CsvMetricReporter extends MetricReporter {
         }
     }
 
-    // private buildTags(taggable: Taggable): { [key: string]: string } {
-    //     const tags: { [x: string]: string } = {};
-    //     this.tags.forEach((tag, key) => tags[key] = tag);
-    //     taggable.getTags().forEach((tag, key) => tags[key] = tag);
-    //     return tags;
-    // }
+    private buildTags(taggable: Taggable): { [key: string]: string } {
+        const tags: { [x: string]: string } = {};
+        this.tags.forEach((tag, key) => tags[key] = tag);
+        taggable.getTags().forEach((tag, key) => tags[key] = tag);
+        return tags;
+    }
 
     // private getNumber(value: number): number {
     //     if (isNaN(value)) {
