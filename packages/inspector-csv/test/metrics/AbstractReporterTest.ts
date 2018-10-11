@@ -51,7 +51,7 @@ export class AbstractReportTest {
         expect(this.writeRowSpy).to.have.not.been.called;
         expect(this.internalCallback).to.not.exist;
 
-        this.reporter.start();
+        await this.reporter.start();
 
         expect(this.internalCallback).to.exist;
 

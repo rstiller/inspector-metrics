@@ -152,6 +152,7 @@ export class CsvMetricReporter extends MetricReporter {
     private scheduler: Scheduler;
     private timer: NodeJS.Timer;
     private metricStates: Map<number, MetricEntry> = new Map();
+    private header: Row;
 
     /**
      * Creates an instance of CsvMetricReporter.
@@ -185,8 +186,11 @@ export class CsvMetricReporter extends MetricReporter {
         this.tags = tags;
     }
 
-    public start(): void {
+    public async start(): Promise<void> {
         const interval: number = this.options.unit.convertTo(this.options.interval, MILLISECOND);
+        if (this.metricRegistries && this.metricRegistries.length > 0) {
+            this.header = await this.buildHeaders();
+        }
         this.timer = this.scheduler(() => this.report(), interval);
     }
 
@@ -200,18 +204,43 @@ export class CsvMetricReporter extends MetricReporter {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const dir = await this.options.dir();
             const file = await this.options.filename();
-            const header: Row = this.buildHeaders();
 
-            this.options.writer.init(dir, file, header);
+            this.options.writer.init(dir, file, this.header);
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
     }
 
-    private buildHeaders(): Row {
+    private async buildHeaders(): Promise<Row> {
         const headers: Row = [];
 
         for (const columnType of this.options.columns) {
             if (columnType === "metadata") {
+                if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+                    headers.push(columnType);
+                } else {
+                    const metadataNames = new Set();
+                    this.metricRegistries
+                        .map((registry) => registry.getMetricList())
+                        .map((metrics) => metrics.map((metric) => metric.getMetadataMap()))
+                        .forEach((metadataMapArray) => {
+                            metadataMapArray.forEach((metadataMap) => {
+                                for (const metadataName of metadataMap.keys()) {
+                                    metadataNames.add(metadataName);
+                                }
+                            });
+                        });
+                    const tasks: Array<Promise<any>> = [];
+                    metadataNames.forEach((metadataName) => {
+                        tasks.push((async () => {
+                            if (
+                                !this.options.metadataFilter ||
+                                await this.options.metadataFilter(null, metadataName, null)) {
+                                headers.push(`${this.options.metadataColumnPrefix}${metadataName}`);
+                            }
+                        })());
+                    });
+                    await Promise.all(tasks);
+                }
             } else if (columnType === "tags") {
                 if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                     headers.push(columnType);
@@ -226,7 +255,15 @@ export class CsvMetricReporter extends MetricReporter {
                                 Object.keys(metricTags).forEach((tag) => tags.add(tag));
                             });
                         });
-                    tags.forEach((tag) => headers.push(`${this.options.tagColumnPrefix}${tag}`));
+                    const tasks: Array<Promise<any>> = [];
+                    tags.forEach((tag) => {
+                        tasks.push((async () => {
+                            if (!this.options.tagFilter || await this.options.tagFilter(null, tag, null)) {
+                                headers.push(`${this.options.tagColumnPrefix}${tag}`);
+                            }
+                        })());
+                    });
+                    await Promise.all(tasks);
                 }
             } else {
                 headers.push(columnType);
