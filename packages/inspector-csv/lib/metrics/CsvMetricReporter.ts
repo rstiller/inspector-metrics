@@ -53,6 +53,12 @@ export type ColumnType = "date" | "name" | "field" | "group" | "description" | "
 export type Row = string[];
 export type Rows = Row[];
 export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>;
+interface Tags {
+    [key: string]: string;
+}
+interface Fields {
+    [field: string]: string;
+}
 
 export enum ExportMode {
     ALL_IN_ONE_COLUMN,
@@ -147,7 +153,7 @@ export class CsvMetricReporterOptions {
 export class CsvMetricReporter extends MetricReporter {
 
     private readonly options: CsvMetricReporterOptions;
-    private tags: Map<string, string>;
+    private tags: Map<string, string> = new Map();
     private clock: Clock;
     private minReportingTimeout: number;
     private scheduler: Scheduler;
@@ -173,7 +179,7 @@ export class CsvMetricReporter extends MetricReporter {
         super();
 
         this.options = options;
-        // this.tags = tags;
+        this.tags = tags;
         this.clock = clock;
         this.minReportingTimeout = minReportingTimeout;
         this.scheduler = scheduler;
@@ -282,22 +288,22 @@ export class CsvMetricReporter extends MetricReporter {
         const now: Date = new Date(this.clock.time().milliseconds);
 
         this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
-            (counter: MonotoneCounter, date: Date) => this.reportCounter(counter, date),
+            (counter: MonotoneCounter) => this.reportCounter(counter),
             (counter: MonotoneCounter) => counter.getCount());
         this.reportMetrics(registry.getCounterList(), now, "counter",
-            (counter: Counter, date: Date) => this.reportCounter(counter, date),
+            (counter: Counter) => this.reportCounter(counter),
             (counter: Counter) => counter.getCount());
         this.reportMetrics(registry.getGaugeList(), now, "gauge",
-            (gauge: Gauge<any>, date: Date) => this.reportGauge(gauge, date),
+            (gauge: Gauge<any>) => this.reportGauge(gauge),
             (gauge: Gauge<any>) => gauge.getValue());
         this.reportMetrics(registry.getHistogramList(), now, "histogram",
-            (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date),
+            (histogram: Histogram) => this.reportHistogram(histogram),
             (histogram: Histogram) => histogram.getCount());
         this.reportMetrics(registry.getMeterList(), now, "meter",
-            (meter: Meter, date: Date) => this.reportMeter(meter, date),
+            (meter: Meter) => this.reportMeter(meter),
             (meter: Meter) => meter.getCount());
         this.reportMetrics(registry.getTimerList(), now, "timer",
-            (timer: Timer, date: Date) => this.reportTimer(timer, date),
+            (timer: Timer) => this.reportTimer(timer),
             (timer: Timer) => timer.getCount());
     }
 
@@ -305,7 +311,7 @@ export class CsvMetricReporter extends MetricReporter {
         metrics: T[],
         date: Date,
         type: MetricType,
-        reportFunction: (metric: Metric, date: Date) => Rows,
+        reportFunction: (metric: Metric) => Fields,
         lastModifiedFunction: (metric: Metric) => number): void {
 
         metrics.forEach((metric) => {
@@ -316,9 +322,13 @@ export class CsvMetricReporter extends MetricReporter {
             }
 
             if (changed) {
-                const rows = reportFunction(metric, date);
-                if (rows.length > 0) {
-                    this.writeRows(metric, rows, type);
+                const fields = reportFunction(metric);
+                if (fields) {
+                    // TODO: build rows
+                    const rows: Rows = [];
+                    if (rows.length > 0) {
+                        this.writeRows(metric, rows, type);
+                    }
                 }
             }
         });
@@ -344,29 +354,78 @@ export class CsvMetricReporter extends MetricReporter {
         return changed;
     }
 
-    private reportCounter(timer: MonotoneCounter, date: Date): Rows {
-        // TODO:
-        return [];
+    private reportCounter(counter: MonotoneCounter): Fields {
+        return {
+            count: `${counter.getCount()}`,
+        };
     }
 
-    private reportGauge(gauge: Gauge<any>, date: Date): Rows {
-        // TODO:
-        return [];
+    private reportGauge(gauge: Gauge<any>): Fields {
+        return {
+            value: `${gauge.getValue()}`,
+        };
     }
 
-    private reportHistogram(histogram: Histogram, date: Date): Rows {
-        // TODO:
-        return [];
+    private reportHistogram(histogram: Histogram): Fields {
+        const snapshot = histogram.getSnapshot();
+        const bucketFields: Fields = {};
+        histogram
+            .getCounts()
+            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
+        bucketFields["bucket_inf"] = `${this.getNumber(histogram.getCount())}`;
+        return {
+            ...bucketFields,
+            count: `${this.getNumber(histogram.getCount())}`,
+            max: `${this.getNumber(snapshot.getMax())}`,
+            mean: `${this.getNumber(snapshot.getMean())}`,
+            min: `${this.getNumber(snapshot.getMin())}`,
+            p50: `${this.getNumber(snapshot.getMedian())}`,
+            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
+            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
+            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
+            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
+            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
+            stddev: `${this.getNumber(snapshot.getStdDev())}`,
+            sum: histogram.getSum().toString(),
+        };
     }
 
-    private reportMeter(meter: Meter, date: Date): Rows {
-        // TODO:
-        return [];
+    private reportMeter(meter: Meter): Fields {
+        return {
+            count: `${this.getNumber(meter.getCount())}`,
+            m15_rate: `${this.getNumber(meter.get15MinuteRate())}`,
+            m1_rate: `${this.getNumber(meter.get1MinuteRate())}`,
+            m5_rate: `${this.getNumber(meter.get5MinuteRate())}`,
+            mean_rate: `${this.getNumber(meter.getMeanRate())}`,
+        };
     }
 
-    private reportTimer(timer: Timer, date: Date): Rows {
-        // TODO:
-        return [];
+    private reportTimer(timer: Timer): Fields {
+        const snapshot = timer.getSnapshot();
+        const bucketFields: Fields = {};
+        timer
+            .getCounts()
+            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
+        bucketFields["bucket_inf"] = `${this.getNumber(timer.getCount())}`;
+        return {
+            ...bucketFields,
+            count: `${timer.getCount() || 0}`,
+            m15_rate: `${this.getNumber(timer.get15MinuteRate())}`,
+            m1_rate: `${this.getNumber(timer.get1MinuteRate())}`,
+            m5_rate: `${this.getNumber(timer.get5MinuteRate())}`,
+            max: `${this.getNumber(snapshot.getMax())}`,
+            mean: `${this.getNumber(snapshot.getMean())}`,
+            mean_rate: `${this.getNumber(timer.getMeanRate())}`,
+            min: `${this.getNumber(snapshot.getMin())}`,
+            p50: `${this.getNumber(snapshot.getMedian())}`,
+            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
+            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
+            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
+            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
+            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
+            stddev: `${this.getNumber(snapshot.getStdDev())}`,
+            sum: timer.getSum().toString(),
+        };
     }
 
     private writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType): void {
@@ -375,18 +434,18 @@ export class CsvMetricReporter extends MetricReporter {
         }
     }
 
-    private buildTags(taggable: Taggable): { [key: string]: string } {
+    private buildTags(taggable: Taggable): Tags {
         const tags: { [x: string]: string } = {};
         this.tags.forEach((tag, key) => tags[key] = tag);
         taggable.getTags().forEach((tag, key) => tags[key] = tag);
         return tags;
     }
 
-    // private getNumber(value: number): number {
-    //     if (isNaN(value)) {
-    //         return 0;
-    //     }
-    //     return value;
-    // }
+    private getNumber(value: number): number {
+        if (isNaN(value)) {
+            return 0;
+        }
+        return value;
+    }
 
 }
