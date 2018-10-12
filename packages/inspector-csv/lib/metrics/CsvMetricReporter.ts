@@ -52,6 +52,7 @@ interface MetricEntry {
 export type ColumnType = "date" | "name" | "field" | "group" | "description" | "value" | "tags" | "type" | "metadata";
 export type Row = string[];
 export type Rows = Row[];
+export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>;
 
 export enum ExportMode {
     ALL_IN_ONE_COLUMN,
@@ -79,8 +80,8 @@ export class CsvMetricReporterOptions {
     public readonly encoding: string;
     public readonly filename: () => Promise<string>;
     public readonly dir: () => Promise<string>;
-    public readonly tagFilter: (metric: Metric, tag: string, value: string) => Promise<boolean>;
-    public readonly metadataFilter: (metric: Metric, key: string, value: any) => Promise<boolean>;
+    public readonly tagFilter: Filter;
+    public readonly metadataFilter: Filter;
 
     public constructor({
         writer,
@@ -214,63 +215,67 @@ export class CsvMetricReporter extends MetricReporter {
         const headers: Row = [];
 
         for (const columnType of this.options.columns) {
-            if (columnType === "metadata") {
-                if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-                    headers.push(columnType);
-                } else {
-                    const metadataNames = new Set();
-                    this.metricRegistries
-                        .map((registry) => registry.getMetricList())
-                        .map((metrics) => metrics.map((metric) => metric.getMetadataMap()))
-                        .forEach((metadataMapArray) => {
-                            metadataMapArray.forEach((metadataMap) => {
-                                for (const metadataName of metadataMap.keys()) {
-                                    metadataNames.add(metadataName);
-                                }
-                            });
-                        });
-                    const tasks: Array<Promise<any>> = [];
-                    metadataNames.forEach((metadataName) => {
-                        tasks.push((async () => {
-                            if (
-                                !this.options.metadataFilter ||
-                                await this.options.metadataFilter(null, metadataName, null)) {
-                                headers.push(`${this.options.metadataColumnPrefix}${metadataName}`);
-                            }
-                        })());
-                    });
-                    await Promise.all(tasks);
-                }
-            } else if (columnType === "tags") {
-                if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-                    headers.push(columnType);
-                } else {
-                    const tags = new Set();
-                    this.tags.forEach((value, tag) => tags.add(tag));
-                    this.metricRegistries
-                        .map((registry) => registry.getMetricList())
-                        .map((metrics) => metrics.map((metric) => this.buildTags(metric)))
-                        .forEach((metricTagsArray) => {
-                            metricTagsArray.forEach((metricTags) => {
-                                Object.keys(metricTags).forEach((tag) => tags.add(tag));
-                            });
-                        });
-                    const tasks: Array<Promise<any>> = [];
-                    tags.forEach((tag) => {
-                        tasks.push((async () => {
-                            if (!this.options.tagFilter || await this.options.tagFilter(null, tag, null)) {
-                                headers.push(`${this.options.tagColumnPrefix}${tag}`);
-                            }
-                        })());
-                    });
-                    await Promise.all(tasks);
-                }
+            if (columnType === "metadata" && this.options.metadataExportMode === ExportMode.EACH_IN_OWN_COLUMN) {
+                const metadataNames = this.getAllMetadataKeys();
+                const filteredNames = await this.filterKeys(metadataNames, this.options.metadataFilter);
+                filteredNames.forEach((metadataName) => {
+                    headers.push(`${this.options.metadataColumnPrefix}${metadataName}`);
+                });
+            } else if (columnType === "tags" && this.options.tagExportMode === ExportMode.EACH_IN_OWN_COLUMN) {
+                const tagNames = this.getAllTagKeys();
+                const filteredTags = await this.filterKeys(tagNames, this.options.tagFilter);
+                filteredTags.forEach((tag) => {
+                    headers.push(`${this.options.tagColumnPrefix}${tag}`);
+                });
             } else {
                 headers.push(columnType);
             }
         }
 
         return headers;
+    }
+
+    private async filterKeys(keys: Set<string>, filter: Filter): Promise<Set<string>> {
+        const filteredKeys = new Set();
+        const tasks: Array<Promise<any>> = [];
+        keys.forEach((key) => {
+            tasks.push((async () => {
+                if (!filter || await filter(null, key, null)) {
+                    filteredKeys.add(key);
+                }
+            })());
+        });
+        await Promise.all(tasks);
+        return filteredKeys;
+    }
+
+    private getAllMetadataKeys(): Set<string> {
+        const metadataNames = new Set();
+        this.metricRegistries
+            .map((registry) => registry.getMetricList())
+            .map((metrics) => metrics.map((metric) => metric.getMetadataMap()))
+            .forEach((metadataMapArray) => {
+                metadataMapArray.forEach((metadataMap) => {
+                    for (const metadataName of metadataMap.keys()) {
+                        metadataNames.add(metadataName);
+                    }
+                });
+            });
+        return metadataNames;
+    }
+
+    private getAllTagKeys(): Set<string> {
+        const tags = new Set();
+        this.tags.forEach((value, tag) => tags.add(tag));
+        this.metricRegistries
+            .map((registry) => registry.getMetricList())
+            .map((metrics) => metrics.map((metric) => this.buildTags(metric)))
+            .forEach((metricTagsArray) => {
+                metricTagsArray.forEach((metricTags) => {
+                    Object.keys(metricTags).forEach((tag) => tags.add(tag));
+                });
+            });
+        return tags;
     }
 
     private reportMetricRegistry(registry: MetricRegistry): void {
