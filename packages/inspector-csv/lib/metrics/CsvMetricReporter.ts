@@ -17,6 +17,7 @@ import {
     Timer,
     TimeUnit,
 } from "inspector-metrics";
+import * as moment from "moment-timezone";
 
 /**
  * Enumeration of all metric types.
@@ -84,6 +85,8 @@ export class CsvMetricReporterOptions {
     public readonly metadataColumnPrefix: string;
     public readonly columns: ColumnType[];
     public readonly encoding: string;
+    public readonly dateFormat: string;
+    public readonly timezone: string;
     public readonly filename: () => Promise<string>;
     public readonly dir: () => Promise<string>;
     public readonly tagFilter: Filter;
@@ -102,6 +105,8 @@ export class CsvMetricReporterOptions {
         metadataColumnPrefix = "meta_",
         columns = [],
         encoding = "utf8",
+        dateFormat = "utf8",
+        timezone = "UTC",
         filename = async () => "metrics.csv",
         dir = async () => "/tmp",
         tagFilter = async () => true,
@@ -119,6 +124,8 @@ export class CsvMetricReporterOptions {
         metadataColumnPrefix?: string,
         columns?: ColumnType[],
         encoding?: string,
+        dateFormat?: string,
+        timezone?: string,
         filename?: () => Promise<string>,
         dir?: () => Promise<string>,
         tagFilter?: (metric: Metric, tag: string, value: string) => Promise<boolean>,
@@ -136,6 +143,8 @@ export class CsvMetricReporterOptions {
         this.metadataColumnPrefix = metadataColumnPrefix;
         this.columns = columns;
         this.encoding = encoding;
+        this.dateFormat = dateFormat;
+        this.timezone = timezone;
         this.filename = filename;
         this.dir = dir;
         this.tagFilter = tagFilter;
@@ -160,6 +169,8 @@ export class CsvMetricReporter extends MetricReporter {
     private timer: NodeJS.Timer;
     private metricStates: Map<number, MetricEntry> = new Map();
     private header: Row;
+    private metadataNames: string[] = [];
+    private tagsNames: string[] = [];
 
     /**
      * Creates an instance of CsvMetricReporter.
@@ -226,12 +237,14 @@ export class CsvMetricReporter extends MetricReporter {
                 const filteredNames = await this.filterKeys(metadataNames, this.options.metadataFilter);
                 filteredNames.forEach((metadataName) => {
                     headers.push(`${this.options.metadataColumnPrefix}${metadataName}`);
+                    this.metadataNames.push(metadataName);
                 });
             } else if (columnType === "tags" && this.options.tagExportMode === ExportMode.EACH_IN_OWN_COLUMN) {
                 const tagNames = this.getAllTagKeys();
                 const filteredTags = await this.filterKeys(tagNames, this.options.tagFilter);
                 filteredTags.forEach((tag) => {
                     headers.push(`${this.options.tagColumnPrefix}${tag}`);
+                    this.tagsNames.push(tag);
                 });
             } else {
                 headers.push(columnType);
@@ -285,24 +298,25 @@ export class CsvMetricReporter extends MetricReporter {
     }
 
     private reportMetricRegistry(registry: MetricRegistry): void {
-        const now: Date = new Date(this.clock.time().milliseconds);
+        const date: Date = new Date(this.clock.time().milliseconds);
+        const now: string = moment(date, this.options.timezone).format(this.options.dateFormat);
 
-        this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
+        this.reportMetrics(registry.getMonotoneCounterList(), date, now, "counter",
             (counter: MonotoneCounter) => this.reportCounter(counter),
             (counter: MonotoneCounter) => counter.getCount());
-        this.reportMetrics(registry.getCounterList(), now, "counter",
+        this.reportMetrics(registry.getCounterList(), date, now, "counter",
             (counter: Counter) => this.reportCounter(counter),
             (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry.getGaugeList(), now, "gauge",
+        this.reportMetrics(registry.getGaugeList(), date, now, "gauge",
             (gauge: Gauge<any>) => this.reportGauge(gauge),
             (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry.getHistogramList(), now, "histogram",
+        this.reportMetrics(registry.getHistogramList(), date, now, "histogram",
             (histogram: Histogram) => this.reportHistogram(histogram),
             (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry.getMeterList(), now, "meter",
+        this.reportMetrics(registry.getMeterList(), date, now, "meter",
             (meter: Meter) => this.reportMeter(meter),
             (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry.getTimerList(), now, "timer",
+        this.reportMetrics(registry.getTimerList(), date, now, "timer",
             (timer: Timer) => this.reportTimer(timer),
             (timer: Timer) => timer.getCount());
     }
@@ -310,6 +324,7 @@ export class CsvMetricReporter extends MetricReporter {
     private reportMetrics<T extends Metric>(
         metrics: T[],
         date: Date,
+        dateStr: string,
         type: MetricType,
         reportFunction: (metric: Metric) => Fields,
         lastModifiedFunction: (metric: Metric) => number): void {
@@ -324,14 +339,90 @@ export class CsvMetricReporter extends MetricReporter {
             if (changed) {
                 const fields = reportFunction(metric);
                 if (fields) {
-                    // TODO: build rows
                     const rows: Rows = [];
+                    for (const field of Object.keys(fields)) {
+                        const row = this.buildRow(dateStr, metric, type, field, fields[field]);
+                        rows.push(row);
+                    }
                     if (rows.length > 0) {
                         this.writeRows(metric, rows, type);
                     }
                 }
             }
         });
+    }
+
+    private buildRow<T extends Metric>(
+        dateStr: string,
+        metric: T,
+        type: MetricType,
+        field: string,
+        value: string): Row {
+
+        const row: Row = [];
+        const tags = this.buildTags(metric);
+
+        let metadataStr = "";
+        if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+            metric.getMetadataMap().forEach((metadataValue, metadataName) => {
+                metadataStr += `${metadataName}=\\"${metadataValue}\\";`;
+            });
+            metadataStr = metadataStr.slice(0, -1);
+        }
+
+        let tagStr = "";
+        if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+            tagStr = Object.keys(tags)
+                .map((tag) => `${tag}=\\"${tags[tag]}\\"`)
+                .join(";");
+        }
+
+        for (const columnType of this.options.columns) {
+            switch (columnType) {
+                case "date":
+                    row.push(dateStr);
+                    break;
+                case "description":
+                    row.push(`\\"${metric.getDescription()}\\"`);
+                    break;
+                case "field":
+                    row.push(`\\"${field}\\"`);
+                    break;
+                case "group":
+                    row.push(`\\"${metric.getGroup()}\\"`);
+                    break;
+                case "metadata":
+                    if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+                        row.push(metadataStr);
+                    } else {
+                        for (const metadata of this.metadataNames) {
+                            row.push(`\\"${metric.getMetadata(metadata)}\\"`);
+                        }
+                    }
+                    break;
+                case "name":
+                    row.push(`\\"${metric.getName()}\\"`);
+                    break;
+                case "tags":
+                    if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
+                        row.push(tagStr);
+                    } else {
+                        for (const tag of this.tagsNames) {
+                            row.push(`\\"${tags[tag]}\\"`);
+                        }
+                    }
+                    break;
+                case "type":
+                    row.push(`\\"${type}\\"`);
+                    break;
+                case "value":
+                    row.push(value);
+                    break;
+                default:
+            }
+        }
+
+        return row;
     }
 
     private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
