@@ -105,7 +105,7 @@ export class CsvMetricReporterOptions {
         metadataColumnPrefix = "meta_",
         columns = [],
         encoding = "utf8",
-        dateFormat = "utf8",
+        dateFormat = "YYYYMMDDHHmmss.SSSZ",
         timezone = "UTC",
         filename = async () => "metrics.csv",
         dir = async () => "/tmp",
@@ -365,7 +365,7 @@ export class CsvMetricReporter extends MetricReporter {
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
             metric.getMetadataMap().forEach((metadataValue, metadataName) => {
-                metadataStr += `${metadataName}=\\"${metadataValue}\\";`;
+                metadataStr += `${metadataName}="${metadataValue}";`;
             });
             metadataStr = metadataStr.slice(0, -1);
         }
@@ -373,7 +373,7 @@ export class CsvMetricReporter extends MetricReporter {
         let tagStr = "";
         if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
             tagStr = Object.keys(tags)
-                .map((tag) => `${tag}=\\"${tags[tag]}\\"`)
+                .map((tag) => `${tag}="${tags[tag]}"`)
                 .join(";");
         }
 
@@ -383,40 +383,40 @@ export class CsvMetricReporter extends MetricReporter {
                     row.push(dateStr);
                     break;
                 case "description":
-                    row.push(`\\"${metric.getDescription()}\\"`);
+                    row.push(`"${metric.getDescription() || ""}"`);
                     break;
                 case "field":
-                    row.push(`\\"${field}\\"`);
+                    row.push(`"${field || ""}"`);
                     break;
                 case "group":
-                    row.push(`\\"${metric.getGroup()}\\"`);
+                    row.push(`"${metric.getGroup() || ""}"`);
                     break;
                 case "metadata":
                     if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(metadataStr);
                     } else {
                         for (const metadata of this.metadataNames) {
-                            row.push(`\\"${metric.getMetadata(metadata)}\\"`);
+                            row.push(`"${metric.getMetadata(metadata) || ""}"`);
                         }
                     }
                     break;
                 case "name":
-                    row.push(`\\"${metric.getName()}\\"`);
+                    row.push(`"${metric.getName() || ""}"`);
                     break;
                 case "tags":
                     if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(tagStr);
                     } else {
                         for (const tag of this.tagsNames) {
-                            row.push(`\\"${tags[tag]}\\"`);
+                            row.push(`"${tags[tag] || ""}"`);
                         }
                     }
                     break;
                 case "type":
-                    row.push(`\\"${type}\\"`);
+                    row.push(`"${type || ""}"`);
                     break;
                 case "value":
-                    row.push(value);
+                    row.push(value || "");
                     break;
                 default:
             }

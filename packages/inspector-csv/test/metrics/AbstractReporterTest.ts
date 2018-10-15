@@ -5,11 +5,11 @@ import "source-map-support/register";
 
 import * as chai from "chai";
 import {
-    MetricRegistry,
+    Metric, MetricRegistry,
 } from "inspector-metrics";
 import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
-import { CsvFileWriter, CsvMetricReporter, CsvMetricReporterOptions } from "../../lib/metrics";
+import { CsvFileWriter, CsvMetricReporter, CsvMetricReporterOptions, Row } from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
 
 chai.use(sinonChai);
@@ -61,9 +61,17 @@ export class AbstractReportTest {
     protected verifyInitCall(dir: string, filename: string, columns: string[], call = 0) {
         expect(this.initSpy).to.have.been.called;
         const calls = this.initSpy.getCalls();
-        expect(calls).to.have.lengthOf(1);
+        expect(calls.length).to.be.gte(call + 1);
         expect(calls[call].args[0]).to.be.equal(dir);
         expect(calls[call].args[1]).to.be.equal(filename);
         expect(calls[call].args[2]).to.deep.equal(columns);
+    }
+
+    protected verifyWriteCall<T extends Metric>(metric: T, row: Row, call = 0) {
+        expect(this.initSpy).to.have.been.called;
+        const calls = this.writeRowSpy.getCalls();
+        expect(calls.length).to.be.gte(call + 1);
+        expect(calls[call].args[0]).to.be.equal(metric);
+        expect(calls[call].args[1]).to.deep.equal(row);
     }
 }

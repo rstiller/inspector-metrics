@@ -87,7 +87,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         tags.set("version", "1.0.0");
         this.reporter.setTags(tags);
 
-        this.registry.newCounter("test_counter");
+        const counter = this.registry.newCounter("test_counter");
 
         await this.triggerReporting();
 
@@ -96,7 +96,10 @@ export class CsvReporterTagsTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "tag_app", "tag_version"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter,
+            ["19700101010000.000+01:00", "\"\"", "\"test_counter\"", "\"count\"", "0", "\"test-app\"", "\"1.0.0\""],
+        );
     }
 
     @test
@@ -113,11 +116,11 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         tags.set("version", "1.0.0");
         this.reporter.setTags(tags);
 
-        this.registry.newCounter("test_counter_1")
-            .setTag("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setTag("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setTag("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setTag("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -126,7 +129,35 @@ export class CsvReporterTagsTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "tag_app", "tag_version", "tag_type", "tag_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"1.0.0\"",
+                "\"requests_per_second\"",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"1.0.0\"",
+                "\"\"",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
     @test
@@ -144,11 +175,11 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         tags.set("version", "1.0.0");
         this.reporter.setTags(tags);
 
-        this.registry.newCounter("test_counter_1")
-            .setTag("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setTag("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setTag("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setTag("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -157,7 +188,35 @@ export class CsvReporterTagsTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "t_app", "t_version", "t_type", "t_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"1.0.0\"",
+                "\"requests_per_second\"",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"1.0.0\"",
+                "\"\"",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
     @test
@@ -175,11 +234,11 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         tags.set("version", "1.0.0");
         this.reporter.setTags(tags);
 
-        this.registry.newCounter("test_counter_1")
-            .setTag("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setTag("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setTag("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setTag("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -188,7 +247,33 @@ export class CsvReporterTagsTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "tag_app", "tag_type", "tag_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"requests_per_second\"",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"test-app\"",
+                "\"\"",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
 }

@@ -38,7 +38,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             writer: this.writer,
         }));
         this.reporter.addMetricRegistry(this.registry);
-        this.registry.newCounter("test_counter");
+        const counter = this.registry.newCounter("test_counter");
 
         await this.triggerReporting();
 
@@ -47,7 +47,10 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter,
+            ["19700101010000.000+01:00", "\"\"", "\"test_counter\"", "\"count\"", "0"],
+        );
     }
 
     @test
@@ -58,11 +61,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             writer: this.writer,
         }));
         this.reporter.addMetricRegistry(this.registry);
-        this.registry.newCounter("test_counter_1")
-            .setMetadata("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setMetadata("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setMetadata("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setMetadata("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -71,7 +74,31 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "meta_type", "meta_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"requests_per_second\"",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"\"",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
     @test
@@ -83,11 +110,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             writer: this.writer,
         }));
         this.reporter.addMetricRegistry(this.registry);
-        this.registry.newCounter("test_counter_1")
-            .setMetadata("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setMetadata("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setMetadata("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setMetadata("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -96,7 +123,31 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "m_type", "m_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"requests_per_second\"",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"\"",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
     @test
@@ -108,11 +159,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             writer: this.writer,
         }));
         this.reporter.addMetricRegistry(this.registry);
-        this.registry.newCounter("test_counter_1")
-            .setMetadata("type", "requests_per_second");
+        const counter1 = this.registry.newCounter("test_counter_1");
+        counter1.setMetadata("type", "requests_per_second");
 
-        this.registry.newCounter("test_counter_2")
-            .setMetadata("measurement", "iops");
+        const counter2 = this.registry.newCounter("test_counter_2");
+        counter2.setMetadata("measurement", "iops");
 
         await this.triggerReporting();
 
@@ -121,7 +172,29 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
             "metrics.csv",
             ["date", "group", "name", "field", "value", "meta_measurement"],
         );
-        expect(this.writeRowSpy).to.have.not.been.called;
+        this.verifyWriteCall(
+            counter1,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_1\"",
+                "\"count\"",
+                "0",
+                "\"\"",
+            ],
+        );
+        this.verifyWriteCall(
+            counter2,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter_2\"",
+                "\"count\"",
+                "0",
+                "\"iops\"",
+            ],
+            1,
+        );
     }
 
 }
