@@ -491,4 +491,40 @@ export class MetricRegistryTest {
         expect(metricRemovedSpy.callCount).to.equal(5);
     }
 
+    @test
+    public "check name building with registerMetric"(): void {
+        const registry: MetricRegistry = new MetricRegistry();
+
+        const counter = registry.newCounter("test_counter", "test_group", "test_counter_desc");
+        expect(counter.getName()).to.be.equal("test_counter");
+        expect(counter.getGroup()).to.be.equal("test_group");
+        expect(counter.getDescription()).to.be.equal("test_counter_desc");
+
+        const hdr = registry.newHdrHistogram("test_hdr", 1, 10, 5, "test_group", "test_hdr_desc");
+        expect(hdr.getName()).to.be.equal("test_hdr");
+        expect(hdr.getGroup()).to.be.equal("test_group");
+        expect(hdr.getDescription()).to.be.equal("test_hdr_desc");
+
+        const histogram = registry.newHistogram("test_histogram", "test_group", undefined, "test_histogram_desc");
+        expect(histogram.getName()).to.be.equal("test_histogram");
+        expect(histogram.getGroup()).to.be.equal("test_group");
+        expect(histogram.getDescription()).to.be.equal("test_histogram_desc");
+
+        const meter = registry.newMeter("test_meter", "test_group", undefined, undefined, "test_meter_desc");
+        expect(meter.getName()).to.be.equal("test_meter");
+        expect(meter.getGroup()).to.be.equal("test_group");
+        expect(meter.getDescription()).to.be.equal("test_meter_desc");
+
+        const monotoneCounter = registry.newMonotoneCounter(
+            "test_monotoneCounter", "test_group", "test_monotoneCounter_desc");
+        expect(monotoneCounter.getName()).to.be.equal("test_monotoneCounter");
+        expect(monotoneCounter.getGroup()).to.be.equal("test_group");
+        expect(monotoneCounter.getDescription()).to.be.equal("test_monotoneCounter_desc");
+
+        const timer = registry.newTimer("test_timer", "test_group", undefined, undefined, "test_timer_desc");
+        expect(timer.getName()).to.be.equal("test_timer");
+        expect(timer.getGroup()).to.be.equal("test_group");
+        expect(timer.getDescription()).to.be.equal("test_timer_desc");
+    }
+
 }

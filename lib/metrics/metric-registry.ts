@@ -650,10 +650,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public newCounter(name: string, group: string = null, description: string = null): Counter {
         const counter = new Counter(name, description);
-        if (!!group) {
-            counter.setGroup(group);
-        }
-        this.register(counter.getName(), counter);
+        this.registerMetric(counter, group, description);
         return counter;
     }
 
@@ -669,10 +666,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public newMonotoneCounter(name: string, group: string = null, description: string = null): MonotoneCounter {
         const counter = new MonotoneCounter(name, description);
-        if (!!group) {
-            counter.setGroup(group);
-        }
-        this.register(counter.getName(), counter);
+        this.registerMetric(counter, group, description);
         return counter;
     }
 
@@ -696,10 +690,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         description: string = null): Meter {
 
         const meter = new Meter(clock, sampleRate, name, description);
-        if (!!group) {
-            meter.setGroup(group);
-        }
-        this.register(meter.getName(), meter);
+        this.registerMetric(meter, group, description);
         return meter;
     }
 
@@ -728,10 +719,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
         buckets: Buckets = new Buckets()): HdrHistogram {
 
         const histogram = new HdrHistogram(lowest, max, figures, name, description, buckets);
-        if (!!group) {
-            histogram.setGroup(group);
-        }
-        this.register(histogram.getName(), histogram);
+        this.registerMetric(histogram, group, description);
         return histogram;
     }
 
@@ -757,10 +745,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const histogram = new Histogram(reservoir, name, description, buckets);
-        if (!!group) {
-            histogram.setGroup(group);
-        }
-        this.register(histogram.getName(), histogram);
+        this.registerMetric(histogram, group, description);
         return histogram;
     }
 
@@ -788,10 +773,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             reservoir = new SlidingWindowReservoir(1024);
         }
         const timer = new Timer(clock, reservoir, name, description, buckets);
-        if (!!group) {
-            timer.setGroup(group);
-        }
-        this.register(timer.getName(), timer);
+        this.registerMetric(timer, group, description);
         return timer;
     }
 
