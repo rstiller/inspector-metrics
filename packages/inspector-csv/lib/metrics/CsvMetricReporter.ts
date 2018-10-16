@@ -67,7 +67,7 @@ export enum ExportMode {
 }
 
 export interface CsvFileWriter {
-    init(dir: string, file: string, header: Row): Promise<void>;
+    init(header: Row): Promise<void>;
     writeRow(metric: Metric, values: Row): Promise<void>;
 }
 
@@ -76,19 +76,16 @@ export class CsvMetricReporterOptions {
     public readonly writer: CsvFileWriter;
     public readonly interval: number;
     public readonly unit: TimeUnit;
-    public readonly writeHeaders: boolean;
     public readonly useSingleQuotes: boolean;
     public readonly tagExportMode: ExportMode;
     public readonly metadataExportMode: ExportMode;
-    public readonly delimiter: string;
     public readonly tagColumnPrefix: string;
+    public readonly tagDelimiter: string;
     public readonly metadataColumnPrefix: string;
+    public readonly metadataDelimiter: string;
     public readonly columns: ColumnType[];
-    public readonly encoding: string;
     public readonly dateFormat: string;
     public readonly timezone: string;
-    public readonly filename: () => Promise<string>;
-    public readonly dir: () => Promise<string>;
     public readonly tagFilter: Filter;
     public readonly metadataFilter: Filter;
 
@@ -96,57 +93,48 @@ export class CsvMetricReporterOptions {
         writer,
         interval = 1000,
         unit = MILLISECOND,
-        writeHeaders = true,
         useSingleQuotes = false,
         tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
         metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
-        delimiter = ",",
         tagColumnPrefix = "tag_",
+        tagDelimiter = ";",
         metadataColumnPrefix = "meta_",
+        metadataDelimiter = ";",
         columns = [],
-        encoding = "utf8",
         dateFormat = "YYYYMMDDHHmmss.SSSZ",
         timezone = "UTC",
-        filename = async () => "metrics.csv",
-        dir = async () => "/tmp",
         tagFilter = async () => true,
         metadataFilter = async () => true,
     }: {
         writer: CsvFileWriter,
         interval?: number,
         unit?: TimeUnit,
-        writeHeaders?: boolean,
         useSingleQuotes?: boolean,
         tagExportMode?: ExportMode,
         metadataExportMode?: ExportMode,
-        delimiter?: string,
         tagColumnPrefix?: string,
+        tagDelimiter?: string,
         metadataColumnPrefix?: string,
+        metadataDelimiter?: string,
         columns?: ColumnType[],
-        encoding?: string,
         dateFormat?: string,
         timezone?: string,
-        filename?: () => Promise<string>,
-        dir?: () => Promise<string>,
         tagFilter?: (metric: Metric, tag: string, value: string) => Promise<boolean>,
         metadataFilter?: (metric: Metric, key: string, value: any) => Promise<boolean>,
     }) {
         this.writer = writer;
         this.interval = interval;
         this.unit = unit;
-        this.writeHeaders = writeHeaders;
         this.useSingleQuotes = useSingleQuotes;
         this.tagExportMode = tagExportMode;
         this.metadataExportMode = metadataExportMode;
-        this.delimiter = delimiter;
         this.tagColumnPrefix = tagColumnPrefix;
+        this.tagDelimiter = tagDelimiter;
         this.metadataColumnPrefix = metadataColumnPrefix;
+        this.metadataDelimiter = metadataDelimiter;
         this.columns = columns;
-        this.encoding = encoding;
         this.dateFormat = dateFormat;
         this.timezone = timezone;
-        this.filename = filename;
-        this.dir = dir;
         this.tagFilter = tagFilter;
         this.metadataFilter = metadataFilter;
     }
@@ -220,10 +208,7 @@ export class CsvMetricReporter extends MetricReporter {
 
     private async report() {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
-            const dir = await this.options.dir();
-            const file = await this.options.filename();
-
-            this.options.writer.init(dir, file, this.header);
+            this.options.writer.init(this.header);
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
     }
@@ -359,13 +344,14 @@ export class CsvMetricReporter extends MetricReporter {
         field: string,
         value: string): Row {
 
+        const quote = this.options.useSingleQuotes === true ? "'" : "\"";
         const row: Row = [];
         const tags = this.buildTags(metric);
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
             metric.getMetadataMap().forEach((metadataValue, metadataName) => {
-                metadataStr += `${metadataName}="${metadataValue}";`;
+                metadataStr += `${metadataName}=${quote}${metadataValue}${quote}${this.options.metadataDelimiter}`;
             });
             metadataStr = metadataStr.slice(0, -1);
         }
@@ -373,8 +359,8 @@ export class CsvMetricReporter extends MetricReporter {
         let tagStr = "";
         if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
             tagStr = Object.keys(tags)
-                .map((tag) => `${tag}="${tags[tag]}"`)
-                .join(";");
+                .map((tag) => `${tag}=${quote}${tags[tag]}${quote}`)
+                .join(this.options.tagDelimiter);
         }
 
         for (const columnType of this.options.columns) {
@@ -383,37 +369,37 @@ export class CsvMetricReporter extends MetricReporter {
                     row.push(dateStr);
                     break;
                 case "description":
-                    row.push(`"${metric.getDescription() || ""}"`);
+                    row.push(`${quote}${metric.getDescription() || ""}${quote}`);
                     break;
                 case "field":
-                    row.push(`"${field || ""}"`);
+                    row.push(`${quote}${field || ""}${quote}`);
                     break;
                 case "group":
-                    row.push(`"${metric.getGroup() || ""}"`);
+                    row.push(`${quote}${metric.getGroup() || ""}${quote}`);
                     break;
                 case "metadata":
                     if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(metadataStr);
                     } else {
                         for (const metadata of this.metadataNames) {
-                            row.push(`"${metric.getMetadata(metadata) || ""}"`);
+                            row.push(`${quote}${metric.getMetadata(metadata) || ""}${quote}`);
                         }
                     }
                     break;
                 case "name":
-                    row.push(`"${metric.getName() || ""}"`);
+                    row.push(`${quote}${metric.getName() || ""}${quote}`);
                     break;
                 case "tags":
                     if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(tagStr);
                     } else {
                         for (const tag of this.tagsNames) {
-                            row.push(`"${tags[tag] || ""}"`);
+                            row.push(`${quote}${tags[tag] || ""}${quote}`);
                         }
                     }
                     break;
                 case "type":
-                    row.push(`"${type || ""}"`);
+                    row.push(`${quote}${type || ""}${quote}`);
                     break;
                 case "value":
                     row.push(value || "");

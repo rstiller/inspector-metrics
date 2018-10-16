@@ -26,8 +26,63 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall("/tmp", "metrics.csv", ["date", "group", "name", "field", "value", "metadata"]);
+        this.verifyInitCall(["date", "group", "name", "field", "value", "metadata"]);
         expect(this.writeRowSpy).to.have.not.been.called;
+    }
+
+    @test
+    public async "check reporting with metadata in one column"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "metadata"],
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+        const counter = this.registry.newCounter("test_counter");
+        counter.setMetadata("type", "requests_per_second");
+        counter.setMetadata("measurement", "iops");
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "metadata"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter\"",
+                "\"count\"",
+                "0",
+                "type=\"requests_per_second\";measurement=\"iops\"",
+            ],
+        );
+    }
+
+    @test
+    public async "check reporting with metadata in one column and custom delimiter"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "metadata"],
+            metadataDelimiter: ":",
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+        const counter = this.registry.newCounter("test_counter");
+        counter.setMetadata("type", "requests_per_second");
+        counter.setMetadata("measurement", "iops");
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "metadata"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter\"",
+                "\"count\"",
+                "0",
+                "type=\"requests_per_second\":measurement=\"iops\"",
+            ],
+        );
     }
 
     @test
@@ -42,11 +97,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value"]);
         this.verifyWriteCall(
             counter,
             ["19700101010000.000+01:00", "\"\"", "\"test_counter\"", "\"count\"", "0"],
@@ -69,11 +120,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value", "meta_type", "meta_measurement"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value", "meta_type", "meta_measurement"]);
         this.verifyWriteCall(
             counter1,
             [
@@ -118,11 +165,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value", "m_type", "m_measurement"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value", "m_type", "m_measurement"]);
         this.verifyWriteCall(
             counter1,
             [
@@ -161,17 +204,12 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newCounter("test_counter_1");
         counter1.setMetadata("type", "requests_per_second");
-
         const counter2 = this.registry.newCounter("test_counter_2");
         counter2.setMetadata("measurement", "iops");
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value", "meta_measurement"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value", "meta_measurement"]);
         this.verifyWriteCall(
             counter1,
             [

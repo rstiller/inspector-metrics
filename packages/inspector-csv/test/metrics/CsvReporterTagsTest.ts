@@ -26,7 +26,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall("/tmp", "metrics.csv", ["date", "group", "name", "field", "value", "tags"]);
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tags"]);
         expect(this.writeRowSpy).to.have.not.been.called;
     }
 
@@ -45,8 +45,73 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall("/tmp", "metrics.csv", ["date", "group", "name", "field", "value", "tags"]);
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tags"]);
         expect(this.writeRowSpy).to.have.not.been.called;
+    }
+
+    @test
+    public async "check reporting with tags in one column"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "tags"],
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+
+        const tags = new Map();
+        tags.set("app", "test-app");
+        tags.set("version", "1.0.0");
+        this.reporter.setTags(tags);
+
+        const counter = this.registry.newCounter("test_counter");
+        counter.setTag("type", "requests_per_second");
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tags"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter\"",
+                "\"count\"",
+                "0",
+                "app=\"test-app\";version=\"1.0.0\";type=\"requests_per_second\"",
+            ],
+        );
+    }
+
+    @test
+    public async "check reporting with tags in one column and custom delimiter"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "tags"],
+            tagDelimiter: ":",
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+
+        const tags = new Map();
+        tags.set("app", "test-app");
+        tags.set("version", "1.0.0");
+        this.reporter.setTags(tags);
+
+        const counter = this.registry.newCounter("test_counter");
+        counter.setTag("type", "requests_per_second");
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tags"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "\"\"",
+                "\"test_counter\"",
+                "\"count\"",
+                "0",
+                "app=\"test-app\":version=\"1.0.0\":type=\"requests_per_second\"",
+            ],
+        );
     }
 
     @test
@@ -65,11 +130,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value", "tag_app", "tag_version"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tag_app", "tag_version"]);
         expect(this.writeRowSpy).to.have.not.been.called;
     }
 
@@ -91,11 +152,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
-        this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
-            ["date", "group", "name", "field", "value", "tag_app", "tag_version"],
-        );
+        this.verifyInitCall(["date", "group", "name", "field", "value", "tag_app", "tag_version"]);
         this.verifyWriteCall(
             counter,
             ["19700101010000.000+01:00", "\"\"", "\"test_counter\"", "\"count\"", "0", "\"test-app\"", "\"1.0.0\""],
@@ -125,8 +182,6 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         await this.triggerReporting();
 
         this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
             ["date", "group", "name", "field", "value", "tag_app", "tag_version", "tag_type", "tag_measurement"],
         );
         this.verifyWriteCall(
@@ -184,8 +239,6 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         await this.triggerReporting();
 
         this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
             ["date", "group", "name", "field", "value", "t_app", "t_version", "t_type", "t_measurement"],
         );
         this.verifyWriteCall(
@@ -243,8 +296,6 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         await this.triggerReporting();
 
         this.verifyInitCall(
-            "/tmp",
-            "metrics.csv",
             ["date", "group", "name", "field", "value", "tag_app", "tag_type", "tag_measurement"],
         );
         this.verifyWriteCall(
