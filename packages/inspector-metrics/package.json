@@ -2,7 +2,7 @@
   "name": "inspector-metrics",
   "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
