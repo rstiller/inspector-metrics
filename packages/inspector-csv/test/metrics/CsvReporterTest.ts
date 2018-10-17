@@ -50,6 +50,63 @@ export class CsvReporterTest extends AbstractReportTest {
     }
 
     @test
+    public async "check encoding of description with double quotes"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "description"],
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+        const counter = this.registry.newCounter("test_counter", "test_group", "desc: '\"abc\"'");
+
+        counter.increment(123);
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "description"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "\"test_group\"",
+                "\"test_counter\"",
+                "\"count\"",
+                "123",
+                "\"desc%3A%20'%22abc%22'\"",
+            ],
+            0,
+        );
+    }
+
+    @test
+    public async "check encoding of description with single quotes"() {
+        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+            columns: ["date", "group", "name", "field", "value", "description"],
+            useSingleQuotes: true,
+            writer: this.writer,
+        }));
+        this.reporter.addMetricRegistry(this.registry);
+        const counter = this.registry.newCounter("test_counter", "test_group", "desc: '\"abc\"'");
+
+        counter.increment(123);
+
+        await this.triggerReporting();
+
+        this.verifyInitCall(["date", "group", "name", "field", "value", "description"]);
+        this.verifyWriteCall(
+            counter,
+            [
+                "19700101010000.000+01:00",
+                "'test_group'",
+                "'test_counter'",
+                "'count'",
+                "123",
+                "'desc%3A%20\\'%22abc%22\\''",
+            ],
+            0,
+        );
+    }
+
+    @test
     public async "check fields of counter"() {
         this.reporter = this.newReporter(new CsvMetricReporterOptions({
             columns: ["date", "group", "name", "field", "value"],

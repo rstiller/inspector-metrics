@@ -369,7 +369,11 @@ export class CsvMetricReporter extends MetricReporter {
                     row.push(dateStr);
                     break;
                 case "description":
-                    row.push(`${quote}${metric.getDescription() || ""}${quote}`);
+                    let desc = encodeURIComponent(metric.getDescription() || "");
+                    if (quote === "'") {
+                        desc = desc.replace(/'/g, "\\'");
+                    }
+                    row.push(`${quote}${desc}${quote}`);
                     break;
                 case "field":
                     row.push(`${quote}${field || ""}${quote}`);
