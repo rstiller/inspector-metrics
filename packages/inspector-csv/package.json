@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.5",
+    "@types/async": "^2.0.50",
     "@types/chai": "^4.1.5",
     "@types/lodash": "^4.14.116",
     "@types/mocha": "^5.2.5",
@@ -49,6 +50,7 @@
     "typescript": "^3.1.1"
   },
   "dependencies": {
+    "async": "^2.6.1",
     "inspector-metrics": "^1.12.1",
     "moment": "^2.22.2",
     "moment-timezone": "^0.5.21",

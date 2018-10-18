@@ -208,7 +208,7 @@ export class CsvMetricReporter extends MetricReporter {
 
     private async report() {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
-            this.options.writer.init(this.header);
+            await this.options.writer.init(this.header);
             this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
         }
     }
