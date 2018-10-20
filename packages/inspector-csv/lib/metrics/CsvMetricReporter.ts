@@ -50,43 +50,195 @@ interface MetricEntry {
     lastValue: number;
 }
 
+/**
+ * Lists all possible column types.
+ */
 export type ColumnType = "date" | "name" | "field" | "group" | "description" | "value" | "tags" | "type" | "metadata";
+
+/**
+ * Shortcut type for a row.
+ */
 export type Row = string[];
+
+/**
+ * Shortcut type for many rows.
+ */
 export type Rows = Row[];
+
+/**
+ * Type for a tag or metadata filter.
+ */
 export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>;
+
+/**
+ * Helper interface for tags.
+ *
+ * @interface Tags
+ */
 interface Tags {
     [key: string]: string;
 }
+
+/**
+ * Helper interface for Fields.
+ *
+ * @interface Fields
+ */
 interface Fields {
     [field: string]: string;
 }
 
+/**
+ * Tags and metadata can be exported in one row or in separate rows.
+ *
+ * @export
+ * @enum {number}
+ */
 export enum ExportMode {
     ALL_IN_ONE_COLUMN,
     EACH_IN_OWN_COLUMN,
 }
 
+/**
+ * Delegation interface for writing the actual value to a file.
+ *
+ * @export
+ * @interface CsvFileWriter
+ */
 export interface CsvFileWriter {
+
+    /**
+     * Called on every metrics-report run one time - behaviour is implementation specific.
+     *
+     * @param {Row} header
+     * @returns {Promise<void>}
+     * @memberof CsvFileWriter
+     */
     init(header: Row): Promise<void>;
+
+    /**
+     * Called for each field of each metric and after init finished - behaviour is implementation specific.
+     *
+     * @param {Metric} metric
+     * @param {Row} values
+     * @returns {Promise<void>}
+     * @memberof CsvFileWriter
+     */
     writeRow(metric: Metric, values: Row): Promise<void>;
 }
 
+/**
+ * Options for {@link CsvMetricReporter}.
+ *
+ * @export
+ * @class CsvMetricReporterOptions
+ */
 export class CsvMetricReporterOptions {
 
+    /**
+     * The writer used to store the rows.
+     *
+     * @type {CsvFileWriter}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly writer: CsvFileWriter;
+    /**
+     * Reporting interval.
+     *
+     * @type {number}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly interval: number;
+    /**
+     * TimeUnit of the reporting interval.
+     *
+     * @type {TimeUnit}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly unit: TimeUnit;
+    /**
+     * Indicates that single quotes are used instead of double quotes.
+     *
+     * @type {boolean}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly useSingleQuotes: boolean;
+    /**
+     * ExportMode for tags.
+     *
+     * @type {ExportMode}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly tagExportMode: ExportMode;
+    /**
+     * ExportMode for metadata.
+     *
+     * @type {ExportMode}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly metadataExportMode: ExportMode;
+    /**
+     * Prefix for tag columns if exported separately.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly tagColumnPrefix: string;
+    /**
+     * Delimiter between the tags if exported in one column.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly tagDelimiter: string;
+    /**
+     * Prefix for metadata columns if exported separately.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly metadataColumnPrefix: string;
+    /**
+     * Delimiter between the metadata if exported in one column.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly metadataDelimiter: string;
+    /**
+     * The columns to export.
+     *
+     * @type {ColumnType[]}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly columns: ColumnType[];
+    /**
+     * The format for the date column.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly dateFormat: string;
+    /**
+     * The timezone used to determine the date.
+     *
+     * @type {string}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly timezone: string;
+    /**
+     * An async filter function used to filter out unwanted tags.
+     *
+     * @type {Filter}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly tagFilter: Filter;
+    /**
+     * An async filter function used to filter out unwanted metadata.
+     *
+     * @type {Filter}
+     * @memberof CsvMetricReporterOptions
+     */
     public readonly metadataFilter: Filter;
 
     public constructor({
@@ -106,20 +258,91 @@ export class CsvMetricReporterOptions {
         tagFilter = async () => true,
         metadataFilter = async () => true,
     }: {
+        /**
+         * The writer used to store the rows.
+         *
+         * @type {CsvFileWriter}
+         */
         writer: CsvFileWriter,
+        /**
+         * Reporting interval.
+         *
+         * @type {number}
+         */
         interval?: number,
+        /**
+         * TimeUnit of the reporting interval.
+         *
+         * @type {TimeUnit}
+         */
         unit?: TimeUnit,
+        /**
+         * Indicates that single quotes are used instead of double quotes.
+         *
+         * @type {boolean}
+         */
         useSingleQuotes?: boolean,
+        /**
+         * ExportMode for tags.
+         *
+         * @type {ExportMode}
+         */
         tagExportMode?: ExportMode,
+        /**
+         * ExportMode for metadata.
+         *
+         * @type {ExportMode}
+         */
         metadataExportMode?: ExportMode,
+        /**
+         * Prefix for tag columns if exported separately.
+         *
+         * @type {string}
+         */
         tagColumnPrefix?: string,
+        /**
+         * Delimiter between the tags if exported in one column.
+         *
+         * @type {string}
+         */
         tagDelimiter?: string,
+        /**
+         * Prefix for metadata columns if exported separately.
+         *
+         * @type {string}
+         */
         metadataColumnPrefix?: string,
+        /**
+         * Delimiter between the metadata if exported in one column.
+         *
+         * @type {string}
+         */
         metadataDelimiter?: string,
+        /**
+         * The columns to export.
+         *
+         * @type {ColumnType[]}
+         */
         columns?: ColumnType[],
+        /**
+         * The format for the date column.
+         *
+         * @type {string}
+         */
         dateFormat?: string,
+        /**
+         * The timezone used to determine the date.
+         *
+         * @type {string}
+         */
         timezone?: string,
+        /**
+         * An async filter function used to filter out unwanted tags.
+         */
         tagFilter?: (metric: Metric, tag: string, value: string) => Promise<boolean>,
+        /**
+         * An async filter function used to filter out unwanted metadata.
+         */
         metadataFilter?: (metric: Metric, key: string, value: any) => Promise<boolean>,
     }) {
         this.writer = writer;
@@ -149,24 +372,97 @@ export class CsvMetricReporterOptions {
  */
 export class CsvMetricReporter extends MetricReporter {
 
+    /**
+     * The options for this reporter.
+     *
+     * @private
+     * @type {CsvMetricReporterOptions}
+     * @memberof CsvMetricReporter
+     */
     private readonly options: CsvMetricReporterOptions;
+    /**
+     * Common tags applied to each metric while reporting.
+     *
+     * @private
+     * @type {Map<string, string>}
+     * @memberof CsvMetricReporter
+     */
     private tags: Map<string, string> = new Map();
+    /**
+     * The clock used to determine the state of change of a certain metric.
+     *
+     * @private
+     * @type {Clock}
+     * @memberof CsvMetricReporter
+     */
     private clock: Clock;
+    /**
+     * Maximum amount of time in seconds a metric
+     * that has not changed it's value is not reported.
+     *
+     * @private
+     * @type {number}
+     * @memberof CsvMetricReporter
+     */
     private minReportingTimeout: number;
+    /**
+     * Scheduler function.
+     *
+     * @private
+     * @type {Scheduler}
+     * @memberof CsvMetricReporter
+     */
     private scheduler: Scheduler;
+    /**
+     * Timer reference.
+     *
+     * @private
+     * @type {NodeJS.Timer}
+     * @memberof CsvMetricReporter
+     */
     private timer: NodeJS.Timer;
+    /**
+     * Helper Map for holding the state / last value of a metric.
+     *
+     * @private
+     * @type {Map<number, MetricEntry>}
+     * @memberof CsvMetricReporter
+     */
     private metricStates: Map<number, MetricEntry> = new Map();
+    /**
+     * Header row.
+     *
+     * @private
+     * @type {Row}
+     * @memberof CsvMetricReporter
+     */
     private header: Row;
+    /**
+     * All metadata names
+     *
+     * @private
+     * @type {string[]}
+     * @memberof CsvMetricReporter
+     */
     private metadataNames: string[] = [];
+    /**
+     * All tags names.
+     *
+     * @private
+     * @type {string[]}
+     * @memberof CsvMetricReporter
+     */
     private tagsNames: string[] = [];
 
     /**
      * Creates an instance of CsvMetricReporter.
      *
+     * @param {CsvMetricReporterOptions} options
      * @param {Map<string, string>} [tags=new Map()]
      * @param {Clock} [clock=new StdClock()]
      * @param {number} [minReportingTimeout=1]
-     *     timeout in minutes a metric need to be included in the report without having changed
+     *          timeout in minutes a metric need to be included in the report without having changed
+     * @param {Scheduler} [scheduler=setInterval]
      * @memberof CsvMetricReporter
      */
     public constructor(
@@ -184,14 +480,35 @@ export class CsvMetricReporter extends MetricReporter {
         this.scheduler = scheduler;
     }
 
+    /**
+     * Gets back all tags.
+     *
+     * @returns {Map<string, string>}
+     * @memberof CsvMetricReporter
+     */
     public getTags(): Map<string, string> {
         return this.tags;
     }
 
+    /**
+     * Sets the common tags.
+     *
+     * @param {Map<string, string>} tags
+     * @memberof CsvMetricReporter
+     */
     public setTags(tags: Map<string, string>): void {
         this.tags = tags;
     }
 
+    /**
+     * Builds all headers and starts scheduling reporting runs.
+     * When call this method all metatdata and tags in each metric
+     * in the application need to be set / known, otherwise it cannot be
+     * reported.
+     *
+     * @returns {Promise<void>}
+     * @memberof CsvMetricReporter
+     */
     public async start(): Promise<void> {
         const interval: number = this.options.unit.convertTo(this.options.interval, MILLISECOND);
         if (this.metricRegistries && this.metricRegistries.length > 0) {
@@ -200,12 +517,23 @@ export class CsvMetricReporter extends MetricReporter {
         this.timer = this.scheduler(() => this.report(), interval);
     }
 
+    /**
+     * Stops the reporting.
+     *
+     * @memberof CsvMetricReporter
+     */
     public stop(): void {
         if (this.timer) {
             this.timer.unref();
         }
     }
 
+    /**
+     * Calls the init method of the file writer and reports all metrics.
+     *
+     * @private
+     * @memberof CsvMetricReporter
+     */
     private async report() {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             await this.options.writer.init(this.header);
@@ -213,6 +541,13 @@ export class CsvMetricReporter extends MetricReporter {
         }
     }
 
+    /**
+     * Builds a row / string array with all headers. Also updated the internal data of the reporter.
+     *
+     * @private
+     * @returns {Promise<Row>}
+     * @memberof CsvMetricReporter
+     */
     private async buildHeaders(): Promise<Row> {
         const headers: Row = [];
 
@@ -239,6 +574,15 @@ export class CsvMetricReporter extends MetricReporter {
         return headers;
     }
 
+    /**
+     * Filters the given set of strings using the given filter and returns the filtered set.
+     *
+     * @private
+     * @param {Set<string>} keys
+     * @param {Filter} filter
+     * @returns {Promise<Set<string>>}
+     * @memberof CsvMetricReporter
+     */
     private async filterKeys(keys: Set<string>, filter: Filter): Promise<Set<string>> {
         const filteredKeys = new Set();
         const tasks: Array<Promise<any>> = [];
@@ -253,6 +597,13 @@ export class CsvMetricReporter extends MetricReporter {
         return filteredKeys;
     }
 
+    /**
+     * Gets all metadata keys - no filtering.
+     *
+     * @private
+     * @returns {Set<string>}
+     * @memberof CsvMetricReporter
+     */
     private getAllMetadataKeys(): Set<string> {
         const metadataNames = new Set();
         this.metricRegistries
@@ -268,6 +619,13 @@ export class CsvMetricReporter extends MetricReporter {
         return metadataNames;
     }
 
+    /**
+     * Gets all tag names - no filtering.
+     *
+     * @private
+     * @returns {Set<string>}
+     * @memberof CsvMetricReporter
+     */
     private getAllTagKeys(): Set<string> {
         const tags = new Set();
         this.tags.forEach((value, tag) => tags.add(tag));
@@ -282,6 +640,13 @@ export class CsvMetricReporter extends MetricReporter {
         return tags;
     }
 
+    /**
+     * Triggers the reporting for the given {@link MetricRegistry}.
+     *
+     * @private
+     * @param {MetricRegistry} registry
+     * @memberof CsvMetricReporter
+     */
     private reportMetricRegistry(registry: MetricRegistry): void {
         const date: Date = new Date(this.clock.time().milliseconds);
         const now: string = moment(date, this.options.timezone).format(this.options.dateFormat);
@@ -306,6 +671,19 @@ export class CsvMetricReporter extends MetricReporter {
             (timer: Timer) => timer.getCount());
     }
 
+    /**
+     * Builds and writes the rows of the given metrics of the given type.
+     *
+     * @private
+     * @template T
+     * @param {T[]} metrics
+     * @param {Date} date
+     * @param {string} dateStr
+     * @param {MetricType} type
+     * @param {(metric: Metric) => Fields} reportFunction
+     * @param {(metric: Metric) => number} lastModifiedFunction
+     * @memberof CsvMetricReporter
+     */
     private reportMetrics<T extends Metric>(
         metrics: T[],
         date: Date,
@@ -337,6 +715,19 @@ export class CsvMetricReporter extends MetricReporter {
         });
     }
 
+    /**
+     * Builds the row of a single metric.
+     *
+     * @private
+     * @template T
+     * @param {string} dateStr
+     * @param {T} metric
+     * @param {MetricType} type
+     * @param {string} field
+     * @param {string} value
+     * @returns {Row}
+     * @memberof CsvMetricReporter
+     */
     private buildRow<T extends Metric>(
         dateStr: string,
         metric: T,
@@ -415,6 +806,17 @@ export class CsvMetricReporter extends MetricReporter {
         return row;
     }
 
+    /**
+     * Determines if the value of a metric has changed - always true if the minimum
+     * reporting timeout is elapsed.
+     *
+     * @private
+     * @param {number} metricId
+     * @param {number} lastValue
+     * @param {Date} date
+     * @returns {boolean}
+     * @memberof CsvMetricReporter
+     */
     private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
         let changed = true;
         let metricEntry = {
@@ -435,18 +837,42 @@ export class CsvMetricReporter extends MetricReporter {
         return changed;
     }
 
+    /**
+     * Gathers the fields for a counter metric.
+     *
+     * @private
+     * @param {MonotoneCounter} counter
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
     private reportCounter(counter: MonotoneCounter): Fields {
         return {
             count: `${counter.getCount()}`,
         };
     }
 
+    /**
+     * Gathers the fields for a gauge metric.
+     *
+     * @private
+     * @param {Gauge<any>} gauge
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
     private reportGauge(gauge: Gauge<any>): Fields {
         return {
             value: `${gauge.getValue()}`,
         };
     }
 
+    /**
+     * Gathers the fields for a histogram metric.
+     *
+     * @private
+     * @param {Histogram} histogram
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
     private reportHistogram(histogram: Histogram): Fields {
         const snapshot = histogram.getSnapshot();
         const bucketFields: Fields = {};
@@ -471,6 +897,14 @@ export class CsvMetricReporter extends MetricReporter {
         };
     }
 
+    /**
+     * Gathers the fields for a meter metric.
+     *
+     * @private
+     * @param {Meter} meter
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
     private reportMeter(meter: Meter): Fields {
         return {
             count: `${this.getNumber(meter.getCount())}`,
@@ -481,6 +915,14 @@ export class CsvMetricReporter extends MetricReporter {
         };
     }
 
+    /**
+     * Gathers the fields for a timer metric.
+     *
+     * @private
+     * @param {Timer} timer
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
     private reportTimer(timer: Timer): Fields {
         const snapshot = timer.getSnapshot();
         const bucketFields: Fields = {};
@@ -509,12 +951,30 @@ export class CsvMetricReporter extends MetricReporter {
         };
     }
 
+    /**
+     * Writes the rows by calling the corrsponding {@link CsvFileWriter}.
+     *
+     * @private
+     * @template T
+     * @param {T} metric
+     * @param {Rows} rows
+     * @param {MetricType} type
+     * @memberof CsvMetricReporter
+     */
     private writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType): void {
         for (const row of rows) {
             this.options.writer.writeRow(metric, row);
         }
     }
 
+    /**
+     * Combines the common tags of this reporter instance with the tags from the metric.
+     *
+     * @private
+     * @param {Taggable} taggable
+     * @returns {Tags}
+     * @memberof CsvMetricReporter
+     */
     private buildTags(taggable: Taggable): Tags {
         const tags: { [x: string]: string } = {};
         this.tags.forEach((tag, key) => tags[key] = tag);
@@ -522,6 +982,14 @@ export class CsvMetricReporter extends MetricReporter {
         return tags;
     }
 
+    /**
+     * Gets the value of the specified number or zero.
+     *
+     * @private
+     * @param {number} value
+     * @returns {number}
+     * @memberof CsvMetricReporter
+     */
     private getNumber(value: number): number {
         if (isNaN(value)) {
             return 0;
