@@ -649,7 +649,7 @@ export class CsvMetricReporter extends MetricReporter {
      */
     private reportMetricRegistry(registry: MetricRegistry): void {
         const date: Date = new Date(this.clock.time().milliseconds);
-        const now: string = moment(date, this.options.timezone).format(this.options.dateFormat);
+        const now: string = moment.tz(date, this.options.timezone).format(this.options.dateFormat);
 
         this.reportMetrics(registry.getMonotoneCounterList(), date, now, "counter",
             (counter: MonotoneCounter) => this.reportCounter(counter),

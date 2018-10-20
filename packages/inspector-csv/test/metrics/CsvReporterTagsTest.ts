@@ -71,7 +71,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter\"",
                 "\"count\"",
@@ -104,7 +104,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter\"",
                 "\"count\"",
@@ -155,7 +155,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyInitCall(["date", "group", "name", "field", "value", "tag_app", "tag_version"]);
         this.verifyWriteCall(
             counter,
-            ["19700101010000.000+01:00", "\"\"", "\"test_counter\"", "\"count\"", "0", "\"test-app\"", "\"1.0.0\""],
+            ["19700101000000.000+00:00", "\"\"", "\"test_counter\"", "\"count\"", "0", "\"test-app\"", "\"1.0.0\""],
         );
     }
 
@@ -187,7 +187,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter1,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_1\"",
                 "\"count\"",
@@ -201,7 +201,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter2,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_2\"",
                 "\"count\"",
@@ -244,7 +244,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter1,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_1\"",
                 "\"count\"",
@@ -258,7 +258,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter2,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_2\"",
                 "\"count\"",
@@ -301,7 +301,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter1,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_1\"",
                 "\"count\"",
@@ -314,7 +314,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
         this.verifyWriteCall(
             counter2,
             [
-                "19700101010000.000+01:00",
+                "19700101000000.000+00:00",
                 "\"\"",
                 "\"test_counter_2\"",
                 "\"count\"",
