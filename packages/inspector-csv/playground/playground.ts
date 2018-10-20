@@ -1,7 +1,6 @@
 // tslint:disable:no-console
 
 import { MetricRegistry, Timer } from "inspector-metrics";
-import moment = require("moment");
 import { CsvMetricReporter, CsvMetricReporterOptions } from "../lib/metrics";
 import { DefaultCsvFileWriter, DefaultCsvFileWriterOptions } from "../lib/metrics/DefaultCsvFileWriter";
 
@@ -18,8 +17,6 @@ requests2.setTag("host", "127.0.0.2");
 requests3.setTag("host", "127.0.0.3");
 
 const writer = new DefaultCsvFileWriter(new DefaultCsvFileWriterOptions({
-    dir: async () => ".",
-    filename: async () => `${moment().format("YYYY-MM-DD-HH-mm")}_metrics.csv`,
 }));
 const reporter = new CsvMetricReporter(new CsvMetricReporterOptions({
     columns: ["date", "group", "name", "field", "value"],
