@@ -24,7 +24,7 @@ export class DefaultCsvFileWriterOptions {
      */
     public readonly writeHeaders: boolean;
     /**
-     * Determines if the dir for the metrics reportig should be created if it doesn't exist.
+     * Determines if the dir for the metrics reporting should be created if it doesn't exist.
      *
      * @type {boolean}
      * @memberof DefaultCsvFileWriterOptions
@@ -102,7 +102,7 @@ export class DefaultCsvFileWriterOptions {
          */
         writeHeaders?: boolean,
         /**
-         * Determines if the dir for the metrics reportig should be created if it doesn't exist.
+         * Determines if the dir for the metrics reporting should be created if it doesn't exist.
          *
          * @type {boolean}
          */

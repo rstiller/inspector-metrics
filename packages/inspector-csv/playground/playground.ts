@@ -1,7 +1,7 @@
 // tslint:disable:no-console
 
 import { MetricRegistry, Timer } from "inspector-metrics";
-import { CsvMetricReporter, CsvMetricReporterOptions } from "../lib/metrics";
+import { CsvMetricReporter, CsvMetricReporterOptions, ExportMode } from "../lib/metrics";
 import { DefaultCsvFileWriter, DefaultCsvFileWriterOptions } from "../lib/metrics/DefaultCsvFileWriter";
 
 const registry: MetricRegistry = new MetricRegistry();
@@ -14,14 +14,20 @@ requests2.setGroup("requests");
 
 requests1.setTag("host", "127.0.0.1");
 requests2.setTag("host", "127.0.0.2");
+requests2.setTag("type", "override_tag");
 requests3.setTag("host", "127.0.0.3");
+requests3.setTag("special_tag", "test_abc");
 
-const writer = new DefaultCsvFileWriter(new DefaultCsvFileWriterOptions({
-}));
+const writer = new DefaultCsvFileWriter(new DefaultCsvFileWriterOptions({}));
 const reporter = new CsvMetricReporter(new CsvMetricReporterOptions({
-    columns: ["date", "group", "name", "field", "value"],
+    columns: ["date", "group", "name", "field", "value", "type", "tags"],
+    tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
     writer,
 }));
+
+const tags = new Map();
+tags.set("type", "metric");
+reporter.setTags(tags);
 
 reporter.addMetricRegistry(registry);
 reporter.start();
