@@ -8,12 +8,16 @@ import { suite, test } from "mocha-typescript";
 import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
 
-import { Clock, Time } from "../../lib/metrics/clock";
-import { SimpleGauge } from "../../lib/metrics/gauge";
-import { Logger } from "../../lib/metrics/logger";
-import { LoggerReporter, Scheduler } from "../../lib/metrics/logger-reporter";
-import { MetricRegistry } from "../../lib/metrics/metric-registry";
-import { MILLISECOND } from "../../lib/metrics/time-unit";
+import {
+    Clock,
+    Logger,
+    LoggerReporter,
+    MetricRegistry,
+    MILLISECOND,
+    Scheduler,
+    SimpleGauge,
+    Time,
+} from "../../../lib/metrics/";
 
 chai.use(sinonChai);
 
