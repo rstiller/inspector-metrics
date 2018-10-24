@@ -1,16 +1,16 @@
 import "source-map-support/register";
 
-import { Clock, StdClock } from "./clock";
-import { Counter, MonotoneCounter } from "./counter";
-import { Gauge } from "./gauge";
-import { Histogram } from "./histogram";
+import { Clock, StdClock } from "../clock";
+import { Counter, MonotoneCounter } from "../counter";
+import { Gauge } from "../gauge";
+import { Histogram } from "../histogram";
+import { Meter } from "../meter";
+import { MetricRegistry } from "../metric-registry";
+import { MetricReporter } from "../metric-reporter";
+import { Taggable } from "../taggable";
+import { MILLISECOND, TimeUnit } from "../time-unit";
+import { Timer } from "../timer";
 import { Logger } from "./logger";
-import { Meter } from "./meter";
-import { MetricRegistry } from "./metric-registry";
-import { MetricReporter } from "./metric-reporter";
-import { Taggable } from "./taggable";
-import { MILLISECOND, TimeUnit } from "./time-unit";
-import { Timer } from "./timer";
 
 export type Scheduler = (prog: () => void, interval: number) => NodeJS.Timer;
 
