@@ -72,7 +72,14 @@ export class LoggerReporterTest {
             return null;
         };
         this.schedulerSpy = spy(this.scheduler);
-        this.reporter = new LoggerReporter(this.logger, 1000, MILLISECOND, new Map(), this.clock, this.schedulerSpy);
+        this.reporter = new LoggerReporter({
+            clock: this.clock,
+            log: this.logger,
+            reportInterval: 1000,
+            scheduler: this.schedulerSpy,
+            tags: new Map(),
+            unit: MILLISECOND,
+        });
 
         this.registry.setDefaultClock(this.clock);
         this.reporter.addMetricRegistry(this.registry);
@@ -93,7 +100,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "no metric-registries added"(): void {
+    public async "no metric-registries added"(): Promise<void> {
         this.reporter.removeMetricRegistry(this.registry);
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -104,14 +111,14 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy).to.not.have.been.called;
     }
 
     @test
-    public "counter reporting"(): void {
+    public async "counter reporting"(): Promise<void> {
         this.registry.newCounter("counter1");
         this.registry.newMonotoneCounter("monotone-counter1");
 
@@ -123,7 +130,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(2);
@@ -141,7 +148,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "gauge reporting"(): void {
+    public async "gauge reporting"(): Promise<void> {
         this.registry.registerMetric(new SimpleGauge("gauge1"));
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -152,7 +159,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -164,7 +171,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "histogram reporting"(): void {
+    public async "histogram reporting"(): Promise<void> {
         this.registry.newHistogram("histogram1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -175,7 +182,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -187,7 +194,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "meter reporting"(): void {
+    public async "meter reporting"(): Promise<void> {
         this.registry.newMeter("meter1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -198,7 +205,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -210,7 +217,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "timer reporting"(): void {
+    public async "timer reporting"(): Promise<void> {
         this.registry.newTimer("timer1");
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -221,7 +228,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -233,7 +240,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "registry tags"(): void {
+    public async "registry tags"(): Promise<void> {
         this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
@@ -246,7 +253,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -260,7 +267,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "metric tags"(): void {
+    public async "metric tags"(): Promise<void> {
         const counter = this.registry.newCounter("counter1");
         counter.setTag("application", "app");
         counter.setTag("mode", "dev");
@@ -273,7 +280,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);
@@ -287,7 +294,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "registry and metric tags"(): void {
+    public async "registry and metric tags"(): Promise<void> {
         const counter = this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
@@ -302,7 +309,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.loggerSpy.callCount).to.equal(1);

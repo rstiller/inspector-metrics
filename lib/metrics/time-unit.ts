@@ -56,10 +56,31 @@ export class TimeUnit {
 
 }
 
+/**
+ * One nanosecond.
+ */
 export const NANOSECOND = new TimeUnit(1);
+/**
+ * One microsecond in nanoseconds.
+ */
 export const MICROSECOND = new TimeUnit(1000);
+/**
+ * One millisecond in nanoseconds.
+ */
 export const MILLISECOND = new TimeUnit(1000000);
+/**
+ * One second in nanoseconds.
+ */
 export const SECOND = new TimeUnit(1000000000);
+/**
+ * One minute in nanoseconds.
+ */
 export const MINUTE = new TimeUnit(60000000000);
+/**
+ * One hour in nanoseconds.
+ */
 export const HOUR = new TimeUnit(3600000000000);
+/**
+ * One day in nanoseconds.
+ */
 export const DAY = new TimeUnit(86400000000000);
