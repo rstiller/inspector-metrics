@@ -73,14 +73,21 @@ export class LoggerReporterTest {
             return null;
         };
         this.schedulerSpy = spy(this.scheduler);
-        this.reporter = new LoggerReporter(this.logger, 1000, MILLISECOND, new Map(), this.clock, this.schedulerSpy);
+        this.reporter = new LoggerReporter({
+            clock: this.clock,
+            log: this.logger,
+            reportInterval: 1000,
+            scheduler: this.schedulerSpy,
+            tags: new Map(),
+            unit: MILLISECOND,
+        });
 
         this.registry.setDefaultClock(this.clock);
         this.reporter.addMetricRegistry(this.registry);
     }
 
     @test
-    public "report multiple metric with same name"(): void {
+    public async "report multiple metric with same name"(): Promise<void> {
         const gauge1 = new SimpleGauge("myValue");
         const gauge2 = new SimpleGauge("myValue");
 
@@ -102,7 +109,7 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            this.internalCallback();
+            await this.internalCallback();
         }
 
         expect(this.logger.calls.length).to.equal(2);

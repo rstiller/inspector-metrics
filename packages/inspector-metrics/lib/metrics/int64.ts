@@ -1,3 +1,6 @@
+/**
+ * native Int64 lib.
+ */
 const Int64 = require("node-cint64").Int64;
 
 /**
