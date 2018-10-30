@@ -1,0 +1,296 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+### Added
+- CHANGELOG
+- compile and test script for different node versions
+- reporter
+    - ScheduledReporter base class
+    - MetricType
+    - MetricEntry
+
+### Changed
+- updated dependencies
+- updated docs in README / added https://github.com/rstiller/inspector-csv reference
+- refactored logger-reporter and metric-reporter
+- travisci build for node version 6, 7, 8, 9, 10, 11
+
+## [1.12.1] - 2018-10-16
+### Changed
+- fixed naming bug within metric-registry
+
+## [1.12.0] - 2018-10-06
+### Added
+- optional dependency 'native-hdr-histogram'
+- HdrHistogram (extends Histogram)
+
+### Changed
+- updated doc in README / added https://github.com/rstiller/inspector-prometheus reference
+- metric-registry
+    - added 'newHdrHistogram' method
+
+## [1.11.0] - 2018-10-01
+### Added
+- Buckets & BucketCounting interfaces
+    - implemented by Histogram & Timer
+
+## [1.10.0] - 2018-09-29
+### Added
+- MetadataContainer interface
+    - implemented by BaseMetric
+
+### Changed
+- updated dependencies
+- updated docs in README
+
+## [1.9.1] - 2018-09-29
+### Added
+- metric-registry
+    - 'isPureMonotoneCounter' static method
+- 'compodoc' as dev-dependency
+- 'homepage' field in package.json
+
+### Changed
+- fixed logger-reporter bug (log-metadata object mutated)
+- added MonotoneCounter to logger-reporter
+- metric-registry
+    - 'GetMonotoneCounterList' now only returns MonotoneCounter instance
+- updated build scripts (for documentation)
+
+### Removed
+- Jenkinsfile
+- 'typedoc' as dev dependency
+
+## [1.9.0] - 2018-09-28
+### Added
+- MonotoneCounter class + tests
+- description field to metrics
+- 'getDescription()' / 'setDescription()' method in Metric interface
+- Summarizing interface
+    - implemented in Histogram & Timer
+- added 'node-cint64' as dependency for 64bit integer support
+- added Int64Wrapper for 'node-cint64' module
+
+### Changed
+- updated build scripts
+
+## [1.8.8] - 2018-09-21
+### Added
+- jsdoc comments for most of the components
+
+### Changed
+- updated dependencies
+- updated keywords in package.json
+- added description in package.json
+
+## [1.8.7] - 2018-07-08
+### Changed
+- travisci build for node version 6, 7, 8, 9, 10
+- updated dependencies
+
+### Removed
+- 'async' as dependency
+
+## [1.8.6] - 2018-02-14
+### Changed
+- updated docs in README
+- bug fix for https://github.com/rstiller/inspector-metrics/issues/3 (thanks to https://github.com/rwfaulkner)
+
+## [1.8.5] - 2018-02-08
+### Changed
+- removed docs folder from npm package
+- updated doc in README / added https://github.com/rstiller/inspector-carbon reference
+
+## [1.8.4] - 2018-02-02
+### Added
+- typedoc as dev-dependency
+- jsdoc comments for clock
+
+### Changed
+- updated dependencies
+- updated Jenkinsfile
+- docs folder in npm package
+- updated doc in README / added https://github.com/rstiller/inspector-elasticsearch reference
+
+## [1.8.3] - 2017-11-20
+### Changed
+- updated dependencies
+- removed ts-node/register from mocha config
+
+## [1.8.2] - 2017-11-19
+### Changed
+- travisci build for node version 6, 7, 8, 9
+- logger-reporter doesn't use async queue anymore
+- updated dependencies
+
+## [1.8.1] - 2017-09-17
+### Added
+- size / length gauges for arrays, maps, etc
+
+## [1.7.0] - 2017-08-26
+### Added
+- private id field to BaseMetric (incremented for each new metric instance)
+
+## [1.6.0] - 2017-08-26
+### Changed
+- updated dependencies
+- adjusted line feed in tsconfig
+- logger
+    - method return 'any' instead of 'void' now
+
+### Removed
+
+## [1.5.4] - 2017-08-18
+### Changed
+- timer
+    - fixed 'timeAsync' method to be compatible with nodejs 6
+
+## [1.5.3] - 2017-08-18
+### Added
+- timer
+    - 'timeAsync' method
+
+### Changed
+- updated dependencies
+- updated timer doc in README
+
+### Removed
+
+## [1.5.2] - 2017-08-01
+### Added
+- travisci config
+- badges in README
+
+### Changed
+- updated dependencies
+
+## [1.5.1] - 2017-06-10
+### Changed
+- updated dependencies
+
+## [1.5.0] - 2017-06-10
+### Added
+- metric-registry
+    - 'registerMetric' method
+
+### Changed
+- change typescript compilation target from 'es6' to 'es2017'
+- updated documentation in README
+
+## [1.4.2] - 2017-06-09
+### Changed
+- metric-registry
+    - fixed bug 'isCounter' method
+    - fixed bug 'isHistogram' method
+    - fixed bug 'isMeter' method
+    - fixed bug 'isTimer' method
+
+## [1.4.1] - 2017-06-09
+### Changed
+- use rimraf to erase build folder
+- metric-registry
+    - 'isCounter' method is now static
+    - 'isHistogram' method is now static
+    - 'isMeter' method is now static
+    - 'isTimer' method is now static
+    - 'isGauge' method is now static
+    - 'isMetricSet' method is now static
+
+## [1.3.0] - 2017-05-29
+### Added
+- .editorconfig file
+- name attribute to metric classes
+- name parameter to metric constructors
+- 'getName' / 'setName' method in 'Metric' interface
+- MetricRegistration class for registering the same metric instance in multiple registry under different names
+- metric-registry
+    - 'getCounterList' method
+    - 'getGaugeList' method
+    - 'getHistogramList' method
+    - 'getMeterList' method
+    - 'getTimerList' method
+    - 'getMetricList' method
+
+### Changed
+- use metric array instead of Maps for metric instances in metric-registry internally
+- metric-registry
+    - deprecate 'removeMetric' method (use 'removeMetrics' instead)
+    - deprecate 'removeCounter' method (use 'removeMetrics' instead)
+    - deprecate 'removeGauge' method (use 'removeMetrics' instead)
+    - deprecate 'removeHistogram' method (use 'removeMetrics' instead)
+    - deprecate 'removeMeter' method (use 'removeMetrics' instead)
+    - deprecate 'removeTimer' method (use 'removeMetrics' instead)
+    - deprecate 'getCounters' method (use 'getCounterList' instead)
+    - deprecate 'getGauges' method (use 'getGaugeList' instead)
+    - deprecate 'getHistograms' method (use 'getHistogramList' instead)
+    - deprecate 'getMeters' method (use 'getMeterList' instead)
+    - deprecate 'getTimers' method (use 'getTimerList' instead)
+    - deprecate 'getMetrics' method (use 'getMetricList' instead)
+- metric-set
+    - deprecate 'getMetrics' method (use 'getMetricList' instead)
+- don't remove comments / jsdocs from source when compiling
+- updated dependencies
+
+## [1.2.1] - 2017-05-11
+### Changed
+- refactored test / test suites
+
+## [1.2.0] - 2017-04-10
+### Added
+- metric-registry-listener + tests
+- documentation for metric-registry listener in README
+
+### Changed
+- renamed 'IGroupable' & 'ITaggable' interfacer to 'Groupable' and 'Taggable'
+
+## [1.1.1] - 2017-04-09
+### Changed
+- fixed import of group related classes and interfaces
+
+## [1.1.0] - 2017-04-09
+### Added
+- base-metric class
+- support for setting groups to metrics
+
+### Changed
+- logger-reporter uses group for metric names
+
+## [1.0.3] - 2017-04-05
+### Added
+- documentation in README
+
+## [1.0.2] - 2017-03-31
+### Changed
+- fixed main / typings path in package.json
+
+## [1.0.1] - 2017-03-31
+### Changed
+- defined fileset for npm package
+
+## [1.0.0] - 2017-03-31
+
+Initial commit.
+
+### Added
+- project setup
+    - README
+    - typescript config
+    - lint config
+- licensed under MIT license
+- basic metrics
+    - counter
+    - gauge
+    - histogram
+    - meter
+    - timer
+- basic metric-registry
+- logger reporter (console, scheduled)
+- mocha testing (with chai, sinon)
+- Jenkins pipeline
+- basic unit-tests for components
+- NYC code-coverage config
+- 

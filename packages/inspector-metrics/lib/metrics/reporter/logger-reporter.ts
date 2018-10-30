@@ -210,7 +210,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * @returns {Promise<void>}
      * @memberof LoggerReporter
      */
-    protected async handleResults(
+    protected handleResults(
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
@@ -218,6 +218,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         for (const logLine of results) {
             this.options.log.info(logLine.result.message, logLine.result.metadata);
         }
+        return Promise.resolve();
     }
 
     /**

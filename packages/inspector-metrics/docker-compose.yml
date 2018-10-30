@@ -6,6 +6,7 @@ services:
     build:
       context: ./test
       dockerfile: Dockerfile-node6
+    user: "node"
     entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
     restart: "no"
     volumes:
@@ -19,6 +20,7 @@ services:
     build:
       context: ./test
       dockerfile: Dockerfile-node7
+    user: "node"
     entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
     restart: "no"
     volumes:
@@ -32,6 +34,7 @@ services:
     build:
       context: ./test
       dockerfile: Dockerfile-node8
+    user: "node"
     entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
     restart: "no"
     volumes:
@@ -45,6 +48,7 @@ services:
     build:
       context: ./test
       dockerfile: Dockerfile-node9
+    user: "node"
     entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
     restart: "no"
     volumes:
@@ -58,6 +62,7 @@ services:
     build:
       context: ./test
       dockerfile: Dockerfile-node10
+    user: "node"
     entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
     restart: "no"
     volumes:
