@@ -6,7 +6,7 @@ import { MetricReporter, MetricReporterOptions } from "./metric-reporter";
 /**
  * Scheduler function type definition.
  */
-export type Scheduler = (prog: () => void, interval: number) => NodeJS.Timer;
+export type Scheduler = (prog: () => Promise<any>, interval: number) => NodeJS.Timer;
 
 /**
  * Options for the {@link ScheduledMetricReporter}.
@@ -75,9 +75,10 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      * @returns {Promise<void>}
      * @memberof ScheduledMetricReporter
      */
-    public async start(): Promise<void> {
+    public start(): Promise<void> {
         const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
         this.timer = this.options.scheduler(() => this.report(), interval);
+        return Promise.resolve();
     }
 
     /**

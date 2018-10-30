@@ -218,7 +218,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async beforeReport(): Promise<any> {
+    protected beforeReport(): Promise<any> {
+        return Promise.resolve();
     }
 
     /**
@@ -227,7 +228,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async afterReport(): Promise<any> {
+    protected afterReport(): Promise<any> {
+        return Promise.resolve();
     }
 
     /**
@@ -238,14 +240,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async report() {
+    protected report(): Promise<any> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
-            await this.beforeReport();
-            for (const registry of this.metricRegistries) {
-                await this.reportMetricRegistry(registry);
-            }
-            await this.afterReport();
+            return Promise.resolve()
+                .then(() => this.beforeReport())
+                .then(() => Promise.all(
+                    this.metricRegistries.map((registry) => this.reportMetricRegistry(registry)),
+                ))
+                .then(() => this.afterReport());
         }
+        return Promise.resolve();
     }
 
     /**
@@ -259,7 +263,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @param {MetricRegistry} registry
      * @memberof MetricReporter
      */
-    protected async reportMetricRegistry(registry: MetricRegistry) {
+    protected reportMetricRegistry(registry: MetricRegistry): Promise<any> {
         const date: Date = new Date(this.options.clock.time().milliseconds);
         const counterCtx: ReportingContext<MonotoneCounter | Counter> = this.createReportingContext(
             registry, date, "counter");
@@ -298,12 +302,14 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        await this.handleResults(registry, date, "counter", monotoneCounterResults);
-        await this.handleResults(registry, date, "counter", counterResults);
-        await this.handleResults(registry, date, "gauge", gaugeResults);
-        await this.handleResults(registry, date, "histogram", histogramResults);
-        await this.handleResults(registry, date, "meter", meterResults);
-        await this.handleResults(registry, date, "timer", timerResults);
+        return Promise.all([
+            this.handleResults(registry, date, "counter", monotoneCounterResults),
+            this.handleResults(registry, date, "counter", counterResults),
+            this.handleResults(registry, date, "gauge", gaugeResults),
+            this.handleResults(registry, date, "histogram", histogramResults),
+            this.handleResults(registry, date, "meter", meterResults),
+            this.handleResults(registry, date, "timer", timerResults),
+        ]);
     }
 
     /**

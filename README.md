@@ -43,6 +43,7 @@ The library ships with a default `console` `MetricReporter`.
 
 Some other reporter:
 * [Carbon / Graphite](https://github.com/rstiller/inspector-carbon)
+* [CSV](https://github.com/rstiller/inspector-csv)
 * [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
 * [Influx](https://github.com/rstiller/inspector-influx)
 * [Prometheus / Pushgateway](https://github.com/rstiller/inspector-prometheus)
@@ -311,6 +312,24 @@ registry.registerMetric(capacity, "buffer");
 registry.newCounter("newAllocations", "buffer");
 
 // the reporter can now report the values as a single measurement point if supported ...
+```
+
+## local dev
+
+### compile & test with different nodejs versions
+
+build docker images:  
+```bash
+docker-compose build
+```
+
+run tests:  
+```bash
+docker-compose run node6
+docker-compose run node7
+docker-compose run node8
+docker-compose run node9
+docker-compose run node10
 ```
 
 ## License
