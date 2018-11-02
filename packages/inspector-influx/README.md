@@ -63,6 +63,24 @@ setInterval(() => {
 }, 100);
 ```
 
+## local dev
+
+### compile & test with different nodejs versions
+
+build docker images:  
+```bash
+docker-compose build
+```
+
+run tests:  
+```bash
+docker-compose run node6
+docker-compose run node7
+docker-compose run node8
+docker-compose run node9
+docker-compose run node10
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)

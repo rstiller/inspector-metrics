@@ -1,3 +1,5 @@
+import "source-map-support/register";
+
 import { IClusterConfig, InfluxDB, IPoint } from "influx";
 import { Sender } from "./InfluxMetricReporter";
 
@@ -51,13 +53,16 @@ export class DefaultSender implements Sender {
      *
      * @memberof DefaultSender
      */
-    public async init() {
+    public init(): Promise<any> {
         const database = this.config.database;
-        const names = await this.db.getDatabaseNames();
-        if (!names.find((value: string, index: number, arr: string[]) => value.localeCompare(database) === 0)) {
-            await this.db.createDatabase(database);
-        }
-        this.ready = true;
+        return this.db.getDatabaseNames()
+            .then((names) => {
+                if (!names.find((value: string, index: number, arr: string[]) => value.localeCompare(database) === 0)) {
+                    return this.db.createDatabase(database);
+                }
+                return Promise.resolve();
+            })
+            .then(() => this.ready = true);
     }
 
     /**
@@ -66,8 +71,8 @@ export class DefaultSender implements Sender {
      * @returns {Promise<boolean>}
      * @memberof DefaultSender
      */
-    public async isReady(): Promise<boolean> {
-        return this.ready;
+    public isReady(): Promise<boolean> {
+        return Promise.resolve(this.ready);
     }
 
     /**
@@ -76,8 +81,8 @@ export class DefaultSender implements Sender {
      * @param {IPoint[]} points
      * @memberof DefaultSender
      */
-    public async send(points: IPoint[]) {
-        await this.db.writePoints(points);
+    public send(points: IPoint[]): Promise<any> {
+        return this.db.writePoints(points);
     }
 
 }

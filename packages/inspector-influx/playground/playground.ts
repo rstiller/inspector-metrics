@@ -13,7 +13,9 @@ const dbConfig = {
 };
 
 const sender = new DefaultSender(dbConfig);
-const reporter: InfluxMetricReporter = new InfluxMetricReporter(sender);
+const reporter: InfluxMetricReporter = new InfluxMetricReporter({
+    sender,
+});
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");
 const requests2: Timer = registry.newTimer("requests2");

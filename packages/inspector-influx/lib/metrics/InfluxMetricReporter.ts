@@ -11,20 +11,18 @@ import {
     Meter,
     Metric,
     MetricRegistry,
-    MetricReporter,
+    MetricType,
     MILLISECOND,
-    MINUTE,
     MonotoneCounter,
+    ReportingContext,
+    ReportingResult,
+    ScheduledMetricReporter,
+    ScheduledMetricReporterOptions,
+    Scheduler,
     StdClock,
-    Taggable,
     Timer,
     TimeUnit,
 } from "inspector-metrics";
-
-/**
- * Enumeration of all metric types.
- */
-export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
 /**
  * Sender interface for influxdb client abstraction.
@@ -62,26 +60,27 @@ export interface Sender {
 }
 
 /**
- * Entry interface to track the last value and timestamp of a metric instance.
+ * Options for {@link InfluxMetricReporter}.
  *
- * @interface MetricEntry
+ * @export
+ * @interface InfluxMetricReporterOptions
+ * @extends {ScheduledMetricReporterOptions}
  */
-interface MetricEntry {
+export interface InfluxMetricReporterOptions extends ScheduledMetricReporterOptions {
     /**
-     * Timestamp of the last reporting.
+     * A logger instance used to report errors.
      *
-     * @type {number}
-     * @memberof MetricEntry
+     * @type {Logger}
+     * @memberof InfluxMetricReporterOptions
      */
-    lastReport: number;
-
+    log: Logger;
     /**
-     * Last reported reference value.
+     * A sender implementation used to send metrics to influx DB server.
      *
-     * @type {number}
-     * @memberof MetricEntry
+     * @type {Sender}
+     * @memberof InfluxMetricReporterOptions
      */
-    lastValue: number;
+    readonly sender: Sender;
 }
 
 /**
@@ -89,58 +88,10 @@ interface MetricEntry {
  *
  * @export
  * @class InfluxMetricReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter}
  */
-export class InfluxMetricReporter extends MetricReporter {
+export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricReporterOptions, IPoint> {
 
-    /**
-     * Clock used to determine the current timestamp.
-     *
-     * @private
-     * @type {Clock}
-     * @memberof InfluxMetricReporter
-     */
-    private clock: Clock;
-    /**
-     * Reference for the object returned by the scheduler function.
-     *
-     * @private
-     * @type {NodeJS.Timer}
-     * @memberof InfluxMetricReporter
-     */
-    private timer: NodeJS.Timer;
-    /**
-     * Reporting interval.
-     *
-     * @private
-     * @type {number}
-     * @memberof InfluxMetricReporter
-     */
-    private interval: number;
-    /**
-     * Minimal timeout to include a metric instance into a reporting.
-     *
-     * @private
-     * @type {number}
-     * @memberof InfluxMetricReporter
-     */
-    private minReportingTimeout: number;
-    /**
-     * Time unit for the reporting interval.
-     *
-     * @private
-     * @type {TimeUnit}
-     * @memberof InfluxMetricReporter
-     */
-    private unit: TimeUnit;
-    /**
-     * Tags assigned to this reporter instance - reported for every metric instance.
-     *
-     * @private
-     * @type {Map<string, string>}
-     * @memberof InfluxMetricReporter
-     */
-    private tags: Map<string, string>;
     /**
      * Metadata for the logger.
      *
@@ -157,60 +108,76 @@ export class InfluxMetricReporter extends MetricReporter {
      * @memberof InfluxMetricReporter
      */
     private queue: async.AsyncQueue<any>;
-    /**
-     * Minimal logger interface to report failures.
-     *
-     * @private
-     * @type {Logger}
-     * @memberof InfluxMetricReporter
-     */
-    private log: Logger = console;
-    /**
-     * Sender instance used to report metrics.
-     *
-     * @private
-     * @type {Sender}
-     * @memberof InfluxMetricReporter
-     */
-    private sender: Sender;
-    /**
-     * Saves the state of each reported metrics.
-     *
-     * @private
-     * @type {Map<number, MetricEntry>}
-     * @memberof InfluxMetricReporter
-     */
-    private metricStates: Map<number, MetricEntry> = new Map();
 
     /**
      * Creates an instance of InfluxMetricReporter.
      *
-     * @param {Sender} sender The influx sender instance.
-     * @param {number} [interval=1000] The reporting interval.
-     * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
-     * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
-     * @param {Clock} [clock=new StdClock()] The clock - used to determine the timestamp of the metrics while reporting.
-     * @param {number} [minReportingTimeout=1] The time in minutes the report sends even unchanged metrics.
      * @memberof InfluxMetricReporter
      */
-    public constructor(
+    public constructor({
+        sender,
+        log = console,
+        reportInterval = 1000,
+        unit = MILLISECOND,
+        clock = new StdClock(),
+        scheduler = setInterval,
+        minReportingTimeout = 1,
+        tags = new Map(),
+    }: {
+        /**
+         * A sender implementation used to send metrics to influx DB server.
+         * @type {Sender}
+         */
         sender: Sender,
-        interval: number = 1000,
-        unit: TimeUnit = MILLISECOND,
-        tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock(),
-        minReportingTimeout = 1) {
-        super();
-
-        this.sender = sender;
-        this.interval = interval;
-        this.unit = unit;
-        this.tags = tags;
-        this.clock = clock;
-        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+        /**
+         * The logger instance used to report metrics.
+         * @type {Logger}
+         */
+        log?: Logger,
+        /**
+         * Reporting interval in the time-unit of {@link #unit}.
+         * @type {number}
+         */
+        reportInterval?: number;
+        /**
+         * The time-unit of the reporting interval.
+         * @type {TimeUnit}
+         */
+        unit?: TimeUnit;
+        /**
+         * The clock instance used determine the current time.
+         * @type {Clock}
+         */
+        clock?: Clock;
+        /**
+         * The scheduler function used to trigger reporting.
+         * @type {Scheduler}
+         */
+        scheduler?: Scheduler;
+        /**
+         * The timeout in which a metrics gets reported wether it's value has changed or not.
+         * @type {number}
+         */
+        minReportingTimeout?: number;
+        /**
+         * Common tags for this reporter instance.
+         * @type {Map<string, string>}
+         */
+        tags?: Map<string, string>;
+    }) {
+        super({
+            clock,
+            log,
+            minReportingTimeout,
+            reportInterval,
+            scheduler,
+            sender,
+            tags,
+            unit,
+        });
 
         this.logMetadata = {
-            interval,
+            reportInterval,
             tags,
             unit,
         };
@@ -224,28 +191,8 @@ export class InfluxMetricReporter extends MetricReporter {
             unlock = callback;
         });
 
-        this.sender.init()
+        this.options.sender.init()
             .then(() => unlock());
-    }
-
-    /**
-     * Gets the reporter tags.
-     *
-     * @returns {Map<string, string>}
-     * @memberof InfluxMetricReporter
-     */
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    /**
-     * Sets the reporter tags.
-     *
-     * @param {Map<string, string>} tags
-     * @memberof InfluxMetricReporter
-     */
-    public setTags(tags: Map<string, string>): void {
-        this.tags = tags;
     }
 
     /**
@@ -255,7 +202,7 @@ export class InfluxMetricReporter extends MetricReporter {
      * @memberof InfluxMetricReporter
      */
     public getLog(): Logger {
-        return this.log;
+        return this.options.log;
     }
 
     /**
@@ -265,155 +212,74 @@ export class InfluxMetricReporter extends MetricReporter {
      * @memberof InfluxMetricReporter
      */
     public setLog(log: Logger): void {
-        this.log = log;
-    }
-
-    /**
-     * Uses the scheduler function to trigger periodical reporting.
-     *
-     * @memberof InfluxMetricReporter
-     */
-    public start(): void {
-        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = setInterval(() => this.report(), interval);
-    }
-
-    /**
-     * Stops the timer reference returned by the scheduler function.
-     *
-     * @memberof InfluxMetricReporter
-     */
-    public stop(): void {
-        if (this.timer) {
-            this.timer.unref();
-        }
+        this.options.log = log;
     }
 
     /**
      * Reports the data points for each registered {@link MetricRegistry}.
      *
-     * @private
+     * @protected
      * @memberof InfluxMetricReporter
      */
-    private async report() {
-        const senderReady = await this.sender.isReady();
-        if (senderReady && this.metricRegistries && this.metricRegistries.length > 0) {
-            this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
-        }
+    protected report(): Promise<any> {
+        return this.options.sender.isReady()
+            .then((senderReady) => {
+                if (senderReady) {
+                    return super.report();
+                }
+                return Promise.resolve();
+            });
     }
 
     /**
-     * Reports the data points for the specified {@link MetricRegistry}.
+     * Uses the sender to report the given data points.
      *
-     * @private
+     * @protected
      * @param {MetricRegistry} registry
-     * @memberof InfluxMetricReporter
-     */
-    private reportMetricRegistry(registry: MetricRegistry): void {
-        const now: Date = new Date(this.clock.time().milliseconds);
-
-        this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
-            (counter: MonotoneCounter, date: Date) => this.reportMonotoneCounter(counter, date),
-            (counter: MonotoneCounter) => counter.getCount());
-        this.reportMetrics(registry.getCounterList(), now, "counter",
-            (counter: Counter, date: Date) => this.reportCounter(counter, date),
-            (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry.getGaugeList(), now, "gauge",
-            (gauge: Gauge<any>, date: Date) => this.reportGauge(gauge, date),
-            (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry.getHistogramList(), now, "histogram",
-            (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date),
-            (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry.getMeterList(), now, "meter",
-            (meter: Meter, date: Date) => this.reportMeter(meter, date),
-            (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry.getTimerList(), now, "timer",
-            (timer: Timer, date: Date) => this.reportTimer(timer, date),
-            (timer: Timer) => timer.getCount());
-    }
-
-    /**
-     * Reports a collection of metric instance for a certain type.
-     *
-     * @private
-     * @template T
-     * @param {T[]} metrics
      * @param {Date} date
-     * @param {MetricType} type the type to report.
-     * @param {(metric: Metric, date: Date) => IPoint} reportFunction
-     *      The function to build the data points for a certain metric.
-     * @param {(metric: Metric) => number} lastModifiedFunction
-     *      function to determine if a metric has a different value since the last reporting.
+     * @param {MetricType} type
+     * @param {Array<ReportingResult<any, IPoint>>} results
+     * @returns {Promise<any>}
      * @memberof InfluxMetricReporter
      */
-    private reportMetrics<T extends Metric>(
-        metrics: T[],
+    protected handleResults(
+        registry: MetricRegistry,
         date: Date,
         type: MetricType,
-        reportFunction: (metric: Metric, date: Date) => IPoint,
-        lastModifiedFunction: (metric: Metric) => number): void {
-
-        const points: IPoint[] = [];
-        metrics.forEach((metric) => {
-            const metricId = (metric as any).id;
-            let changed = true;
-            if (metricId) {
-                changed = this.hasChanged(metricId, lastModifiedFunction(metric), date);
-            }
-
-            if (changed) {
-                const point = reportFunction(metric, date);
-                if (!!point) {
-                    points.push(point);
-                }
-            }
+        results: Array<ReportingResult<any, IPoint>>): Promise<any> {
+        return new Promise((resolve, reject) => {
+            this.queue.push((callback: () => void) => {
+                const points = results.map((result) => result.result);
+                this.options.sender.send(points)
+                    .then(() => {
+                        if (this.options.log) {
+                            this.options.log.debug(`wrote ${type} metrics`, this.logMetadata);
+                        }
+                    })
+                    .catch((reason) => {
+                        if (this.options.log) {
+                            this.options.log
+                                .error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
+                        }
+                    })
+                    .then(() => callback())
+                    .then(() => resolve());
+            });
         });
-        if (points.length > 0) {
-            this.sendPoints(points, type);
-        }
     }
 
     /**
-     * Determines if the specified metric has changed. This is always true if
-     * the minimum-reporting timeout was reached.
+     * Builds an IPoint instance for the given {@link Counter} or  {@link MonotoneCounter}.
      *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {Date} date
-     * @returns {boolean}
-     * @memberof InfluxMetricReporter
-     */
-    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
-        let changed = true;
-        let metricEntry = {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry = this.metricStates.get(metricId);
-            changed = metricEntry.lastValue !== lastValue;
-            if (!changed) {
-                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-            }
-        }
-        if (changed) {
-            metricEntry.lastReport = date.getTime();
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
-    }
-
-    /**
-     * Computes and reports the fields of the monotone-counter.
-     *
-     * @private
-     * @param {MonotoneCounter} counter
-     * @param {Date} date
+     * @protected
+     * @param {(MonotoneCounter | Counter)} counter
+     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    private reportMonotoneCounter(counter: MonotoneCounter, date: Date): IPoint {
+    protected reportCounter(
+        counter: MonotoneCounter | Counter,
+        ctx: ReportingContext<MonotoneCounter | Counter>): IPoint {
         const value = counter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -427,49 +293,21 @@ export class InfluxMetricReporter extends MetricReporter {
         return {
             fields,
             measurement,
-            tags: this.buildTags(counter),
-            timestamp: date,
+            tags: this.buildTags(ctx.registry, counter),
+            timestamp: ctx.date,
         };
     }
 
     /**
-     * Computes and reports the fields of the counter.
+     * Builds an IPoint instance for the given {@link Gauge}.
      *
-     * @private
-     * @param {Counter} counter
-     * @param {Date} date
-     * @returns {IPoint}
-     * @memberof InfluxMetricReporter
-     */
-    private reportCounter(counter: Counter, date: Date): IPoint {
-        const value = counter.getCount();
-        if (!value || isNaN(value)) {
-            return null;
-        }
-        const fields: any = {};
-        const fieldNamePrefix = this.getFieldNamePrefix(counter);
-        const measurement = this.getMeasurementName(counter);
-
-        fields[`${fieldNamePrefix}count`] = counter.getCount() || 0;
-
-        return {
-            fields,
-            measurement,
-            tags: this.buildTags(counter),
-            timestamp: date,
-        };
-    }
-
-    /**
-     * Computes and reports the fields of the gauge.
-     *
-     * @private
+     * @protected
      * @param {Gauge<any>} gauge
-     * @param {Date} date
+     * @param {ReportingContext<Gauge<any>>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    private reportGauge(gauge: Gauge<any>, date: Date): IPoint {
+    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): IPoint {
         const value = gauge.getValue();
         if (!value || isNaN(value)) {
             return null;
@@ -483,21 +321,21 @@ export class InfluxMetricReporter extends MetricReporter {
         return {
             fields,
             measurement,
-            tags: this.buildTags(gauge),
-            timestamp: date,
+            tags: this.buildTags(ctx.registry, gauge),
+            timestamp: ctx.date,
         };
     }
 
     /**
-     * Computes and reports the fields of the histogram.
+     * Builds an IPoint instance for the given {@link Histogram}.
      *
-     * @private
+     * @protected
      * @param {Histogram} histogram
-     * @param {Date} date
+     * @param {ReportingContext<Histogram>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    private reportHistogram(histogram: Histogram, date: Date): IPoint {
+    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): IPoint {
         const value = histogram.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -522,21 +360,21 @@ export class InfluxMetricReporter extends MetricReporter {
         return {
             fields,
             measurement,
-            tags: this.buildTags(histogram),
-            timestamp: date,
+            tags: this.buildTags(ctx.registry, histogram),
+            timestamp: ctx.date,
         };
     }
 
     /**
-     * Computes and reports the fields of the meter.
+     * Builds an IPoint instance for the given {@link Meter}.
      *
-     * @private
+     * @protected
      * @param {Meter} meter
-     * @param {Date} date
+     * @param {ReportingContext<Meter>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    private reportMeter(meter: Meter, date: Date): IPoint {
+    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): IPoint {
         const value = meter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -554,21 +392,21 @@ export class InfluxMetricReporter extends MetricReporter {
         return {
             fields,
             measurement,
-            tags: this.buildTags(meter),
-            timestamp: date,
+            tags: this.buildTags(ctx.registry, meter),
+            timestamp: ctx.date,
         };
     }
 
     /**
-     * Computes and reports the fields of the timer.
+     * Builds an IPoint instance for the given {@link Timer}.
      *
-     * @private
+     * @protected
      * @param {Timer} timer
-     * @param {Date} date
+     * @param {ReportingContext<Timer>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    private reportTimer(timer: Timer, date: Date): IPoint {
+    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): IPoint {
         const value = timer.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -597,8 +435,8 @@ export class InfluxMetricReporter extends MetricReporter {
         return {
             fields,
             measurement,
-            tags: this.buildTags(timer),
-            timestamp: date,
+            tags: this.buildTags(ctx.registry, timer),
+            timestamp: ctx.date,
         };
     }
 
@@ -630,61 +468,6 @@ export class InfluxMetricReporter extends MetricReporter {
             return metric.getGroup();
         }
         return metric.getName();
-    }
-
-    /**
-     * Builds the tags using the metric's tags and this reportes tags.
-     *
-     * @private
-     * @param {Taggable} taggable
-     * @returns {{ [key: string]: string }}
-     * @memberof InfluxMetricReporter
-     */
-    private buildTags(taggable: Taggable): { [key: string]: string } {
-        const tags: { [x: string]: string } = {};
-        this.tags.forEach((tag, key) => tags[key] = tag);
-        taggable.getTags().forEach((tag, key) => tags[key] = tag);
-        return tags;
-    }
-
-    /**
-     * Uses the sender to report the given data points.
-     *
-     * @private
-     * @param {IPoint[]} points
-     * @param {MetricType} type
-     * @memberof InfluxMetricReporter
-     */
-    private sendPoints(points: IPoint[], type: MetricType) {
-        this.queue.push(async (callback: () => void) => {
-            try {
-                await this.sender.send(points);
-                if (this.log) {
-                    this.log.debug(`wrote ${type} metrics`, this.logMetadata);
-                }
-            } catch (reason) {
-                if (this.log) {
-                    this.log.error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
-                }
-            } finally {
-                callback();
-            }
-        });
-    }
-
-    /**
-     * Either gets 0 or the specifed value.
-     *
-     * @private
-     * @param {number} value
-     * @returns {number}
-     * @memberof InfluxMetricReporter
-     */
-    private getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
     }
 
 }

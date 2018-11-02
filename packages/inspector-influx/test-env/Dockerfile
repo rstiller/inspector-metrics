@@ -1,4 +1,4 @@
-FROM node:slim
+FROM node:10-slim
 
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/bin/
 RUN chmod +x /usr/bin/wait-for-it.sh
