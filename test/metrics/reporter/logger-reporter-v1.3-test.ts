@@ -87,7 +87,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "report multiple metric with same name"(callback: (err?: any) => any): void {
+    public "report multiple metric with same name"(): Promise<any> {
         const gauge1 = new SimpleGauge("myValue");
         const gauge2 = new SimpleGauge("myValue");
 
@@ -104,32 +104,26 @@ export class LoggerReporterTest {
 
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        this.reporter.start();
+        return this.reporter.start()
+            .then(() => {
+                expect(this.schedulerSpy).to.have.been.called;
+            })
+            .then(() => this.internalCallback())
+            .then(() => {
+                expect(this.logger.calls.length).to.equal(2);
 
-        expect(this.schedulerSpy).to.have.been.called;
+                let logMetadata = this.logger.calls[0];
+                expect(logMetadata.measurement).to.equal("myValue");
+                expect(logMetadata.measurement_type).to.equal("gauge");
+                expect(logMetadata.timestamp.getTime()).to.equal(0);
+                expect(logMetadata.tags["type"]).to.equal("abc");
 
-        if (!!this.internalCallback) {
-            this.internalCallback()
-                .then(() => {
-                    expect(this.logger.calls.length).to.equal(2);
-
-                    let logMetadata = this.logger.calls[0];
-                    expect(logMetadata.measurement).to.equal("myValue");
-                    expect(logMetadata.measurement_type).to.equal("gauge");
-                    expect(logMetadata.timestamp.getTime()).to.equal(0);
-                    expect(logMetadata.tags["type"]).to.equal("abc");
-
-                    logMetadata = this.logger.calls[1];
-                    expect(logMetadata.measurement).to.equal("myValue");
-                    expect(logMetadata.measurement_type).to.equal("gauge");
-                    expect(logMetadata.timestamp.getTime()).to.equal(0);
-                    expect(logMetadata.tags["type"]).to.equal("def");
-                })
-                .then(() => callback())
-                .catch((e) => callback(e));
-        } else {
-            callback(new Error("internalCallback is null / undefined"));
-        }
+                logMetadata = this.logger.calls[1];
+                expect(logMetadata.measurement).to.equal("myValue");
+                expect(logMetadata.measurement_type).to.equal("gauge");
+                expect(logMetadata.timestamp.getTime()).to.equal(0);
+                expect(logMetadata.tags["type"]).to.equal("def");
+            });
     }
 
 }
