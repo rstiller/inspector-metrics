@@ -2,8 +2,10 @@ import { MetricRegistry, Timer } from "inspector-metrics";
 import { ElasticsearchMetricReporter } from "../lib/metrics/ElasticsearchMetricReporter";
 
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
-    apiVersion: "6.0",
-    host: "elasticsearch:9200",
+    clientOptions: {
+        apiVersion: "6.0",
+        host: "elasticsearch:9200",
+    },
 });
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");

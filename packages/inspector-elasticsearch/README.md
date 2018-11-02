@@ -32,12 +32,14 @@ import { MetricRegistry } from "inspector-metrics";
 import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
 import { ConfigOptions } from "elasticsearch";
 
-const reporterConfig: ConfigOptions = {
+const clientOptions: ConfigOptions = {
     apiVersion: "6.0",
     host: "localhost:9200",
 };
 // instance the elasticsearch reporter
-const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(reporterConfig);
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
+    clientOptions,
+});
 const registry: MetricRegistry = new MetricRegistry();
 
 // add the registry to the reporter
@@ -56,9 +58,9 @@ import {
 } from "inspector-elasticsearch";
 import { ConfigOptions } from "elasticsearch";
 
-const reporterConfig: ConfigOptions = { ... };
+const clientOptions: ConfigOptions = { ... };
 // computes the name of the index using the timestamp of the metric
-const indexnameGenerator: MetricInfoDeterminator = (
+const indexnameDeterminator: MetricInfoDeterminator = (
     registry: MetricRegistry,
     metric: Metric,
     type: MetricType,
@@ -71,10 +73,10 @@ const indexnameGenerator: MetricInfoDeterminator = (
     return `metrics-${date.getFullYear()}-${monthPrefix}${month}-${dayPrefix}${day}`;
 };
 // the indexname generator needs to be specified when instancing the reporter
-const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(
-    reporterConfig,
-    ElasticsearchMetricReporter.defaultDocumentBuilder(),
-    indexnameGenerator,
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    indexnameDeterminator, 
+}
 );
 ```
 
@@ -89,9 +91,9 @@ import {
 } from "inspector-elasticsearch";
 import { ConfigOptions } from "elasticsearch";
 
-const reporterConfig: ConfigOptions = { ... };
+const clientOptions: ConfigOptions = { ... };
 // only build documents for counter metrics
-const counterOnlyDocumentBuilder: MetricDocumentBuilder = (
+const metricDocumentBuilder: MetricDocumentBuilder = (
     registry: MetricRegistry,
     metric: Metric,
     type: MetricType,
@@ -111,10 +113,10 @@ const counterOnlyDocumentBuilder: MetricDocumentBuilder = (
 };
 
 // the document builder needs to be specified when instancing the reporter
-const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter(
-    reporterConfig,
-    counterOnlyDocumentBuilder,
-);
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    metricDocumentBuilder,
+});
 ```
 
 ## dev

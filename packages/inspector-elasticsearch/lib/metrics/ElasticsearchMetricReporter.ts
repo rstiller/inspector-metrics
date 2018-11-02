@@ -10,43 +10,19 @@ import {
     Meter,
     Metric,
     MetricRegistry,
-    MetricReporter,
+    MetricType,
     MILLISECOND,
-    MINUTE,
     MonotoneCounter,
+    ReportingContext,
+    ReportingResult,
+    ScheduledMetricReporter,
+    ScheduledMetricReporterOptions,
+    Scheduler,
     StdClock,
-    Taggable,
+    Tags,
     Timer,
     TimeUnit,
 } from "inspector-metrics";
-
-/**
- * Entry interface to track the last value and timestamp of a metric instance.
- *
- * @interface MetricEntry
- */
-interface MetricEntry {
-    /**
-     * Timestamp of the last reporting.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastReport: number;
-
-    /**
-     * Last reported reference value.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastValue: number;
-}
-
-/**
- * Enumeration of all metric types.
- */
-export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
 
 /**
  * Interface for getting a certain information using the specified emtric metadata -
@@ -62,7 +38,52 @@ export type MetricDocumentBuilder = (
     metric: Metric,
     type: MetricType,
     date: Date,
-    tags: Map<string, string>) => {};
+    tags: Tags) => {};
+
+/**
+ * Options for {@link ElasticsearchMetricReporter}.
+ *
+ * @export
+ * @interface ElasticsearchMetricReporterOption
+ * @extends {ScheduledMetricReporterOptions}
+ */
+export interface ElasticsearchMetricReporterOption extends ScheduledMetricReporterOptions {
+    /**
+     * Elasticsearch client options.
+     *
+     * @type {ConfigOptions}
+     * @memberof ElasticsearchMetricReporterOption
+     */
+    readonly clientOptions: ConfigOptions;
+    /**
+     * Logger instance used to report errors.
+     *
+     * @type {Logger}
+     * @memberof ElasticsearchMetricReporterOption
+     */
+    log: Logger;
+    /**
+     * Used to get the name of the index.
+     *
+     * @type {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporterOption
+     */
+    readonly indexnameDeterminator: MetricInfoDeterminator;
+    /**
+     * Used to get the type of the metric instance.
+     *
+     * @type {MetricInfoDeterminator}
+     * @memberof ElasticsearchMetricReporterOption
+     */
+    readonly typeDeterminator: MetricInfoDeterminator;
+    /**
+     * Used to build the document for a metric.
+     *
+     * @type {MetricDocumentBuilder}
+     * @memberof ElasticsearchMetricReporterOption
+     */
+    readonly metricDocumentBuilder: MetricDocumentBuilder;
+}
 
 /**
  * A MetricReporter extension used to publish metric values to elasticsearch.
@@ -71,7 +92,7 @@ export type MetricDocumentBuilder = (
  * @class ElasticsearchMetricReporter
  * @extends {MetricReporter}
  */
-export class ElasticsearchMetricReporter extends MetricReporter {
+export class ElasticsearchMetricReporter extends ScheduledMetricReporter<ElasticsearchMetricReporterOption, Array<{}>> {
 
     /**
      * Returns a {@link MetricInfoDeterminator} that returns 'metric' as type.
@@ -131,7 +152,7 @@ export class ElasticsearchMetricReporter extends MetricReporter {
             metric: Metric,
             type: MetricType,
             timestamp: Date,
-            commonTags: Map<string, string>) => {
+            tags: Tags) => {
 
             let values = null;
 
@@ -153,27 +174,10 @@ export class ElasticsearchMetricReporter extends MetricReporter {
                 return null;
             }
 
-            const tags = ElasticsearchMetricReporter.buildTags(commonTags, metric);
             const name = metric.getName();
             const group = metric.getGroup();
             return { name, group, tags, timestamp, values, type };
         };
-    }
-
-    /**
-     * Combines all specified tags.
-     *
-     * @static
-     * @param {Map<string, string>} commonTags - read-only tags from reporter - get with reporter.getTags().
-     * @param {Taggable} taggable - mostly a metric with tags.
-     * @returns {{ [key: string]: string }} Returns a key-value object with all tags combined.
-     * @memberof ElasticsearchMetricReporter
-     */
-    public static buildTags(commonTags: Map<string, string>, taggable: Taggable): { [key: string]: string } {
-        const tags: { [x: string]: string } = {};
-        commonTags.forEach((tag, key) => tags[key] = tag);
-        taggable.getTags().forEach((tag, key) => tags[key] = tag);
-        return tags;
     }
 
     /**
@@ -330,54 +334,6 @@ export class ElasticsearchMetricReporter extends MetricReporter {
     }
 
     /**
-     * Clock used to determine the current timestamp.
-     *
-     * @private
-     * @type {Clock}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private clock: Clock;
-    /**
-     * Reference for the object returned by the scheduler function.
-     *
-     * @private
-     * @type {NodeJS.Timer}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private timer: NodeJS.Timer;
-    /**
-     * Reporting interval.
-     *
-     * @private
-     * @type {number}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private interval: number;
-    /**
-     * Minimal timeout to include a metric instance into a reporting.
-     *
-     * @private
-     * @type {number}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private minReportingTimeout: number;
-    /**
-     * Time unit for the reporting interval.
-     *
-     * @private
-     * @type {TimeUnit}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private unit: TimeUnit;
-    /**
-     * Tags assigned to this reporter instance - reported for every metric instance.
-     *
-     * @private
-     * @type {Map<string, string>}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private tags: Map<string, string>;
-    /**
      * Metadata for the logger.
      *
      * @private
@@ -386,22 +342,6 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      */
     private logMetadata: any;
     /**
-     * Minimal logger interface to report failures.
-     *
-     * @private
-     * @type {Logger}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private log: Logger = console;
-    /**
-     * Saves the state of each reported metrics.
-     *
-     * @private
-     * @type {Map<number, MetricEntry>}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private metricStates: Map<number, MetricEntry> = new Map();
-    /**
      * Elasticsearch client used to do reporting.
      *
      * @private
@@ -409,92 +349,101 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * @memberof ElasticsearchMetricReporter
      */
     private client: Client;
-    /**
-     * Used to get the name of the index.
-     *
-     * @private
-     * @type {MetricInfoDeterminator}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private indexnameDeterminator: MetricInfoDeterminator;
-    /**
-     * Used to get the type of the metric instance.
-     *
-     * @private
-     * @type {MetricInfoDeterminator}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private typeDeterminator: MetricInfoDeterminator;
-    /**
-     * Used to build the document for a metric.
-     *
-     * @private
-     * @type {MetricDocumentBuilder}
-     * @memberof ElasticsearchMetricReporter
-     */
-    private metricDocumentBuilder: MetricDocumentBuilder;
 
     /**
      * Creates an instance of ElasticsearchMetricReporter.
-     *
-     * @param {ConfigOptions} clientOptions Elasticsearch client config.
-     * @param [metricDocumentBuilder] A function that constructs an object of a metric that's gonna be indexed.
-     * @param [indexnameDeterminator] A function that determines the name of the index for a given metric.
-     * @param [typeDeterminator] A function that determines the name of the type for a given metric.
-     * @param {number} [interval=1000] The reporting interval.
-     * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
-     * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
-     * @param {Clock} [clock=new StdClock()] The clock - used to determine the timestamp of the metrics while reporting.
-     * @param {number} [minReportingTimeout=1] The time in minutes the reporter sends even unchanged metrics.
      */
     public constructor(
-        clientOptions: ConfigOptions,
-        metricDocumentBuilder: MetricDocumentBuilder = ElasticsearchMetricReporter.defaultDocumentBuilder(),
-        indexnameDeterminator: MetricInfoDeterminator = ElasticsearchMetricReporter.dailyIndex("metric"),
-        typeDeterminator: MetricInfoDeterminator = ElasticsearchMetricReporter.defaultTypeDeterminator(),
-        interval: number = 1000,
-        unit: TimeUnit = MILLISECOND,
-        tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock(),
-        minReportingTimeout = 1) {
-        super();
-
-        this.indexnameDeterminator = indexnameDeterminator;
-        this.typeDeterminator = typeDeterminator;
-        this.metricDocumentBuilder = metricDocumentBuilder;
-        this.interval = interval;
-        this.unit = unit;
-        this.tags = tags;
-        this.clock = clock;
-        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+        {
+            clientOptions,
+            metricDocumentBuilder = ElasticsearchMetricReporter.defaultDocumentBuilder(),
+            indexnameDeterminator = ElasticsearchMetricReporter.dailyIndex("metric"),
+            typeDeterminator = ElasticsearchMetricReporter.defaultTypeDeterminator(),
+            log = console,
+            reportInterval = 1000,
+            unit = MILLISECOND,
+            clock = new StdClock(),
+            scheduler = setInterval,
+            minReportingTimeout = 1,
+            tags = new Map(),
+        }: {
+            /**
+             * Elasticsearch client options.
+             * @type {ConfigOptions}
+             */
+            clientOptions: ConfigOptions,
+            /**
+             * Used to build the document for a metric.
+             * @type {MetricDocumentBuilder}
+             */
+            metricDocumentBuilder?: MetricDocumentBuilder,
+            /**
+             * Used to get the name of the index.
+             * @type {MetricInfoDeterminator}
+             */
+            indexnameDeterminator?: MetricInfoDeterminator,
+            /**
+             * Used to get the type of the metric instance.
+             * @type {MetricInfoDeterminator}
+             */
+            typeDeterminator?: MetricInfoDeterminator,
+            /**
+             * The logger instance used to report metrics.
+             * @type {Logger}
+             */
+            log?: Logger,
+            /**
+             * Reporting interval in the time-unit of {@link #unit}.
+             * @type {number}
+             */
+            reportInterval?: number;
+            /**
+             * The time-unit of the reporting interval.
+             * @type {TimeUnit}
+             */
+            unit?: TimeUnit;
+            /**
+             * The clock instance used determine the current time.
+             * @type {Clock}
+             */
+            clock?: Clock;
+            /**
+             * The scheduler function used to trigger reporting.
+             * @type {Scheduler}
+             */
+            scheduler?: Scheduler;
+            /**
+             * The timeout in which a metrics gets reported wether it's value has changed or not.
+             * @type {number}
+             */
+            minReportingTimeout?: number;
+            /**
+             * Common tags for this reporter instance.
+             * @type {Map<string, string>}
+             */
+            tags?: Map<string, string>;
+        }) {
+        super({
+            clientOptions,
+            clock,
+            indexnameDeterminator,
+            log,
+            metricDocumentBuilder,
+            minReportingTimeout,
+            reportInterval,
+            scheduler,
+            tags,
+            typeDeterminator,
+            unit,
+        });
 
         this.logMetadata = {
-            interval,
+            reportInterval,
             tags,
             unit,
         };
 
         this.client = new Client(clientOptions);
-    }
-
-    /**
-     * Gets the reporter tags.
-     *
-     * @returns {Map<string, string>}
-     * @memberof ElasticsearchMetricReporter
-     */
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    /**
-     * Sets the reporter tags.
-     *
-     * @param {Map<string, string>} tags
-     * @memberof ElasticsearchMetricReporter
-     */
-    public setTags(tags: Map<string, string>): void {
-        this.tags = tags;
     }
 
     /**
@@ -504,7 +453,7 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * @memberof ElasticsearchMetricReporter
      */
     public getLog(): Logger {
-        return this.log;
+        return this.options.log;
     }
 
     /**
@@ -514,152 +463,137 @@ export class ElasticsearchMetricReporter extends MetricReporter {
      * @memberof ElasticsearchMetricReporter
      */
     public setLog(log: Logger): void {
-        this.log = log;
+        this.options.log = log;
     }
 
     /**
-     * Starts the logger reporting loop using {setInterval()}.
+     * Send the combinations of index and document to the elasticsearch cluster
+     * using the bulk method of the elasticsearch client.
      *
-     * @memberof ElasticsearchMetricReporter
-     */
-    public start(): void {
-        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-        this.timer = setInterval(() => this.report(), interval);
-    }
-
-    /**
-     * Stopps reporting metrics.
-     *
-     * @memberof ElasticsearchMetricReporter
-     */
-    public stop(): void {
-        if (this.timer) {
-            this.timer.unref();
-        }
-    }
-
-    /**
-     * Reports the data points for each registered {@link MetricRegistry}.
-     *
-     * @private
-     * @memberof ElasticsearchMetricReporter
-     */
-    private async report() {
-        this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
-    }
-
-    /**
-     * Reports the data points for the specified {@link MetricRegistry}.
-     *
-     * @private
+     * @protected
      * @param {MetricRegistry} registry
-     * @memberof ElasticsearchMetricReporter
-     */
-    private reportMetricRegistry(registry: MetricRegistry): void {
-        const now: Date = new Date(this.clock.time().milliseconds);
-
-        this.reportMetrics(registry, registry.getMonotoneCounterList(), now, "counter",
-            (counter: MonotoneCounter) => counter.getCount());
-        this.reportMetrics(registry, registry.getCounterList(), now, "counter",
-            (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry, registry.getGaugeList(), now, "gauge",
-            (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry, registry.getHistogramList(), now, "histogram",
-            (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry, registry.getMeterList(), now, "meter",
-            (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry, registry.getTimerList(), now, "timer",
-            (timer: Timer) => timer.getCount());
-    }
-
-    /**
-     * Reports a collection of metric instance for a certain type.
-     *
-     * @private
-     * @template T
-     * @param {MetricRegistry} registry
-     * @param {T[]} metrics
      * @param {Date} date
      * @param {MetricType} type
-     * @param {(metric: Metric) => number} lastModifiedFunction
-     *      function to determine if a metric has a different value since the last reporting.
+     * @param {Array<ReportingResult<any, any[]>>} results
      * @returns {Promise<void>}
      * @memberof ElasticsearchMetricReporter
      */
-    private async reportMetrics<T extends Metric>(
+    protected handleResults(
         registry: MetricRegistry,
-        metrics: T[],
         date: Date,
         type: MetricType,
-        lastModifiedFunction: (metric: Metric) => number): Promise<void> {
-
-        const body: Array<{}> = [];
-        metrics.forEach((metric) => {
-            const metricId = (metric as any).id;
-            let changed = true;
-            if (metricId) {
-                changed = this.hasChanged(metricId, lastModifiedFunction(metric), date);
-            }
-
-            if (changed) {
-                const document = this.metricDocumentBuilder(registry, metric, type, date, this.tags);
-                if (!!document) {
-                    // tslint:disable-next-line:variable-name
-                    const _index = this.indexnameDeterminator(registry, metric, type, date);
-                    // tslint:disable-next-line:variable-name
-                    const _type = this.typeDeterminator(registry, metric, type, date);
-                    body.push({ index: { _index, _type } });
-                    body.push(document);
-                }
-            }
-        });
-
-        if (body.length > 0) {
-            try {
-                const response = await this.client.bulk({ body });
-                if (this.log) {
-                    this.log.debug(
+        results: Array<ReportingResult<any, any[]>>): Promise<void> {
+        const body = results
+            .map((result) => result.result)
+            .reduce((p, c) => p.concat(c));
+        return this.client.bulk({ body })
+            .then((response) => {
+                if (this.options.log) {
+                    this.options.log.debug(
                         `took ${response.took}ms to write ${type} metrics - errors ${response.errors}`,
                         this.logMetadata,
                     );
                 }
-            } catch (reason) {
-                if (this.log) {
-                    this.log.error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
+            })
+            .catch((reason) => {
+                if (this.options.log) {
+                    this.options.log
+                        .error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
                 }
-            }
-        }
+            });
     }
 
     /**
-     * Determines if the specified metric has changed. This is always true if
-     * the minimum-reporting timeout was reached.
+     * Generalized reporting method of all types of metric instances.
+     * Builds the index configuration document and the metric document.
      *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {Date} date
-     * @returns {boolean}
+     * @protected
+     * @param {Metric} metric
+     * @param {ReportingContext<Metric>} ctx
+     * @returns {Array<{}>}
      * @memberof ElasticsearchMetricReporter
      */
-    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
-        let changed = true;
-        let metricEntry = {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry = this.metricStates.get(metricId);
-            changed = metricEntry.lastValue !== lastValue;
-            if (!changed) {
-                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-            }
+    protected reportMetric(
+        metric: Metric, ctx: ReportingContext<Metric>): Array<{}> {
+        const document = this.options.metricDocumentBuilder(
+            ctx.registry, metric, ctx.type, ctx.date, this.buildTags(ctx.registry, metric));
+        if (!!document) {
+            // tslint:disable-next-line:variable-name
+            const _index = this.options.indexnameDeterminator(ctx.registry, metric, ctx.type, ctx.date);
+            // tslint:disable-next-line:variable-name
+            const _type = this.options.typeDeterminator(ctx.registry, metric, ctx.type, ctx.date);
+            return [
+                { index: { _index, _type } },
+                document,
+            ];
         }
-        if (changed) {
-            metricEntry.lastReport = date.getTime();
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
+        return [];
+    }
+
+    /**
+     * Calls {@link #reportMetric} with the specified arguments.
+     *
+     * @protected
+     * @param {(MonotoneCounter | Counter)} counter
+     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @returns {Array<{}>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    protected reportCounter(
+        counter: MonotoneCounter | Counter, ctx: ReportingContext<MonotoneCounter | Counter>): Array<{}> {
+        return this.reportMetric(counter, ctx);
+    }
+
+    /**
+     * Calls {@link #reportMetric} with the specified arguments.
+     *
+     * @protected
+     * @param {Gauge<any>} gauge
+     * @param {ReportingContext<Gauge<any>>} ctx
+     * @returns {Array<{}>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): Array<{}> {
+        return this.reportMetric(gauge, ctx);
+    }
+
+    /**
+     * Calls {@link #reportMetric} with the specified arguments.
+     *
+     * @protected
+     * @param {Histogram} histogram
+     * @param {ReportingContext<Histogram>} ctx
+     * @returns {Array<{}>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): Array<{}> {
+        return this.reportMetric(histogram, ctx);
+    }
+
+    /**
+     * Calls {@link #reportMetric} with the specified arguments.
+     *
+     * @protected
+     * @param {Meter} meter
+     * @param {ReportingContext<Meter>} ctx
+     * @returns {Array<{}>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): Array<{}> {
+        return this.reportMetric(meter, ctx);
+    }
+
+    /**
+     * Calls {@link #reportMetric} with the specified arguments.
+     *
+     * @protected
+     * @param {Timer} timer
+     * @param {ReportingContext<Timer>} ctx
+     * @returns {Array<{}>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): Array<{}> {
+        return this.reportMetric(timer, ctx);
     }
 
 }
