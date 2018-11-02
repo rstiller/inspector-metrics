@@ -12,44 +12,59 @@ import {
     Histogram,
     Logger,
     Meter,
-    Metric,
     MetricRegistry,
-    MetricReporter,
+    MetricType,
     MILLISECOND,
-    MINUTE,
     MonotoneCounter,
+    ReportingContext,
+    ReportingResult,
+    ScheduledMetricReporter,
+    ScheduledMetricReporterOptions,
+    Scheduler,
     StdClock,
-    Taggable,
+    Tags,
     Timer,
     TimeUnit,
 } from "inspector-metrics";
 
-/**
- * Enumeration of all metric types.
- */
-export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
+export interface CarbonMetricReporterOptions extends ScheduledMetricReporterOptions {
+    /**
+     * The graphite / carbon host.
+     *
+     * @type {string}
+     * @memberof CarbonMetricReporterOptions
+     */
+    readonly host: string;
+    /**
+     * Minimal logger interface to report failures.
+     *
+     * @type {Logger}
+     * @memberof CarbonMetricReporterOptions
+     */
+    log: Logger;
+}
 
 /**
- * Entry interface to track the last value and timestamp of a metric instance.
+ * Helper interface for representing the result of a metric report.
  *
- * @interface MetricEntry
+ * @export
+ * @interface CarbonData
  */
-interface MetricEntry {
+export interface CarbonData {
     /**
-     * Timestamp of the last reporting.
+     * Document that is getting sent to the carbon / graphite server.
      *
-     * @type {number}
-     * @memberof MetricEntry
+     * @type {*}
+     * @memberof CarbonData
      */
-    lastReport: number;
-
+    measurement: any;
     /**
-     * Last reported reference value.
+     * Combined tags for the metric.
      *
-     * @type {number}
-     * @memberof MetricEntry
+     * @type {Tags}
+     * @memberof CarbonData
      */
-    lastValue: number;
+    tags: Tags;
 }
 
 /**
@@ -59,64 +74,8 @@ interface MetricEntry {
  * @class CarbonMetricReporter
  * @extends {MetricReporter}
  */
-export class CarbonMetricReporter extends MetricReporter {
+export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricReporterOptions, CarbonData> {
 
-    /**
-     * The graphite / carbon host.
-     *
-     * @private
-     * @type {string}
-     * @memberof CarbonMetricReporter
-     */
-    private host: string;
-    /**
-     * Clock used to determine the current timestamp.
-     *
-     * @private
-     * @type {Clock}
-     * @memberof CarbonMetricReporter
-     */
-    private clock: Clock;
-    /**
-     * Reference for the object returned by the scheduler function.
-     *
-     * @private
-     * @type {NodeJS.Timer}
-     * @memberof CarbonMetricReporter
-     */
-    private timer: NodeJS.Timer;
-    /**
-     * Reporting interval.
-     *
-     * @private
-     * @type {number}
-     * @memberof CarbonMetricReporter
-     */
-    private interval: number;
-    /**
-     * Minimal timeout to include a metric instance into a reporting.
-     *
-     * @private
-     * @type {number}
-     * @memberof CarbonMetricReporter
-     */
-    private minReportingTimeout: number;
-    /**
-     * Time unit for the reporting interval.
-     *
-     * @private
-     * @type {TimeUnit}
-     * @memberof CarbonMetricReporter
-     */
-    private unit: TimeUnit;
-    /**
-     * Tags assigned to this reporter instance - reported for every metric instance.
-     *
-     * @private
-     * @type {Map<string, string>}
-     * @memberof CarbonMetricReporter
-     */
-    private tags: Map<string, string>;
     /**
      * Metadata for the logger.
      *
@@ -125,22 +84,6 @@ export class CarbonMetricReporter extends MetricReporter {
      * @memberof CarbonMetricReporter
      */
     private logMetadata: any;
-    /**
-     * Minimal logger interface to report failures.
-     *
-     * @private
-     * @type {Logger}
-     * @memberof CarbonMetricReporter
-     */
-    private log: Logger = console;
-    /**
-     * Saves the state of each reported metrics.
-     *
-     * @private
-     * @type {Map<number, MetricEntry>}
-     * @memberof CarbonMetricReporter
-     */
-    private metricStates: Map<number, MetricEntry> = new Map();
     /**
      * Graphite / carbon client instance.
      *
@@ -153,55 +96,75 @@ export class CarbonMetricReporter extends MetricReporter {
     /**
      * Creates an instance of CarbonMetricReporter.
      *
-     * @param {string} host The carbon/graphite host.
-     * @param {number} [interval=1000] The reporting interval.
-     * @param {TimeUnit} [unit=MILLISECOND] The time unit for the reporting interval.
-     * @param {Map<string, string>} [tags=new Map()] Tags assigned to every metric.
-     * @param {Clock} [clock=new StdClock()] The clock - used to determine the timestamp of the metrics while reporting.
-     * @param {number} [minReportingTimeout=1] The time in minutes the report sends even unchanged metrics.
      * @memberof CarbonMetricReporter
      */
-    public constructor(
+    public constructor({
+        host,
+        log = console,
+        reportInterval = 1000,
+        unit = MILLISECOND,
+        clock = new StdClock(),
+        scheduler = setInterval,
+        minReportingTimeout = 1,
+        tags = new Map(),
+    }: {
+        /**
+         * The graphite / carbon host.
+         * @type {string}
+         */
         host: string,
-        interval: number = 1000,
-        unit: TimeUnit = MILLISECOND,
-        tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock(),
-        minReportingTimeout = 1) {
-        super();
-
-        this.host = host;
-        this.interval = interval;
-        this.unit = unit;
-        this.tags = tags;
-        this.clock = clock;
-        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+        /**
+         * The logger instance used to report metrics.
+         * @type {Logger}
+         */
+        log?: Logger,
+        /**
+         * Reporting interval in the time-unit of {@link #unit}.
+         * @type {number}
+         */
+        reportInterval?: number;
+        /**
+         * The time-unit of the reporting interval.
+         * @type {TimeUnit}
+         */
+        unit?: TimeUnit;
+        /**
+         * The clock instance used determine the current time.
+         * @type {Clock}
+         */
+        clock?: Clock;
+        /**
+         * The scheduler function used to trigger reporting.
+         * @type {Scheduler}
+         */
+        scheduler?: Scheduler;
+        /**
+         * The timeout in which a metrics gets reported wether it's value has changed or not.
+         * @type {number}
+         */
+        minReportingTimeout?: number;
+        /**
+         * Common tags for this reporter instance.
+         * @type {Map<string, string>}
+         */
+        tags?: Map<string, string>;
+    }) {
+        super({
+            clock,
+            host,
+            log,
+            minReportingTimeout,
+            reportInterval,
+            scheduler,
+            tags,
+            unit,
+        });
 
         this.logMetadata = {
-            interval,
+            reportInterval,
             tags,
             unit,
         };
-    }
-
-    /**
-     * Gets the reporter tags.
-     *
-     * @returns {Map<string, string>}
-     * @memberof CarbonMetricReporter
-     */
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    /**
-     * Sets the reporter tags.
-     *
-     * @param {Map<string, string>} tags
-     * @memberof CarbonMetricReporter
-     */
-    public setTags(tags: Map<string, string>): void {
-        this.tags = tags;
     }
 
     /**
@@ -211,7 +174,7 @@ export class CarbonMetricReporter extends MetricReporter {
      * @memberof CarbonMetricReporter
      */
     public getLog(): Logger {
-        return this.log;
+        return this.options.log;
     }
 
     /**
@@ -221,7 +184,7 @@ export class CarbonMetricReporter extends MetricReporter {
      * @memberof CarbonMetricReporter
      */
     public setLog(log: Logger): void {
-        this.log = log;
+        this.options.log = log;
     }
 
     /**
@@ -229,11 +192,9 @@ export class CarbonMetricReporter extends MetricReporter {
      *
      * @memberof CarbonMetricReporter
      */
-    public start(): void {
-        const interval: number = this.unit.convertTo(this.interval, MILLISECOND);
-
-        this.client = graphite.createClient(this.host);
-        this.timer = setInterval(() => this.report(), interval);
+    public start(): Promise<any> {
+        this.client = graphite.createClient(this.options.host);
+        return super.start();
     }
 
     /**
@@ -242,181 +203,53 @@ export class CarbonMetricReporter extends MetricReporter {
      * @memberof CarbonMetricReporter
      */
     public stop(): void {
-        if (this.timer) {
-            this.timer.unref();
-        }
+        super.stop();
         if (this.client) {
             this.client.end();
         }
     }
 
     /**
-     * Reports the data points for each registered {@link MetricRegistry}.
+     * Uses the client instance to report the given metric results.
      *
-     * @private
-     * @memberof CarbonMetricReporter
-     */
-    private async report() {
-        this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
-    }
-
-    /**
-     * Reports the data points for the specified {@link MetricRegistry}.
-     *
-     * @private
+     * @protected
      * @param {MetricRegistry} registry
-     * @memberof CarbonMetricReporter
-     */
-    private reportMetricRegistry(registry: MetricRegistry): void {
-        const now: Date = new Date(this.clock.time().milliseconds);
-
-        this.reportMetrics(registry.getMonotoneCounterList(), now, "counter",
-            (counter: MonotoneCounter, date: Date) => this.reportMonotoneCounter(counter, date),
-            (counter: MonotoneCounter) => counter.getCount());
-        this.reportMetrics(registry.getCounterList(), now, "counter",
-            (counter: Counter, date: Date) => this.reportCounter(counter, date),
-            (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry.getGaugeList(), now, "gauge",
-            (gauge: Gauge<any>, date: Date) => this.reportGauge(gauge, date),
-            (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry.getHistogramList(), now, "histogram",
-            (histogram: Histogram, date: Date) => this.reportHistogram(histogram, date),
-            (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry.getMeterList(), now, "meter",
-            (meter: Meter, date: Date) => this.reportMeter(meter, date),
-            (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry.getTimerList(), now, "timer",
-            (timer: Timer, date: Date) => this.reportTimer(timer, date),
-            (timer: Timer) => timer.getCount());
-    }
-
-    /**
-     * Reports a collection of metric instance for a certain type.
-     *
-     * @private
-     * @template T
-     * @param {T[]} metrics
-     * @param {Date} date
-     * @param {MetricType} type
-     * @param {(metric: Metric, date: Date) => {}} reportFunction
-     *      The function to build the data points for a certain metric.
-     * @param {(metric: Metric) => number} lastModifiedFunction
-     *      function to determine if a metric has a different value since the last reporting.
-     * @memberof CarbonMetricReporter
-     */
-    private reportMetrics<T extends Metric>(
-        metrics: T[],
-        date: Date,
-        type: MetricType,
-        reportFunction: (metric: Metric, date: Date) => {},
-        lastModifiedFunction: (metric: Metric) => number): void {
-
-        metrics.forEach((metric) => {
-            const metricId = (metric as any).id;
-            let changed = true;
-            if (metricId) {
-                changed = this.hasChanged(metricId, lastModifiedFunction(metric), date);
-            }
-
-            if (changed) {
-                const measurement = reportFunction(metric, date);
-                if (!!measurement) {
-                    this.sendMetric(metric, date, measurement);
-                }
-            }
-        });
-    }
-
-    /**
-     * Uses the client instance to report the given metric.
-     *
-     * @private
-     * @param {Metric} metric
      * @param {Date} timestamp
-     * @param {{}} measurement
+     * @param {MetricType} type
+     * @param {ReportingResult<any, CarbonData>[]} results
+     * @returns {Promise<any>}
      * @memberof CarbonMetricReporter
      */
-    private sendMetric(metric: Metric, timestamp: Date, measurement: {}) {
-        const tags = this.buildTags(this.getTags(), metric);
-        this.client.writeTagged(measurement, tags, timestamp, (err: any) => {
-            if (err != null) {
-                this.log.error(err, this.logMetadata);
-            }
-        });
+    protected handleResults(
+        registry: MetricRegistry,
+        timestamp: Date,
+        type: MetricType,
+        results: Array<ReportingResult<any, CarbonData>>): Promise<any> {
+        return Promise.all(results
+            .map((result) => result.result)
+            .map((carbonData) => new Promise((resolve, reject) => {
+                this.client.writeTagged(carbonData.measurement, carbonData.tags, timestamp, (err: any) => {
+                    if (err != null) {
+                        this.options.log.error(err, this.logMetadata);
+                        reject(err);
+                    }
+                    resolve();
+                });
+            })));
     }
 
     /**
-     * Determines if the specified metric has changed. This is always true if
-     * the minimum-reporting timeout was reached.
+     * Builds the {@link CarbonData} for the specified {@link Counter} or {@link MonotoneCounter}.
      *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {Date} date
-     * @returns {boolean}
+     * @protected
+     * @param {(MonotoneCounter | Counter)} counter
+     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
-        let changed = true;
-        let metricEntry = {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry = this.metricStates.get(metricId);
-            changed = metricEntry.lastValue !== lastValue;
-            if (!changed) {
-                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-            }
-        }
-        if (changed) {
-            metricEntry.lastReport = date.getTime();
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
-    }
-
-    /**
-     * Builds the tags using the metric's tags and this reportes tags.
-     *
-     * @private
-     * @param {Map<string, string>} commonTags
-     * @param {Taggable} taggable
-     * @returns {{ [key: string]: string }}
-     * @memberof CarbonMetricReporter
-     */
-    private buildTags(commonTags: Map<string, string>, taggable: Taggable): { [key: string]: string } {
-        const tags: { [x: string]: string } = {};
-        commonTags.forEach((tag, key) => tags[key] = tag);
-        taggable.getTags().forEach((tag, key) => tags[key] = tag);
-        return tags;
-    }
-
-    /**
-     * Either gets 0 or the specifed value.
-     *
-     * @private
-     * @param {number} value
-     * @returns {number}
-     * @memberof CarbonMetricReporter
-     */
-    private getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
-    }
-
-    /**
-     * Computes and reports the fields of the monotone-counter.
-     *
-     * @private
-     * @param {MonotoneCounter} counter
-     * @param {Date} date
-     * @returns {{}}
-     * @memberof CarbonMetricReporter
-     */
-    private reportMonotoneCounter(counter: MonotoneCounter, date: Date): {} {
+    protected reportCounter(
+        counter: MonotoneCounter | Counter,
+        ctx: ReportingContext<MonotoneCounter | Counter>): CarbonData {
         const value = counter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -427,42 +260,22 @@ export class CarbonMetricReporter extends MetricReporter {
         };
         measurement[`count`] = counter.getCount() || 0;
 
-        return measurement;
-    }
-
-    /**
-     * Computes and reports the fields of the counter.
-     *
-     * @private
-     * @param {Counter} counter
-     * @param {Date} date
-     * @returns {{}}
-     * @memberof CarbonMetricReporter
-     */
-    private reportCounter(counter: Counter, date: Date): {} {
-        const value = counter.getCount();
-        if (!value || isNaN(value)) {
-            return null;
-        }
-        const measurement: any = {
-            group: counter.getGroup(),
-            name: counter.getName(),
+        return {
+            measurement,
+            tags: this.buildTags(ctx.registry, counter),
         };
-        measurement[`count`] = counter.getCount() || 0;
-
-        return measurement;
     }
 
     /**
-     * Computes and reports the fields of the gauge.
+     * Builds the {@link CarbonData} for the specified {@link Gauge}.
      *
-     * @private
+     * @protected
      * @param {Gauge<any>} gauge
-     * @param {Date} date
-     * @returns {{}}
+     * @param {ReportingContext<Gauge<any>>} ctx
+     * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    private reportGauge(gauge: Gauge<any>, date: Date): {} {
+    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): CarbonData {
         const value = gauge.getValue();
         if (!value || isNaN(value)) {
             return null;
@@ -473,19 +286,22 @@ export class CarbonMetricReporter extends MetricReporter {
         };
         measurement[`value`] = gauge.getValue() || 0;
 
-        return measurement;
+        return {
+            measurement,
+            tags: this.buildTags(ctx.registry, gauge),
+        };
     }
 
     /**
-     * Computes and reports the fields of the histogram.
+     * Builds the {@link CarbonData} for the specified {@link Histogram}.
      *
-     * @private
+     * @protected
      * @param {Histogram} histogram
-     * @param {Date} date
-     * @returns {{}}
+     * @param {ReportingContext<Histogram>} ctx
+     * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    private reportHistogram(histogram: Histogram, date: Date): {} {
+    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): CarbonData {
         const value = histogram.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -507,19 +323,22 @@ export class CarbonMetricReporter extends MetricReporter {
         measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
         measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
 
-        return measurement;
+        return {
+            measurement,
+            tags: this.buildTags(ctx.registry, histogram),
+        };
     }
 
     /**
-     * Computes and reports the fields of the meter.
+     * Builds the {@link CarbonData} for the specified {@link Meter}.
      *
-     * @private
+     * @protected
      * @param {Meter} meter
-     * @param {Date} date
-     * @returns {{}}
+     * @param {ReportingContext<Meter>} ctx
+     * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    private reportMeter(meter: Meter, date: Date): {} {
+    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): CarbonData {
         const value = meter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -534,19 +353,22 @@ export class CarbonMetricReporter extends MetricReporter {
         measurement[`m5_rate`] = this.getNumber(meter.get5MinuteRate());
         measurement[`mean_rate`] = this.getNumber(meter.getMeanRate());
 
-        return measurement;
+        return {
+            measurement,
+            tags: this.buildTags(ctx.registry, meter),
+        };
     }
 
     /**
-     * Computes and reports the fields of the timer.
+     * Builds the {@link CarbonData} for the specified {@link Timer}.
      *
-     * @private
+     * @protected
      * @param {Timer} timer
-     * @param {Date} date
-     * @returns {{}}
+     * @param {ReportingContext<Timer>} ctx
+     * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    private reportTimer(timer: Timer, date: Date): {} {
+    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): CarbonData {
         const value = timer.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -572,7 +394,10 @@ export class CarbonMetricReporter extends MetricReporter {
         measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
         measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
 
-        return measurement;
+        return {
+            measurement,
+            tags: this.buildTags(ctx.registry, timer),
+        };
     }
 
 }

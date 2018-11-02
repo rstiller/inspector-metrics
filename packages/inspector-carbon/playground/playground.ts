@@ -1,7 +1,9 @@
 import { MetricRegistry, Timer } from "inspector-metrics";
 import { CarbonMetricReporter } from "../lib/metrics/CarbonMetricReporter";
 
-const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
+const reporter: CarbonMetricReporter = new CarbonMetricReporter({
+    host: "plaintext://graphite:2003/",
+});
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");
 const requests2: Timer = registry.newTimer("requests2");

@@ -1,0 +1,55 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+### Added
+- CHANGELOG
+- compile and test script for different node versions
+
+### Changed
+- added nodejs 11 to travis.yml
+- updated dependencies
+- use inspector-metrics@1.13.0
+- adapted new MetricLogger implementation
+
+## [1.1.0] - 2018-10-04
+### Added
+- support for monotone counters
+- "description" & "homepage" to package.json
+- jsdocs for components
+
+### Changed
+- fixed linting config
+- refactored playground
+- updated dependencies
+- use inspector-metrics@1.11.0
+- refactored build scripts
+- use compodoc as documentation tool
+
+## [1.0.1] - 2018-07-08
+### Changed
+- updated dependencies
+- use inspector-metrics@1.8.7
+- added nodejs 10 to travis.yml
+
+## [1.0.0] - 2018-02-08
+
+Initial commit.
+
+### Added
+- project setup
+    - README
+    - typescript config
+    - lint config
+- licensed under MIT license
+- basic carbon / graphite reporter
+- mocha testing (with chai, sinon)
+- Jenkins pipeline
+- NYC code-coverage config
+- added editorconfig file
+- travis.yml for nodejs 6, 7, 8, 9
+- basic playground setup
+- use inspector-metrics@1.8.3
