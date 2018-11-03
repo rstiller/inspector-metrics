@@ -171,18 +171,16 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, LogLine>>} results
-     * @returns {Promise<void>}
      * @memberof LoggerReporter
      */
-    protected handleResults(
+    protected async handleResults(
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
-        results: Array<ReportingResult<any, LogLine>>): Promise<void> {
+        results: Array<ReportingResult<any, LogLine>>) {
         for (const logLine of results) {
             this.options.log.info(logLine.result.message, logLine.result.metadata);
         }
-        return Promise.resolve();
     }
 
     /**
