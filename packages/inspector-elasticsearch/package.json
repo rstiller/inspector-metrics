@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "elasticsearch": "15.2.0",
-    "inspector-metrics": "1.13.0-rc.1",
+    "inspector-metrics": "1.13.0-rc.5",
     "source-map-support": "0.5.9"
   },
   "files": [
