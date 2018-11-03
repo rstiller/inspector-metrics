@@ -20,9 +20,23 @@ export interface Tags {
 }
 
 /**
+ * Helper interface for a reporting run.
+ */
+export interface OverallReportContext {
+    [key: string]: any;
+}
+
+/**
  * Helper interface for reporting runs.
  */
-export interface ReportingContext<M> {
+export interface MetricSetReportContext<M> {
+    /**
+     * The OverallReportContext this context is running in.
+     *
+     * @type {OverallReportContext}
+     * @memberof ReportingContext
+     */
+    overallCtx: OverallReportContext;
     /**
      * The array of metric instance that is currently reported.
      *
@@ -218,7 +232,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async beforeReport() {
+    protected async beforeReport(ctx: OverallReportContext) {
     }
 
     /**
@@ -227,7 +241,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async afterReport() {
+    protected async afterReport(ctx: OverallReportContext) {
     }
 
     /**
@@ -238,14 +252,17 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @memberof MetricReporter
      */
-    protected async report() {
+    protected async report(): Promise<OverallReportContext> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
-            await this.beforeReport();
+            const ctx = this.createOverallReportContext();
+            await this.beforeReport(ctx);
             for (const registry of this.metricRegistries) {
-                await this.reportMetricRegistry(registry);
+                await this.reportMetricRegistry(ctx, registry);
             }
-            await this.afterReport();
+            await this.afterReport(ctx);
+            return ctx;
         }
+        return {};
     }
 
     /**
@@ -259,67 +276,89 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @param {MetricRegistry} registry
      * @memberof MetricReporter
      */
-    protected async reportMetricRegistry(registry: MetricRegistry) {
+    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry) {
         const date: Date = new Date(this.options.clock.time().milliseconds);
-        const counterCtx: ReportingContext<MonotoneCounter | Counter> = this.createReportingContext(
-            registry, date, "counter");
-        const gaugeCtx: ReportingContext<Gauge<any>> = this.createReportingContext(registry, date, "gauge");
-        const histogramCtx: ReportingContext<Histogram> = this.createReportingContext(registry, date, "histogram");
-        const meterCtx: ReportingContext<Meter> = this.createReportingContext(registry, date, "meter");
-        const timerCtx: ReportingContext<Timer> = this.createReportingContext(registry, date, "timer");
+        const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this
+            .createMetricSetReportContext(ctx, registry, date, "counter");
+        const gaugeCtx: MetricSetReportContext<Gauge<any>> = this
+            .createMetricSetReportContext(ctx, registry, date, "gauge");
+        const histogramCtx: MetricSetReportContext<Histogram> = this
+            .createMetricSetReportContext(ctx, registry, date, "histogram");
+        const meterCtx: MetricSetReportContext<Meter> = this
+            .createMetricSetReportContext(ctx, registry, date, "meter");
+        const timerCtx: MetricSetReportContext<Timer> = this
+            .createMetricSetReportContext(ctx, registry, date, "timer");
 
         counterCtx.metrics = registry.getMonotoneCounterList();
-        const monotoneCounterResults = this.reportMetrics(counterCtx,
+        const monotoneCounterResults = this.reportMetrics(ctx, counterCtx,
             (counter: MonotoneCounter) => this.reportCounter(counter, counterCtx),
             (counter: MonotoneCounter) => counter.getCount());
 
         counterCtx.metrics = registry.getCounterList();
-        const counterResults = this.reportMetrics(counterCtx as ReportingContext<Counter>,
+        const counterResults = this.reportMetrics(ctx, counterCtx as MetricSetReportContext<Counter>,
             (counter: Counter) => this.reportCounter(counter, counterCtx),
             (counter: Counter) => counter.getCount());
 
         gaugeCtx.metrics = registry.getGaugeList();
-        const gaugeResults = this.reportMetrics(gaugeCtx,
+        const gaugeResults = this.reportMetrics(ctx, gaugeCtx,
             (gauge: Gauge<any>) => this.reportGauge(gauge, gaugeCtx),
             (gauge: Gauge<any>) => gauge.getValue());
 
         histogramCtx.metrics = registry.getHistogramList();
-        const histogramResults = this.reportMetrics(histogramCtx,
+        const histogramResults = this.reportMetrics(ctx, histogramCtx,
             (histogram: Histogram) => this.reportHistogram(histogram, histogramCtx),
             (histogram: Histogram) => histogram.getCount());
 
         meterCtx.metrics = registry.getMeterList();
-        const meterResults = this.reportMetrics(meterCtx,
+        const meterResults = this.reportMetrics(ctx, meterCtx,
             (meter: Meter) => this.reportMeter(meter, meterCtx),
             (meter: Meter) => meter.getCount());
 
         timerCtx.metrics = registry.getTimerList();
-        const timerResults = this.reportMetrics(timerCtx,
+        const timerResults = this.reportMetrics(ctx, timerCtx,
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        await this.handleResults(registry, date, "counter", monotoneCounterResults);
-        await this.handleResults(registry, date, "counter", counterResults);
-        await this.handleResults(registry, date, "gauge", gaugeResults);
-        await this.handleResults(registry, date, "histogram", histogramResults);
-        await this.handleResults(registry, date, "meter", meterResults);
-        await this.handleResults(registry, date, "timer", timerResults);
+        await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
+        await this.handleResults(ctx, registry, date, "counter", counterResults);
+        await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
+        await this.handleResults(ctx, registry, date, "histogram", histogramResults);
+        await this.handleResults(ctx, registry, date, "meter", meterResults);
+        await this.handleResults(ctx, registry, date, "timer", timerResults);
     }
 
     /**
-     * Creates a ReportingContext with the specified arguments.
+     * Creates an OverallReportContext.
      *
      * @protected
+     * @returns {OverallReportContext}
+     * @memberof MetricReporter
+     */
+    protected createOverallReportContext(): OverallReportContext {
+        return {
+        };
+    }
+
+    /**
+     * Creates a MetricSetReportContext with the specified arguments.
+     *
+     * @protected
+     * @param {OverallReportContext} overallCtx
      * @param {MetricRegistry} registry
      * @param {Date} date
      * @param {MetricType} type
-     * @returns {ReportingContext<any>}
+     * @returns {MetricSetReportContext<any>}
      * @memberof MetricReporter
      */
-    protected createReportingContext(registry: MetricRegistry, date: Date, type: MetricType): ReportingContext<any> {
+    protected createMetricSetReportContext(
+        overallCtx: OverallReportContext,
+        registry: MetricRegistry,
+        date: Date,
+        type: MetricType): MetricSetReportContext<any> {
         return {
             date,
             metrics: [],
+            overallCtx,
             registry,
             type,
         };
@@ -338,7 +377,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @returns {Array<ReportingResult<M, T>>}
      * @memberof MetricReporter
      */
-    protected reportMetrics<M extends Metric, C extends ReportingContext<M>>(
+    protected reportMetrics<M extends Metric, C extends MetricSetReportContext<M>>(
+        overallCtx: OverallReportContext,
         ctx: C,
         reportFunction: (metric: M, ctx: C) => T,
         lastModifiedFunction: (metric: M, ctx: C) => number): Array<ReportingResult<M, T>> {
@@ -360,6 +400,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      *
      * @protected
      * @abstract
+     * @param {OverallReportContext} ctx
      * @param {MetricRegistry} registry
      * @param {Date} date
      * @param {MetricType} type
@@ -368,7 +409,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @memberof MetricReporter
      */
     protected abstract handleResults(
-        registry: MetricRegistry, date: Date, type: MetricType, results: Array<ReportingResult<any, T>>): Promise<void>;
+        ctx: OverallReportContext,
+        registry: MetricRegistry,
+        date: Date,
+        type: MetricType,
+        results: Array<ReportingResult<any, T>>): Promise<void>;
 
     /**
      * Does the reporting for a counter or monotone counter.
@@ -376,12 +421,12 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @abstract
      * @param {(MonotoneCounter | Counter)} counter
-     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @param {(MetricSetReportContext<MonotoneCounter | Counter>)} ctx
      * @returns {T}
      * @memberof MetricReporter
      */
     protected abstract reportCounter(
-        counter: MonotoneCounter | Counter, ctx: ReportingContext<MonotoneCounter | Counter>): T;
+        counter: MonotoneCounter | Counter, ctx: MetricSetReportContext<MonotoneCounter | Counter>): T;
 
     /**
      * Does the reporting for a gauge.
@@ -389,11 +434,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @abstract
      * @param {Gauge<any>} gauge
-     * @param {ReportingContext<Gauge<any>>} ctx
+     * @param {MetricSetReportContext<Gauge<any>>} ctx
      * @returns {T}
      * @memberof MetricReporter
      */
-    protected abstract reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): T;
+    protected abstract reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): T;
 
     /**
      * Does the reporting for a histogram.
@@ -401,11 +446,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @abstract
      * @param {Histogram} histogram
-     * @param {ReportingContext<Histogram>} ctx
+     * @param {MetricSetReportContext<Histogram>} ctx
      * @returns {T}
      * @memberof MetricReporter
      */
-    protected abstract reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): T;
+    protected abstract reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): T;
 
     /**
      * Does the reporting for a meter.
@@ -413,11 +458,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @abstract
      * @param {Meter} meter
-     * @param {ReportingContext<Meter>} ctx
+     * @param {MetricSetReportContext<Meter>} ctx
      * @returns {T}
      * @memberof MetricReporter
      */
-    protected abstract reportMeter(meter: Meter, ctx: ReportingContext<Meter>): T;
+    protected abstract reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): T;
 
     /**
      * Does the reporting for a timer.
@@ -425,11 +470,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * @protected
      * @abstract
      * @param {Timer} timer
-     * @param {ReportingContext<Timer>} ctx
+     * @param {MetricSetReportContext<Timer>} ctx
      * @returns {T}
      * @memberof MetricReporter
      */
-    protected abstract reportTimer(timer: Timer, ctx: ReportingContext<Timer>): T;
+    protected abstract reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): T;
 
     /**
      * Determines if a metric instance has changed it's value since the last check.
