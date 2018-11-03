@@ -32,9 +32,7 @@ can exported into CSV files.
 ```typescript
 import {
     CsvMetricReporter,
-    CsvMetricReporterOptions,
     DefaultCsvFileWriter,
-    DefaultCsvFileWriterOptions,
 } from "inspector-csv";
 import { MetricRegistry, Timer } from "inspector-metrics";
 
@@ -54,13 +52,13 @@ requests2.setTag("host", "127.0.0.2");
 requests3.setTag("host", "127.0.0.3");
 
 // default csv file writer
-const writer = new DefaultCsvFileWriter(new DefaultCsvFileWriterOptions({}));
+const writer = new DefaultCsvFileWriter({});
 
 // configure CSV metric reporter instance
-const reporter = new CsvMetricReporter(new CsvMetricReporterOptions({
+const reporter = new CsvMetricReporter({
     columns: ["date", "group", "name", "field", "value"],
     writer,
-}));
+});
 
 // register registry in the reporter
 reporter.addMetricRegistry(registry);
@@ -166,12 +164,24 @@ date,group,name,field,value
 
 * `writer`
     - The writer used to store the rows.
-* `interval`
+* `reportInterval`
     - Reporting interval in TimeUnit
     - default value __1000__
 * `unit`
     - TimeUnit of the reporting interval
     - default value __MILLISECOND__
+* `scheduler`
+    - function used to schedule reporting tasks
+    - default value __setInterval__
+* `clock`
+    - Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature
+    - default value __new StdClock()__
+* `minReportingTimeout`
+    - Timeout in minutes a metric need to be included in the report without having changed
+    - default value __1__
+* `tags`
+    - Tags for this reporter instance - to be combined with the tags of each metric while reporting
+    - default value __new Map()__
 * `useSingleQuotes`
     - Indicates that single quotes are used instead of double quotes.
     - default value __false__
@@ -249,9 +259,7 @@ date,group,name,field,value
 ```typescript
 import {
     CsvMetricReporter,
-    CsvMetricReporterOptions,
     DefaultCsvFileWriter,
-    DefaultCsvFileWriterOptions,
 } from "inspector-csv";
 import { MetricRegistry, Timer } from "inspector-metrics";
 
@@ -274,14 +282,14 @@ requests3.setTag("host", "127.0.0.3");
 requests3.setTag("special_tag", "test_abc");
 
 // default csv file writer
-const writer = new DefaultCsvFileWriter(new DefaultCsvFileWriterOptions({}));
+const writer = new DefaultCsvFileWriter({});
 
 // configure CSV metric reporter instance
-const reporter = new CsvMetricReporter(new CsvMetricReporterOptions({
+const reporter = new CsvMetricReporter({
     columns: ["date", "group", "name", "field", "value", "type", "tags"],
     tagExportMode: ExportMode.ALL_IN_ONE_COLUMN,
     writer,
-}));
+});
 
 // common tags for all metrics
 const tags = new Map();
@@ -393,11 +401,11 @@ date,group,name,field,value,type,tags
 // same as in the example above ...
 
 // configure CSV metric reporter instance
-const reporter = new CsvMetricReporter(new CsvMetricReporterOptions({
+const reporter = new CsvMetricReporter({
     columns: ["date", "group", "name", "field", "value", "type", "tags"],
     tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
     ...
-}));
+});
 ```
 
 `201810201900_metrics.csv` (example output file)
@@ -487,6 +495,24 @@ date,group,name,field,value,type,tag_type,tag_host,tag_special_tag
 20181020195009.787+00:00,"","requests3","p999",3000064,"timer","metric","127.0.0.3","test_abc"
 20181020195009.787+00:00,"","requests3","stddev",545386.4756426474,"timer","metric","127.0.0.3","test_abc"
 20181020195009.787+00:00,"","requests3","sum",35999488,"timer","metric","127.0.0.3","test_abc"
+```
+
+## local dev
+
+### compile & test with different nodejs versions
+
+build docker images:  
+```bash
+docker-compose build
+```
+
+run tests:  
+```bash
+docker-compose run node6
+docker-compose run node7
+docker-compose run node8
+docker-compose run node9
+docker-compose run node10
 ```
 
 ## License

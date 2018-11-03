@@ -12,9 +12,9 @@ import { CsvFileWriter } from "./CsvMetricReporter";
  * Options for standard implementation for a csv file writer.
  *
  * @export
- * @class DefaultCsvFileWriterOptions
+ * @interface DefaultCsvFileWriterOptions
  */
-export class DefaultCsvFileWriterOptions {
+export interface DefaultCsvFileWriterOptions {
 
     /**
      * Determines if the column headers should be written at the top of each file.
@@ -22,126 +22,47 @@ export class DefaultCsvFileWriterOptions {
      * @type {boolean}
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly writeHeaders: boolean;
+    readonly writeHeaders?: boolean;
     /**
      * Determines if the dir for the metrics reporting should be created if it doesn't exist.
      *
      * @type {boolean}
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly createDir: boolean;
+    readonly createDir?: boolean;
     /**
      * The delimiter between the fields.
      *
      * @type {string}
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly delimiter: string;
+    readonly delimiter?: string;
     /**
      * The encoding of the file.
      *
      * @type {string}
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly encoding: string;
+    readonly encoding?: string;
     /**
      * The line endings in the file.
      *
      * @type {string}
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly lineEnding: string;
+    readonly lineEnding?: string;
     /**
      * An async function determining the filename of the metrics.
      *
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly filename: () => Promise<string>;
+    readonly filename?: () => Promise<string>;
     /**
      * An async function determining the directory of the metricsfile.
      *
      * @memberof DefaultCsvFileWriterOptions
      */
-    public readonly dir: () => Promise<string>;
-
-    /**
-     * Creates an instance of DefaultCsvFileWriterOptions.
-     *
-     * @param {{
-     *         writeHeaders?: boolean,
-     *         createDir?: boolean,
-     *         delimiter?: string,
-     *         encoding?: string,
-     *         lineEnding?: string,
-     *         filename?: () => Promise<string>,
-     *         dir?: () => Promise<string>,
-     *     }} {
-     *         filename = async () => `${moment().format("YYYYMMDDHH00")}_metrics.csv`,
-     *         dir = async () => "./metrics",
-     *         writeHeaders = true,
-     *         createDir = true,
-     *         delimiter =  ",",
-     *         encoding =  "utf8",
-     *         lineEnding =  "\n",
-     *     }
-     * @memberof DefaultCsvFileWriterOptions
-     */
-    public constructor({
-        filename = async () => `${moment().format("YYYYMMDDHH00")}_metrics.csv`,
-        dir = async () => "./metrics",
-        writeHeaders = true,
-        createDir = true,
-        delimiter =  ",",
-        encoding =  "utf8",
-        lineEnding =  "\n",
-    }: {
-        /**
-         * Determines if the column headers should be written at the top of each file.
-         *
-         * @type {boolean}
-         */
-        writeHeaders?: boolean,
-        /**
-         * Determines if the dir for the metrics reporting should be created if it doesn't exist.
-         *
-         * @type {boolean}
-         */
-        createDir?: boolean,
-        /**
-         * The delimiter between the fields.
-         *
-         * @type {string}
-         */
-        delimiter?: string,
-        /**
-         * The encoding of the file.
-         *
-         * @type {string}
-         */
-        encoding?: string,
-        /**
-         * The line endings in the file.
-         *
-         * @type {string}
-         */
-        lineEnding?: string,
-        /**
-         * An async function determining the filename of the metrics.
-         */
-        filename?: () => Promise<string>,
-        /**
-         * An async function determining the directory of the metricsfile.
-         */
-        dir?: () => Promise<string>,
-    }) {
-        this.createDir = createDir;
-        this.writeHeaders = writeHeaders;
-        this.delimiter = delimiter;
-        this.encoding = encoding;
-        this.lineEnding = lineEnding;
-        this.filename = filename;
-        this.dir = dir;
-    }
+    readonly dir?: () => Promise<string>;
 }
 
 /**
@@ -194,8 +115,24 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
      * @param {DefaultCsvFileWriterOptions} options
      * @memberof DefaultCsvFileWriter
      */
-    public constructor(options: DefaultCsvFileWriterOptions) {
-        this.options = options;
+    public constructor({
+        filename = async () => `${moment().format("YYYYMMDDHH00")}_metrics.csv`,
+        dir = async () => "./metrics",
+        writeHeaders = true,
+        createDir = true,
+        delimiter =  ",",
+        encoding =  "utf8",
+        lineEnding =  "\n",
+    }: DefaultCsvFileWriterOptions) {
+        this.options = {
+            createDir,
+            delimiter,
+            dir,
+            encoding,
+            filename,
+            lineEnding,
+            writeHeaders,
+        };
         this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
             task(callback);
         }, 1);

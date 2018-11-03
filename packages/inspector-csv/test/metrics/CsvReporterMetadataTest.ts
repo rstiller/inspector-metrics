@@ -6,7 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 import * as sinonChai from "sinon-chai";
-import { CsvMetricReporterOptions, ExportMode } from "../../lib/metrics";
+import { ExportMode } from "../../lib/metrics";
 import { AbstractReportTest } from "./AbstractReporterTest";
 
 chai.use(sinonChai);
@@ -18,10 +18,10 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with empty metric registry and metadata in columns, but no metadata assigned"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         await this.triggerReporting();
@@ -32,10 +32,10 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with metadata in one column"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter = this.registry.newCounter("test_counter");
         counter.setMetadata("type", "requests_per_second");
@@ -59,11 +59,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with metadata in one column and custom delimiter"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             metadataDelimiter: ":",
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter = this.registry.newCounter("test_counter");
         counter.setMetadata("type", "requests_per_second");
@@ -87,11 +87,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with metadata in separate columns"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter = this.registry.newCounter("test_counter");
 
@@ -106,11 +106,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with metadata in separate columns as superset of all metrics"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newCounter("test_counter_1");
         counter1.setMetadata("type", "requests_per_second");
@@ -150,12 +150,12 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check reporting with custom metadata prefix"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             metadataColumnPrefix: "m_",
             metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newCounter("test_counter_1");
         counter1.setMetadata("type", "requests_per_second");
@@ -195,12 +195,12 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
 
     @test
     public async "check metadata filtering in columns"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "metadata"],
             metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
             metadataFilter: async (metric, metadata, value) => metadata !== "type",
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newCounter("test_counter_1");
         counter1.setMetadata("type", "requests_per_second");

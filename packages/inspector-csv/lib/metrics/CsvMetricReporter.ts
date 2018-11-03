@@ -1,54 +1,23 @@
 import "source-map-support";
 
 import {
-    Clock,
     Counter,
     Gauge,
     Histogram,
     Meter,
     Metric,
     MetricRegistry,
-    MetricReporter,
+    MetricType,
     MILLISECOND,
     MonotoneCounter,
-    Scheduler,
+    ReportingContext,
+    ReportingResult,
+    ScheduledMetricReporter,
+    ScheduledMetricReporterOptions,
     StdClock,
-    Taggable,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 import * as moment from "moment-timezone";
-
-/**
- * Enumeration of all metric types.
- */
-export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
-
-/**
- * Utility interface to track report-timestamps and -values of metric instances.
- * This is directly linked to the minimum-reporting timeout, which ensures
- * that a certain value gets reported at least in a certain amount of time
- * e.g. every minute without the value being having changed. On the other hand
- * to not report values that haven't changed.
- *
- * @interface MetricEntry
- */
-interface MetricEntry {
-    /**
-     * timestamp of the latest report.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastReport: number;
-    /**
-     * value that got reported as latest.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastValue: number;
-}
 
 /**
  * Lists all possible column types.
@@ -69,15 +38,6 @@ export type Rows = Row[];
  * Type for a tag or metadata filter.
  */
 export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>;
-
-/**
- * Helper interface for tags.
- *
- * @interface Tags
- */
-interface Tags {
-    [key: string]: string;
-}
 
 /**
  * Helper interface for Fields.
@@ -131,236 +91,100 @@ export interface CsvFileWriter {
  * Options for {@link CsvMetricReporter}.
  *
  * @export
- * @class CsvMetricReporterOptions
+ * @interface CsvMetricReporterOptions
  */
-export class CsvMetricReporterOptions {
-
+export interface CsvMetricReporterOptions extends ScheduledMetricReporterOptions {
     /**
      * The writer used to store the rows.
      *
      * @type {CsvFileWriter}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly writer: CsvFileWriter;
-    /**
-     * Reporting interval.
-     *
-     * @type {number}
-     * @memberof CsvMetricReporterOptions
-     */
-    public readonly interval: number;
-    /**
-     * TimeUnit of the reporting interval.
-     *
-     * @type {TimeUnit}
-     * @memberof CsvMetricReporterOptions
-     */
-    public readonly unit: TimeUnit;
+    readonly writer?: CsvFileWriter;
     /**
      * Indicates that single quotes are used instead of double quotes.
      *
      * @type {boolean}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly useSingleQuotes: boolean;
+    readonly useSingleQuotes?: boolean;
     /**
      * ExportMode for tags.
      *
      * @type {ExportMode}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly tagExportMode: ExportMode;
+    readonly tagExportMode?: ExportMode;
     /**
      * ExportMode for metadata.
      *
      * @type {ExportMode}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly metadataExportMode: ExportMode;
+    readonly metadataExportMode?: ExportMode;
     /**
      * Prefix for tag columns if exported separately.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly tagColumnPrefix: string;
+    readonly tagColumnPrefix?: string;
     /**
      * Delimiter between the tags if exported in one column.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly tagDelimiter: string;
+    readonly tagDelimiter?: string;
     /**
      * Prefix for metadata columns if exported separately.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly metadataColumnPrefix: string;
+    readonly metadataColumnPrefix?: string;
     /**
      * Delimiter between the metadata if exported in one column.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly metadataDelimiter: string;
+    readonly metadataDelimiter?: string;
     /**
      * The columns to export.
      *
      * @type {ColumnType[]}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly columns: ColumnType[];
+    readonly columns?: ColumnType[];
     /**
      * The format for the date column.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly dateFormat: string;
+    readonly dateFormat?: string;
     /**
      * The timezone used to determine the date.
      *
      * @type {string}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly timezone: string;
+    readonly timezone?: string;
     /**
      * An async filter function used to filter out unwanted tags.
      *
      * @type {Filter}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly tagFilter: Filter;
+    readonly tagFilter?: Filter;
     /**
      * An async filter function used to filter out unwanted metadata.
      *
      * @type {Filter}
      * @memberof CsvMetricReporterOptions
      */
-    public readonly metadataFilter: Filter;
-
-    public constructor({
-        writer,
-        interval = 1000,
-        unit = MILLISECOND,
-        useSingleQuotes = false,
-        tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
-        metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
-        tagColumnPrefix = "tag_",
-        tagDelimiter = ";",
-        metadataColumnPrefix = "meta_",
-        metadataDelimiter = ";",
-        columns = [],
-        dateFormat = "YYYYMMDDHHmmss.SSSZ",
-        timezone = "UTC",
-        tagFilter = async () => true,
-        metadataFilter = async () => true,
-    }: {
-        /**
-         * The writer used to store the rows.
-         *
-         * @type {CsvFileWriter}
-         */
-        writer: CsvFileWriter,
-        /**
-         * Reporting interval.
-         *
-         * @type {number}
-         */
-        interval?: number,
-        /**
-         * TimeUnit of the reporting interval.
-         *
-         * @type {TimeUnit}
-         */
-        unit?: TimeUnit,
-        /**
-         * Indicates that single quotes are used instead of double quotes.
-         *
-         * @type {boolean}
-         */
-        useSingleQuotes?: boolean,
-        /**
-         * ExportMode for tags.
-         *
-         * @type {ExportMode}
-         */
-        tagExportMode?: ExportMode,
-        /**
-         * ExportMode for metadata.
-         *
-         * @type {ExportMode}
-         */
-        metadataExportMode?: ExportMode,
-        /**
-         * Prefix for tag columns if exported separately.
-         *
-         * @type {string}
-         */
-        tagColumnPrefix?: string,
-        /**
-         * Delimiter between the tags if exported in one column.
-         *
-         * @type {string}
-         */
-        tagDelimiter?: string,
-        /**
-         * Prefix for metadata columns if exported separately.
-         *
-         * @type {string}
-         */
-        metadataColumnPrefix?: string,
-        /**
-         * Delimiter between the metadata if exported in one column.
-         *
-         * @type {string}
-         */
-        metadataDelimiter?: string,
-        /**
-         * The columns to export.
-         *
-         * @type {ColumnType[]}
-         */
-        columns?: ColumnType[],
-        /**
-         * The format for the date column.
-         *
-         * @type {string}
-         */
-        dateFormat?: string,
-        /**
-         * The timezone used to determine the date.
-         *
-         * @type {string}
-         */
-        timezone?: string,
-        /**
-         * An async filter function used to filter out unwanted tags.
-         */
-        tagFilter?: (metric: Metric, tag: string, value: string) => Promise<boolean>,
-        /**
-         * An async filter function used to filter out unwanted metadata.
-         */
-        metadataFilter?: (metric: Metric, key: string, value: any) => Promise<boolean>,
-    }) {
-        this.writer = writer;
-        this.interval = interval;
-        this.unit = unit;
-        this.useSingleQuotes = useSingleQuotes;
-        this.tagExportMode = tagExportMode;
-        this.metadataExportMode = metadataExportMode;
-        this.tagColumnPrefix = tagColumnPrefix;
-        this.tagDelimiter = tagDelimiter;
-        this.metadataColumnPrefix = metadataColumnPrefix;
-        this.metadataDelimiter = metadataDelimiter;
-        this.columns = columns;
-        this.dateFormat = dateFormat;
-        this.timezone = timezone;
-        this.tagFilter = tagFilter;
-        this.metadataFilter = metadataFilter;
-    }
+    readonly metadataFilter?: Filter;
 }
 
 /**
@@ -368,67 +192,10 @@ export class CsvMetricReporterOptions {
  *
  * @export
  * @class CsvMetricReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter}
  */
-export class CsvMetricReporter extends MetricReporter {
+export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporterOptions, Fields> {
 
-    /**
-     * The options for this reporter.
-     *
-     * @private
-     * @type {CsvMetricReporterOptions}
-     * @memberof CsvMetricReporter
-     */
-    private readonly options: CsvMetricReporterOptions;
-    /**
-     * Common tags applied to each metric while reporting.
-     *
-     * @private
-     * @type {Map<string, string>}
-     * @memberof CsvMetricReporter
-     */
-    private tags: Map<string, string> = new Map();
-    /**
-     * The clock used to determine the state of change of a certain metric.
-     *
-     * @private
-     * @type {Clock}
-     * @memberof CsvMetricReporter
-     */
-    private clock: Clock;
-    /**
-     * Maximum amount of time in seconds a metric
-     * that has not changed it's value is not reported.
-     *
-     * @private
-     * @type {number}
-     * @memberof CsvMetricReporter
-     */
-    private minReportingTimeout: number;
-    /**
-     * Scheduler function.
-     *
-     * @private
-     * @type {Scheduler}
-     * @memberof CsvMetricReporter
-     */
-    private scheduler: Scheduler;
-    /**
-     * Timer reference.
-     *
-     * @private
-     * @type {NodeJS.Timer}
-     * @memberof CsvMetricReporter
-     */
-    private timer: NodeJS.Timer;
-    /**
-     * Helper Map for holding the state / last value of a metric.
-     *
-     * @private
-     * @type {Map<number, MetricEntry>}
-     * @memberof CsvMetricReporter
-     */
-    private metricStates: Map<number, MetricEntry> = new Map();
     /**
      * Header row.
      *
@@ -457,47 +224,50 @@ export class CsvMetricReporter extends MetricReporter {
     /**
      * Creates an instance of CsvMetricReporter.
      *
-     * @param {CsvMetricReporterOptions} options
-     * @param {Map<string, string>} [tags=new Map()]
-     * @param {Clock} [clock=new StdClock()]
-     * @param {number} [minReportingTimeout=1]
-     *          timeout in minutes a metric need to be included in the report without having changed
-     * @param {Scheduler} [scheduler=setInterval]
      * @memberof CsvMetricReporter
      */
-    public constructor(
-        options: CsvMetricReporterOptions,
-        tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock(),
+    public constructor({
+        writer,
+        useSingleQuotes = false,
+        tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        tagColumnPrefix = "tag_",
+        tagDelimiter = ";",
+        metadataColumnPrefix = "meta_",
+        metadataDelimiter = ";",
+        columns = [],
+        dateFormat = "YYYYMMDDHHmmss.SSSZ",
+        timezone = "UTC",
+        tagFilter = async () => true,
+        metadataFilter = async () => true,
+        reportInterval = 1000,
+        unit = MILLISECOND,
+        clock = new StdClock(),
+        scheduler = setInterval,
         minReportingTimeout = 1,
-        scheduler: Scheduler = setInterval) {
-        super();
-
-        this.options = options;
-        this.tags = tags;
-        this.clock = clock;
-        this.minReportingTimeout = minReportingTimeout;
-        this.scheduler = scheduler;
-    }
-
-    /**
-     * Gets back all tags.
-     *
-     * @returns {Map<string, string>}
-     * @memberof CsvMetricReporter
-     */
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    /**
-     * Sets the common tags.
-     *
-     * @param {Map<string, string>} tags
-     * @memberof CsvMetricReporter
-     */
-    public setTags(tags: Map<string, string>): void {
-        this.tags = tags;
+        tags = new Map(),
+    }: CsvMetricReporterOptions) {
+        super({
+            clock,
+            columns,
+            dateFormat,
+            metadataColumnPrefix,
+            metadataDelimiter,
+            metadataExportMode,
+            metadataFilter,
+            minReportingTimeout,
+            reportInterval,
+            scheduler,
+            tagColumnPrefix,
+            tagDelimiter,
+            tagExportMode,
+            tagFilter,
+            tags,
+            timezone,
+            unit,
+            useSingleQuotes,
+            writer,
+        });
     }
 
     /**
@@ -506,39 +276,176 @@ export class CsvMetricReporter extends MetricReporter {
      * in the application need to be set / known, otherwise it cannot be
      * reported.
      *
-     * @returns {Promise<void>}
      * @memberof CsvMetricReporter
      */
-    public async start(): Promise<void> {
-        const interval: number = this.options.unit.convertTo(this.options.interval, MILLISECOND);
+    public async start() {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             this.header = await this.buildHeaders();
-        }
-        this.timer = this.scheduler(() => this.report(), interval);
-    }
-
-    /**
-     * Stops the reporting.
-     *
-     * @memberof CsvMetricReporter
-     */
-    public stop(): void {
-        if (this.timer) {
-            this.timer.unref();
+            await super.start();
         }
     }
 
     /**
-     * Calls the init method of the file writer and reports all metrics.
+     * Calls the init method of the writer instance.
      *
-     * @private
+     * @protected
      * @memberof CsvMetricReporter
      */
-    private async report() {
-        if (this.metricRegistries && this.metricRegistries.length > 0) {
-            await this.options.writer.init(this.header);
-            this.metricRegistries.forEach((registry) => this.reportMetricRegistry(registry));
+    protected async beforeReport() {
+        await this.options.writer.init(this.header);
+    }
+
+    /**
+     * Writes the reporting results to the writer instance.
+     *
+     * @protected
+     * @param {MetricRegistry} registry
+     * @param {Date} date
+     * @param {MetricType} type
+     * @param {Array<ReportingResult<any, Fields>>} results
+     * @memberof CsvMetricReporter
+     */
+    protected async handleResults(
+        registry: MetricRegistry,
+        date: Date,
+        type: MetricType,
+        results: Array<ReportingResult<any, Fields>>) {
+
+        const dateStr = moment.tz(date, this.options.timezone).format(this.options.dateFormat);
+        for (const result of results) {
+            const fields = result.result;
+            const metric = result.metric;
+            if (fields) {
+                const rows: Rows = [];
+                for (const field of Object.keys(fields)) {
+                    const row = this.buildRow(registry, dateStr, metric, type, field, fields[field]);
+                    rows.push(row);
+                }
+                if (rows.length > 0) {
+                    await this.writeRows(metric, rows, type);
+                }
+            }
         }
+    }
+
+    /**
+     * Gathers the fields for a counter metric.
+     *
+     * @protected
+     * @param {(MonotoneCounter | Counter)} counter
+     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
+    protected reportCounter(
+        counter: MonotoneCounter | Counter, ctx: ReportingContext<MonotoneCounter | Counter>): Fields {
+        return {
+            count: `${counter.getCount()}`,
+        };
+    }
+
+    /**
+     * Gathers the fields for a gauge metric.
+     *
+     * @protected
+     * @param {Gauge<any>} gauge
+     * @param {ReportingContext<Gauge<any>>} ctx
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
+    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): Fields {
+        return {
+            value: `${gauge.getValue()}`,
+        };
+    }
+
+    /**
+     * Gathers the fields for a histogram metric.
+     *
+     * @protected
+     * @param {Histogram} histogram
+     * @param {ReportingContext<Histogram>} ctx
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
+    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): Fields {
+        const snapshot = histogram.getSnapshot();
+        const bucketFields: Fields = {};
+        histogram
+            .getCounts()
+            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
+        bucketFields["bucket_inf"] = `${this.getNumber(histogram.getCount())}`;
+        return {
+            ...bucketFields,
+            count: `${this.getNumber(histogram.getCount())}`,
+            max: `${this.getNumber(snapshot.getMax())}`,
+            mean: `${this.getNumber(snapshot.getMean())}`,
+            min: `${this.getNumber(snapshot.getMin())}`,
+            p50: `${this.getNumber(snapshot.getMedian())}`,
+            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
+            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
+            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
+            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
+            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
+            stddev: `${this.getNumber(snapshot.getStdDev())}`,
+            sum: histogram.getSum().toString(),
+        };
+    }
+
+    /**
+     * Gathers the fields for a meter metric.
+     *
+     * @protected
+     * @param {Meter} meter
+     * @param {ReportingContext<Meter>} ctx
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
+    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): Fields {
+        return {
+            count: `${this.getNumber(meter.getCount())}`,
+            m15_rate: `${this.getNumber(meter.get15MinuteRate())}`,
+            m1_rate: `${this.getNumber(meter.get1MinuteRate())}`,
+            m5_rate: `${this.getNumber(meter.get5MinuteRate())}`,
+            mean_rate: `${this.getNumber(meter.getMeanRate())}`,
+        };
+    }
+
+    /**
+     * Gathers the fields for a timer metric.
+     *
+     * @protected
+     * @param {Timer} timer
+     * @param {ReportingContext<Timer>} ctx
+     * @returns {Fields}
+     * @memberof CsvMetricReporter
+     */
+    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): Fields {
+        const snapshot = timer.getSnapshot();
+        const bucketFields: Fields = {};
+        timer
+            .getCounts()
+            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
+        bucketFields["bucket_inf"] = `${this.getNumber(timer.getCount())}`;
+        return {
+            ...bucketFields,
+            count: `${timer.getCount() || 0}`,
+            m15_rate: `${this.getNumber(timer.get15MinuteRate())}`,
+            m1_rate: `${this.getNumber(timer.get1MinuteRate())}`,
+            m5_rate: `${this.getNumber(timer.get5MinuteRate())}`,
+            max: `${this.getNumber(snapshot.getMax())}`,
+            mean: `${this.getNumber(snapshot.getMean())}`,
+            mean_rate: `${this.getNumber(timer.getMeanRate())}`,
+            min: `${this.getNumber(snapshot.getMin())}`,
+            p50: `${this.getNumber(snapshot.getMedian())}`,
+            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
+            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
+            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
+            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
+            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
+            stddev: `${this.getNumber(snapshot.getStdDev())}`,
+            sum: timer.getSum().toString(),
+        };
     }
 
     /**
@@ -628,91 +535,19 @@ export class CsvMetricReporter extends MetricReporter {
      */
     private getAllTagKeys(): Set<string> {
         const tags = new Set();
-        this.tags.forEach((value, tag) => tags.add(tag));
+        this.options.tags.forEach((value, tag) => tags.add(tag));
         this.metricRegistries
-            .map((registry) => registry.getMetricList())
-            .map((metrics) => metrics.map((metric) => this.buildTags(metric)))
+            .map((registry) => ({
+                metrics: registry.getMetricList(),
+                registry,
+            }))
+            .map((result) => result.metrics.map((metric) => this.buildTags(result.registry, metric)))
             .forEach((metricTagsArray) => {
                 metricTagsArray.forEach((metricTags) => {
                     Object.keys(metricTags).forEach((tag) => tags.add(tag));
                 });
             });
         return tags;
-    }
-
-    /**
-     * Triggers the reporting for the given {@link MetricRegistry}.
-     *
-     * @private
-     * @param {MetricRegistry} registry
-     * @memberof CsvMetricReporter
-     */
-    private reportMetricRegistry(registry: MetricRegistry): void {
-        const date: Date = new Date(this.clock.time().milliseconds);
-        const now: string = moment.tz(date, this.options.timezone).format(this.options.dateFormat);
-
-        this.reportMetrics(registry.getMonotoneCounterList(), date, now, "counter",
-            (counter: MonotoneCounter) => this.reportCounter(counter),
-            (counter: MonotoneCounter) => counter.getCount());
-        this.reportMetrics(registry.getCounterList(), date, now, "counter",
-            (counter: Counter) => this.reportCounter(counter),
-            (counter: Counter) => counter.getCount());
-        this.reportMetrics(registry.getGaugeList(), date, now, "gauge",
-            (gauge: Gauge<any>) => this.reportGauge(gauge),
-            (gauge: Gauge<any>) => gauge.getValue());
-        this.reportMetrics(registry.getHistogramList(), date, now, "histogram",
-            (histogram: Histogram) => this.reportHistogram(histogram),
-            (histogram: Histogram) => histogram.getCount());
-        this.reportMetrics(registry.getMeterList(), date, now, "meter",
-            (meter: Meter) => this.reportMeter(meter),
-            (meter: Meter) => meter.getCount());
-        this.reportMetrics(registry.getTimerList(), date, now, "timer",
-            (timer: Timer) => this.reportTimer(timer),
-            (timer: Timer) => timer.getCount());
-    }
-
-    /**
-     * Builds and writes the rows of the given metrics of the given type.
-     *
-     * @private
-     * @template T
-     * @param {T[]} metrics
-     * @param {Date} date
-     * @param {string} dateStr
-     * @param {MetricType} type
-     * @param {(metric: Metric) => Fields} reportFunction
-     * @param {(metric: Metric) => number} lastModifiedFunction
-     * @memberof CsvMetricReporter
-     */
-    private reportMetrics<T extends Metric>(
-        metrics: T[],
-        date: Date,
-        dateStr: string,
-        type: MetricType,
-        reportFunction: (metric: Metric) => Fields,
-        lastModifiedFunction: (metric: Metric) => number): void {
-
-        metrics.forEach((metric) => {
-            const metricId = (metric as any).id;
-            let changed = true;
-            if (metricId) {
-                changed = this.hasChanged(metricId, lastModifiedFunction(metric), date);
-            }
-
-            if (changed) {
-                const fields = reportFunction(metric);
-                if (fields) {
-                    const rows: Rows = [];
-                    for (const field of Object.keys(fields)) {
-                        const row = this.buildRow(dateStr, metric, type, field, fields[field]);
-                        rows.push(row);
-                    }
-                    if (rows.length > 0) {
-                        this.writeRows(metric, rows, type);
-                    }
-                }
-            }
-        });
     }
 
     /**
@@ -729,6 +564,7 @@ export class CsvMetricReporter extends MetricReporter {
      * @memberof CsvMetricReporter
      */
     private buildRow<T extends Metric>(
+        registry: MetricRegistry,
         dateStr: string,
         metric: T,
         type: MetricType,
@@ -737,7 +573,7 @@ export class CsvMetricReporter extends MetricReporter {
 
         const quote = this.options.useSingleQuotes === true ? "'" : "\"";
         const row: Row = [];
-        const tags = this.buildTags(metric);
+        const tags = this.buildTags(registry, metric);
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
@@ -807,151 +643,6 @@ export class CsvMetricReporter extends MetricReporter {
     }
 
     /**
-     * Determines if the value of a metric has changed - always true if the minimum
-     * reporting timeout is elapsed.
-     *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {Date} date
-     * @returns {boolean}
-     * @memberof CsvMetricReporter
-     */
-    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
-        let changed = true;
-        let metricEntry = {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry = this.metricStates.get(metricId);
-            changed = metricEntry.lastValue !== lastValue;
-            if (!changed) {
-                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-            }
-        }
-        if (changed) {
-            metricEntry.lastReport = date.getTime();
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
-    }
-
-    /**
-     * Gathers the fields for a counter metric.
-     *
-     * @private
-     * @param {MonotoneCounter} counter
-     * @returns {Fields}
-     * @memberof CsvMetricReporter
-     */
-    private reportCounter(counter: MonotoneCounter): Fields {
-        return {
-            count: `${counter.getCount()}`,
-        };
-    }
-
-    /**
-     * Gathers the fields for a gauge metric.
-     *
-     * @private
-     * @param {Gauge<any>} gauge
-     * @returns {Fields}
-     * @memberof CsvMetricReporter
-     */
-    private reportGauge(gauge: Gauge<any>): Fields {
-        return {
-            value: `${gauge.getValue()}`,
-        };
-    }
-
-    /**
-     * Gathers the fields for a histogram metric.
-     *
-     * @private
-     * @param {Histogram} histogram
-     * @returns {Fields}
-     * @memberof CsvMetricReporter
-     */
-    private reportHistogram(histogram: Histogram): Fields {
-        const snapshot = histogram.getSnapshot();
-        const bucketFields: Fields = {};
-        histogram
-            .getCounts()
-            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
-        bucketFields["bucket_inf"] = `${this.getNumber(histogram.getCount())}`;
-        return {
-            ...bucketFields,
-            count: `${this.getNumber(histogram.getCount())}`,
-            max: `${this.getNumber(snapshot.getMax())}`,
-            mean: `${this.getNumber(snapshot.getMean())}`,
-            min: `${this.getNumber(snapshot.getMin())}`,
-            p50: `${this.getNumber(snapshot.getMedian())}`,
-            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
-            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
-            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
-            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
-            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
-            stddev: `${this.getNumber(snapshot.getStdDev())}`,
-            sum: histogram.getSum().toString(),
-        };
-    }
-
-    /**
-     * Gathers the fields for a meter metric.
-     *
-     * @private
-     * @param {Meter} meter
-     * @returns {Fields}
-     * @memberof CsvMetricReporter
-     */
-    private reportMeter(meter: Meter): Fields {
-        return {
-            count: `${this.getNumber(meter.getCount())}`,
-            m15_rate: `${this.getNumber(meter.get15MinuteRate())}`,
-            m1_rate: `${this.getNumber(meter.get1MinuteRate())}`,
-            m5_rate: `${this.getNumber(meter.get5MinuteRate())}`,
-            mean_rate: `${this.getNumber(meter.getMeanRate())}`,
-        };
-    }
-
-    /**
-     * Gathers the fields for a timer metric.
-     *
-     * @private
-     * @param {Timer} timer
-     * @returns {Fields}
-     * @memberof CsvMetricReporter
-     */
-    private reportTimer(timer: Timer): Fields {
-        const snapshot = timer.getSnapshot();
-        const bucketFields: Fields = {};
-        timer
-            .getCounts()
-            .forEach((value, bucket) => bucketFields[`bucket_${bucket}`] = `${value}`);
-        bucketFields["bucket_inf"] = `${this.getNumber(timer.getCount())}`;
-        return {
-            ...bucketFields,
-            count: `${timer.getCount() || 0}`,
-            m15_rate: `${this.getNumber(timer.get15MinuteRate())}`,
-            m1_rate: `${this.getNumber(timer.get1MinuteRate())}`,
-            m5_rate: `${this.getNumber(timer.get5MinuteRate())}`,
-            max: `${this.getNumber(snapshot.getMax())}`,
-            mean: `${this.getNumber(snapshot.getMean())}`,
-            mean_rate: `${this.getNumber(timer.getMeanRate())}`,
-            min: `${this.getNumber(snapshot.getMin())}`,
-            p50: `${this.getNumber(snapshot.getMedian())}`,
-            p75: `${this.getNumber(snapshot.get75thPercentile())}`,
-            p95: `${this.getNumber(snapshot.get95thPercentile())}`,
-            p98: `${this.getNumber(snapshot.get98thPercentile())}`,
-            p99: `${this.getNumber(snapshot.get99thPercentile())}`,
-            p999: `${this.getNumber(snapshot.get999thPercentile())}`,
-            stddev: `${this.getNumber(snapshot.getStdDev())}`,
-            sum: timer.getSum().toString(),
-        };
-    }
-
-    /**
      * Writes the rows by calling the corrsponding {@link CsvFileWriter}.
      *
      * @private
@@ -961,40 +652,10 @@ export class CsvMetricReporter extends MetricReporter {
      * @param {MetricType} type
      * @memberof CsvMetricReporter
      */
-    private writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType): void {
+    private async writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType) {
         for (const row of rows) {
-            this.options.writer.writeRow(metric, row);
+            await this.options.writer.writeRow(metric, row);
         }
-    }
-
-    /**
-     * Combines the common tags of this reporter instance with the tags from the metric.
-     *
-     * @private
-     * @param {Taggable} taggable
-     * @returns {Tags}
-     * @memberof CsvMetricReporter
-     */
-    private buildTags(taggable: Taggable): Tags {
-        const tags: { [x: string]: string } = {};
-        this.tags.forEach((tag, key) => tags[key] = tag);
-        taggable.getTags().forEach((tag, key) => tags[key] = tag);
-        return tags;
-    }
-
-    /**
-     * Gets the value of the specified number or zero.
-     *
-     * @private
-     * @param {number} value
-     * @returns {number}
-     * @memberof CsvMetricReporter
-     */
-    private getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
     }
 
 }

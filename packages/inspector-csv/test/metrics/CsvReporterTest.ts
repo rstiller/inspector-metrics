@@ -7,7 +7,6 @@ import * as chai from "chai";
 import { Buckets, NANOSECOND, SimpleGauge } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import * as sinonChai from "sinon-chai";
-import { CsvMetricReporterOptions } from "../../lib/metrics";
 import { AbstractReportTest } from "./AbstractReporterTest";
 
 chai.use(sinonChai);
@@ -23,6 +22,7 @@ export class CsvReporterTest extends AbstractReportTest {
 
         await this.triggerReporting();
 
+        expect(this.internalCallback).to.not.exist;
         expect(this.initSpy).to.have.not.been.called;
         expect(this.writeRowSpy).to.have.not.been.called;
     }
@@ -37,10 +37,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check reporting with empty metric registry and some columns"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         await this.triggerReporting();
@@ -51,10 +51,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check encoding of description with double quotes"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "description"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter = this.registry.newCounter("test_counter", "test_group", "desc: '\"abc\"'");
 
@@ -79,11 +79,11 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check encoding of description with single quotes"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value", "description"],
             useSingleQuotes: true,
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter = this.registry.newCounter("test_counter", "test_group", "desc: '\"abc\"'");
 
@@ -108,10 +108,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of counter"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newCounter("test_counter_1");
         const counter2 = this.registry.newCounter("test_counter_2");
@@ -136,10 +136,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of monotone counter"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const counter1 = this.registry.newMonotoneCounter("test_counter_1");
         const counter2 = this.registry.newMonotoneCounter("test_counter_2");
@@ -164,10 +164,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of gauge"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const gauge1 = new SimpleGauge("test_gauge_1");
         const gauge2 = new SimpleGauge("test_gauge_2");
@@ -194,10 +194,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of histogram"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const histogram1 = this.registry
             .newHistogram("test_histo_1", "group123", undefined, "", Buckets.linear(100, 100, 3));
@@ -285,10 +285,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of hdr histogram"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const histogram1 = this.registry
             .newHdrHistogram("test_histo_1", 92, 256, 3, "group123", "", Buckets.linear(100, 100, 3));
@@ -376,10 +376,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of meter"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const meter1 = this.registry
             .newMeter("test_meter_1", "group123", undefined, undefined, "");
@@ -421,10 +421,10 @@ export class CsvReporterTest extends AbstractReportTest {
 
     @test
     public async "check fields of timer"() {
-        this.reporter = this.newReporter(new CsvMetricReporterOptions({
+        this.reporter = this.newReporter({
             columns: ["date", "group", "name", "field", "value"],
             writer: this.writer,
-        }));
+        });
         this.reporter.addMetricRegistry(this.registry);
         const timer1 = this.registry
             .newTimer("test_timer_1", "group123", undefined, undefined, "", Buckets.linear(100, 100, 3));

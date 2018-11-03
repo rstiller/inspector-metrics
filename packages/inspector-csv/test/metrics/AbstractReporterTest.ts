@@ -5,11 +5,17 @@ import "source-map-support/register";
 
 import * as chai from "chai";
 import {
-    Metric, MetricRegistry,
+    Metric, MetricRegistry, MILLISECOND,
 } from "inspector-metrics";
 import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
-import { CsvFileWriter, CsvMetricReporter, CsvMetricReporterOptions, Row } from "../../lib/metrics";
+import {
+    CsvFileWriter,
+    CsvMetricReporter,
+    CsvMetricReporterOptions,
+    ExportMode,
+    Row,
+} from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
 
 chai.use(sinonChai);
@@ -18,7 +24,7 @@ const expect = chai.expect;
 
 export class AbstractReportTest {
 
-    protected internalCallback: () => void;
+    protected internalCallback: () => Promise<any>;
     protected clock: MockedClock = new MockedClock();
     protected registry: MetricRegistry;
     protected reporter: CsvMetricReporter;
@@ -36,14 +42,54 @@ export class AbstractReportTest {
             init: this.initSpy,
             writeRow: this.writeRowSpy,
         };
-        this.reporter = this.newReporter();
+        this.reporter = this.newReporter({});
         this.reporter.addMetricRegistry(this.registry);
     }
 
-    protected newReporter(options = new CsvMetricReporterOptions({ writer: this.writer })): CsvMetricReporter {
-        return new CsvMetricReporter(options, new Map(), this.clock, 1, (task, interval) => {
+    protected newReporter({
+        writer = this.writer,
+        useSingleQuotes = false,
+        tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+        tagColumnPrefix = "tag_",
+        tagDelimiter = ";",
+        metadataColumnPrefix = "meta_",
+        metadataDelimiter = ";",
+        columns = [],
+        dateFormat = "YYYYMMDDHHmmss.SSSZ",
+        timezone = "UTC",
+        tagFilter = async () => true,
+        metadataFilter = async () => true,
+        reportInterval = 1000,
+        unit = MILLISECOND,
+        clock = this.clock,
+        scheduler = (task, interval) => {
             this.internalCallback = task;
             return null;
+        },
+        minReportingTimeout = 1,
+        tags = new Map(),
+    }: CsvMetricReporterOptions): CsvMetricReporter {
+        return new CsvMetricReporter({
+            clock,
+            columns,
+            dateFormat,
+            metadataColumnPrefix,
+            metadataDelimiter,
+            metadataExportMode,
+            metadataFilter,
+            minReportingTimeout,
+            reportInterval,
+            scheduler,
+            tagColumnPrefix,
+            tagDelimiter,
+            tagExportMode,
+            tagFilter,
+            tags,
+            timezone,
+            unit,
+            useSingleQuotes,
+            writer,
         });
     }
 
@@ -54,9 +100,9 @@ export class AbstractReportTest {
 
         await this.reporter.start();
 
-        expect(this.internalCallback).to.exist;
-
-        await this.internalCallback();
+        if (this.internalCallback) {
+            await this.internalCallback();
+        }
     }
 
     protected verifyInitCall(columns: string[], call = 0) {
@@ -73,4 +119,5 @@ export class AbstractReportTest {
         expect(calls[call].args[0]).to.be.equal(metric);
         expect(calls[call].args[1]).to.deep.equal(row);
     }
+
 }
