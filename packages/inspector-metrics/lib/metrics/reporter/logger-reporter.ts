@@ -1,17 +1,17 @@
 import "source-map-support/register";
 
-import { Clock, StdClock } from "../clock";
+import { StdClock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
 import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
 import { MetricRegistry } from "../metric-registry";
-import { MILLISECOND, TimeUnit } from "../time-unit";
+import { MILLISECOND } from "../time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
 import { ReportingContext, ReportingResult } from "./metric-reporter";
 import { MetricType } from "./metric-type";
-import { ScheduledMetricReporter, ScheduledMetricReporterOptions, Scheduler } from "./scheduled-reporter";
+import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
 /**
  * Helper interface to abstract a log-line.
@@ -66,7 +66,7 @@ export interface LoggerReporterOptions extends ScheduledMetricReporterOptions {
      * @type {Logger}
      * @memberof LoggerReporterOptions
      */
-    log: Logger;
+    log?: Logger;
 }
 
 /**
@@ -100,43 +100,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-    }: {
-        /**
-         * The logger instance used to report metrics.
-         * @type {Logger}
-         */
-        log?: Logger,
-        /**
-         * Reporting interval in the time-unit of {@link #unit}.
-         * @type {number}
-         */
-        reportInterval?: number;
-        /**
-         * The time-unit of the reporting interval.
-         * @type {TimeUnit}
-         */
-        unit?: TimeUnit;
-        /**
-         * The clock instance used determine the current time.
-         * @type {Clock}
-         */
-        clock?: Clock;
-        /**
-         * The scheduler function used to trigger reporting.
-         * @type {Scheduler}
-         */
-        scheduler?: Scheduler;
-        /**
-         * The timeout in which a metrics gets reported wether it's value has changed or not.
-         * @type {number}
-         */
-        minReportingTimeout?: number;
-        /**
-         * Common tags for this reporter instance.
-         * @type {Map<string, string>}
-         */
-        tags?: Map<string, string>;
-    }) {
+    }: LoggerReporterOptions) {
         super({
             clock,
             log,
