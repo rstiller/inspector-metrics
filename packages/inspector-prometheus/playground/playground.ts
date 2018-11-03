@@ -3,7 +3,6 @@
 import * as Hapi from "hapi";
 import { MetricRegistry, Timer } from "inspector-metrics";
 import { PrometheusMetricReporter, PushgatewayMetricReporter } from "../lib/metrics";
-import { PushgatewayReporterOptions } from "../lib/metrics/";
 
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");
@@ -17,7 +16,7 @@ requests1.setTag("host", "127.0.0.1");
 requests2.setTag("host", "127.0.0.2");
 requests3.setTag("host", "127.0.0.3");
 
-const reporter = new PrometheusMetricReporter();
+const reporter = new PrometheusMetricReporter({});
 const tags = new Map();
 
 tags.set("app_version", "1.0.0");
@@ -26,12 +25,13 @@ tags.set("app_id", "test_env_playground");
 reporter.setTags(tags);
 reporter.addMetricRegistry(registry);
 
-const pushReporter = new PushgatewayMetricReporter(reporter, new PushgatewayReporterOptions(
-    "localhost",
-    9091,
-    "pushgateway",
-    "127.0.0.4",
-));
+const pushReporter = new PushgatewayMetricReporter({
+    host: "localhost",
+    instance: "127.0.0.4",
+    job: "pushgateway",
+    port: 9091,
+    reporter,
+});
 
 pushReporter.start();
 

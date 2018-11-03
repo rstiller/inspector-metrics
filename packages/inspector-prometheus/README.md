@@ -42,7 +42,7 @@ import {
 // contains all metrics
 const registry = new MetricRegistry();
 // exposes the metrics
-const reporter = new PrometheusMetricReporter();
+const reporter = new PrometheusMetricReporter({});
 
 // register the registry within the reporter
 reporter.addMetricRegistry(registry);
@@ -112,14 +112,13 @@ requests_sum{app_version="1.0.0",host="127.0.0.3"} 283998208
 ```typescript
 import {
     PrometheusMetricReporter,
-    PrometheusReporterOptions,
 } from "inspector-prometheus";
 
-const reporter = new PrometheusMetricReporter(new PrometheusReporterOptions(
-    true, // includeTimestamp - default is false
-    true, // emitComments - default is true
-    false, // useUntyped - default is false
-));
+const reporter = new PrometheusMetricReporter({
+    includeTimestamp: true,
+    emitComments: true,
+    useUntyped: false,
+});
 ```
 
 ## report metrics with pushgateway
@@ -130,28 +129,45 @@ import ...; // like in the example above
 import {
     PrometheusMetricReporter,
     PushgatewayMetricReporter,
-    PushgatewayReporterOptions,
 } from "inspector-prometheus";
 
 // contains all metrics
 const registry = new MetricRegistry();
 // exposes the metrics
-const reporter = new PrometheusMetricReporter();
+const reporter = new PrometheusMetricReporter({});
 
 // register the registry within the reporter
 reporter.addMetricRegistry(registry);
 
-const pushReporter = new PushgatewayMetricReporter(
+const pushReporter = new PushgatewayMetricReporter({
     reporter,
-    new PushgatewayReporterOptions(
-        "localhost", // assuming the pushgateway is running on localhost
-        9091, // standard port for pushgateway
-        "pushgateway", // id of the job
-        "127.0.0.4", // id of the instance
-    ));
+
+    host: "localhost",
+    port: 9091,
+    job: "pushgateway",
+    instance: "127.0.0.4",
+});
 
 // start reporting
 pushReporter.start();
+```
+
+## local dev
+
+### compile & test with different nodejs versions
+
+build docker images:  
+```bash
+docker-compose build
+```
+
+run tests:  
+```bash
+docker-compose run node6
+docker-compose run node7
+docker-compose run node8
+docker-compose run node9
+docker-compose run node10
 ```
 
 ## License

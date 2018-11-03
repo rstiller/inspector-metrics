@@ -1,0 +1,34 @@
+# Changelog
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+### Added
+- CHANGELOG
+- compile and test script for different node versions
+
+### Changed
+- added nodejs 11 to travis.yml
+- updated dependencies
+- use inspector-metrics@1.13.0
+- adapted new MetricLogger implementation
+
+## [1.0.0] - 2018-10-04
+
+Initial release.
+
+### Added
+- project setup
+    - README
+    - typescript config
+    - lint config
+- licensed under MIT license
+- basic prometheus / pushgateway reporter
+- mocha testing (with chai, sinon)
+- NYC code-coverage config
+- added editorconfig file
+- travis.yml for nodejs 6, 7, 8, 9, 10
+- basic playground setup
+- use inspector-metrics@1.11.0

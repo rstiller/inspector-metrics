@@ -3,7 +3,6 @@ import "source-map-support";
 import {
     BucketCounting,
     Buckets,
-    Clock,
     Counter,
     Gauge,
     Histogram,
@@ -11,45 +10,41 @@ import {
     Metric,
     MetricRegistry,
     MetricReporter,
-    MILLISECOND,
-    MINUTE,
+    MetricReporterOptions,
+    MetricSetReportContext,
+    MetricType,
     MonotoneCounter,
+    OverallReportContext,
+    ReportingResult,
     Sampling,
     StdClock,
     Taggable,
+    Tags,
     Timer,
 } from "inspector-metrics";
 
 /**
- * Utility interface to track report-timestamps and -values of metric instances.
- * This is directly linked to the minimum-reporting timeout, which ensures
- * that a certain value gets reported at least in a certain amount of time
- * e.g. every minute without the value being having changed. On the other hand
- * to not report values that haven't changed.
- *
- * @interface MetricEntry
- */
-interface MetricEntry {
-    /**
-     * timestamp of the latest report.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastReport: number;
-    /**
-     * value that got reported as latest.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastValue: number;
-}
-
-/**
  * Enumeration used to determine valid metric types of prometheus.
  */
-type MetricType = "counter" | "gauge" | "histogram" | "summary" | "untyped";
+type PrometheusMetricType = "counter" | "gauge" | "histogram" | "summary" | "untyped";
+
+/**
+ * Helper interface for reported fields.
+ *
+ * @interface PrometheusFields
+ */
+interface PrometheusFields { [key: string]: number | string; }
+
+/**
+ * Helper interface for a report result.
+ *
+ * @interface PrometheusMetricResult
+ */
+interface PrometheusMetricResult {
+    readonly type: PrometheusMetricType;
+    readonly fields: PrometheusFields;
+    readonly canBeReported: boolean;
+}
 
 /**
  * List of values between 0 and 1 representing the percent boundaries for reporting.
@@ -93,25 +88,30 @@ export class Percentiles {
  * Configuration object for {@link PrometheusMetricReporter}.
  *
  * @export
- * @class PrometheusReporterOptions
+ * @interface PrometheusReporterOptions
  */
-export class PrometheusReporterOptions {
-
+export interface PrometheusReporterOptions extends MetricReporterOptions {
     /**
-     * Creates an instance of PrometheusReporterOptions.
+     * indicates if UTC converted timestamps should be appended to each metric data
      *
-     * @param {boolean} [includeTimestamp=false]
-     *  indicates if UTC converted timestamps should be appended to each metric data
-     * @param {boolean} [emitComments=true] indicates if comments like HELP and TYPE should be emitted
-     * @param {boolean} [useUntyped=false] indicates if the untyped should always be used
+     * @type {boolean}
      * @memberof PrometheusReporterOptions
      */
-    constructor(
-        public includeTimestamp: boolean = false,
-        public emitComments: boolean = true,
-        public useUntyped: boolean = false,
-    ) {}
-
+    readonly includeTimestamp?: boolean;
+    /**
+     * indicates if comments like HELP and TYPE should be emitted
+     *
+     * @type {boolean}
+     * @memberof PrometheusReporterOptions
+     */
+    readonly emitComments?: boolean;
+    /**
+     * indicates if the untyped should always be used
+     *
+     * @type {boolean}
+     * @memberof PrometheusReporterOptions
+     */
+    readonly useUntyped?: boolean;
 }
 
 /**
@@ -126,7 +126,7 @@ export class PrometheusReporterOptions {
  * @class PrometheusMetricReporter
  * @extends {MetricReporter}
  */
-export class PrometheusMetricReporter extends MetricReporter {
+export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterOptions, PrometheusMetricResult> {
 
     /**
      * Used to replace unsupported characters from label name.
@@ -188,132 +188,71 @@ export class PrometheusMetricReporter extends MetricReporter {
     }
 
     /**
-     * Configuration for the rendering of the metric report.
-     *
-     * @private
-     * @type {PrometheusReporterOptions}
-     * @memberof PrometheusMetricReporter
-     */
-    private options: PrometheusReporterOptions;
-    /**
-     * Clack instance used to determine the time for reports and minimal-reporting feature.
-     *
-     * @private
-     * @type {Clock}
-     * @memberof PrometheusMetricReporter
-     */
-    private clock: Clock;
-    /**
-     * Timeout in {@link MINUTE}s in which a certain metric needs to be included in the metric report.
-     *
-     * @private
-     * @type {number}
-     * @memberof PrometheusMetricReporter
-     */
-    private minReportingTimeout: number;
-    /**
-     * Common tags for this reporter.
-     *
-     * @private
-     * @type {Map<string, string>}
-     * @memberof PrometheusMetricReporter
-     */
-    private tags: Map<string, string>;
-    /**
-     * Keeps track of the reporting states for each metric.
-     *
-     * @private
-     * @type {Map<number, MetricEntry>}
-     * @memberof PrometheusMetricReporter
-     */
-    private metricStates: Map<number, MetricEntry> = new Map();
-    /**
      * The prometheus counter type string.
      *
      * @private
-     * @type {MetricType}
+     * @type {PrometheusMetricType}
      * @memberof PrometheusMetricReporter
      */
-    private counterType: MetricType = "counter";
+    private counterType: PrometheusMetricType = "counter";
     /**
      * The prometheus gauge type string.
      *
      * @private
-     * @type {MetricType}
+     * @type {PrometheusMetricType}
      * @memberof PrometheusMetricReporter
      */
-    private gaugeType: MetricType = "gauge";
+    private gaugeType: PrometheusMetricType = "gauge";
     /**
      * The prometheus histogram type string.
      *
      * @private
-     * @type {MetricType}
+     * @type {PrometheusMetricType}
      * @memberof PrometheusMetricReporter
      */
-    private histogramType: MetricType = "histogram";
+    private histogramType: PrometheusMetricType = "histogram";
     /**
      * The prometheus summary type string.
      *
      * @private
-     * @type {MetricType}
+     * @type {PrometheusMetricType}
      * @memberof PrometheusMetricReporter
      */
-    private summaryType: MetricType = "summary";
+    private summaryType: PrometheusMetricType = "summary";
 
     /**
      * Creates an instance of PrometheusMetricReporter.
      *
-     * @param {PrometheusReporterOptions} [options=new PrometheusReporterOptions()] configuration options
-     * @param {Map<string, string>} [tags=new Map()]
-     * @param {Clock} [clock=new StdClock()]
-     * @param {number} [minReportingTimeout=1]
-     *     timeout in minutes a metric need to be included in the report without having changed
      * @memberof PrometheusMetricReporter
      */
-    public constructor(
-        options: PrometheusReporterOptions = new PrometheusReporterOptions(),
-        tags: Map<string, string> = new Map(),
-        clock: Clock = new StdClock(),
-        minReportingTimeout = 1) {
-        super();
-
-        this.options = options;
-        this.tags = tags;
-        this.clock = clock;
-        this.minReportingTimeout = MINUTE.convertTo(minReportingTimeout, MILLISECOND);
+    public constructor({
+        clock = new StdClock(),
+        emitComments = true,
+        includeTimestamp = false,
+        minReportingTimeout = 1,
+        tags = new Map(),
+        useUntyped = false,
+    }: PrometheusReporterOptions) {
+        super({
+            clock,
+            emitComments,
+            includeTimestamp,
+            minReportingTimeout,
+            tags,
+            useUntyped,
+        });
     }
 
     /**
-     * Gets the tags of this reporter.
-     *
-     * @returns {Map<string, string>}
-     * @memberof PrometheusMetricReporter
-     */
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    /**
-     * Sets the tags for this reporter.
-     *
-     * @param {Map<string, string>} tags
-     * @memberof PrometheusMetricReporter
-     */
-    public setTags(tags: Map<string, string>): void {
-        this.tags = tags;
-    }
-
-    /**
-     * Build the metric reporting string for all registered {@link MetricRegistry}s.
+     * Build the metric reporting string for all registered {@link MetricRegistry} instances.
      *
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    public getMetricsString(): string {
+    public async getMetricsString(): Promise<string> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
-            return this.metricRegistries
-                .map((registry) => this.reportMetricRegistry(registry))
-                .join("") + "\n";
+            const ctx = await this.report();
+            return ctx.result;
         }
         return "\n";
     }
@@ -323,7 +262,7 @@ export class PrometheusMetricReporter extends MetricReporter {
      *
      * @memberof PrometheusMetricReporter
      */
-    public start(): void {
+    public start() {
     }
 
     /**
@@ -331,70 +270,126 @@ export class PrometheusMetricReporter extends MetricReporter {
      *
      * @memberof PrometheusMetricReporter
      */
-    public stop(): void {
+    public stop() {
     }
 
     /**
-     * Builds the reporting string for the specifed {@link MetricRegistry}.
+     * Called be before each reporting run.
      *
-     * @private
-     * @param {MetricRegistry} r
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
+     * @protected
+     * @memberof MetricReporter
      */
-    private reportMetricRegistry(r: MetricRegistry): string {
-        const now: Date = new Date(this.clock.time().milliseconds);
-
-        const monotoneCounters = this.reportMetrics(r.getMonotoneCounterList(), now,
-            (c: MonotoneCounter) => this.getCounterString(now, c),
-            (c: MonotoneCounter) => c.getCount());
-        const counters = this.reportMetrics(r.getCounterList(), now,
-            (c: Counter) => this.getCounterGaugeString(now, c),
-            (c: Counter) => c.getCount());
-        const gauges = this.reportMetrics(r.getGaugeList(), now,
-            (g: Gauge<any>) => this.getGaugeString(now, g),
-            (g: Gauge<any>) => g.getValue());
-        const histograms = this.reportMetrics(r.getHistogramList(), now,
-            (h: Histogram) => this.getHistogramString(now, h),
-            (h: Histogram) => h.getCount());
-        const meters = this.reportMetrics(r.getMeterList(), now,
-            (m: Meter) => this.getMeterString(now, m),
-            (m: Meter) => m.getCount());
-        const timers = this.reportMetrics(r.getTimerList(), now,
-            (t: Timer) => this.getTimerString(now, t),
-            (t: Timer) => t.getCount());
-
-        return []
-            .concat(monotoneCounters)
-            .concat(counters)
-            .concat(gauges)
-            .concat(histograms)
-            .concat(meters)
-            .concat(timers)
-            .join("\n");
+    protected async beforeReport(ctx: OverallReportContext) {
+        ctx.result = "";
     }
 
-    /**
-     * Builds the reporting string for a group of metrics with the same type.
-     *
-     * @private
-     * @template T
-     * @param {T[]} metrics
-     * @param {Date} date the date used to determine the timestamp from.
-     * @param {(metric: T) => string} reportFn function called generate teh reporting string for a single metric
-     * @param {(metric: Metric) => number} lastFn function to determine the latest value of a metric
-     * @returns {string[]}
-     * @memberof PrometheusMetricReporter
-     */
-    private reportMetrics<T extends Metric>(
-        metrics: T[],
+    protected async handleResults(
+        overallCtx: OverallReportContext,
+        registry: MetricRegistry,
         date: Date,
-        reportFn: (metric: T) => string,
-        lastFn: (metric: Metric) => number): string[] {
+        type: MetricType,
+        results: Array<ReportingResult<any, PrometheusMetricResult>>): Promise<void> {
+        const lines = [];
+        for (const result of results) {
+            const metric = result.metric;
+            const ctx = result.result;
+            const line = this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields);
+            lines.push(line);
+        }
+        overallCtx.result += lines.join("\n");
+    }
 
-        return metrics
-            .filter((metric) => !(metric as any).id || this.hasChanged((metric as any).id, lastFn(metric), date))
-            .map((metric) => reportFn(metric));
+    protected reportCounter(
+        counter: MonotoneCounter | Counter,
+        ctx: MetricSetReportContext<MonotoneCounter | Counter>): PrometheusMetricResult {
+        if (counter instanceof Counter) {
+            return {
+                canBeReported: true,
+                fields: {
+                    "": counter.getCount() || 0,
+                },
+                type: this.gaugeType,
+            };
+        }
+        return {
+            canBeReported: true,
+            fields: {
+                "": counter.getCount() || 0,
+            },
+            type: this.counterType,
+        };
+    }
+
+    protected reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): PrometheusMetricResult {
+        return {
+            canBeReported: true,
+            fields: {
+                "": gauge.getValue(),
+            },
+            type: this.gaugeType,
+        };
+    }
+
+    protected reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): PrometheusMetricResult {
+        return {
+            canBeReported: !isNaN(histogram.getCount()),
+            fields: {
+                count: histogram.getCount() || 0,
+                sum: histogram.getSum().toString() || 0,
+            },
+            type: this.histogramType,
+        };
+    }
+
+    protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): PrometheusMetricResult {
+        return {
+            canBeReported: !isNaN(meter.getCount()),
+            fields: {
+                "": meter.getCount() || 0,
+            },
+            type: this.gaugeType,
+        };
+    }
+
+    protected reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): PrometheusMetricResult {
+        return {
+            canBeReported: !isNaN(timer.getCount()),
+            fields: {
+                count: timer.getCount() || 0,
+                sum: timer.getSum().toString() || 0,
+            },
+            type: this.summaryType,
+        };
+    }
+
+    /**
+     * Gets the mapping of tags with normalized names and filtered for reserved tags.
+     *
+     * @private
+     * @param {Taggable} taggable
+     * @param {string[]} exclude
+     * @returns {Tags}
+     * @memberof PrometheusMetricReporter
+     */
+    protected buildPrometheusTags(taggable: Taggable, exclude: string[]): Tags {
+        exclude.sort();
+
+        const tags: { [x: string]: string } = {};
+        this.options.tags.forEach((value, key) => {
+            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+            if (exclude.indexOf(normalizedKey) === -1 &&
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                tags[normalizedKey] = value;
+            }
+        });
+        taggable.getTags().forEach((value, key) => {
+            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+            if (exclude.indexOf(normalizedKey) === -1 &&
+                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                tags[normalizedKey] = value;
+            }
+        });
+        return tags;
     }
 
     /**
@@ -406,29 +401,28 @@ export class PrometheusMetricReporter extends MetricReporter {
      * @template T
      * @param {Date} now
      * @param {T} metric
-     * @param {MetricType} metricType
-     * @param {(metric: T) => boolean} canReport
-     * @param {((metric: T) => { [key: string]: number | string; })} getValues
+     * @param {PrometheusMetricType} metricType
+     * @param {boolean} canReport
+     * @param {PrometheusFields} fields
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
     private getMetricString<T extends Metric>(
         now: Date,
         metric: T,
-        metricType: MetricType,
-        canReport: (metric: T) => boolean,
-        getValues: (metric: T) => { [key: string]: number | string; },
+        metricType: PrometheusMetricType,
+        canReport: boolean,
+        fields: PrometheusFields,
         ): string {
 
-        if (!canReport(metric)) {
+        if (!canReport) {
             return "";
         }
 
         const metricName = this.getMetricName(metric);
         const description = this.getDescription(metric, metricName);
-        const values = getValues(metric);
         const timestamp = this.getTimestamp(now);
-        const tags = this.buildTags(metric, ["le", "quantile"]);
+        const tags = this.buildPrometheusTags(metric, ["le", "quantile"]);
         const tagStr = Object
             .keys(tags)
             .map((tag) => `${tag}="${tags[tag]}"`)
@@ -436,7 +430,7 @@ export class PrometheusMetricReporter extends MetricReporter {
         let additionalFields = "";
 
         if (metricType === "histogram") {
-            additionalFields = this.getBuckets(metric as any, metricName, values["count"] as number, tagStr, timestamp);
+            additionalFields = this.getBuckets(metric as any, metricName, fields["count"] as number, tagStr, timestamp);
         } else if (metricType === "summary") {
             additionalFields = this.getQuantiles(metric as any, metricName, tagStr, timestamp);
         }
@@ -452,10 +446,10 @@ export class PrometheusMetricReporter extends MetricReporter {
         }
 
         return comments + additionalFields + Object
-            .keys(values)
+            .keys(fields)
             .map((field) => {
                 const fieldStr = PrometheusMetricReporter.isEmpty(field) ? "" : `_${field}`;
-                const valueStr = this.getValue(values[field]);
+                const valueStr = this.getValue(fields[field]);
 
                 return `${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n`;
             })
@@ -590,159 +584,6 @@ export class PrometheusMetricReporter extends MetricReporter {
     }
 
     /**
-     * Builds the reporting string for monotone counter types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {MonotoneCounter} counter
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getCounterString(now: Date, counter: MonotoneCounter): string {
-        return this.getMetricString(
-            now,
-            counter,
-            this.counterType,
-            (metric) => true,
-            (metric) => ({
-                "": counter.getCount() || 0,
-            }));
-    }
-
-    /**
-     * Builds the reporting string for counter types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {Counter} counter
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getCounterGaugeString(now: Date, counter: Counter): string {
-        return this.getMetricString(
-            now,
-            counter,
-            this.gaugeType,
-            (metric) => true,
-            (metric) => ({
-                "": counter.getCount() || 0,
-            }));
-    }
-
-    /**
-     * Builds the reporting string for gauge types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {Gauge<any>} gauge
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getGaugeString(now: Date, gauge: Gauge<any>): string {
-        return this.getMetricString(
-            now,
-            gauge,
-            this.gaugeType,
-            (metric) => true,
-            (metric) => ({
-                "": gauge.getValue(),
-            }));
-    }
-
-    /**
-     * Builds the reporting string for histogram types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {Histogram} histogram
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getHistogramString(now: Date, histogram: Histogram): string {
-        return this.getMetricString(
-            now,
-            histogram,
-            this.histogramType,
-            (metric) => !isNaN(histogram.getCount()),
-            (metric) => ({
-                count: histogram.getCount() || 0,
-                sum: histogram.getSum().toString() || 0,
-            }));
-    }
-
-    /**
-     * Builds the reporting string for meter types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {Meter} meter
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getMeterString(now: Date, meter: Meter): string {
-        return this.getMetricString(
-            now,
-            meter,
-            this.gaugeType,
-            (metric) => !isNaN(meter.getCount()),
-            (metric) => ({
-                "": meter.getCount() || 0,
-            }));
-    }
-
-    /**
-     * Builds the reporting string for timer types using {@link PrometheusMetricReporter#getMetricString}.
-     *
-     * @private
-     * @param {Date} now
-     * @param {Timer} timer
-     * @returns {string}
-     * @memberof PrometheusMetricReporter
-     */
-    private getTimerString(now: Date, timer: Timer): string {
-        return this.getMetricString(
-            now,
-            timer,
-            this.summaryType,
-            (metric) => !isNaN(timer.getCount()),
-            (metric) => ({
-                count: timer.getCount() || 0,
-                sum: timer.getSum().toString() || 0,
-            }));
-    }
-
-    /**
-     * Determines if a metric instance has changed it's value since the last check.
-     * This is always true is the minimal-reporting timeout was reached.
-     *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {Date} date
-     * @returns {boolean}
-     * @memberof PrometheusMetricReporter
-     */
-    private hasChanged(metricId: number, lastValue: number, date: Date): boolean {
-        let changed = true;
-        let metricEntry = {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry = this.metricStates.get(metricId);
-            changed = metricEntry.lastValue !== lastValue;
-            if (!changed) {
-                changed = metricEntry.lastReport + this.minReportingTimeout < date.getTime();
-            }
-        }
-        if (changed) {
-            metricEntry.lastReport = date.getTime();
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
-    }
-
-    /**
      * Gets the normalized metric name.
      *
      * @private
@@ -761,36 +602,6 @@ export class PrometheusMetricReporter extends MetricReporter {
             name = "_" + name.slice(1);
         }
         return name;
-    }
-
-    /**
-     * Gets the mapping of tags with normalized names and filtered for reserved tags.
-     *
-     * @private
-     * @param {Taggable} taggable
-     * @param {string[]} exclude
-     * @returns {{ [key: string]: string }}
-     * @memberof PrometheusMetricReporter
-     */
-    private buildTags(taggable: Taggable, exclude: string[]): { [key: string]: string } {
-        exclude.sort();
-
-        const tags: { [x: string]: string } = {};
-        this.tags.forEach((value, key) => {
-            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
-            if (exclude.indexOf(normalizedKey) === -1 &&
-                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
-                tags[normalizedKey] = value;
-            }
-        });
-        taggable.getTags().forEach((value, key) => {
-            const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
-            if (exclude.indexOf(normalizedKey) === -1 &&
-                PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
-                tags[normalizedKey] = value;
-            }
-        });
-        return tags;
     }
 
 }

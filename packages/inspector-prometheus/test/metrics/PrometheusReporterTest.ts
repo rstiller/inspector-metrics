@@ -13,7 +13,7 @@ import {
     Taggable,
 } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
-import { Percentiles, PrometheusMetricReporter, PrometheusReporterOptions } from "../../lib/metrics";
+import { Percentiles, PrometheusMetricReporter } from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
 
 const expect = chai.expect;
@@ -28,144 +28,146 @@ export class PrometheusReporterTest {
     public before() {
         this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 });
         this.registry = new MetricRegistry();
-        this.reporter = new PrometheusMetricReporter(undefined, undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter({
+            clock: this.clock,
+        });
         this.reporter.addMetricRegistry(this.registry);
     }
 
     @test
-    public "reporting with no MetricRegistries added"(): void {
+    public async "reporting with no MetricRegistries added"() {
         this.reporter.removeMetricRegistry(this.registry);
-        expect(this.reporter.getMetricsString()).to.be.equal("\n");
+        expect(await this.reporter.getMetricsString()).to.be.equal("\n");
     }
 
     @test
-    public "reporting with a single MetricRegistry added, that is empty"(): void {
-        expect(this.reporter.getMetricsString()).to.be.equal("\n");
+    public async "reporting with a single MetricRegistry added, that is empty"() {
+        expect(await this.reporter.getMetricsString()).to.be.equal("");
     }
 
     @test
-    public "check existence of all monotone counter"(): void {
+    public async "check existence of all monotone counter"() {
         const counter = this.registry.newMonotoneCounter("test_counter_total");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total counter\n" +
-                "test_counter_total{} 0\n\n",
+                "test_counter_total{} 0\n",
             );
 
         counter.increment(1);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total counter\n" +
-                "test_counter_total{} 1\n\n",
+                "test_counter_total{} 1\n",
             );
 
         counter.increment(22);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total counter\n" +
-                "test_counter_total{} 23\n\n",
+                "test_counter_total{} 23\n",
             );
     }
 
     @test
-    public "check existence of all counter fields"(): void {
+    public async "check existence of all counter fields"() {
         const counter = this.registry.newCounter("test_counter");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter test_counter description\n" +
                 "# TYPE test_counter gauge\n" +
-                "test_counter{} 0\n\n",
+                "test_counter{} 0\n",
             );
 
         counter.increment(1);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter test_counter description\n" +
                 "# TYPE test_counter gauge\n" +
-                "test_counter{} 1\n\n",
+                "test_counter{} 1\n",
             );
 
         counter.decrement(3);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_counter test_counter description\n" +
                 "# TYPE test_counter gauge\n" +
-                "test_counter{} -2\n\n",
+                "test_counter{} -2\n",
             );
     }
 
     @test
-    public "check existence of all gauge fields"(): void {
+    public async "check existence of all gauge fields"() {
         const gauge = new SimpleGauge("test_gauge");
         this.registry.registerMetric(gauge);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} 0\n\n",
+                "test_gauge{} 0\n",
             );
 
         gauge.setValue(32.32);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} 32.32\n\n",
+                "test_gauge{} 32.32\n",
             );
 
         gauge.setValue(-87);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} -87\n\n",
+                "test_gauge{} -87\n",
             );
 
         gauge.setValue(NaN);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} NaN\n\n",
+                "test_gauge{} NaN\n",
             );
 
         gauge.setValue(Infinity);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} +Inf\n\n",
+                "test_gauge{} +Inf\n",
             );
 
         gauge.setValue(-Infinity);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} -Inf\n\n",
+                "test_gauge{} -Inf\n",
             );
     }
 
     @test
-    public "check existence of all histogram fields"(): void {
+    public async "check existence of all histogram fields"() {
         const histogram = this.registry.newHistogram("test_histo", null, null, null, Buckets.linear(10, 10, 5));
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
@@ -176,12 +178,12 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 0\n" +
                 "test_histo_bucket{le=\"+Inf\"} 0\n" +
                 "test_histo_count{} 0\n" +
-                "test_histo_sum{} 0\n\n",
+                "test_histo_sum{} 0\n",
             );
 
         histogram.update(11);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
@@ -192,12 +194,12 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 1\n" +
                 "test_histo_bucket{le=\"+Inf\"} 1\n" +
                 "test_histo_count{} 1\n" +
-                "test_histo_sum{} 11\n\n",
+                "test_histo_sum{} 11\n",
             );
 
         histogram.update(340);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
@@ -208,12 +210,12 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 1\n" +
                 "test_histo_bucket{le=\"+Inf\"} 2\n" +
                 "test_histo_count{} 2\n" +
-                "test_histo_sum{} 351\n\n",
+                "test_histo_sum{} 351\n",
             );
 
         histogram.update(-119);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
@@ -224,42 +226,42 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 2\n" +
                 "test_histo_bucket{le=\"+Inf\"} 3\n" +
                 "test_histo_count{} 3\n" +
-                "test_histo_sum{} 232\n\n",
+                "test_histo_sum{} 232\n",
             );
     }
 
     @test
-    public "check existence of all meter fields"(): void {
+    public async "check existence of all meter fields"() {
         const meter = this.registry.newMeter("test_meter");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} 0\n\n",
+                "test_meter{} 0\n",
             );
 
         meter.mark(1);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} 1\n\n",
+                "test_meter{} 1\n",
             );
 
         meter.mark(-3);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} -2\n\n",
+                "test_meter{} -2\n",
             );
     }
 
     @test
-    public "check existence of all timer fields"(): void {
+    public async "check existence of all timer fields"() {
         const timer = this.registry.newTimer(
             "test_timer",
             null,
@@ -267,7 +269,7 @@ export class PrometheusReporterTest {
             new SlidingWindowReservoir(3));
         timer.setMetadata(Percentiles.METADATA_NAME, new Percentiles([0.5, 0.75, 0.9]));
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
@@ -275,12 +277,12 @@ export class PrometheusReporterTest {
                 "test_timer{quantile=\"0.75\"} 0\n" +
                 "test_timer{quantile=\"0.9\"} 0\n" +
                 "test_timer_count{} 0\n" +
-                "test_timer_sum{} 0\n\n",
+                "test_timer_sum{} 0\n",
         );
 
         timer.addDuration(11, NANOSECOND);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
@@ -288,12 +290,12 @@ export class PrometheusReporterTest {
                 "test_timer{quantile=\"0.75\"} 11\n" +
                 "test_timer{quantile=\"0.9\"} 11\n" +
                 "test_timer_count{} 1\n" +
-                "test_timer_sum{} 11\n\n",
+                "test_timer_sum{} 11\n",
         );
 
         timer.addDuration(5, NANOSECOND);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
@@ -301,12 +303,12 @@ export class PrometheusReporterTest {
                 "test_timer{quantile=\"0.75\"} 11\n" +
                 "test_timer{quantile=\"0.9\"} 11\n" +
                 "test_timer_count{} 2\n" +
-                "test_timer_sum{} 16\n\n",
+                "test_timer_sum{} 16\n",
         );
 
         timer.addDuration(35, NANOSECOND);
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
@@ -314,12 +316,12 @@ export class PrometheusReporterTest {
                 "test_timer{quantile=\"0.75\"} 35\n" +
                 "test_timer{quantile=\"0.9\"} 35\n" +
                 "test_timer_count{} 3\n" +
-                "test_timer_sum{} 51\n\n",
+                "test_timer_sum{} 51\n",
             );
     }
 
     @test
-    public "check mixed metrics: no tags, no timestamp, no description"(): void {
+    public async "check mixed metrics: no tags, no timestamp, no description"() {
         this.registry.newMonotoneCounter("test_monotone_counter_total");
         this.registry.newCounter("test_counter_total");
         this.registry.registerMetric(new SimpleGauge("test_gauge"));
@@ -332,17 +334,17 @@ export class PrometheusReporterTest {
             new SlidingWindowReservoir(3));
         timer.setMetadata(Percentiles.METADATA_NAME, new Percentiles([0.5, 0.75, 0.9]));
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_monotone_counter_total test_monotone_counter_total description\n" +
                 "# TYPE test_monotone_counter_total counter\n" +
-                "test_monotone_counter_total{} 0\n\n" +
+                "test_monotone_counter_total{} 0\n" +
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total gauge\n" +
-                "test_counter_total{} 0\n\n" +
+                "test_counter_total{} 0\n" +
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} 0\n\n" +
+                "test_gauge{} 0\n" +
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
                 "test_histo_bucket{le=\"10\"} 0\n" +
@@ -352,24 +354,27 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 0\n" +
                 "test_histo_bucket{le=\"+Inf\"} 0\n" +
                 "test_histo_count{} 0\n" +
-                "test_histo_sum{} 0\n\n" +
+                "test_histo_sum{} 0\n" +
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} 0\n\n" +
+                "test_meter{} 0\n" +
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
                 "test_timer{quantile=\"0.5\"} 0\n" +
                 "test_timer{quantile=\"0.75\"} 0\n" +
                 "test_timer{quantile=\"0.9\"} 0\n" +
                 "test_timer_count{} 0\n" +
-                "test_timer_sum{} 0\n\n",
+                "test_timer_sum{} 0\n",
             );
     }
 
     @test
-    public "check mixed metrics with timestamp"(): void {
+    public async "check mixed metrics with timestamp"() {
         this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 });
-        this.reporter = new PrometheusMetricReporter(new PrometheusReporterOptions(true), undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter({
+            clock: this.clock,
+            includeTimestamp: true,
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -387,17 +392,17 @@ export class PrometheusReporterTest {
         this.clock.setCurrentTime({ milliseconds: 1234, nanoseconds: 0 });
         const millis = new Date(this.clock.time().milliseconds).getUTCMilliseconds();
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_monotone_counter_total test_monotone_counter_total description\n" +
                 "# TYPE test_monotone_counter_total counter\n" +
-                `test_monotone_counter_total{} 0 ${millis}\n\n` +
+                `test_monotone_counter_total{} 0 ${millis}\n` +
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total gauge\n" +
-                `test_counter_total{} 0 ${millis}\n\n` +
+                `test_counter_total{} 0 ${millis}\n` +
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                `test_gauge{} 0 ${millis}\n\n` +
+                `test_gauge{} 0 ${millis}\n` +
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
                 `test_histo_bucket{le=\"10\"} 0 ${millis}\n` +
@@ -407,22 +412,22 @@ export class PrometheusReporterTest {
                 `test_histo_bucket{le=\"50\"} 0 ${millis}\n` +
                 `test_histo_bucket{le=\"+Inf\"} 0 ${millis}\n` +
                 `test_histo_count{} 0 ${millis}\n` +
-                `test_histo_sum{} 0 ${millis}\n\n` +
+                `test_histo_sum{} 0 ${millis}\n` +
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                `test_meter{} 0 ${millis}\n\n` +
+                `test_meter{} 0 ${millis}\n` +
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
                 `test_timer{quantile=\"0.5\"} 0 ${millis}\n` +
                 `test_timer{quantile=\"0.75\"} 0 ${millis}\n` +
                 `test_timer{quantile=\"0.9\"} 0 ${millis}\n` +
                 `test_timer_count{} 0 ${millis}\n` +
-                `test_timer_sum{} 0 ${millis}\n\n`,
+                `test_timer_sum{} 0 ${millis}\n`,
             );
     }
 
     @test
-    public "check mixed metrics with description"(): void {
+    public async "check mixed metrics with description"() {
         this.registry.newMonotoneCounter("test_monotone_counter_total", null, "monotone description");
         this.registry.newCounter("test_counter_total", null, "counter description");
         this.registry.registerMetric(new SimpleGauge("test_gauge"), null, "gauge description");
@@ -436,17 +441,17 @@ export class PrometheusReporterTest {
             "timer description");
         timer.setMetadata(Percentiles.METADATA_NAME, new Percentiles([0.5, 0.75, 0.9]));
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_monotone_counter_total monotone description\n" +
                 "# TYPE test_monotone_counter_total counter\n" +
-                "test_monotone_counter_total{} 0\n\n" +
+                "test_monotone_counter_total{} 0\n" +
                 "# HELP test_counter_total counter description\n" +
                 "# TYPE test_counter_total gauge\n" +
-                "test_counter_total{} 0\n\n" +
+                "test_counter_total{} 0\n" +
                 "# HELP test_gauge gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} 0\n\n" +
+                "test_gauge{} 0\n" +
                 "# HELP test_histo histogram description\n" +
                 "# TYPE test_histo histogram\n" +
                 "test_histo_bucket{le=\"10\"} 0\n" +
@@ -456,22 +461,22 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 0\n" +
                 "test_histo_bucket{le=\"+Inf\"} 0\n" +
                 "test_histo_count{} 0\n" +
-                "test_histo_sum{} 0\n\n" +
+                "test_histo_sum{} 0\n" +
                 "# HELP test_meter meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} 0\n\n" +
+                "test_meter{} 0\n" +
                 "# HELP test_timer timer description\n" +
                 "# TYPE test_timer summary\n" +
                 "test_timer{quantile=\"0.5\"} 0\n" +
                 "test_timer{quantile=\"0.75\"} 0\n" +
                 "test_timer{quantile=\"0.9\"} 0\n" +
                 "test_timer_count{} 0\n" +
-                "test_timer_sum{} 0\n\n",
+                "test_timer_sum{} 0\n",
             );
     }
 
     @test
-    public "check mixed metrics with tags"(): void {
+    public async "check mixed metrics with tags"() {
         let taggable: Taggable = null;
 
         taggable = this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -504,17 +509,17 @@ export class PrometheusReporterTest {
         timer.setTag("type", "timer");
         timer.setTag("host", "127.0.0.2");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_monotone_counter_total test_monotone_counter_total description\n" +
                 "# TYPE test_monotone_counter_total counter\n" +
-                "test_monotone_counter_total{type=\"monotone_counter\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_monotone_counter_total{type=\"monotone_counter\",host=\"127.0.0.2\"} 0\n" +
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total gauge\n" +
-                "test_counter_total{type=\"counter\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_counter_total{type=\"counter\",host=\"127.0.0.2\"} 0\n" +
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{type=\"simple_gauge\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_gauge{type=\"simple_gauge\",host=\"127.0.0.2\"} 0\n" +
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"10\"} 0\n" +
@@ -524,26 +529,30 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"50\"} 0\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"+Inf\"} 0\n" +
                 "test_histo_count{type=\"histogram\",host=\"127.0.0.2\"} 0\n" +
-                "test_histo_sum{type=\"histogram\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_histo_sum{type=\"histogram\",host=\"127.0.0.2\"} 0\n" +
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{type=\"meter\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_meter{type=\"meter\",host=\"127.0.0.2\"} 0\n" +
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.5\"} 0\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.75\"} 0\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.9\"} 0\n" +
                 "test_timer_count{type=\"timer\",host=\"127.0.0.2\"} 0\n" +
-                "test_timer_sum{type=\"timer\",host=\"127.0.0.2\"} 0\n\n",
+                "test_timer_sum{type=\"timer\",host=\"127.0.0.2\"} 0\n",
             );
     }
 
     @test
-    public "check mixed metrics without comments"(): void {
+    public async "check mixed metrics without comments"() {
         let taggable: Taggable = null;
 
-        this.reporter = new PrometheusMetricReporter(
-            new PrometheusReporterOptions(false, false, false), undefined, this.clock);
+        this.reporter = new PrometheusMetricReporter({
+            clock: this.clock,
+            emitComments: false,
+            includeTimestamp: false,
+            useUntyped: false,
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         taggable = this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -576,11 +585,11 @@ export class PrometheusReporterTest {
         timer.setTag("type", "timer");
         timer.setTag("host", "127.0.0.2");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
-                "test_monotone_counter_total{type=\"monotone_counter\",host=\"127.0.0.2\"} 0\n\n" +
-                "test_counter_total{type=\"counter\",host=\"127.0.0.2\"} 0\n\n" +
-                "test_gauge{type=\"simple_gauge\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_monotone_counter_total{type=\"monotone_counter\",host=\"127.0.0.2\"} 0\n" +
+                "test_counter_total{type=\"counter\",host=\"127.0.0.2\"} 0\n" +
+                "test_gauge{type=\"simple_gauge\",host=\"127.0.0.2\"} 0\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"10\"} 0\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"20\"} 0\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"30\"} 0\n" +
@@ -588,20 +597,24 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"50\"} 0\n" +
                 "test_histo_bucket{type=\"histogram\",host=\"127.0.0.2\",le=\"+Inf\"} 0\n" +
                 "test_histo_count{type=\"histogram\",host=\"127.0.0.2\"} 0\n" +
-                "test_histo_sum{type=\"histogram\",host=\"127.0.0.2\"} 0\n\n" +
-                "test_meter{type=\"meter\",host=\"127.0.0.2\"} 0\n\n" +
+                "test_histo_sum{type=\"histogram\",host=\"127.0.0.2\"} 0\n" +
+                "test_meter{type=\"meter\",host=\"127.0.0.2\"} 0\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.5\"} 0\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.75\"} 0\n" +
                 "test_timer{type=\"timer\",host=\"127.0.0.2\",quantile=\"0.9\"} 0\n" +
                 "test_timer_count{type=\"timer\",host=\"127.0.0.2\"} 0\n" +
-                "test_timer_sum{type=\"timer\",host=\"127.0.0.2\"} 0\n\n",
+                "test_timer_sum{type=\"timer\",host=\"127.0.0.2\"} 0\n",
             );
     }
 
     @test
-    public "check mixed metrics as untyped"(): void {
-        this.reporter = new PrometheusMetricReporter(
-            new PrometheusReporterOptions(false, true, true), undefined, this.clock);
+    public async "check mixed metrics as untyped"() {
+        this.reporter = new PrometheusMetricReporter({
+            clock: this.clock,
+            emitComments: true,
+            includeTimestamp: false,
+            useUntyped: true,
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("test_monotone_counter_total");
@@ -618,17 +631,17 @@ export class PrometheusReporterTest {
             new SlidingWindowReservoir(3));
         timer.setMetadata(Percentiles.METADATA_NAME, new Percentiles([0.5, 0.75, 0.9]));
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP test_monotone_counter_total test_monotone_counter_total description\n" +
                 "# TYPE test_monotone_counter_total untyped\n" +
-                "test_monotone_counter_total{} 0\n\n" +
+                "test_monotone_counter_total{} 0\n" +
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total untyped\n" +
-                "test_counter_total{} 0\n\n" +
+                "test_counter_total{} 0\n" +
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge untyped\n" +
-                "test_gauge{} 0\n\n" +
+                "test_gauge{} 0\n" +
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo untyped\n" +
                 "test_histo_bucket{le=\"10\"} 0\n" +
@@ -638,22 +651,22 @@ export class PrometheusReporterTest {
                 "test_histo_bucket{le=\"50\"} 0\n" +
                 "test_histo_bucket{le=\"+Inf\"} 0\n" +
                 "test_histo_count{} 0\n" +
-                "test_histo_sum{} 0\n\n" +
+                "test_histo_sum{} 0\n" +
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter untyped\n" +
-                "test_meter{} 0\n\n" +
+                "test_meter{} 0\n" +
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer untyped\n" +
                 "test_timer{quantile=\"0.5\"} 0\n" +
                 "test_timer{quantile=\"0.75\"} 0\n" +
                 "test_timer{quantile=\"0.9\"} 0\n" +
                 "test_timer_count{} 0\n" +
-                "test_timer_sum{} 0\n\n",
+                "test_timer_sum{} 0\n",
             );
     }
 
     @test
-    public "check tag name compatibility"(): void {
+    public async "check tag name compatibility"() {
         const taggable = this.registry.newMonotoneCounter("ccc");
         taggable.setTag("type", "monotone");
         taggable.setTag("host", "127.0.0.2");
@@ -664,19 +677,23 @@ export class PrometheusReporterTest {
         taggable.setTag("special:tag", "replaced");
         taggable.setTag("my_µ", "replaced");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "# HELP ccc ccc description\n" +
                 "# TYPE ccc counter\n" +
                 "ccc{type=\"monotone\",host=\"127.0.0.2\"," +
                 "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_=\"something\"," +
-                "special_tag=\"replaced\",my__=\"replaced\"} 0\n\n",
+                "special_tag=\"replaced\",my__=\"replaced\"} 0\n",
             );
     }
 
     @test
-    public "check matric name compatibility"(): void {
-        this.reporter = new PrometheusMetricReporter(new PrometheusReporterOptions(false, false, false));
+    public async "check matric name compatibility"() {
+        this.reporter = new PrometheusMetricReporter({
+            emitComments: false,
+            includeTimestamp: false,
+            useUntyped: false,
+        });
         this.reporter.addMetricRegistry(this.registry);
 
         this.registry.newMonotoneCounter("__test1");
@@ -687,7 +704,7 @@ export class PrometheusReporterTest {
         this.registry.newMonotoneCounter("request_ÄÖÜßäöü");
         this.registry.newMonotoneCounter("@µabc");
 
-        expect(this.reporter.getMetricsString()).to.be
+        expect(await this.reporter.getMetricsString()).to.be
             .equal(
                 "__test1{} 0\n\n" +
                 "_test2{} 0\n\n" +
@@ -695,7 +712,7 @@ export class PrometheusReporterTest {
                 "group:test{} 0\n\n" +
                 "_:test1{} 0\n\n" +
                 "request________{} 0\n\n" +
-                "__abc{} 0\n\n",
+                "__abc{} 0\n",
             );
     }
 

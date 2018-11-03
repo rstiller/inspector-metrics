@@ -9,14 +9,14 @@ import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import {
-    Buckets, MetricRegistry, Scheduler, SECOND, SimpleGauge, SlidingWindowReservoir,
+    Buckets, MetricRegistry, Scheduler, SimpleGauge, SlidingWindowReservoir,
 } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import {
     Percentiles,
     PrometheusMetricReporter,
     PushgatewayMetricReporter,
-    PushgatewayReporterOptions } from "../../lib/metrics";
+} from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
 
 chai.use(sinonChai);
@@ -34,39 +34,36 @@ export class PushgatewayReporterTest {
     private registry: MetricRegistry;
     private prometheusReporter: PrometheusMetricReporter;
     private reporter: PushgatewayMetricReporter;
-    private internalCallback: () => void;
+    private internalCallback: () => Promise<any>;
     private scheduler: Scheduler;
     private schedulerSpy: SinonSpy;
 
     public before() {
         this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 });
         this.registry = new MetricRegistry();
-        this.prometheusReporter = new PrometheusMetricReporter(undefined, undefined, this.clock);
+        this.prometheusReporter = new PrometheusMetricReporter({
+            clock: this.clock,
+        });
         this.prometheusReporter.addMetricRegistry(this.registry);
 
-        this.scheduler = (prog: () => void, interval: number): NodeJS.Timer => {
+        this.scheduler = (prog: () => Promise<any>, interval: number): NodeJS.Timer => {
             this.internalCallback = prog;
             return null;
         };
         this.schedulerSpy = spy(this.scheduler);
 
-        this.reporter = new PushgatewayMetricReporter(
-            this.prometheusReporter,
-            new PushgatewayReporterOptions(
-                "localhost",
-                9091,
-                "test-pushgateway-reporter",
-                "localhost",
-            ),
-            10,
-            SECOND,
-            null,
-            this.schedulerSpy,
-        );
+        this.reporter = new PushgatewayMetricReporter({
+            host: "localhost",
+            instance: "localhost",
+            job: "test-pushgateway-reporter",
+            port: 9091,
+            reporter: this.prometheusReporter,
+            scheduler: this.schedulerSpy,
+        });
     }
 
     @test
-    public "check reporting with PrometheusMetricReporter"(): void {
+    public async "check reporting with PrometheusMetricReporter"() {
         this.registry.newMonotoneCounter("test_monotone_counter_total");
         this.registry.newCounter("test_counter_total");
         this.registry.registerMetric(new SimpleGauge("test_gauge"));
@@ -81,22 +78,22 @@ export class PushgatewayReporterTest {
 
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        this.reporter.start();
+        await this.reporter.start();
 
         expect(this.schedulerSpy).to.have.been.called;
 
-        const payload = this.internalCallback();
-        expect(payload).to.be
+        const payload = await this.internalCallback();
+        expect(payload.result).to.be
             .equal(
                 "# HELP test_monotone_counter_total test_monotone_counter_total description\n" +
                 "# TYPE test_monotone_counter_total counter\n" +
-                "test_monotone_counter_total{} 0\n\n" +
+                "test_monotone_counter_total{} 0\n" +
                 "# HELP test_counter_total test_counter_total description\n" +
                 "# TYPE test_counter_total gauge\n" +
-                "test_counter_total{} 0\n\n" +
+                "test_counter_total{} 0\n" +
                 "# HELP test_gauge test_gauge description\n" +
                 "# TYPE test_gauge gauge\n" +
-                "test_gauge{} 0\n\n" +
+                "test_gauge{} 0\n" +
                 "# HELP test_histo test_histo description\n" +
                 "# TYPE test_histo histogram\n" +
                 "test_histo_bucket{le=\"10\"} 0\n" +
@@ -106,17 +103,17 @@ export class PushgatewayReporterTest {
                 "test_histo_bucket{le=\"50\"} 0\n" +
                 "test_histo_bucket{le=\"+Inf\"} 0\n" +
                 "test_histo_count{} 0\n" +
-                "test_histo_sum{} 0\n\n" +
+                "test_histo_sum{} 0\n" +
                 "# HELP test_meter test_meter description\n" +
                 "# TYPE test_meter gauge\n" +
-                "test_meter{} 0\n\n" +
+                "test_meter{} 0\n" +
                 "# HELP test_timer test_timer description\n" +
                 "# TYPE test_timer summary\n" +
                 "test_timer{quantile=\"0.5\"} 0\n" +
                 "test_timer{quantile=\"0.75\"} 0\n" +
                 "test_timer{quantile=\"0.9\"} 0\n" +
                 "test_timer_count{} 0\n" +
-                "test_timer_sum{} 0\n\n",
+                "test_timer_sum{} 0\n",
             );
     }
 

@@ -2,6 +2,76 @@ version: "3"
 
 services:
 
+  node6:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node6
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=6
+
+  node7:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node7
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=7
+
+  node8:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node8
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=8
+
+  node9:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node9
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=9
+
+  node10:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node10
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=10
+
   # test:
   #   build:
   #     context: ./test-env/
