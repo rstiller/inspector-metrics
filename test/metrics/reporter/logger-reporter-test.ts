@@ -100,7 +100,7 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "no metric-registries added"(): Promise<any> {
+    public async "no metric-registries added"() {
         this.reporter.removeMetricRegistry(this.registry);
 
         expect(this.loggerSpy).to.not.have.been.called;
@@ -111,133 +111,125 @@ export class LoggerReporterTest {
         expect(this.schedulerSpy).to.have.been.called;
 
         if (!!this.internalCallback) {
-            return this.internalCallback()
-                .then(() => {
-                    expect(this.loggerSpy).to.not.have.been.called;
-                });
+            await this.internalCallback();
         }
-        return Promise.reject();
+        expect(this.loggerSpy).to.not.have.been.called;
     }
 
     @test
-    public "counter reporting"(): Promise<any> {
+    public async "counter reporting"() {
         this.registry.newCounter("counter1");
         this.registry.newMonotoneCounter("monotone-counter1");
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(2);
-                let logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("monotone-counter1");
-                expect(logMetadata.measurement_type).to.equal("counter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
+        await this.reporter.start();
 
-                logMetadata = this.loggerSpy.getCall(1).args[1];
-                expect(logMetadata.measurement).to.equal("counter1");
-                expect(logMetadata.measurement_type).to.equal("counter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-            });
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(2);
+        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("monotone-counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+
+        logMetadata = this.loggerSpy.getCall(1).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
     }
 
     @test
-    public "gauge reporting"(): Promise<any> {
+    public async "gauge reporting"() {
         this.registry.registerMetric(new SimpleGauge("gauge1"));
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("gauge1");
-                expect(logMetadata.measurement_type).to.equal("gauge");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("gauge1");
+        expect(logMetadata.measurement_type).to.equal("gauge");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
     }
 
     @test
-    public "histogram reporting"(): Promise<any> {
+    public async "histogram reporting"() {
         this.registry.newHistogram("histogram1");
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("histogram1");
-                expect(logMetadata.measurement_type).to.equal("histogram");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("histogram1");
+        expect(logMetadata.measurement_type).to.equal("histogram");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
     }
 
     @test
-    public "meter reporting"(): Promise<any> {
+    public async "meter reporting"() {
         this.registry.newMeter("meter1");
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("meter1");
-                expect(logMetadata.measurement_type).to.equal("meter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("meter1");
+        expect(logMetadata.measurement_type).to.equal("meter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
     }
 
     @test
-    public "timer reporting"(): Promise<any> {
+    public async "timer reporting"() {
         this.registry.newTimer("timer1");
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("timer1");
-                expect(logMetadata.measurement_type).to.equal("timer");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("timer1");
+        expect(logMetadata.measurement_type).to.equal("timer");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
     }
 
     @test
-    public "registry tags"(): Promise<any> {
+    public async "registry tags"() {
         this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
@@ -245,25 +237,24 @@ export class LoggerReporterTest {
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("counter1");
-                expect(logMetadata.measurement_type).to.equal("counter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-                expect(logMetadata.tags["application"]).to.equal("app");
-                expect(logMetadata.tags["mode"]).to.equal("dev");
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("dev");
     }
 
     @test
-    public "metric tags"(): Promise<any> {
+    public async "metric tags"() {
         const counter = this.registry.newCounter("counter1");
         counter.setTag("application", "app");
         counter.setTag("mode", "dev");
@@ -271,25 +262,24 @@ export class LoggerReporterTest {
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("counter1");
-                expect(logMetadata.measurement_type).to.equal("counter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-                expect(logMetadata.tags["application"]).to.equal("app");
-                expect(logMetadata.tags["mode"]).to.equal("dev");
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("dev");
     }
 
     @test
-    public "registry and metric tags"(): Promise<any> {
+    public async "registry and metric tags"() {
         const counter = this.registry.newCounter("counter1");
         this.registry.setTag("application", "app");
         this.registry.setTag("mode", "dev");
@@ -299,22 +289,21 @@ export class LoggerReporterTest {
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        return this.reporter.start()
-            .then(() => {
-                expect(this.schedulerSpy).to.have.been.called;
-            })
-            .then(() => this.internalCallback())
-            .then(() => {
-                expect(this.loggerSpy.callCount).to.equal(1);
-                const logMetadata = this.loggerSpy.getCall(0).args[1];
-                expect(logMetadata.measurement).to.equal("counter1");
-                expect(logMetadata.measurement_type).to.equal("counter");
-                expect(logMetadata.timestamp.getTime()).to.equal(0);
-                expect(logMetadata.tags).to.not.be.null;
-                expect(logMetadata.tags["application"]).to.equal("app");
-                expect(logMetadata.tags["mode"]).to.equal("test");
-                expect(logMetadata.tags["component"]).to.equal("main");
-            });
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("test");
+        expect(logMetadata.tags["component"]).to.equal("main");
     }
 
 }
