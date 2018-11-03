@@ -29,6 +29,13 @@ export interface Logger {
      * Logs at "debug" level:
      * - the first argument passed is usually the log message
      * - usually logs to stdout stream
+     * - available since node 8
      */
     debug: (...args: any[]) => any;
+    /**
+     * Logs at "trace" level:
+     * - the first argument passed is usually the log message
+     * - usually logs to stdout stream
+     */
+    trace: (...args: any[]) => any;
 }
