@@ -33,6 +33,7 @@ export class MockedLogger implements Logger {
         this.calls.push(Object.assign({}, metadata));
     }
     public debug(): void {}
+    public trace(): void {}
 }
 
 export class MockedClock implements Clock {
