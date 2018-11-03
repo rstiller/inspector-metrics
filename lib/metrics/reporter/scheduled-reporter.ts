@@ -22,21 +22,21 @@ export interface ScheduledMetricReporterOptions extends MetricReporterOptions {
      * @type {number}
      * @memberof ScheduledMetricReporterOptions
      */
-    readonly reportInterval: number;
+    readonly reportInterval?: number;
     /**
      * Time unit for the reporting interval.
      *
      * @type {TimeUnit}
      * @memberof ScheduledMetricReporterOptions
      */
-    readonly unit: TimeUnit;
+    readonly unit?: TimeUnit;
     /**
      * The scheduler function used to trigger reporting runs.
      *
      * @type {Scheduler}
      * @memberof ScheduledMetricReporterOptions
      */
-    readonly scheduler: Scheduler;
+    readonly scheduler?: Scheduler;
 }
 
 /**

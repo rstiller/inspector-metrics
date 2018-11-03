@@ -86,21 +86,21 @@ export interface MetricReporterOptions {
      * @type {Clock}
      * @memberof MetricReporterOptions
      */
-    readonly clock: Clock;
+    readonly clock?: Clock;
     /**
      * Timeout in minutes a metric need to be included in the report without having changed.
      *
      * @type {number}
      * @memberof MetricReporterOptions
      */
-    minReportingTimeout: number;
+    minReportingTimeout?: number;
     /**
      * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
      *
      * @type {Map<string, string>}
      * @memberof MetricReporterOptions
      */
-    tags: Map<string, string>;
+    tags?: Map<string, string>;
 }
 
 /**
