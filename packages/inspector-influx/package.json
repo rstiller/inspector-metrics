@@ -24,7 +24,7 @@
   ],
   "engines": {
     "node": ">= 6",
-    "npm": ">= 5"
+    "npm": ">= 3"
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.6",
@@ -46,7 +46,7 @@
   "dependencies": {
     "async": "2.6.1",
     "influx": "5.0.7",
-    "inspector-metrics": "1.13.0-rc.1",
+    "inspector-metrics": "1.13.0-rc.5",
     "source-map-support": "0.5.9"
   },
   "files": [

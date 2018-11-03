@@ -11,10 +11,11 @@ import {
     Meter,
     Metric,
     MetricRegistry,
+    MetricSetReportContext,
     MetricType,
     MILLISECOND,
     MonotoneCounter,
-    ReportingContext,
+    OverallReportContext,
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
@@ -221,14 +222,12 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * @protected
      * @memberof InfluxMetricReporter
      */
-    protected report(): Promise<any> {
-        return this.options.sender.isReady()
-            .then((senderReady) => {
-                if (senderReady) {
-                    return super.report();
-                }
-                return Promise.resolve();
-            });
+    protected async report(): Promise<OverallReportContext> {
+        const senderReady = await this.options.sender.isReady();
+        if (senderReady) {
+            return await super.report();
+        }
+        return {};
     }
 
     /**
@@ -243,6 +242,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * @memberof InfluxMetricReporter
      */
     protected handleResults(
+        ctx: OverallReportContext,
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
@@ -273,13 +273,13 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      *
      * @protected
      * @param {(MonotoneCounter | Counter)} counter
-     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @param {(MetricSetReportContext<MonotoneCounter | Counter>)} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
     protected reportCounter(
         counter: MonotoneCounter | Counter,
-        ctx: ReportingContext<MonotoneCounter | Counter>): IPoint {
+        ctx: MetricSetReportContext<MonotoneCounter | Counter>): IPoint {
         const value = counter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -303,11 +303,11 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      *
      * @protected
      * @param {Gauge<any>} gauge
-     * @param {ReportingContext<Gauge<any>>} ctx
+     * @param {MetricSetReportContext<Gauge<any>>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): IPoint {
+    protected reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): IPoint {
         const value = gauge.getValue();
         if (!value || isNaN(value)) {
             return null;
@@ -331,11 +331,11 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      *
      * @protected
      * @param {Histogram} histogram
-     * @param {ReportingContext<Histogram>} ctx
+     * @param {MetricSetReportContext<Histogram>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): IPoint {
+    protected reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): IPoint {
         const value = histogram.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -370,11 +370,11 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      *
      * @protected
      * @param {Meter} meter
-     * @param {ReportingContext<Meter>} ctx
+     * @param {MetricSetReportContext<Meter>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): IPoint {
+    protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): IPoint {
         const value = meter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -402,11 +402,11 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      *
      * @protected
      * @param {Timer} timer
-     * @param {ReportingContext<Timer>} ctx
+     * @param {MetricSetReportContext<Timer>} ctx
      * @returns {IPoint}
      * @memberof InfluxMetricReporter
      */
-    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): IPoint {
+    protected reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): IPoint {
         const value = timer.getCount();
         if (!value || isNaN(value)) {
             return null;
