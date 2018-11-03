@@ -51,7 +51,7 @@
   },
   "dependencies": {
     "async": "2.6.1",
-    "inspector-metrics": "1.13.0-rc.3",
+    "inspector-metrics": "1.13.0-rc.5",
     "moment": "2.22.2",
     "moment-timezone": "0.5.23",
     "source-map-support": "0.5.9"

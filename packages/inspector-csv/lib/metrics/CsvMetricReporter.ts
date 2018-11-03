@@ -7,10 +7,11 @@ import {
     Meter,
     Metric,
     MetricRegistry,
+    MetricSetReportContext,
     MetricType,
     MILLISECOND,
     MonotoneCounter,
-    ReportingContext,
+    OverallReportContext,
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
@@ -291,7 +292,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @protected
      * @memberof CsvMetricReporter
      */
-    protected async beforeReport() {
+    protected async beforeReport(ctx: OverallReportContext) {
         await this.options.writer.init(this.header);
     }
 
@@ -306,6 +307,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     protected async handleResults(
+        ctx: OverallReportContext,
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
@@ -338,7 +340,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     protected reportCounter(
-        counter: MonotoneCounter | Counter, ctx: ReportingContext<MonotoneCounter | Counter>): Fields {
+        counter: MonotoneCounter | Counter, ctx: MetricSetReportContext<MonotoneCounter | Counter>): Fields {
         return {
             count: `${counter.getCount()}`,
         };
@@ -353,7 +355,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Fields}
      * @memberof CsvMetricReporter
      */
-    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): Fields {
+    protected reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): Fields {
         return {
             value: `${gauge.getValue()}`,
         };
@@ -368,7 +370,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Fields}
      * @memberof CsvMetricReporter
      */
-    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): Fields {
+    protected reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): Fields {
         const snapshot = histogram.getSnapshot();
         const bucketFields: Fields = {};
         histogram
@@ -401,7 +403,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Fields}
      * @memberof CsvMetricReporter
      */
-    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): Fields {
+    protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): Fields {
         return {
             count: `${this.getNumber(meter.getCount())}`,
             m15_rate: `${this.getNumber(meter.get15MinuteRate())}`,
@@ -420,7 +422,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Fields}
      * @memberof CsvMetricReporter
      */
-    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): Fields {
+    protected reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): Fields {
         const snapshot = timer.getSnapshot();
         const bucketFields: Fields = {};
         timer
