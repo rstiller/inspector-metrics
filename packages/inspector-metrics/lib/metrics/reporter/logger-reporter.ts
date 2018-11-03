@@ -9,7 +9,7 @@ import { MetricRegistry } from "../metric-registry";
 import { MILLISECOND } from "../time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
-import { ReportingContext, ReportingResult } from "./metric-reporter";
+import { MetricSetReportContext, OverallReportContext, ReportingResult } from "./metric-reporter";
 import { MetricType } from "./metric-type";
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
@@ -39,10 +39,10 @@ interface LogLine {
  * Helper interface for the reporting context.
  *
  * @interface LoggerReportingContext
- * @extends {ReportingContext<M>}
+ * @extends {MetricSetReportContext<M>}
  * @template M
  */
-interface LoggerReportingContext<M> extends ReportingContext<M> {
+interface LoggerReportingContext<M> extends MetricSetReportContext<M> {
     /**
      * Common log metadata to extend.
      *
@@ -141,14 +141,18 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * Creates a new {@link LoggerReportingContext} using the speicifed arguments.
      *
      * @protected
+     * @param {OverallReportContext} overallCtx
      * @param {MetricRegistry} registry
      * @param {Date} date
      * @param {MetricType} type
      * @returns {LoggerReportingContext<any>}
      * @memberof LoggerReporter
      */
-    protected createReportingContext(
-        registry: MetricRegistry, date: Date, type: MetricType): LoggerReportingContext<any> {
+    protected createMetricSetReportContext(
+        overallCtx: OverallReportContext,
+        registry: MetricRegistry,
+        date: Date,
+        type: MetricType): LoggerReportingContext<any> {
         const logMetadata = Object.assign({}, this.logMetadata, {
             measurement: "",
             measurement_type: type,
@@ -158,6 +162,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
             date,
             logMetadata,
             metrics: [],
+            overallCtx,
             registry,
             type,
         };
@@ -167,6 +172,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * Logs each result at 'info' level using the logger instance specified in the options.
      *
      * @protected
+     * @param {OverallReportContext} ctx
      * @param {MetricRegistry} registry
      * @param {Date} date
      * @param {MetricType} type
@@ -174,6 +180,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * @memberof LoggerReporter
      */
     protected async handleResults(
+        ctx: OverallReportContext,
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
