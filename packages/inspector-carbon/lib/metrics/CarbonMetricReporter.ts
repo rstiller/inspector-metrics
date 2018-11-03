@@ -13,10 +13,11 @@ import {
     Logger,
     Meter,
     MetricRegistry,
+    MetricSetReportContext,
     MetricType,
     MILLISECOND,
     MonotoneCounter,
-    ReportingContext,
+    OverallReportContext,
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
@@ -221,6 +222,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      * @memberof CarbonMetricReporter
      */
     protected handleResults(
+        ctx: OverallReportContext,
         registry: MetricRegistry,
         timestamp: Date,
         type: MetricType,
@@ -243,13 +245,13 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @protected
      * @param {(MonotoneCounter | Counter)} counter
-     * @param {(ReportingContext<MonotoneCounter | Counter>)} ctx
+     * @param {(MetricSetReportContext<MonotoneCounter | Counter>)} ctx
      * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
     protected reportCounter(
         counter: MonotoneCounter | Counter,
-        ctx: ReportingContext<MonotoneCounter | Counter>): CarbonData {
+        ctx: MetricSetReportContext<MonotoneCounter | Counter>): CarbonData {
         const value = counter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -271,11 +273,11 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @protected
      * @param {Gauge<any>} gauge
-     * @param {ReportingContext<Gauge<any>>} ctx
+     * @param {MetricSetReportContext<Gauge<any>>} ctx
      * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    protected reportGauge(gauge: Gauge<any>, ctx: ReportingContext<Gauge<any>>): CarbonData {
+    protected reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): CarbonData {
         const value = gauge.getValue();
         if (!value || isNaN(value)) {
             return null;
@@ -297,11 +299,11 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @protected
      * @param {Histogram} histogram
-     * @param {ReportingContext<Histogram>} ctx
+     * @param {MetricSetReportContext<Histogram>} ctx
      * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    protected reportHistogram(histogram: Histogram, ctx: ReportingContext<Histogram>): CarbonData {
+    protected reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): CarbonData {
         const value = histogram.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -334,11 +336,11 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @protected
      * @param {Meter} meter
-     * @param {ReportingContext<Meter>} ctx
+     * @param {MetricSetReportContext<Meter>} ctx
      * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    protected reportMeter(meter: Meter, ctx: ReportingContext<Meter>): CarbonData {
+    protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): CarbonData {
         const value = meter.getCount();
         if (!value || isNaN(value)) {
             return null;
@@ -364,11 +366,11 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @protected
      * @param {Timer} timer
-     * @param {ReportingContext<Timer>} ctx
+     * @param {MetricSetReportContext<Timer>} ctx
      * @returns {CarbonData}
      * @memberof CarbonMetricReporter
      */
-    protected reportTimer(timer: Timer, ctx: ReportingContext<Timer>): CarbonData {
+    protected reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): CarbonData {
         const value = timer.getCount();
         if (!value || isNaN(value)) {
             return null;
