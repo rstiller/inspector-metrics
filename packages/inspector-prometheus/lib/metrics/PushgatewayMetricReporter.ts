@@ -142,7 +142,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
 
         const req = http.request(options, (res) => {
             if (this.options.log) {
-                this.options.log.debug(`${res.statusCode} ${res.statusMessage}`);
+                this.options.log.trace(`${res.statusCode} ${res.statusMessage}`);
             }
         });
         req.write(payload);

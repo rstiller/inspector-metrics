@@ -53,7 +53,7 @@
     "typescript": "^3.1.6"
   },
   "dependencies": {
-    "inspector-metrics": "1.13.0-rc.4",
+    "inspector-metrics": "1.13.0-rc.5",
     "source-map-support": "0.5.9"
   },
   "files": [
