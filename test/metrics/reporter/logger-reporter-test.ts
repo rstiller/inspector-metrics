@@ -29,6 +29,7 @@ export class MockedLogger implements Logger {
     public warn(): void {}
     public info(): void {}
     public debug(): void {}
+    public trace(): void {}
 }
 
 export class MockedClock implements Clock {
