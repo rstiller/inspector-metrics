@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [2.0.0] - 2018-11-04
 ### Added
 - CHANGELOG
 - compile and test script for different node versions
@@ -14,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - updated dependencies
 - use inspector-metrics@1.13.0
 - adapted new MetricLogger implementation
+- compile target from "es2017" to "es6"
 
 ## [1.1.0] - 2018-10-05
 ### Added

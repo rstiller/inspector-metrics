@@ -2,7 +2,7 @@
   "name": "inspector-elasticsearch",
   "description": "Elasticsearch metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-elasticsearch/",
-  "version": "2.0.0-rc.1",
+  "version": "2.0.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -24,7 +24,7 @@
   ],
   "engines": {
     "node": ">= 6",
-    "npm": ">= 5"
+    "npm": ">= 3"
   },
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.6",
@@ -45,7 +45,7 @@
   },
   "dependencies": {
     "elasticsearch": "15.2.0",
-    "inspector-metrics": "1.13.0-rc.5",
+    "inspector-metrics": "1.13.0",
     "source-map-support": "0.5.9"
   },
   "files": [
