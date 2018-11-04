@@ -1,4 +1,4 @@
-version: "3"
+version: "3.4"
 
 services:
 
@@ -72,21 +72,6 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
       - NODE_VERSION=10
 
-  # test:
-  #   build:
-  #     context: ./test-env/
-  #     args:
-  #       TZ: Europe/Berlin
-  #   restart: "no"
-  #   hostname: playground
-  #   depends_on:
-  #     - prometheus
-  #     - pushgateway
-  #   volumes:
-  #     - ./:/opt/playground/
-  #   working_dir: "/opt/playground"
-  #   command: ["/usr/bin/wait-for-it.sh", "pushgateway:9091", "--", "node", "build/playground/playground.js"]
-
   grafana:
     build:
       context: ./test-env/grafana
@@ -95,10 +80,12 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - grafana-logs:/var/log/grafana
+      - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./playground/dashboards:/dashboards
     ports:
       - "3000:3000"
     restart: "no"
-    hostname: grafana
     depends_on:
       - prometheus
 
@@ -110,21 +97,24 @@ services:
     ports:
       - "9091:9091"
     restart: "no"
-    hostname: pushgateway
 
   prometheus:
     build:
       context: ./test-env/prometheus
       args:
         TZ: CET-1CEST
-    command: ["--config.file", "/etc/prometheus/config.yml"]
+    command: [
+                "--config.file", "/etc/prometheus/config.yml",
+                "--storage.tsdb.path", "/prometheus-data"
+             ]
     ports:
       - "9090:9090"
     restart: "no"
-    hostname: prometheus
     volumes:
+      - prometheus-data:/prometheus-data
       - ./test-env/prometheus/config.yml:/etc/prometheus/config.yml
 
 volumes:
   grafana-data:
   grafana-logs:
+  prometheus-data:

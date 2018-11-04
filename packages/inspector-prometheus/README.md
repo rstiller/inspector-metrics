@@ -154,6 +154,17 @@ pushReporter.start();
 
 ## local dev
 
+### setup playground
+
+Have a look at `playground/playground.ts` to see what is reported to the prometheus server.  
+To let it run in a fully provisioned environment do the following:  
+
+1. execute `npm i`
+1. execute `test-env/boot.sh` - builds the docker images and starts the services
+1. start the playground app by executing `./playground.sh`
+1. navigate to `localhost:3000` in the browser
+1. click on dashboard `Playground Dashboard` and see the reporter work
+
 ### compile & test with different nodejs versions
 
 build docker images:  
