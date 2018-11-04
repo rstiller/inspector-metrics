@@ -5,9 +5,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.13.0] - 2018-11-04
 ### Added
 - CHANGELOG
 - compile and test script for different node versions
+- trace method in Logger interface
 - reporter
     - ScheduledReporter base class
     - MetricType
@@ -18,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - updated docs in README / added https://github.com/rstiller/inspector-csv reference
 - refactored logger-reporter and metric-reporter
 - travisci build for node version 6, 7, 8, 9, 10, 11
+- compile target from "es2017" to "es6"
 
 ## [1.12.1] - 2018-10-16
 ### Changed
