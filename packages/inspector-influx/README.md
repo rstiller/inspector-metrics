@@ -18,7 +18,7 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
 </p>
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and
-is meant to be used with `typescript` / `nodejs`.  
+is meant to be used with `nodejs`.  
 It uses [node-influx](https://github.com/node-influx/node-influx) as influxdb client.
 
 ## install
@@ -28,7 +28,7 @@ It uses [node-influx](https://github.com/node-influx/node-influx) as influxdb cl
 ## basic usage
 
 ```typescript
-import { InfluxMetricReporter } from "inspector-influx";
+import { DefaultSender, InfluxMetricReporter } from "inspector-influx";
 import { MetricRegistry, Timer } from "inspector-metrics";
 
 // influxdb config from https://github.com/node-influx/node-influx/blob/master/src/index.ts#L80
@@ -41,7 +41,10 @@ const dbConfig = {
     ]
 };
 
-const reporter: InfluxMetricReporter = new InfluxMetricReporter(dbConfig);
+const sender = new DefaultSender(dbConfig);
+const reporter: InfluxMetricReporter = new InfluxMetricReporter({
+    sender,
+});
 const registry: MetricRegistry = new MetricRegistry();
 const requests: Timer = registry.newTimer("requests");
 
