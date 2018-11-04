@@ -332,6 +332,31 @@ docker-compose run node9
 docker-compose run node10
 ```
 
+### releaseing / publish docs
+
+```text
+# check functionality
+npm i
+npm run build
+
+# release
+git commit -am "release of a.b.c"
+git push
+git tag va.b.c
+git push --tags
+
+# publish docs
+rm -fr docs/
+git branch -D gh-pages
+git worktree prune
+git worktree list
+git worktree add -b gh-pages docs origin/gh-pages
+npm run publishDocs
+
+# publish package
+npm publish
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)
