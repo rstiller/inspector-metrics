@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2018-11-21
+### Changed
+- allow logger to be null - resolves https://github.com/rstiller/inspector-influx/issues/1
+
 ## [2.0.0] - 2018-11-04
 ### Added
 - changelog
