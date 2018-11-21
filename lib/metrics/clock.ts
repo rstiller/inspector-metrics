@@ -14,7 +14,7 @@ export interface Time {
 /**
  * Gets the time elapsed from parameter one to parameter two in nanoseconds.
  *
- * Also assumes that the first point in time time is elder than the sesond point in time.
+ * Also assumes that the first point in time is older than the second point in time.
  *
  * @export
  * @param {Time} one time sample
