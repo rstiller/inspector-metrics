@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.13.1] - 2018-11-21
+### Changed
+- updated docs in README / added https://github.com/rstiller/inspector-vm reference
+- updated docs in README / fixed first example code
+
 ## [1.13.0] - 2018-11-04
 ### Added
 - CHANGELOG
