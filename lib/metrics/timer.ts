@@ -255,31 +255,33 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
      * Measures the duration of the passed function's invocation
      * synchronously and adds it to the pool.
      *
-     * @returns {ThisType}
+     * @template T
+     * @returns {T}
      * @memberof Timer
      */
-    public time(f: () => void): this {
+    public time<T>(f: () => T): T {
         const startTime: Time = this.clock.time();
         try {
-            f();
+            return f();
         } finally {
             this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
         }
-        return this;
     }
 
     /**
      * Measures the duration of the passed function's invocation
      * asynchronously and adds it to the pool.
      *
-     * @returns {number}
+     * @template T
+     * @returns {T}
      * @memberof Timer
      */
-    public timeAsync(f: () => Promise<any>): Promise<void> {
+    public timeAsync<T>(f: () => Promise<T>): Promise<T> {
         const startTime: Time = this.clock.time();
         return f()
-            .then(() => {
+            .then((res) => {
                 this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
+                return res;
             })
             .catch((err) => {
                 this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
