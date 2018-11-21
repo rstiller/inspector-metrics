@@ -74,7 +74,7 @@ export interface InfluxMetricReporterOptions extends ScheduledMetricReporterOpti
      * @type {Logger}
      * @memberof InfluxMetricReporterOptions
      */
-    log: Logger;
+    log: Logger | null;
     /**
      * A sender implementation used to send metrics to influx DB server.
      *
