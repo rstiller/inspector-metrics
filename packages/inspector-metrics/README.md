@@ -39,6 +39,10 @@ Supported metric types:
 * Meter - measures the rate of events over time (e.g. "requests per second")
 * Timer - measures call-rate of a function and the distribution of the duration of all calls
 
+There are libraries which collect some metrics:
+
+* [node VM](https://github.com/rstiller/inspector-vm) - collects memory & garbage collection metric for node VM
+
 The library ships with a default `console` `MetricReporter`.
 
 Some other reporter:
@@ -54,7 +58,9 @@ import { LoggerReporter, MetricRegistry, Timer } from "inspector-metrics";
 // a registry is a collection of metric objects
 const registry = new MetricRegistry();
 // the reporter prints the stats
-const reporter = new LoggerReporter(global.console);
+const reporter = new LoggerReporter({
+    log: global.console,
+});
 // a new timer instance
 const requests: Timer = registry.newTimer("requests");
 
@@ -66,9 +72,10 @@ setInterval(() => {
     // should report a few milliseconds
     requests.time(() => {
         let a = 0;
+        // tslint:disable-next-line:prefer-const
         let b = 1;
         for (let i = 0; i < 1e6; i++) {
-            a = b + i;
+            a = b + i + a;
         }
     });
 }, 100);
