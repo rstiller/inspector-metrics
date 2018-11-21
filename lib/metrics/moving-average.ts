@@ -32,17 +32,19 @@ export interface MovingAverage {
      * Adds the given value to the logic of the implementation.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof MovingAverage
      */
-    update(value: number): void;
+    update(value: number): this;
 
     /**
      * Triggers the actual average to be updated.
      * A tick represents an update event.
      *
+     * @returns {ThisType}
      * @memberof MovingAverage
      */
-    tick(): void;
+    tick(): this;
 }
 
 /**
@@ -163,10 +165,12 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
      * Adds the value to the current sum.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof ExponentiallyWeightedMovingAverage
      */
-    public update(value: number): void {
+    public update(value: number): this {
         this.sum += value;
+        return this;
     }
 
     /**
@@ -177,9 +181,10 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
      *
      * If the alpha value is high the last average has more weight and vice versa.
      *
+     * @returns {ThisType}
      * @memberof ExponentiallyWeightedMovingAverage
      */
-    public tick(): void {
+    public tick(): this {
         const sum = this.sum;
         const avg = sum / this.interval;
         this.sum -= sum;
@@ -189,6 +194,6 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
         } else {
             this.avg += this.alpha * (avg - this.avg);
         }
+        return this;
     }
-
 }

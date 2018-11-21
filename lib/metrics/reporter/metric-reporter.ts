@@ -181,49 +181,57 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Sets the reporter tags.
      *
      * @param {Map<string, string>} tags
+     * @returns {ThisType}
      * @memberof MetricReporter
      */
-    public setTags(tags: Map<string, string>): void {
+    public setTags(tags: Map<string, string>): this {
         this.options.tags = tags;
+        return this;
     }
 
     /**
      * Implementations start reporting metrics when called.
      *
      * @abstract
+     * @returns {ThisType}
      * @memberof MetricReporter
      */
-    public abstract start(): void;
+    public abstract start(): this;
 
     /**
      * Implementations stop reporting metrics when called.
      *
      * @abstract
+     * @returns {ThisType}
      * @memberof MetricReporter
      */
-    public abstract stop(): void;
+    public abstract stop(): this;
 
     /**
      * Adds a new {@link MetricRegistry} to be reported.
      *
      * @param {MetricRegistry} metricRegistry
+     * @returns {ThisType}
      * @memberof MetricReporter
      */
-    public addMetricRegistry(metricRegistry: MetricRegistry): void {
+    public addMetricRegistry(metricRegistry: MetricRegistry): this {
         this.metricRegistries.push(metricRegistry);
+        return this;
     }
 
     /**
      * Removes the given {@link MetricRegistry} if it was previously added.
      *
      * @param {MetricRegistry} metricRegistry
+     * @returns {ThisType}
      * @memberof MetricReporter
      */
-    public removeMetricRegistry(metricRegistry: MetricRegistry): void {
+    public removeMetricRegistry(metricRegistry: MetricRegistry): this {
         const index: number = this.metricRegistries.indexOf(metricRegistry);
         if (index > -1) {
             this.metricRegistries.splice(index, 1);
         }
+        return this;
     }
 
     /**

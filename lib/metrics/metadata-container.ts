@@ -44,8 +44,8 @@ export interface MetadataContainer {
      * @template T
      * @param {string} name The key of the metadata
      * @param {T} value any value
+     * @returns {ThisType}
      * @memberof MetadataContainer
      */
-    setMetadata<T>(name: string, value: T): void;
-
+    setMetadata<T>(name: string, value: T): this;
 }

@@ -61,20 +61,24 @@ export class StopWatch {
     /**
      * Sets the startTime variable.
      *
+     * @returns {ThisType}
      * @memberof StopWatch
      */
-    public start(): void {
+    public start(): this {
         this.startTime = this.clock.time();
+        return this;
     }
 
     /**
      * Adds the duration between the last invocation of the start function
      * and this invocation to the timer in nanoseconds.
      *
+     * @returns {ThisType}
      * @memberof StopWatch
      */
-    public stop(): void {
+    public stop(): this {
         this.timer.addDuration(diff(this.startTime, this.clock.time()), NANOSECOND);
+        return this;
     }
 
 }
@@ -146,13 +150,15 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
      *
      * @param {number} duration
      * @param {TimeUnit} unit
+     * @returns {ThisType}
      * @memberof Timer
      */
-    public addDuration(duration: number, unit: TimeUnit): void {
+    public addDuration(duration: number, unit: TimeUnit): this {
         if (duration >= 0) {
             this.histogram.update(unit.convertTo(duration, NANOSECOND));
             this.meter.mark(1);
         }
+        return this;
     }
 
     /**
@@ -249,16 +255,17 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
      * Measures the duration of the passed function's invocation
      * synchronously and adds it to the pool.
      *
-     * @returns {number}
+     * @returns {ThisType}
      * @memberof Timer
      */
-    public time(f: () => void): void {
+    public time(f: () => void): this {
         const startTime: Time = this.clock.time();
         try {
             f();
         } finally {
             this.addDuration(diff(startTime, this.clock.time()), NANOSECOND);
         }
+        return this;
     }
 
     /**

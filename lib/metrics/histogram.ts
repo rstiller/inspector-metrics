@@ -96,9 +96,10 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * the value 31 is increasing none of the buckets
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof Histogram
      */
-    public update(value: number): void {
+    public update(value: number): this {
         this.count++;
         this.sum.add(value);
         for (const boundary of this.buckets.boundaries) {
@@ -107,6 +108,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
             }
         }
         this.reservoir.update(value);
+        return this;
     }
 
     /**

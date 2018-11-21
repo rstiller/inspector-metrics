@@ -21,8 +21,9 @@ export interface Groupable {
      * Sets the group name.
      *
      * @param {string} group the new group name
+     * @returns {ThisType}
      * @memberof Groupable
      */
-    setGroup(group: string): void;
+    setGroup(group: string): this;
 
 }

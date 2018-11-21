@@ -22,9 +22,10 @@ export interface Reservoir {
      * Adds a value to the reservoir.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof Reservoir
      */
-    update(value: number): void;
+    update(value: number): this;
 
     /**
      * Creates a new snapshot of this reservoir.
@@ -90,15 +91,17 @@ export class DefaultReservoir implements Reservoir {
      * an old value at a random position is replaced with the specified value.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof DefaultReservoir
      */
-    public update(value: number): void {
+    public update(value: number): this {
         if (this.values.length < this.maxSize) {
             this.values.push(value);
         } else {
             const randomIndex: number = Math.round(Math.random() * this.values.length);
             this.values[randomIndex % this.values.length] = value;
         }
+        return this;
     }
 
     /**
@@ -174,14 +177,16 @@ export class SlidingWindowReservoir implements Reservoir {
      * values is reached, the insertion restarts at the beginning.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof SlidingWindowReservoir
      */
-    public update(value: number): void {
+    public update(value: number): this {
         if (this.values.length < this.maxSize) {
             this.values.push(value);
         } else {
             this.values[this.index++ % this.values.length] = value;
         }
+        return this;
     }
 
     /**
