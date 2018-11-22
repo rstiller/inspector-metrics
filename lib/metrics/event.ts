@@ -1,60 +1,99 @@
 import "source-map-support/register";
 
-import { BaseMetric } from "./metric";
+import { Groupable } from "./groupable";
+import { MetadataContainer } from "./metadata-container";
+import { MetadataManager } from "./metadata-manager";
+import { TagManager } from "./tag-manager";
+import { Taggable } from "./taggable";
 
-/**
- * An event is a special kind of metric representing something that needs to be reported as is.
- * It doesn't need to be tracked in time, and can have tags and fields.
- *
- * @export
- * @class Event
- * @extends {BaseMetric}
- * @template T
- */
-export class Event<T> extends BaseMetric {
+export class Event<TValue> implements Groupable, MetadataContainer, Taggable {
+  private group: string;
+  private metadataManager = new MetadataManager();
+  private tagManager = new TagManager();
+  private name: string;
+  private description: string;
+  private value: TValue;
 
-  /**
-   * The value.
-   *
-   * @private
-   * @type {T}
-   * @memberof Event
-   */
-  private value: T;
-
-  /**
-   * Creates an instance of Event with an optional name.
-   *
-   * @param {string} [name] optional metric name.
-   * @param {string} [description] optional metric description.
-   * @memberof Event
-   */
-  public constructor(name?: string, description?: string) {
-    super();
+  public constructor(name: string, description?: string) {
     this.name = name;
     this.description = description;
   }
 
-  /**
-   * Gets the current value.
-   *
-   * @returns {T}
-   * @memberof Event
-   */
-  public getValue(): T {
+  public getGroup(): string {
+    return this.group;
+  }
+
+  public setGroup(group: string): this {
+    this.group = group;
+    return this;
+  }
+
+  public getMetadataMap(): Map<string, any> {
+    return this.metadataManager.getMetadataMap();
+  }
+
+  public getMetadata<T>(name: string): T {
+    return this.metadataManager.getMetadata<T>(name);
+  }
+
+  public removeMetadata<T>(name: string): T {
+    return this.metadataManager.removeMetadata<T>(name);
+  }
+
+  public setMetadata<T>(name: string, value: T): this {
+    this.metadataManager.setMetadata(name, value);
+    return this;
+  }
+
+  public getTags(): Map<string, string> {
+    return this.tagManager.getTags();
+  }
+
+  public getTag(name: string): string {
+    return this.tagManager.getTag(name);
+  }
+
+  public setTag(name: string, value: string): this {
+    this.tagManager.setTag(name, value);
+    return this;
+  }
+
+  public removeTag(name: string): this {
+    this.tagManager.removeTag(name);
+    return this;
+  }
+
+  public getName(): string {
+    return this.name;
+  }
+
+  public setName(name: string): this {
+    this.name = name;
+    return this;
+  }
+
+  public getDescription(): string {
+    return this.description;
+  }
+
+  public setDescription(description: string): this {
+    this.description = description;
+    return this;
+  }
+
+  public getValue(): TValue {
     return this.value;
   }
 
-  /**
-   * Sets the current value.
-   *
-   * @param {T} value
-   * @returns {ThisType}
-   * @memberof Event
-   */
-  public setValue(value: T): this {
+  public setValue(value: TValue): this {
     this.value = value;
     return this;
   }
 
+  public toString(): string {
+    if (this.group) {
+      return `${this.group}.${this.name}`;
+    }
+    return this.name;
+  }
 }

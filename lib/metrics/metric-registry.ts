@@ -31,7 +31,7 @@ export class MetricRegistryListenerRegistration {
      * @param {MetricRegistry} registry
      * @memberof MetricRegistryListenerRegistration
      */
-    public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) {}
+    public constructor(private listener: MetricRegistryListener, private registry: MetricRegistry) { }
 
     /**
      * Removes the managed listener from the metric registry.
@@ -127,7 +127,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public static isPureMonotoneCounter(instance: any): instance is MonotoneCounter {
         return (instance instanceof MonotoneCounter || instance.metricRef instanceof MonotoneCounter) &&
-                !MetricRegistry.isCounter(instance);
+            !MetricRegistry.isCounter(instance);
     }
 
     /**
@@ -177,9 +177,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      */
     public static isGauge<T>(instance: any): instance is Gauge<T> {
         const directGauge: boolean = !!instance.getValue && instance.getValue instanceof Function;
-        const gaugeRegistration =   !!instance.metricRef &&
-                                    !!instance.metricRef.getValue &&
-                                    instance.metricRef.getValue instanceof Function;
+        const gaugeRegistration = !!instance.metricRef &&
+            !!instance.metricRef.getValue &&
+            instance.metricRef.getValue instanceof Function;
         return directGauge || gaugeRegistration;
     }
 

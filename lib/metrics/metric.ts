@@ -2,6 +2,8 @@ import "source-map-support/register";
 
 import { Groupable } from "./groupable";
 import { MetadataContainer } from "./metadata-container";
+import { MetadataManager } from "./metadata-manager";
+import { TagManager } from "./tag-manager";
 import { Taggable } from "./taggable";
 
 /**
@@ -79,14 +81,16 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     public readonly id: number = BaseMetric.COUNTER++;
+
     /**
      * Maps of tags for this metric.
      *
      * @protected
-     * @type {Map<string, string>}
+     * @type {TagManager}
      * @memberof BaseMetric
      */
-    protected tags: Map<string, string> = new Map();
+    protected tagManager = new TagManager();
+
     /**
      * The group set to this metric.
      *
@@ -95,6 +99,7 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     protected group: string;
+
     /**
      * The name of this metric.
      *
@@ -103,6 +108,7 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     protected name: string;
+
     /**
      * The description of this metric.
      *
@@ -111,31 +117,48 @@ export abstract class BaseMetric implements Metric {
      * @memberof BaseMetric
      */
     protected description: string;
+
     /**
      * The metadata associated with an instance of class.
      *
      * @protected
-     * @type {Map<string, any>}
+     * @type {MetadataManager}
      * @memberof BaseMetric
      */
-    protected metadata: Map<string, any> = new Map();
+    private metadataManager = new MetadataManager();
 
     public getMetadataMap(): Map<string, any> {
-        return this.metadata;
+        return this.metadataManager.getMetadataMap();
     }
 
     public getMetadata<T>(name: string): T {
-        return this.metadata.get(name) as T;
+        return this.metadataManager.getMetadata<T>(name);
     }
 
     public removeMetadata<T>(name: string): T {
-        const value = this.metadata.get(name) as T;
-        this.metadata.delete(name);
-        return value;
+        return this.metadataManager.removeMetadata<T>(name);
     }
 
     public setMetadata<T>(name: string, value: T): this {
-        this.metadata.set(name, value);
+        this.metadataManager.setMetadata(name, value);
+        return this;
+    }
+
+    public getTags(): Map<string, string> {
+        return this.tagManager.getTags();
+    }
+
+    public getTag(name: string): string {
+        return this.tagManager.getTag(name);
+    }
+
+    public setTag(name: string, value: string): this {
+        this.tagManager.setTag(name, value);
+        return this;
+    }
+
+    public removeTag(name: string): this {
+        this.tagManager.removeTag(name);
         return this;
     }
 
@@ -163,24 +186,6 @@ export abstract class BaseMetric implements Metric {
 
     public setGroup(group: string): this {
         this.group = group;
-        return this;
-    }
-
-    public getTags(): Map<string, string> {
-        return this.tags;
-    }
-
-    public getTag(name: string): string {
-        return this.tags.get(name);
-    }
-
-    public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
-        return this;
-    }
-
-    public removeTag(name: string): this {
-        this.tags.delete(name);
         return this;
     }
 
