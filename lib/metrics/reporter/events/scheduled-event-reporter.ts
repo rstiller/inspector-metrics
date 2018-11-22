@@ -17,9 +17,8 @@ export abstract class ScheduledEventReporter<O extends ScheduledEventReporterOpt
   }
 
   public start(): this {
-    const options = this.getOptions();
-    const interval: number = options.unit.convertTo(options.reportInterval, MILLISECOND);
-    this.timer = options.scheduler(() => this.doReport(), interval);
+    const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
+    this.timer = this.options.scheduler(() => this.doReport(), interval);
     return this;
   }
 
@@ -27,6 +26,9 @@ export abstract class ScheduledEventReporter<O extends ScheduledEventReporterOpt
     if (this.timer) {
       this.timer.unref();
     }
+    // flush buffer if there are some events remaining
+    // TODO : doReport is async, there is a risk to loose some events if we don't wait the operation to finsh
+    this.doReport();
     return this;
   }
 
@@ -35,12 +37,14 @@ export abstract class ScheduledEventReporter<O extends ScheduledEventReporterOpt
     return this;
   }
 
-  protected abstract async reportEvents(events: Array<Event<any>>): Promise<any>;
+  protected abstract async reportEvents(events: Array<Event<any>>): Promise<void>;
 
-  private doReport(): Promise<any> {
-    // reset events buffer
-    const events = this.events;
-    this.events = new Array<Event<any>>();
-    return this.reportEvents(events);
+  private async doReport(): Promise<void> {
+    if (this.events.length) {
+      // reset events buffer
+      const events = this.events;
+      this.events = new Array<Event<any>>();
+      return this.reportEvents(events);
+    }
   }
 }
