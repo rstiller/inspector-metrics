@@ -34,7 +34,7 @@ export class Int64Wrapper {
      * Adds the specified value.
      *
      * @param {number} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Int64Wrapper
      */
     public add(value: number): this {

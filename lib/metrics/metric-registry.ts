@@ -36,7 +36,7 @@ export class MetricRegistryListenerRegistration {
     /**
      * Removes the managed listener from the metric registry.
      *
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistryListenerRegistration
      */
     public remove(): this {
@@ -260,7 +260,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Removes a listener manually.
      *
      * @param {MetricRegistryListener} listener
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public removeListener(listener: MetricRegistryListener): this {
@@ -275,7 +275,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Sets the default name factory for metric instances.
      *
      * @param {NameFactory} nameFactory
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public setNameFactory(nameFactory: NameFactory): this {
@@ -297,7 +297,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Sets the default clock.
      *
      * @param {Clock} defaultClock
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public setDefaultClock(defaultClock: Clock): this {
@@ -596,7 +596,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Removes all managed metric instances by name regardless of the type.
      *
      * @param {string} name
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public removeMetrics(name: string): this {
@@ -796,7 +796,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @param {Metric} metric
      * @param {string} [group=null]
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public registerMetric(metric: Metric, group: string = null, description: string = null): this {
@@ -832,7 +832,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @param {Metric} metric
      * @param {string} [group=null]
      * @deprecated since version 1.5 - use {@link registerMetric} instead
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricRegistry
      */
     public register(name: string, metric: Metric, group: string = null, description: string = null): this {
@@ -916,12 +916,10 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @private
      * @param {string} name
      * @param {Metric} metric
-     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    private fireMetricAdded(name: string, metric: Metric): this {
+    private fireMetricAdded(name: string, metric: Metric): void {
         this.listeners.forEach((listener) => listener.metricAdded(name, metric));
-        return this;
     }
 
     /**
@@ -930,11 +928,9 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @private
      * @param {string} name
      * @param {Metric} metric
-     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    private fireMetricRemoved(name: string, metric: Metric): this {
+    private fireMetricRemoved(name: string, metric: Metric): void {
         this.listeners.forEach((listener) => listener.metricRemoved(name, metric));
-        return this;
     }
 }

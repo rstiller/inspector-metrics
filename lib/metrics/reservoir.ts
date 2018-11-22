@@ -22,7 +22,7 @@ export interface Reservoir {
      * Adds a value to the reservoir.
      *
      * @param {number} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Reservoir
      */
     update(value: number): this;
@@ -91,7 +91,7 @@ export class DefaultReservoir implements Reservoir {
      * an old value at a random position is replaced with the specified value.
      *
      * @param {number} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof DefaultReservoir
      */
     public update(value: number): this {
@@ -177,7 +177,7 @@ export class SlidingWindowReservoir implements Reservoir {
      * values is reached, the insertion restarts at the beginning.
      *
      * @param {number} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof SlidingWindowReservoir
      */
     public update(value: number): this {

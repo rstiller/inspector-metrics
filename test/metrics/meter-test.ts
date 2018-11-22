@@ -53,6 +53,33 @@ export class MeterTest {
     }
 
     @test
+    public "mark using fluent interface"(): void {
+        this.clock.setCurrentTime({
+            milliseconds: 0,
+            nanoseconds: 0,
+        });
+        const meter = new Meter(this.clock, 1);
+
+        expect(meter.getCount()).to.equal(0);
+        expect(meter.getMeanRate()).to.equal(0);
+        expect(meter.get1MinuteRate()).to.equal(0);
+        expect(meter.get5MinuteRate()).to.equal(0);
+        expect(meter.get15MinuteRate()).to.equal(0);
+
+        meter
+            .mark(1)
+            .mark(2)
+            .mark(3)
+            .mark(4);
+
+        expect(meter.getCount()).to.equal(10);
+        expect(meter.getMeanRate()).to.equal(Infinity);
+        expect(meter.get1MinuteRate()).to.equal(0);
+        expect(meter.get5MinuteRate()).to.equal(0);
+        expect(meter.get15MinuteRate()).to.equal(0);
+    }
+
+    @test
     public "mark and tick and check rates"(): void {
         this.clock.setCurrentTime({
             milliseconds: 0,

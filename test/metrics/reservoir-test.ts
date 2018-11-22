@@ -87,6 +87,29 @@ export class DefaultReservoirTest {
     }
 
     @test
+    public "check snapshot from same value twice with fluent interface"(): void {
+        const reservoir = new DefaultReservoir(2);
+        expect(reservoir.size()).to.equal(0);
+        reservoir
+            .update(1)
+            .update(1);
+        expect(reservoir.size()).to.equal(2);
+
+        const snapshot = reservoir.snapshot();
+        expect(snapshot.get75thPercentile()).to.equal(1);
+        expect(snapshot.get95thPercentile()).to.equal(1);
+        expect(snapshot.get98thPercentile()).to.equal(1);
+        expect(snapshot.get999thPercentile()).to.equal(1);
+        expect(snapshot.get99thPercentile()).to.equal(1);
+        expect(snapshot.getMax()).to.equal(1);
+        expect(snapshot.getMean()).to.equal(1);
+        expect(snapshot.getMedian()).to.equal(1);
+        expect(snapshot.getMin()).to.equal(1);
+        expect(snapshot.getStdDev()).to.equal(0);
+        expect(snapshot.size()).to.equal(2);
+    }
+
+    @test
     public "check snapshot from different values"(): void {
         const reservoir = new DefaultReservoir(2);
         expect(reservoir.size()).to.equal(0);
@@ -118,6 +141,30 @@ export class DefaultReservoirTest {
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
         reservoir.update(1);
+        expect(reservoir.size()).to.equal(2);
+
+        const snapshot = reservoir.snapshot();
+        expect(snapshot.get75thPercentile()).to.equal(1);
+        expect(snapshot.get95thPercentile()).to.equal(1);
+        expect(snapshot.get98thPercentile()).to.equal(1);
+        expect(snapshot.get999thPercentile()).to.equal(1);
+        expect(snapshot.get99thPercentile()).to.equal(1);
+        expect(snapshot.getMax()).to.equal(1);
+        expect(snapshot.getMean()).to.equal(1);
+        expect(snapshot.getMedian()).to.equal(1);
+        expect(snapshot.getMin()).to.equal(1);
+        expect(snapshot.getStdDev()).to.equal(0);
+        expect(snapshot.size()).to.equal(2);
+    }
+
+    @test
+    public "check snapshot from same value more times than capacity with fluent interface"(): void {
+        const reservoir = new DefaultReservoir(2);
+        expect(reservoir.size()).to.equal(0);
+        reservoir
+            .update(1)
+            .update(1)
+            .update(1);
         expect(reservoir.size()).to.equal(2);
 
         const snapshot = reservoir.snapshot();
@@ -189,6 +236,16 @@ export class SlidingWindowReservoirTest {
     }
 
     @test
+    public "check correct size with fluent interface"(): void {
+        const reservoir = new SlidingWindowReservoir(2);
+        expect(reservoir.size()).to.equal(0);
+        reservoir
+            .update(1)
+            .update(1);
+        expect(reservoir.size()).to.equal(2);
+    }
+
+    @test
     public "check snapshot from no values"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
@@ -252,6 +309,29 @@ export class SlidingWindowReservoirTest {
     }
 
     @test
+    public "check snapshot from same value twice with fluent interface"(): void {
+        const reservoir = new SlidingWindowReservoir(2);
+        expect(reservoir.size()).to.equal(0);
+        reservoir
+            .update(1)
+            .update(1);
+        expect(reservoir.size()).to.equal(2);
+
+        const snapshot = reservoir.snapshot();
+        expect(snapshot.get75thPercentile()).to.equal(1);
+        expect(snapshot.get95thPercentile()).to.equal(1);
+        expect(snapshot.get98thPercentile()).to.equal(1);
+        expect(snapshot.get999thPercentile()).to.equal(1);
+        expect(snapshot.get99thPercentile()).to.equal(1);
+        expect(snapshot.getMax()).to.equal(1);
+        expect(snapshot.getMean()).to.equal(1);
+        expect(snapshot.getMedian()).to.equal(1);
+        expect(snapshot.getMin()).to.equal(1);
+        expect(snapshot.getStdDev()).to.equal(0);
+        expect(snapshot.size()).to.equal(2);
+    }
+
+    @test
     public "check snapshot from different values"(): void {
         const reservoir = new SlidingWindowReservoir(2);
         expect(reservoir.size()).to.equal(0);
@@ -283,6 +363,30 @@ export class SlidingWindowReservoirTest {
         reservoir.update(1);
         expect(reservoir.size()).to.equal(2);
         reservoir.update(1);
+        expect(reservoir.size()).to.equal(2);
+
+        const snapshot = reservoir.snapshot();
+        expect(snapshot.get75thPercentile()).to.equal(1);
+        expect(snapshot.get95thPercentile()).to.equal(1);
+        expect(snapshot.get98thPercentile()).to.equal(1);
+        expect(snapshot.get999thPercentile()).to.equal(1);
+        expect(snapshot.get99thPercentile()).to.equal(1);
+        expect(snapshot.getMax()).to.equal(1);
+        expect(snapshot.getMean()).to.equal(1);
+        expect(snapshot.getMedian()).to.equal(1);
+        expect(snapshot.getMin()).to.equal(1);
+        expect(snapshot.getStdDev()).to.equal(0);
+        expect(snapshot.size()).to.equal(2);
+    }
+
+    @test
+    public "check snapshot from same value more times than capacity with fluent interface"(): void {
+        const reservoir = new SlidingWindowReservoir(2);
+        expect(reservoir.size()).to.equal(0);
+        reservoir
+            .update(1)
+            .update(1)
+            .update(1);
         expect(reservoir.size()).to.equal(2);
 
         const snapshot = reservoir.snapshot();

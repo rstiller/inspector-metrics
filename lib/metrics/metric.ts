@@ -26,7 +26,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
      * Sets the name of the metric.
      *
      * @param {string} name
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Metric
      */
     setName(name: string): this;
@@ -43,7 +43,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
      * Sets the description of the metric.
      *
      * @param {string} description
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Metric
      */
     setDescription(description: string): this;

@@ -146,7 +146,7 @@ export class Meter extends BaseMetric implements Metered {
      * Increases the counter and updates the averages.
      *
      * @param {number} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Meter
      */
     public mark(value: number): this {
@@ -221,32 +221,28 @@ export class Meter extends BaseMetric implements Metered {
      *
      * @private
      * @param {number} ticks number of updates.
-     * @returns {ThisType}
      * @memberof Meter
      */
-    private tick(ticks: number): this {
+    private tick(ticks: number): void {
         while (ticks-- > 0) {
             this.avg15Minute.tick();
             this.avg5Minute.tick();
             this.avg1Minute.tick();
         }
-        return this;
     }
 
     /**
      * Checks for if an update of the averages is needed and if so updates the {@link Meter#lastTime}.
      *
      * @private
-     * @returns {ThisType}
      * @memberof Meter
      */
-    private tickIfNeeded(): this {
+    private tickIfNeeded(): void {
         const currentTime: Time = this.clock.time();
         const age: number = diff(this.lastTime, currentTime);
         if (age > this.interval) {
             this.lastTime = currentTime;
             this.tick(Math.floor(age / this.interval));
         }
-        return this;
     }
 }

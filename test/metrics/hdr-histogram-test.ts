@@ -46,6 +46,25 @@ export class HdrHistogramTest {
     }
 
     @test
+    public "simple count and get with fluent interface"(): void {
+        const histogram: HdrHistogram = new HdrHistogram(1, 2, 3);
+        expect(histogram.getCount()).to.equal(0);
+        expect(histogram.getSum().toNumber()).to.equal(0);
+
+        histogram.update(1);
+        expect(histogram.getCount()).to.equal(1);
+        expect(histogram.getSum().toNumber()).to.equal(1);
+
+        histogram
+            .update(1)
+            .update(2)
+            .update(3)
+            .update(4);
+        expect(histogram.getCount()).to.equal(5);
+        expect(histogram.getSum().toNumber()).to.equal(11);
+    }
+
+    @test
     public "update negative values"(): void {
         const histogram: HdrHistogram = new HdrHistogram(1, 33, 3);
         expect(histogram.getCount()).to.equal(0);

@@ -72,7 +72,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      * Uses the scheduler function to call the {@link #report} function
      * in the interval specified. The interval is converted into {@link MILLISECOND}s.
      *
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof ScheduledMetricReporter
      */
     public start(): this {
@@ -84,7 +84,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
     /**
      * Stops reporting metrics.
      *
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof ScheduledMetricReporter
      */
     public stop(): this {
