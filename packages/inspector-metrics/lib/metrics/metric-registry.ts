@@ -36,10 +36,12 @@ export class MetricRegistryListenerRegistration {
     /**
      * Removes the managed listener from the metric registry.
      *
+     * @returns {ThisType}
      * @memberof MetricRegistryListenerRegistration
      */
-    public remove(): void {
+    public remove(): this {
         this.registry.removeListener(this.listener);
+        return this;
     }
 
 }
@@ -258,23 +260,27 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Removes a listener manually.
      *
      * @param {MetricRegistryListener} listener
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public removeListener(listener: MetricRegistryListener): void {
+    public removeListener(listener: MetricRegistryListener): this {
         const index = this.listeners.indexOf(listener);
         if (index > -1) {
             delete this.listeners[index];
         }
+        return this;
     }
 
     /**
      * Sets the default name factory for metric instances.
      *
      * @param {NameFactory} nameFactory
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public setNameFactory(nameFactory: NameFactory): void {
+    public setNameFactory(nameFactory: NameFactory): this {
         this.nameFactory = nameFactory;
+        return this;
     }
 
     /**
@@ -291,10 +297,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * Sets the default clock.
      *
      * @param {Clock} defaultClock
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public setDefaultClock(defaultClock: Clock): void {
+    public setDefaultClock(defaultClock: Clock): this {
         this.defaultClock = defaultClock;
+        return this;
     }
 
     /**
@@ -569,7 +577,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeMetric(name: string): void {
+    public removeMetric(name: string): this {
         const metrics: Metric[] = this.getByName(name);
 
         if (metrics.length > 0) {
@@ -581,15 +589,17 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             }
             this.fireMetricRemoved(name, metrics[0]);
         }
+        return this;
     }
 
     /**
      * Removes all managed metric instances by name regardless of the type.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public removeMetrics(name: string): void {
+    public removeMetrics(name: string): this {
         const metrics: Metric[] = this.getByName(name);
 
         metrics.forEach((metric) => {
@@ -601,41 +611,42 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
             }
             this.fireMetricRemoved(name, metric);
         });
+        return this;
     }
 
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeCounter(name: string): void {
-        this.removeMetric(name);
+    public removeCounter(name: string): this {
+        return this.removeMetric(name);
     }
 
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeGauge(name: string): void {
-        this.removeMetric(name);
+    public removeGauge(name: string): this {
+        return this.removeMetric(name);
     }
 
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeHistogram(name: string): void {
-        this.removeMetric(name);
+    public removeHistogram(name: string): this {
+        return this.removeMetric(name);
     }
 
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeMeter(name: string): void {
-        this.removeMetric(name);
+    public removeMeter(name: string): this {
+        return this.removeMetric(name);
     }
 
     /**
      * @deprecated since version 1.3 - use {@link removeMetrics} instead
      */
-    public removeTimer(name: string): void {
-        this.removeMetric(name);
+    public removeTimer(name: string): this {
+        return this.removeMetric(name);
     }
 
     /**
@@ -785,13 +796,14 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      *
      * @param {Metric} metric
      * @param {string} [group=null]
-     *
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public registerMetric(metric: Metric, group: string = null, description: string = null): void {
+    public registerMetric(metric: Metric, group: string = null, description: string = null): this {
         if (!!group) {
             metric.setGroup(group);
         }
+
         if (!!description) {
             metric.setDescription(description);
         }
@@ -810,6 +822,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
                 this.registerMetric(m);
             });
         }
+        return this;
     }
 
     /**
@@ -819,9 +832,10 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @param {Metric} metric
      * @param {string} [group=null]
      * @deprecated since version 1.5 - use {@link registerMetric} instead
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    public register(name: string, metric: Metric, group: string = null, description: string = null): void {
+    public register(name: string, metric: Metric, group: string = null, description: string = null): this {
         if (!!group) {
             metric.setGroup(group);
         }
@@ -845,6 +859,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
                 this.register(metricName, m);
             });
         }
+        return this;
     }
 
     /**
@@ -901,10 +916,12 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @private
      * @param {string} name
      * @param {Metric} metric
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    private fireMetricAdded(name: string, metric: Metric): void {
+    private fireMetricAdded(name: string, metric: Metric): this {
         this.listeners.forEach((listener) => listener.metricAdded(name, metric));
+        return this;
     }
 
     /**
@@ -913,10 +930,11 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @private
      * @param {string} name
      * @param {Metric} metric
+     * @returns {ThisType}
      * @memberof MetricRegistry
      */
-    private fireMetricRemoved(name: string, metric: Metric): void {
+    private fireMetricRemoved(name: string, metric: Metric): this {
         this.listeners.forEach((listener) => listener.metricRemoved(name, metric));
+        return this;
     }
-
 }

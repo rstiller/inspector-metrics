@@ -30,16 +30,18 @@ export interface Taggable {
      *
      * @param {string} name
      * @param {string} value
+     * @returns {ThisType}
      * @memberof Taggable
      */
-    setTag(name: string, value: string): void;
+    setTag(name: string, value: string): this;
 
     /**
      * Removes the specified tag.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof Taggable
      */
-    removeTag(name: string): void;
+    removeTag(name: string): this;
 
 }

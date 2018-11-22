@@ -131,10 +131,12 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * Sets the {@link Logger} instance.
      *
      * @param {Logger} log
+     * @returns {ThisType}
      * @memberof LoggerReporter
      */
-    public setLog(log: Logger): void {
+    public setLog(log: Logger): this {
         this.options.log = log;
+        return this;
     }
 
     /**
