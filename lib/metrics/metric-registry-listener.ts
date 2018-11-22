@@ -9,7 +9,6 @@ import { Metric } from "./metric";
  * @interface MetricRegistryListener
  */
 export interface MetricRegistryListener {
-
     /**
      * Called when a metric was added to a {@link MetricRegistry}.
      *
@@ -27,5 +26,4 @@ export interface MetricRegistryListener {
      * @memberof MetricRegistryListener
      */
     metricRemoved(name: string, metric: Metric): void;
-
 }

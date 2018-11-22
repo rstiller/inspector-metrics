@@ -252,9 +252,10 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
      * Updates the histogram, all counters and th overall sum with the given value.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof HdrHistogram
      */
-    public update(value: number): void {
+    public update(value: number): this {
         this.count++;
         this.sum.add(value);
         for (const boundary of this.buckets.boundaries) {
@@ -263,6 +264,7 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
             }
         }
         this.histogram.record(value);
+        return this;
     }
 
 }

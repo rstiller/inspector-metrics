@@ -26,9 +26,10 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
      * Sets the name of the metric.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof Metric
      */
-    setName(name: string): void;
+    setName(name: string): this;
 
     /**
      * Gets the description of the metric.
@@ -42,9 +43,10 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
      * Sets the description of the metric.
      *
      * @param {string} description
+     * @returns {ThisType}
      * @memberof Metric
      */
-    setDescription(description: string): void;
+    setDescription(description: string): this;
 
 }
 
@@ -132,32 +134,36 @@ export abstract class BaseMetric implements Metric {
         return value;
     }
 
-    public setMetadata<T>(name: string, value: T): void {
+    public setMetadata<T>(name: string, value: T): this {
         this.metadata.set(name, value);
+        return this;
     }
 
     public getName(): string {
         return this.name;
     }
 
-    public setName(name: string): void {
+    public setName(name: string): this {
         this.name = name;
+        return this;
     }
 
     public getDescription(): string {
         return this.description;
     }
 
-    public setDescription(description: string): void {
+    public setDescription(description: string): this {
         this.description = description;
+        return this;
     }
 
     public getGroup(): string {
         return this.group;
     }
 
-    public setGroup(group: string): void {
+    public setGroup(group: string): this {
         this.group = group;
+        return this;
     }
 
     public getTags(): Map<string, string> {
@@ -168,12 +174,14 @@ export abstract class BaseMetric implements Metric {
         return this.tags.get(name);
     }
 
-    public setTag(name: string, value: string): void {
+    public setTag(name: string, value: string): this {
         this.tags.set(name, value);
+        return this;
     }
 
-    public removeTag(name: string): void {
+    public removeTag(name: string): this {
         this.tags.delete(name);
+        return this;
     }
 
     public toString(): string {

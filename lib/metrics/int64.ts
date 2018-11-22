@@ -34,10 +34,12 @@ export class Int64Wrapper {
      * Adds the specified value.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof Int64Wrapper
      */
-    public add(value: number): void {
+    public add(value: number): this {
         this.num = this.num.add(value);
+        return this;
     }
 
     /**

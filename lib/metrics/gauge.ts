@@ -68,10 +68,12 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
      * Sets the current value.
      *
      * @param {number} value
+     * @returns {ThisType}
      * @memberof SimpleGauge
      */
-    public setValue(value: number): void {
+    public setValue(value: number): this {
         this.value = value;
+        return this;
     }
 
 }
