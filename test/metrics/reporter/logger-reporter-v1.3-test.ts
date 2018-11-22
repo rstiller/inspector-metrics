@@ -14,10 +14,11 @@ import {
     LoggerReporter,
     MetricRegistry,
     MILLISECOND,
-    Scheduler,
     SimpleGauge,
     Time,
 } from "../../../lib/metrics/";
+
+import { Scheduler } from "../../../lib/metrics/reporter/scheduler";
 
 chai.use(sinonChai);
 

@@ -2,11 +2,7 @@ import "source-map-support/register";
 
 import { MILLISECOND, TimeUnit } from "../time-unit";
 import { MetricReporter, MetricReporterOptions } from "./metric-reporter";
-
-/**
- * Scheduler function type definition.
- */
-export type Scheduler = (prog: () => Promise<any>, interval: number) => NodeJS.Timer;
+import { Scheduler } from "./scheduler";
 
 /**
  * Options for the {@link ScheduledMetricReporter}.

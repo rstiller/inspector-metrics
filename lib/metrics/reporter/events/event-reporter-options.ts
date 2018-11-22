@@ -1,3 +1,5 @@
+import { Logger } from "../logger";
+
 export interface EventReporterOptions {
-  // TODO
+  log?: Logger | null;
 }
