@@ -8,5 +8,5 @@ export const NullLogger = {
   debug(...args: any[]): any {
   },
   trace(...args: any[]): any {
-  }
+  },
 };

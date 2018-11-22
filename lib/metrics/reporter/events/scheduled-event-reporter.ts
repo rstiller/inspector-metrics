@@ -1,8 +1,14 @@
 import { Event } from "../../event";
-import { MILLISECOND } from "../../time-unit";
+import { MILLISECOND, TimeUnit } from "../../time-unit";
+import { Scheduler } from "../scheduler";
 import { EventReporter } from "./event-reporter";
-import { EventReporterBase } from "./event-reporter-base";
-import { ScheduledEventReporterOptions } from "./scheduled-event-reporter-options";
+import { EventReporterBase, EventReporterOptions } from "./event-reporter-base";
+
+export interface ScheduledEventReporterOptions extends EventReporterOptions {
+  readonly reportInterval?: number;
+  readonly unit?: TimeUnit;
+  readonly scheduler?: Scheduler;
+}
 
 export abstract class ScheduledEventReporter<O extends ScheduledEventReporterOptions>
   extends EventReporterBase<O>
