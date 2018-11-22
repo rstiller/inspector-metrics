@@ -50,6 +50,18 @@ export class ExponentiallyWeightedMovingAverageTest {
     }
 
     @test
+    public "multiple values using fluent interface"(): void {
+        this.movingAverage
+            .update(5)
+            .tick()
+            .update(6)
+            .tick()
+            .update(7)
+            .tick();
+        expect(this.movingAverage.getAverage(MILLISECOND)).to.equal(6.25);
+    }
+
+    @test
     public "multiple values - degraded"(): void {
         this.movingAverage.update(5);
         this.movingAverage.tick();

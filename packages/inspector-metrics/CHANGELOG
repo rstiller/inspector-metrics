@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.0] - 2018-11-22
+### Changed
+- introduced fluent interface for public setter functions
+    - https://github.com/rstiller/inspector-metrics/pull/8
+    - thanks to https://github.com/doubret
+
 ## [1.13.1] - 2018-11-21
 ### Changed
 - updated docs in README / added https://github.com/rstiller/inspector-vm reference

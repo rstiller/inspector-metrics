@@ -181,7 +181,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Sets the reporter tags.
      *
      * @param {Map<string, string>} tags
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricReporter
      */
     public setTags(tags: Map<string, string>): this {
@@ -193,7 +193,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Implementations start reporting metrics when called.
      *
      * @abstract
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricReporter
      */
     public abstract start(): this;
@@ -202,7 +202,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Implementations stop reporting metrics when called.
      *
      * @abstract
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricReporter
      */
     public abstract stop(): this;
@@ -211,7 +211,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Adds a new {@link MetricRegistry} to be reported.
      *
      * @param {MetricRegistry} metricRegistry
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricReporter
      */
     public addMetricRegistry(metricRegistry: MetricRegistry): this {
@@ -223,7 +223,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Removes the given {@link MetricRegistry} if it was previously added.
      *
      * @param {MetricRegistry} metricRegistry
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof MetricReporter
      */
     public removeMetricRegistry(metricRegistry: MetricRegistry): this {

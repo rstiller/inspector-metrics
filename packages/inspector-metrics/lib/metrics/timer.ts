@@ -61,7 +61,7 @@ export class StopWatch {
     /**
      * Sets the startTime variable.
      *
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof StopWatch
      */
     public start(): this {
@@ -73,7 +73,7 @@ export class StopWatch {
      * Adds the duration between the last invocation of the start function
      * and this invocation to the timer in nanoseconds.
      *
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof StopWatch
      */
     public stop(): this {
@@ -150,7 +150,7 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
      *
      * @param {number} duration
      * @param {TimeUnit} unit
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Timer
      */
     public addDuration(duration: number, unit: TimeUnit): this {

@@ -30,7 +30,7 @@ export interface Taggable {
      *
      * @param {string} name
      * @param {string} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Taggable
      */
     setTag(name: string, value: string): this;
@@ -39,7 +39,7 @@ export interface Taggable {
      * Removes the specified tag.
      *
      * @param {string} name
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof Taggable
      */
     removeTag(name: string): this;
