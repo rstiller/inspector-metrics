@@ -1,3 +1,3 @@
-export interface IAdapter<TIn, TOut> {
-  adapt(element: TIn): TOut;
-}
+// export interface IAdapter<TIn, TOut> {
+//   adapt(element: TIn): TOut;
+// }
