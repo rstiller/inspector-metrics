@@ -37,26 +37,29 @@ export class ScheduledEventReporter<TEventData, TResult, TOptions extends ISched
   extends EventReporterBase<TEventData, TResult, TOptions>
   implements IEventReporter<TEventData, TResult> {
 
-  private batch: EventBatch<TEventData, TResult>;
+  private batch: EventBatch<TEventData, TResult> | null;
 
   public constructor(options: TOptions) {
     super(options);
   }
 
   protected doReport(event: Event<TEventData>): Promise<TResult> {
-    if (!this.batch) {
+    if (this.batch == null) {
       this.createBatch();
     }
     return this.batch.push([event]);
   }
 
   private createBatch(): void {
-    const interval = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
+    if (this.pipeline) {
+      const interval = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
+      const pipeline = this.pipeline;
 
-    this.batch = new EventBatch<TEventData, TResult>(buffer => {
-      //  reset current bactch
-      this.batch = null;
-      return this.pipeline.push(buffer);
-    }, interval);
+      this.batch = new EventBatch<TEventData, TResult>(buffer => {
+        //  reset current bactch
+        this.batch = null;
+        return pipeline.push(buffer);
+      }, interval);
+    }
   }
 }

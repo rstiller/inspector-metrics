@@ -23,7 +23,7 @@ export interface Taggable {
      * @returns {string}
      * @memberof Taggable
      */
-    getTag(name: string): string;
+    getTag(name: string): string | undefined;
 
     /**
      * Sets the specified tag.

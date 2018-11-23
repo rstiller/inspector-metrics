@@ -1,6 +1,7 @@
 export * from "./clock";
 export * from "./counter";
 export * from "./counting";
+export * from "./event";
 export * from "./gauge";
 export * from "./groupable";
 export * from "./hdr-histogram";
@@ -20,6 +21,7 @@ export * from "./reporter/metric-entry";
 export * from "./reporter/metric-reporter";
 export * from "./reporter/metric-type";
 export * from "./reporter/scheduled-reporter";
+export * from "./reporter/events/";
 export * from "./reservoir";
 export * from "./sampling";
 export * from "./size-gauge";

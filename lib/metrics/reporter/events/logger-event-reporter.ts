@@ -6,11 +6,11 @@ import { IEventPipeline } from "./event-pipeline";
 import { RealtimeEventReporter } from "./realtime-event-reporter";
 import { ScheduledEventReporter, IScheduledEventReporterOptions } from "./scheduled-event-reporter";
 
-class LoggerEventPipeline<TEventData> implements IEventPipeline<TEventData, void> {
+class LoggerEventPipeline implements IEventPipeline<any, void> {
   constructor(private log: Logger) {
   }
 
-  push(events: Event<TEventData>[]): Promise<void> {
+  push(events: Event<any>[]): Promise<void> {
     this.log.debug(events);
     return Promise.resolve();
   }
@@ -20,7 +20,7 @@ class LoggerEventPipeline<TEventData> implements IEventPipeline<TEventData, void
   }
 }
 
-export class RealtimeLoggerEventReporter<TEventData> extends RealtimeEventReporter<TEventData, void, IEventReporterOptions<TEventData, void>> {
+export class RealtimeLoggerEventReporter extends RealtimeEventReporter<any, void, IEventReporterOptions<any, void>> {
   public constructor(log: Logger) {
     super({
       log: log,
@@ -29,7 +29,7 @@ export class RealtimeLoggerEventReporter<TEventData> extends RealtimeEventReport
   }
 }
 
-export class ScheduledLoggerEventReporter<TEventData> extends ScheduledEventReporter<TEventData, void, IScheduledEventReporterOptions<TEventData, void>> {
+export class ScheduledLoggerEventReporter extends ScheduledEventReporter<any, void, IScheduledEventReporterOptions<any, void>> {
   public constructor(log: Logger) {
     super({
       log: log,

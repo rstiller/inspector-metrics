@@ -7,7 +7,7 @@ export class TagManager {
     return this.tags;
   }
 
-  public getTag(name: string): string {
+  public getTag(name: string): string | undefined {
     return this.tags.get(name);
   }
 

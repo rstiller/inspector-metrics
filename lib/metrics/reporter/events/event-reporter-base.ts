@@ -10,7 +10,7 @@ export interface IEventReporterOptions<TEventData, TResult> {
 
 export abstract class EventReporterBase<TEventData, TResult, TOptions extends IEventReporterOptions<TEventData, TResult>> implements IEventReporter<TEventData, TResult> {
   protected readonly options: TOptions;
-  protected pipeline: IEventPipeline<TEventData, TResult>;
+  protected pipeline: IEventPipeline<TEventData, TResult> | null;
 
   public constructor(options: TOptions) {
     this.options = options;

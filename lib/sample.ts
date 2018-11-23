@@ -20,7 +20,7 @@ function middleware(req: express.Request, res: express.Response, next: express.N
   res.on('finish', () => {
     const duration = Date.now() - start;
     
-    const event = new Event('request').setValue(duration);
+    const event = new Event('request').setValue({duration});
 
     reporter.report(event).then(() => console.log("reported !"));
   });
