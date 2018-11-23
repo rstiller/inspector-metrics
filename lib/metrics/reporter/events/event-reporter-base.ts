@@ -5,7 +5,7 @@ import { IEventReporter } from "./event-reporter";
 
 export interface IEventReporterOptions<TEventData, TResult> {
   log: Logger;
-  pipelineFactory: () => IEventPipeline<TEventData, TResult>
+  pipelineFactory: () => IEventPipeline<TEventData, TResult>;
 }
 
 export abstract class EventReporterBase<TEventData, TResult, TOptions extends IEventReporterOptions<TEventData, TResult>> implements IEventReporter<TEventData, TResult> {
@@ -20,36 +20,33 @@ export abstract class EventReporterBase<TEventData, TResult, TOptions extends IE
     if (this.pipeline) {
       throw new Error("The reporter has already been started");
     }
-    else {
-      this.pipeline = this.options.pipelineFactory();
-      return this;
-    }
+
+    this.pipeline = this.options.pipelineFactory();
+    return this;
   }
 
   public stop(): Promise<void> {
     if (!this.pipeline) {
       throw new Error("The reporter has not been started yet");
     }
-    else {
-      return this.pipeline
-        .flush()
-        .then(() => {
-          this.pipeline = null;
-        })
-        .catch(error => {
-          this.pipeline = null;
-          throw error;
-        });
-    }
+
+    return this.pipeline
+      .flush()
+      .then(() => {
+        this.pipeline = null;
+      })
+      .catch((error) => {
+        this.pipeline = null;
+        throw error;
+      });
   }
 
   public report(event: Event<TEventData>): Promise<TResult> {
     if (!this.pipeline) {
       throw new Error("The reporter should be started before calling the report method");
     }
-    else {
-      return this.doReport(event);
-    }
+
+    return this.doReport(event);
   }
 
   protected abstract doReport(event: Event<TEventData>): Promise<TResult>;

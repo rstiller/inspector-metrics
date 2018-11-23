@@ -30,7 +30,8 @@
         "sourceRoot": "./lib/",
         "rootDir": "./",
         "charset": "utf-8",
-        "outDir": "build/"
+        "outDir": "build/",
+        "strictNullChecks": false,
     },
     "exclude": [
         "node_modules",
