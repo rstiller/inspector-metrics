@@ -1,13 +1,13 @@
-import { Logger } from "../logger";
+// import { Logger } from "../logger";
 
-export interface EventReporterOptions {
-  log?: Logger;
-}
+// export interface IEventReporterOptions {
+//   log?: Logger;
+// }
 
-export abstract class EventReporterBase<O extends EventReporterOptions> {
-  protected readonly options: O;
+// export abstract class EventReporterBase<O extends IEventReporterOptions> {
+//   protected readonly options: O;
 
-  public constructor(options: O) {
-    this.options = options;
-  }
-}
+//   public constructor(options: O) {
+//     this.options = options;
+//   }
+// }

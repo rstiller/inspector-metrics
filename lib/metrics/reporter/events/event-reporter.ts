@@ -1,5 +1,7 @@
 import { Event } from "../../event";
 
-export interface EventReporter {
-  report<T>(event: Event<T>): this;
+export interface IEventReporter<TEventData, TResult> {
+  start(): this;
+  stop(): Promise<void>;
+  report(event: Event<TEventData>): Promise<TResult>;
 }
