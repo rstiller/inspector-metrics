@@ -2,6 +2,7 @@ import "source-map-support/register";
 
 import { Clock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
+import { Event } from "../event";
 import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
@@ -232,6 +233,26 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
             this.metricRegistries.splice(index, 1);
         }
         return this;
+    }
+
+    /**
+     * Reports an event {@link Event}.
+     *
+     * @param {MetricRegistry} event
+     * @returns {ThisType}
+     * @memberof MetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        return null;
+    }
+
+    /**
+     * Sends events remaining in the queue (if a queue is used in the implementation).
+     *
+     * @returns {Promise<void>}
+     * @memberof MetricReporter
+     */
+    public async flushEvents(): Promise<void> {
     }
 
     /**
