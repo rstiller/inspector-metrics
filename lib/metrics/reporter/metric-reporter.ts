@@ -551,7 +551,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
         if (this.options.tags) {
             this.options.tags.forEach((tag, key) => tags[key] = tag);
         }
-        if (registry.getTags()) {
+        if (registry && registry.getTags()) {
             registry.getTags().forEach((tag, key) => tags[key] = tag);
         }
         if (taggable.getTags()) {
