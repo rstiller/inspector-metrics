@@ -1,10 +1,9 @@
 import "source-map-support/register";
 
-import { TagManager } from "./tag-manager";
 import { Taggable } from "./taggable";
 
 export class Event<TEventData> implements Taggable {
-  private tagManager = new TagManager();
+  private tags: Map<string, string> = new Map();
   private name: string;
   private description?: string;
   private value: TEventData;
@@ -17,20 +16,20 @@ export class Event<TEventData> implements Taggable {
   }
 
   public getTags(): Map<string, string> {
-    return this.tagManager.getTags();
+    return this.tags;
   }
 
   public getTag(name: string): string | undefined {
-    return this.tagManager.getTag(name);
+    return this.tags.get(name);
   }
 
   public setTag(name: string, value: string): this {
-    this.tagManager.setTag(name, value);
+    this.tags.set(name, value);
     return this;
   }
 
   public removeTag(name: string): this {
-    this.tagManager.removeTag(name);
+    this.tags.delete(name);
     return this;
   }
 
