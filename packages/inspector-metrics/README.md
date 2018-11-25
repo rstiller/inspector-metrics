@@ -33,6 +33,7 @@ to use the library.
 Supported metric types:
 * Counter - measures an integer value (e.g. "how many time was my function called, number of bookings in a sales system")
 * MonotoneCounter - a monotonically increasing integer value (e.g. "error count")
+* Event - ad-hoc event to report events (e.g. "application start / deployment", "batch import started / ended")
 * Gauge - measurement of a value (e.g. "number of waiting threads on a resource")
 * HdrHistogram - recording and analyzing sampled data value counts across a configurable integer value range with configurable value precision
 * Histogram - measures the statistical distribution of all values
@@ -119,6 +120,32 @@ errorCount.increment(-1);
 errorCount.getCount();
 
 errorCount.reset();
+```
+
+### Event
+
+```typescript
+import { BaseMetric, Event, MetricRegistry } from "inspector-metrics";
+
+// common application tags - applied to each metric / event
+const tags: Map<string, string> = new Map();
+tags.set("application", "project-name");
+tags.set("hostname", "127.0.0.4");
+
+// the reporter prints the stats
+const reporter = new LoggerReporter({
+    log: global.console,
+    tags,
+});
+
+// not connected to a MetricRegistry like the other metrics
+const event = new Event<string>("application_started", "signals an application start")
+    .setValue("started")
+    .setTag("mode", "test")
+    .setTag("component", "main");
+
+// directly send to time-series DB
+await reporter.reportEvent(event);
 ```
 
 ### Gauge

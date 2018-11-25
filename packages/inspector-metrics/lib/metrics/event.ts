@@ -1,76 +1,109 @@
 import "source-map-support/register";
 
-import { Taggable } from "./taggable";
+import { Gauge } from "./gauge";
+import { BaseMetric } from "./metric";
 
-export class Event<TEventData> implements Taggable {
-  private tags: Map<string, string> = new Map();
-  private name: string;
-  private description?: string;
-  private value: TEventData;
-  private time: number;
+/**
+ * Represents an ad-hoc event which can directly be reported using the
+ * {@link MetricReporter#reportEvent} method.
+ * Events are treated as gauges with timestamp.
+ *
+ * @export
+ * @class Event
+ * @implements {Taggable}
+ * @template TEventData
+ */
+export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
 
-  public constructor(name: string, description?: string) {
-    this.time = Date.now();
-    this.name = name;
-    this.description = description;
-  }
+    /**
+     * The value of the event can be anything
+     * MetricReporter instances can choose to support some value types or not.
+     *
+     * @private
+     * @type {TEventData}
+     * @memberof Event
+     */
+    private value: TEventData;
+    /**
+     * The time the event happened.
+     *
+     * @private
+     * @type {Date}
+     * @memberof Event
+     */
+    private time: Date;
 
-  public getTags(): Map<string, string> {
-    return this.tags;
-  }
+    /**
+     * Creates an instance of Event.
+     *
+     * @param {string} name the metric name of the event
+     * @param {string} [description] optional description
+     * @param {string} [group] optional group
+     * @param {Date} [time=new Date()]
+     *              can be set to <pre><code>new Date(clock.time().milliseconds)</code></pre>
+     *              to be in line with orinary {@link MetricReporter} implementations.
+     * @memberof Event
+     */
+    public constructor(name: string, description?: string, group?: string, time: Date = new Date()) {
+        super();
+        this.time = time;
+        this.name = name;
+        this.description = description;
+        this.group = group;
+    }
 
-  public getTag(name: string): string | undefined {
-    return this.tags.get(name);
-  }
+    /**
+     * Gets the time.
+     *
+     * @returns {Date}
+     * @memberof Event
+     */
+    public getTime(): Date {
+        return this.time;
+    }
 
-  public setTag(name: string, value: string): this {
-    this.tags.set(name, value);
-    return this;
-  }
+    /**
+     * Sets the time.
+     *
+     * @param {Date} time
+     * @returns {this}
+     * @memberof Event
+     */
+    public setTime(time: Date): this {
+        this.time = time;
+        return this;
+    }
 
-  public removeTag(name: string): this {
-    this.tags.delete(name);
-    return this;
-  }
+    /**
+     * Gets the value of the event
+     *
+     * @returns {TEventData}
+     * @memberof Event
+     */
+    public getValue(): TEventData {
+        return this.value;
+    }
 
-  public getName(): string {
-    return this.name;
-  }
+    /**
+     * Sets the value of the event.
+     *
+     * @param {TEventData} value
+     * @returns {this}
+     * @memberof Event
+     */
+    public setValue(value: TEventData): this {
+        this.value = value;
+        return this;
+    }
 
-  public setName(name: string): this {
-    this.name = name;
-    return this;
-  }
+    /**
+     * Renders a string representing this event.
+     *
+     * @returns {string}
+     * @memberof Event
+     */
+    public toString(): string {
+        return this.name;
+    }
 
-  public getDescription(): string | undefined {
-    return this.description;
-  }
-
-  public setDescription(description: string): this {
-    this.description = description;
-    return this;
-  }
-
-  //  TODO use clock instead ?
-  public getTime(): number {
-    return this.time;
-  }
-
-  public setTime(time: number): this {
-    this.time = time;
-    return this;
-  }
-
-  public getValue(): TEventData {
-    return this.value;
-  }
-
-  public setValue(value: TEventData): this {
-    this.value = value;
-    return this;
-  }
-
-  public toString(): string {
-    return this.name;
-  }
 }

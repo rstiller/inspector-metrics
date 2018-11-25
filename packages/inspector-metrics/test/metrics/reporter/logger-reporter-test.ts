@@ -10,6 +10,7 @@ import * as sinonChai from "sinon-chai";
 
 import {
     Clock,
+    Event,
     Logger,
     LoggerReporter,
     MetricRegistry,
@@ -302,6 +303,99 @@ export class LoggerReporterTest {
         expect(logMetadata.measurement_type).to.equal("counter");
         expect(logMetadata.timestamp.getTime()).to.equal(0);
         expect(logMetadata.tags).to.not.be.null;
+        expect(logMetadata.tags["application"]).to.equal("app");
+        expect(logMetadata.tags["mode"]).to.equal("test");
+        expect(logMetadata.tags["component"]).to.equal("main");
+    }
+
+    @test
+    public async "ad-hoc event reporting without starting report"() {
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        const event = new Event<Date>("app_started", null, null, new Date(this.clock.time().milliseconds))
+            .setValue(new Date());
+        await this.reporter.reportEvent(event);
+
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("app_started");
+        expect(logMetadata.measurement_type).to.equal("gauge");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+    }
+
+    @test
+    public async "ad-hoc event reporting with starting reporter"() {
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        await this.reporter.start();
+
+        const event = new Event<Date>("app_started", null, null, new Date(this.clock.time().milliseconds))
+            .setValue(new Date());
+        await this.reporter.reportEvent(event);
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("app_started");
+        expect(logMetadata.measurement_type).to.equal("gauge");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+    }
+
+    @test
+    public async "ad-hoc event reporting with event tags"() {
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        const event = new Event<Date>("app_started", null, null, new Date(this.clock.time().milliseconds))
+            .setValue(new Date())
+            .setTag("mode", "test")
+            .setTag("component", "main");
+        await this.reporter.reportEvent(event);
+
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("app_started");
+        expect(logMetadata.measurement_type).to.equal("gauge");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags["mode"]).to.equal("test");
+        expect(logMetadata.tags["component"]).to.equal("main");
+    }
+
+    @test
+    public async "ad-hoc event reporting with event + reporter tags"() {
+        const tags: Map<string, string> = new Map();
+        tags.set("application", "app");
+        tags.set("mode", "dev");
+
+        this.reporter.setTags(tags);
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        const event = new Event<Date>("app_started", null, null, new Date(this.clock.time().milliseconds))
+            .setValue(new Date())
+            .setTag("mode", "test")
+            .setTag("component", "main");
+        await this.reporter.reportEvent(event);
+
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("app_started");
+        expect(logMetadata.measurement_type).to.equal("gauge");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
         expect(logMetadata.tags["application"]).to.equal("app");
         expect(logMetadata.tags["mode"]).to.equal("test");
         expect(logMetadata.tags["component"]).to.equal("main");
