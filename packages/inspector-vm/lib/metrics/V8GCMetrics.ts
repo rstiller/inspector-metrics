@@ -172,16 +172,17 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
      * Sets the group of this metric-set as well as all contained metrics.
      *
      * @param {string} group
+     * @returns {ThisType}
      * @memberof V8GCMetrics
      */
-    public setGroup(group: string): void {
+    public setGroup(group: string): this {
         this.group = group;
-
         this.allRuns.setGroup(group);
         this.incrementalMarkingRuns.setGroup(group);
         this.majorRuns.setGroup(group);
         this.minorRuns.setGroup(group);
         this.phantomCallbackProcessingRuns.setGroup(group);
+        return this;
     }
 
     /**
@@ -189,32 +190,34 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} value
+     * @returns {ThisType}
      * @memberof V8GCMetrics
      */
-    public setTag(name: string, value: string): void {
+    public setTag(name: string, value: string): this {
         this.tags.set(name, value);
-
         this.allRuns.setTag(name, value);
         this.incrementalMarkingRuns.setTag(name, value);
         this.majorRuns.setTag(name, value);
         this.minorRuns.setTag(name, value);
         this.phantomCallbackProcessingRuns.setTag(name, value);
+        return this;
     }
 
     /**
      * Removes the specified tag from this metric-set and all contained metrics accordingly.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof V8GCMetrics
      */
-    public removeTag(name: string): void {
+    public removeTag(name: string): this {
         this.tags.delete(name);
-
         this.allRuns.removeTag(name);
         this.incrementalMarkingRuns.removeTag(name);
         this.majorRuns.removeTag(name);
         this.minorRuns.removeTag(name);
         this.phantomCallbackProcessingRuns.removeTag(name);
+        return this;
     }
 
 }

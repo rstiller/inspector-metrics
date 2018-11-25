@@ -256,9 +256,10 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      * Sets the group of this metric-set as well as all contained metrics.
      *
      * @param {string} group
+     * @returns {ThisType}
      * @memberof V8MemoryMetrics
      */
-    public setGroup(group: string): void {
+    public setGroup(group: string): this {
         this.group = group;
 
         this.totalHeapSize.setGroup(group);
@@ -276,6 +277,8 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
             history.size.setGroup(group);
             history.usedSize.setGroup(group);
         });
+
+        return this;
     }
 
     /**
@@ -283,9 +286,10 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} value
+     * @returns {ThisType}
      * @memberof V8MemoryMetrics
      */
-    public setTag(name: string, value: string): void {
+    public setTag(name: string, value: string): this {
         this.tags.set(name, value);
 
         this.totalHeapSize.setTag(name, value);
@@ -303,6 +307,8 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
             history.size.setTag(name, value);
             history.usedSize.setTag(name, value);
         });
+
+        return this;
     }
 
     /**
@@ -311,7 +317,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      * @param {string} name
      * @memberof V8MemoryMetrics
      */
-    public removeTag(name: string): void {
+    public removeTag(name: string): this {
         this.tags.delete(name);
 
         this.totalHeapSize.removeTag(name);
@@ -329,6 +335,8 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
             history.size.removeTag(name);
             history.usedSize.removeTag(name);
         });
+
+        return this;
     }
 
 }

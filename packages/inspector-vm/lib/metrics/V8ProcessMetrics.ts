@@ -113,7 +113,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.metrics.push(this.cpuTotalUsage);
         this.metrics.push(this.cpuUserUsage);
 
-        this.timer = scheduler(() => this.update(), 1000);
+        this.timer = scheduler(async () => this.update(), 1000);
     }
 
     /**
@@ -153,9 +153,10 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
      * Sets the group of this metric-set as well as all contained metrics.
      *
      * @param {string} group
+     * @returns {ThisType}
      * @memberof V8ProcessMetrics
      */
-    public setGroup(group: string): void {
+    public setGroup(group: string): this {
         this.group = group;
 
         this.activeHandles.setGroup(group);
@@ -163,6 +164,8 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.cpuSystemUsage.setGroup(group);
         this.cpuTotalUsage.setGroup(group);
         this.cpuUserUsage.setGroup(group);
+
+        return this;
     }
 
     /**
@@ -170,9 +173,10 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} value
+     * @returns {ThisType}
      * @memberof V8ProcessMetrics
      */
-    public setTag(name: string, value: string): void {
+    public setTag(name: string, value: string): this {
         this.tags.set(name, value);
 
         this.activeHandles.setTag(name, value);
@@ -180,15 +184,18 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.cpuSystemUsage.setTag(name, value);
         this.cpuTotalUsage.setTag(name, value);
         this.cpuUserUsage.setTag(name, value);
+
+        return this;
     }
 
     /**
      * Removes the specified tag from this metric-set and all contained metrics accordingly.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof V8ProcessMetrics
      */
-    public removeTag(name: string): void {
+    public removeTag(name: string): this {
         this.tags.delete(name);
 
         this.activeHandles.removeTag(name);
@@ -196,6 +203,8 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
         this.cpuSystemUsage.removeTag(name);
         this.cpuTotalUsage.removeTag(name);
         this.cpuUserUsage.removeTag(name);
+
+        return this;
     }
 
     private update() {

@@ -60,7 +60,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
         );
 
         this.metrics.push(this.eventLoopLag);
-        this.timer = scheduler(() => {
+        this.timer = scheduler(async () => {
             setImmediate((start) => this.reportEventloopLag(start), process.hrtime());
         }, 500);
     }
@@ -102,12 +102,13 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      * Sets the group of this metric-set as well as all contained metrics.
      *
      * @param {string} group
+     * @returns {ThisType}
      * @memberof V8EventLoop
      */
-    public setGroup(group: string): void {
+    public setGroup(group: string): this {
         this.group = group;
-
         this.eventLoopLag.setGroup(group);
+        return this;
     }
 
     /**
@@ -115,24 +116,26 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} value
+     * @returns {ThisType}
      * @memberof V8EventLoop
      */
-    public setTag(name: string, value: string): void {
+    public setTag(name: string, value: string): this {
         this.tags.set(name, value);
-
         this.eventLoopLag.setTag(name, value);
+        return this;
     }
 
     /**
      * Removes the specified tag from this metric-set and all contained metrics accordingly.
      *
      * @param {string} name
+     * @returns {ThisType}
      * @memberof V8EventLoop
      */
-    public removeTag(name: string): void {
+    public removeTag(name: string): this {
         this.tags.delete(name);
-
         this.eventLoopLag.removeTag(name);
+        return this;
     }
 
     /**
