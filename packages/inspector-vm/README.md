@@ -30,7 +30,8 @@ import { MetricRegistry } from "inspector-metrics";
 import {
     V8EventLoop,
     V8MemoryMetrics,
-    V8GCMetrics
+    V8GCMetrics,
+    V8ProcessMetrics,
 } from "inspector-vm";
 
 // get a registry
