@@ -1,6 +1,7 @@
 export * from "./clock";
 export * from "./counter";
 export * from "./counting";
+export * from "./event";
 export * from "./gauge";
 export * from "./groupable";
 export * from "./hdr-histogram";
