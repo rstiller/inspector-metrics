@@ -27,7 +27,11 @@ This library is meant to be used with `typescript` / `nodejs`.
 
 ```typescript
 import { MetricRegistry } from "inspector-metrics";
-import { V8MemoryMetrics, V8GCMetrics } from "inspector-vm";
+import {
+    V8EventLoop,
+    V8MemoryMetrics,
+    V8GCMetrics
+} from "inspector-vm";
 
 // get a registry
 const registry: MetricRegistry = ...;
@@ -35,19 +39,32 @@ const registry: MetricRegistry = ...;
 // instance the memory metric, contains
 //   - space statistics
 //   - memory statistics
-const memoryMetrics: V8MemoryMetrics = new V8MemoryMetrics("v8", registry.getDefaultClock());
+const memoryMetrics: V8MemoryMetrics = new V8MemoryMetrics("v8");
 //   - gc statistics
-const gcMetrics: V8GCMetrics = new V8GCMetrics("gc", registry.getDefaultClock());
+const gc: V8GCMetrics = new V8GCMetrics("gc", registry.getDefaultClock());
+//   - event loop delay / latency
+const eventLoop: V8EventLoop = new V8EventLoop("eventLoop");
+//   - cpu_usage (system, user, total)
+//   - active_handles
+//   - active_requests
+const processMetric: V8ProcessMetrics = new V8ProcessMetrics("process");
 
 // metric is registered und the name "v8"
-// defaults to group "gc"
-registry.register(memoryMetrics.getName(), memoryMetrics);
+registry.registerMetric(memoryMetrics);
+// metric is registered und the name "gc"
+registry.registerMetric(gc);
+// metric is registered und the name "eventLoop"
+registry.registerMetric(eventLoop);
+// metric is registered und the name "process"
+registry.registerMetric(processMetric);
 
 // setup reporter ...
 
 // note that unstopped metrics can cause the application to keep running
-gcMetrics.stop();
 memoryMetrics.stop();
+gc.stop();
+eventLoop.stop();
+processMetric.stop();
 ```
 
 ## License

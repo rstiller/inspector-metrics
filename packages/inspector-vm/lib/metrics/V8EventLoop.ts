@@ -19,7 +19,7 @@ import {
 export class V8EventLoop extends BaseMetric implements MetricSet {
 
     /**
-     * Contains ll the metrics in this metric-set.
+     * Contains all the metrics in this metric-set.
      *
      * @private
      * @type {Metric[]}
@@ -102,7 +102,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      * Sets the group of this metric-set as well as all contained metrics.
      *
      * @param {string} group
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof V8EventLoop
      */
     public setGroup(group: string): this {
@@ -116,7 +116,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      *
      * @param {string} name
      * @param {string} value
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof V8EventLoop
      */
     public setTag(name: string, value: string): this {
@@ -129,7 +129,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      * Removes the specified tag from this metric-set and all contained metrics accordingly.
      *
      * @param {string} name
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof V8EventLoop
      */
     public removeTag(name: string): this {
