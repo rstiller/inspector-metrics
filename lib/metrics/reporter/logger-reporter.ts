@@ -2,6 +2,7 @@ import "source-map-support/register";
 
 import { StdClock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
+import { Event } from "../event";
 import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
@@ -137,6 +138,25 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
     public setLog(log: Logger): this {
         this.options.log = log;
         return this;
+    }
+
+    /**
+     * Prints the specified event immediately to the logger at 'info' level.
+     *
+     * @template TEventData
+     * @template TEvent
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
+     * @memberof LoggerReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        const ctx: LoggerReportingContext<TEvent> = this
+            .createMetricSetReportContext({}, null, event.getTime(), "gauge");
+        const logLine: LogLine = this.reportGauge(event, ctx);
+        if (logLine) {
+            this.options.log.info(logLine.message, logLine.metadata);
+        }
+        return event;
     }
 
     /**

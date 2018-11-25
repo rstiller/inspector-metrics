@@ -6,6 +6,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.15.0] - 2018-11-25
+### Added
+- ad-hoc events
+    - https://github.com/rstiller/inspector-metrics/pull/10
+    - thanks to https://github.com/doubret
+- metric-reporter
+    - 'reportEvent' method - reports an ad-hoc event
+    - 'flushEvents' method - triggers immediate reporting of events if applicable
+
 ## [1.14.0] - 2018-11-22
 ### Changed
 - introduced fluent interface for public setter functions
