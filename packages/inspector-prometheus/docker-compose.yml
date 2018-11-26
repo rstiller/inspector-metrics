@@ -72,6 +72,20 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
       - NODE_VERSION=10
 
+  node11:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node11
+    user: "node"
+    entrypoint: "/opt/inspector-prometheus/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-prometheus/
+    working_dir: "/opt/inspector-prometheus"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-prometheus/.tmp/.npm/"
+      - NODE_VERSION=11
+
   grafana:
     build:
       context: ./test-env/grafana
