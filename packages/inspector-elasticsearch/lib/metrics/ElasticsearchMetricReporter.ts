@@ -4,6 +4,7 @@ import { Client, ConfigOptions } from "elasticsearch";
 import {
     Clock,
     Counter,
+    Event,
     Gauge,
     Histogram,
     Logger,
@@ -465,6 +466,41 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      */
     public setLog(log: Logger): void {
         this.options.log = log;
+    }
+
+    /**
+     * Reports an {@link Event}.
+     *
+     * @param {Event} event
+     * @returns {Promise<TEvent>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        const result = this.reportGauge(event, {
+            date: event.getTime(),
+            metrics: [],
+            overallCtx: null,
+            registry: null,
+            type: "gauge",
+        });
+
+        if (result) {
+            await this.handleResults(null, null, event.getTime(), "gauge", [{
+                metric: event,
+                result,
+            }]);
+        }
+
+        return event;
+    }
+
+    /**
+     * Does nothing
+     *
+     * @returns {Promise<void>}
+     * @memberof ElasticsearchMetricReporter
+     */
+    public async flushEvents(): Promise<void> {
     }
 
     /**
