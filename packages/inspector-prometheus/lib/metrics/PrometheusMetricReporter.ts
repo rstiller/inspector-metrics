@@ -4,6 +4,7 @@ import {
     BucketCounting,
     Buckets,
     Counter,
+    Event,
     Gauge,
     Histogram,
     Meter,
@@ -258,11 +259,57 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     }
 
     /**
-     * Does nothing.
+     * Builds the text representation of the event specified.
      *
+     * @param {MetricRegistry} event
+     * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    public start() {
+    public async getEventString<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<string> {
+        const overallCtx: OverallReportContext = {
+            result: "",
+        };
+
+        const result = this.reportGauge(event, {
+            date: null,
+            metrics: [],
+            overallCtx,
+            registry: null,
+            type: "gauge",
+        });
+
+        await this.handleResults(
+            overallCtx,
+            null,
+            event.getTime(),
+            "gauge",
+            [{
+                metric: event,
+                result,
+            }],
+        );
+
+        return overallCtx.result;
+    }
+
+    /**
+     * Use {@link #getEventString} instead.
+     *
+     * @param {Event} event
+     * @returns {Promise<Event>} always the specified event.
+     * @memberof PrometheusMetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        return event;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @returns {Promise<void>}
+     * @memberof PrometheusMetricReporter
+     */
+    public async flushEvents(): Promise<void> {
     }
 
     /**
@@ -270,7 +317,17 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      *
      * @memberof PrometheusMetricReporter
      */
-    public stop() {
+    public start(): this {
+        return this;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @memberof PrometheusMetricReporter
+     */
+    public stop(): this {
+        return this;
     }
 
     /**

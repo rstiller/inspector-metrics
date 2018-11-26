@@ -6,6 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import {
     Buckets,
+    Event,
     MetricRegistry,
     NANOSECOND,
     SimpleGauge,
@@ -688,7 +689,7 @@ export class PrometheusReporterTest {
     }
 
     @test
-    public async "check matric name compatibility"() {
+    public async "check metric name compatibility"() {
         this.reporter = new PrometheusMetricReporter({
             emitComments: false,
             includeTimestamp: false,
@@ -713,6 +714,30 @@ export class PrometheusReporterTest {
                 "_:test1{} 0\n\n" +
                 "request________{} 0\n\n" +
                 "__abc{} 0\n",
+            );
+    }
+
+    @test
+    public async "check event reporting"() {
+        const tags = new Map();
+        tags.set("application", "my-web-app");
+        tags.set("hostname", "127.0.0.4");
+        tags.set("mode", "prod");
+
+        this.reporter = new PrometheusMetricReporter({})
+            .setTags(tags);
+
+        const event = new Event<string>("application_started")
+            .setValue("up")
+            .setTag("mode", "test")
+            .setTag("customTag", "specialValue");
+
+        expect(await this.reporter.getEventString(event)).to.be
+            .equal(
+                "# HELP application_started application_started description\n" +
+                "# TYPE application_started gauge\n" +
+                "application_started" +
+                "{application=\"my-web-app\",hostname=\"127.0.0.4\",mode=\"test\",customTag=\"specialValue\"} up\n",
             );
     }
 

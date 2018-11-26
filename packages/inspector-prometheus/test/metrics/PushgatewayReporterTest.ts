@@ -9,7 +9,7 @@ import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import {
-    Buckets, MetricRegistry, Scheduler, SimpleGauge, SlidingWindowReservoir,
+    Buckets, Event, MetricRegistry, Scheduler, SimpleGauge, SlidingWindowReservoir,
 } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import {
@@ -22,10 +22,6 @@ import { MockedClock } from "./mocked-clock";
 chai.use(sinonChai);
 
 const expect = chai.expect;
-
-nock("http://localhost:9091")
-    .put("/metrics/job/test-pushgateway-reporter/instance/localhost")
-    .reply(202, "Accepted");
 
 @suite
 export class PushgatewayReporterTest {
@@ -64,6 +60,10 @@ export class PushgatewayReporterTest {
 
     @test
     public async "check reporting with PrometheusMetricReporter"() {
+        nock("http://localhost:9091")
+            .put("/metrics/job/test-pushgateway-reporter/instance/localhost")
+            .reply(202, "Accepted");
+
         this.registry.newMonotoneCounter("test_monotone_counter_total");
         this.registry.newCounter("test_counter_total");
         this.registry.registerMetric(new SimpleGauge("test_gauge"));
@@ -115,6 +115,49 @@ export class PushgatewayReporterTest {
                 "test_timer_count{} 0\n" +
                 "test_timer_sum{} 0\n",
             );
+    }
+
+    @test
+    public async "check event reporting"() {
+        nock("http://localhost:9091")
+            .put(
+                "/metrics/job/test-pushgateway-reporter/instance/localhost",
+                "# HELP application_started application_started description\n" +
+                "# TYPE application_started gauge\n" +
+                "application_started" +
+                "{application=\"my-web-app\",hostname=\"127.0.0.4\",mode=\"test\",customTag=\"specialValue\"} up\n",
+            )
+            .reply(202, "Accepted");
+
+        const tags = new Map();
+        tags.set("application", "my-web-app");
+        tags.set("hostname", "127.0.0.4");
+        tags.set("mode", "prod");
+
+        this.prometheusReporter = new PrometheusMetricReporter({
+            clock: this.clock,
+        })
+        .setTags(tags);
+
+        this.reporter = new PushgatewayMetricReporter({
+            host: "localhost",
+            instance: "localhost",
+            job: "test-pushgateway-reporter",
+            port: 9091,
+            reporter: this.prometheusReporter,
+            scheduler: this.schedulerSpy,
+        });
+
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        const event = new Event<string>("application_started")
+            .setValue("up")
+            .setTag("mode", "test")
+            .setTag("customTag", "specialValue");
+
+        await this.reporter.reportEvent(event);
+
+        expect(this.schedulerSpy).to.not.have.been.called;
     }
 
 }

@@ -3,6 +3,7 @@ import "source-map-support";
 import * as http from "http";
 import {
     Counter,
+    Event,
     Gauge,
     Histogram,
     Logger,
@@ -120,6 +121,31 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     }
 
     /**
+     * Uses {@link PrometheusMetricReporter#getEventString} to build the string and sends the event
+     * straight to the pushgateway.
+     *
+     * @param {Event} event
+     * @returns {Promise<Event>} always the specified event.
+     * @memberof PushgatewayMetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        const payload = await this.options.reporter.getEventString(event);
+
+        this.sendPayload(payload);
+
+        return event;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @returns {Promise<void>}
+     * @memberof PushgatewayMetricReporter
+     */
+    public async flushEvents(): Promise<void> {
+    }
+
+    /**
      * Calls the {@link PrometheusMetricReporter} to generate the metrics in a valid prometheus text format.
      * Sends the metrics via 'PUT' to the configured pushgateway.
      *
@@ -129,6 +155,21 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     protected async report(): Promise<OverallReportContext> {
         const ctx = this.createOverallReportContext();
         const payload = await this.options.reporter.getMetricsString();
+
+        this.sendPayload(payload);
+
+        ctx.result = payload;
+        return ctx;
+    }
+
+    /**
+     * Sends the specified payload to the prometheus pushgateway.
+     *
+     * @protected
+     * @param {string} payload
+     * @memberof PushgatewayMetricReporter
+     */
+    protected sendPayload(payload: string) {
         const options = {
             headers: {
                 "Content-Length": payload.length,
@@ -147,9 +188,6 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         });
         req.write(payload);
         req.end();
-
-        ctx.result = payload;
-        return ctx;
     }
 
     /**
