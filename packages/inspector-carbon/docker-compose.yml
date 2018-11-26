@@ -91,6 +91,10 @@ services:
       context: ./test-env/grafana
       args:
         TZ: Europe/Berlin
+    volumes:
+      - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./playground/dashboards:/dashboards
     ports:
       - "3000:3000"
     restart: unless-stopped
@@ -99,6 +103,8 @@ services:
         aliases:
          - grafana
     hostname: grafana
+    depends_on:
+      - graphite
 
   graphite:
     build:

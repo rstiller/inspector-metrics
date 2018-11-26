@@ -18,7 +18,7 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
 </p>
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and
-is meant to be used with `typescript` / `nodejs`.  
+is meant to be used with `nodejs`.  
 It uses [node-graphite](https://github.com/felixge/node-graphite) as graphite/carbon client.
 
 ## install
@@ -33,7 +33,7 @@ import { CarbonMetricReporter } from "inspector-carbon";
 
 // instance the carbon reporter
 const reporter: CarbonMetricReporter = new CarbonMetricReporter({
-    host: "plaintext://graphite:2003/",
+    host: "http://graphite-server/",
 });
 const registry: MetricRegistry = new MetricRegistry();
 
@@ -51,12 +51,33 @@ import { CarbonMetricReporter } from "inspector-carbon";
 
 // instance the carbon reporter
 const reporter: CarbonMetricReporter = new CarbonMetricReporter({
-    host: "plaintext://graphite:2003/",
+    host: "http://graphite-server/",
 });
 
 // set common tags for all metrics
 reporter.getTags().set("app-name", "my-service");
 reporter.getTags().set("app-version", "v1.2.3");
+```
+
+### reporting events
+
+```typescript
+import { Event, MetricRegistry } from "inspector-metrics";
+import { CarbonMetricReporter } from "inspector-carbon";
+
+// instance the carbon reporter
+const reporter: CarbonMetricReporter = new CarbonMetricReporter({
+    host: "http://graphite-server/",
+});
+
+// build an ad-hoc event
+const event = new Event<number>("application_started")
+    .setValue(1.0)
+    .setTag("mode", "test")
+    .setTag("customTag", "specialValue");
+
+// send the event to graphite
+reporter.reportEvent(event);
 ```
 
 ## dev
@@ -66,16 +87,18 @@ reporter.getTags().set("app-version", "v1.2.3");
 To use the playground you need to have `docker` and `docker-compose` installed.
 
 ```bash
-npm run compile
+# boots all services (graphite / grafana) and provisions the example dashboard
+playground/boot.sh
 # running playground script
-playground/playground.sh
+./playground.sh
 ```
 
 ### view data in grafana
 
 1. Navigate to `http://localhost:3000`
-1. Add a new Data Source (type: graphite, username / password: root/root, host / url: http://graphite/)
-1. Create a new graph
+1. select example dashboard (upper left corner: "Home") "Graphite / Carbon example Dashboard"
+
+![Example Dashboard](assets/example_dashboard.png)
 
 ## License
 

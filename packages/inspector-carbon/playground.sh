@@ -2,7 +2,6 @@
 
 set -e
 
-COMPOSE=`which docker-compose || which docker-compose.exe`
-
-"${COMPOSE}" up -d graphite grafana
-"${COMPOSE}" run --rm test
+npm run clean
+npm run compile
+node build/playground/playground.js

@@ -2,7 +2,7 @@ import { Event, MetricRegistry, Timer } from "inspector-metrics";
 import { CarbonMetricReporter } from "../lib/metrics/CarbonMetricReporter";
 
 const reporter: CarbonMetricReporter = new CarbonMetricReporter({
-    host: "plaintext://graphite:2003/",
+    host: "plaintext://127.0.0.1:2003/",
 });
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");
@@ -23,12 +23,17 @@ reporter.addMetricRegistry(registry);
 
 reporter.start();
 
-const event = new Event<string>("application_started")
-    .setValue("up")
+const event = new Event<number>("application_started")
+    .setValue(1.0)
     .setTag("mode", "test")
     .setTag("customTag", "specialValue");
 
-reporter.reportEvent(event);
+try {
+    reporter.reportEvent(event);
+} catch (e) {
+    // tslint:disable-next-line:no-console
+    console.log(e);
+}
 
 function noop(x: any) {
 }

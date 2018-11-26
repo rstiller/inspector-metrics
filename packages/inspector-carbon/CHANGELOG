@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - added nodejs 11 to playground
 - updated dependencies
 - fixed examples in README
+- fixed naming of metrics
+- refactored playground
+- use inspector-metrics@1.15.0
 
 ## [2.0.0] - 2018-11-04
 ### Added

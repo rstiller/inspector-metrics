@@ -13,6 +13,7 @@ import {
     Histogram,
     Logger,
     Meter,
+    Metric,
     MetricRegistry,
     MetricSetReportContext,
     MetricType,
@@ -205,16 +206,18 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             type: "gauge",
         });
 
-        await this.handleResults(
-            this.createOverallReportContext(),
-            null,
-            event.getTime(),
-            "gauge",
-            [{
-                metric: event,
-                result,
-            }],
-        );
+        if (result) {
+            await this.handleResults(
+                this.createOverallReportContext(),
+                null,
+                event.getTime(),
+                "gauge",
+                [{
+                    metric: event,
+                    result,
+                }],
+            );
+        }
 
         return event;
     }
@@ -299,15 +302,17 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         if (!value || isNaN(value)) {
             return null;
         }
-        const measurement: any = {
-            group: counter.getGroup(),
-            name: counter.getName(),
-        };
-        measurement[`count`] = counter.getCount() || 0;
+        const tags = this.buildTags(ctx.registry, counter);
+        tags["group"] = counter.getGroup();
+        tags["name"] = counter.getName();
+
+        const prefix = this.getMetricName(counter);
+        const measurement: any = {};
+        measurement[`${prefix}.count`] = counter.getCount() || 0;
 
         return {
             measurement,
-            tags: this.buildTags(ctx.registry, counter),
+            tags,
         };
     }
 
@@ -325,15 +330,17 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         if (!value || isNaN(value)) {
             return null;
         }
-        const measurement: any = {
-            group: gauge.getGroup(),
-            name: gauge.getName(),
-        };
-        measurement[`value`] = gauge.getValue() || 0;
+        const tags = this.buildTags(ctx.registry, gauge);
+        tags["group"] = gauge.getGroup();
+        tags["name"] = gauge.getName();
+
+        const prefix = this.getMetricName(gauge);
+        const measurement: any = {};
+        measurement[`${prefix}.value`] = gauge.getValue() || 0;
 
         return {
             measurement,
-            tags: this.buildTags(ctx.registry, gauge),
+            tags,
         };
     }
 
@@ -352,25 +359,27 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             return null;
         }
         const snapshot = histogram.getSnapshot();
-        const measurement: any = {
-            group: histogram.getGroup(),
-            name: histogram.getName(),
-        };
-        measurement[`count`] = histogram.getCount() || 0;
-        measurement[`max`] = this.getNumber(snapshot.getMax());
-        measurement[`mean`] = this.getNumber(snapshot.getMean());
-        measurement[`min`] = this.getNumber(snapshot.getMin());
-        measurement[`p50`] = this.getNumber(snapshot.getMedian());
-        measurement[`p75`] = this.getNumber(snapshot.get75thPercentile());
-        measurement[`p95`] = this.getNumber(snapshot.get95thPercentile());
-        measurement[`p98`] = this.getNumber(snapshot.get98thPercentile());
-        measurement[`p99`] = this.getNumber(snapshot.get99thPercentile());
-        measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
-        measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
+        const tags = this.buildTags(ctx.registry, histogram);
+        tags["group"] = histogram.getGroup();
+        tags["name"] = histogram.getName();
+
+        const prefix = this.getMetricName(histogram);
+        const measurement: any = {};
+        measurement[`${prefix}.count`] = histogram.getCount() || 0;
+        measurement[`${prefix}.max`] = this.getNumber(snapshot.getMax());
+        measurement[`${prefix}.mean`] = this.getNumber(snapshot.getMean());
+        measurement[`${prefix}.min`] = this.getNumber(snapshot.getMin());
+        measurement[`${prefix}.p50`] = this.getNumber(snapshot.getMedian());
+        measurement[`${prefix}.p75`] = this.getNumber(snapshot.get75thPercentile());
+        measurement[`${prefix}.p95`] = this.getNumber(snapshot.get95thPercentile());
+        measurement[`${prefix}.p98`] = this.getNumber(snapshot.get98thPercentile());
+        measurement[`${prefix}.p99`] = this.getNumber(snapshot.get99thPercentile());
+        measurement[`${prefix}.p999`] = this.getNumber(snapshot.get999thPercentile());
+        measurement[`${prefix}.stddev`] = this.getNumber(snapshot.getStdDev());
 
         return {
             measurement,
-            tags: this.buildTags(ctx.registry, histogram),
+            tags,
         };
     }
 
@@ -388,15 +397,17 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         if (!value || isNaN(value)) {
             return null;
         }
-        const measurement: any = {
-            group: meter.getGroup(),
-            name: meter.getName(),
-        };
-        measurement[`count`] = meter.getCount() || 0;
-        measurement[`m15_rate`] = this.getNumber(meter.get15MinuteRate());
-        measurement[`m1_rate`] = this.getNumber(meter.get1MinuteRate());
-        measurement[`m5_rate`] = this.getNumber(meter.get5MinuteRate());
-        measurement[`mean_rate`] = this.getNumber(meter.getMeanRate());
+        const tags = this.buildTags(ctx.registry, meter);
+        tags["group"] = meter.getGroup();
+        tags["name"] = meter.getName();
+
+        const prefix = this.getMetricName(meter);
+        const measurement: any = {};
+        measurement[`${prefix}.count`] = meter.getCount() || 0;
+        measurement[`${prefix}.m15_rate`] = this.getNumber(meter.get15MinuteRate());
+        measurement[`${prefix}.m1_rate`] = this.getNumber(meter.get1MinuteRate());
+        measurement[`${prefix}.m5_rate`] = this.getNumber(meter.get5MinuteRate());
+        measurement[`${prefix}.mean_rate`] = this.getNumber(meter.getMeanRate());
 
         return {
             measurement,
@@ -419,30 +430,47 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             return null;
         }
         const snapshot = timer.getSnapshot();
-        const measurement: any = {
-            group: timer.getGroup(),
-            name: timer.getName(),
-        };
-        measurement[`count`] = timer.getCount() || 0;
-        measurement[`m15_rate`] = this.getNumber(timer.get15MinuteRate());
-        measurement[`m1_rate`] = this.getNumber(timer.get1MinuteRate());
-        measurement[`m5_rate`] = this.getNumber(timer.get5MinuteRate());
-        measurement[`max`] = this.getNumber(snapshot.getMax());
-        measurement[`mean`] = this.getNumber(snapshot.getMean());
-        measurement[`mean_rate`] = this.getNumber(timer.getMeanRate());
-        measurement[`min`] = this.getNumber(snapshot.getMin());
-        measurement[`p50`] = this.getNumber(snapshot.getMedian());
-        measurement[`p75`] = this.getNumber(snapshot.get75thPercentile());
-        measurement[`p95`] = this.getNumber(snapshot.get95thPercentile());
-        measurement[`p98`] = this.getNumber(snapshot.get98thPercentile());
-        measurement[`p99`] = this.getNumber(snapshot.get99thPercentile());
-        measurement[`p999`] = this.getNumber(snapshot.get999thPercentile());
-        measurement[`stddev`] = this.getNumber(snapshot.getStdDev());
+        const tags = this.buildTags(ctx.registry, timer);
+        tags["group"] = timer.getGroup();
+        tags["name"] = timer.getName();
+
+        const prefix = this.getMetricName(timer);
+        const measurement: any = {};
+        measurement[`${prefix}.count`] = timer.getCount() || 0;
+        measurement[`${prefix}.m15_rate`] = this.getNumber(timer.get15MinuteRate());
+        measurement[`${prefix}.m1_rate`] = this.getNumber(timer.get1MinuteRate());
+        measurement[`${prefix}.m5_rate`] = this.getNumber(timer.get5MinuteRate());
+        measurement[`${prefix}.max`] = this.getNumber(snapshot.getMax());
+        measurement[`${prefix}.mean`] = this.getNumber(snapshot.getMean());
+        measurement[`${prefix}.mean_rate`] = this.getNumber(timer.getMeanRate());
+        measurement[`${prefix}.min`] = this.getNumber(snapshot.getMin());
+        measurement[`${prefix}.p50`] = this.getNumber(snapshot.getMedian());
+        measurement[`${prefix}.p75`] = this.getNumber(snapshot.get75thPercentile());
+        measurement[`${prefix}.p95`] = this.getNumber(snapshot.get95thPercentile());
+        measurement[`${prefix}.p98`] = this.getNumber(snapshot.get98thPercentile());
+        measurement[`${prefix}.p99`] = this.getNumber(snapshot.get99thPercentile());
+        measurement[`${prefix}.p999`] = this.getNumber(snapshot.get999thPercentile());
+        measurement[`${prefix}.stddev`] = this.getNumber(snapshot.getStdDev());
 
         return {
             measurement,
             tags: this.buildTags(ctx.registry, timer),
         };
+    }
+
+    /**
+     * Builds a name for the metric.
+     *
+     * @protected
+     * @param {Metric} metric
+     * @returns {string}
+     * @memberof CarbonMetricReporter
+     */
+    protected getMetricName(metric: Metric): string {
+        if (metric.getGroup()) {
+            return `${metric.getGroup()}.${metric.getName()}`;
+        }
+        return metric.getName();
     }
 
 }
