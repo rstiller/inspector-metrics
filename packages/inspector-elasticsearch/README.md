@@ -163,6 +163,7 @@ docker-compose run node7
 docker-compose run node8
 docker-compose run node9
 docker-compose run node10
+docker-compose run node11
 ```
 
 ## License

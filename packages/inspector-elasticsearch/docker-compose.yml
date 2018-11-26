@@ -71,6 +71,20 @@ services:
     environment:
       - NPM_CONFIG_CACHE="/opt/inspector-elasticsearch/.tmp/.npm/"
       - NODE_VERSION=10
+
+  node11:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node11
+    user: "node"
+    entrypoint: "/opt/inspector-elasticsearch/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-elasticsearch/
+    working_dir: "/opt/inspector-elasticsearch"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-elasticsearch/.tmp/.npm/"
+      - NODE_VERSION=11
   
   elasticsearch:
     build:
