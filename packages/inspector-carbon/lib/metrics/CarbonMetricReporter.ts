@@ -8,6 +8,7 @@ const graphite = require("graphite");
 import {
     Clock,
     Counter,
+    Event,
     Gauge,
     Histogram,
     Logger,
@@ -189,11 +190,50 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     }
 
     /**
+     * Reports an {@link Event}.
+     *
+     * @param {Event} event
+     * @returns {Promise<TEvent>}
+     * @memberof CarbonMetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        const result = this.reportGauge(event, {
+            date: event.getTime(),
+            metrics: [],
+            overallCtx: null,
+            registry: null,
+            type: "gauge",
+        });
+
+        await this.handleResults(
+            this.createOverallReportContext(),
+            null,
+            event.getTime(),
+            "gauge",
+            [{
+                metric: event,
+                result,
+            }],
+        );
+
+        return event;
+    }
+
+    /**
+     * Does nothing
+     *
+     * @returns {Promise<void>}
+     * @memberof CarbonMetricReporter
+     */
+    public async flushEvents(): Promise<void> {
+    }
+
+    /**
      * Uses the scheduler function to trigger periodical reporting.
      *
      * @memberof CarbonMetricReporter
      */
-    public start(): Promise<any> {
+    public start(): this {
         this.client = graphite.createClient(this.options.host);
         return super.start();
     }
@@ -203,11 +243,12 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @memberof CarbonMetricReporter
      */
-    public stop(): void {
+    public stop(): this {
         super.stop();
         if (this.client) {
             this.client.end();
         }
+        return this;
     }
 
     /**
@@ -232,7 +273,9 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             .map((carbonData) => new Promise((resolve, reject) => {
                 this.client.writeTagged(carbonData.measurement, carbonData.tags, timestamp, (err: any) => {
                     if (err != null) {
-                        this.options.log.error(err, this.logMetadata);
+                        if (this.options.log) {
+                            this.options.log.error(err, this.logMetadata);
+                        }
                         reject(err);
                     }
                     resolve();

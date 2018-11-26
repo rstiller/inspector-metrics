@@ -32,7 +32,9 @@ import { MetricRegistry } from "inspector-metrics";
 import { CarbonMetricReporter } from "inspector-carbon";
 
 // instance the carbon reporter
-const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
+const reporter: CarbonMetricReporter = new CarbonMetricReporter({
+    host: "plaintext://graphite:2003/",
+});
 const registry: MetricRegistry = new MetricRegistry();
 
 // add the registry to the reporter
@@ -48,7 +50,9 @@ import { MetricRegistry } from "inspector-metrics";
 import { CarbonMetricReporter } from "inspector-carbon";
 
 // instance the carbon reporter
-const reporter: CarbonMetricReporter = new CarbonMetricReporter("plaintext://graphite:2003/");
+const reporter: CarbonMetricReporter = new CarbonMetricReporter({
+    host: "plaintext://graphite:2003/",
+});
 
 // set common tags for all metrics
 reporter.getTags().set("app-name", "my-service");

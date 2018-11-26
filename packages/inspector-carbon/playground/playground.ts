@@ -1,4 +1,4 @@
-import { MetricRegistry, Timer } from "inspector-metrics";
+import { Event, MetricRegistry, Timer } from "inspector-metrics";
 import { CarbonMetricReporter } from "../lib/metrics/CarbonMetricReporter";
 
 const reporter: CarbonMetricReporter = new CarbonMetricReporter({
@@ -22,6 +22,13 @@ reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
 reporter.start();
+
+const event = new Event<string>("application_started")
+    .setValue("up")
+    .setTag("mode", "test")
+    .setTag("customTag", "specialValue");
+
+reporter.reportEvent(event);
 
 function noop(x: any) {
 }
