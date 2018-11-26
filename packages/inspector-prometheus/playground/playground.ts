@@ -1,8 +1,8 @@
 // tslint:disable:no-console
 
 import * as Hapi from "hapi";
-import { MetricRegistry, Timer } from "inspector-metrics";
-import { PrometheusMetricReporter } from "../lib/metrics";
+import { Event, MetricRegistry, Timer } from "inspector-metrics";
+import { PrometheusMetricReporter, PushgatewayMetricReporter } from "../lib/metrics";
 
 const registry: MetricRegistry = new MetricRegistry();
 const requests1: Timer = registry.newTimer("requests1");
@@ -24,6 +24,26 @@ tags.set("app_id", "test_env_playground");
 
 reporter.setTags(tags);
 reporter.addMetricRegistry(registry);
+
+const pushReporter = new PushgatewayMetricReporter({
+    host: "localhost",
+    instance: "127.0.0.4",
+    job: "pushgateway",
+    port: 9091,
+    reporter,
+});
+
+const event = new Event<number>("application_started")
+    .setValue(1.0)
+    .setTag("mode", "test")
+    .setTag("customTag", "specialValue");
+
+try {
+    pushReporter.reportEvent(event);
+} catch (e) {
+    // tslint:disable-next-line:no-console
+    console.log(e);
+}
 
 const server = new Hapi.Server({
     host: "0.0.0.0",

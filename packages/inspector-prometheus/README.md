@@ -165,6 +165,8 @@ To let it run in a fully provisioned environment do the following:
 1. navigate to `localhost:3000` in the browser
 1. click on dashboard `Playground Dashboard` and see the reporter work
 
+![Example Dashboard](assets/example-dashboard.png)
+
 ### compile & test with different nodejs versions
 
 build docker images:  
@@ -179,6 +181,7 @@ docker-compose run node7
 docker-compose run node8
 docker-compose run node9
 docker-compose run node10
+docker-compose run node11
 ```
 
 ## License
