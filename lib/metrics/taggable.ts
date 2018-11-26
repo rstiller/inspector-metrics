@@ -36,6 +36,24 @@ export interface Taggable {
     setTag(name: string, value: string): this;
 
     /**
+     * Sets tags set.
+     *
+     * @param {Map<string, string>} name
+     * @returns {this}
+     * @memberof Taggable
+     */
+    setTags(tags: Map<string, string>): this;
+
+    /**
+     * Adds tags to the tags set.
+     *
+     * @param {Map<string, string>} name
+     * @returns {this}
+     * @memberof Taggable
+     */
+    addTags(tags: Map<string, string>): this;
+
+    /**
      * Removes the specified tag.
      *
      * @param {string} name
@@ -43,5 +61,14 @@ export interface Taggable {
      * @memberof Taggable
      */
     removeTag(name: string): this;
+
+    /**
+     * Removes the specified tag.
+     *
+     * @param {string[]} names
+     * @returns {this}
+     * @memberof Taggable
+     */
+    removeTags(...names: string[]): this;
 
 }
