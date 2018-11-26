@@ -119,13 +119,100 @@ export interface MetricReporterOptions {
 }
 
 /**
+ * Interface for metric-reporter.
+ *
+ * @export
+ * @interface IMetricReporter
+ */
+export interface IMetricReporter {
+    /**
+     * Gets the reporter tags.
+     *
+     * @returns {Map<string, string>}
+     * @memberof IMetricReporter
+     */
+    getTags(): Map<string, string>;
+
+    /**
+     * Sets the reporter tags.
+     *
+     * @param {Map<string, string>} tags
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    setTags(tags: Map<string, string>): this;
+
+    /**
+     * Implementations start reporting metrics when called.
+     *
+     * @abstract
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    start(): this;
+
+    /**
+     * Implementations stop reporting metrics when called.
+     *
+     * @abstract
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    stop(): this;
+
+    /**
+     * Adds a new {@link MetricRegistry} to be reported.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    addMetricRegistry(metricRegistry: MetricRegistry): this;
+
+    /**
+     * Removes the given {@link MetricRegistry} if it was previously added.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    removeMetricRegistry(metricRegistry: MetricRegistry): this;
+
+    /**
+     * Reports an {@link Event}.
+     *
+     * Implementations can choose how to process ad-hoc events, wether it's
+     * queuing the events to the next call to report or sending events
+     * immediately.
+     *
+     * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
+     * and call {@link #afterReport} may not be applied for ad-hoc events.
+     *
+     * This implementation does nothing and always resolved the specified evnet.
+     *
+     * @param {MetricRegistry} event
+     * @returns {ThisType}
+     * @memberof IMetricReporter
+     */
+    reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>;
+
+    /**
+     * Sends events remaining in the queue (if a queue is used in the implementation).
+     *
+     * @returns {Promise<void>}
+     * @memberof IMetricReporter
+     */
+    flushEvents(): Promise<void>;
+}
+
+/**
  * Base-class for metric-reporter implementations.
  *
  * @export
  * @abstract
  * @class MetricReporter
  */
-export abstract class MetricReporter<O extends MetricReporterOptions, T> {
+export abstract class MetricReporter<O extends MetricReporterOptions, T> implements IMetricReporter {
 
     /**
      * {@link MetricRegistry} instances.
