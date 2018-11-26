@@ -134,10 +134,9 @@ npm run compile
 ### view data in grafana
 
 1. Navigate to `http://localhost:3000`
-1. Add a new Data Source (type: elasticsearch, host / url: http://elasticsearch:9200)
-1. Create a new graph
+1. Navigate to the example dashboard (upper left corner "Home"): "Elasticsearch example dashboard"
 
-![](assets/grafana.png)
+![Example Dashboard](assets/example-dashboard.png)
 
 ### view data in kibana
 

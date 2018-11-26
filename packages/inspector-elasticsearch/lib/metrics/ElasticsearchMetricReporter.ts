@@ -523,7 +523,12 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
         results: Array<ReportingResult<any, any[]>>): Promise<void> {
         const body = results
             .map((result) => result.result)
-            .reduce((p, c) => p.concat(c));
+            .reduce((p, c) => p.concat(c), []);
+
+        if (!body || body.length === 0) {
+            return Promise.resolve();
+        }
+
         return this.client.bulk({ body })
             .then((response) => {
                 if (this.options.log) {

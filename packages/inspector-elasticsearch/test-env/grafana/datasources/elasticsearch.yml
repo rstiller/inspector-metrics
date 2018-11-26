@@ -1,0 +1,14 @@
+apiVersion: 1
+
+# see http://docs.grafana.org/administration/provisioning/
+datasources:
+- name: elasticsearch
+  type: elasticsearch
+  access: proxy
+  isDefault: true
+  editable: true
+  database: "[metric-]YYYY-MM-DD"
+  url: http://elasticsearch:9200
+  jsonData:
+    interval: Daily
+    timeField: "timestamp"

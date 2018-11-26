@@ -139,6 +139,10 @@ services:
     ports:
       - "3000:3000"
     restart: unless-stopped
+    volumes:
+      - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./playground/dashboards:/dashboards
     networks:
       default:
         aliases:

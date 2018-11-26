@@ -4,7 +4,7 @@ import { ElasticsearchMetricReporter } from "../lib/metrics/ElasticsearchMetricR
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions: {
         apiVersion: "6.0",
-        host: "elasticsearch:9200",
+        host: "localhost:9200",
     },
 });
 const registry: MetricRegistry = new MetricRegistry();
