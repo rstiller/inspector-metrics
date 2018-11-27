@@ -125,7 +125,7 @@ const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
 To use the playground you need to have `docker` and `docker-compose` installed.
 
 ```bash
-# boots all services (graphite / grafana) and provisions the example dashboard
+# boots all services (elasticsearch / grafana) and provisions the example dashboard
 test-env/boot.sh
 # running playground script
 ./playground.sh
