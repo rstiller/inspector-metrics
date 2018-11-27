@@ -245,10 +245,10 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> {
      * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
      * and call {@link #afterReport} may not be applied for ad-hoc events.
      *
-     * This implementation does nothing and always resolved the specified evnet.
+     * This implementation does nothing and always resolved the specified event.
      *
-     * @param {MetricRegistry} event
-     * @returns {ThisType}
+     * @param {Event} event
+     * @returns {Promise<TEvent>}
      * @memberof MetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
