@@ -191,7 +191,7 @@ export interface IMetricReporter {
      * This implementation does nothing and always resolved the specified evnet.
      *
      * @param {MetricRegistry} event
-     * @returns {ThisType}
+     * @returns {this}
      * @memberof IMetricReporter
      */
     reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>;

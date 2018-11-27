@@ -6,6 +6,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.16.0] - 2018-11-27
+### Added
+- convenience methods for setting tags on all metrics and reporters
+    - https://github.com/rstiller/inspector-metrics/pull/11
+    - thanks to https://github.com/doubret
+
+### Changed
+- added nodejs 11 to playground
+- set version of transitive dependency event-stream to 3.3.4
+
 ## [1.15.0] - 2018-11-25
 ### Added
 - ad-hoc events

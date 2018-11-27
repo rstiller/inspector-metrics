@@ -45,7 +45,7 @@ export interface Taggable {
     setTags(tags: Map<string, string>): this;
 
     /**
-     * Adds tags to the tags set.
+     * Adds the specified tags to metric's tags.
      *
      * @param {Map<string, string>} name
      * @returns {this}
@@ -63,7 +63,7 @@ export interface Taggable {
     removeTag(name: string): this;
 
     /**
-     * Removes the specified tag.
+     * Removes the specified tag names.
      *
      * @param {string[]} names
      * @returns {this}

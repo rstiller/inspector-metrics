@@ -71,3 +71,17 @@ services:
     environment:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=10
+
+  node11:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node11
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=11
