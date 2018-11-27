@@ -1,4 +1,4 @@
-import { MetricRegistry, Timer } from "inspector-metrics";
+import { Event, MetricRegistry, Timer } from "inspector-metrics";
 import { DefaultSender } from "../lib/metrics/DefaultSender";
 import { InfluxMetricReporter } from "../lib/metrics/InfluxMetricReporter";
 
@@ -30,8 +30,20 @@ requests3.setTag("host", "127.0.0.3");
 
 // quick & dirty hack ...
 global.console.debug = global.console.info;
-reporter.setLog(global.console);
+reporter.setLog(null);
 reporter.addMetricRegistry(registry);
+
+const event = new Event<number>("application_started")
+    .setValue(1.0)
+    .setTag("mode", "test")
+    .setTag("customTag", "specialValue");
+
+try {
+    reporter.reportEvent(event);
+} catch (e) {
+    // tslint:disable-next-line:no-console
+    console.log(e);
+}
 
 reporter.start();
 

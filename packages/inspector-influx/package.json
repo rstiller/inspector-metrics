@@ -62,7 +62,7 @@
     "build": "npm run clean && npm run lint && npm run compile && npm run compodoc",
     "clean": "rimraf build coverage docs",
     "compile": "tsc -p .",
-    "compodoc": "compodoc lib -p tsconfig.json --output docs --disableGraph --unitTestCoverage ./coverage/coverage-summary.json",
+    "compodoc": "compodoc lib -p tsconfig.json --output docs --disableGraph --assetsFolder assets --unitTestCoverage ./coverage/coverage-summary.json",
     "coverage": "nyc npm run test",
     "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "lint": "tslint -c tslint.json lib/**/*.ts test/**/*.ts",

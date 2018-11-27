@@ -229,28 +229,32 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
             return Promise.reject(new Error("Invalid event value"));
         }
 
-        const point = this.reportGauge(event, null);
+        const point = this.reportGauge(event, {
+            date: event.getTime(),
+            metrics: [],
+            overallCtx: {},
+            registry: null,
+            type: "gauge",
+        });
         point.timestamp = event.getTime();
 
-        const task = this.handleResults({}, null, null, "gauge", [{
-            metric: event,
-            result: point,
-        }]);
+        try {
+            await this.handleResults({}, null, null, "gauge", [{
+                metric: event,
+                result: point,
+            }]);
 
-        return task
-            .then(() => {
-                if (this.options.log) {
-                    this.options.log.debug(`wrote event`, this.logMetadata);
-                }
-                return event;
-            })
-            .catch((reason) => {
-                if (this.options.log) {
-                    this.options.log
-                        .error(`error writing event - reason: ${reason}`, reason, this.logMetadata);
-                }
-                throw reason;
-            });
+            if (this.options.log) {
+                this.options.log.debug(`wrote event`, this.logMetadata);
+            }
+            return event;
+        } catch (reason) {
+            if (this.options.log) {
+                this.options.log
+                    .error(`error writing event - reason: ${reason}`, reason, this.logMetadata);
+            }
+            throw reason;
+        }
     }
 
     /**

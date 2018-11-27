@@ -106,11 +106,16 @@ services:
       args:
         TZ: Europe/Berlin
     volumes:
-      - grafana-data:/var/lib/grafana
-      - grafana-logs:/var/log/grafana
+      - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./playground/dashboards:/dashboards
     ports:
       - "3000:3000"
-    restart: "no"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - grafana
     hostname: grafana
     depends_on:
       - influx
@@ -131,5 +136,3 @@ services:
 volumes:
   influx-data:
   influx-logs:
-  grafana-data:
-  grafana-logs:
