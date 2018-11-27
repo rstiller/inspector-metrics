@@ -6,6 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.0] - 2018-11-27
+### Added
+- support for reporting events
+    - https://github.com/rstiller/inspector-influx/pull/3
+    - thanks to https://github.com/doubret
+
+### Changed
+- added nodejs 11 to playground
+- use inspector-metrics@1.16.0
+- set version of transitive dependency event-stream to 3.3.4
+
 ## [2.1.0] - 2018-11-21
 ### Changed
 - allow logger to be null - resolves https://github.com/rstiller/inspector-influx/issues/1
