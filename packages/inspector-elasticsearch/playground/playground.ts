@@ -1,5 +1,5 @@
 import { Event, MetricRegistry, Timer } from "inspector-metrics";
-import { ElasticsearchMetricReporter } from "../lib/metrics/ElasticsearchMetricReporter";
+import { ElasticsearchMetricReporter } from "../lib/metrics";
 
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions: {

@@ -76,14 +76,13 @@ const indexnameDeterminator: MetricInfoDeterminator = (
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
     indexnameDeterminator, 
-}
-);
+});
 ```
 
 ### build a metric document
 
 ```typescript
-import { MetricRegistry } from "inspector-metrics";
+import { MetricRegistry, Tags } from "inspector-metrics";
 import {
     ElasticsearchMetricReporter,
     MetricDocumentBuilder,
@@ -98,13 +97,13 @@ const metricDocumentBuilder: MetricDocumentBuilder = (
     metric: Metric,
     type: MetricType,
     timestamp: Date,
-    commonTags: Map<string, string>) => {
+    commonTags: Tags) => {
 
     if (metric instanceof Counter) {
-        const tags = ElasticsearchMetricReporter.buildTags(commonTags, metric);
+        const tags = commonTags;
         const name = metric.getName();
         const group = metric.getGroup();
-        return { name, group, tags, timestamp, values: { 'count': metric.getCount() }, type };
+        return { name, group, tags, timestamp, values: { count: metric.getCount() }, type };
 
     } else {
         // null values will not be reported / published
@@ -126,7 +125,8 @@ const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
 To use the playground you need to have `docker` and `docker-compose` installed.
 
 ```bash
-npm run compile
+# boots all services (graphite / grafana) and provisions the example dashboard
+test-env/boot.sh
 # running playground script
 ./playground.sh
 ```
