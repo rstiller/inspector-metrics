@@ -81,7 +81,7 @@ export class DefaultSender implements Sender {
      * @param {IPoint[]} points
      * @memberof DefaultSender
      */
-    public send(points: IPoint[]): Promise<any> {
+    public send(points: IPoint[]): Promise<void> {
         return this.db.writePoints(points);
     }
 
