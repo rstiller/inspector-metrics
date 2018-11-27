@@ -21,7 +21,7 @@ requests3.setTag("host", "127.0.0.3");
 
 // quick & dirty hack ...
 global.console.debug = global.console.info;
-reporter.setLog(global.console);
+reporter.setLog(null);
 reporter.addMetricRegistry(registry);
 
 const event = new Event<number>("application_started")
