@@ -2,7 +2,7 @@
   "name": "inspector-influx",
   "description": "InfluxDB metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-influx/",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -43,6 +43,9 @@
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "typescript": "^3.1.6"
+  },
+  "peerDependencies": {
+    "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
     "async": "^2.6.1",

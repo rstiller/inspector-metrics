@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.2.1] - 2018-11-27
+### Changed
+- added inspector-metrics@1.16.x as peer dependency
+
 ## [2.2.0] - 2018-11-27
 ### Added
 - support for reporting events
