@@ -236,7 +236,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @memberof CarbonMetricReporter
      */
-    public start(): this {
+    public async start(): Promise<this> {
         this.client = graphite.createClient(this.options.host);
         return super.start();
     }
@@ -246,10 +246,10 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      *
      * @memberof CarbonMetricReporter
      */
-    public stop(): this {
-        super.stop();
+    public async stop(): Promise<this> {
+        await super.stop();
         if (this.client) {
-            this.client.end();
+            await this.client.end();
         }
         return this;
     }

@@ -21,52 +21,54 @@ global.console.debug = global.console.info;
 reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
-reporter.start();
+(async () => {
+    await reporter.start();
 
-const event = new Event<number>("application_started")
-    .setValue(1.0)
-    .setTag("mode", "test")
-    .setTag("customTag", "specialValue");
+    const event = new Event<number>("application_started")
+        .setValue(1.0)
+        .setTag("mode", "test")
+        .setTag("customTag", "specialValue");
 
-try {
-    reporter.reportEvent(event);
-} catch (e) {
-    // tslint:disable-next-line:no-console
-    console.log(e);
-}
+    try {
+        reporter.reportEvent(event);
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+    }
 
-function noop(x: any) {
-}
+    function noop(x: any) {
+    }
 
-setInterval(() => {
-    requests1.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 100);
+    setInterval(() => {
+        requests1.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 100);
 
-setInterval(() => {
-    requests2.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 2e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 50);
+    setInterval(() => {
+        requests2.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 2e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 50);
 
-setInterval(() => {
-    requests3.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 4e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 25);
+    setInterval(() => {
+        requests3.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 4e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 25);
+})();

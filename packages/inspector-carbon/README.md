@@ -40,7 +40,7 @@ const registry: MetricRegistry = new MetricRegistry();
 // add the registry to the reporter
 reporter.addMetricRegistry(registry);
 // start reporting
-reporter.start();
+await reporter.start();
 ```
 
 ### set common tags for all metrics
