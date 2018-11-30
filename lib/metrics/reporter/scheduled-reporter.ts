@@ -72,10 +72,10 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      * Uses the scheduler function to call the {@link #report} function
      * in the interval specified. The interval is converted into {@link MILLISECOND}s.
      *
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof ScheduledMetricReporter
      */
-    public start(): this {
+    public async start(): Promise<this> {
         const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
         this.timer = this.options.scheduler(() => this.report(), interval);
         return this;
@@ -84,10 +84,10 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
     /**
      * Stops reporting metrics.
      *
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof ScheduledMetricReporter
      */
-    public stop(): this {
+    public async stop(): Promise<this> {
         if (this.timer) {
             this.timer.unref();
         }

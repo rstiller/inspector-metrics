@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.0] - 2018-12-01
+### Changed
+- metric-reporter start and stop methods return promise
+- updated dependencies
+
 ## [1.16.0] - 2018-11-27
 ### Added
 - convenience methods for setting tags on all metrics and reporters

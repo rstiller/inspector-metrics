@@ -146,19 +146,19 @@ export interface IMetricReporter {
      * Implementations start reporting metrics when called.
      *
      * @abstract
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof IMetricReporter
      */
-    start(): this;
+    start(): Promise<this>;
 
     /**
      * Implementations stop reporting metrics when called.
      *
      * @abstract
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof IMetricReporter
      */
-    stop(): this;
+    stop(): Promise<this>;
 
     /**
      * Adds a new {@link MetricRegistry} to be reported.
@@ -281,19 +281,19 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * Implementations start reporting metrics when called.
      *
      * @abstract
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof MetricReporter
      */
-    public abstract start(): this;
+    public abstract start(): Promise<this>;
 
     /**
      * Implementations stop reporting metrics when called.
      *
      * @abstract
-     * @returns {this}
+     * @returns {Promise<this>}
      * @memberof MetricReporter
      */
-    public abstract stop(): this;
+    public abstract stop(): Promise<this>;
 
     /**
      * Adds a new {@link MetricRegistry} to be reported.

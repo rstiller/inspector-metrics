@@ -88,14 +88,14 @@ export class LoggerReporterTest {
     }
 
     @test
-    public "remove metric-registry which was not added"(): void {
+    public async "remove metric-registry which was not added"() {
         this.reporter.removeMetricRegistry(this.registry);
         this.reporter.removeMetricRegistry(this.registry);
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        this.reporter.start();
+        await this.reporter.start();
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.have.been.called;
@@ -108,7 +108,7 @@ export class LoggerReporterTest {
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
 
-        this.reporter.start();
+        await this.reporter.start();
 
         expect(this.schedulerSpy).to.have.been.called;
 

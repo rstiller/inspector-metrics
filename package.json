@@ -2,7 +2,7 @@
   "name": "inspector-metrics",
   "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "bugs": {
@@ -29,12 +29,12 @@
     "npm": ">= 3"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.1.6",
+    "@compodoc/compodoc": "^1.1.7",
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.5",
-    "@types/node": "^10.12.1",
-    "@types/sinon": "^5.0.5",
-    "@types/sinon-chai": "^3.2.0",
+    "@types/node": "^10.12.11",
+    "@types/sinon": "^5.0.7",
+    "@types/sinon-chai": "^3.2.1",
     "chai": "^4.2.0",
     "event-stream": "3.3.4",
     "mocha": "^5.2.0",
@@ -44,16 +44,16 @@
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "sinon": "^7.1.1",
-    "sinon-chai": "^3.2.0",
+    "sinon-chai": "^3.3.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "3.1.6"
+    "typescript": "3.2.1"
   },
   "optionalDependencies": {
     "native-hdr-histogram": "^0.5.0"
   },
   "dependencies": {
-    "node-cint64": "2.0.0",
+    "node-cint64": "2.0.1",
     "source-map-support": "0.5.9"
   },
   "files": [
