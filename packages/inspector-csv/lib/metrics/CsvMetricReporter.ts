@@ -2,6 +2,7 @@ import "source-map-support";
 
 import {
     Counter,
+    Event,
     Gauge,
     Histogram,
     Meter,
@@ -277,13 +278,55 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * in the application need to be set / known, otherwise it cannot be
      * reported.
      *
+     * @returns {Promise<this>}
      * @memberof CsvMetricReporter
      */
-    public async start() {
+    public async start(): Promise<this> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
+            // rebuild header on every call to start
             this.header = await this.buildHeaders();
             await super.start();
         }
+        return this;
+    }
+
+    /**
+     * Reports an {@link Event}.
+     *
+     * @param {Event} event
+     * @returns {Promise<TEvent>}
+     * @memberof CsvMetricReporter
+     */
+    public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        if (!this.header) {
+            this.header = await this.buildHeaders();
+        }
+
+        const result = this.reportGauge(event, {
+            date: event.getTime(),
+            metrics: [],
+            overallCtx: null,
+            registry: null,
+            type: "gauge",
+        });
+
+        if (result) {
+            await this.options.writer.init(this.header);
+            await this.handleResults(null, null, event.getTime(), "gauge", [{
+                metric: event,
+                result,
+            }]);
+        }
+        return event;
+    }
+
+    /**
+     * Does nothing.
+     *
+     * @returns {Promise<void>}
+     * @memberof CsvMetricReporter
+     */
+    public async flushEvents(): Promise<void> {
     }
 
     /**

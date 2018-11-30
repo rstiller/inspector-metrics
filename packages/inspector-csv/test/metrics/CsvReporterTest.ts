@@ -4,7 +4,7 @@ import "reflect-metadata";
 import "source-map-support/register";
 
 import * as chai from "chai";
-import { Buckets, NANOSECOND, SimpleGauge } from "inspector-metrics";
+import { Buckets, Event, NANOSECOND, SimpleGauge } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import * as sinonChai from "sinon-chai";
 import { AbstractReportTest } from "./AbstractReporterTest";
@@ -524,6 +524,112 @@ export class CsvReporterTest extends AbstractReportTest {
             ["19700101000000.000+00:00", "\"group123\"", "\"test_timer_2\"", "\"stddev\"", "32.083225108042576"], 39);
         this.verifyWriteCall(timer2,
             ["19700101000000.000+00:00", "\"group123\"", "\"test_timer_2\"", "\"sum\"", "484"], 40);
+    }
+
+    @test
+    public async "check reporting of event without starting reporter"() {
+        this.reporter = this.newReporter({
+            columns: ["date", "group", "name", "field", "value"],
+            writer: this.writer,
+        });
+
+        const event = new Event<number>("application_started")
+            .setValue(1.0)
+            .setTag("mode", "test")
+            .setTag("customTag", "specialValue")
+            .setTime(new Date(0));
+
+        await this.reporter.reportEvent(event);
+
+        this.verifyInitCall(["date", "group", "name", "field", "value"]);
+        this.verifyWriteCall(
+            event,
+            ["19700101000000.000+00:00", "\"\"", "\"application_started\"", "\"value\"", "1"],
+            0,
+        );
+    }
+
+    @test
+    public async "check reporting of many events without starting reporter"() {
+        this.reporter = this.newReporter({
+            columns: ["date", "group", "name", "field", "value"],
+            writer: this.writer,
+        });
+
+        for (let i = 0; i < 10; i++) {
+            const event = new Event<number>("application_started")
+                .setValue(i)
+                .setTag("mode", "test")
+                .setTag("customTag", "specialValue")
+                .setTime(new Date(i));
+
+            await this.reporter.reportEvent(event);
+
+            this.verifyInitCall(["date", "group", "name", "field", "value"], i);
+            this.verifyWriteCall(
+                event,
+                [`19700101000000.00${i}+00:00`, "\"\"", "\"application_started\"", "\"value\"", `${i}`],
+                i,
+            );
+        }
+
+    }
+
+    @test
+    public async "check reporting of event after starting reporter"() {
+        this.reporter = this.newReporter({
+            columns: ["date", "group", "name", "field", "value"],
+            writer: this.writer,
+        });
+
+        this.reporter.addMetricRegistry(this.registry);
+
+        await this.triggerReporting();
+
+        const event = new Event<number>("application_started")
+            .setValue(1.0)
+            .setTag("mode", "test")
+            .setTag("customTag", "specialValue")
+            .setTime(new Date(0));
+
+        await this.reporter.reportEvent(event);
+
+        this.verifyInitCall(["date", "group", "name", "field", "value"]);
+        this.verifyWriteCall(
+            event,
+            ["19700101000000.000+00:00", "\"\"", "\"application_started\"", "\"value\"", "1"],
+            0,
+        );
+    }
+
+    @test
+    public async "check reporting of many events after starting reporter"() {
+        this.reporter = this.newReporter({
+            columns: ["date", "group", "name", "field", "value"],
+            writer: this.writer,
+        });
+
+        this.reporter.addMetricRegistry(this.registry);
+
+        await this.triggerReporting();
+
+        for (let i = 0; i < 10; i++) {
+            const event = new Event<number>("application_started")
+                .setValue(i)
+                .setTag("mode", "test")
+                .setTag("customTag", "specialValue")
+                .setTime(new Date(i));
+
+            await this.reporter.reportEvent(event);
+
+            this.verifyInitCall(["date", "group", "name", "field", "value"], i);
+            this.verifyWriteCall(
+                event,
+                [`19700101000000.00${i}+00:00`, "\"\"", "\"application_started\"", "\"value\"", `${i}`],
+                i,
+            );
+        }
+
     }
 
 }
