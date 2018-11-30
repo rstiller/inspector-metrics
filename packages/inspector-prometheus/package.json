@@ -2,7 +2,7 @@
   "name": "inspector-prometheus",
   "description": "Prometheus / Pushgateway metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-prometheus/",
-  "version": "2.1.2",
+  "version": "2.2.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -28,13 +28,13 @@
     "npm": ">= 3"
   },
   "devDependencies": {
-    "@compodoc/compodoc": "^1.1.6",
+    "@compodoc/compodoc": "^1.1.7",
     "@types/chai": "^4.1.7",
-    "@types/hapi": "^17.6.4",
+    "@types/hapi": "^17.8.0",
     "@types/lodash": "^4.14.118",
     "@types/mocha": "^5.2.5",
     "@types/nock": "^9.3.0",
-    "@types/node": "^10.12.10",
+    "@types/node": "^10.12.11",
     "@types/sinon": "^5.0.7",
     "@types/sinon-chai": "^3.2.1",
     "chai": "^4.2.0",
@@ -51,14 +51,14 @@
     "sinon-chai": "^3.3.0",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
-    "typescript": "^3.1.6"
+    "typescript": "^3.2.1"
   },
   "peerDependencies": {
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "inspector-metrics": "1.16.0",
-    "source-map-support": "0.5.9"
+    "inspector-metrics": "^1.17.0",
+    "source-map-support": "^0.5.9"
   },
   "files": [
     "build",

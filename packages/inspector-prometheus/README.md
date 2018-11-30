@@ -149,7 +149,7 @@ const pushReporter = new PushgatewayMetricReporter({
 });
 
 // start reporting
-pushReporter.start();
+await pushReporter.start();
 ```
 
 ## local dev
