@@ -51,7 +51,8 @@ const requests: Timer = registry.newTimer("requests");
 reporter.setLog(global.console);
 reporter.addMetricRegistry(registry);
 
-reporter.start();
+// need ot wait for the reporter to start
+await reporter.start();
 
 // example usage
 setInterval(() => {
@@ -64,6 +65,27 @@ setInterval(() => {
         }
     });
 }, 100);
+```
+
+## reporting events
+
+```typescript
+import { InfluxMetricReporter } from "inspector-influx";
+import { Event } from "inspector-metrics";
+
+const reporter: InfluxMetricReporter = ...
+
+// need ot wait for the reporter to start before reporting events
+await reporter.start();
+
+// build an ad-hoc event
+const event = new Event<number>("application_started")
+    .setValue(1.0)
+    .setTag("mode", "test")
+    .setTag("customTag", "specialValue");
+
+// send the event to influxdb
+await reporter.reportEvent(event);
 ```
 
 ## local dev

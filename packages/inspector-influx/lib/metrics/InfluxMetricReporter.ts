@@ -1,6 +1,5 @@
 import "source-map-support/register";
 
-import * as async from "async";
 import { IPoint } from "influx";
 import {
     Clock,
@@ -102,14 +101,6 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * @memberof InfluxMetricReporter
      */
     private logMetadata: any;
-    /**
-     * async queue used to queue data point sending.
-     *
-     * @private
-     * @type {async.AsyncQueue<any>}
-     * @memberof InfluxMetricReporter
-     */
-    private queue: async.AsyncQueue<any>;
 
     /**
      * Creates an instance of InfluxMetricReporter.
@@ -183,18 +174,6 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
             tags,
             unit,
         };
-
-        this.queue = async.queue((task: (clb: () => void) => void, callback: () => void) => {
-            task(callback);
-        }, 1);
-
-        let unlock: () => void = null;
-        this.queue.push((callback: () => void) => {
-            unlock = callback;
-        });
-
-        this.options.sender.init()
-            .then(() => unlock());
     }
 
     /**
@@ -218,12 +197,27 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     }
 
     /**
+     * Starts the sender and calls the super method to start scheduling.
+     *
+     * @returns {Promise<this>}
+     * @memberof ScheduledMetricReporter
+     */
+    public async start(): Promise<this> {
+        await this.options.sender.init();
+        return super.start();
+    }
+
+    /**
      * Sends an event directly to influxdb.
      *
      * @param {Event} event
      * @memberof InfluxMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
+        if (!(await this.options.sender.isReady())) {
+            throw new Error("Sender is not ready. Wait for the 'start' method to complete.");
+        }
+
         const value = event.getValue();
         if (!value) {
             return Promise.reject(new Error("Invalid event value"));
@@ -282,31 +276,24 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * @returns {Promise<any>}
      * @memberof InfluxMetricReporter
      */
-    protected handleResults(
+    protected async handleResults(
         ctx: OverallReportContext,
         registry: MetricRegistry,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, IPoint>>): Promise<any> {
-        return new Promise((resolve, reject) => {
-            this.queue.push((callback: () => void) => {
-                const points = results.map((result) => result.result);
-                this.options.sender.send(points)
-                    .then(() => {
-                        if (this.options.log) {
-                            this.options.log.debug(`wrote ${type} metrics`, this.logMetadata);
-                        }
-                    })
-                    .catch((reason) => {
-                        if (this.options.log) {
-                            this.options.log
-                                .error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
-                        }
-                    })
-                    .then(() => callback())
-                    .then(() => resolve());
-            });
-        });
+        const points = results.map((result) => result.result);
+        try {
+            await this.options.sender.send(points);
+            if (this.options.log) {
+                this.options.log.debug(`wrote ${type} metrics`, this.logMetadata);
+            }
+        } catch (reason) {
+            if (this.options.log) {
+                this.options.log
+                    .error(`error writing ${type} metrics - reason: ${reason}`, reason, this.logMetadata);
+            }
+        }
     }
 
     /**

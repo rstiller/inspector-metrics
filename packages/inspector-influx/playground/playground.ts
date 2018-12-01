@@ -38,44 +38,46 @@ const event = new Event<number>("application_started")
     .setTag("mode", "test")
     .setTag("customTag", "specialValue");
 
-try {
-    reporter.reportEvent(event);
-} catch (e) {
-    // tslint:disable-next-line:no-console
-    console.log(e);
-}
+(async () => {
+    await reporter.start();
 
-reporter.start();
+    try {
+        reporter.reportEvent(event);
+    } catch (e) {
+        // tslint:disable-next-line:no-console
+        console.log(e);
+    }
 
-setInterval(() => {
-    requests1.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        a = a + 0;
-    });
-}, 100);
+    setInterval(() => {
+        requests1.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            a = a + 0;
+        });
+    }, 100);
 
-setInterval(() => {
-    requests2.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        a = a + 0;
-    });
-}, 50);
+    setInterval(() => {
+        requests2.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            a = a + 0;
+        });
+    }, 50);
 
-setInterval(() => {
-    requests3.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        a = a + 0;
-    });
-}, 25);
+    setInterval(() => {
+        requests3.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            a = a + 0;
+        });
+    }, 25);
+})();
