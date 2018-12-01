@@ -36,40 +36,42 @@ try {
     console.log(e);
 }
 
-reporter.start();
+(async () => {
+    await reporter.start();
 
-function noop(x: any) {
-}
+    function noop(x: any) {
+    }
 
-setInterval(() => {
-    requests1.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 100);
+    setInterval(() => {
+        requests1.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 100);
 
-setInterval(() => {
-    requests2.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 50);
+    setInterval(() => {
+        requests2.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 50);
 
-setInterval(() => {
-    requests3.time(() => {
-        let a = 0;
-        const b = 1;
-        for (let i = 0; i < 1e6; i++) {
-            a = b + i;
-        }
-        noop(a);
-    });
-}, 25);
+    setInterval(() => {
+        requests3.time(() => {
+            let a = 0;
+            const b = 1;
+            for (let i = 0; i < 1e6; i++) {
+                a = b + i;
+            }
+            noop(a);
+        });
+    }, 25);
+})();

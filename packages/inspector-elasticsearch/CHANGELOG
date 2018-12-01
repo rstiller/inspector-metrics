@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.0] - 2018-12-01
+### Changed
+- updated dependencies
+
 ## [2.2.0] - 2018-11-30
 ### Changed
 - gauge values can be objects now and if so will be set directly to the resulting document's `values` property
