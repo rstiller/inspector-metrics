@@ -64,7 +64,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
 export abstract class BaseMetric implements Metric {
 
     /**
-     * A static number instance to give an unique id with an application instance.
+     * A static number instance to give an unique id within an application instance.
      *
      * @private
      * @static

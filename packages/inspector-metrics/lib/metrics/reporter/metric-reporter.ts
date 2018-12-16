@@ -9,6 +9,7 @@ import { Meter } from "../meter";
 import { Metric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
 import { Taggable } from "../taggable";
+import { MILLISECOND, MINUTE } from "../time-unit";
 import { Timer } from "../timer";
 import { MetricEntry } from "./metric-entry";
 import { MetricType } from "./metric-type";
@@ -608,7 +609,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @private
      * @param {number} metricId
      * @param {number} lastValue
-     * @param {Date} date
+     * @param {number} date
      * @returns {boolean}
      * @memberof MetricReporter
      */
@@ -622,7 +623,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             metricEntry = this.metricStates.get(metricId);
             changed = metricEntry.lastValue !== lastValue;
             if (!changed) {
-                changed = metricEntry.lastReport + this.options.minReportingTimeout < date;
+                const minReportingTimeout = MINUTE.convertTo(this.options.minReportingTimeout, MILLISECOND);
+                changed = metricEntry.lastReport + minReportingTimeout < date;
             }
         }
         if (changed) {
