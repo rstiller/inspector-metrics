@@ -15,6 +15,7 @@ import {
     LoggerReporter,
     MetricRegistry,
     MILLISECOND,
+    MINUTE,
     Scheduler,
     SimpleGauge,
     Time,
@@ -77,6 +78,7 @@ export class LoggerReporterTest {
         this.reporter = new LoggerReporter({
             clock: this.clock,
             log: this.logger,
+            minReportingTimeout: 1,
             reportInterval: 1000,
             scheduler: this.schedulerSpy,
             tags: new Map(),
@@ -399,6 +401,96 @@ export class LoggerReporterTest {
         expect(logMetadata.tags["application"]).to.equal("app");
         expect(logMetadata.tags["mode"]).to.equal("test");
         expect(logMetadata.tags["component"]).to.equal("main");
+    }
+
+    @test
+    public async "check reporting if value has not changed"() {
+        this.registry.newCounter("counter1");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        // call report
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        const logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+        expect(logMetadata.tags).to.not.be.null;
+
+        // minReportingTimeout = 1 min
+        this.clock.setCurrentTime({
+            milliseconds: MINUTE.convertTo(1, MILLISECOND),
+            nanoseconds: 0,
+        });
+
+        // call report again
+        await this.internalCallback();
+
+        // should be same as before
+        expect(this.loggerSpy.callCount).to.equal(1);
+    }
+
+    @test
+    public async "check reporting if value has not changed for longer than the minReportingTimeout"() {
+        this.registry.newCounter("counter1");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        await this.reporter.start();
+
+        expect(this.schedulerSpy).to.have.been.called;
+
+        // call report
+        await this.internalCallback();
+
+        expect(this.loggerSpy.callCount).to.equal(1);
+        let logMetadata = this.loggerSpy.getCall(0).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(0);
+
+        this.clock.setCurrentTime({
+            milliseconds: MINUTE.convertTo(1, MILLISECOND) - 1,
+            nanoseconds: 0,
+        });
+
+        // call report again
+        await this.internalCallback();
+        // should be same
+        expect(this.loggerSpy.callCount).to.equal(1);
+
+        this.clock.setCurrentTime({
+            milliseconds: MINUTE.convertTo(1, MILLISECOND) + 1,
+            nanoseconds: 0,
+        });
+
+        // call report again
+        await this.internalCallback();
+
+        // should have changed
+        expect(this.loggerSpy.callCount).to.equal(2);
+        logMetadata = this.loggerSpy.getCall(1).args[1];
+        expect(logMetadata.measurement).to.equal("counter1");
+        expect(logMetadata.measurement_type).to.equal("counter");
+        expect(logMetadata.timestamp.getTime()).to.equal(60001);
+
+        this.clock.setCurrentTime({
+            milliseconds: MINUTE.convertTo(1, MILLISECOND) * 2 - 1,
+            nanoseconds: 0,
+        });
+
+        // call report again
+        await this.internalCallback();
+        // should be same
+        expect(this.loggerSpy.callCount).to.equal(2);
     }
 
 }
