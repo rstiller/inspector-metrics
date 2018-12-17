@@ -629,6 +629,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         }
         if (changed) {
             metricEntry.lastReport = date;
+            metricEntry.lastValue = lastValue;
         }
         this.metricStates.set(metricId, metricEntry);
         return changed;
