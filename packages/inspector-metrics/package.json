@@ -2,7 +2,7 @@
   "name": "inspector-metrics",
   "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "1.17.1",
+  "version": "1.17.2",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "bugs": {
@@ -47,7 +47,7 @@
     "sinon-chai": "^3.3.0",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
-    "typescript": "3.3.3"
+    "typescript": "^3.3.3"
   },
   "optionalDependencies": {
     "native-hdr-histogram": "^0.5.0"
