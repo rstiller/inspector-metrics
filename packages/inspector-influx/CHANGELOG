@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.3.1] - 2019-02-08
+### Changed
+- use inspector-metrics@1.17.2
+- updated dependencies
+
 ## [2.3.0] - 2018-12-01
 ### Changed
 - applied new start & stop method signature
