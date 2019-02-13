@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.17.3] - 2019-02-13
+### Changed
+- fix NaN check in logger report
+    - https://github.com/rstiller/inspector-metrics/pull/13
+    - thanks to https://github.com/ttous
+
 ## [1.17.2] - 2019-02-08
 ### Changed
 - updated dependencies
