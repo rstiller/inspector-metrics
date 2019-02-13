@@ -258,7 +258,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      * @memberof LoggerReporter
      */
     protected reportGauge(gauge: Gauge<any>, ctx: LoggerReportingContext<Gauge<any>>): LogLine {
-        if (!isNaN(gauge.getValue())) {
+        if (!Number.isNaN(gauge.getValue())) {
             const name = gauge.getName();
             ctx.logMetadata.measurement = name;
             ctx.logMetadata.group = gauge.getGroup();
