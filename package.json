@@ -46,7 +46,7 @@
         "lint": "lerna run lint",
         "publish": "lerna publish",
         "publish-dry-run": "lerna publish --skip-npm --no-git-tag-version --no-push",
-        "pretest": "lerna run compile --scope slf4ts-api",
+        "pretest": "lerna run compile --scope inspector-metrics",
         "publishDocs": "cd docs && git add --all . && git commit -m 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
         "prepublishDocs": "npm run compodoc",
         "test": "lerna run test"
