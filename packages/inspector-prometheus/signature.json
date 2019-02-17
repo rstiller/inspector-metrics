@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "package.json",
-      "sha512": "44ca7364a2bd20cfcb663d27e1ce5395b3a04802bc582dab39d3f1911ed4c7d8d4544b946cf9d7abab3d4c557de850ab504fe54e00a46ef27fe9379e377be9c1"
+      "sha512": "c5ec036b4f6f0c9c209787bfb9814265ef0f0f9b6a6aa29f45c28cc6060775c7b318e724929db22d54058d270198673bfe1b9c6985e82083e90d9705475fe734"
     },
     {
       "path": "CHANGELOG",
@@ -14,16 +14,8 @@
       "sha512": "315dd0b0b9d3e310c1a78a0b451a4374f1caa9397027a4c0474d7f6e8ba2ac9199132ab82a285dccf6da3f4dd2689da383649cb8c7f4c4e387e9cc6cb13441cd"
     },
     {
-      "path": "mocha.opts",
-      "sha512": "8a0795298e077f13a6133af3cac6c1d953e24bb026f474447cb1e4b4524977c1d6cf442defcd1ed0a90d66876dd875e56bd1418a48d321354524e5fca335bee2"
-    },
-    {
       "path": "README.md",
       "sha512": "5473ada1377d7981bae9c31b8e40b30e3fd43638c9c1fe2ffe2326a4979db7939025d20bf32466425dc6ea26c151f12c8b3a55db3ca358783bd3ab71e8795cbc"
-    },
-    {
-      "path": "tsconfig.json",
-      "sha512": "78a7f14e48e503490642681ba0a1bf46f344d07522520b848495e499c15b807844def19d16116d874e13973648b6eb80587f448d6c9b1d63b3ff06edfef7237f"
     },
     {
       "path": "build/lib/metrics/index.d.ts",
@@ -108,61 +100,9 @@
     {
       "path": "build/test/metrics/PushgatewayReporterTest.js.map",
       "sha512": "15c9741bc120bcb4ada7ad3dbfdc8dbcdc17c7a844fc972e69195e59676cb887964719c0462cab540ec2d244a4d9cb1947766c10a40f756ebe44767b8bdc0863"
-    },
-    {
-      "path": "lib/metrics/index.ts",
-      "sha512": "14dbb6b1d9813fdb8a1e5faa8a8905174124d872990efa307a95ba4bc88c2e80ea0fd43533eb1cac3e9bc3fb807d1d4d4a55b81d8fd9689fff545694dc4d61ae"
-    },
-    {
-      "path": "lib/metrics/PrometheusMetricReporter.ts",
-      "sha512": "01e3ee02e844b7c5986ebafec4871793101735db93c8b59a416b00625839a412cac6576be7c4c5571a650b2e2922a58f11dd31f8767893230da166fe91367119"
-    },
-    {
-      "path": "lib/metrics/PushgatewayMetricReporter.ts",
-      "sha512": "33a42f9e96fc97b21cda6cf6a2441b1ee097a2fd2538685dcc9826a19424f8627312a3df47a98bd8e3228344556a240b3cbe936838912bf14ba3ef82a2ad6dde"
-    },
-    {
-      "path": "test/compile+test.sh",
-      "sha512": "1f4856e7402ab8c8265db1724cc08288ab8136946b9428edb220382d7b5596191ad427d22adae4220f848602c9dea10fe4cc08a76ea4902c6f23f2cc8488db3e"
-    },
-    {
-      "path": "test/Dockerfile-node10",
-      "sha512": "6732727b1ac063c5fadd5f1035b2f43d4379f0803c27ba19166cf7d9df7ed86eb3f8f12d41ab9d28ceb0bfc85de8bae8d8abb9020a654b6678fc248f26712fc9"
-    },
-    {
-      "path": "test/Dockerfile-node11",
-      "sha512": "ae67733781cc735ea1111139e9a3224ad2945b6ee83fb141957d38dad63ce8edb652b7f4b2d81923995da0352e93bc6e4a73c8d1a739f8821da0bf9f01945801"
-    },
-    {
-      "path": "test/Dockerfile-node6",
-      "sha512": "359c0c25e5841a6cadffa2e694e4cd215842b66e067f6112ea82d15fc008faceb6e941346010d1807a5ca5fa6cec236b05961c9b1f3cbca8bae025ea74c8e239"
-    },
-    {
-      "path": "test/Dockerfile-node7",
-      "sha512": "01b8dfd84e03c4257267c2bc3e01cbe8a7851130be89fd5c4c9076679e329589dd38867577ac3f05b9896dc8c161abe4c84a64369c3301fb0ba129edf326db80"
-    },
-    {
-      "path": "test/Dockerfile-node8",
-      "sha512": "9319fe79ff719a74b05f976457c5ed531722f603297e57d6d10d32879a62b154fee5a3b1b74787f58b5bda45d3165fb8c74af41cdc6b6b56d8ac0b062b648cf8"
-    },
-    {
-      "path": "test/Dockerfile-node9",
-      "sha512": "eb7e8f50b04071f100615b9cbf36f4c0752dd9374acd4019ec853026742ae5675f1de562f0f20514fd41c56ee951062e915917588312a78e96892ae2308a4b33"
-    },
-    {
-      "path": "test/metrics/mocked-clock.ts",
-      "sha512": "afc75d08980cc9142da7c799fd7acdd24840f4ab580527946ff8a34c84f1e1289509182e63a5b449e74fab898b1ee81b6669639eca5ba0c41ec3cd05c64187a4"
-    },
-    {
-      "path": "test/metrics/PrometheusReporterTest.ts",
-      "sha512": "36dc291a2f10d48011aa0f8355cefe36dcb391137dcbca499e27bf09caed9c549d9e1b65e8ffaa0561d20d5a40b9a3bc1266f95f7811d4037c2ca100a7bb799f"
-    },
-    {
-      "path": "test/metrics/PushgatewayReporterTest.ts",
-      "sha512": "054a446164159a6fce78c270f828ffc9f5959c316bcf145a3470ecd20bb137ac96cda0261c1fdf1bab133e1b3e34aa10312ee94314184a313e77333d6aa33ce8"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcaZXwCRDCMfXrQKYV5wAAK6gQAHlSNpwjmMbh7TjyBrIMTNGR\n7VOHYvd6NNWjlzavkeYS1g83pjympq3cjR7IRkdgUN6uSWpW4niKgFi2zqK9203g\nGY1ALlI11TKhg5tovaYwNw7NOEOuhEtYyIME3Y7EJKU43CVXTb2ikz0uL0kTYvqx\nSyM753eOjgmCBS1oeotE7BhaKeODUj4aieQNj049NPKK9fUvncAkBH17m2L6Cz+3\nLWbqI+LRvIybVTSVbLoQpMlM4TC2wQjqoEDTlJrM27+aI2UlDkIAB+ZVTsS/iH1Z\nFR6zzZJfBljPMlGWhLNrF0/OO0ChelVtf48JKGHTD1dj1jb/hikqEyFz5W6RT55/\nte8mLXUh51yspiB7rPblltePOeQXVJuB6PNVMhDV95S7bG+VXVTkztTA6yMeDGPk\nC/vNICDmvuSHY4NaUAmDEwWXlH4dxLC8jsOs6hkuF7JQWv6jLoi3cPeB1lpC6Uj0\nTMmKjvK2qt/1AZbopyTaC0jPIxjF9NrjE5Adyl/daxIZDk25GOydyhgtshfon9UN\nC6yfMBYCmusQAXU50lbikzlSrXWFVjp8geimva/v4GRsGXm98qOBo0kSt9b2xRMl\niXylilig3eJU/mU0TUBf8fh3gI3C2O02Z+Sy668XNuDsGYAd2jwhg1+6O9dvehYn\nxn1e/gvooikUZPdIaK4V\n=6gZ0\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcabuvCRDCMfXrQKYV5wAASq8QAIUWiZIJpWS+hqde1nX8fX1U\npIRmTSFX5s6nj69kLBDHEsGNHJdEKGukepi+GHvn1WcmRsVE5cqlmkx2+MEAcSXS\nkihYfC1Y0aHpqRLA0xWm8WlKjLY2Umk7Gh6bsWl1IfE7at9ZX1egyjv9pVXCTINF\nnAWZNHN8XzEPddKcKaGhr67y0RXmsJRiFM/AzY3Vwli5P6u0fN+Dv7WNnPhr8ubl\nBI6HBhYHJ6v8+kNp915uvMpCNYY6/V/5tpjNWYrNM/tWYoxrqyk5m0mh2p/B1AhE\n/u7zoeuMTU6Zlz9QmxEZjx9nAFORzeoD47bMPbjseVsjwOgPQgR8xq5aVBYBHMXn\nZrCxwcj2Kh45bfDSG8bG/Gb36W/6H9OzieQY8kPnOrzvrlLUMcqVNLAIUqvfjWoa\nWUqgMkAw8HyZhIbFlxyzTUB5vWQk7kwTkCxL+1QWARD2yASsHGl07Kt9KU8ixIOm\ndtVrl20iV1He9FXHdzU3skPic4aSDd8e7Ps3/RUtub/X3lm3SQa9rVtALTk2FKex\n2zM3thDy4GSlFss9uqL+hOYioZeEMtNxH/dq3Je55+fSQ/ZCvZqyLQvNhtwDi6Lh\nvtGSgYY08Ehrjmu2SXpY9GaQPuWxcEsICHLVEK/aOodBUj1iZ6XhY94GjmygVhcK\nFNflMNr4nVYRu1nOhkrJ\n=xkS+\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

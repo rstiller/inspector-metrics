@@ -12,4 +12,5 @@ rsync -avh --exclude *.sh \
     --delete
 cd /opt/inspector-metrics/.tmp/$NODE_VERSION/
 npm i
+npm run bootstrap
 npm run build

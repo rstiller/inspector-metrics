@@ -12,7 +12,8 @@ DC=`which docker-compose || which docker-compose.exe`
 # goto project root dir
 pushd "${BASEDIR}"
 
-"${DC}" down -v
+"${DC}" build
+"${DC}" up -d grafana graphite elasticsearch kibana influx prometheus pushgateway
 "${DC}" ps
 
 # go back to whereever

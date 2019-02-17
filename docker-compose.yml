@@ -1,0 +1,208 @@
+version: "3"
+
+services:
+
+  node6:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node6
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=6
+
+  node7:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node7
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=7
+
+  node8:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node8
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=8
+
+  node9:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node9
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=9
+
+  node10:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node10
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=10
+
+  node11:
+    build:
+      context: ./test
+      dockerfile: Dockerfile-node11
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=11
+
+  grafana:
+    build:
+      context: ./test-env/grafana
+      args:
+        TZ: Europe/Berlin
+    volumes:
+      - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
+      - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./playground/dashboards:/dashboards
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - grafana
+    hostname: grafana
+    depends_on:
+      - graphite
+
+  graphite:
+    build:
+      context: ./test-env/graphite
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "80:80"
+      - "2003-2004:2003-2004"
+      - "2023-2024:2023-2024"
+      - "8125:8125/udp"
+      - "8126:8126"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - graphite
+    hostname: graphite
+  
+  elasticsearch:
+    build:
+      context: ./test-env/elasticsearch
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "9200:9200"
+    environment:
+      - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
+      - bootstrap.memory_lock=true
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-sSf", "http://localhost:9200"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    cap_add:
+      - IPC_LOCK
+    networks:
+      default:
+        aliases:
+         - elasticsearch
+    hostname: elasticsearch
+  
+  kibana:
+    build:
+      context: ./test-env/kibana
+      args:
+        TZ: Europe/Berlin
+    ports:
+      - "5601:5601"
+    restart: unless-stopped
+    networks:
+      default:
+        aliases:
+         - kibana
+    hostname: kibana
+
+  influx:
+    build:
+      context: ./test-env/influx
+      args:
+        TZ: Europe/Berlin
+    volumes:
+      - influx-data:/var/lib/influxdb
+      - influx-logs:/var/log/influxdb
+    ports:
+      - "8086:8086"
+    restart: "no"
+    hostname: influx
+
+  pushgateway:
+    build:
+      context: ./test-env/pushgateway
+      args:
+        TZ: CET-1CEST
+    ports:
+      - "9091:9091"
+    restart: "no"
+
+  prometheus:
+    build:
+      context: ./test-env/prometheus
+      args:
+        TZ: CET-1CEST
+    command: [
+                "--config.file", "/etc/prometheus/config.yml",
+                "--storage.tsdb.path", "/prometheus-data"
+             ]
+    ports:
+      - "9090:9090"
+    restart: "no"
+    volumes:
+      - prometheus-data:/prometheus-data
+      - ./test-env/prometheus/config.yml:/etc/prometheus/config.yml
