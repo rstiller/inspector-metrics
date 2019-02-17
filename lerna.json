@@ -1,0 +1,20 @@
+{
+  "command": {
+    "publish": {
+      "ignoreChanges": [
+        "ignored-file",
+        "*.md"
+      ]
+    },
+    "bootstrap": {
+      "hoist": true
+    }
+  },
+  "npmClient": "npm",
+  "stream": true,
+  "parallel": false,
+  "packages": [
+    "packages/*"
+  ],
+  "version": "independent"
+}

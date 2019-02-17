@@ -1,0 +1,24 @@
+{
+    "name": "inspector-monorepo",
+    "private": true,
+    "devDependencies": {
+    },
+    "scripts": {
+        "bootstrap": "lerna bootstrap",
+        "build": "lerna run build",
+        "sign": "lerna run sign && git add packages/*/signature.json",
+        "clean": "lerna run clean",
+        "compile": "lerna run compile",
+        "compodoc": "lerna run compodoc",
+        "coverage": "lerna run coverage",
+        "deps": "lerna run deps",
+        "lint": "lerna run lint",
+        "publish": "lerna publish",
+        "publish-dry-run": "lerna publish --skip-npm --no-git-tag-version --no-push",
+        "pretest": "lerna run compile --scope slf4ts-api",
+        "publishDocs": "cd docs && git add --all . && git commit -m 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
+        "prepublishDocs": "npm run compodoc",
+        "test": "lerna run test"
+    },
+    "precommit": "sign"
+}
