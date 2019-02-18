@@ -14,7 +14,7 @@
         "type": "dashboard"
       },
       {
-        "datasource": null,
+        "datasource": "graphite",
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
@@ -37,7 +37,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "graphite",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -152,7 +152,7 @@
     ]
   },
   "timezone": "",
-  "title": "Graphite / Carbon example Dashboard",
+  "title": "graphite / carbon dashboard",
   "uid": "hwjzIKLik",
   "version": 1
 }

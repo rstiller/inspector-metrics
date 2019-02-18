@@ -1,4 +1,4 @@
-FROM influxdb:1.6
+FROM influxdb:1.7
 
 ARG TZ
 ENV TZ=$TZ

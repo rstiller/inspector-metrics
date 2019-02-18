@@ -1,0 +1,37 @@
+apiVersion: 1
+
+# see http://docs.grafana.org/administration/provisioning/
+datasources:
+- name: graphite
+  type: graphite
+  access: proxy
+  url: http://graphite/
+  isDefault: false
+  editable: true
+  jsonData:
+    graphiteVersion: "1.1"
+- name: prometheus
+  type: prometheus
+  access: proxy
+  url: http://prometheus:9090
+  isDefault: false
+  editable: true
+- name: influxdb
+  type: influxdb
+  access: proxy
+  url: http://influx:8086
+  isDefault: false
+  editable: true
+  database: example-db
+  user: admin
+  password: admin
+- name: elasticsearch
+  type: elasticsearch
+  access: proxy
+  isDefault: false
+  editable: true
+  database: "[metric-]YYYY-MM-DD"
+  url: http://elasticsearch:9200
+  jsonData:
+    interval: Daily
+    timeField: "timestamp"

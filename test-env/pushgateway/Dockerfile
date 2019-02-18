@@ -1,4 +1,4 @@
-FROM prom/pushgateway:v0.6.0
+FROM prom/pushgateway:v0.7.0
 
 ARG TZ
 ENV TZ=$TZ

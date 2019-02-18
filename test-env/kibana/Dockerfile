@@ -1,4 +1,4 @@
-FROM docker.elastic.co/kibana/kibana-oss:6.1.2
+FROM docker.elastic.co/kibana/kibana-oss:6.6.0
 
 ARG TZ
 ENV TZ=$TZ

@@ -22,7 +22,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "prometheus",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -122,7 +122,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "prometheus",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -254,7 +254,7 @@
     ]
   },
   "timezone": "",
-  "title": "Playground Dashboard",
+  "title": "prometheus-dashboard",
   "uid": "UIdwcbamz",
   "version": 1
 }

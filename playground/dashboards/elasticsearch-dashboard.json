@@ -11,7 +11,7 @@
         "type": "dashboard"
       },
       {
-        "datasource": null,
+        "datasource": "elasticsearch",
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
@@ -35,7 +35,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "elasticsearch",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -163,7 +163,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": null,
+      "datasource": "elasticsearch",
       "fill": 1,
       "gridPos": {
         "h": 9,
@@ -324,7 +324,7 @@
     ]
   },
   "timezone": "",
-  "title": "Elasticsearch example dashboard",
+  "title": "elasticsearch-dashboard",
   "uid": "k2vTxFYik",
   "version": 1
 }

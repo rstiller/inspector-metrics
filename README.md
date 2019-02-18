@@ -29,6 +29,46 @@ This is the monorepository for the `inspector-metrics` modules.
 | :--- | :--- | :--- | :--- |
 | [inspector-amqp](https://github.com/ttous/inspector-amqp) | reporter for AMQP | [amqp-ts](https://github.com/abreits/amqp-ts) | ![NPM Version](https://img.shields.io/npm/v/inspector-amqp.svg) ![License](https://img.shields.io/npm/l/inspector-amqp.svg) ![Dependencies Status](https://img.shields.io/david/ttous/inspector-amqp.svg) |
 
+## development
+
+### local setup / prerequisites
+
+You should have [nodejs](https://nodejs.org/en/) and [docker](https://www.docker.com/) installed.
+
+boot test environment:  
+`./test-env/boot.sh`
+
+shutdown test environment:  
+`./test-env/reset.sh`
+
+execute compatibility tests:  
+`docker-compose run --rm nodeX`  
+_X = nodejs version (available: 6, 7, 8, 9, 10, 11)_
+
+init / update project (if a new dependency is introduced or an existing is updated):  
+```bash
+npm i
+npm run bootstrap
+```
+
+release packages / publish docs:  
+```bash
+# check functionality
+npm i
+npm run bootstrap
+npm run build
+
+# publish docs
+rm -fr docs/
+git branch -D gh-pages
+git worktree prune
+git worktree list
+git worktree add -b gh-pages docs origin/gh-pages
+npm run publishDocs
+
+# publish package (using lerna)
+npm publish
+```
 
 ## License
 

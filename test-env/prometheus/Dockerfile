@@ -1,4 +1,4 @@
-FROM prom/prometheus:v2.4.3
+FROM prom/prometheus:v2.7.1
 
 ARG TZ
 ENV TZ=$TZ

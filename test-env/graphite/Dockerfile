@@ -1,6 +1,8 @@
-FROM graphiteapp/graphite-statsd
+FROM graphiteapp/graphite-statsd:1.1.5-7
 
 ARG TZ
 ENV TZ=$TZ
-RUN ln -fs /usr/share/zoneinfo/$TZ /etc/localtime
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+
+USER root
+RUN echo $TZ > /etc/TZ
+RUN rm /etc/localtime && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
