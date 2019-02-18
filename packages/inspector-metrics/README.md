@@ -47,6 +47,7 @@ There are libraries which collect some metrics:
 The library ships with a default `console` `MetricReporter`.
 
 Some other reporter:
+* [AMQP](https://github.com/ttous/inspector-amqp)
 * [Carbon / Graphite](https://github.com/rstiller/inspector-carbon)
 * [CSV](https://github.com/rstiller/inspector-csv)
 * [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
@@ -346,50 +347,6 @@ registry.registerMetric(capacity, "buffer");
 registry.newCounter("newAllocations", "buffer");
 
 // the reporter can now report the values as a single measurement point if supported ...
-```
-
-## local dev
-
-### compile & test with different nodejs versions
-
-build docker images:  
-```bash
-docker-compose build
-```
-
-run tests:  
-```bash
-docker-compose run node6
-docker-compose run node7
-docker-compose run node8
-docker-compose run node9
-docker-compose run node10
-docker-compose run node11
-```
-
-### releaseing / publish docs
-
-```text
-# check functionality
-npm i
-npm run build
-
-# release
-git commit -am "release of a.b.c"
-git push
-git tag va.b.c
-git push --tags
-
-# publish docs
-rm -fr docs/
-git branch -D gh-pages
-git worktree prune
-git worktree list
-git worktree add -b gh-pages docs origin/gh-pages
-npm run publishDocs
-
-# publish package
-npm publish
 ```
 
 ## License

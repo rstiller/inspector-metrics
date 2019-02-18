@@ -15,7 +15,7 @@
     },
     {
       "path": "README.md",
-      "sha512": "45d41b8160bcdfed75564fe8297c210419ab99fab5462e999eb5459130f430214e7408b1fa6acc8008cb89728b95fe442f9b1d20dbb0ef0a830aa10cb53fce8b"
+      "sha512": "6f02be18dd243de065b0c0af38492dbe2bc95c9dc552617c55ce6cafc696aa03ea028d95daf595bb31332461a03df8b602c3e261ec6fa9099226d1a3b7ac4b72"
     },
     {
       "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
@@ -66,7 +66,7 @@
       "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcaualCRDCMfXrQKYV5wAAkFEQAIfJeMWAjcHyIrUucKKnTONM\nytUuC8474sINeKNKbDVjTALHjHWYp7z8gSybTfaO7coZ6WdagsnDa7aAihleSg7c\nBPfHbBFDRqcwXETanoAF7rwByRxGBduA2v7Ks2C4GM+GCGUtiivdsOSQyxtlFcUL\nFTwDKsWHdlctEPwGOubOwGOfGcbHSRPidIrLQeGQxuvn9O+eHYMIsyqEEzanYCtj\nppvlYgQg+xgJjJkR2gxU7MUICQVeiNR6DXgpJURtY791110Xt4hj+it8indszTWo\nB2ZCf2dbQqyIU/s8RGh1E1dJYTw022l2Okef7RHGBJcoqmjWCXzvYFjrXPDYPum8\n1AMvNwcSKSzzl7rnotvwTfOiRsBfM7CVKn0QoArwORSS11VMFVgE8G+1lLe3ALEQ\ntdN8bqRITp0SIO2trdNoS8rSB994/KYHk48qXwuVUDRl3NgC6ApkldKW+JUHGfDs\nUar4eFKUDv0QtO3BcnDIch4cWGU92hr9+w2VT3prQII38S2L76Aes4bLFHWlsqDn\nsUoQM5zI/k9jSwddoTIFm3qIqqMmBqbEJ7KkAuDbR48MN3SvS9ATpB+EphRdRa9z\nB19LIcvGvvbDrDlKcPdZziuPHBeACi9CYXm/aRLlMLlzMmScA8656xr6OKrDmQ9a\nFcIAkczICd79GJLrm7j+\n=gv3r\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcaurQCRDCMfXrQKYV5wAA0TcQAF3KnoBTVDM82FZfnrOgqMoN\n3G21l7Kp38O0KSGRu4EWSRmvFp1zQcNqo28xuRiOCGEfnBHCC0zfT4ACvM3TRcmB\nQvTNHwa4/JxjHxVCUCYnlvCAYBvbDnHti5Lpc9FueWd3iyOn0f+Yue3Ovkk76TEp\n7sOMTEAhkSl+MNHsWn9IIdlVH3wJxJeoTfckz09uDDX42ewXNJhq1LdoLUgJ2j/1\nOhvx7b8njxKauOGXuDq3LDvo1XcdNTQjAiL8VV/SmaNxN87YBtKw8CqpWGlsII0+\nurXdz2Gt+eoLKLFWJ20JqK9tPYHCL7En+I/tY7nkYImUBfXltiBTVo4TrmJFkbr8\nruuMJhI3WMSZQinOAGIvXhxLtdU0Lt/4JUPvTccq9ztrR9ynhnOoiyPrBmhE5H1C\nlD7B3GTeXxVyOtDvhdFWLCR101Vzj/L4ukyDHumoR7nYRvk38Xi/JQoHGeC5sGyW\nVhPvRBraWUvxem5mRwfWpg6gkE726e/eSDR+8btkcIIBN3e+L99u+tzg7LDaOi60\nft9PZ/CLagfePE2kYp6U5xe2Cfcz+xBGjVa6b1TyXLbc3l1A2ZINul3a1Vz3RJN+\n5etiJsLjdHVnuDqfpXS+cl/pqjwanl3tViDJPCUlbvFtKDSmlv/vTTV7xDBre3QE\nPAYk+Ms+oQ7B9fWe26bc\n=EeRY\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

@@ -497,24 +497,6 @@ date,group,name,field,value,type,tag_type,tag_host,tag_special_tag
 20181020195009.787+00:00,"","requests3","sum",35999488,"timer","metric","127.0.0.3","test_abc"
 ```
 
-## local dev
-
-### compile & test with different nodejs versions
-
-build docker images:  
-```bash
-docker-compose build
-```
-
-run tests:  
-```bash
-docker-compose run node6
-docker-compose run node7
-docker-compose run node8
-docker-compose run node9
-docker-compose run node10
-```
-
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)

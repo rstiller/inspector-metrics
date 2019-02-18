@@ -80,26 +80,6 @@ const event = new Event<number>("application_started")
 reporter.reportEvent(event);
 ```
 
-## dev
-
-### using the playground
-
-To use the playground you need to have `docker` and `docker-compose` installed.
-
-```bash
-# boots all services (graphite / grafana) and provisions the example dashboard
-test-env/boot.sh
-# running playground script
-./playground.sh
-```
-
-### view data in grafana
-
-1. Navigate to `http://localhost:3000`
-1. select example dashboard (upper left corner: "Home") "Graphite / Carbon example Dashboard"
-
-![Example Dashboard](assets/example_dashboard.png)
-
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)

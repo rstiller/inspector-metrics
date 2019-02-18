@@ -88,43 +88,6 @@ const event = new Event<number>("application_started")
 await reporter.reportEvent(event);
 ```
 
-## local dev
-
-### using the playground
-
-To use the playground you need to have `docker` and `docker-compose` installed.
-
-```bash
-# boots all services (influxdb / grafana) and provisions the example dashboard
-test-env/boot.sh
-# running playground script
-./playground.sh
-```
-
-### view data in grafana
-
-1. Navigate to `http://localhost:3000`
-1. Navigate to the example dashboard (upper left corner "Home"): "Example InfluxDB Dashboard"
-
-![Example Dashboard](assets/example-dashboard.png)
-
-### compile & test with different nodejs versions
-
-build docker images:  
-```bash
-docker-compose build
-```
-
-run tests:  
-```bash
-docker-compose run node6
-docker-compose run node7
-docker-compose run node8
-docker-compose run node9
-docker-compose run node10
-docker-compose run node11
-```
-
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)
