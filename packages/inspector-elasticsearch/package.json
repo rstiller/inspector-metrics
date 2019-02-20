@@ -1,7 +1,7 @@
 {
   "name": "inspector-elasticsearch",
   "description": "Elasticsearch metric reporter for nodejs",
-  "homepage": "https://rstiller.github.io/inspector-elasticsearch/",
+  "homepage": "https://rstiller.github.io/inspector-metrics/",
   "version": "2.3.2",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rstiller/inspector-elasticsearch"
+    "url": "https://github.com/rstiller/inspector-metrics"
   },
   "keywords": [
     "metrics",

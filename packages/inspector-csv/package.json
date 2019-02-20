@@ -1,7 +1,7 @@
 {
   "name": "inspector-csv",
   "description": "CSV metric reporter for nodejs",
-  "homepage": "https://rstiller.github.io/inspector-csv/",
+  "homepage": "https://rstiller.github.io/inspector-metrics/",
   "version": "2.1.1",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
@@ -14,7 +14,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/rstiller/inspector-csv"
+    "url": "https://github.com/rstiller/inspector-metrics"
   },
   "keywords": [
     "metrics",
