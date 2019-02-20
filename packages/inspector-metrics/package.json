@@ -49,7 +49,7 @@
     "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
     "precompodoc": "npm run coverage",
     "prepublishOnly": "npm run build",
-    "test": "exit 0 || mocha --opts mocha.opts"
+    "test": "mocha --opts mocha.opts"
   },
   "compodoc": {
     "tsconfig": "./tsconfig.json",

@@ -16,45 +16,9 @@
     {
       "path": "README.md",
       "sha512": "1b5646d4be45dd93451672533080ba8e0f006b0408259bd19e02b3793200492822d68f393c927e3bf5c06f26192845b4ea3ac9476267e03b108aaa6a98e58ac4"
-    },
-    {
-      "path": "build/lib/metrics/ElasticsearchMetricReporter.d.ts",
-      "sha512": "c587a94568ad76f822f9429e56ef715fb303dfa5330b77607daa1cabd76b7cdc6041ab73c07cbfacb1c6bf84ca7d700e29420e117b67bcccdd4e7eee35fe7dda"
-    },
-    {
-      "path": "build/lib/metrics/ElasticsearchMetricReporter.js",
-      "sha512": "fb34a0fccb5507b7228a16fe317e62d06abb9ce781205c82397771d01849a94c7b9cb946b8fbf03b47f431d407ec24eda6ced4dac4a5f7cf554dda4d78c62c76"
-    },
-    {
-      "path": "build/lib/metrics/ElasticsearchMetricReporter.js.map",
-      "sha512": "e3913704c79190511e6dd04e37ef026106cbd6359e0f4b449b14b055bd60db89f101f7877a374fd94a3b785980e8f8e2906a5a51413cdcc22f7f33455544334a"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "4272c1df0e8e18a806e0d09c3b452472dad28a507c64267ebf31cb24fd55127d55ffb00bf3b7d625d5875f0e21f02684587c164abcb66e8ae51d99d7be5bcbb5"
-    },
-    {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "886904b5210c1705247e6e993f541c1dcde05cb2bcc29e2c01a5619c1385b0609324c26dbc0841fcc0d4440aa247c003b1f654964fad49e5de3f33da8ea0e313"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "889b5940523b0ca03658f7aab3f57adbf27cfc57d3a7f1efd56806e54f8d39755fcddc15929c299b0e0749b7bebc474f161455840144491a39241d5ffd59fde4"
-    },
-    {
-      "path": "build/test/metrics/ElasticsearchMetricReporterTest.d.ts",
-      "sha512": "d29f062367369d96d2705e1a93baf4a73555fa50adbeea86170c6577d3873e6aa676281d1a5bec4fd6764d76c3de65044fa09379e935483ef3cded02bcda56cc"
-    },
-    {
-      "path": "build/test/metrics/ElasticsearchMetricReporterTest.js",
-      "sha512": "bfd720478eac10c00a9626fd048061b2b5b1c14a6f1c7dfa62d4703661815e0ceee46f35a84a7a0ae5ff7ef6753b65e24b8a042eb33fcf3c8a41b68405176344"
-    },
-    {
-      "path": "build/test/metrics/ElasticsearchMetricReporterTest.js.map",
-      "sha512": "ffd66a3cf2fafa6b2eab154392266b595b7cf446816e59e533966bef5d44addcb8228dd98b834cccd63821b9839457ea5aeaaaced53d826f0d37a2553d8ddd73"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcba8YCRDCMfXrQKYV5wAA2EsQADz+Nw5uu0p0wkhvWXx+MOaw\nrB0sV35z8ruyBtOFqTd0bJonyv6EVpH64LznxFWM3SvAev7R4X0pvQnS/S54Vdv2\nYCDzyxyKhIt7XpAhCcH+YM6b5Hxy3c0s1erdOTlWHVXrrC/LiktWHGsVsFifb53q\nL2oEgLQ/img1X/uQ7JgjwzkM0wYtfUZO6giRdw2f3RJ5ASsCN/fMiiLrQdiy/a/9\nC189bbZh1/1WRgWA0FG4f+b+qbfjMiaYc4yPTxcPYCrCovEJp0Uy/waBRJHlKT/b\n5FHNUZDuaF7AD5jsj6Ne1jNjuhHna45NhuTsfKCTFSNZEHLQhyf+mcN9l8gNRrxl\nvQxmamGo4Dv7b5aRySg6tct9HAeC+ka0fgcZH7IOrMxbKHUu+Zf/kItGA7BPLE41\nLFJK2HhBL+nS35co9vK6ewey0vje9AAptHgA4eEreN14IpMpwQ9gjkonWQJBYOPD\nB8AmyOMoB3hnJJu+SzIecT7BPOAkub/l3I30XY9nHOjY1JRa5AVC4eFzNaRyh92/\nPlNh7hAi5UkJY6la9HpTxyg8eP4pX9qCLoBhoecMYhiYXvO4Hi0x5tOBEZFaJEmK\nDNPLsicOTY8ukjCSDYIjTg/Mg+5LW4zegimYPSLdzoxFByzYBmbM7dYAEEDAMpiC\nLgmntx+i0IGH4uSdA+EP\n=fEOn\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcbbD1CRDCMfXrQKYV5wAAwQcQAAiu9M1BVlQ2bNtqeAeCCnG3\nf8jhylQkbmo+7Ognoe3MJ1kKWKJIJHcRE6899wVe8/Jz+z5BPiWTk1brP0oKskac\nMvNYXNu4TILE3CeRPCKdfIVXrk+HwS1Q+u6gDetOdHL51WmEwWpwCI8YYrl/2oCw\nINFMhP2df5OGSBiNCudGMVE/cukNsA5Q545ItYKa9EISMFaeev8Y5ETVsqGW07T5\npgtKhF+h9rQ+YS8BiIsbNFvipjLHWysbKftoc4PuwSLhMM6EdpovGGyRgqFTmpCs\nDoQ2yx3r7AZDPW08iO+hqx4atsMnkiJAhRFVcIOF0xyMmxtnNUB1TIFhLIrR7nFm\nsCg7BDssMpKA3YBdOezv2dZgzHnCPsNdYIMAGhwZulSHqPPyiPt1bI1Qu/6HLo5k\nfk4BAuPB3sQKqUV1d0Mclqg/jFPnxWwUNFLDZif5EF/clq/Pv2QRwUfwEhLk29ux\nIo+mNCq8fa5+PGlKsXCNjbSwfFdrDrthtLobRBw4J/irVvsx5qZwaMsgHImR4mMm\n6Fu2uUUiDDvV72yLeiP2Gk6MlM8/dl+chIqu/aJS1D9tbk/YPd2emu8vxAxRL4tS\nVnEHw1xouuWes9FINijuBZUxj0eAIYAIiwEeMnrKWe1Ryu+GXj52UJUpveCmY00P\nO7Zr/xv9loIUY1MC6/Ax\n=j0LQ\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

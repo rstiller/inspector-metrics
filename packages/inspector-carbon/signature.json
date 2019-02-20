@@ -16,45 +16,9 @@
     {
       "path": "README.md",
       "sha512": "6f02be18dd243de065b0c0af38492dbe2bc95c9dc552617c55ce6cafc696aa03ea028d95daf595bb31332461a03df8b602c3e261ec6fa9099226d1a3b7ac4b72"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
-      "sha512": "b2afa148e546c145c594a1572eae28817258fed8fb93381195a25649e0f3a28441dcf16bf42669d4ced67c394f4062379cafb1d2585ecd6ff5052c4fdda7f1ce"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.js",
-      "sha512": "a765a8582a99c334bcbb9f39fa1f35bfb8b0506363718a6c4199b2195253d2279e3fdc13c088a6f43af244d5d0ee9212c195f30dea931e20538251a05f2368ec"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.js.map",
-      "sha512": "53cdf507908352163c4658de3dd136f501f5c14fdee0cd7d128aeea272e480f14c1bd493c5ca58346c435718c3228326b7fe6e2b7a6ff2ae733a61fd2c7c4c76"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
-    },
-    {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.d.ts",
-      "sha512": "bfc2e2310dfc7a31907d0434d07eb7ef48de941610ce8e0e07ac02a6a510008d99b1b05f62a0d3b69826930e0dfaae449b1139622d6fd86e2e42090c15795543"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js",
-      "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
-      "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcba8YCRDCMfXrQKYV5wAAX5kQAJ+sCkhBWb++6sXAmiVA1nR/\nkGCXe6R5m6fvJJGG8WYIgNz5TnQbFFZNYJlx3VJR7aGqssr2nxwUmwhhp6dr3NSJ\ndjNoEPmn5o+mxv0UA/x+eJR0GIOkAdo2hUUqFSAk9ypgD08l1FRGXxl5X5DwD4S0\n7wEZ2g9+kpY1cAxl4QBHtxmTUx12oMpffMy+WRq7sefIHM198BWDvzEEwKOdSpSX\nXk/4xnZff1IL4ih3gghzGVntWEB6rHURPI6owoYgVnKMf6kNBuLCyjH1cfhCtkeU\n3Pk+eLQi9e/ItSm1aiMGwtMpQRSiuh4fGk7dwwCqk6gx9NQ3EBe4iHwNhupCLKhq\n1aF9giwgzp5H7SruSDndUT3LKc6++5Qt/JPuwSO5Zk+u29k8mSbs2FurAhH2xaKm\nrX1BF8VvAWs99+wntJBddpzrM/DQ1vk4gveUGscgV8Z1mlttNMEw6ACAWj4z0AuN\nlayq80RhR4oYYepHwYzq3qbXHBTfHap3CTDvQsrmUMCL07GZW8Ih3KKh0kKDo54U\npzvzSFO5HRD4MDyvNch+ZLwRzupwlJF2ecrdzBp48wn0s3AR7NXpqWUwuFW49qoG\nfc/Na9vQsrWVla5o0oX+IGDQGZ/0ncET6isKbmUzqcZfLNcHM8boTcCQaXafjrJR\ntQRaSXSdJAMyq/w45j4N\n=U1+8\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcbbD1CRDCMfXrQKYV5wAA3/cQAJ5svBCucKZlfLOGM0IGeiEb\njNojaFwcifJ1Br41c/zdybfLcDVqN6GFzUf3m1Netd1y+MgulGWhh7j0C8UG3X4O\nOW/SnOr0yL0gMzrepNBcFX1gWkabpTs2SdupBctxVei28RjeyXGFnxV2WZHWF4sA\nlWX8A9pDpPjnwmv4y1AeiGth19keSQ+smI9BgyRIUcpnCI1q+pjjx4/tRPXQNWRB\nEgvBgsTT6OuT23obK2mmXgYLxw/aCdYRWt/DJ/8bEllae02VsNMtnT37OrsxRCgL\ngZkffOiIRMfH55+ZnGY4RRokoo0noryGK921DR1tPxkBjt5CcNu3tK4cyd9EbjID\nq8FzlmA0Z019A9l+auaUOJZ9m+HvW1M6ghwWsuTpnBweNQBbNfJGV2YD/7tmyy7Y\nktxRHgsemk5qMPMqzvyjzzg9eGNLgKQLuCQlQyGzwCyrF3fPW6hqVbCXAFGsw9FU\n3aD/Vms3Moew2yNB4q8UZzbMTkCVGaT1JNMBEczXPJ6bAl16+efRpmWUhot/t3/r\n+KB7qSClYPJHoOJvHtePR7C5uFemiK7sE7d29QNI2WgMovf69ToGasXP8re1tsBJ\nMBdsuj5j6pnh7GINC1OWc4D+ZCWKvX6QzTdrY+PKIgc8xsPVY4ct4y7d0R97Q6WZ\nu2O78eMVnpT37t7FjnGW\n=BPSz\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
