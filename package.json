@@ -40,7 +40,7 @@
         "sign": "lerna run sign && git add packages/*/signature.json",
         "clean": "lerna run clean",
         "compile": "lerna run compile",
-        "compodoc": "lerna run compodoc",
+        "compodoc": "lerna run compodoc --scope inspector-metrics && mv packages/inspector-metrics/docs .",
         "coverage": "lerna run coverage",
         "deps": "lerna run deps",
         "lint": "lerna run lint",
