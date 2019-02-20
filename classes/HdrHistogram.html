@@ -1,0 +1,1424 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>HdrHistogram</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/hdr-histogram.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Wrapper implementation for the native hdr-histogram provided by &#39;native-hdr-histogram&#39; module.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                    <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+            </p>
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/BucketCounting.html" target="_self" >BucketCounting</a></code>
+                        <code><a href="../interfaces/Counting.html" target="_self" >Counting</a></code>
+                        <code><a href="../interfaces/Metric.html" target="_self" >Metric</a></code>
+                        <code><a href="../interfaces/Sampling.html" target="_self" >Sampling</a></code>
+                        <code><a href="../interfaces/Summarizing.html" target="_self" >Summarizing</a></code>
+            </p>
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#histogram">histogram</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#snapshot">snapshot</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#bucketCounts">bucketCounts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#buckets">buckets</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#count">count</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#reservoir">reservoir</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#sum">sum</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getSnapshot">getSnapshot</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#update">update</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getBuckets">getBuckets</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCount">getCount</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getCounts">getCounts</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getSnapshot">getSnapshot</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getSum">getSum</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#update">update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(lowest: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, max: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, figures: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, name?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, description?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, buckets: <a href="../classes/Buckets.html">Buckets</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">lib/metrics/hdr-histogram.ts:208</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of HdrHistogram.
+Throws anerror if the &#39;native-hdr-histogram&#39; module is not installed.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                                    <td>Description</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>lowest</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>is the lowest possible number that can be recorded</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>max</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>is the maximum number that can be recorded</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>figures</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                                <code><p>the number of figures in a decimal number that will be maintained, must be between 1 and 5 (inclusive)</p>
+</code>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>name</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>description</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            Yes
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                                <tr>
+                                                        <td>buckets</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../classes/Buckets.html" target="_self" >Buckets</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                        <td>
+                                                        </td>
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="histogram"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            histogram</b>
+                            <a href="#histogram"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="200" class="link-to-prism">lib/metrics/hdr-histogram.ts:200</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>histogram instance.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="snapshot"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            snapshot</b>
+                            <a href="#snapshot"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Snapshot.html" target="_self" >HdrSnapshot</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="208" class="link-to-prism">lib/metrics/hdr-histogram.ts:208</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Snapshot instance.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="bucketCounts"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                                <span class="modifier">Readonly</span>
+                            bucketCounts</b>
+                            <a href="#bucketCounts"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Map&lt;number | number&gt;</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Map()</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:54</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Contains all countings based on <a href="../classes/Histogram.html#buckets">Histogram</a>.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="buckets"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                                <span class="modifier">Readonly</span>
+                            buckets</b>
+                            <a href="#buckets"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Buckets.html" target="_self" >Buckets</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:62</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The bucket config used to count.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="count"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            count</b>
+                            <a href="#count"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>0</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:38</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Continuous number representing the update operations executed.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="reservoir"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                                <span class="modifier">Readonly</span>
+                            reservoir</b>
+                            <a href="#reservoir"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../interfaces/Reservoir.html" target="_self" >Reservoir</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:30</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The value reservoir used to do sampling.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="sum"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Protected</span>
+                            sum</b>
+                            <a href="#sum"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/Int64Wrapper.html" target="_self" >Int64Wrapper</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>new Int64Wrapper()</code>
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:46</div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Sum of all values.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getSnapshot"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getSnapshot
+                            </b>
+                            <a href="#getSnapshot"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getSnapshot()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="247" class="link-to-prism">lib/metrics/hdr-histogram.ts:247</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the snapshot instance.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="update"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            update
+                            </b>
+                            <a href="#update"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>update(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="258" class="link-to-prism">lib/metrics/hdr-histogram.ts:258</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Updates the histogram, all counters and th overall sum with the given value.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>value</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getBuckets"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getBuckets
+                            </b>
+                            <a href="#getBuckets"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getBuckets()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:150</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the buckets config object.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/Buckets.html" target="_self" >Buckets</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCount"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getCount
+                            </b>
+                            <a href="#getCount"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getCount()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:130</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the count of update operations executed.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getCounts"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getCounts
+                            </b>
+                            <a href="#getCounts"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getCounts()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:160</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the actual bucket counts.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Map&lt;number, number&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getSnapshot"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getSnapshot
+                            </b>
+                            <a href="#getSnapshot"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getSnapshot()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:120</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the snapshot of the reservoir.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getSum"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getSum
+                            </b>
+                            <a href="#getSum"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getSum()</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:140</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Gets the sum of all values.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="../classes/Int64Wrapper.html" target="_self" >Int64Wrapper</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="update"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            update
+                            </b>
+                            <a href="#update"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>update(value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Inherited from     <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+</div>
+                                </td>
+                            </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in Histogram:102</div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Increases the total count, updates the reservoir,
+updates the bucket counts and adds the specified value
+to the overall sum.</p>
+<p>The bucket boundaries from <a href="../classes/Buckets.html#boundaries">Buckets</a> represent the upper edge
+of a value range. Each value that is below a boundary is increasing the
+according bucket count. E.g. assume the bucket config [10, 20, 30]:</p>
+<p>the value 11 is increasing buckets 20 and 30</p>
+<p>the value -9 is increasing all buckets (10, 20 and 30)</p>
+<p>the value 31 is increasing none of the buckets</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>value</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+
+import { BucketCounting, Buckets, Counting } from &quot;./counting&quot;;
+import { Histogram } from &quot;./histogram&quot;;
+import { Metric } from &quot;./metric&quot;;
+import { Sampling } from &quot;./sampling&quot;;
+import { Snapshot } from &quot;./snapshot&quot;;
+import { Summarizing } from &quot;./summarizing&quot;;
+
+/**
+ * The &#x27;native-hdr-histogram&#x27; module (optional).
+ */
+let NativeHistogram: any &#x3D; null;
+try {
+    NativeHistogram &#x3D; require(&quot;native-hdr-histogram&quot;);
+} catch (e) {
+}
+
+/**
+ * Snapshot implementation for a {@link HdrHistogram} reference.
+ *
+ * @export
+ * @class HdrSnapshot
+ * @implements {Snapshot}
+ */
+export class HdrSnapshot implements Snapshot {
+
+    /**
+     * Creates an instance of HdrSnapshot.
+     * @param {*} reference
+     * @memberof HdrSnapshot
+     */
+    public constructor(private reference: any) {
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 75th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get75thPercentile(): number {
+        return this.reference.histogram.percentile(75);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 95th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get95thPercentile(): number {
+        return this.reference.histogram.percentile(95);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 98th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get98thPercentile(): number {
+        return this.reference.histogram.percentile(98);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 99.9th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get999thPercentile(): number {
+        return this.reference.histogram.percentile(99.9);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 99th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get99thPercentile(): number {
+        return this.reference.histogram.percentile(99);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 50th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMedian(): number {
+        return this.reference.histogram.percentile(50);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the max value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMax(): number {
+        return this.reference.histogram.max() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the min value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMin(): number {
+        return this.reference.histogram.min() || 0;
+    }
+
+    /**
+     * Always returns an empty array.
+     *
+     * @returns {number[]}
+     * @memberof HdrSnapshot
+     */
+    public getValues(): number[] {
+        return [];
+    }
+
+    /**
+     * Returns the count of all values recorded.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public size(): number {
+        return this.reference.getCount();
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the mean value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMean(): number {
+        return this.reference.histogram.mean() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the standard deviation - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getStdDev(): number {
+        return this.reference.histogram.stddev() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the given percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getValue(quantile: number): number {
+        return this.reference.histogram.percentile(quantile * 100.0);
+    }
+
+}
+
+/**
+ * Wrapper implementation for the native hdr-histogram provided by &#x27;native-hdr-histogram&#x27; module.
+ *
+ * @export
+ * @class HdrHistogram
+ * @extends {Histogram}
+ * @implements {BucketCounting}
+ * @implements {Counting}
+ * @implements {Metric}
+ * @implements {Sampling}
+ * @implements {Summarizing}
+ */
+export class HdrHistogram extends Histogram implements BucketCounting, Counting, Metric, Sampling, Summarizing {
+
+    /**
+     * histogram instance.
+     *
+     * @private
+     * @type {*}
+     * @memberof HdrHistogram
+     */
+    private histogram: any;
+    /**
+     * Snapshot instance.
+     *
+     * @private
+     * @type {HdrSnapshot}
+     * @memberof HdrHistogram
+     */
+    private snapshot: HdrSnapshot;
+
+    /**
+     * Creates an instance of HdrHistogram.
+     * Throws anerror if the &#x27;native-hdr-histogram&#x27; module is not installed.
+     *
+     * @param {number} [lowest&#x3D;1] is the lowest possible number that can be recorded
+     * @param {number} [max&#x3D;100] is the maximum number that can be recorded
+     * @param {number} [figures&#x3D;3]
+     *      the number of figures in a decimal number that will be maintained, must be between 1 and 5 (inclusive)
+     * @param {string} [name]
+     * @param {string} [description]
+     * @param {Buckets} [buckets&#x3D;new Buckets()]
+     * @memberof HdrHistogram
+     */
+    public constructor(
+        lowest: number &#x3D; 1,
+        max: number &#x3D; 100,
+        figures: number &#x3D; 3,
+        name?: string,
+        description?: string,
+        buckets: Buckets &#x3D; new Buckets()) {
+        super(null, name, description, buckets);
+
+        if (!NativeHistogram) {
+            throw new Error(&quot;Module &#x27;native-hdr-histogram&#x27; not found. &quot; +
+                            &quot;Please install the optional dependencies of &#x27;inspector-metrics&#x27; module.&quot;);
+        }
+
+        this.histogram &#x3D; new NativeHistogram(lowest, max, figures);
+        this.snapshot &#x3D; new HdrSnapshot(this);
+    }
+
+    /**
+     * Gets the snapshot instance.
+     *
+     * @returns {Snapshot}
+     * @memberof HdrHistogram
+     */
+    public getSnapshot(): Snapshot {
+        return this.snapshot;
+    }
+
+    /**
+     * Updates the histogram, all counters and th overall sum with the given value.
+     *
+     * @param {number} value
+     * @returns {this}
+     * @memberof HdrHistogram
+     */
+    public update(value: number): this {
+        this.count++;
+        this.sum.add(value);
+        for (const boundary of this.buckets.boundaries) {
+            if (value &lt; boundary) {
+                this.bucketCounts.set(boundary, this.bucketCounts.get(boundary) + 1);
+            }
+        }
+        this.histogram.record(value);
+        return this;
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'HdrHistogram.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

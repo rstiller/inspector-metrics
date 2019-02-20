@@ -1,0 +1,551 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="changelog">Changelog</h1>
+<p>All notable changes to this project will be documented in this file.</p>
+<p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
+and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
+<h2 id="-unreleased-">[Unreleased]</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>turned into monorepo</li>
+<li>shrinked package to contain only necessary files</li>
+</ul>
+<h2 id="-1-17-3-2019-02-13">[1.17.3] - 2019-02-13</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fix NaN check in logger report<ul>
+<li><a href="https://github.com/rstiller/inspector-metrics/pull/13">https://github.com/rstiller/inspector-metrics/pull/13</a></li>
+<li>thanks to <a href="https://github.com/ttous">https://github.com/ttous</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-17-2-2019-02-08">[1.17.2] - 2019-02-08</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-17-1-2018-12-17">[1.17.1] - 2018-12-17</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fixed typos in docs</li>
+<li>fixed minimum reporting timeout bug</li>
+<li>fixed last value reported bug</li>
+</ul>
+<h2 id="-1-17-0-2018-11-30">[1.17.0] - 2018-11-30</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>metric-reporter start and stop methods return promise</li>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-16-0-2018-11-27">[1.16.0] - 2018-11-27</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>convenience methods for setting tags on all metrics and reporters<ul>
+<li><a href="https://github.com/rstiller/inspector-metrics/pull/11">https://github.com/rstiller/inspector-metrics/pull/11</a></li>
+<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>added nodejs 11 to playground</li>
+<li>set version of transitive dependency event-stream to 3.3.4</li>
+</ul>
+<h2 id="-1-15-0-2018-11-25">[1.15.0] - 2018-11-25</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>ad-hoc events<ul>
+<li><a href="https://github.com/rstiller/inspector-metrics/pull/10">https://github.com/rstiller/inspector-metrics/pull/10</a></li>
+<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+</ul>
+</li>
+<li>metric-reporter<ul>
+<li>&#39;reportEvent&#39; method - reports an ad-hoc event</li>
+<li>&#39;flushEvents&#39; method - triggers immediate reporting of events if applicable</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-14-0-2018-11-22">[1.14.0] - 2018-11-22</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>introduced fluent interface for public setter functions<ul>
+<li><a href="https://github.com/rstiller/inspector-metrics/pull/8">https://github.com/rstiller/inspector-metrics/pull/8</a></li>
+<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-13-1-2018-11-21">[1.13.1] - 2018-11-21</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated docs in README / added <a href="https://github.com/rstiller/inspector-vm">https://github.com/rstiller/inspector-vm</a> reference</li>
+<li>updated docs in README / fixed first example code</li>
+</ul>
+<h2 id="-1-13-0-2018-11-04">[1.13.0] - 2018-11-04</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>CHANGELOG</li>
+<li>compile and test script for different node versions</li>
+<li>trace method in Logger interface</li>
+<li>reporter<ul>
+<li>ScheduledReporter base class</li>
+<li>MetricType</li>
+<li>MetricEntry</li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>updated docs in README / added <a href="https://github.com/rstiller/inspector-csv">https://github.com/rstiller/inspector-csv</a> reference</li>
+<li>refactored logger-reporter and metric-reporter</li>
+<li>travisci build for node version 6, 7, 8, 9, 10, 11</li>
+<li>compile target from &quot;es2017&quot; to &quot;es6&quot;</li>
+</ul>
+<h2 id="-1-12-1-2018-10-16">[1.12.1] - 2018-10-16</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fixed naming bug within metric-registry</li>
+</ul>
+<h2 id="-1-12-0-2018-10-06">[1.12.0] - 2018-10-06</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>optional dependency &#39;native-hdr-histogram&#39;</li>
+<li>HdrHistogram (extends Histogram)</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-prometheus">https://github.com/rstiller/inspector-prometheus</a> reference</li>
+<li>metric-registry<ul>
+<li>added &#39;newHdrHistogram&#39; method</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-11-0-2018-10-01">[1.11.0] - 2018-10-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>Buckets &amp; BucketCounting interfaces<ul>
+<li>implemented by Histogram &amp; Timer</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-10-0-2018-09-29">[1.10.0] - 2018-09-29</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>MetadataContainer interface<ul>
+<li>implemented by BaseMetric</li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>updated docs in README</li>
+</ul>
+<h2 id="-1-9-1-2018-09-29">[1.9.1] - 2018-09-29</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>metric-registry<ul>
+<li>&#39;isPureMonotoneCounter&#39; static method</li>
+</ul>
+</li>
+<li>&#39;compodoc&#39; as dev-dependency</li>
+<li>&#39;homepage&#39; field in package.json</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fixed logger-reporter bug (log-metadata object mutated)</li>
+<li>added MonotoneCounter to logger-reporter</li>
+<li>metric-registry<ul>
+<li>&#39;GetMonotoneCounterList&#39; now only returns MonotoneCounter instance</li>
+</ul>
+</li>
+<li>updated build scripts (for documentation)</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>Jenkinsfile</li>
+<li>&#39;typedoc&#39; as dev dependency</li>
+</ul>
+<h2 id="-1-9-0-2018-09-28">[1.9.0] - 2018-09-28</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>MonotoneCounter class + tests</li>
+<li>description field to metrics</li>
+<li>&#39;getDescription()&#39; / &#39;setDescription()&#39; method in Metric interface</li>
+<li>Summarizing interface<ul>
+<li>implemented in Histogram &amp; Timer</li>
+</ul>
+</li>
+<li>added &#39;node-cint64&#39; as dependency for 64bit integer support</li>
+<li>added Int64Wrapper for &#39;node-cint64&#39; module</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated build scripts</li>
+</ul>
+<h2 id="-1-8-8-2018-09-21">[1.8.8] - 2018-09-21</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>jsdoc comments for most of the components</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>updated keywords in package.json</li>
+<li>added description in package.json</li>
+</ul>
+<h2 id="-1-8-7-2018-07-08">[1.8.7] - 2018-07-08</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>travisci build for node version 6, 7, 8, 9, 10</li>
+<li>updated dependencies</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>&#39;async&#39; as dependency</li>
+</ul>
+<h2 id="-1-8-6-2018-02-14">[1.8.6] - 2018-02-14</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated docs in README</li>
+<li>bug fix for <a href="https://github.com/rstiller/inspector-metrics/issues/3">https://github.com/rstiller/inspector-metrics/issues/3</a> (thanks to <a href="https://github.com/rwfaulkner">https://github.com/rwfaulkner</a>)</li>
+</ul>
+<h2 id="-1-8-5-2018-02-08">[1.8.5] - 2018-02-08</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>removed docs folder from npm package</li>
+<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-carbon">https://github.com/rstiller/inspector-carbon</a> reference</li>
+</ul>
+<h2 id="-1-8-4-2018-02-02">[1.8.4] - 2018-02-02</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>typedoc as dev-dependency</li>
+<li>jsdoc comments for clock</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>updated Jenkinsfile</li>
+<li>docs folder in npm package</li>
+<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-elasticsearch">https://github.com/rstiller/inspector-elasticsearch</a> reference</li>
+</ul>
+<h2 id="-1-8-3-2017-11-20">[1.8.3] - 2017-11-20</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>removed ts-node/register from mocha config</li>
+</ul>
+<h2 id="-1-8-2-2017-11-19">[1.8.2] - 2017-11-19</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>travisci build for node version 6, 7, 8, 9</li>
+<li>logger-reporter doesn&#39;t use async queue anymore</li>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-8-1-2017-09-17">[1.8.1] - 2017-09-17</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>size / length gauges for arrays, maps, etc</li>
+</ul>
+<h2 id="-1-7-0-2017-08-26">[1.7.0] - 2017-08-26</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>private id field to BaseMetric (incremented for each new metric instance)</li>
+</ul>
+<h2 id="-1-6-0-2017-08-26">[1.6.0] - 2017-08-26</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>adjusted line feed in tsconfig</li>
+<li>logger<ul>
+<li>method return &#39;any&#39; instead of &#39;void&#39; now</li>
+</ul>
+</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<h2 id="-1-5-4-2017-08-18">[1.5.4] - 2017-08-18</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>timer<ul>
+<li>fixed &#39;timeAsync&#39; method to be compatible with nodejs 6</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-5-3-2017-08-18">[1.5.3] - 2017-08-18</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>timer<ul>
+<li>&#39;timeAsync&#39; method</li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+<li>updated timer doc in README</li>
+</ul>
+<h3 id="removed">Removed</h3>
+<h2 id="-1-5-2-2017-08-01">[1.5.2] - 2017-08-01</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>travisci config</li>
+<li>badges in README</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-5-1-2017-06-10">[1.5.1] - 2017-06-10</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-5-0-2017-06-10">[1.5.0] - 2017-06-10</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>metric-registry<ul>
+<li>&#39;registerMetric&#39; method</li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>change typescript compilation target from &#39;es6&#39; to &#39;es2017&#39;</li>
+<li>updated documentation in README</li>
+</ul>
+<h2 id="-1-4-2-2017-06-09">[1.4.2] - 2017-06-09</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>metric-registry<ul>
+<li>fixed bug &#39;isCounter&#39; method</li>
+<li>fixed bug &#39;isHistogram&#39; method</li>
+<li>fixed bug &#39;isMeter&#39; method</li>
+<li>fixed bug &#39;isTimer&#39; method</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-4-1-2017-06-09">[1.4.1] - 2017-06-09</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>use rimraf to erase build folder</li>
+<li>metric-registry<ul>
+<li>&#39;isCounter&#39; method is now static</li>
+<li>&#39;isHistogram&#39; method is now static</li>
+<li>&#39;isMeter&#39; method is now static</li>
+<li>&#39;isTimer&#39; method is now static</li>
+<li>&#39;isGauge&#39; method is now static</li>
+<li>&#39;isMetricSet&#39; method is now static</li>
+</ul>
+</li>
+</ul>
+<h2 id="-1-3-0-2017-05-29">[1.3.0] - 2017-05-29</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>.editorconfig file</li>
+<li>name attribute to metric classes</li>
+<li>name parameter to metric constructors</li>
+<li>&#39;getName&#39; / &#39;setName&#39; method in &#39;Metric&#39; interface</li>
+<li>MetricRegistration class for registering the same metric instance in multiple registry under different names</li>
+<li>metric-registry<ul>
+<li>&#39;getCounterList&#39; method</li>
+<li>&#39;getGaugeList&#39; method</li>
+<li>&#39;getHistogramList&#39; method</li>
+<li>&#39;getMeterList&#39; method</li>
+<li>&#39;getTimerList&#39; method</li>
+<li>&#39;getMetricList&#39; method</li>
+</ul>
+</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>use metric array instead of Maps for metric instances in metric-registry internally</li>
+<li>metric-registry<ul>
+<li>deprecate &#39;removeMetric&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;removeCounter&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;removeGauge&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;removeHistogram&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;removeMeter&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;removeTimer&#39; method (use &#39;removeMetrics&#39; instead)</li>
+<li>deprecate &#39;getCounters&#39; method (use &#39;getCounterList&#39; instead)</li>
+<li>deprecate &#39;getGauges&#39; method (use &#39;getGaugeList&#39; instead)</li>
+<li>deprecate &#39;getHistograms&#39; method (use &#39;getHistogramList&#39; instead)</li>
+<li>deprecate &#39;getMeters&#39; method (use &#39;getMeterList&#39; instead)</li>
+<li>deprecate &#39;getTimers&#39; method (use &#39;getTimerList&#39; instead)</li>
+<li>deprecate &#39;getMetrics&#39; method (use &#39;getMetricList&#39; instead)</li>
+</ul>
+</li>
+<li>metric-set<ul>
+<li>deprecate &#39;getMetrics&#39; method (use &#39;getMetricList&#39; instead)</li>
+</ul>
+</li>
+<li>don&#39;t remove comments / jsdocs from source when compiling</li>
+<li>updated dependencies</li>
+</ul>
+<h2 id="-1-2-1-2017-05-11">[1.2.1] - 2017-05-11</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>refactored test / test suites</li>
+</ul>
+<h2 id="-1-2-0-2017-04-10">[1.2.0] - 2017-04-10</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>metric-registry-listener + tests</li>
+<li>documentation for metric-registry listener in README</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>renamed &#39;IGroupable&#39; &amp; &#39;ITaggable&#39; interfacer to &#39;Groupable&#39; and &#39;Taggable&#39;</li>
+</ul>
+<h2 id="-1-1-1-2017-04-09">[1.1.1] - 2017-04-09</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fixed import of group related classes and interfaces</li>
+</ul>
+<h2 id="-1-1-0-2017-04-09">[1.1.0] - 2017-04-09</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>base-metric class</li>
+<li>support for setting groups to metrics</li>
+</ul>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>logger-reporter uses group for metric names</li>
+</ul>
+<h2 id="-1-0-3-2017-04-05">[1.0.3] - 2017-04-05</h2>
+<h3 id="added">Added</h3>
+<ul>
+<li>documentation in README</li>
+</ul>
+<h2 id="-1-0-2-2017-03-31">[1.0.2] - 2017-03-31</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>fixed main / typings path in package.json</li>
+</ul>
+<h2 id="-1-0-1-2017-03-31">[1.0.1] - 2017-03-31</h2>
+<h3 id="changed">Changed</h3>
+<ul>
+<li>defined fileset for npm package</li>
+</ul>
+<h2 id="-1-0-0-2017-03-31">[1.0.0] - 2017-03-31</h2>
+<p>Initial commit.</p>
+<h3 id="added">Added</h3>
+<ul>
+<li>project setup<ul>
+<li>README</li>
+<li>typescript config</li>
+<li>lint config</li>
+</ul>
+</li>
+<li>licensed under MIT license</li>
+<li>basic metrics<ul>
+<li>counter</li>
+<li>gauge</li>
+<li>histogram</li>
+<li>meter</li>
+<li>timer</li>
+</ul>
+</li>
+<li>basic metric-registry</li>
+<li>logger reporter (console, scheduled)</li>
+<li>mocha testing (with chai, sinon)</li>
+<li>Jenkins pipeline</li>
+<li>basic unit-tests for components</li>
+<li>NYC code-coverage config</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'changelog.html';
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

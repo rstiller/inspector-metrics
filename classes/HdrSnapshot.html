@@ -1,0 +1,1210 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>HdrSnapshot</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/hdr-histogram.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Snapshot implementation for a <a href="../classes/HdrHistogram.html">HdrHistogram</a> reference.</p>
+
+            </p>
+
+
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
+            </p>
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get75thPercentile">get75thPercentile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get95thPercentile">get95thPercentile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get98thPercentile">get98thPercentile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get999thPercentile">get999thPercentile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get99thPercentile">get99thPercentile</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMax">getMax</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMean">getMean</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMedian">getMedian</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMin">getMin</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getStdDev">getStdDev</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getValue">getValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getValues">getValues</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#size">size</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(reference: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">lib/metrics/hdr-histogram.ts:26</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of HdrSnapshot.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>reference</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get75thPercentile"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            get75thPercentile
+                            </b>
+                            <a href="#get75thPercentile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>get75thPercentile()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">lib/metrics/hdr-histogram.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 75th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get95thPercentile"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            get95thPercentile
+                            </b>
+                            <a href="#get95thPercentile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>get95thPercentile()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">lib/metrics/hdr-histogram.ts:54</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 95th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get98thPercentile"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            get98thPercentile
+                            </b>
+                            <a href="#get98thPercentile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>get98thPercentile()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">lib/metrics/hdr-histogram.ts:65</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 98th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get999thPercentile"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            get999thPercentile
+                            </b>
+                            <a href="#get999thPercentile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>get999thPercentile()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">lib/metrics/hdr-histogram.ts:76</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 99.9th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="get99thPercentile"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            get99thPercentile
+                            </b>
+                            <a href="#get99thPercentile"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>get99thPercentile()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="87" class="link-to-prism">lib/metrics/hdr-histogram.ts:87</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 99th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getMax"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getMax
+                            </b>
+                            <a href="#getMax"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getMax()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">lib/metrics/hdr-histogram.ts:109</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the max value - if NaN returns 0.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getMean"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getMean
+                            </b>
+                            <a href="#getMean"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getMean()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="151" class="link-to-prism">lib/metrics/hdr-histogram.ts:151</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the mean value - if NaN returns 0.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getMedian"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getMedian
+                            </b>
+                            <a href="#getMedian"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getMedian()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">lib/metrics/hdr-histogram.ts:98</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the 50th percentile.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getMin"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getMin
+                            </b>
+                            <a href="#getMin"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getMin()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">lib/metrics/hdr-histogram.ts:120</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the min value - if NaN returns 0.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getStdDev"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getStdDev
+                            </b>
+                            <a href="#getStdDev"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getStdDev()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">lib/metrics/hdr-histogram.ts:162</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the standard deviation - if NaN returns 0.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getValue"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getValue
+                            </b>
+                            <a href="#getValue"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getValue(quantile: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">lib/metrics/hdr-histogram.ts:173</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Calls the native hrd-histogram implementation of the
+referenced <a href="../classes/HdrHistogram.html">HdrHistogram</a> for the given percentile.</p>
+</div>
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>quantile</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="getValues"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            getValues
+                            </b>
+                            <a href="#getValues"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>getValues()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">lib/metrics/hdr-histogram.ts:130</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Always returns an empty array.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>number[]</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="size"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            size
+                            </b>
+                            <a href="#size"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>size()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">lib/metrics/hdr-histogram.ts:140</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Returns the count of all values recorded.</p>
+</div>
+
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+
+import { BucketCounting, Buckets, Counting } from &quot;./counting&quot;;
+import { Histogram } from &quot;./histogram&quot;;
+import { Metric } from &quot;./metric&quot;;
+import { Sampling } from &quot;./sampling&quot;;
+import { Snapshot } from &quot;./snapshot&quot;;
+import { Summarizing } from &quot;./summarizing&quot;;
+
+/**
+ * The &#x27;native-hdr-histogram&#x27; module (optional).
+ */
+let NativeHistogram: any &#x3D; null;
+try {
+    NativeHistogram &#x3D; require(&quot;native-hdr-histogram&quot;);
+} catch (e) {
+}
+
+/**
+ * Snapshot implementation for a {@link HdrHistogram} reference.
+ *
+ * @export
+ * @class HdrSnapshot
+ * @implements {Snapshot}
+ */
+export class HdrSnapshot implements Snapshot {
+
+    /**
+     * Creates an instance of HdrSnapshot.
+     * @param {*} reference
+     * @memberof HdrSnapshot
+     */
+    public constructor(private reference: any) {
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 75th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get75thPercentile(): number {
+        return this.reference.histogram.percentile(75);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 95th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get95thPercentile(): number {
+        return this.reference.histogram.percentile(95);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 98th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get98thPercentile(): number {
+        return this.reference.histogram.percentile(98);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 99.9th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get999thPercentile(): number {
+        return this.reference.histogram.percentile(99.9);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 99th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public get99thPercentile(): number {
+        return this.reference.histogram.percentile(99);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the 50th percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMedian(): number {
+        return this.reference.histogram.percentile(50);
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the max value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMax(): number {
+        return this.reference.histogram.max() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the min value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMin(): number {
+        return this.reference.histogram.min() || 0;
+    }
+
+    /**
+     * Always returns an empty array.
+     *
+     * @returns {number[]}
+     * @memberof HdrSnapshot
+     */
+    public getValues(): number[] {
+        return [];
+    }
+
+    /**
+     * Returns the count of all values recorded.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public size(): number {
+        return this.reference.getCount();
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the mean value - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getMean(): number {
+        return this.reference.histogram.mean() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the standard deviation - if NaN returns 0.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getStdDev(): number {
+        return this.reference.histogram.stddev() || 0;
+    }
+
+    /**
+     * Calls the native hrd-histogram implementation of the
+     * referenced {@link HdrHistogram} for the given percentile.
+     *
+     * @returns {number}
+     * @memberof HdrSnapshot
+     */
+    public getValue(quantile: number): number {
+        return this.reference.histogram.percentile(quantile * 100.0);
+    }
+
+}
+
+/**
+ * Wrapper implementation for the native hdr-histogram provided by &#x27;native-hdr-histogram&#x27; module.
+ *
+ * @export
+ * @class HdrHistogram
+ * @extends {Histogram}
+ * @implements {BucketCounting}
+ * @implements {Counting}
+ * @implements {Metric}
+ * @implements {Sampling}
+ * @implements {Summarizing}
+ */
+export class HdrHistogram extends Histogram implements BucketCounting, Counting, Metric, Sampling, Summarizing {
+
+    /**
+     * histogram instance.
+     *
+     * @private
+     * @type {*}
+     * @memberof HdrHistogram
+     */
+    private histogram: any;
+    /**
+     * Snapshot instance.
+     *
+     * @private
+     * @type {HdrSnapshot}
+     * @memberof HdrHistogram
+     */
+    private snapshot: HdrSnapshot;
+
+    /**
+     * Creates an instance of HdrHistogram.
+     * Throws anerror if the &#x27;native-hdr-histogram&#x27; module is not installed.
+     *
+     * @param {number} [lowest&#x3D;1] is the lowest possible number that can be recorded
+     * @param {number} [max&#x3D;100] is the maximum number that can be recorded
+     * @param {number} [figures&#x3D;3]
+     *      the number of figures in a decimal number that will be maintained, must be between 1 and 5 (inclusive)
+     * @param {string} [name]
+     * @param {string} [description]
+     * @param {Buckets} [buckets&#x3D;new Buckets()]
+     * @memberof HdrHistogram
+     */
+    public constructor(
+        lowest: number &#x3D; 1,
+        max: number &#x3D; 100,
+        figures: number &#x3D; 3,
+        name?: string,
+        description?: string,
+        buckets: Buckets &#x3D; new Buckets()) {
+        super(null, name, description, buckets);
+
+        if (!NativeHistogram) {
+            throw new Error(&quot;Module &#x27;native-hdr-histogram&#x27; not found. &quot; +
+                            &quot;Please install the optional dependencies of &#x27;inspector-metrics&#x27; module.&quot;);
+        }
+
+        this.histogram &#x3D; new NativeHistogram(lowest, max, figures);
+        this.snapshot &#x3D; new HdrSnapshot(this);
+    }
+
+    /**
+     * Gets the snapshot instance.
+     *
+     * @returns {Snapshot}
+     * @memberof HdrHistogram
+     */
+    public getSnapshot(): Snapshot {
+        return this.snapshot;
+    }
+
+    /**
+     * Updates the histogram, all counters and th overall sum with the given value.
+     *
+     * @param {number} value
+     * @returns {this}
+     * @memberof HdrHistogram
+     */
+    public update(value: number): this {
+        this.count++;
+        this.sum.add(value);
+        for (const boundary of this.buckets.boundaries) {
+            if (value &lt; boundary) {
+                this.bucketCounts.set(boundary, this.bucketCounts.get(boundary) + 1);
+            }
+        }
+        this.histogram.record(value);
+        return this;
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'HdrSnapshot.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
