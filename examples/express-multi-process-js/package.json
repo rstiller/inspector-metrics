@@ -19,7 +19,7 @@
   },
   "scripts": {
     "build": "npm run lint",
-    "sign": "pkgsign sign .",
+    "sign": "exit 0",
     "clean": "exit 0",
     "compile": "exit 0",
     "compodoc": "exit 0",
