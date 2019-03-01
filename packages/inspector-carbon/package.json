@@ -2,7 +2,7 @@
   "name": "inspector-carbon",
   "description": "Graphite / carbon metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "2.2.1",
+  "version": "2.3.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "graphite": "^0.1.4",
-    "inspector-metrics": "^1.17.3",
+    "inspector-metrics": "^1.18.0",
     "source-map-support": "^0.5.10"
   },
   "files": [

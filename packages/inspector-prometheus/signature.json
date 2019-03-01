@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "package.json",
-      "sha512": "cb474bbb94ff2cec65a114e0719ea1c4c6aebc176c76531a4508e89d277fc5bd81f5d789180f91d1a5a3b845410023b538d5e7441db77b65fee8193842d4d3de"
+      "sha512": "998b1911edf285aa21964a036dbc45304e2c5021419e9cc9c74d3a8416cb1730bd671089bc185320d1acab2928e0da1a6683185365354c597b830d44611380c7"
     },
     {
       "path": "CHANGELOG",
@@ -18,7 +18,7 @@
       "sha512": "f38c5f22a5373ae8d24dfdb3ed78f4affbdf238d1629806e492a4b2bc10799da5c1e460e79a89fff2dfe3dacc9f9cf8dfed605c7f6008a5959a223f4c809c150"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceTsiCRDCMfXrQKYV5wAA1dwQALH+fYCE5tFzosXGqBQoTtYM\nY9nN7ncdMKjGKYZu36VZ1aqFEc0EdMxsjlOQlDVd7UPaMgXNKJq4LMdzfOjw3ySX\nTdtlxmj8B+plniNNOFQf+eEYdBKJ91sqnDSjIe0Ltscd39yDigk/eisl2M1W2aa9\nl2i1YsgWYD2umo83x+lYvNMsz1ATi3TYsbzjUTew16p/cvFEUkm/pHVLiDOrUfij\nMvmWk8AfSKKP1nm+1/mNfKVHA02s/87okmSy+JptoS5Of5PVMwOnPmxO+j0swunE\ncmV5K1fcLh2rSSKrhQacFW2GNagp+RixLaBnBU8wDNBGBJXOIch+RkH8kxZyA+Jp\n9SHk2qM4kHaYvN8YVzqJqr7gwHEbwxeFv1J+lcIXKxuhNohV8YxqO0xJDOU5m8n4\nOU04d5ARU4SgskOt0FYnIpdfZpVa0IT1KOULiIQayLfnLvc8jtF5myayDTOuQ4DC\nNz5gkdF14IxI+fApFGWWwniumHfLL/rbcYgi1UgbpT0mnoqVftRFnTB34qczQbt6\ncDMbUlZiEDtgsfsH788xvu0MDgteMGm6Y/64/mtd9lkcncH/MOr9rlULU1hSzYpa\nlMu5woxQOa2fptMuqO/zSOCYK/2HJHLZmoq5KBoas7jYhFu+FTKHYVPLPeJVTdFO\nxR50bdeU5NphpQ55tx8y\n=ufnB\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceTtgCRDCMfXrQKYV5wAAI2wQAEjU0la0msrO1vdDFvno7DP7\neyuInGWBKataB52APlCYXC9G50vY9C0Sf1doLaXRGAV3Mu8JgizLBbNyLzUuRJ2V\nnnAfXVGDWiuZREieHcB6FhzPfFfU/nOyjaVzTcGe2YPnEA2XG8f4sbfCqQhzcUNq\n97EpZ8WTcfa0QhPZl0UeTt+y0h2psBSTZ/5R+4Lh1KQ0EkwEzTujsuRQYq3nhL9B\n6ItNiPunMPaQLm8TbwxhinY71c6J6RYQe64fNB6zDCAxFK0iQ+XgwB1n6cLD9x1O\nib25FEFX3MK2hBpfX//iUJKck5UEIB/VE2dsWwLxOVD+/bBLdfzOwL2RJ0RYoYhu\nSTFzA44mY9xg1vVTmA6rQdCRUNhwiErGb/aaOC/q7s54Nf/0ahHJdHPtgU+4j0v5\nHWmdl/kN6thecfkjYePuWEYK0JkHNZa4D/Pk2TkzyIjT7IevlVgX/J4fU2NFJ5sm\nFQCTDj8VmnMNri0EWxqCVfl9uszbpjrIGlnn0T676AKzBxJsync58vf3gtu/i4B/\n7vghdgNx23XOFin6yoTuzDDBCvcbiJ+0hoNMxeXXYorjisQOL7+vS47RKyuSXURQ\nN6y1eux9aMsVVA2pi0eJezfN1/1tRsT6p05MME6OYj9V81tVneVMtCq+KGH0KDlT\njPbqMXSDPD8BhaOvkR/w\n=rUTh\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
