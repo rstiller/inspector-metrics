@@ -394,7 +394,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      */
     protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): CarbonData {
         const value = meter.getCount();
-        if (!value || isNaN(value)) {
+        if (value === undefined || value === null || isNaN(value)) {
             return null;
         }
         const tags = this.buildTags(ctx.registry, meter);
