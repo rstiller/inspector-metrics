@@ -12,9 +12,6 @@
       "url": "https://www.opensource.org/licenses/mit-license.php"
     }
   ],
-  "peerDependencies": {
-    "inspector-metrics": ">=1.16.x"
-  },
   "dependencies": {
     "inspector-metrics": "^1.18.0",
     "inspector-prometheus": "^2.3.0",

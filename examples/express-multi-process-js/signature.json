@@ -1,0 +1,21 @@
+{
+  "version": "v1alpha",
+  "files": [
+    {
+      "path": "package.json",
+      "sha512": "d02f6912f8fdc742d60710afcfe8e65a86a9a516248a67ba2bd23e175e444075d6c7e6bd9c2cdb2a3ce7525f4440074ca914ea9f792876250147f2bfc92641fa"
+    },
+    {
+      "path": "README.md",
+      "sha512": "77e298da399db8f635e213ba497838fe91318cf7a261bfecf11b302c7944af16347c866ebdba8172268160f7c2a52196909b58ae9b00bf6b98867523526c882f"
+    },
+    {
+      "path": "src/index.js",
+      "sha512": "cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"
+    }
+  ],
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceX0xCRDCMfXrQKYV5wAAZm8QAC+JKSQk/IIYAk2qUJEc7A5n\nm/cM7IUsWKFnTuBiI7xZhMlbFTcv7Rt9Vjma8ZrOJwQUgzvr7pX85bF8Ks6e2tqo\nefbZK1UUz2yo2gbQAycb8PVv5+UwVUF81U0qPytdVZlFbdy7I8BWrdll9+Rftrl9\nGDObJR3xf0Cwa8/ilKrQ27CSWJqKJeFdG1ZzqRQhJ4nPRnXQ/Kdg9Z/SlVr5mFZt\n5qARZtsUxAf60feqDaUZ/k/3qeeFmZOGcLpt2pmaS+4q0QNHO4twznxFfY1H85Fx\nCTthZ04Wn3+M+AYBZ5NGhB80V5fhEK7nj1zGB3ks8/g4dd+FikP5AILQ6nY8+w/K\nvD+r5iS7oV+TF+tDU1sznN1WgYMgVQWHSOBOy9XoWDfZpPe/NMBy03xwn0PBXIYt\nNJwGahtfTAfwO59GQeH8yLjs3PgVeDecDK3vadn83d7mhhTthgQ5hYv2APoXNvt5\n6dsV6MTHwKtpGW3oWLztXsnaZ4RgDlkfxUb6QG0RKDW744p3fW2qiNrBynVW1Kp6\nv8vtihOOeHrigG2B7Y4GMqQIC+Zhrxl397tKK1bUbtwb/AsgJqomMzdvfU/jnZHZ\nN1otdRGHS5MyeTEGBrjKgz8ZpVIBLzQqJymAfoYIpBxtHS4inPyBdUS/TNxPJOg7\n8JzEQncMoF0VJ5jSn28k\n=PwrF\n-----END PGP SIGNATURE-----\n",
+  "identity": {
+    "keybaseUser": "rstiller"
+  }
+}
