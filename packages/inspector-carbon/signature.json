@@ -16,9 +16,45 @@
     {
       "path": "README.md",
       "sha512": "6f02be18dd243de065b0c0af38492dbe2bc95c9dc552617c55ce6cafc696aa03ea028d95daf595bb31332461a03df8b602c3e261ec6fa9099226d1a3b7ac4b72"
+    },
+    {
+      "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
+      "sha512": "b2afa148e546c145c594a1572eae28817258fed8fb93381195a25649e0f3a28441dcf16bf42669d4ced67c394f4062379cafb1d2585ecd6ff5052c4fdda7f1ce"
+    },
+    {
+      "path": "build/lib/metrics/CarbonMetricReporter.js",
+      "sha512": "401074bde60859a4994afc2671239307da02bf0d64833269ca0dea7d6a530891ee1fb02ed6551fcda8fec45fef8814cf9c1bb07aa88f14c8cd8637099830d928"
+    },
+    {
+      "path": "build/lib/metrics/CarbonMetricReporter.js.map",
+      "sha512": "2fa4512006c0adc5cdd0bb317c9dcd92223f005e94460650d0b6b5c04258daf74a2c225b73caa77b879a63f5bddec453f7247092c95c509c1e5b3ff2804b9004"
+    },
+    {
+      "path": "build/lib/metrics/index.d.ts",
+      "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
+    },
+    {
+      "path": "build/lib/metrics/index.js",
+      "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
+    },
+    {
+      "path": "build/lib/metrics/index.js.map",
+      "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
+    },
+    {
+      "path": "build/test/metrics/CarbonMetricReporterTest.d.ts",
+      "sha512": "bfc2e2310dfc7a31907d0434d07eb7ef48de941610ce8e0e07ac02a6a510008d99b1b05f62a0d3b69826930e0dfaae449b1139622d6fd86e2e42090c15795543"
+    },
+    {
+      "path": "build/test/metrics/CarbonMetricReporterTest.js",
+      "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
+    },
+    {
+      "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
+      "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceTtfCRDCMfXrQKYV5wAA+DYQABvi08YA+gOzsWXSGDaDCvtT\nV5d7P7/RMS27Y/Sz5mPW7jXrObYFg6B+Y0W48VnlSLu0f+tsZo4q3Rwtj6cBKIz9\nLUIw9RnaS6NCaYXkeBgeq2cK+bvZCaiEI9gSVE7sdqwYb+qbHZ6/kZLV+de0Fg+c\naOd0Yh/M1a7Ky9bKf3gZxBbOZC4HXSZb5gkDyRdiRf9M0oai4rOUbQwsuUHLyl+I\nvDdzIpbAW05HN9TZFK6NKFguN/YNoBSICsM6JbHNph/qge+SVD6wv/vmqrP2jG/E\ncBLoSlkAHAhREeVjinMD9XHai33u+VoGFZ9L9gTRWq5BAIiPxtRSQ4ZaOFwWhX46\n1vs6n/Eu0oLW5tinHWmeIgyugqX266ho2x4uaGlvkm3LYXAOMbKrIClST2J63wWb\nirg3JkkCKPwRhx4YVw75HT854H8a4gzVf+ebSYW1ziQzuzjQkIVhT1DMu7nhpTtS\n6szgfD9cEP5wEzOSLtjNgJP0usA0jqmBiSktQ9C6j/7eWwEftuiDDA31Ut+6KSWy\nYq0veWImiiqnfGUCoKs5mxws9Ncy4pvaH4OEF4O5yVjFSBYD+Sj5EZMgnajfCvmx\nzLHS8Il8GaemGaQkyIryRuN8BRVFofyqDDS9IbhLZGBs/moSDVoE8aTvH8K+MO1I\ngQ1mVpZnwY/jjFNe8RHp\n=0mfh\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceX0uCRDCMfXrQKYV5wAAyMIQAHHjjLxcvS+1RJY3GTJze2KA\nU00WGwRlUH1obHZczlxGN5esafnQf6z25g5u3eJBaxEzkJHXLWRjlLJabfmmK3Ck\nLrcB9g6PlNceU6vlpeoeL8tZJdfLLeb0cDhC8agAq4JYOzFldyUvAqsFhgzQqv9+\nK5M9+94xyyWnYFO6jevmNF/kPELZ4MM+KUsumc0P+iZ3+78v+w+2SzCpWuEhuUJi\nkul+vcyxrQjtLeZ7B+35gj/lsbeF/ZL/xYMsb9vAUsFHmmfxz/iHb7TrCTjIdnTF\nQptGA21CoBMZeC0e1UdYQG6RtLRMAd0SzVF2nZvsaXJBFS/gLmnAeL2CAy9VqlM1\n6Ivog591lIYgzfgS8bWYizzFjN1Wd3tKNbxPzJ7WxcT13m5pUppx3c02VCgryLMd\nJyxWBZu+X+MKrwyT7Zi/cYKigrMetDw/+dOQJ9QtxpBv6W8Bv3LW8C7PSNGWeqRr\nABUAyUKPM0O/+A2mTRumg5lXCzSDd2NcxHbOJcD1weN0AHfsyaVf6JyjY+y8ttVn\n1dGkHzHqAhLe5gOt01VjnE9F1dnsDShPnN5uap35OLTe62saERyHl/mbk1/EGTXh\nKQQC/k1dO/nDsVDO59Neu6pL+zMzd0bZbdcIZJQfpnfBSdsNwn+SBPk05H9OLoOW\nPE+h5ivPNkyyYLvNoF1u\n=9snf\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

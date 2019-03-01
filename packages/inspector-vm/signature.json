@@ -12,9 +12,93 @@
     {
       "path": "README.md",
       "sha512": "9459cb3e00d3bb5be78fe5f8e9e0c00fd227be318812445f072881e8df50b006f00f28bfbe7528782937bde3493c0aa5fab047acd39e2cfbd811186db47aeae6"
+    },
+    {
+      "path": "build/lib/metrics/index.d.ts",
+      "sha512": "2019b5ce7cce351d85a9a460ada769a0ce734436446e2d6e0a0ab8e8dfeb23d10b357bd27626a942a83e5ae3c5c11fd02baac7e30f46b329a3d9c01d97483d10"
+    },
+    {
+      "path": "build/lib/metrics/index.js",
+      "sha512": "8093fe685835954bed6135785bc24193b7964758aebe85cc340767276b0e6f6ab876b0f2c52285d478d9f0baaa9c5143cbb281f8a34342fa6159a543bc613f21"
+    },
+    {
+      "path": "build/lib/metrics/index.js.map",
+      "sha512": "74cfd1ad0a635043158bb8d30c4e4f66149538c3a09b3b196c0eeaf00d98e2f76d29dba628c56b37c140cb0826d7cc0501ff3f3ab6aa24e6dfd8f99b96449299"
+    },
+    {
+      "path": "build/lib/metrics/V8EventLoop.d.ts",
+      "sha512": "b21f46c597934f3ca2c540c6abd54da67cb21f4b327fa4a93e52aa79be522861f0fb0dcb149aa4eba86bccad327e2bdbd9413400dae11e92d9ad50f3b0d16988"
+    },
+    {
+      "path": "build/lib/metrics/V8EventLoop.js",
+      "sha512": "0ecf5a6f4e9a41b09c7035254043b0bdb0dc3b949562bbcd628fc714b6591077725a9632c137a399367c677d954287c6062f7ce4c1012bf2a6aefa86dbd74a97"
+    },
+    {
+      "path": "build/lib/metrics/V8EventLoop.js.map",
+      "sha512": "03dc507278245ff88fdd48a88a41ebb54bd81df73c197deef85057322e21b31b960b11d88f0b46f0371148a41b61861db47744e79336e0bad97017ccc6cb878f"
+    },
+    {
+      "path": "build/lib/metrics/V8GCMetrics.d.ts",
+      "sha512": "0b2ab46e22fef14d0f0882199c80664eb4a02667189919ac1e119074e89af9f226c450354a634c764d8085179bfece4cd0d7f1fe1a02dff828299e0cad85dabe"
+    },
+    {
+      "path": "build/lib/metrics/V8GCMetrics.js",
+      "sha512": "5d1d16d672403726b49bef2a70482c8f0cd156ce0d24a6e2107456cad1c13935169f6cde81a562be38ade741b53a32d6de9113b265eada652dd41c61bf348dc1"
+    },
+    {
+      "path": "build/lib/metrics/V8GCMetrics.js.map",
+      "sha512": "0a057716d50f18142cac958f0e748b868b91609bb752477ef9b2d168df8abfff3d3b7c4ba2cc5fddea842c91f10cfd9bf456f4cea33ec0deac6f152cf31dd863"
+    },
+    {
+      "path": "build/lib/metrics/V8MemoryMetrics.d.ts",
+      "sha512": "a54f7fea9077bceb8fc17d310b0e359d2098531d84610cd996776710d6b107fe2994d063f237ced0ffc8838d011a80f2eb3ce5a64afcbb11e4229b53b88fce2f"
+    },
+    {
+      "path": "build/lib/metrics/V8MemoryMetrics.js",
+      "sha512": "4d3e59e35c2f48b6e7b3989a389916a43f64ab817bd0c802956f1bf1567bda61f17696fc01bd4de1a529952d2846e3572c4543fbc6e74d36c41650fdc656c9d9"
+    },
+    {
+      "path": "build/lib/metrics/V8MemoryMetrics.js.map",
+      "sha512": "b3f2c41ebe89cfa7b02e18424677e224a1fd003f217e54873f42bca2ddfeac80db4297c375311d97647b7183c7aaf67b73f0639559b516dfd9485d789c426cb8"
+    },
+    {
+      "path": "build/lib/metrics/V8ProcessMetrics.d.ts",
+      "sha512": "cc16a6f96dae5c6e981d0c73b217cb640a2c4ee945a3b7788ab21360e10f5a1ab478d97a2e81ed1c280bcb928815c464757cd59a75f1d2155a406ad987465145"
+    },
+    {
+      "path": "build/lib/metrics/V8ProcessMetrics.js",
+      "sha512": "345f04ffee2b13f36871a84c837016a08e0ac4f792d2ac18e42e4c24bb9cbb3b1546a52c11f7851b13def383c0677b087afec847a630b5e0e3e66ee2685c8b4e"
+    },
+    {
+      "path": "build/lib/metrics/V8ProcessMetrics.js.map",
+      "sha512": "0d366587f2c60ea515158d33e7eefa2e744e2546ae7e98cef291eef5deec226b2f1f59eba6896b0adb03f0bf2aa76ed8a0b417b60ab7937d278382333ddc2d44"
+    },
+    {
+      "path": "build/test/metrics/V8GCMetricsTest.d.ts",
+      "sha512": "e5bff6bc6931933a7f4fb4bc54cac5cbd104f37d51955328a0d098b2e512412d863e28e98e9edd65a358e5d05b4d071ca4406e3c232be8df465f13b5366cf133"
+    },
+    {
+      "path": "build/test/metrics/V8GCMetricsTest.js",
+      "sha512": "b515ef43f2d4a9237fc470632e945f8cf2162705096c7ed14b4ef6eeb5e91679d3f30b6774f7acf407fa28efec89321320d83d046469905f6137822f9dd365e0"
+    },
+    {
+      "path": "build/test/metrics/V8GCMetricsTest.js.map",
+      "sha512": "5e8a0348a963fcb47029805c76f72a5f4512d0e84e52a8a6116829e8fe65d84f9f8a8c683f731c781891ffbb69411ef9f302e549d16df5bd31a32254a62cddf7"
+    },
+    {
+      "path": "build/test/metrics/V8MemoryMetricsTest.d.ts",
+      "sha512": "ba9fd086906ee3c0177b6bd6db8fab61a84c1b5c2db2c15a59439411b1823b7476656ec21ff28387bf268a5d11be896074b92854f68054fe7a2ff1aeaaf58daf"
+    },
+    {
+      "path": "build/test/metrics/V8MemoryMetricsTest.js",
+      "sha512": "5356269c63145294dbc6492a767f5714b5745748269f9e21bf67f9f0739d3fd67be1a05dd94c187743c2e7695bbbd6c6dced203890b85163c0a06099985064e7"
+    },
+    {
+      "path": "build/test/metrics/V8MemoryMetricsTest.js.map",
+      "sha512": "cc8232dbc6f326432213d3d90f3e577874c375e428e19bb6d8de3ae73df423c5995f204a6f65127fb6f940aaa9ce28ca5d110593f04ed996aa8924df221441a1"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceTthCRDCMfXrQKYV5wAAqf8QAHRGw02D9uLnrXQGA0G6O8kD\nH/jo9nyu0Jwvy4jpw4zRYrXVt99oNWBPuT0kAsFO6LdbkrWxsckCAHFEoW6P+oZt\nScYUo3cpQoqWN4Tg1bKlHwO8JKOpz546pCfyn2m3O8V65Xc3SVtrdjTmXDzZaHIv\n1RHCWsEyWtciPIS95cqo0XNBRINgqVKmgFEbqEp+IiwcKrRFhJpzBONx4LaxsNaz\nBywrP8HdULCaz9jN6ZXt86I4eT2KL+4nbAf1Ziygo0J5tkdIpwLgolQRUSebKA3L\n7O/gAH+6KqeemzvChcxfqIEhKz8umQPdI1hgyoN9804x+b42zepKwFOxFi0t1l9x\nyXYRvvoXH1xGQ450SS8Bz3cODiqkj8svFBd3BQU1RISvmExV/RSq61ZFhq5puKFe\nBqUMKsU6M3Ts4oyP0G78XdjPK7CpnFtt/sf8xj6HKq7+/CIgdXd1luNHJ/FL/61a\ndwhFLQUoG4uflQaIctz7iQQ0vPzoB8PHmj68tqDldEs2f5WK2aaE19b1/fyNeXJg\nWGFx6bDuCgzdYkC/k/e/7KNJQ3guw+TRdF5JRq5leLSaq+1Haj62lgmbZZ3Y9CgT\nzdKVMgc/0J4ke7YwT79k84PFHvkhHMQTrz3Jmu4SoezIG9hyE2jog0QrJwLLorX6\nQV2KrHnlkxsh3cOYj4yv\n=0SOQ\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceX0uCRDCMfXrQKYV5wAAlL8QAATlrs5356JEL+I7s6c2v4bt\nQn5lUs7Zza9m7EOO61ZVyb0Zma7gKsP0Wfc9rgka0pSqVpQN3I1NG+Or3quebCzN\nVbYxS1nCJdWM3PiklICukJl20LqkC11l2on6w9M6yT1BKt1hRPhrYj6pbwoJypAu\nsmKi6Fd4ws9UQXCYDytwd6mwauDwKbXDIunFlJF/mtZ2dtV5uYIutR2YDwKvegmR\nLlPnaoFRkADqMsjHV7PW9yeeMflndpqTW90WFUaejPr60N1q/U3EMIsHu7Vg3Jaf\nO9rhtw2R2hs3jz3jmVprMxsy4K65qHZb/tkMrhN2YZFu/PxwGwtTaJHH89Klc6n4\nvJZNe88lPpE+N2w9g2lJKUxOXsCD5k9IFgRT9FQ1ZfKv/c2qRQe0en3RIXKIh/2X\ns9xJ4Nec4WjBeksUjtRq32kQJdwolgBBadOlpvGgAXciu9w6omjfBi1kZ5ewNb/n\nSmF0B6/R248PtS7LZgpNnwcDmH2BeEz8Ajw4Gc5fkDzM2qA+t9uLrvoXEk4iZOI8\nYSwSkuQ9XFImBE15EEUcfFp7CSAmvxnYPnvdn8R73LOB5Y4+h7bOZzrsOlPpHZZO\nbk4KDRBSkG+QcRCyv+f25akIAbtUk1XMDmdb+CGbfqHF4eq6s99mzFYndWH6POGm\nXCkieW2HlswMPu1xLgB2\n=/C8z\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
