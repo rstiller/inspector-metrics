@@ -13,6 +13,11 @@
     }
   ],
   "dependencies": {
+    "express": "^4.16.4",
+    "inspector-carbon": "^2.3.0",
+    "inspector-csv": "^2.2.0",
+    "inspector-elasticsearch": "^2.4.0",
+    "inspector-influx": "^2.4.0",
     "inspector-metrics": "^1.18.0",
     "inspector-prometheus": "^2.3.0",
     "inspector-vm": "^3.3.0"
