@@ -1,4 +1,4 @@
-function influxReporter (registry, tags) {
+async function influxReporter (registry, tags) {
   const influx = require('inspector-influx')
 
   const sender = new influx.DefaultSender({
@@ -9,20 +9,21 @@ function influxReporter (registry, tags) {
     }]
   })
   const reporter = new influx.InfluxMetricReporter({
-    log: console,
+    log: null,
     minReportingTimeout: 1440,
     reportInterval: 1000,
     sender
   })
 
   reporter.setTags(tags)
-  reporter.setLog(console)
   reporter.addMetricRegistry(registry)
+
+  await reporter.start()
 
   return reporter
 }
 
-function install () {
+async function install () {
   const metrics = require('inspector-metrics')
   const vm = require('inspector-vm')
 
@@ -44,7 +45,7 @@ function install () {
 
   module.exports.registry = registry
   module.exports.reporter = {
-    influx: influxReporter(registry, reportingTags)
+    influx: await influxReporter(registry, reportingTags)
   }
 }
 
