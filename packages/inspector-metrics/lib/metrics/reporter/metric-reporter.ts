@@ -1,5 +1,6 @@
 import "source-map-support/register";
 
+import * as cluster from "cluster";
 import { Clock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
 import { Event } from "../event";
@@ -110,6 +111,14 @@ export interface MetricReporterOptions {
      * @memberof MetricReporterOptions
      */
     minReportingTimeout?: number;
+    /**
+     * Determines if a worker instance in a cluster send metrics to the master instance
+     * instead of reporting the metrics directly.
+     *
+     * @type {boolean}
+     * @memberof MetricReporterOptions
+     */
+    sendMetricsToMaster?: boolean;
     /**
      * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
      *
@@ -244,16 +253,18 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * Creates an instance of MetricReporter.
      *
      * @param {O} options
-     * @param {Map<string, string>} [tags=new Map()]
-     *          tags for this reporter instance - to be combined with the tags of each metric while reporting
-     * @param {Clock} [clock=new StdClock()]
-     *          clock used to determine the date for the reporting as well as the minimum-reporting timeout feature
-     * @param {number} [minReportingTimeout=1]
-     *          timeout in minutes a metric need to be included in the report without having changed
      * @memberof MetricReporter
      */
     public constructor(options: O) {
         this.options = options;
+        if (cluster.isMaster) {
+            cluster.on("message", (worker, message, handle) => {
+                // TODO: metricStates
+                // TODO: report metrics
+                // tslint:disable-next-line:no-console
+                console.log(`message from worker ${worker.id}: ${JSON.stringify(message)}`);
+            });
+        }
     }
 
     /**
@@ -353,12 +364,22 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Called be before each reporting run.
+     * Called before each reporting run.
      *
      * @protected
      * @memberof MetricReporter
      */
     protected async beforeReport(ctx: OverallReportContext) {
+    }
+
+    /**
+     * Called before each reporting run if sending metrics to master process.
+     *
+     * @protected
+     * @memberof MetricReporter
+     */
+    protected async beforeSendToMaster(ctx: OverallReportContext) {
+        await this.beforeReport(ctx);
     }
 
     /**
@@ -368,6 +389,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     protected async afterReport(ctx: OverallReportContext) {
+    }
+
+    /**
+     * Called after each reporting run if sending metrics to master process.
+     *
+     * @protected
+     * @memberof MetricReporter
+     */
+    protected async afterSendToMaster(ctx: OverallReportContext) {
+        await this.afterReport(ctx);
     }
 
     /**
@@ -381,11 +412,28 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     protected async report(): Promise<OverallReportContext> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const ctx = this.createOverallReportContext();
-            await this.beforeReport(ctx);
-            for (const registry of this.metricRegistries) {
-                await this.reportMetricRegistry(ctx, registry);
+            if (cluster.isWorker && this.options.sendMetricsToMaster) {
+                await this.beforeSendToMaster(ctx);
+                for (const registry of this.metricRegistries) {
+                    cluster.worker.send({
+                        counters: registry.getCounterList(),
+                        ctx,
+                        gauges: registry.getGaugeList(),
+                        histograms: registry.getHistogramList(),
+                        meters: registry.getMeterList(),
+                        monotoneCounters: registry.getMonotoneCounterList(),
+                        timers: registry.getTimerList(),
+                        type: "inspector-metrics:metric-reporter:report",
+                    });
+                }
+                await this.afterSendToMaster(ctx);
+            } else {
+                await this.beforeReport(ctx);
+                for (const registry of this.metricRegistries) {
+                    await this.reportMetricRegistry(ctx, registry);
+                }
+                await this.afterReport(ctx);
             }
-            await this.afterReport(ctx);
             return ctx;
         }
         return {};

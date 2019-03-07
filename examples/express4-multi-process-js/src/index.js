@@ -12,7 +12,7 @@ async function start () {
       console.log(`respawning worker ${worker.id}`)
       cluster.fork()
     })
-    for (let i = 0; i < cpuCount; i += 1) {
+    for (let i = 0; i < cpuCount; i++) {
       cluster.fork()
     }
     console.log(`master process with pid ${process.pid}`)

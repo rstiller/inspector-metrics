@@ -1,3 +1,6 @@
+const cluster = require('cluster')
+const packageJson = require('../package.json')
+
 async function influxReporter (registry, tags) {
   const influx = require('inspector-influx')
 
@@ -24,24 +27,27 @@ async function influxReporter (registry, tags) {
 }
 
 async function install () {
-  const metrics = require('inspector-metrics')
-  const vm = require('inspector-vm')
+  const {
+    MetricRegistry
+  } = require('inspector-metrics')
+  const {
+    V8MemoryMetrics,
+    V8GCMetrics,
+    V8EventLoop,
+    V8ProcessMetrics
+  } = require('inspector-vm')
 
-  const registry = new metrics.MetricRegistry()
-  const memoryMetric = new vm.V8MemoryMetrics('memory')
-  const gcMetric = new vm.V8GCMetrics('gc', registry.getDefaultClock())
-  const eventLoop = new vm.V8EventLoop('eventLoop')
-  const processMetric = new vm.V8ProcessMetrics('process')
-
-  registry.registerMetric(gcMetric)
-  registry.registerMetric(memoryMetric)
-  registry.registerMetric(eventLoop)
-  registry.registerMetric(processMetric)
+  const registry = new MetricRegistry()
+  registry.registerMetric(new V8GCMetrics('gc', registry.getDefaultClock()))
+  registry.registerMetric(new V8MemoryMetrics('memory'))
+  registry.registerMetric(new V8EventLoop('eventLoop'))
+  registry.registerMetric(new V8ProcessMetrics('process'))
+  registry.setTag('pid', process.pid)
+  registry.setTag('isMaster', cluster.isMaster)
 
   const reportingTags = new Map()
-  reportingTags.set('application', 'express4-multi-process')
-  reportingTags.set('version', '1.0.0')
-  reportingTags.set('pid', process.pid)
+  reportingTags.set('application', packageJson.name)
+  reportingTags.set('version', packageJson.version)
 
   module.exports.registry = registry
   module.exports.reporter = {

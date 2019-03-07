@@ -115,6 +115,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         clock = new StdClock(),
         scheduler = setInterval,
         minReportingTimeout = 1,
+        sendMetricsToMaster = true,
         tags = new Map(),
     }: {
             /**
@@ -157,6 +158,12 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
              * @type {Map<string, string>}
              */
             tags?: Map<string, string>;
+            /**
+             * Determines if a worker instance in a cluster send metrics to the master instance
+             * instead of reporting the metrics directly..
+             * @type {boolean}
+             */
+            sendMetricsToMaster?: boolean;
         }) {
         super({
             clock,
@@ -164,6 +171,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
             minReportingTimeout,
             reportInterval,
             scheduler,
+            sendMetricsToMaster,
             sender,
             tags,
             unit,
