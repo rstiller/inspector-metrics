@@ -218,7 +218,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     /**
      * Sends an event directly to influxdb.
      *
-     * @param {Event} event
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof InfluxMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -277,7 +278,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * Uses the sender to report the given data points.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, IPoint>>} results
@@ -286,7 +288,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, IPoint>>): Promise<any> {

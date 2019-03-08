@@ -193,7 +193,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof CarbonMetricReporter
      */
@@ -258,7 +258,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      * Uses the client instance to report the given metric results.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} timestamp
      * @param {MetricType} type
      * @param {ReportingResult<any, CarbonData>[]} results
@@ -267,7 +267,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      */
     protected handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         timestamp: Date,
         type: MetricType,
         results: Array<ReportingResult<any, CarbonData>>): Promise<any> {

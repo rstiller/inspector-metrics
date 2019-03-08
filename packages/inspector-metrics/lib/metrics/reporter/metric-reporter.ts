@@ -50,10 +50,10 @@ export interface MetricSetReportContext<M> {
     /**
      * The registry the metric are registered in.
      *
-     * @type {MetricRegistry}
+     * @type {MetricRegistry | null}
      * @memberof ReportingContext
      */
-    readonly registry: MetricRegistry;
+    readonly registry: MetricRegistry | null;
     /**
      * The current date.
      *
@@ -200,8 +200,8 @@ export interface IMetricReporter {
      *
      * This implementation does nothing and always resolved the specified evnet.
      *
-     * @param {MetricRegistry} event
-     * @returns {this}
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof IMetricReporter
      */
     reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>;
@@ -346,7 +346,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * This implementation does nothing and always resolved the specified event.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof MetricReporter
      */
@@ -447,10 +447,10 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * And finally calls {@link #handleResults} for each of the results.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @memberof MetricReporter
      */
-    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry) {
+    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry | null) {
         const date: Date = new Date(this.options.clock.time().milliseconds);
         const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this
             .createMetricSetReportContext(ctx, registry, date, "counter");
@@ -518,7 +518,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * @protected
      * @param {OverallReportContext} overallCtx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @returns {MetricSetReportContext<any>}
@@ -526,7 +526,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      */
     protected createMetricSetReportContext(
         overallCtx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType): MetricSetReportContext<any> {
         return {
@@ -575,7 +575,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @protected
      * @abstract
      * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, T>>} results
@@ -584,7 +584,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      */
     protected abstract handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, T>>): Promise<void>;
@@ -688,12 +688,12 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * and the specified taggable metric (in this order).
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Taggable} taggable
      * @returns {Tags}
      * @memberof MetricReporter
      */
-    protected buildTags(registry: MetricRegistry, taggable: Taggable): Tags {
+    protected buildTags(registry: MetricRegistry | null, taggable: Taggable): Tags {
         const tags: Tags = {};
         if (this.options.tags) {
             this.options.tags.forEach((tag, key) => tags[key] = tag);

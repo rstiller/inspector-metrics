@@ -124,8 +124,8 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
      * Uses {@link PrometheusMetricReporter#getEventString} to build the string and sends the event
      * straight to the pushgateway.
      *
-     * @param {Event} event
-     * @returns {Promise<Event>} always the specified event.
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof PushgatewayMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -198,7 +198,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, any>>): Promise<any> {

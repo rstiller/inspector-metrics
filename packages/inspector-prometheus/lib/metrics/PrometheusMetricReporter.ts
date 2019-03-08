@@ -295,8 +295,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     /**
      * Use {@link #getEventString} instead.
      *
-     * @param {Event} event
-     * @returns {Promise<Event>} always the specified event.
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof PrometheusMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -331,7 +331,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     }
 
     /**
-     * Called be before each reporting run.
+     * Called before each reporting run.
      *
      * @protected
      * @memberof MetricReporter
@@ -342,7 +342,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
 
     protected async handleResults(
         overallCtx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, PrometheusMetricResult>>): Promise<void> {

@@ -475,7 +475,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof ElasticsearchMetricReporter
      */
@@ -512,7 +512,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      * using the bulk method of the elasticsearch client.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, any[]>>} results
@@ -521,7 +521,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      */
     protected handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, any[]>>): Promise<void> {

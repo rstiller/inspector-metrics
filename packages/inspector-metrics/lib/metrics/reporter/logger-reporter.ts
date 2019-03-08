@@ -195,7 +195,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      *
      * @protected
      * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, LogLine>>} results
@@ -203,7 +203,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, LogLine>>) {

@@ -293,7 +293,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof CsvMetricReporter
      */
@@ -343,7 +343,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * Writes the reporting results to the writer instance.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, Fields>>} results
@@ -351,7 +351,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, Fields>>) {
@@ -600,6 +600,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      *
      * @private
      * @template T
+     * @param {MetricRegistry | null} registry
      * @param {string} dateStr
      * @param {T} metric
      * @param {MetricType} type
@@ -609,7 +610,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     private buildRow<T extends Metric>(
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         dateStr: string,
         metric: T,
         type: MetricType,
