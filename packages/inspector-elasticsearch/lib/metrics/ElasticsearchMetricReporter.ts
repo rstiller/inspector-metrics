@@ -372,6 +372,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             scheduler = setInterval,
             minReportingTimeout = 1,
             tags = new Map(),
+            sendMetricsToMaster = true,
         }: {
                 /**
                  * Elasticsearch client options.
@@ -428,6 +429,12 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
                  * @type {Map<string, string>}
                  */
                 tags?: Map<string, string>;
+                /**
+                 * Determines if a worker instance in a cluster sends metrics to the master instance
+                 * instead of reporting the metrics directly.
+                 * @type {boolean}
+                 */
+                sendMetricsToMaster?: boolean;
             }) {
         super({
             clientOptions,
@@ -438,6 +445,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             minReportingTimeout,
             reportInterval,
             scheduler,
+            sendMetricsToMaster,
             tags,
             typeDeterminator,
             unit,

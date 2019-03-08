@@ -233,12 +233,14 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         minReportingTimeout = 1,
         tags = new Map(),
         useUntyped = false,
+        sendMetricsToMaster = true,
     }: PrometheusReporterOptions) {
         super({
             clock,
             emitComments,
             includeTimestamp,
             minReportingTimeout,
+            sendMetricsToMaster,
             tags,
             useUntyped,
         });

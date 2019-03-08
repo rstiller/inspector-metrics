@@ -103,6 +103,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         scheduler = setInterval,
         tags = new Map(),
         unit = MILLISECOND,
+        sendMetricsToMaster = true,
     }: PushgatewayReporterOptions) {
         super({
             clock,
@@ -115,6 +116,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
             reportInterval,
             reporter,
             scheduler,
+            sendMetricsToMaster,
             tags,
             unit,
         });

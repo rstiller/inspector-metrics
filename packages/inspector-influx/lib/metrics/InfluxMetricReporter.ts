@@ -159,8 +159,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
              */
             tags?: Map<string, string>;
             /**
-             * Determines if a worker instance in a cluster send metrics to the master instance
-             * instead of reporting the metrics directly..
+             * Determines if a worker instance in a cluster sends metrics to the master instance
+             * instead of reporting the metrics directly.
              * @type {boolean}
              */
             sendMetricsToMaster?: boolean;

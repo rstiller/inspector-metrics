@@ -110,6 +110,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
+        sendMetricsToMaster = true,
     }: {
         /**
          * The graphite / carbon host.
@@ -151,6 +152,12 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
          * @type {Map<string, string>}
          */
         tags?: Map<string, string>;
+        /**
+         * Determines if a worker instance in a cluster sends metrics to the master instance
+         * instead of reporting the metrics directly.
+         * @type {boolean}
+         */
+        sendMetricsToMaster?: boolean;
     }) {
         super({
             clock,
@@ -159,6 +166,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             minReportingTimeout,
             reportInterval,
             scheduler,
+            sendMetricsToMaster,
             tags,
             unit,
         });
