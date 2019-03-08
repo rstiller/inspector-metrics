@@ -220,10 +220,36 @@ export interface IMetricReporter {
  *
  * @export
  * @interface InterprocessReportMessage
+ * @template T
  */
 export interface InterprocessReportMessage<T> {
+    /**
+     * Reporting context from forked process.
+     *
+     * @type {OverallReportContext}
+     * @memberof InterprocessReportMessage
+     */
     ctx: OverallReportContext;
+    /**
+     * Date from report function in forked process.
+     *
+     * @type {Date}
+     * @memberof InterprocessReportMessage
+     */
     date: Date;
+    /**
+     * Collection of metric reporting results from forked process.
+     *
+     * @type {{
+     *         counters: Array<ReportingResult<any, T>>;
+     *         gauges: Array<ReportingResult<any, T>>;
+     *         histograms: Array<ReportingResult<any, T>>;
+     *         meters: Array<ReportingResult<any, T>>;
+     *         monotoneCounters: Array<ReportingResult<any, T>>;
+     *         timers: Array<ReportingResult<any, T>>;
+     *     }}
+     * @memberof InterprocessReportMessage
+     */
     metrics: {
         counters: Array<ReportingResult<any, T>>;
         gauges: Array<ReportingResult<any, T>>;
@@ -232,7 +258,19 @@ export interface InterprocessReportMessage<T> {
         monotoneCounters: Array<ReportingResult<any, T>>;
         timers: Array<ReportingResult<any, T>>;
     };
+    /**
+     * Type of the reported which sent the metrics to the master process.
+     *
+     * @type {string}
+     * @memberof InterprocessReportMessage
+     */
     targetReporterType: string;
+    /**
+     * The type property of the message sent to the master process.
+     *
+     * @type {string}
+     * @memberof InterprocessReportMessage
+     */
     type: string;
 }
 
