@@ -2,7 +2,6 @@ import "source-map-support/register";
 
 import { Client, ConfigOptions } from "elasticsearch";
 import {
-    Clock,
     Counter,
     Event,
     Gauge,
@@ -19,11 +18,9 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Tags,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 /**
@@ -373,69 +370,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             minReportingTimeout = 1,
             tags = new Map(),
             sendMetricsToMaster = true,
-        }: {
-                /**
-                 * Elasticsearch client options.
-                 * @type {ConfigOptions}
-                 */
-                clientOptions: ConfigOptions,
-                /**
-                 * Used to build the document for a metric.
-                 * @type {MetricDocumentBuilder}
-                 */
-                metricDocumentBuilder?: MetricDocumentBuilder,
-                /**
-                 * Used to get the name of the index.
-                 * @type {MetricInfoDeterminator}
-                 */
-                indexnameDeterminator?: MetricInfoDeterminator,
-                /**
-                 * Used to get the type of the metric instance.
-                 * @type {MetricInfoDeterminator}
-                 */
-                typeDeterminator?: MetricInfoDeterminator,
-                /**
-                 * The logger instance used to report metrics.
-                 * @type {Logger}
-                 */
-                log?: Logger,
-                /**
-                 * Reporting interval in the time-unit of {@link #unit}.
-                 * @type {number}
-                 */
-                reportInterval?: number;
-                /**
-                 * The time-unit of the reporting interval.
-                 * @type {TimeUnit}
-                 */
-                unit?: TimeUnit;
-                /**
-                 * The clock instance used determine the current time.
-                 * @type {Clock}
-                 */
-                clock?: Clock;
-                /**
-                 * The scheduler function used to trigger reporting.
-                 * @type {Scheduler}
-                 */
-                scheduler?: Scheduler;
-                /**
-                 * The timeout in which a metrics gets reported wether it's value has changed or not.
-                 * @type {number}
-                 */
-                minReportingTimeout?: number;
-                /**
-                 * Common tags for this reporter instance.
-                 * @type {Map<string, string>}
-                 */
-                tags?: Map<string, string>;
-                /**
-                 * Determines if a worker instance in a cluster sends metrics to the master instance
-                 * instead of reporting the metrics directly.
-                 * @type {boolean}
-                 */
-                sendMetricsToMaster?: boolean;
-            }) {
+        }: ElasticsearchMetricReporterOption) {
         super({
             clientOptions,
             clock,

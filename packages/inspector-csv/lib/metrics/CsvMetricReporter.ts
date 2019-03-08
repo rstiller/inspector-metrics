@@ -248,6 +248,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
+        sendMetricsToMaster = true,
     }: CsvMetricReporterOptions) {
         super({
             clock,
@@ -260,6 +261,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
             minReportingTimeout,
             reportInterval,
             scheduler,
+            sendMetricsToMaster,
             tagColumnPrefix,
             tagDelimiter,
             tagExportMode,

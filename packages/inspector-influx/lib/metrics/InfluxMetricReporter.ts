@@ -2,7 +2,6 @@ import "source-map-support/register";
 
 import { IPoint } from "influx";
 import {
-    Clock,
     Counter,
     Event,
     Gauge,
@@ -19,10 +18,8 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 /**
@@ -117,54 +114,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         minReportingTimeout = 1,
         sendMetricsToMaster = true,
         tags = new Map(),
-    }: {
-            /**
-             * A sender implementation used to send metrics to influx DB server.
-             * @type {Sender}
-             */
-            sender: Sender,
-            /**
-             * The logger instance used to report metrics.
-             * @type {(Logger | null)}
-             */
-            log?: Logger,
-            /**
-             * Reporting interval in the time-unit of {@link #unit}.
-             * @type {number}
-             */
-            reportInterval?: number;
-            /**
-             * The time-unit of the reporting interval.
-             * @type {TimeUnit}
-             */
-            unit?: TimeUnit;
-            /**
-             * The clock instance used determine the current time.
-             * @type {Clock}
-             */
-            clock?: Clock;
-            /**
-             * The scheduler function used to trigger reporting.
-             * @type {Scheduler}
-             */
-            scheduler?: Scheduler;
-            /**
-             * The timeout in which a metrics gets reported wether it's value has changed or not.
-             * @type {number}
-             */
-            minReportingTimeout?: number;
-            /**
-             * Common tags for this reporter instance.
-             * @type {Map<string, string>}
-             */
-            tags?: Map<string, string>;
-            /**
-             * Determines if a worker instance in a cluster sends metrics to the master instance
-             * instead of reporting the metrics directly.
-             * @type {boolean}
-             */
-            sendMetricsToMaster?: boolean;
-        }) {
+    }: InfluxMetricReporterOptions) {
         super({
             clock,
             log,

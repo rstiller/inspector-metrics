@@ -6,7 +6,6 @@ import "source-map-support/register";
 const graphite = require("graphite");
 
 import {
-    Clock,
     Counter,
     Event,
     Gauge,
@@ -23,11 +22,9 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Tags,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 export interface CarbonMetricReporterOptions extends ScheduledMetricReporterOptions {
@@ -111,54 +108,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         minReportingTimeout = 1,
         tags = new Map(),
         sendMetricsToMaster = true,
-    }: {
-        /**
-         * The graphite / carbon host.
-         * @type {string}
-         */
-        host: string,
-        /**
-         * The logger instance used to report metrics.
-         * @type {Logger}
-         */
-        log?: Logger,
-        /**
-         * Reporting interval in the time-unit of {@link #unit}.
-         * @type {number}
-         */
-        reportInterval?: number;
-        /**
-         * The time-unit of the reporting interval.
-         * @type {TimeUnit}
-         */
-        unit?: TimeUnit;
-        /**
-         * The clock instance used determine the current time.
-         * @type {Clock}
-         */
-        clock?: Clock;
-        /**
-         * The scheduler function used to trigger reporting.
-         * @type {Scheduler}
-         */
-        scheduler?: Scheduler;
-        /**
-         * The timeout in which a metrics gets reported wether it's value has changed or not.
-         * @type {number}
-         */
-        minReportingTimeout?: number;
-        /**
-         * Common tags for this reporter instance.
-         * @type {Map<string, string>}
-         */
-        tags?: Map<string, string>;
-        /**
-         * Determines if a worker instance in a cluster sends metrics to the master instance
-         * instead of reporting the metrics directly.
-         * @type {boolean}
-         */
-        sendMetricsToMaster?: boolean;
-    }) {
+    }: CarbonMetricReporterOptions) {
         super({
             clock,
             host,
