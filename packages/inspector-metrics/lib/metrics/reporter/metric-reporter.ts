@@ -216,6 +216,27 @@ export interface IMetricReporter {
 }
 
 /**
+ * Interface for reports from reporters in forked processes.
+ *
+ * @export
+ * @interface InterprocessReportMessage
+ */
+export interface InterprocessReportMessage<T> {
+    ctx: OverallReportContext;
+    date: Date;
+    metrics: {
+        counters: Array<ReportingResult<any, T>>;
+        gauges: Array<ReportingResult<any, T>>;
+        histograms: Array<ReportingResult<any, T>>;
+        meters: Array<ReportingResult<any, T>>;
+        monotoneCounters: Array<ReportingResult<any, T>>;
+        timers: Array<ReportingResult<any, T>>;
+    };
+    targetReporterType: string;
+    type: string;
+}
+
+/**
  * Base-class for metric-reporter implementations.
  *
  * @export
@@ -225,9 +246,19 @@ export interface IMetricReporter {
 export abstract class MetricReporter<O extends MetricReporterOptions, T> implements IMetricReporter {
 
     /**
+     * Constant for the "type" variable of process-level message identifying report-messages
+     * from reporter of forked processes.
+     *
+     * @static
+     * @memberof MetricReporter
+     */
+    public static readonly MESSAGE_TYPE = "inspector-metrics:metric-reporter:report";
+
+    /**
      * {@link MetricRegistry} instances.
      *
      * @protected
+     * @readonly
      * @type {MetricRegistry[]}
      * @memberof MetricReporter
      */
@@ -236,6 +267,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * options for this reporter instance.
      *
      * @protected
+     * @readonly
      * @type {O}
      * @memberof MetricReporter
      */
@@ -244,25 +276,44 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * Keeps track of the reporting states for each metric.
      *
      * @protected
+     * @readonly
      * @type {Map<number, MetricEntry>}
      * @memberof MetricReporter
      */
     protected readonly metricStates: Map<number, MetricEntry> = new Map();
+    /**
+     * The type of the reporter implementation - for internal use.
+     *
+     * @protected
+     * @readonly
+     * @type {stirng}
+     * @memberof MetricReporter
+     */
+    protected readonly reporterType: string;
 
     /**
      * Creates an instance of MetricReporter.
      *
      * @param {O} options
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof MetricReporter
      */
-    public constructor(options: O) {
+    public constructor(options: O, reporterType?: string) {
         this.options = options;
+        this.reporterType = reporterType || this.constructor.name;
         if (cluster.isMaster) {
-            cluster.on("message", (worker, message, handle) => {
-                // TODO: metricStates
-                // TODO: report metrics
-                // tslint:disable-next-line:no-console
-                console.log(`message from worker ${worker.id}: ${JSON.stringify(message)}`);
+            cluster.on("message", async (worker, message, handle) => {
+                if (message &&
+                    message.type && message.type === MetricReporter.MESSAGE_TYPE &&
+                    message.targetReporterType && message.targetReporterType === this.reporterType) {
+                    const report: InterprocessReportMessage<T> = message;
+                    await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.monotoneCounters);
+                    await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.counters);
+                    await this.handleResults(report.ctx, null, report.date, "gauge", report.metrics.gauges);
+                    await this.handleResults(report.ctx, null, report.date, "histogram", report.metrics.histograms);
+                    await this.handleResults(report.ctx, null, report.date, "meter", report.metrics.meters);
+                    await this.handleResults(report.ctx, null, report.date, "timer", report.metrics.timers);
+                }
             });
         }
     }
@@ -412,28 +463,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     protected async report(): Promise<OverallReportContext> {
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const ctx = this.createOverallReportContext();
-            if (cluster.isWorker && this.options.sendMetricsToMaster) {
-                await this.beforeSendToMaster(ctx);
-                for (const registry of this.metricRegistries) {
-                    cluster.worker.send({
-                        counters: registry.getCounterList(),
-                        ctx,
-                        gauges: registry.getGaugeList(),
-                        histograms: registry.getHistogramList(),
-                        meters: registry.getMeterList(),
-                        monotoneCounters: registry.getMonotoneCounterList(),
-                        timers: registry.getTimerList(),
-                        type: "inspector-metrics:metric-reporter:report",
-                    });
-                }
-                await this.afterSendToMaster(ctx);
-            } else {
-                await this.beforeReport(ctx);
-                for (const registry of this.metricRegistries) {
-                    await this.reportMetricRegistry(ctx, registry);
-                }
-                await this.afterReport(ctx);
+            await this.beforeReport(ctx);
+            for (const registry of this.metricRegistries) {
+                await this.reportMetricRegistry(ctx, registry);
             }
+            await this.afterReport(ctx);
             return ctx;
         }
         return {};
@@ -447,10 +481,14 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * And finally calls {@link #handleResults} for each of the results.
      *
      * @protected
+     * @param {OverallReportContext} ctx
      * @param {MetricRegistry | null} registry
      * @memberof MetricReporter
      */
-    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry | null) {
+    protected async reportMetricRegistry(
+        ctx: OverallReportContext,
+        registry: MetricRegistry | null) {
+
         const date: Date = new Date(this.options.clock.time().milliseconds);
         const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this
             .createMetricSetReportContext(ctx, registry, date, "counter");
@@ -493,12 +531,30 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
-        await this.handleResults(ctx, registry, date, "counter", counterResults);
-        await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
-        await this.handleResults(ctx, registry, date, "histogram", histogramResults);
-        await this.handleResults(ctx, registry, date, "meter", meterResults);
-        await this.handleResults(ctx, registry, date, "timer", timerResults);
+        if (cluster.isWorker && this.options.sendMetricsToMaster) {
+            const message: InterprocessReportMessage<T> = {
+                ctx,
+                date,
+                metrics: {
+                    counters: counterResults,
+                    gauges: gaugeResults,
+                    histograms: histogramResults,
+                    meters: meterResults,
+                    monotoneCounters: monotoneCounterResults,
+                    timers: timerResults,
+                },
+                targetReporterType: this.reporterType,
+                type: MetricReporter.MESSAGE_TYPE,
+            };
+            cluster.worker.send(message);
+        } else {
+            await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
+            await this.handleResults(ctx, registry, date, "counter", counterResults);
+            await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
+            await this.handleResults(ctx, registry, date, "histogram", histogramResults);
+            await this.handleResults(ctx, registry, date, "meter", meterResults);
+            await this.handleResults(ctx, registry, date, "timer", timerResults);
+        }
     }
 
     /**

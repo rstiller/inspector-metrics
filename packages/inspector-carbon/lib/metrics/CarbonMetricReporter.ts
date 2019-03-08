@@ -258,6 +258,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      * Uses the client instance to report the given metric results.
      *
      * @protected
+     * @param {OverallReportContext} ctx
      * @param {MetricRegistry | null} registry
      * @param {Date} timestamp
      * @param {MetricType} type
