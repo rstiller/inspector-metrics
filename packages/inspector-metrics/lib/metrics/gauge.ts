@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { BaseMetric, Metric } from "./metric";
+import { BaseMetric, Metric, SerializableMetric } from "./metric";
 
 /**
  * A gauge can represent any value - regardless of the type.
@@ -10,7 +10,7 @@ import { BaseMetric, Metric } from "./metric";
  * @extends {Metric}
  * @template T
  */
-export interface Gauge<T> extends Metric {
+export interface Gauge<T> extends Metric, SerializableMetric {
 
     /**
      * Gets the current value of the gauge.

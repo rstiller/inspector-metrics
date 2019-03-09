@@ -8,6 +8,7 @@ import {
     Meter,
     Metric,
     MetricRegistry,
+    MetricReporter,
     MetricSetReportContext,
     MetricType,
     MILLISECOND,
@@ -16,6 +17,7 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
+    SerializableMetric,
     StdClock,
     Timer,
 } from "inspector-metrics";
@@ -81,12 +83,12 @@ export interface CsvFileWriter {
     /**
      * Called for each field of each metric and after init finished - behaviour is implementation specific.
      *
-     * @param {Metric} metric
+     * @param {Metric | SerializableMetric} metric
      * @param {Row} values
      * @returns {Promise<void>}
      * @memberof CsvFileWriter
      */
-    writeRow(metric: Metric, values: Row): Promise<void>;
+    writeRow(metric: Metric | SerializableMetric, values: Row): Promise<void>;
 }
 
 /**
@@ -611,7 +613,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Row}
      * @memberof CsvMetricReporter
      */
-    private buildRow<T extends Metric>(
+    private buildRow<T extends Metric | SerializableMetric>(
         registry: MetricRegistry | null,
         dateStr: string,
         metric: T,
@@ -625,7 +627,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-            metric.getMetadataMap().forEach((metadataValue, metadataName) => {
+            MetricReporter.getMetadata(metric).forEach((metadataValue, metadataName) => {
                 metadataStr += `${metadataName}=${quote}${metadataValue}${quote}${this.options.metadataDelimiter}`;
             });
             metadataStr = metadataStr.slice(0, -1);
@@ -644,7 +646,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(dateStr);
                     break;
                 case "description":
-                    let desc = encodeURIComponent(metric.getDescription() || "");
+                    let desc = encodeURIComponent(MetricReporter.getDescription(metric) || "");
                     if (quote === "'") {
                         desc = desc.replace(/'/g, "\\'");
                     }
@@ -654,19 +656,20 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(`${quote}${field || ""}${quote}`);
                     break;
                 case "group":
-                    row.push(`${quote}${metric.getGroup() || ""}${quote}`);
+                    row.push(`${quote}${MetricReporter.getGroup(metric) || ""}${quote}`);
                     break;
                 case "metadata":
                     if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(metadataStr);
                     } else {
+                        const metadataMap = MetricReporter.getMetadata(metric);
                         for (const metadata of this.metadataNames) {
-                            row.push(`${quote}${metric.getMetadata(metadata) || ""}${quote}`);
+                            row.push(`${quote}${metadataMap.get(metadata) || ""}${quote}`);
                         }
                     }
                     break;
                 case "name":
-                    row.push(`${quote}${metric.getName() || ""}${quote}`);
+                    row.push(`${quote}${MetricReporter.getName(metric) || ""}${quote}`);
                     break;
                 case "tags":
                     if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
@@ -700,7 +703,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @param {MetricType} type
      * @memberof CsvMetricReporter
      */
-    private async writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType) {
+    private async writeRows<T extends Metric | SerializableMetric>(metric: T, rows: Rows, type: MetricType) {
         for (const row of rows) {
             await this.options.writer.writeRow(metric, row);
         }

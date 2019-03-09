@@ -50,6 +50,14 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
 
 }
 
+export interface SerializableMetric extends Metric {
+    description: string;
+    group: string;
+    metadata: Map<string, any>;
+    name: string;
+    tags: Map<string, string>;
+}
+
 /**
  * Abstract base-class for a metric which implements commonly needed functions:
  * - get / set name
@@ -61,7 +69,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
  * @class BaseMetric
  * @implements {Metric}
  */
-export abstract class BaseMetric implements Metric {
+export abstract class BaseMetric implements Metric, SerializableMetric {
 
     /**
      * A static number instance to give an unique id within an application instance.
@@ -86,7 +94,7 @@ export abstract class BaseMetric implements Metric {
      * @type {Map<string, string>}
      * @memberof BaseMetric
      */
-    protected tags: Map<string, string> = new Map();
+    public tags: Map<string, string> = new Map();
     /**
      * The group set to this metric.
      *
@@ -94,7 +102,7 @@ export abstract class BaseMetric implements Metric {
      * @type {string}
      * @memberof BaseMetric
      */
-    protected group: string;
+    public group: string;
     /**
      * The name of this metric.
      *
@@ -102,7 +110,7 @@ export abstract class BaseMetric implements Metric {
      * @type {string}
      * @memberof BaseMetric
      */
-    protected name: string;
+    public name: string;
     /**
      * The description of this metric.
      *
@@ -110,7 +118,7 @@ export abstract class BaseMetric implements Metric {
      * @type {string}
      * @memberof BaseMetric
      */
-    protected description: string;
+    public description: string;
     /**
      * The metadata associated with an instance of class.
      *
@@ -118,7 +126,7 @@ export abstract class BaseMetric implements Metric {
      * @type {Map<string, any>}
      * @memberof BaseMetric
      */
-    protected metadata: Map<string, any> = new Map();
+    public metadata: Map<string, any> = new Map();
 
     public getMetadataMap(): Map<string, any> {
         return this.metadata;

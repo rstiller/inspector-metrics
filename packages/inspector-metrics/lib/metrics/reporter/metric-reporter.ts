@@ -5,9 +5,11 @@ import { Clock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
 import { Event } from "../event";
 import { Gauge } from "../gauge";
+import { Groupable } from "../groupable";
 import { Histogram } from "../histogram";
+import { MetadataContainer } from "../metadata-container";
 import { Meter } from "../meter";
-import { Metric } from "../metric";
+import { Metric, SerializableMetric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
 import { Taggable } from "../taggable";
 import { MILLISECOND, MINUTE } from "../time-unit";
@@ -73,7 +75,7 @@ export interface MetricSetReportContext<M> {
 /**
  * Helper interface for reporting results.
  */
-export interface ReportingResult<M, T> {
+export interface ReportingResult<M extends Metric | SerializableMetric, T> {
     /**
      * The metric the result refers to.
      *
@@ -241,22 +243,22 @@ export interface InterprocessReportMessage<T> {
      * Collection of metric reporting results from forked process.
      *
      * @type {{
-     *         counters: Array<ReportingResult<any, T>>;
-     *         gauges: Array<ReportingResult<any, T>>;
-     *         histograms: Array<ReportingResult<any, T>>;
-     *         meters: Array<ReportingResult<any, T>>;
-     *         monotoneCounters: Array<ReportingResult<any, T>>;
-     *         timers: Array<ReportingResult<any, T>>;
+     *         counters: Array<ReportingResult<SerializableMetric, T>>;
+     *         gauges: Array<ReportingResult<SerializableMetric, T>>;
+     *         histograms: Array<ReportingResult<SerializableMetric, T>>;
+     *         meters: Array<ReportingResult<SerializableMetric, T>>;
+     *         monotoneCounters: Array<ReportingResult<SerializableMetric, T>>;
+     *         timers: Array<ReportingResult<SerializableMetric, T>>;
      *     }}
      * @memberof InterprocessReportMessage
      */
     metrics: {
-        counters: Array<ReportingResult<any, T>>;
-        gauges: Array<ReportingResult<any, T>>;
-        histograms: Array<ReportingResult<any, T>>;
-        meters: Array<ReportingResult<any, T>>;
-        monotoneCounters: Array<ReportingResult<any, T>>;
-        timers: Array<ReportingResult<any, T>>;
+        counters: Array<ReportingResult<SerializableMetric, T>>;
+        gauges: Array<ReportingResult<SerializableMetric, T>>;
+        histograms: Array<ReportingResult<SerializableMetric, T>>;
+        meters: Array<ReportingResult<SerializableMetric, T>>;
+        monotoneCounters: Array<ReportingResult<SerializableMetric, T>>;
+        timers: Array<ReportingResult<SerializableMetric, T>>;
     };
     /**
      * Type of the reported which sent the metrics to the master process.
@@ -291,6 +293,112 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static readonly MESSAGE_TYPE = "inspector-metrics:metric-reporter:report";
+
+    /**
+     * Determines if the metric passed is a {@link SerializableMetric} or not.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {metric is SerializableMetric}
+     * @memberof MetricReporter
+     */
+    public static isSerializableMetric(
+        metric: Groupable | MetadataContainer | Taggable | Metric | SerializableMetric): metric is SerializableMetric {
+        const anyMetric: any = metric as any;
+        if ((anyMetric.getGroup && typeof anyMetric.getGroup === "function") ||
+            (anyMetric.getMetadataMap && typeof anyMetric.getMetadataMap === "function") ||
+            (anyMetric.getTags && typeof anyMetric.getTags === "function") ||
+            (anyMetric.getName && typeof anyMetric.getName === "function")) {
+            return false;
+        }
+        return  typeof anyMetric.name === "string";
+    }
+
+    /**
+     * Convinence method the get the name of a {@link Metric} or a {@link SerializableMetric}.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {string}
+     * @memberof MetricReporter
+     */
+    public static getName(metric: Metric | SerializableMetric): string {
+        if (MetricReporter.isSerializableMetric(metric)) {
+            return metric.name;
+        } else {
+            return metric.getName();
+        }
+    }
+
+    /**
+     * Convinence method the get the description of a {@link Metric} or a {@link SerializableMetric}.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {string}
+     * @memberof MetricReporter
+     */
+    public static getDescription(metric: Metric | SerializableMetric): string {
+        if (MetricReporter.isSerializableMetric(metric)) {
+            return metric.description;
+        } else {
+            return metric.getDescription();
+        }
+    }
+
+    /**
+     * Convinence method the get the group of a {@link Metric} or a {@link SerializableMetric}.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {string}
+     * @memberof MetricReporter
+     */
+    public static getGroup(metric: Groupable | SerializableMetric): string {
+        if (MetricReporter.isSerializableMetric(metric)) {
+            return metric.group;
+        } else {
+            return metric.getGroup();
+        }
+    }
+
+    /**
+     * Convinence method the get the tags of a {@link Metric} or a {@link SerializableMetric}.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {Map<string, string>}
+     * @memberof MetricReporter
+     */
+    public static getTags(metric: Taggable | SerializableMetric): Map<string, string> {
+        if (MetricReporter.isSerializableMetric(metric)) {
+            return metric.tags;
+        } else {
+            return metric.getTags();
+        }
+    }
+
+    /**
+     * Convinence method the get the metadata of a {@link Metric} or a {@link SerializableMetric}.
+     *
+     * @protected
+     * @static
+     * @param {(Metric | SerializableMetric)} metric
+     * @returns {Map<string, any>}
+     * @memberof MetricReporter
+     */
+    public static getMetadata(metric: MetadataContainer | SerializableMetric): Map<string, any> {
+        if (MetricReporter.isSerializableMetric(metric)) {
+            return metric.metadata;
+        } else {
+            return metric.getMetadataMap();
+        }
+    }
 
     /**
      * {@link MetricRegistry} instances.
@@ -797,8 +905,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         if (registry && registry.getTags()) {
             registry.getTags().forEach((tag, key) => tags[key] = tag);
         }
-        if (taggable.getTags()) {
-            taggable.getTags().forEach((tag, key) => tags[key] = tag);
+        if (taggable) {
+            MetricReporter.getTags(taggable).forEach((tag, key) => tags[key] = tag);
         }
         return tags;
     }

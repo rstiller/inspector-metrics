@@ -18,6 +18,7 @@ import {
     OverallReportContext,
     ReportingResult,
     Sampling,
+    SerializableMetric,
     StdClock,
     Taggable,
     Tags,
@@ -425,12 +426,12 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * Gets the mapping of tags with normalized names and filtered for reserved tags.
      *
      * @private
-     * @param {Taggable} taggable
+     * @param {Taggable | SerializableMetric} taggable
      * @param {string[]} exclude
      * @returns {Tags}
      * @memberof PrometheusMetricReporter
      */
-    protected buildPrometheusTags(taggable: Taggable, exclude: string[]): Tags {
+    protected buildPrometheusTags(taggable: Taggable | SerializableMetric, exclude: string[]): Tags {
         exclude.sort();
 
         const tags: { [x: string]: string } = {};
@@ -441,7 +442,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
                 tags[normalizedKey] = value;
             }
         });
-        taggable.getTags().forEach((value, key) => {
+        PrometheusMetricReporter.getTags(taggable).forEach((value, key) => {
             const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
             if (exclude.indexOf(normalizedKey) === -1 &&
                 PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
@@ -466,7 +467,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getMetricString<T extends Metric>(
+    private getMetricString<T extends Metric | SerializableMetric>(
         now: Date,
         metric: T,
         metricType: PrometheusMetricType,
@@ -526,8 +527,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getDescription<T extends Metric>(metric: T, metricName: string): string {
-        let description = metric.getDescription();
+    private getDescription<T extends Metric | SerializableMetric>(metric: T, metricName: string): string {
+        let description = PrometheusMetricReporter.getDescription(metric);
         if (PrometheusMetricReporter.isEmpty(description)) {
             description = `${metricName} description`;
         }
@@ -581,7 +582,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getBuckets<T extends Metric & BucketCounting>(
+    private getBuckets<T extends (Metric | SerializableMetric) & BucketCounting>(
         metric: T,
         metricName: string,
         count: number,
@@ -646,14 +647,15 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * Gets the normalized metric name.
      *
      * @private
-     * @param {Metric} metric
+     * @param {Metric | SerializableMetric} metric
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getMetricName(metric: Metric): string {
-        let name = metric.getName();
-        if (metric.getGroup()) {
-            name = `${metric.getGroup()}:${metric.getName()}`;
+    private getMetricName(metric: Metric | SerializableMetric): string {
+        let name = PrometheusMetricReporter.getName(metric);
+        const group = PrometheusMetricReporter.getGroup(metric);
+        if (group) {
+            name = `${group}:${name}`;
         }
 
         name = name.replace(PrometheusMetricReporter.METRIC_NAME_REPLACEMENT_REGEXP, "_");
