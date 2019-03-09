@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { Metric } from "./metric";
+import { Metric, SerializableMetric } from "./metric";
 
 /**
  * Represents everything that is countable ({@link Counter}, {@link MonotoneCounter}, {@link Histogram}).
@@ -128,5 +128,63 @@ export interface BucketCounting extends Metric {
      * @memberof BucketCounting
      */
     getCounts(): Map<number, number>;
+
+}
+
+/**
+ * Interface for defining a collection of boundaries to count events (e.g. method calls, requests per time-unit).
+ * The meaning of the countings is implementation-specific.
+ *
+ * @export
+ * @interface BucketCounting
+ * @extends {Metric}
+ */
+export interface BucketCounting extends Metric {
+
+    /**
+     * Gets the current Buckets object used to do the counting.
+     *
+     * @returns {Buckets}
+     * @memberof BucketCounting
+     */
+    getBuckets(): Buckets;
+
+    /**
+     * Gets a mapping from the boundary to the count of events
+     * within the corresponding boundary.
+     * The meaning of the count is implementation specific.
+     *
+     * @returns {Map<number, number>}
+     * @memberof BucketCounting
+     */
+    getCounts(): Map<number, number>;
+
+}
+
+/**
+ * Serialized version of {@link BucketCounting}.
+ *
+ * @export
+ * @interface SerializableBucketCounting
+ * @extends {Metric}
+ */
+export interface SerializableBucketCounting extends SerializableMetric {
+
+    /**
+     * The boundaries used to do the counting.
+     *
+     * @returns {number[]}
+     * @memberof SerializableBucketCounting
+     */
+    buckets: number[];
+
+    /**
+     * Mapping: boundary to the count of events within boundary.
+     * The meaning of the count is implementation specific.
+     *
+     * @returns {Map<number, number>}
+     * @memberof SerializableBucketCounting
+     */
+    counts: Map<number, number>;
 
 }

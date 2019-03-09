@@ -1,5 +1,6 @@
 import "source-map-support";
 
+import * as cluster from "cluster";
 import {
     Counter,
     Event,
@@ -289,6 +290,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             // rebuild header on every call to start
             this.header = await this.buildHeaders();
+            await this.options.writer.init(this.header);
             await super.start();
         }
         return this;
@@ -340,7 +342,9 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     protected async beforeReport(ctx: OverallReportContext) {
-        await this.options.writer.init(this.header);
+        if (cluster.isMaster) {
+            await this.options.writer.init(this.header);
+        }
     }
 
     /**
@@ -627,7 +631,9 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-            MetricReporter.getMetadata(metric).forEach((metadataValue, metadataName) => {
+            const metadata = MetricReporter.getMetadata(metric);
+            Object.keys(metadata).forEach((metadataName) => {
+                const metadataValue = metadata[metadataName];
                 metadataStr += `${metadataName}=${quote}${metadataValue}${quote}${this.options.metadataDelimiter}`;
             });
             metadataStr = metadataStr.slice(0, -1);

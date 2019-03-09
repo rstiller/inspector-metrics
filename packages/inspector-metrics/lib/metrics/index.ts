@@ -21,6 +21,7 @@ export * from "./reporter/metric-entry";
 export * from "./reporter/metric-reporter";
 export * from "./reporter/metric-type";
 export * from "./reporter/scheduled-reporter";
+export * from "./reporter/tags";
 export * from "./reservoir";
 export * from "./sampling";
 export * from "./size-gauge";

@@ -49,3 +49,36 @@ export interface MetadataContainer {
      */
     setMetadata<T>(name: string, value: T): this;
 }
+
+/**
+ * Helper interface for handling metadata.
+ */
+export interface Metadata {
+    [key: string]: any;
+}
+
+/**
+ * Transforms the {@link Metadata} object into a {@link Map<string, any>} object.
+ *
+ * @export
+ * @param {Metadata} metadata
+ * @returns {Map<string, any>}
+ */
+export function metadataToMap(metadata: Metadata): Map<string, any> {
+    const metadataMap: Map<string, any> = new Map();
+    Object.keys(metadata).forEach((key) => metadataMap.set(key, metadata[key]));
+    return metadataMap;
+}
+
+/**
+ * Transforms the {@link Map<string, any>} object into a {@link Metadata} object.
+ *
+ * @export
+ * @param {Map<string, any>} tagMap
+ * @returns {Tags}
+ */
+export function mapToMetadata(metadataMap: Map<string, any>): Metadata {
+    const metadata: Metadata = {};
+    metadataMap.forEach((value, name) => metadata[name] = value);
+    return metadata;
+}

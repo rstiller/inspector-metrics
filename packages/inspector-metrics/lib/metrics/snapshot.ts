@@ -116,22 +116,38 @@ export interface Snapshot {
 }
 
 /**
+ * A serialized version of {@link Snapshot}.
+ *
+ * @export
+ * @interface SerializedSnapshot
+ */
+export interface SerializedSnapshot {
+    /**
+     * A sorted array of samples.
+     *
+     * @type {number[]}
+     * @memberof SerializedSnapshot
+     */
+    values: number[];
+}
+
+/**
  * Default implementation of the {@link Snapshot} interface.
  *
  * @export
  * @class SimpleSnapshot
  * @implements {Snapshot}
  */
-export class SimpleSnapshot implements Snapshot {
+export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
 
     /**
      * Sorted collection of values.
      *
-     * @private
+     * @public
      * @type {number[]}
      * @memberof SimpleSnapshot
      */
-    private values: number[] = [];
+    public values: number[] = [];
 
     /**
      * Creates an instance of SimpleSnapshot.

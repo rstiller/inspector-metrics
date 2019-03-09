@@ -3,25 +3,48 @@ import "source-map-support/register";
 import * as cluster from "cluster";
 import { Clock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
+import { BucketCounting, Buckets, SerializableBucketCounting } from "../counting";
 import { Event } from "../event";
 import { Gauge } from "../gauge";
 import { Groupable } from "../groupable";
 import { Histogram } from "../histogram";
-import { MetadataContainer } from "../metadata-container";
+import { Metadata, MetadataContainer } from "../metadata-container";
 import { Meter } from "../meter";
 import { Metric, SerializableMetric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
+import { Sampling, SerializableSampling } from "../sampling";
+import { SimpleSnapshot, Snapshot } from "../snapshot";
 import { Taggable } from "../taggable";
 import { MILLISECOND, MINUTE } from "../time-unit";
 import { Timer } from "../timer";
 import { MetricEntry } from "./metric-entry";
 import { MetricType } from "./metric-type";
+import { Tags } from "./tags";
 
 /**
- * Helper interface for handling tags.
+ * Transforms the {@link Tags} object into a {@link Map<string, string>} object.
+ *
+ * @export
+ * @param {Tags} tags
+ * @returns {Map<string, string>}
  */
-export interface Tags {
-    [key: string]: string;
+export function tagsToMap(tags: Tags): Map<string, string> {
+    const tagMap: Map<string, string> = new Map();
+    Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]));
+    return tagMap;
+}
+
+/**
+ * Transforms the {@link Map<string, string>} object into a {@link Tags} object.
+ *
+ * @export
+ * @param {Map<string, string>} tagMap
+ * @returns {Tags}
+ */
+export function mapToTags(tagMap: Map<string, string>): Tags {
+    const tags: Tags = {};
+    tagMap.forEach((tag, name) => tags[name] = tag);
+    return tags;
 }
 
 /**
@@ -240,6 +263,13 @@ export interface InterprocessReportMessage<T> {
      */
     date: Date;
     /**
+     * Tags from originating {@link MetricRegistry}.
+     *
+     * @type {Tags}
+     * @memberof InterprocessReportMessage
+     */
+    tags: Tags;
+    /**
      * Collection of metric reporting results from forked process.
      *
      * @type {{
@@ -276,6 +306,20 @@ export interface InterprocessReportMessage<T> {
     type: string;
 }
 
+class TagsOnlyMetricRegistry {
+
+    private tags: Map<string, string>;
+
+    public constructor(tags: Tags) {
+        this.tags = tagsToMap(tags);
+    }
+
+    public getTags(): Map<string, string> {
+        return this.tags;
+    }
+
+}
+
 /**
  * Base-class for metric-reporter implementations.
  *
@@ -297,7 +341,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     /**
      * Determines if the metric passed is a {@link SerializableMetric} or not.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
      * @returns {metric is SerializableMetric}
@@ -312,13 +356,49 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (anyMetric.getName && typeof anyMetric.getName === "function")) {
             return false;
         }
-        return  typeof anyMetric.name === "string";
+        return typeof anyMetric.name === "string";
+    }
+
+    /**
+     * Determines if the metric passed is a {@link SerializableBucketCounting} or not.
+     *
+     * @public
+     * @static
+     * @param {(BucketCounting | SerializableBucketCounting)} metric
+     * @returns {metric is SerializableBucketCounting}
+     * @memberof MetricReporter
+     */
+    public static isSerializableBucketCounting(
+        metric: BucketCounting | SerializableBucketCounting): metric is SerializableBucketCounting {
+        const anyMetric: any = metric as any;
+        if ((anyMetric.getBuckets && typeof anyMetric.getBuckets === "function") ||
+            (anyMetric.getCounts && typeof anyMetric.getCounts === "function")) {
+            return false;
+        }
+        return Array.isArray(anyMetric.buckets);
+    }
+
+    /**
+     * Determines if the metric passed is a {@link SerializableSampling} or not.
+     *
+     * @public
+     * @static
+     * @param {(Sampling | SerializableSampling)} metric
+     * @returns {metric is SerializableSampling}
+     * @memberof MetricReporter
+     */
+    public static isSerializableSampling(metric: Sampling | SerializableSampling): metric is SerializableSampling {
+        const anyMetric: any = metric as any;
+        if ((anyMetric.getSnapshot && typeof anyMetric.getSnapshot === "function")) {
+            return false;
+        }
+        return anyMetric.hasOwnProperty("snapshot");
     }
 
     /**
      * Convinence method the get the name of a {@link Metric} or a {@link SerializableMetric}.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
      * @returns {string}
@@ -335,7 +415,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     /**
      * Convinence method the get the description of a {@link Metric} or a {@link SerializableMetric}.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
      * @returns {string}
@@ -352,7 +432,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     /**
      * Convinence method the get the group of a {@link Metric} or a {@link SerializableMetric}.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
      * @returns {string}
@@ -369,34 +449,87 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     /**
      * Convinence method the get the tags of a {@link Metric} or a {@link SerializableMetric}.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
-     * @returns {Map<string, string>}
+     * @returns {Tags}
      * @memberof MetricReporter
      */
-    public static getTags(metric: Taggable | SerializableMetric): Map<string, string> {
+    public static getTags(metric: Taggable | SerializableMetric): Tags {
         if (MetricReporter.isSerializableMetric(metric)) {
-            return metric.tags;
+            return (metric.tags as any) as Tags;
         } else {
-            return metric.getTags();
+            return mapToTags(metric.getTags());
         }
     }
 
     /**
      * Convinence method the get the metadata of a {@link Metric} or a {@link SerializableMetric}.
      *
-     * @protected
+     * @public
      * @static
      * @param {(Metric | SerializableMetric)} metric
-     * @returns {Map<string, any>}
+     * @returns {Metadata}
      * @memberof MetricReporter
      */
-    public static getMetadata(metric: MetadataContainer | SerializableMetric): Map<string, any> {
+    public static getMetadata(metric: MetadataContainer | SerializableMetric): Metadata {
         if (MetricReporter.isSerializableMetric(metric)) {
             return metric.metadata;
         } else {
             return metric.getMetadataMap();
+        }
+    }
+
+    /**
+     * Convinence method the get the {@link Buckets} of a
+     * {@link BucketCounting} or a {@link SerializableBucketCounting}.
+     *
+     * @public
+     * @static
+     * @param {(BucketCounting | SerializableBucketCounting)} metric
+     * @returns {Buckets}
+     * @memberof MetricReporter
+     */
+    public static getBuckets(metric: BucketCounting | SerializableBucketCounting): Buckets {
+        if (MetricReporter.isSerializableBucketCounting(metric)) {
+            return new Buckets(metric.buckets);
+        } else {
+            return metric.getBuckets();
+        }
+    }
+
+    /**
+     * Convinence method the get the counts of a
+     * {@link BucketCounting} or a {@link SerializableBucketCounting}.
+     *
+     * @public
+     * @static
+     * @param {(BucketCounting | SerializableBucketCounting)} metric
+     * @returns {Map<number, number>}
+     * @memberof MetricReporter
+     */
+    public static getCounts(metric: BucketCounting | SerializableBucketCounting): Map<number, number> {
+        if (MetricReporter.isSerializableBucketCounting(metric)) {
+            return metric.counts;
+        } else {
+            return metric.getCounts();
+        }
+    }
+
+    /**
+     * Convinence method the get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
+     *
+     * @public
+     * @static
+     * @param {(Sampling | SerializableSampling)} metric
+     * @returns {Snapshot}
+     * @memberof MetricReporter
+     */
+    public static getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
+        if (MetricReporter.isSerializableSampling(metric)) {
+            return new SimpleSnapshot(metric.snapshot.values);
+        } else {
+            return metric.getSnapshot();
         }
     }
 
@@ -453,14 +586,13 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                     message.type && message.type === MetricReporter.MESSAGE_TYPE &&
                     message.targetReporterType && message.targetReporterType === this.reporterType) {
                     const report: InterprocessReportMessage<T> = message;
-                    // tslint:disable-next-line:no-console
-                    console.log(this.reporterType, report.metrics.timers[0]);
-                    await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.monotoneCounters);
-                    await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.counters);
-                    await this.handleResults(report.ctx, null, report.date, "gauge", report.metrics.gauges);
-                    await this.handleResults(report.ctx, null, report.date, "histogram", report.metrics.histograms);
-                    await this.handleResults(report.ctx, null, report.date, "meter", report.metrics.meters);
-                    await this.handleResults(report.ctx, null, report.date, "timer", report.metrics.timers);
+                    const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
+                    await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
+                    await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.counters);
+                    await this.handleResults(report.ctx, reg, report.date, "gauge", report.metrics.gauges);
+                    await this.handleResults(report.ctx, reg, report.date, "histogram", report.metrics.histograms);
+                    await this.handleResults(report.ctx, reg, report.date, "meter", report.metrics.meters);
+                    await this.handleResults(report.ctx, reg, report.date, "timer", report.metrics.timers);
                 }
             });
         }
@@ -691,6 +823,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                     monotoneCounters: monotoneCounterResults,
                     timers: timerResults,
                 },
+                tags: mapToTags(registry.getTags()),
                 targetReporterType: this.reporterType,
                 type: MetricReporter.MESSAGE_TYPE,
             };
@@ -906,7 +1039,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             registry.getTags().forEach((tag, key) => tags[key] = tag);
         }
         if (taggable) {
-            MetricReporter.getTags(taggable).forEach((tag, key) => tags[key] = tag);
+            const customTags = MetricReporter.getTags(taggable);
+            Object.keys(customTags).forEach((key) => tags[key] = customTags[key]);
         }
         return tags;
     }
