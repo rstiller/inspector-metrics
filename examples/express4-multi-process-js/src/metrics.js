@@ -2,20 +2,60 @@ const cluster = require('cluster')
 const packageJson = require('../package.json')
 
 async function influxReporter (registry, tags) {
-  const influx = require('inspector-influx')
+  const {
+    DefaultSender,
+    InfluxMetricReporter
+  } = require('inspector-influx')
 
-  const sender = new influx.DefaultSender({
+  const sender = new DefaultSender({
     database: 'express4',
     hosts: [{
       host: '127.0.0.1',
       port: 8086
     }]
   })
-  const reporter = new influx.InfluxMetricReporter({
+  const reporter = new InfluxMetricReporter({
     log: null,
     minReportingTimeout: 1440,
     reportInterval: 1000,
     sender
+  })
+
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
+
+  await reporter.start()
+
+  return reporter
+}
+
+// async function consoleReporter (registry, tags) {
+//   const {
+//     LoggerReporter
+//   } = require('inspector-metrics')
+
+//   const reporter = new LoggerReporter({
+//     log: console
+//   })
+
+//   reporter.setTags(tags)
+//   reporter.addMetricRegistry(registry)
+
+//   await reporter.start()
+
+//   return reporter
+// }
+
+async function csvReporter (registry, tags) {
+  const {
+    CsvMetricReporter,
+    DefaultCsvFileWriter
+  } = require('inspector-csv')
+
+  const reporter = new CsvMetricReporter({
+    log: null,
+    columns: ['date', 'group', 'name', 'field', 'type', 'value', 'tags'],
+    writer: new DefaultCsvFileWriter({})
   })
 
   reporter.setTags(tags)
@@ -51,7 +91,9 @@ async function install () {
 
   module.exports.registry = registry
   module.exports.reporter = {
-    influx: await influxReporter(registry, reportingTags)
+    influx: await influxReporter(registry, reportingTags),
+    // console: await consoleReporter(registry, reportingTags),
+    csv: await csvReporter(registry, reportingTags)
   }
 }
 

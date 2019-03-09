@@ -22,6 +22,8 @@ async function start () {
       .setTag('text', `application started at ${new Date()} on host ${os.hostname()}`)
       .setValue(1)
     metrics.reporter.influx.reportEvent(event)
+    // metrics.reporter.console.reportEvent(event)
+    metrics.reporter.csv.reportEvent(event)
   } else {
     const express = require('express')
     const app = express()

@@ -63,3 +63,4 @@ typings/
 build/
 coverage/
 docs/
+*.csv

@@ -345,6 +345,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                     message.type && message.type === MetricReporter.MESSAGE_TYPE &&
                     message.targetReporterType && message.targetReporterType === this.reporterType) {
                     const report: InterprocessReportMessage<T> = message;
+                    // tslint:disable-next-line:no-console
+                    console.log(this.reporterType, report.metrics.timers[0]);
                     await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.monotoneCounters);
                     await this.handleResults(report.ctx, null, report.date, "counter", report.metrics.counters);
                     await this.handleResults(report.ctx, null, report.date, "gauge", report.metrics.gauges);
