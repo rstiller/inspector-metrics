@@ -396,7 +396,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the name of a {@link Metric} or a {@link SerializableMetric}.
+     * Convenience method the get the name of a {@link Metric} or a {@link SerializableMetric}.
      *
      * @public
      * @static
@@ -413,7 +413,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the description of a {@link Metric} or a {@link SerializableMetric}.
+     * Convenience method the get the description of a {@link Metric} or a {@link SerializableMetric}.
      *
      * @public
      * @static
@@ -430,7 +430,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the group of a {@link Metric} or a {@link SerializableMetric}.
+     * Convenience method the get the group of a {@link Metric} or a {@link SerializableMetric}.
      *
      * @public
      * @static
@@ -447,7 +447,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the tags of a {@link Metric} or a {@link SerializableMetric}.
+     * Convenience method the get the tags of a {@link Metric} or a {@link SerializableMetric}.
      *
      * @public
      * @static
@@ -464,7 +464,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the metadata of a {@link Metric} or a {@link SerializableMetric}.
+     * Convenience method the get the metadata of a {@link Metric} or a {@link SerializableMetric}.
      *
      * @public
      * @static
@@ -481,7 +481,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the {@link Buckets} of a
+     * Convenience method the get the {@link Buckets} of a
      * {@link BucketCounting} or a {@link SerializableBucketCounting}.
      *
      * @public
@@ -499,7 +499,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the counts of a
+     * Convenience method the get the counts of a
      * {@link BucketCounting} or a {@link SerializableBucketCounting}.
      *
      * @public
@@ -517,7 +517,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Convinence method the get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
+     * Convenience method the get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
      *
      * @public
      * @static
