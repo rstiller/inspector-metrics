@@ -7,6 +7,7 @@ import {
     Event,
     Gauge,
     Histogram,
+    Metadata,
     Meter,
     Metric,
     MetricRegistry,
@@ -631,8 +632,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         tagStr: string,
         timestamp: string): string {
 
-        const metadata = PrometheusMetricReporter.getMetadata(metric);
-        let quantiles: Percentiles = metadata.get(Percentiles.METADATA_NAME);
+        const metadata: Metadata = PrometheusMetricReporter.getMetadata(metric);
+        let quantiles: Percentiles | null = metadata[Percentiles.METADATA_NAME];
         if (!quantiles) {
             quantiles = new Percentiles();
         }

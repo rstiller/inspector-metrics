@@ -8,7 +8,7 @@ import { Event } from "../event";
 import { Gauge } from "../gauge";
 import { Groupable } from "../groupable";
 import { Histogram } from "../histogram";
-import { Metadata, MetadataContainer } from "../metadata-container";
+import { mapToMetadata, Metadata, MetadataContainer } from "../metadata-container";
 import { Meter } from "../meter";
 import { Metric, SerializableMetric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
@@ -476,7 +476,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         if (MetricReporter.isSerializableMetric(metric)) {
             return metric.metadata;
         } else {
-            return metric.getMetadataMap();
+            return mapToMetadata(metric.getMetadataMap());
         }
     }
 
