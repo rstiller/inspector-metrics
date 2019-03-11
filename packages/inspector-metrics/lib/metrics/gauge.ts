@@ -8,6 +8,7 @@ import { BaseMetric, Metric, SerializableMetric } from "./model/metric";
  * @export
  * @interface Gauge
  * @extends {Metric}
+ * @extends {SerializableMetric}
  * @template T
  */
 export interface Gauge<T> extends Metric, SerializableMetric {
