@@ -1,17 +1,17 @@
 import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
-import { BucketCounting, Buckets } from "./counting";
 import { Histogram } from "./histogram";
-import { Int64Wrapper } from "./int64";
 import { Meter } from "./meter";
-import { Metered } from "./metered";
-import { BaseMetric } from "./metric";
-import { Reservoir } from "./reservoir";
-import { Sampling } from "./sampling";
-import { Snapshot } from "./snapshot";
-import { Summarizing } from "./summarizing";
-import { NANOSECOND, TimeUnit } from "./time-unit";
+import { BucketCounting, Buckets } from "./model/counting";
+import { Int64Wrapper } from "./model/int64";
+import { Metered } from "./model/metered";
+import { BaseMetric } from "./model/metric";
+import { Reservoir } from "./model/reservoir";
+import { Sampling } from "./model/sampling";
+import { Snapshot } from "./model/snapshot";
+import { Summarizing } from "./model/summarizing";
+import { NANOSECOND, TimeUnit } from "./model/time-unit";
 
 /**
  * A convenience wrapper class for a {@link Timer} to measure durations.

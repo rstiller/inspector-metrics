@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Gauge } from "./gauge";
-import { BaseMetric } from "./metric";
+import { BaseMetric } from "./model/metric";
 
 /**
  * Represents an ad-hoc event which can directly be reported using the
@@ -10,7 +10,8 @@ import { BaseMetric } from "./metric";
  *
  * @export
  * @class Event
- * @implements {Taggable}
+ * @extends {BaseMetric}
+ * @implements {Gauge<TEventData>}
  * @template TEventData
  */
 export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {

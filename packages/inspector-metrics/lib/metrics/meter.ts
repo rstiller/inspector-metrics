@@ -1,10 +1,10 @@
 import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
-import { Metered } from "./metered";
-import { BaseMetric } from "./metric";
-import { ExponentiallyWeightedMovingAverage, MovingAverage } from "./moving-average";
-import { NANOSECOND, SECOND } from "./time-unit";
+import { Metered } from "./model/metered";
+import { BaseMetric } from "./model/metric";
+import { ExponentiallyWeightedMovingAverage, MovingAverage } from "./model/moving-average";
+import { NANOSECOND, SECOND } from "./model/time-unit";
 
 /**
  * Standard implementation of a rate-measuring metrics.

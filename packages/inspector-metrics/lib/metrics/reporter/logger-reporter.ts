@@ -7,7 +7,7 @@ import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
 import { MetricRegistry } from "../metric-registry";
-import { MILLISECOND } from "../time-unit";
+import { MILLISECOND } from "../model/time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
 import { MetricSetReportContext, OverallReportContext, ReportingResult } from "./metric-reporter";

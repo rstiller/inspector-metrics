@@ -102,36 +102,6 @@ export class Buckets {
 }
 
 /**
- * Interface for defining counting events based on Buckets.
- * The meaning of the countings is implementation-specific.
- *
- * @export
- * @interface BucketCounting
- * @extends {Metric}
- */
-export interface BucketCounting extends Metric {
-
-    /**
-     * Gets the current Buckets object used to do the counting.
-     *
-     * @returns {Buckets}
-     * @memberof BucketCounting
-     */
-    getBuckets(): Buckets;
-
-    /**
-     * Gets a mapping from the boundary to the count of events
-     * within the corresponding boundary.
-     * The meaning of the count is implementation specific.
-     *
-     * @returns {Map<number, number>}
-     * @memberof BucketCounting
-     */
-    getCounts(): Map<number, number>;
-
-}
-
-/**
  * Interface for defining a collection of boundaries to count events (e.g. method calls, requests per time-unit).
  * The meaning of the countings is implementation-specific.
  *

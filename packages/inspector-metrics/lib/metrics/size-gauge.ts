@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Gauge } from "./gauge";
-import { BaseMetric } from "./metric";
+import { BaseMetric } from "./model/metric";
 
 /**
  * Accessor-interface for objects with "length()" method.

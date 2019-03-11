@@ -1,12 +1,12 @@
 import "source-map-support/register";
 
-import { BucketCounting, Buckets, Counting } from "./counting";
-import { Int64Wrapper } from "./int64";
-import { BaseMetric, Metric } from "./metric";
-import { Reservoir } from "./reservoir";
-import { Sampling } from "./sampling";
-import { Snapshot } from "./snapshot";
-import { Summarizing } from "./summarizing";
+import { BucketCounting, Buckets, Counting } from "./model/counting";
+import { Int64Wrapper } from "./model/int64";
+import { BaseMetric, Metric } from "./model/metric";
+import { Reservoir } from "./model/reservoir";
+import { Sampling } from "./model/sampling";
+import { Snapshot } from "./model/snapshot";
+import { Summarizing } from "./model/summarizing";
 
 /**
  * Represents the distribution of values - e.g. number of logged-in users, search result count.

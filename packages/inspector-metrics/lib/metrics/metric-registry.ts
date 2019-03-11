@@ -2,15 +2,15 @@ import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
 import { Counter, MonotoneCounter } from "./counter";
-import { Buckets } from "./counting";
 import { Gauge } from "./gauge";
 import { HdrHistogram } from "./hdr-histogram";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
-import { BaseMetric, Metric } from "./metric";
 import { MetricRegistryListener } from "./metric-registry-listener";
 import { MetricSet } from "./metric-set";
-import { Reservoir, SlidingWindowReservoir } from "./reservoir";
+import { Buckets } from "./model/counting";
+import { BaseMetric, Metric } from "./model/metric";
+import { Reservoir, SlidingWindowReservoir } from "./model/reservoir";
 import { Timer } from "./timer";
 
 export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;

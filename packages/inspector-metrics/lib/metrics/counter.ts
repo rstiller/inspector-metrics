@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
-import { Counting } from "./counting";
-import { BaseMetric, Metric } from "./metric";
+import { Counting } from "./model/counting";
+import { BaseMetric, Metric } from "./model/metric";
 
 /**
  * A monotonically increasing number.

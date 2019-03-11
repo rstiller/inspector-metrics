@@ -5,11 +5,31 @@ import { MetadataContainer } from "./metadata-container";
 import { Taggable } from "./taggable";
 
 /**
- * Representation for a metrics.
+ * Determines if the metric passed is a {@link SerializableMetric} or not.
+ *
+ * @export
+ * @param {(Groupable | MetadataContainer | Taggable | Metric | SerializableMetric)} metric
+ * @returns {metric is SerializableMetric}
+ */
+export function isSerializableMetric(
+    metric: Groupable | MetadataContainer | Taggable | Metric | SerializableMetric): metric is SerializableMetric {
+    const anyMetric: any = metric as any;
+    if ((anyMetric.getGroup && typeof anyMetric.getGroup === "function") ||
+        (anyMetric.getMetadataMap && typeof anyMetric.getMetadataMap === "function") ||
+        (anyMetric.getTags && typeof anyMetric.getTags === "function") ||
+        (anyMetric.getName && typeof anyMetric.getName === "function")) {
+        return false;
+    }
+    return typeof anyMetric.name === "string";
+}
+
+/**
+ * Representation of a metric.
  *
  * @export
  * @interface Metric
  * @extends {Groupable}
+ * @extends {MetadataContainer}
  * @extends {Taggable}
  */
 export interface Metric extends Groupable, MetadataContainer, Taggable {
@@ -50,29 +70,76 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
 
 }
 
+/**
+ * A {@link Metric} with public fields for convenient use after serialization.
+ *
+ * @export
+ * @interface SerializableMetric
+ * @extends {Metric}
+ */
 export interface SerializableMetric extends Metric {
+    /**
+     * Description of the metric.
+     *
+     * @type {string}
+     * @memberof SerializableMetric
+     */
     description: string;
+    /**
+     * Group of the metric.
+     *
+     * @type {string}
+     * @memberof SerializableMetric
+     */
     group: string;
+    /**
+     * Metadata map of the metric.
+     * This field is serialized as an object.
+     * {@link Metadata} would be a more suitable interface for this field,
+     * but to be compatible with {@link BaseMetric} this is a Map.
+     *
+     * @type {Map<string, any>}
+     * @memberof SerializableMetric
+     */
     metadata: Map<string, any>;
+    /**
+     * name of the metric.
+     *
+     * @type {string}
+     * @memberof SerializableMetric
+     */
     name: string;
+    /**
+     * Tags of the metric.
+     * This field is serialized as an object.
+     * {@link Tags} would be a more suitable interface for this field,
+     * but to be compatible with {@link BaseMetric} this is a Map.
+     *
+     * @type {Map<string, string>}
+     * @memberof SerializableMetric
+     */
     tags: Map<string, string>;
 }
 
 /**
  * Abstract base-class for a metric which implements commonly needed functions:
  * - get / set name
+ * - get / set description
  * - get / set tags
+ * - get / set metadta
  * - get / set group
  *
  * @export
  * @abstract
  * @class BaseMetric
  * @implements {Metric}
+ * @implements {SerializableMetric}
  */
 export abstract class BaseMetric implements Metric, SerializableMetric {
 
     /**
      * A static number instance to give an unique id within an application instance.
+     * This counter is only unique per process, forked processes start from 0.
      *
      * @private
      * @static

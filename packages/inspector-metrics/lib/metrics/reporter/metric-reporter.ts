@@ -3,19 +3,19 @@ import "source-map-support/register";
 import * as cluster from "cluster";
 import { Clock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
-import { BucketCounting, Buckets, SerializableBucketCounting } from "../counting";
 import { Event } from "../event";
 import { Gauge } from "../gauge";
-import { Groupable } from "../groupable";
 import { Histogram } from "../histogram";
-import { mapToMetadata, Metadata, MetadataContainer } from "../metadata-container";
 import { Meter } from "../meter";
-import { Metric, SerializableMetric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
-import { Sampling, SerializableSampling } from "../sampling";
-import { SimpleSnapshot, Snapshot } from "../snapshot";
-import { Taggable } from "../taggable";
-import { MILLISECOND, MINUTE } from "../time-unit";
+import { BucketCounting, Buckets, SerializableBucketCounting } from "../model/counting";
+import { Groupable } from "../model/groupable";
+import { mapToMetadata, Metadata, MetadataContainer } from "../model/metadata-container";
+import { isSerializableMetric, Metric, SerializableMetric } from "../model/metric";
+import { Sampling, SerializableSampling } from "../model/sampling";
+import { SimpleSnapshot, Snapshot } from "../model/snapshot";
+import { Taggable } from "../model/taggable";
+import { MILLISECOND, MINUTE } from "../model/time-unit";
 import { Timer } from "../timer";
 import { MetricEntry } from "./metric-entry";
 import { MetricType } from "./metric-type";
@@ -339,27 +339,6 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     public static readonly MESSAGE_TYPE = "inspector-metrics:metric-reporter:report";
 
     /**
-     * Determines if the metric passed is a {@link SerializableMetric} or not.
-     *
-     * @public
-     * @static
-     * @param {(Metric | SerializableMetric)} metric
-     * @returns {metric is SerializableMetric}
-     * @memberof MetricReporter
-     */
-    public static isSerializableMetric(
-        metric: Groupable | MetadataContainer | Taggable | Metric | SerializableMetric): metric is SerializableMetric {
-        const anyMetric: any = metric as any;
-        if ((anyMetric.getGroup && typeof anyMetric.getGroup === "function") ||
-            (anyMetric.getMetadataMap && typeof anyMetric.getMetadataMap === "function") ||
-            (anyMetric.getTags && typeof anyMetric.getTags === "function") ||
-            (anyMetric.getName && typeof anyMetric.getName === "function")) {
-            return false;
-        }
-        return typeof anyMetric.name === "string";
-    }
-
-    /**
      * Determines if the metric passed is a {@link SerializableBucketCounting} or not.
      *
      * @public
@@ -405,7 +384,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static getName(metric: Metric | SerializableMetric): string {
-        if (MetricReporter.isSerializableMetric(metric)) {
+        if (isSerializableMetric(metric)) {
             return metric.name;
         } else {
             return metric.getName();
@@ -422,7 +401,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static getDescription(metric: Metric | SerializableMetric): string {
-        if (MetricReporter.isSerializableMetric(metric)) {
+        if (isSerializableMetric(metric)) {
             return metric.description;
         } else {
             return metric.getDescription();
@@ -439,7 +418,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static getGroup(metric: Groupable | SerializableMetric): string {
-        if (MetricReporter.isSerializableMetric(metric)) {
+        if (isSerializableMetric(metric)) {
             return metric.group;
         } else {
             return metric.getGroup();
@@ -456,7 +435,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static getTags(metric: Taggable | SerializableMetric): Tags {
-        if (MetricReporter.isSerializableMetric(metric)) {
+        if (isSerializableMetric(metric)) {
             return (metric.tags as any) as Tags;
         } else {
             return mapToTags(metric.getTags());
@@ -473,7 +452,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     public static getMetadata(metric: MetadataContainer | SerializableMetric): Metadata {
-        if (MetricReporter.isSerializableMetric(metric)) {
+        if (isSerializableMetric(metric)) {
             return metric.metadata;
         } else {
             return mapToMetadata(metric.getMetadataMap());

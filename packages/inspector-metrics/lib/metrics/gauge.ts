@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { BaseMetric, Metric, SerializableMetric } from "./metric";
+import { BaseMetric, Metric, SerializableMetric } from "./model/metric";
 
 /**
  * A gauge can represent any value - regardless of the type.
