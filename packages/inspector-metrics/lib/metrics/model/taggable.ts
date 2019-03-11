@@ -1,6 +1,13 @@
 import "source-map-support/register";
 
 /**
+ * Helper interface for handling tags.
+ */
+export interface Tags {
+    [key: string]: string;
+}
+
+/**
  * An interface for taggable classes.
  *
  * @export
@@ -71,4 +78,30 @@ export interface Taggable {
      */
     removeTags(...names: string[]): this;
 
+}
+
+/**
+ * Transforms the {@link Tags} object into a {@link Map<string, string>} object.
+ *
+ * @export
+ * @param {Tags} tags
+ * @returns {Map<string, string>}
+ */
+export function tagsToMap(tags: Tags): Map<string, string> {
+    const tagMap: Map<string, string> = new Map();
+    Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]));
+    return tagMap;
+}
+
+/**
+ * Transforms the {@link Map<string, string>} object into a {@link Tags} object.
+ *
+ * @export
+ * @param {Map<string, string>} tagMap
+ * @returns {Tags}
+ */
+export function mapToTags(tagMap: Map<string, string>): Tags {
+    const tags: Tags = {};
+    tagMap.forEach((tag, name) => tags[name] = tag);
+    return tags;
 }

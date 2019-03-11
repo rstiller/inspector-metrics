@@ -8,7 +8,7 @@ import { suite, test } from "mocha-typescript";
 
 import { Buckets } from "../../lib/metrics";
 import { Histogram } from "../../lib/metrics/histogram";
-import { DefaultReservoir } from "../../lib/metrics/reservoir";
+import { DefaultReservoir } from "../../lib/metrics/model/reservoir";
 
 const expect = chai.expect;
 

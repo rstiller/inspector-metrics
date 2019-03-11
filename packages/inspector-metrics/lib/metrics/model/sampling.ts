@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { SerializedSnapshot, Snapshot } from "./snapshot";
+import { SerializedSnapshot, SimpleSnapshot, Snapshot } from "./snapshot";
 
 /**
  * Interface fo all metric classes that can build a snapshot of values.
@@ -36,4 +36,34 @@ export interface SerializableSampling {
      */
     snapshot: SerializedSnapshot;
 
+}
+
+/**
+ * Determines if the metric passed is a {@link SerializableSampling} or not.
+ *
+ * @export
+ * @param {(Sampling | SerializableSampling)} metric
+ * @returns {metric is SerializableSampling}
+ */
+export function isSerializableSampling(metric: Sampling | SerializableSampling): metric is SerializableSampling {
+    const anyMetric: any = metric as any;
+    if ((anyMetric.getSnapshot && typeof anyMetric.getSnapshot === "function")) {
+        return false;
+    }
+    return anyMetric.hasOwnProperty("snapshot");
+}
+
+/**
+ * Convenience method the get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
+ *
+ * @export
+ * @param {(Sampling | SerializableSampling)} metric
+ * @returns {Snapshot}
+ */
+export function getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
+    if (isSerializableSampling(metric)) {
+        return new SimpleSnapshot(metric.snapshot.values);
+    } else {
+        return metric.getSnapshot();
+    }
 }

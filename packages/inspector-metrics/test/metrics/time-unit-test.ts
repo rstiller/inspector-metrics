@@ -4,7 +4,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
-import * as TimeUnit from "../../lib/metrics/time-unit";
+import * as TimeUnit from "../../lib/metrics/model/time-unit";
 
 const expect = chai.expect;
 

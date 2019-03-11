@@ -1,7 +1,8 @@
 import "source-map-support/register";
 
 import { MILLISECOND, TimeUnit } from "../model/time-unit";
-import { MetricReporter, MetricReporterOptions } from "./metric-reporter";
+import { MetricReporter } from "./metric-reporter";
+import { MetricReporterOptions } from "./metric-reporter-options";
 
 /**
  * Scheduler function type definition.

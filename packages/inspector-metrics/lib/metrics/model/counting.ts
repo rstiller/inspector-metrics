@@ -158,3 +158,52 @@ export interface SerializableBucketCounting extends SerializableMetric {
     counts: Map<number, number>;
 
 }
+
+/**
+ * Determines if the metric passed is a {@link SerializableBucketCounting} or not.
+ *
+ * @export
+ * @param {(BucketCounting | SerializableBucketCounting)} metric
+ * @returns {metric is SerializableBucketCounting}
+ */
+export function isSerializableBucketCounting(
+    metric: BucketCounting | SerializableBucketCounting): metric is SerializableBucketCounting {
+    const anyMetric: any = metric as any;
+    if ((anyMetric.getBuckets && typeof anyMetric.getBuckets === "function") ||
+        (anyMetric.getCounts && typeof anyMetric.getCounts === "function")) {
+        return false;
+    }
+    return Array.isArray(anyMetric.buckets);
+}
+
+/**
+ * Convenience method the get the {@link Buckets} of a
+ * {@link BucketCounting} or a {@link SerializableBucketCounting}.
+ *
+ * @export
+ * @param {(BucketCounting | SerializableBucketCounting)} metric
+ * @returns {Buckets}
+ */
+export function getBuckets(metric: BucketCounting | SerializableBucketCounting): Buckets {
+    if (isSerializableBucketCounting(metric)) {
+        return new Buckets(metric.buckets);
+    } else {
+        return metric.getBuckets();
+    }
+}
+
+/**
+ * Convenience method the get the counts of a
+ * {@link BucketCounting} or a {@link SerializableBucketCounting}.
+ *
+ * @export
+ * @param {(BucketCounting | SerializableBucketCounting)} metric
+ * @returns {Map<number, number>}
+ */
+export function getCounts(metric: BucketCounting | SerializableBucketCounting): Map<number, number> {
+    if (isSerializableBucketCounting(metric)) {
+        return metric.counts;
+    } else {
+        return metric.getCounts();
+    }
+}

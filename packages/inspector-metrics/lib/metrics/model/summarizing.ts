@@ -1,4 +1,5 @@
 import "source-map-support/register";
+
 import { Int64Wrapper } from "./int64";
 
 /**
@@ -16,5 +17,23 @@ export interface Summarizing {
      * @memberof Summarizing
      */
     getSum(): Int64Wrapper;
+
+}
+
+/**
+ * The serialized version of {@link Summarizing}.
+ *
+ * @export
+ * @interface SerializableSummarizing
+ */
+export interface SerializableSummarizing {
+
+    /**
+     * int64 number in it's string representation.
+     *
+     * @type {string}
+     * @memberof SerializableSummarizing
+     */
+    sum: string;
 
 }

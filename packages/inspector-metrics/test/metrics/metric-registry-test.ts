@@ -13,9 +13,9 @@ import { Counter, MonotoneCounter } from "../../lib/metrics/counter";
 import { SimpleGauge } from "../../lib/metrics/gauge";
 import { Histogram } from "../../lib/metrics/histogram";
 import { Meter } from "../../lib/metrics/meter";
-import { Metric } from "../../lib/metrics/metric";
 import { MetricRegistry } from "../../lib/metrics/metric-registry";
 import { MetricRegistryListener } from "../../lib/metrics/metric-registry-listener";
+import { Metric } from "../../lib/metrics/model/metric";
 import { Timer } from "../../lib/metrics/timer";
 
 chai.use(sinonChai);

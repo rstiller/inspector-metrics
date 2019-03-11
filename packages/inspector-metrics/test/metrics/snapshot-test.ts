@@ -4,7 +4,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
-import { SimpleSnapshot } from "../../lib/metrics/snapshot";
+import { SimpleSnapshot } from "../../lib/metrics/model/snapshot";
 
 const expect = chai.expect;
 

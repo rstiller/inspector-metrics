@@ -10,8 +10,10 @@ import { MetricRegistry } from "../metric-registry";
 import { MILLISECOND } from "../model/time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
-import { MetricSetReportContext, OverallReportContext, ReportingResult } from "./metric-reporter";
+import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
+import { OverallReportContext } from "./overall-report-context";
+import { ReportingResult } from "./reporting-result";
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
 /**

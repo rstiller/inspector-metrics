@@ -5,6 +5,10 @@ import {
     Counter,
     Event,
     Gauge,
+    getMetricDescription,
+    getMetricGroup,
+    getMetricMetadata,
+    getMetricName,
     Histogram,
     Metadata,
     Meter,
@@ -631,7 +635,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-            const metadata: Metadata = CsvMetricReporter.getMetadata(metric);
+            const metadata: Metadata = getMetricMetadata(metric);
             Object.keys(metadata).forEach((metadataName) => {
                 const metadataValue = metadata[metadataName];
                 metadataStr += `${metadataName}=${quote}${metadataValue}${quote}${this.options.metadataDelimiter}`;
@@ -652,7 +656,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(dateStr);
                     break;
                 case "description":
-                    let desc = encodeURIComponent(CsvMetricReporter.getDescription(metric) || "");
+                    let desc = encodeURIComponent(getMetricDescription(metric) || "");
                     if (quote === "'") {
                         desc = desc.replace(/'/g, "\\'");
                     }
@@ -662,20 +666,20 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(`${quote}${field || ""}${quote}`);
                     break;
                 case "group":
-                    row.push(`${quote}${CsvMetricReporter.getGroup(metric) || ""}${quote}`);
+                    row.push(`${quote}${getMetricGroup(metric) || ""}${quote}`);
                     break;
                 case "metadata":
                     if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(metadataStr);
                     } else {
-                        const metadata: Metadata = CsvMetricReporter.getMetadata(metric);
+                        const metadata: Metadata = getMetricMetadata(metric);
                         for (const metadataName of this.metadataNames) {
                             row.push(`${quote}${metadata[metadataName] || ""}${quote}`);
                         }
                     }
                     break;
                 case "name":
-                    row.push(`${quote}${CsvMetricReporter.getName(metric) || ""}${quote}`);
+                    row.push(`${quote}${getMetricName(metric) || ""}${quote}`);
                     break;
                 case "tags":
                     if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {

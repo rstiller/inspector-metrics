@@ -1,8 +1,8 @@
 import "source-map-support/register";
 
 import { Groupable } from "./groupable";
-import { MetadataContainer } from "./metadata-container";
-import { Taggable } from "./taggable";
+import { mapToMetadata, Metadata, MetadataContainer } from "./metadata-container";
+import { mapToTags, Taggable, Tags } from "./taggable";
 
 /**
  * Determines if the metric passed is a {@link SerializableMetric} or not.
@@ -21,6 +21,81 @@ export function isSerializableMetric(
         return false;
     }
     return typeof anyMetric.name === "string";
+}
+
+/**
+ * Convenience method the get the name of a {@link Metric} or a {@link SerializableMetric}.
+ *
+ * @export
+ * @param {(Metric | SerializableMetric)} metric
+ * @returns {string}
+ */
+export function getMetricName(metric: Metric | SerializableMetric): string {
+    if (isSerializableMetric(metric)) {
+        return metric.name;
+    } else {
+        return metric.getName();
+    }
+}
+
+/**
+ * Convenience method the get the description of a {@link Metric} or a {@link SerializableMetric}.
+ *
+ * @export
+ * @param {(Metric | SerializableMetric)} metric
+ * @returns {string}
+ */
+export function getMetricDescription(metric: Metric | SerializableMetric): string {
+    if (isSerializableMetric(metric)) {
+        return metric.description;
+    } else {
+        return metric.getDescription();
+    }
+}
+
+/**
+ * Convenience method the get the group of a {@link Metric} or a {@link SerializableMetric}.
+ *
+ * @export
+ * @param {(Groupable | SerializableMetric)} metric
+ * @returns {string}
+ */
+export function getMetricGroup(metric: Groupable | SerializableMetric): string {
+    if (isSerializableMetric(metric)) {
+        return metric.group;
+    } else {
+        return metric.getGroup();
+    }
+}
+
+/**
+ * Convenience method the get the tags of a {@link Metric} or a {@link SerializableMetric}.
+ *
+ * @export
+ * @param {(Taggable | SerializableMetric)} metric
+ * @returns {Tags}
+ */
+export function getMetricTags(metric: Taggable | SerializableMetric): Tags {
+    if (isSerializableMetric(metric)) {
+        return (metric.tags as any) as Tags;
+    } else {
+        return mapToTags(metric.getTags());
+    }
+}
+
+/**
+ * Convenience method the get the metadata of a {@link Metric} or a {@link SerializableMetric}.
+ *
+ * @export
+ * @param {(MetadataContainer | SerializableMetric)} metric
+ * @returns {Metadata}
+ */
+export function getMetricMetadata(metric: MetadataContainer | SerializableMetric): Metadata {
+    if (isSerializableMetric(metric)) {
+        return metric.metadata;
+    } else {
+        return mapToMetadata(metric.getMetadataMap());
+    }
 }
 
 /**
