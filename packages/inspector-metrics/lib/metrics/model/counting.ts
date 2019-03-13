@@ -136,7 +136,7 @@ export interface BucketCounting extends Metric {
  *
  * @export
  * @interface SerializableBucketCounting
- * @extends {Metric}
+ * @extends {SerializableMetric}
  */
 export interface SerializableBucketCounting extends SerializableMetric {
 

@@ -106,14 +106,38 @@ export interface IMetricReporter {
     flushEvents(): Promise<void>;
 }
 
+/**
+ * Pseudo-{@link MetricRegistry} used to provide an interface for registry tags.
+ *
+ * @class TagsOnlyMetricRegistry
+ */
 class TagsOnlyMetricRegistry {
 
+    /**
+     * private tags map.
+     *
+     * @private
+     * @type {Map<string, string>}
+     * @memberof TagsOnlyMetricRegistry
+     */
     private tags: Map<string, string>;
 
+    /**
+     * Creates an instance of TagsOnlyMetricRegistry.
+     *
+     * @param {Tags} tags
+     * @memberof TagsOnlyMetricRegistry
+     */
     public constructor(tags: Tags) {
         this.tags = tagsToMap(tags);
     }
 
+    /**
+     * Gets the tags map.
+     *
+     * @returns {Map<string, string>}
+     * @memberof TagsOnlyMetricRegistry
+     */
     public getTags(): Map<string, string> {
         return this.tags;
     }
@@ -186,19 +210,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         this.options = options;
         this.reporterType = reporterType || this.constructor.name;
         if (cluster.isMaster) {
-            cluster.on("message", async (worker, message, handle) => {
-                if (message &&
-                    message.type && message.type === MetricReporter.MESSAGE_TYPE &&
-                    message.targetReporterType && message.targetReporterType === this.reporterType) {
-                    const report: InterprocessReportMessage<T> = message;
-                    const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
-                    await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
-                    await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.counters);
-                    await this.handleResults(report.ctx, reg, report.date, "gauge", report.metrics.gauges);
-                    await this.handleResults(report.ctx, reg, report.date, "histogram", report.metrics.histograms);
-                    await this.handleResults(report.ctx, reg, report.date, "meter", report.metrics.meters);
-                    await this.handleResults(report.ctx, reg, report.date, "timer", report.metrics.timers);
-                }
+            cluster.on("message", (worker, message, handle) => {
+                this.handleReportMessage(worker, message, handle);
             });
         }
     }
@@ -300,6 +313,30 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
+     * Handles messages from forked processes.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @memberof MetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
+        if (message &&
+            message.type && message.type === MetricReporter.MESSAGE_TYPE &&
+            message.targetReporterType && message.targetReporterType === this.reporterType) {
+            const report: InterprocessReportMessage<T> = message;
+            const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
+            await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
+            await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.counters);
+            await this.handleResults(report.ctx, reg, report.date, "gauge", report.metrics.gauges);
+            await this.handleResults(report.ctx, reg, report.date, "histogram", report.metrics.histograms);
+            await this.handleResults(report.ctx, reg, report.date, "meter", report.metrics.meters);
+            await this.handleResults(report.ctx, reg, report.date, "timer", report.metrics.timers);
+        }
+    }
+
+    /**
      * Called before each reporting run.
      *
      * @protected
@@ -309,32 +346,12 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Called before each reporting run if sending metrics to master process.
-     *
-     * @protected
-     * @memberof MetricReporter
-     */
-    protected async beforeSendToMaster(ctx: OverallReportContext) {
-        await this.beforeReport(ctx);
-    }
-
-    /**
      * Called after each reporting run.
      *
      * @protected
      * @memberof MetricReporter
      */
     protected async afterReport(ctx: OverallReportContext) {
-    }
-
-    /**
-     * Called after each reporting run if sending metrics to master process.
-     *
-     * @protected
-     * @memberof MetricReporter
-     */
-    protected async afterSendToMaster(ctx: OverallReportContext) {
-        await this.afterReport(ctx);
     }
 
     /**
