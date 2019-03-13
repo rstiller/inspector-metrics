@@ -104,11 +104,13 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         tags = new Map(),
         unit = MILLISECOND,
         sendMetricsToMaster = true,
+        interprocessReportMessageSender = null,
     }: PushgatewayReporterOptions) {
         super({
             clock,
             host,
             instance,
+            interprocessReportMessageSender,
             job,
             log,
             minReportingTimeout,

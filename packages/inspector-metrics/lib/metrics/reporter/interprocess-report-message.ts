@@ -70,3 +70,13 @@ export interface InterprocessReportMessage<T> {
      */
     type: string;
 }
+
+/**
+ * Sender abstraction for sending a {@link InterprocessReportMessage} object.
+ * Compatible with {@code cluster.worker.send}.
+ *
+ * @exports
+ * @type {(message: InterprocessReportMessage<T>) => any}
+ * @template T
+ */
+export type InterprocessReportMessageSender = <T> (message: InterprocessReportMessage<T>) => any;

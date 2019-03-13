@@ -370,11 +370,13 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             minReportingTimeout = 1,
             tags = new Map(),
             sendMetricsToMaster = true,
+            interprocessReportMessageSender = null,
         }: ElasticsearchMetricReporterOption) {
         super({
             clientOptions,
             clock,
             indexnameDeterminator,
+            interprocessReportMessageSender,
             log,
             metricDocumentBuilder,
             minReportingTimeout,

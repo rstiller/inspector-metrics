@@ -113,10 +113,12 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         scheduler = setInterval,
         minReportingTimeout = 1,
         sendMetricsToMaster = true,
+        interprocessReportMessageSender = null,
         tags = new Map(),
     }: InfluxMetricReporterOptions) {
         super({
             clock,
+            interprocessReportMessageSender,
             log,
             minReportingTimeout,
             reportInterval,

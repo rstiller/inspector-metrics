@@ -108,10 +108,12 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         minReportingTimeout = 1,
         tags = new Map(),
         sendMetricsToMaster = true,
+        interprocessReportMessageSender = null,
     }: CarbonMetricReporterOptions) {
         super({
             clock,
             host,
+            interprocessReportMessageSender,
             log,
             minReportingTimeout,
             reportInterval,

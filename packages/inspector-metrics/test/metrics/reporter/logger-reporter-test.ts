@@ -26,12 +26,12 @@ chai.use(sinonChai);
 const expect = chai.expect;
 
 export class MockedLogger implements Logger {
-    public log(): void {}
-    public error(): void {}
-    public warn(): void {}
-    public info(): void {}
-    public debug(): void {}
-    public trace(): void {}
+    public log(...args: any[]): void {}
+    public error(...args: any[]): void {}
+    public warn(...args: any[]): void {}
+    public info(...args: any[]): void {}
+    public debug(...args: any[]): void {}
+    public trace(...args: any[]): void {}
 }
 
 export class MockedClock implements Clock {

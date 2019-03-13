@@ -1,6 +1,7 @@
 import "source-map-support/register";
 
 import { Clock } from "../clock";
+import { InterprocessReportMessageSender } from "./interprocess-report-message";
 
 /**
  * Options for the {@link MetricReporter}.
@@ -31,6 +32,13 @@ export interface MetricReporterOptions {
      * @memberof MetricReporterOptions
      */
     sendMetricsToMaster?: boolean;
+    /**
+     * Abstraction for sending {@link InterprocessReportMessage} objects to the master process.
+     *
+     * @type {InterprocessReportMessageSender}
+     * @memberof MetricReporterOptions
+     */
+    interprocessReportMessageSender?: InterprocessReportMessageSender;
     /**
      * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
      *

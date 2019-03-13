@@ -78,7 +78,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      */
     public async start(): Promise<this> {
         const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
-        this.timer = this.options.scheduler(() => this.report(), interval);
+        this.timer = this.options.scheduler(async () => this.report(), interval);
         return this;
     }
 

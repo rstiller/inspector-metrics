@@ -208,6 +208,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      */
     public constructor(options: O, reporterType?: string) {
         this.options = options;
+        this.options.interprocessReportMessageSender = this.options.interprocessReportMessageSender ||
+            (cluster.worker ? cluster.worker.send : null);
         this.reporterType = reporterType || this.constructor.name;
         if (cluster.isMaster) {
             cluster.on("message", (worker, message, handle) => {
@@ -449,7 +451,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                 targetReporterType: this.reporterType,
                 type: MetricReporter.MESSAGE_TYPE,
             };
-            cluster.worker.send(message);
+            this.options.interprocessReportMessageSender(message);
         } else {
             await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
             await this.handleResults(ctx, registry, date, "counter", counterResults);

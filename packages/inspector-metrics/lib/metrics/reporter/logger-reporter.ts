@@ -104,9 +104,11 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         minReportingTimeout = 1,
         tags = new Map(),
         sendMetricsToMaster = true,
+        interprocessReportMessageSender = null,
     }: LoggerReporterOptions) {
         super({
             clock,
+            interprocessReportMessageSender,
             log,
             minReportingTimeout,
             reportInterval,

@@ -256,11 +256,13 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         minReportingTimeout = 1,
         tags = new Map(),
         sendMetricsToMaster = true,
+        interprocessReportMessageSender = null,
     }: CsvMetricReporterOptions) {
         super({
             clock,
             columns,
             dateFormat,
+            interprocessReportMessageSender,
             metadataColumnPrefix,
             metadataDelimiter,
             metadataExportMode,
