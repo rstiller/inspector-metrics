@@ -64,3 +64,4 @@ build/
 coverage/
 docs/
 *.csv
+.vscode/

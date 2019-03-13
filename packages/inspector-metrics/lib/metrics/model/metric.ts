@@ -201,7 +201,7 @@ export interface SerializableMetric extends Metric {
  * - get / set name
  * - get / set description
  * - get / set tags
- * - get / set metadta
+ * - get / set metadata
  * - get / set group
  *
  * @export

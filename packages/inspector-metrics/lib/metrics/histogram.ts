@@ -45,7 +45,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      */
     protected sum: Int64Wrapper = new Int64Wrapper();
     /**
-     * Contains all countings based on {@link Histogram#buckets}.
+     * Contains all counts based on {@link Histogram#buckets}.
      *
      * @private
      * @type {{ [boundary: number]: number }}

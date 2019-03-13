@@ -60,7 +60,7 @@ export abstract class Clock {
 export class StdClock extends Clock {
 
     /**
-     * Returns a Time object whos nanoseconds component is always zero.
+     * Returns a Time object who's nanoseconds component is always zero.
      *
      * @returns {Time}
      * @memberof StdClock

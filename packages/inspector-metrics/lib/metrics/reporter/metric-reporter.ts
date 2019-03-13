@@ -89,7 +89,7 @@ export interface IMetricReporter {
      * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
      * and call {@link #afterReport} may not be applied for ad-hoc events.
      *
-     * This implementation does nothing and always resolved the specified evnet.
+     * This implementation does nothing and always resolved the specified event.
      *
      * @param {TEvent} event
      * @returns {Promise<TEvent>}
@@ -194,7 +194,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * @protected
      * @readonly
-     * @type {stirng}
+     * @type {string}
      * @memberof MetricReporter
      */
     protected readonly reporterType: string;
@@ -376,9 +376,9 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Reporting function for a sinlge {@link MetricRegistry}.
+     * Reporting function for a single {@link MetricRegistry}.
      * Calls {@link #createReportingContext} for each metric type.
-     * Afterwarsds calls {@link #reportMetrics} for each of the
+     * Afterwards calls {@link #reportMetrics} for each of the
      * registry's metrics - grouped by type.
      * And finally calls {@link #handleResults} for each of the results.
      *

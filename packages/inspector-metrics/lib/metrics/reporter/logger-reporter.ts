@@ -164,7 +164,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
     }
 
     /**
-     * Creates a new {@link LoggerReportingContext} using the speicifed arguments.
+     * Creates a new {@link LoggerReportingContext} using the specified arguments.
      *
      * @protected
      * @param {OverallReportContext} overallCtx

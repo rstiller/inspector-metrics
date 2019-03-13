@@ -42,7 +42,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
      * @param {string} [group] optional group
      * @param {Date} [time=new Date()]
      *              can be set to <pre><code>new Date(clock.time().milliseconds)</code></pre>
-     *              to be in line with orinary {@link MetricReporter} implementations.
+     *              to be in line with ordinary {@link MetricReporter} implementations.
      * @memberof Event
      */
     public constructor(name: string, description?: string, group?: string, time: Date = new Date()) {

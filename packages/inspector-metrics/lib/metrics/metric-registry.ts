@@ -244,7 +244,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     private listeners: MetricRegistryListener[] = [];
 
     /**
-     * Adds the specified listener and returns the corrsponding
+     * Adds the specified listener and returns the corresponding
      * registration object.
      *
      * @param {MetricRegistryListener} listener
@@ -498,7 +498,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Gets all mamanged metric instance by name.
+     * Gets all managed metric instance by name.
      *
      * @param {string} name
      * @returns {Metric[]}
@@ -548,7 +548,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @returns {Histogram[]}
      * @memberof MetricRegistry
      */
-    public getHistogramsByname(name: string): Histogram[] {
+    public getHistogramsByName(name: string): Histogram[] {
         return this.getByName<Histogram>(name);
     }
 
@@ -826,7 +826,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Registeres a metric by name
+     * Registers a metric by name
      *
      * @param {string} name
      * @param {Metric} metric

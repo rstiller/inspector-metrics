@@ -51,7 +51,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
     extends MetricReporter<O, T> {
 
     /**
-     * Timer instance retuned by the scheduler function.
+     * Timer instance returned by the scheduler function.
      *
      * @private
      * @type {NodeJS.Timer}

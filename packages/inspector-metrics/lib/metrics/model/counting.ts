@@ -103,7 +103,7 @@ export class Buckets {
 
 /**
  * Interface for defining a collection of boundaries to count events (e.g. method calls, requests per time-unit).
- * The meaning of the countings is implementation-specific.
+ * The meaning of the counts is implementation-specific.
  *
  * @export
  * @interface BucketCounting

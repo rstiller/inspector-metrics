@@ -209,7 +209,7 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
 
     /**
      * Creates an instance of HdrHistogram.
-     * Throws anerror if the 'native-hdr-histogram' module is not installed.
+     * Throws an error if the 'native-hdr-histogram' module is not installed.
      *
      * @param {number} [lowest=1] is the lowest possible number that can be recorded
      * @param {number} [max=100] is the maximum number that can be recorded
