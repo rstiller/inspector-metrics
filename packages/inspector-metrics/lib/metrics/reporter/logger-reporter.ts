@@ -1,5 +1,7 @@
 import "source-map-support/register";
 
+import * as cluster from "cluster";
+
 import { StdClock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
 import { Event } from "../event";
@@ -103,7 +105,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
     }: LoggerReporterOptions) {
         super({

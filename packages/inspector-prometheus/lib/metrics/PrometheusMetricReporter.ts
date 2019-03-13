@@ -1,5 +1,6 @@
 import "source-map-support";
 
+import * as cluster from "cluster";
 import {
     BucketCounting,
     Buckets,
@@ -245,7 +246,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         minReportingTimeout = 1,
         tags = new Map(),
         useUntyped = false,
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
     }: PrometheusReporterOptions) {
         super({

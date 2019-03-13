@@ -1,5 +1,6 @@
 import "source-map-support/register";
 
+import * as cluster from "cluster";
 import { IPoint } from "influx";
 import {
     Counter,
@@ -112,7 +113,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         clock = new StdClock(),
         scheduler = setInterval,
         minReportingTimeout = 1,
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
         tags = new Map(),
     }: InfluxMetricReporterOptions) {

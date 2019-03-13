@@ -5,6 +5,7 @@ import "source-map-support/register";
  */
 const graphite = require("graphite");
 
+import * as cluster from "cluster";
 import {
     Counter,
     Event,
@@ -107,7 +108,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
     }: CarbonMetricReporterOptions) {
         super({

@@ -1,5 +1,6 @@
 import "source-map-support";
 
+import * as cluster from "cluster";
 import * as http from "http";
 import {
     Counter,
@@ -103,7 +104,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         scheduler = setInterval,
         tags = new Map(),
         unit = MILLISECOND,
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
     }: PushgatewayReporterOptions) {
         super({

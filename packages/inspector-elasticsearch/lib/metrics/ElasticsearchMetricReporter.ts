@@ -1,5 +1,6 @@
 import "source-map-support/register";
 
+import * as cluster from "cluster";
 import { Client, ConfigOptions } from "elasticsearch";
 import {
     Counter,
@@ -369,7 +370,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             scheduler = setInterval,
             minReportingTimeout = 1,
             tags = new Map(),
-            sendMetricsToMaster = true,
+            sendMetricsToMaster = cluster.isWorker,
             interprocessReportMessageSender = null,
         }: ElasticsearchMetricReporterOption) {
         super({

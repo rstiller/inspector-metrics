@@ -211,7 +211,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         this.options.interprocessReportMessageSender = this.options.interprocessReportMessageSender ||
             (cluster.worker ? cluster.worker.send : null);
         this.reporterType = reporterType || this.constructor.name;
-        if (cluster.isMaster) {
+        if (!this.options.sendMetricsToMaster) {
             cluster.on("message", (worker, message, handle) => {
                 this.handleReportMessage(worker, message, handle);
             });
@@ -435,7 +435,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        if (cluster.isWorker && this.options.sendMetricsToMaster) {
+        if (this.options.sendMetricsToMaster) {
             const message: InterprocessReportMessage<T> = {
                 ctx,
                 date,

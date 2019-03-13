@@ -255,7 +255,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = true,
+        sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
     }: CsvMetricReporterOptions) {
         super({

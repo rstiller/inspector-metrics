@@ -92,7 +92,6 @@ export class LoggerReporterTest {
     @test
     public async "remove metric-registry which was not added"() {
         this.reporter.removeMetricRegistry(this.registry);
-        this.reporter.removeMetricRegistry(this.registry);
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.schedulerSpy).to.not.have.been.called;
