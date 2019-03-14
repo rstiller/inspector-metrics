@@ -15,7 +15,9 @@ import {
     Logger,
     LoggerReporter,
     MetricRegistry,
+    MetricReporter,
     MILLISECOND,
+    ReportingResult,
     Scheduler,
     Time,
 } from "../../../lib/metrics";
@@ -110,8 +112,69 @@ export class LoggerReporterClusterWorkerTest {
 
         expect(this.loggerSpy).to.not.have.been.called;
         expect(this.interprocessReportMessageSenderSpy.callCount).to.equal(1);
-        const metrics = this.interprocessReportMessageSenderSpy.getCall(0).args[1];
-        expect(metrics).to.have.length(1);
+
+        let interprocessReportMessage = this.interprocessReportMessageSenderSpy.getCall(0).args[0];
+        // simulating the serialization
+        interprocessReportMessage = JSON.parse(JSON.stringify(interprocessReportMessage));
+
+        expect(interprocessReportMessage).to.have.property("ctx");
+        expect(interprocessReportMessage).to.have.property("date");
+        expect(interprocessReportMessage).to.have.property("metrics");
+        expect(interprocessReportMessage).to.have.property("tags");
+        expect(interprocessReportMessage).to.have.property("targetReporterType");
+        expect(interprocessReportMessage).to.have.property("type");
+
+        expect(interprocessReportMessage.type).to.equal(MetricReporter.MESSAGE_TYPE);
+        expect(interprocessReportMessage.targetReporterType).to.equal("LoggerReporter");
+
+        const metrics = interprocessReportMessage.metrics;
+        expect(metrics).to.have.property("counters");
+        expect(metrics).to.have.property("gauges");
+        expect(metrics).to.have.property("histograms");
+        expect(metrics).to.have.property("meters");
+        expect(metrics).to.have.property("monotoneCounters");
+        expect(metrics).to.have.property("timers");
+
+        const counters = metrics.counters;
+        expect(counters).to.have.length(1);
+
+        const result: ReportingResult<any, any> = counters[0];
+        expect(result.metric.name).to.equal("counter1");
+        expect(result.metric.count).to.equal(0);
+        expect(result.result.message).to.equal("Thu Jan 01 1970 01:00:00 GMT+0100 (GMT+01:00) - counter counter1: 0");
+        expect(result.result.metadata.reportInterval).to.equal(1000);
+        expect(result.result.metadata.measurement).to.equal("counter1");
+        expect(result.result.metadata.measurement_type).to.equal("counter");
+        expect(result.result.metadata.timestamp).to.equal("1970-01-01T00:00:00.000Z");
+    }
+
+    @test
+    public async "check registry tags send to master"() {
+        this.registry.newCounter("counter1");
+        this.registry.setTag("tag1", "value1");
+        this.registry.setTag("tag2", "value2");
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        await this.reporter.start();
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.interprocessReportMessageSenderSpy.callCount).to.equal(1);
+
+        let interprocessReportMessage = this.interprocessReportMessageSenderSpy.getCall(0).args[0];
+        // simulating the serialization
+        interprocessReportMessage = JSON.parse(JSON.stringify(interprocessReportMessage));
+
+        expect(interprocessReportMessage).to.have.property("tags");
+
+        expect(interprocessReportMessage.tags.tag1).to.equal("value1");
+        expect(interprocessReportMessage.tags.tag2).to.equal("value2");
     }
 
 }
