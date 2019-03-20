@@ -11,3 +11,5 @@ cache:
     - "node_modules"
 before_script:
   - "npm run bootstrap"
+env:
+  - TZ=Europe/Berlin

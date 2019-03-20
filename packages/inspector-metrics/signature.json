@@ -19,11 +19,11 @@
     },
     {
       "path": "build/lib/metrics/clock.d.ts",
-      "sha512": "0cb0ad9ddb1a493e0ced12c99a196cd4517404f5f612aaf4a2f2671e5481f3963191b20756e08e44f3828e31809a5803f369465b583f45fbb2bceb46ea790877"
+      "sha512": "cd6bdf24add964fcc596132a4fb0d3e320b0468194cb0567fa8d769ef23db95f23c2e1e8e7001d0e41fa85f5cceb97f72c271cdd96c3617715e3dc852d8fabea"
     },
     {
       "path": "build/lib/metrics/clock.js",
-      "sha512": "30fb87b23084569edfb74c4a99ddb49089873bc57aeaf4796ed248a687cb58c6f4713aa71bb2a9bb7783fb1960b8d3aec5ff17f29ff700dd9dc8a0a6c5a11744"
+      "sha512": "102f902e04e5986c128d8787b1eb51419505eb6b69b7dab2de718a6003d4bb302f48bf88cb7748bc161dce75ce6cfe8b753f90e73ca732fc3a8b0ae522700e35"
     },
     {
       "path": "build/lib/metrics/clock.js.map",
@@ -55,11 +55,11 @@
     },
     {
       "path": "build/lib/metrics/event.d.ts",
-      "sha512": "9d3d1ca4f3fffef4685de764f9cf83b95aeed40240ccc3d8d3d05bc6162c1def1bcaa0362194e17522b18b0a2f77687887e1b8ec20729ec4cf57b2e2445ea1d1"
+      "sha512": "ec219a874ee75d9a82d438a78374fc926c8ea1c83ebd6e283fe5493520f5ae3f8df522f88ef3b70ddb9b51519bb46584674a46b2421bb2a54b5483594a50f217"
     },
     {
       "path": "build/lib/metrics/event.js",
-      "sha512": "6769989420924d16800419f7641d4e4a9e692c0584cc09374177dc085c30f9707fe1d12053657652bc5fabeea1f928ade30043b29ddbf12641ee7009a6b576a7"
+      "sha512": "c9b46af4f3a71376f374d80dedc274caa101bdfc9d5f0b28f5f619d5c025d84c5e1a11b99baa843b52dfa11814cf532ac3461251d02af439ac746e28683a6bd5"
     },
     {
       "path": "build/lib/metrics/event.js.map",
@@ -67,7 +67,7 @@
     },
     {
       "path": "build/lib/metrics/gauge.d.ts",
-      "sha512": "986704988ace4e13236c720f72c718135b1f4593e3b8eab74f80eeea0bc00032ccab9eca53a322bc4764daa73d36c035694b8d7c5eea09cbebc238b52b8f6a61"
+      "sha512": "b67fbf8cab75db536a4b3ede136be2d93113a11109a4dd9fb9652d4cf6eeaddef948e4a0dca3cc6c6a6a26d25b70642d19272b85f45123d47c378e6326f94bdc"
     },
     {
       "path": "build/lib/metrics/gauge.js",
@@ -75,7 +75,7 @@
     },
     {
       "path": "build/lib/metrics/gauge.js.map",
-      "sha512": "c3821a93c8a8f773ec444298a2dc9e311f0fb910c0949e1df025a332debf274f37bca582670c09d14c5f09b6b7824d7d257bcd114b330ae5e5382d6ee3dca945"
+      "sha512": "b87983a7aa24b42abf40cb0d3936ada06502163691db1656ba50b386f20cbcb61a12d15109a9e7f408c77d3cada0a6fc5e08cf2eafc093092bf4ccf50041ced6"
     },
     {
       "path": "build/lib/metrics/groupable.d.ts",
@@ -91,11 +91,11 @@
     },
     {
       "path": "build/lib/metrics/hdr-histogram.d.ts",
-      "sha512": "f47a669fd0e6a796d9b0375ce857b826a4eb40c04a633bc72331ba4e2052d5105891a8d9bf765045a9b3764a5eb30e145b1a3ce91b11106ef6a397d6e6bcf3b1"
+      "sha512": "b71b557c7ad7aa4b9cb206d2e1e423752a43aad06bc682a1265d5748ff8e95d537435d8e560729b89ef5fc1ed7578f59f31d5f98507eed2f03af99b8d470dbde"
     },
     {
       "path": "build/lib/metrics/hdr-histogram.js",
-      "sha512": "500d19e84f5fe262b71843aeb98fb0317494a1ed2788c83112238ddfaf9c454c7bddcf50eadf7af1888cb2d33cd1a4d284dc9ba6136674d34ca7327f3a04b869"
+      "sha512": "4f1a25ae0ca5479e9cf0ed2ed994cb1efdca632e2ee5330f546da90011307dabbd24abc3cad50d20291135b650c370d89b4a1fa0bf68e63c75f509b34fd408e4"
     },
     {
       "path": "build/lib/metrics/hdr-histogram.js.map",
@@ -103,11 +103,11 @@
     },
     {
       "path": "build/lib/metrics/histogram.d.ts",
-      "sha512": "28069f32d7b97c7045f596210c652c69bed76ef21cf57657d9af09339f687eae527af86e063f7968a96e1ab33af13047a67a9da60e519906c86954a0dd251077"
+      "sha512": "d9eb47e9b876253b97921945888a00db7faebb1c0037abbca8be25e058618a40da180ae1113be07c21f08dd2c0286657ea5108c20ee9060a1e5674676683696d"
     },
     {
       "path": "build/lib/metrics/histogram.js",
-      "sha512": "b9a4664a6cee1b375d6bece3efe3589bc270cd2b80c478992bcdeb7a7b4a1f852af5a293b86edf9fca3b8360046be190d1ce3fb3af1885954e7aa2535570cfc5"
+      "sha512": "4f75c25f915faef365bca3a562ffcdf63676a1c99cf44a34354621283b92c2c6d631155d04294700200da0906f1c2fef82750009f6298f900d18efd246323cc4"
     },
     {
       "path": "build/lib/metrics/histogram.js.map",
@@ -187,11 +187,11 @@
     },
     {
       "path": "build/lib/metrics/metric-registry.d.ts",
-      "sha512": "52ac7e23c324b76a8a9e454a64196adf02d8ea1e7cae983351cefee19ce045f30ce0c2f1275d960a0a1b71f279d5254c524d486731115ae62e894f89a1edfa3a"
+      "sha512": "65eb4afbb830a46e7b56efd30c90ab643151f021f995d0fe2415e2887d1fb7fcc444bdd308b5d57d24852c5dcb1e2e5fb795bff38fc9c2c3d1e350dd7730c80b"
     },
     {
       "path": "build/lib/metrics/metric-registry.js",
-      "sha512": "c9044a2e014a12c07d0be4bbb97e940c65bbde57e8fba41e27c44298bb7d14b648e6b6e007dde11d96ae227de6289a861f34528d079388b50c4e95665bc6f863"
+      "sha512": "b34baef121b75e6223957871b62e397105334b7b4294e9db5f4674e96546f5987e48466e078c611bc37ee6d9008f69e8df8b1020ad1aba8bc1dddf1984a1cb07"
     },
     {
       "path": "build/lib/metrics/metric-registry.js.map",
@@ -223,7 +223,7 @@
     },
     {
       "path": "build/lib/metrics/model/counting.d.ts",
-      "sha512": "3ba39c41d49560d6b45797ddf1cf473842dccdea18d3fee164444c1fc7e5a452466972be6c7bd91da9acf2d740e27853cb7afa09d9861d3496bf0410c189819c"
+      "sha512": "8ce324e2516581b0f5ea68434824d9eaaabbf00419cdd15e9e3fb7d1282abfc7d2616e59430d2da1227bd83f2fc5046bfa162cbd2de09155e2ceccc3dfdfdec9"
     },
     {
       "path": "build/lib/metrics/model/counting.js",
@@ -283,11 +283,11 @@
     },
     {
       "path": "build/lib/metrics/model/metric.d.ts",
-      "sha512": "731e18b63b4ddde6fa5f2deb04954b43bfc1aaea6cecbd500fefd4aa33e266060dd37d02c22aee369b5b260ba5859e966ff5dfddb165a42d6f5a1a6b7a8a39b4"
+      "sha512": "1f0e0d0f0cb241cd60ecc40da17a91a1f25449b5d907b9e35eaa9e57130abbdb85ec421d28ebed60bc21088cef01043986c8a8bd44f12e10d81a7af7064ab938"
     },
     {
       "path": "build/lib/metrics/model/metric.js",
-      "sha512": "3f6d0f13778388b4c2e8955c457d24e17580b2f4159c36768038bf4d764d1aa99cc7426130b9793d889f389fbeea9cdb807a64a9168b7c945544122c5761d82a"
+      "sha512": "da4ee1e3a206d28f77df019202e47d73000b9b3b50ff0fb61ba6aa75464270d79e510744ed00976ae3d081826dfbf32ddfde29b8306b0094b04edd3dc01ea6b1"
     },
     {
       "path": "build/lib/metrics/model/metric.js.map",
@@ -391,7 +391,7 @@
     },
     {
       "path": "build/lib/metrics/reporter/interprocess-report-message.d.ts",
-      "sha512": "0bd43b0031518fd70c08258f9d38a5c93d5d62ba5f17747cca67368be49847f708df4b2dd4adc3fee2923a49522e45eb9d3ab3178bde4f0f620d23350b569771"
+      "sha512": "6f98bf4416c182fdb684d771dc476357308a8f3c4c4da75e5697b0f892b9f7eda2b82bb4bef528fd872cccf5e4dcfdc4a68cc4ed6134245acda637633adda91c"
     },
     {
       "path": "build/lib/metrics/reporter/interprocess-report-message.js",
@@ -403,15 +403,15 @@
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.d.ts",
-      "sha512": "40751243bc9c185405158fd073d6189a2490e1ba86ebd101e915ba247c43b1951230a0b0e630a273790ab30cb34c84034f7690669c732b5b21fe66d2cf530e11"
+      "sha512": "266835961cb6d275e858d161a3fc69da8621be08a596511638b87e4ac4fd87b181ea17872a1f263f3cab838dbe99d9aa8faca94bae027c04056230783c1c4262"
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.js",
-      "sha512": "026f97932dea4423b828b1aaeff8f59ffc0942d890834237dab8019ea9344ae189ffccafa8e95c07fcaaf4990111b3a78ecee31082bf1b45035d29628c8fde1e"
+      "sha512": "d81a3d524021ff80ab59c907959d4efda40a8c3dfead843627fada6d683a5345893fe19e42cdafab62970978a66807ba0ecfc9effa9686f775c5211d3311077c"
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.js.map",
-      "sha512": "4d395b490e8e9982473c96a854b95d9a4201084b6c4f1a3024b464c40590888ad5ed0268d09baab33f6e9140275c328280405264334be67f53e2e7f81935cad1"
+      "sha512": "2984927f589bbd5db06603ed040815b59f6f357ef47acb389ce2d415a071da3276e580fc5821180df1a0e22a2980c9253192e4f64524e59f5f4f1c22cf6a2cd0"
     },
     {
       "path": "build/lib/metrics/reporter/logger.d.ts",
@@ -439,7 +439,7 @@
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter-options.d.ts",
-      "sha512": "3d03f0cb2ceadaf9f6f31800a0904f5c342a1f7f13afc0f489dbc83affada5f9812f73bfcfbe2970d3113f918e8f60cd608926e94f2794f2ebfea87ca1af6abe"
+      "sha512": "c065aa82409ebe0d607a3b31355db6677a9952270a32420457a610ec7f3f7338784dc4018c9deb9d180c6084b6512c7b5a6eb2ed730b27997ff547b5bcbd8275"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter-options.js",
@@ -451,15 +451,15 @@
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.d.ts",
-      "sha512": "6f15cdce51ce7dc28c1a223e52d3ef8b8d7423ccbfa546ec245074cb8ae515231d790c9d56067ea4a559b35436c320ab4bd4b6980dbc134b2a1f9a46e2a08d5b"
+      "sha512": "492ebc9a71e8b6376fcfa77005a4f6a21cabdbeb27238356dd4f445d029836adef54d31cd739f4ad8656809455b4ca8d0c34165c4bb6d3c885c12b1c1ff33923"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js",
-      "sha512": "a8a24af992c830dcea3d62f06584b014dc56f75d7133f37e0717d7476786875b22cf1c1b5ab3c6ad46f603b885b31f199e8f255954608f2694d50e231931362b"
+      "sha512": "42b07546e6b63ef828c45d89617dcf73bc00f322a83fd14ea2b68f696c100c86942c61ffb803e6dc2b6632d6d8f8d58324e2de465eb27ce04a4cdaeeff658744"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js.map",
-      "sha512": "511354039a4419f90dbe2149d500b99a2ecda371810a71c8b712e55a8275d65bd32b3fce88112df93e31e69f3ac3266d70ac502d82567d343b72f5c51a2ad026"
+      "sha512": "ffe52658385c23ce3c7c925f964d898ea9f78cb0db397c9f6d344da9e97b1c8c9453eefc5e0061a510e24c717027225563ed022be3e98fa3f19bd64b9b81ff1a"
     },
     {
       "path": "build/lib/metrics/reporter/metric-set-report-context.d.ts",
@@ -511,15 +511,15 @@
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.d.ts",
-      "sha512": "5f597282c128157240dbceb4604f55e64d936d1d2c4497326dda9ab2a34a5aef7da4a84bf16c730e7185a0068411fb6ea4aa295b60c308ac461321894422aa3a"
+      "sha512": "b602550eb21743b1c1a1d6965e038be1bc117d81b7c0fa66f864307bf71e50df68c308170042c19e6691b5955742dc09c782db0b92d49cb5ce10ae0119d0d665"
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.js",
-      "sha512": "b89ec5dc4e74892fa1416b8973d30d7852f1dd0c63d8505846d799a42d42240c24a31f378c5de67e41d2d22326c2ff2591a3da32ab4836c3650a33dad7388b62"
+      "sha512": "b57f92242da29cd2ae6e0305fdefc8995152a92c55f9d11eed033a328a6dc730379a8abf88facc19b8d035ff997d4d0f87a471191d1c5778840b3e67dd448fe8"
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.js.map",
-      "sha512": "33883347203f55ad2fb2889b4b30d389bade1185d2c181eb277aa5cfe3b2d85bd6e2f076295ec82be65e4296ed8bea55c2467d130377835dad25d6962eae925b"
+      "sha512": "deb953e32c58af70b37a2457f1da571e96410a817344923d434a9d770bf82df9c27a6f57cafde40cad36760490c7ddc4b94e80b0a31a877513750cdbf9d3f3a4"
     },
     {
       "path": "build/lib/metrics/reporter/tags.d.ts",
@@ -774,16 +774,28 @@
       "sha512": "a0274a791006eac7ecaed3694fc7dff08b8610f460e5410d3dc5e654cdd6e3affcfc517cb46e7aebe858e4c79d70be1c8e96d1183971da1ecf470f94f4f3e9e5"
     },
     {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.d.ts",
+      "sha512": "b921039274954d01bf00b98656ddc3ab9ae5942e9d9f45ea39b5a64ad7f0d2a22f5b5a9d07d239f07db4236c9b2a72a66447a55768beec5f5f9fbf4b713ddf9e"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js",
+      "sha512": "48fab79255fd555ae8b23bf28506da904793f6d691f024cd1aa7d28a9e361937fd19855f183803d2bbbeabbfabeec1ab7e3a8993495180963acf065c21dbf00e"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js.map",
+      "sha512": "405e40ea1d9a659e0f57399241f4cf399b1f6f1bcdbdafe8ebd389a1d9f1534d0a8fb9a00744c985f7ed7906c87b54c26b8180788ce3302ebb484e5b283d5366"
+    },
+    {
       "path": "build/test/metrics/reporter/logger-reporter-test.d.ts",
-      "sha512": "fdf622591ea0ac3ff1f8cf767b01314181c6e16da906ae62d7d26dd4e47b5448ba6a23a2393929686c8e200bda10b2344bd70ee4f6a34c1ab975eafdb77024f4"
+      "sha512": "022295a9b8db7e5bbc85a850ab87051a45e83e2a0ec6f6707bb8de27e32948c8f2d5f51054f781604e0a48f940b0fd172d0ee26bd33ffde41e1016628bed4e0c"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-test.js",
-      "sha512": "006d493c34e4f7621b403499a416ab212871f7542db0b71596a937591640aeb9c6026eea3be7b4b7df78f1725c43537c69351d94e673c6a9f9badd4b3d61dbe9"
+      "sha512": "49a300541e1cd8f490186629aa5aa844bccf7411aea67498fecb5356f6aa5c51c798eac42ddf50c4ab746da63b2cdcf8c657ca7bcab7b1448b0610e785078f6d"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-test.js.map",
-      "sha512": "a8f7aacfd085550c95cd8099b1036ee7dddecef24459f4f3a49c8a32614c519fe233e5fb8af76e7623dac20f42915a9047cba6d3e8e8dcc97a70b880a231ae35"
+      "sha512": "a44d03984032e6e980cc3274e690e6d049932d678600d9f75172052a093f7a70a3cc6bed42428d8874ce6eb742da379b261363ea61d5374b243a4b2ec86c6c2f"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.d.ts",
@@ -858,7 +870,7 @@
       "sha512": "c72a0eab849efe2455d404da8530ee0a6cae62370068a5fccd0772f0c95227bc5fd287e3d754486d69ae65f312d110fb2577669e524d58acb13e086c4b9b79fb"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJckmRXCRDCMfXrQKYV5wAAtjUQAGMXuxiVkMZzmErRPbVG/PcL\nRovSF55wUs2fQv5ueaTjrPlQU3mgvF1iJoeUonYgQMxIilTlUQ61vMv1Uio2G6a9\nTmG5wAo6zZ/ZmquhxXgQMA66Qu528Nfxe66c6YM5hWs9cPjaF9hsjc3zdi8XAoAV\nQOkQ0FvLxxDLSrX2klD3Ev4nR9S22/IwfEJsSCkKpMhBRH+/JQk60Ck//qQitLoF\nqeyK6MtuXyLqPDAvPAdGOn0d1F3ogjmJu+tOEvtsCORBdQH6oYj+WajtAWrVUPEf\n/pczRpwHdRrO1P+sdVjFqEsiD9MatihpIqcVKsHAGHoEyXAysN42T6sS8PzKWX4+\n5nRziVKzmB7lxKDvZ18QBVbiISJTCwYaNYMwZN27o34Qn+m3gVSujSkZKuQz2jQv\nc6JeMjZoQqes8E28zQZeIgSiI5yFOnBBEMDBJBlbNAYXkz0l+bZt3LS/wtN7kMmz\nnG6SXKOY5uJaslPY+dqEA9rF2kclB8c/nCT0ON0KmdAbJ2boANhDN7tFbt2zxk1n\nBjKK3YItkKAfEZnDRk6Clj/RBC+OIT0wJiHECqkfNL6oIF9dSaFgEQA2O/FQ91/c\npQO9P+KHYmvEsQO7HGsnHKfCOVN5qUIFn1+3ENQ1pVbZezs1UtzG6FuzBHQZx8ZE\nqTjmRhZzUHHzb02U3bOg\n=i183\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcknQ4CRDCMfXrQKYV5wAAtg4QAIwsBh8/bvfRrig5F+5zss7M\nlzfKniHrWVE3toDt8XwvpPYNWAielcKsg4HlkEv0LzWCf+aNmQvC3T0K9lR4QAvH\nnkYRXR9zQqDPU/kZSfEPzSsAyXaK7K8WLuTFQFYmOYQ7Uqjt1SNjtr8Ta6sVPJT2\n50OByBHS3gqSMrtcr4XciGiJ4qEyPTKQ5dOresLzpiB2EqvRw7QlrPmfFz9t+wlm\nzwlKbkoiwgeLy2wNzowHBKwBkbCMINcQVRuRU2p4/HUN1v1IEhxxItxKKwGXzkwK\njZdMM4oqVzerB+RzVKl8QnqCFKkbWEVWfUy76+H+LtWfbxFBDoZ8r4uaEXvb7WGQ\n+j13WLtuzJbyCZNbeBtyDVAYVW19Oqs7WO4oXkv3KHK3XD8cw/4OmnjDksHiNtr5\nd6umBZH8ktDs6n5LGTEs9DaudgwY/YYix3Jiz8Tjf8i+z2PS0Livgj9Avfb78uze\n/bNkTG8TKeq0i2HmYQargXKtz1JBqgxokPIPBMTehKbxtoHFcJuGcpXdmjKP3X7t\n5HdtGjgLMm2dnVCoJMA1gOSpNP6PwbkKt0beaQxl0dgLYHk96vDXXfEZ1PaPgCSB\nmeFLa4OkPLzblbRTzL9YuR3xdlEfX1PQ8fRJs2rFZ/OWuWZ1fMeCwSXGCYMfUkFg\nZJkrTgY1R7waox8XsM0e\n=1g+J\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
