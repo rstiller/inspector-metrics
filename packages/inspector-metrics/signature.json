@@ -779,7 +779,7 @@
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js",
-      "sha512": "48fab79255fd555ae8b23bf28506da904793f6d691f024cd1aa7d28a9e361937fd19855f183803d2bbbeabbfabeec1ab7e3a8993495180963acf065c21dbf00e"
+      "sha512": "cc92f1c81a9cb3452aa19c7962f76709e99b9da89dad43830c6376f6ab6471be284f86151cb7e79179fc2dd9f8db8b51272deb10db7b70260a8a2fe7fd5a6a8e"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js.map",
@@ -870,7 +870,7 @@
       "sha512": "c72a0eab849efe2455d404da8530ee0a6cae62370068a5fccd0772f0c95227bc5fd287e3d754486d69ae65f312d110fb2577669e524d58acb13e086c4b9b79fb"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcknQ4CRDCMfXrQKYV5wAAtg4QAIwsBh8/bvfRrig5F+5zss7M\nlzfKniHrWVE3toDt8XwvpPYNWAielcKsg4HlkEv0LzWCf+aNmQvC3T0K9lR4QAvH\nnkYRXR9zQqDPU/kZSfEPzSsAyXaK7K8WLuTFQFYmOYQ7Uqjt1SNjtr8Ta6sVPJT2\n50OByBHS3gqSMrtcr4XciGiJ4qEyPTKQ5dOresLzpiB2EqvRw7QlrPmfFz9t+wlm\nzwlKbkoiwgeLy2wNzowHBKwBkbCMINcQVRuRU2p4/HUN1v1IEhxxItxKKwGXzkwK\njZdMM4oqVzerB+RzVKl8QnqCFKkbWEVWfUy76+H+LtWfbxFBDoZ8r4uaEXvb7WGQ\n+j13WLtuzJbyCZNbeBtyDVAYVW19Oqs7WO4oXkv3KHK3XD8cw/4OmnjDksHiNtr5\nd6umBZH8ktDs6n5LGTEs9DaudgwY/YYix3Jiz8Tjf8i+z2PS0Livgj9Avfb78uze\n/bNkTG8TKeq0i2HmYQargXKtz1JBqgxokPIPBMTehKbxtoHFcJuGcpXdmjKP3X7t\n5HdtGjgLMm2dnVCoJMA1gOSpNP6PwbkKt0beaQxl0dgLYHk96vDXXfEZ1PaPgCSB\nmeFLa4OkPLzblbRTzL9YuR3xdlEfX1PQ8fRJs2rFZ/OWuWZ1fMeCwSXGCYMfUkFg\nZJkrTgY1R7waox8XsM0e\n=1g+J\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcknyhCRDCMfXrQKYV5wAAOa8QAHrBbF3L+ny1i9PCkcdcQDCA\nBfayvtvDYfkLhIRiXRFHB6whHyyzs2TlrnyIAwOaVik6GXQ09Sbyb1Zm+pp5Z9xF\nRrQhiTZ0K72bJ0JriO3uODZRkFi2Rf8y1roRgoUrJm3mil2D4jqpbgmOxco+vBRz\nqXmk+xvNtWFOivn92trI+dDmNfBq/FYFjC9H6mSbr5AC3wIMl+u7fU9Rf5o0i/1X\ns3FmVeqUHbuTQLfucxzp3km+RR65jeLXWE6tEIBJfgK/wlP7FdF9okcfvLmz/ltG\ngRUusdl3cKNsaUmSBM1oC1pWGgZH9NF1bEeFrxL9oDDeVwC0A+PWyOt8u+5QPVF8\nCanMsMYh8o/6RdfaaJ+Tes0UGoFpv4tAvoZePEW/ECMn/dSHXKS50gJG9o1okLhn\n39IqWxQd3jozwABBeyAvBhWm6K0Xbua2UT2PDH7JxsXmIF5UnyaSRHDFaSNWpq4t\nZ1uz66IU1T42X5cNZOARL4o8+5lwgT4G+nsQRuTbj7vAMSHfU5UlVa5nBqOanWbY\ntvsUuvPq85fkANlc8hqMvg4Vt0wHQPNu/oTOzqzjzD7ZPay7HDhmPNJfnAFa2rpz\nOyr4jHwnVK0DHkfT22zeFK01SE0jNh4pThrHNcPS+F4NL+wbML3FDmz6iK+VaTmf\nxUN4wostRE/eJB9kYDd9\n=gzGy\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
