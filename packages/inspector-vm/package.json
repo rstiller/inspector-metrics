@@ -33,7 +33,7 @@
   "dependencies": {
     "gc-stats": "^1.2.1",
     "inspector-metrics": "^1.18.0",
-    "source-map-support": "^0.5.10"
+    "source-map-support": "^0.5.11"
   },
   "files": [
     "build"
