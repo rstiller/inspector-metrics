@@ -5,7 +5,7 @@ import "source-map-support/register";
 
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
-import { Buckets } from "../../lib/metrics";
+import { Buckets } from "../../../lib/metrics";
 
 const expect = chai.expect;
 

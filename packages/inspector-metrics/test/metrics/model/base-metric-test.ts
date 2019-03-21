@@ -6,7 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
-import { BaseMetric } from "../../lib/metrics/model/metric";
+import { BaseMetric } from "../../../lib/metrics/model/metric";
 
 const expect = chai.expect;
 

@@ -74,7 +74,7 @@ export function metadataToMap(metadata: Metadata): Map<string, any> {
  * Transforms the {@link Map<string, any>} object into a {@link Metadata} object.
  *
  * @export
- * @param {Map<string, any>} tagMap
+ * @param {Map<string, any>} metadataMap
  * @returns {Tags}
  */
 export function mapToMetadata(metadataMap: Map<string, any>): Metadata {

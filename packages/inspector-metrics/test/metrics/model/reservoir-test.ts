@@ -6,7 +6,7 @@ import "source-map-support/register";
 import * as chai from "chai";
 import { suite, test } from "mocha-typescript";
 
-import { DefaultReservoir, SlidingWindowReservoir } from "../../lib/metrics/model/reservoir";
+import { DefaultReservoir, SlidingWindowReservoir } from "../../../lib/metrics/model/reservoir";
 
 const expect = chai.expect;
 
