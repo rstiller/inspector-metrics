@@ -156,4 +156,16 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
         return this.extractor();
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SizeGauge
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.extractor();
+        return json;
+    }
+
 }

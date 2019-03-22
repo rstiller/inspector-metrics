@@ -217,6 +217,18 @@ export class Meter extends BaseMetric implements Metered {
     }
 
     /**
+     * Same as {@link BaseMetric#toJSON()}, also adding count property.
+     *
+     * @returns {*}
+     * @memberof Meter
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.count = this.count;
+        return json;
+    }
+
+    /**
      * Calls the {@link MovingAverage#tick} for each tick.
      *
      * @private
@@ -245,4 +257,5 @@ export class Meter extends BaseMetric implements Metered {
             this.tick(Math.floor(age / this.interval));
         }
     }
+
 }

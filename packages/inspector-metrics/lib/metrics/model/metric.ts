@@ -169,14 +169,11 @@ export interface SerializableMetric extends Metric {
     group: string;
     /**
      * Metadata map of the metric.
-     * This field is serialized as an object.
-     * {@link Metadata} would be a more suitable interface for this field,
-     * but to be compatible with {@link BaseMetric} this is a Map.
      *
-     * @type {Map<string, any>}
+     * @type {Metadata}
      * @memberof SerializableMetric
      */
-    metadata: Map<string, any>;
+    metadata: Metadata;
     /**
      * name of the metric.
      *
@@ -186,14 +183,11 @@ export interface SerializableMetric extends Metric {
     name: string;
     /**
      * Tags of the metric.
-     * This field is serialized as an object.
-     * {@link Tags} would be a more suitable interface for this field,
-     * but to be compatible with {@link BaseMetric} this is a Map.
      *
-     * @type {Map<string, string>}
+     * @type {Tags}
      * @memberof SerializableMetric
      */
-    tags: Map<string, string>;
+    tags: Tags;
 }
 
 /**
@@ -230,14 +224,6 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
      */
     public readonly id: number = BaseMetric.COUNTER++;
     /**
-     * Maps of tags for this metric.
-     *
-     * @protected
-     * @type {Map<string, string>}
-     * @memberof BaseMetric
-     */
-    public tags: Map<string, string> = new Map();
-    /**
      * The group set to this metric.
      *
      * @protected
@@ -268,24 +254,40 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
      * @type {Map<string, any>}
      * @memberof BaseMetric
      */
-    public metadata: Map<string, any> = new Map();
+    private metadataMap: Map<string, any> = new Map();
+    /**
+     * Maps of tags for this metric.
+     *
+     * @protected
+     * @type {Map<string, string>}
+     * @memberof BaseMetric
+     */
+    private tagMap: Map<string, string> = new Map();
+
+    public get metadata(): Metadata {
+        return mapToMetadata(this.metadataMap);
+    }
+
+    public get tags(): Tags {
+        return mapToTags(this.tagMap);
+    }
 
     public getMetadataMap(): Map<string, any> {
-        return this.metadata;
+        return this.metadataMap;
     }
 
     public getMetadata<T>(name: string): T {
-        return this.metadata.get(name) as T;
+        return this.metadataMap.get(name) as T;
     }
 
     public removeMetadata<T>(name: string): T {
-        const value = this.metadata.get(name) as T;
-        this.metadata.delete(name);
+        const value = this.metadataMap.get(name) as T;
+        this.metadataMap.delete(name);
         return value;
     }
 
     public setMetadata<T>(name: string, value: T): this {
-        this.metadata.set(name, value);
+        this.metadataMap.set(name, value);
         return this;
     }
 
@@ -317,30 +319,30 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
     }
 
     public getTags(): Map<string, string> {
-        return this.tags;
+        return this.tagMap;
     }
 
     public getTag(name: string): string {
-        return this.tags.get(name);
+        return this.tagMap.get(name);
     }
 
     public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
+        this.tagMap.set(name, value);
         return this;
     }
 
     public setTags(tags: Map<string, string>): this {
-        this.tags = tags;
+        this.tagMap = tags;
         return this;
     }
 
     public addTags(tags: Map<string, string>): this {
-        tags.forEach((value, key) => this.tags.set(key, value));
+        tags.forEach((value, key) => this.tagMap.set(key, value));
         return this;
     }
 
     public removeTag(name: string): this {
-        this.tags.delete(name);
+        this.tagMap.delete(name);
         return this;
     }
 
@@ -354,6 +356,22 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
             return `${this.group}.${this.name}`;
         }
         return this.name;
+    }
+
+    /**
+     * Generates a serialized version of this metric.
+     *
+     * @returns {*}
+     * @memberof BaseMetric
+     */
+    public toJSON(): any {
+        return {
+            description: this.getDescription(),
+            group: this.getGroup(),
+            metadata: this.metadata,
+            name: this.getName(),
+            tags: this.tags,
+        };
     }
 
 }

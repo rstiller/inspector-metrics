@@ -77,4 +77,16 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
         return this;
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SimpleGauge
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.value;
+        return json;
+    }
+
 }

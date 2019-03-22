@@ -73,6 +73,18 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
         return this;
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding count property.
+     *
+     * @returns {*}
+     * @memberof MonotoneCounter
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.count = this.count;
+        return json;
+    }
+
 }
 
 /**

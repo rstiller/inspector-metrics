@@ -299,4 +299,19 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
         return new StopWatch(this.clock, this);
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding the values of the internal histogram property.
+     *
+     * @returns {*}
+     * @memberof Timer
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        const histogramJson = this.histogram.toJSON();
+        return {
+            ...histogramJson,
+            ...json,
+        };
+    }
+
 }

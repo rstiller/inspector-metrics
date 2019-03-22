@@ -161,4 +161,23 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
         return this.bucketCounts;
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding
+     * bucketCounts, buckets, count and sum (64bit number stringified) property.
+     *
+     * @returns {*}
+     * @memberof Histogram
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.counts = {};
+        for (const [key, value] of this.bucketCounts) {
+            json.counts[key] = value;
+        }
+        json.buckets = this.buckets.boundaries;
+        json.count = this.count;
+        json.sum = this.sum.toString();
+        return json;
+    }
+
 }

@@ -107,4 +107,17 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
         return this.name;
     }
 
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value and time property.
+     *
+     * @returns {*}
+     * @memberof Event
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.value;
+        json.time = this.time;
+        return json;
+    }
+
 }

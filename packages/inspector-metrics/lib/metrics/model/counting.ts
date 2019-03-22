@@ -132,6 +132,13 @@ export interface BucketCounting extends Metric {
 }
 
 /**
+ * Helper interface for serialized bucket counts.
+ */
+export interface BucketToCountMap {
+    [bucket: number]: number;
+}
+
+/**
  * Serialized version of {@link BucketCounting}.
  *
  * @export
@@ -152,10 +159,10 @@ export interface SerializableBucketCounting extends SerializableMetric {
      * Mapping: boundary to the count of events within boundary.
      * The meaning of the count is implementation specific.
      *
-     * @returns {Map<number, number>}
+     * @returns {BucketToCountMap}
      * @memberof SerializableBucketCounting
      */
-    counts: Map<number, number>;
+    counts: BucketToCountMap;
 
 }
 
@@ -184,7 +191,7 @@ export function isSerializableBucketCounting(
  * @param {(BucketCounting | SerializableBucketCounting)} metric
  * @returns {Buckets}
  */
-export function getBuckets(metric: BucketCounting | SerializableBucketCounting): Buckets {
+export function getMetricBuckets(metric: BucketCounting | SerializableBucketCounting): Buckets {
     if (isSerializableBucketCounting(metric)) {
         return new Buckets(metric.buckets);
     } else {
@@ -198,12 +205,16 @@ export function getBuckets(metric: BucketCounting | SerializableBucketCounting):
  *
  * @export
  * @param {(BucketCounting | SerializableBucketCounting)} metric
- * @returns {Map<number, number>}
+ * @returns {BucketToCountMap}
  */
-export function getCounts(metric: BucketCounting | SerializableBucketCounting): Map<number, number> {
+export function getMetricCounts(metric: BucketCounting | SerializableBucketCounting): BucketToCountMap {
     if (isSerializableBucketCounting(metric)) {
         return metric.counts;
     } else {
-        return metric.getCounts();
+        const counts: BucketToCountMap = {};
+        for (const [bucket, count] of metric.getCounts()) {
+            counts[bucket] = count;
+        }
+        return counts;
     }
 }
