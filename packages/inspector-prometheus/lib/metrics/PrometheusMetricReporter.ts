@@ -4,11 +4,12 @@ import * as cluster from "cluster";
 import {
     BucketCounting,
     Buckets,
+    BucketToCountMap,
     Counter,
     Event,
     Gauge,
-    getBuckets,
-    getCounts,
+    getMetricBuckets,
+    getMetricCounts,
     getMetricDescription,
     getMetricGroup,
     getMetricMetadata,
@@ -605,17 +606,18 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         tagStr: string,
         timestamp: string): string {
 
-        const buckets: Buckets = getBuckets(metric);
+        const buckets: Buckets = getMetricBuckets(metric);
         if (buckets) {
             const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? "," : "";
             const bucketStrings: string[] = [];
+            const counts: BucketToCountMap = getMetricCounts(metric);
 
-            getCounts(metric)
-                .forEach((bucketCount: number, boundary: number) => {
-                    bucketStrings.push(
-                        `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}${timestamp}`,
-                    );
-                });
+            for (const boundary of Object.keys(counts)) {
+                const bucketCount: number = counts[boundary as any];
+                bucketStrings.push(
+                    `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}${timestamp}`,
+                );
+            }
 
             return bucketStrings.join("\n") +
                 `\n${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}${timestamp}\n`;

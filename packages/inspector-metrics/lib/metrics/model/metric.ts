@@ -254,7 +254,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
      * @type {Map<string, any>}
      * @memberof BaseMetric
      */
-    private metadataMap: Map<string, any> = new Map();
+    protected metadataMap: Map<string, any> = new Map();
     /**
      * Maps of tags for this metric.
      *
@@ -262,7 +262,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
      * @type {Map<string, string>}
      * @memberof BaseMetric
      */
-    private tagMap: Map<string, string> = new Map();
+    protected tagMap: Map<string, string> = new Map();
 
     public get metadata(): Metadata {
         return mapToMetadata(this.metadataMap);
