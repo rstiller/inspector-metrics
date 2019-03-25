@@ -3,14 +3,14 @@ import "source-map-support/register";
 import { Clock, diff, Time } from "./clock";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
-import { BucketCounting, Buckets } from "./model/counting";
+import { BucketCounting, Buckets, BucketToCountMap, SerializableBucketCounting } from "./model/counting";
 import { Int64Wrapper } from "./model/int64";
-import { Metered } from "./model/metered";
+import { Metered, MeteredRates, SerializableMetered } from "./model/metered";
 import { BaseMetric } from "./model/metric";
 import { Reservoir } from "./model/reservoir";
-import { Sampling } from "./model/sampling";
-import { Snapshot } from "./model/snapshot";
-import { Summarizing } from "./model/summarizing";
+import { Sampling, SerializableSampling } from "./model/sampling";
+import { SerializedSnapshot, Snapshot } from "./model/snapshot";
+import { SerializableSummarizing, Summarizing } from "./model/summarizing";
 import { NANOSECOND, TimeUnit } from "./model/time-unit";
 
 /**
@@ -93,7 +93,10 @@ export class StopWatch {
  * @implements {Metered}
  * @implements {Sampling}
  */
-export class Timer extends BaseMetric implements BucketCounting, Metered, Sampling, Summarizing {
+export class Timer extends BaseMetric implements
+    BucketCounting, Metered, Sampling, Summarizing,
+    SerializableSummarizing, SerializableBucketCounting,
+    SerializableSampling, SerializableMetered {
 
     /**
      * Used to determine a duration.
@@ -143,6 +146,85 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
         this.description = description;
         this.meter = new Meter(clock, 1, name);
         this.histogram = new Histogram(reservoir, name, description, buckets);
+    }
+
+    /**
+     * Gets the bucket boundaries from the internal {@link Histogram}.
+     *
+     * @returns {number[]}
+     * @memberof Timer
+     */
+    public get buckets(): number[] {
+        return this.histogram.buckets;
+    }
+
+    /**
+     * Gets the {@link BucketToCountMap} from the internal {@link Histogram}.
+     *
+     * @returns {BucketToCountMap}
+     * @memberof Timer
+     */
+    public get counts(): BucketToCountMap {
+        return this.histogram.counts;
+    }
+
+    /**
+     * Gets the 64bit number as string from the internal {@link Histogram}.
+     *
+     * @readonly
+     * @type {string}
+     * @memberof Timer
+     */
+    public get sum(): string {
+        return this.histogram.sum;
+    }
+
+    /**
+     * Gets the {@link SerializedSnapshot} from the internal histogram.
+     *
+     * @readonly
+     * @type {SerializedSnapshot}
+     * @memberof Timer
+     */
+    public get snapshot(): SerializedSnapshot {
+        return this.histogram.snapshot;
+    }
+
+    /**
+     * Gets the count of event reported.
+     *
+     * @readonly
+     * @type {number}
+     * @memberof Timer
+     */
+    public get count(): number {
+        return this.getCount();
+    }
+
+    /**
+     * Getter emthod for mean-rate
+     *
+     * @readonly
+     * @type {number}
+     * @memberof Timer
+     */
+    public get meanRate(): number {
+        return this.getMeanRate();
+    }
+
+    /**
+     * Getter method for rates 'snapshot'
+     *
+     * @readonly
+     * @type {MeteredRates}
+     * @memberof Timer
+     */
+    public get rates(): MeteredRates {
+        return {
+            15: this.get15MinuteRate(),
+            5: this.get5MinuteRate(),
+            1: this.get1MinuteRate(),
+        };
     }
 
     /**
@@ -308,7 +390,9 @@ export class Timer extends BaseMetric implements BucketCounting, Metered, Sampli
     public toJSON(): any {
         const json = super.toJSON();
         const histogramJson = this.histogram.toJSON();
+        const meterJson = this.meter.toJSON();
         return {
+            ...meterJson,
             ...histogramJson,
             ...json,
         };

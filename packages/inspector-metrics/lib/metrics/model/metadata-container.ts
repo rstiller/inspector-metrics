@@ -66,7 +66,9 @@ export interface Metadata {
  */
 export function metadataToMap(metadata: Metadata): Map<string, any> {
     const metadataMap: Map<string, any> = new Map();
-    Object.keys(metadata).forEach((key) => metadataMap.set(key, metadata[key]));
+    if (metadata) {
+        Object.keys(metadata).forEach((key) => metadataMap.set(key, metadata[key]));
+    }
     return metadataMap;
 }
 
@@ -75,10 +77,12 @@ export function metadataToMap(metadata: Metadata): Map<string, any> {
  *
  * @export
  * @param {Map<string, any>} metadataMap
- * @returns {Tags}
+ * @returns {Metadata}
  */
 export function mapToMetadata(metadataMap: Map<string, any>): Metadata {
     const metadata: Metadata = {};
-    metadataMap.forEach((value, name) => metadata[name] = value);
+    if (metadataMap) {
+        metadataMap.forEach((value, name) => metadata[name] = value);
+    }
     return metadata;
 }

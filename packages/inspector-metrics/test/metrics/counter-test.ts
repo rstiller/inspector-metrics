@@ -48,6 +48,42 @@ export class CounterTest {
         expect(counter.getCount()).to.equal(1);
     }
 
+    @test
+    public "check serialization"(): void {
+        const internalObject = {
+            property1: "value1",
+            property2: 2,
+        };
+        const counter: Counter = new Counter("counter-name", "counter-description")
+            .setTag("key1", "value1")
+            .setTag("key2", "value2")
+            .setMetadata("internalObject", internalObject);
+        expect(counter.getCount()).to.equal(0);
+        counter.increment(1);
+        expect(counter.getCount()).to.equal(1);
+
+        const serializedCounter = JSON.parse(JSON.stringify(counter));
+        expect(Object.keys(serializedCounter).length).to.equal(5);
+
+        expect(serializedCounter).has.property("name");
+        expect(serializedCounter.name).to.equal("counter-name");
+
+        expect(serializedCounter).has.property("description");
+        expect(serializedCounter.description).to.equal("counter-description");
+
+        expect(serializedCounter).has.property("tags");
+        expect(Object.keys(serializedCounter.tags).length).to.equal(2);
+        expect(serializedCounter.tags.key1).to.equal("value1");
+        expect(serializedCounter.tags.key2).to.equal("value2");
+
+        expect(serializedCounter).has.property("metadata");
+        expect(Object.keys(serializedCounter.metadata).length).to.equal(1);
+        expect(serializedCounter.metadata.internalObject).to.deep.equal(internalObject);
+
+        expect(serializedCounter).has.property("count");
+        expect(serializedCounter.count).to.equal(1);
+    }
+
 }
 
 @suite
@@ -88,6 +124,40 @@ export class MonotoneCounterTest {
         } catch (e) {
             expect(e).to.be.instanceOf(Error);
         }
+    }
+
+    @test
+    public "check serialization"(): void {
+        const internalObject = {
+            property1: "value1",
+            property2: 2,
+        };
+        const counter: MonotoneCounter = new MonotoneCounter("counter-name", "counter-description")
+            .setTag("key1", "value1")
+            .setTag("key2", "value2")
+            .setMetadata("internalObject", internalObject);
+        expect(counter.getCount()).to.equal(0);
+        counter.increment(1);
+        expect(counter.getCount()).to.equal(1);
+
+        const serializedCounter = JSON.parse(JSON.stringify(counter));
+        expect(serializedCounter).has.property("name");
+        expect(serializedCounter.name).to.equal("counter-name");
+
+        expect(serializedCounter).has.property("description");
+        expect(serializedCounter.description).to.equal("counter-description");
+
+        expect(serializedCounter).has.property("tags");
+        expect(Object.keys(serializedCounter.tags).length).to.equal(2);
+        expect(serializedCounter.tags.key1).to.equal("value1");
+        expect(serializedCounter.tags.key2).to.equal("value2");
+
+        expect(serializedCounter).has.property("metadata");
+        expect(Object.keys(serializedCounter.metadata).length).to.equal(1);
+        expect(serializedCounter.metadata.internalObject).to.deep.equal(internalObject);
+
+        expect(serializedCounter).has.property("count");
+        expect(serializedCounter.count).to.equal(1);
     }
 
 }

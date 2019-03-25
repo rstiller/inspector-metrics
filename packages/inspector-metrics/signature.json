@@ -91,27 +91,27 @@
     },
     {
       "path": "build/lib/metrics/hdr-histogram.d.ts",
-      "sha512": "b71b557c7ad7aa4b9cb206d2e1e423752a43aad06bc682a1265d5748ff8e95d537435d8e560729b89ef5fc1ed7578f59f31d5f98507eed2f03af99b8d470dbde"
+      "sha512": "141d0fcaee678fe9dca0bc450d89a57c4a5998b4b9976a52b7cb0573193ab5a44546126478da867ce11f1e1593b45b3668c83b468499820a720a5649c460088f"
     },
     {
       "path": "build/lib/metrics/hdr-histogram.js",
-      "sha512": "4f1a25ae0ca5479e9cf0ed2ed994cb1efdca632e2ee5330f546da90011307dabbd24abc3cad50d20291135b650c370d89b4a1fa0bf68e63c75f509b34fd408e4"
+      "sha512": "c453391df0e660b9aab41749046178b0d22b3bfae68e0781c2a0c006420a564e42fee4b692505ad795478c5f026b4101324bcc7d19814d966b91ba62a65bf3b0"
     },
     {
       "path": "build/lib/metrics/hdr-histogram.js.map",
-      "sha512": "cf8b81b094ba6bb9b3929b629916a1f3ec2d19367e032ad284b9faded0634b1102f698c17c90ed21d7cbb11cfcf3ff8dfdb014cf2faea861c20ebe50c11b9ec6"
+      "sha512": "d746616d801277a49998a6423b4655e3950f80c6f69a183301863032f60605cc3d1912e1f6a3ae011ffbbe522d9395832c8a6ef766f87de2d8f7e4b476427d65"
     },
     {
       "path": "build/lib/metrics/histogram.d.ts",
-      "sha512": "d17314d5e34bd03afc02ad26cac01505094c35a6a90f1f203a085c9c56c486bd21c81fe8935f2b531e64519c7b285679849cd5fce41a29e8b81c732de9290043"
+      "sha512": "dd401c4e97fe98b0df46c9f0ad0170cbcb6ecea4110af5fd55a7893db1e82ef91cc4baafd7edaaaf14cb53587802123ea9a5547e545dbabbd581c9a45572870d"
     },
     {
       "path": "build/lib/metrics/histogram.js",
-      "sha512": "54e5c51da23bc3102c7fa16bb3eb6d5254de71cff0ce0e3313e5de977e44183dc95e66a090a5373f7189b0b97d319a184ae5dd04b9ba8681c1181963fd0d1345"
+      "sha512": "0ee1a35166e9da785000a5675b43a08fff632ce93a829056b55cb61fdf6076281efe49941ae0939dcbff798c6718e59195e2097ef8ae0d94baef1f56b9c0b920"
     },
     {
       "path": "build/lib/metrics/histogram.js.map",
-      "sha512": "faf697e7a1981d66dc77f9b692ab5e6314ab0f33e316419143ebda69f765446f36104e61276f21430ea991be03d06709ea54cd26d15a9a92f6e0ddadec582703"
+      "sha512": "94fa4bcc21bebae9e1ae7e1bc764ccd558d81e8d04fd5b57a7f3d4a86d70ef329dbbe29d427ae37316a0073339be051daf4f8ac67e4f152702123dbd2216303d"
     },
     {
       "path": "build/lib/metrics/index.d.ts",
@@ -259,15 +259,15 @@
     },
     {
       "path": "build/lib/metrics/model/metadata-container.d.ts",
-      "sha512": "1ceeefcb9b11c6c3fca7d9a3e0b6344958b959d6527888badd5d61f582a5dd7b3bbd83a7701d022bf764ce9c3147720911332f59b21ba1b4788c166c3ffe87b6"
+      "sha512": "b62df26466e57d767ded45df663e3630902b16a1d6ba2e728be8b17758a4093a755cd9fe784449bb4196bd020f4d75edbab224096f8a86bd4de2efa6a9e88bde"
     },
     {
       "path": "build/lib/metrics/model/metadata-container.js",
-      "sha512": "6abff59ef8ff138f408cda5bb3058277a9ba5b73b8e7cce39d3ec3158fce3f5dde9af59abc7a33e88c9b497597e87416240c6b25a480cdf7300015009b49646a"
+      "sha512": "7e3acf2c58476622343c0674ee6a374cdbf334b33e1b356e83496bd8fa9e9416ee329e81a81625c55651e833453ec908c87447408e5afb584767c73d3fc3848d"
     },
     {
       "path": "build/lib/metrics/model/metadata-container.js.map",
-      "sha512": "87e86bf684594a45f2c3457bb971b80fe26d4da6b02f8bd4fe8d434cfb03889a577d7f5c4046dc5996d06c25349e1634f0fa7bbe91c9cb1ce061a0918fc84f1b"
+      "sha512": "7c69ac1d6792c342d9210a14d7941f93b3198af65b9a1298565b0407d8dfe32b92683e0741d7d73f628e3fb2b7961da6d717750d368054e7c9f2f983b7fde768"
     },
     {
       "path": "build/lib/metrics/model/metered.d.ts",
@@ -319,11 +319,11 @@
     },
     {
       "path": "build/lib/metrics/model/sampling.d.ts",
-      "sha512": "5aed0d0ab22f7c65b22e697b55495a761701a261b039c2b28a3c4a87d867ebc87e3de41c689df82347b69b2cbdd31556ff8a63f4cb98fa2a9eca894ff58abd63"
+      "sha512": "ad66b8aaba419d011b989202d763a8e286f835869319c85971f5ddbde796076ac71f33dca0aa272e11eda82991c1d21076de8a31a3933f7950ea7148f60226c1"
     },
     {
       "path": "build/lib/metrics/model/sampling.js",
-      "sha512": "19c0750bec82893405c80fc6f573e54522076c5df6e653688d9025a5ea9327b3f6b3ecfd4a0c7c8246c6a0a7391cb3672fd1e0e301be113b9d8ff702713debf7"
+      "sha512": "aebc611a2d696ec9c7824f2904b7cca5fda51ba390cc6dcf51385b0907fff569ab10b2909c0e31ccc67546b8b7090d8b2572eecf703acf3178ae5a86b2345522"
     },
     {
       "path": "build/lib/metrics/model/sampling.js.map",
@@ -359,11 +359,11 @@
     },
     {
       "path": "build/lib/metrics/model/taggable.js",
-      "sha512": "3459a835c3817757cf5ed973e146cbe2d87799658eb47ec61a6ef2acc3269f5444a27cfac53bab057a8921494bbf2413436367186d07c69553e6901219118f6b"
+      "sha512": "e738a6655c214830efd47be70fca99f4a11661b83d760255bdac7695902a75bb1e9fd81d46f26adf2add1b14019d5282b1c4d4018a96064e9246e416f4481092"
     },
     {
       "path": "build/lib/metrics/model/taggable.js.map",
-      "sha512": "9dd3759885cf57ed6f3e8ccfbabc86a5f78535bb2aedd5b4f275541257f0980a76a8654b3267e283fedbfcff82a089ad106ec2b250856da11b74c6ec6a0b7c66"
+      "sha512": "56be53dbf611dcf7e5ab6b1a43afd81d6533adc0b57c4852b597613afbadeab7edfd09e6dae0e40893279282eda7a99aaf70ba34f481e806c1420cdefc864ca6"
     },
     {
       "path": "build/lib/metrics/model/time-unit.d.ts",
@@ -619,15 +619,15 @@
     },
     {
       "path": "build/lib/metrics/timer.d.ts",
-      "sha512": "97aa3f0e2289fcaf212ed36577435900433d7e976c0e797e5a7464d61bdf0b481c8cb6b7a71d297f3007aeb503545ff5d3f96432e172bf877b89217d95b8ccfd"
+      "sha512": "ea6427edeab01cce3f9adfd1b75f2bd3cf29cd74d0c9f2893831efe4b50eff83e66db7dc99742f3c11c2eb4f94e3adfe4f76ea0d9a7948e5272210ee3050ca57"
     },
     {
       "path": "build/lib/metrics/timer.js",
-      "sha512": "fab902f7ce1236a31ff57f1a5274b9c1a328d377a118105da12d4fde0bf657635934ecb114c29e01dc78731fe89f9c2f38a2b48fef36580b0d9872213dc2dfc7"
+      "sha512": "9c49d99011308607a8f52db1527601da3e807f08326c3e5dbda63dc95cf29d9e9b266852e14d192c4931e4cc62282510eeef46446a2d8c0fb9b15b2160538dd2"
     },
     {
       "path": "build/lib/metrics/timer.js.map",
-      "sha512": "2b529a709f7fce2e8ec37bf04e08bfa84209df9befef44f4aada09624186682ff193720450f19617c2e2738e02f4186d4fce10409ff8c82396eefe9cc3394c5a"
+      "sha512": "97517da813b7722ea9fa187ae4f880a3ce4832d1a50106335c4320ec0d57dc3531cf5b7c0b1f00f0b6eadca030cc7402d6ba3ec0057e829acbd3ffa0273bd35b"
     },
     {
       "path": "build/test/metrics/base-metric-test.d.ts",
@@ -667,15 +667,15 @@
     },
     {
       "path": "build/test/metrics/counter-test.d.ts",
-      "sha512": "4c6aaafae945a42be91fc3a3e2c552f99dad858902e5cb92350de9c55c1613e2a1ad7baa774dfd6db88a36c3147a88296640b08512bc2956177db9f128740ce7"
+      "sha512": "3375ad4596e12a29579176042f2244a66c1dbf9d0021c0f0c478fe3a3a803ee961439d64999fb8a00c5c26e1dfe842bbcfa1e8f0cbce08446dddce3b4589e791"
     },
     {
       "path": "build/test/metrics/counter-test.js",
-      "sha512": "a7e79f809768a00bdc992c9d383bb91b0504aa7ac7cc564fa7f6ffdf93d1d11ea794ca1c13e0beea47e5e577e3e8b6e44a7c604d66f98486738e2a7448f76377"
+      "sha512": "a7247629813545b3b1e310881a10fc1dac470a7850e5349efaef28943a6aa6d4baa2af6464d53b631c6b3e82f7d16063833a8407c096f4237e3ec5545bd74150"
     },
     {
       "path": "build/test/metrics/counter-test.js.map",
-      "sha512": "40f8c052f5d05a72da8a61f7b58b84c1908d220eed54e2f9e5484ccb02fc86071d36f877791c5197d008d0aeecfe10881786e8252ca183e2fab49a0c431d04fd"
+      "sha512": "ade4e5f5ec13aa011b117251bc156d952755caeb1e09d87030dc8faa8840c3f01a8c26396d87a98aee6aa6d19af13ccf0c6b290cf6bade3de4b665911ae9b037"
     },
     {
       "path": "build/test/metrics/exponentially-weighted-moving-average-test.d.ts",
@@ -815,11 +815,11 @@
     },
     {
       "path": "build/test/metrics/model/metadata-container-test.js",
-      "sha512": "29cfd76f65ff4a41b783b2ab0e68c4144a5e53fb6c03fa863bf66dd4db649c930c7e1eeeef521f8064f355ad822b35c9db4a229475bc5eb9481c45840c16a909"
+      "sha512": "204aa199b50ee15c2898e19ec41d43de8e4e6b1e39e9346d37bb206d396672a673ea0fa432ccfdbcbb63f4f8178f137ca0423685757d3f7174616e3bb144e01e"
     },
     {
       "path": "build/test/metrics/model/metadata-container-test.js.map",
-      "sha512": "883724b75e7cb8e8039f9ba86d6971ca324a8c194b43285d5d3d4d4a0e12903f6dd3f8914ac1b5e9db0ac9819d93b6231bf7c32197cab6ba517b736bd07b50dc"
+      "sha512": "d7ff6d48d1c6cb3ef658cebafce0d332f0735a517cff8d6f92d7532f709c3ea324b7509d494998190d41ecaaa81f3065c376dfa92375c55ea6c2c7f5f30d8293"
     },
     {
       "path": "build/test/metrics/model/reservoir-test.d.ts",
@@ -851,11 +851,11 @@
     },
     {
       "path": "build/test/metrics/model/taggable-test.js",
-      "sha512": "62d0c0b53b15f327c42c30715008a6c6104e2ccf2e2e7d6253870882e12fcbd8e1d48554ed4a30ecd55b9802743a374bf55499de9af1dee65daf801d976e2ef3"
+      "sha512": "907092adf19f88568eac7f8b1172377bb8568481a34aa1608f1473a0620b7f4c42be6d611450261363e5ab846c5a5022b0dbd02a1fa580a35d9cc8cf1299a082"
     },
     {
       "path": "build/test/metrics/model/taggable-test.js.map",
-      "sha512": "88034dcdf010aadb3c144730d49a40f11b3e3b89f9f4675c5ffa860444a3a2d3220baf8706f3e2dc9a924d3295080798d03744660a427345bd12134a801fde50"
+      "sha512": "5a082ddfcceeaceee53eb8d7a4b6e682997f30bfb8dfc5fc437e9e72885fdf8c995e75bd5401ee8731e682802a3cd57d19e270c564cc8f2f743605894cf8f438"
     },
     {
       "path": "build/test/metrics/model/time-unit-test.d.ts",
@@ -966,7 +966,7 @@
       "sha512": "c72a0eab849efe2455d404da8530ee0a6cae62370068a5fccd0772f0c95227bc5fd287e3d754486d69ae65f312d110fb2577669e524d58acb13e086c4b9b79fb"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJclSEACRDCMfXrQKYV5wAA1c4QAI0srnuaqQT+9lqWBMyX0y+/\n/yxBstbSyeruyyCFnkaYQVfcJrvjo4ZpzWXZHnIo91G4wdrwqt8F5rSRfSjZHbFt\nv3KsqyUy/WzUSnT1HnFj/e9lobaxjWViJFaL/TXp9eFwuSllYgjC7znaLdv+nT65\nMooH3qKnP4BYucmxjFi/PMQ01+iHX0fe9xxxUY+x+WHi/AELVgUgww4/618eaoXE\nZ9al3LShTOamMolLS+WAmFIuULcBettW/JHKPFFlp4cGOts1FSxD3aBUUFTznZ2Z\nFo2/eGs7qCpcEtJrW3ZteocEs2+BtP8XzLY14T3bjXR4g0AgyrlQHQWwwrCZY4JM\n3du67AGXZnpe4/GWfPfFd8XaioCbu3ZvgK5tjyR+KQ9PgwrPSwrkqNxMeUjo+Gtp\n8oU+8Fep81iFomtuCzC21PeUJu80z16+5S1TBpvS2qv1++Juli+iovMfLXDPpTAj\nIsYkX5g4wNbaqUck1ZELAqC8JNaZOedOt+8ZihHtcajwhZe+MUAtUkdbx+dGMYBB\n1NV2EZMbjPzyk2bhzPOWtIDiH1QZyP6f3PWpYMESu7rhBfv8IxlW7FU7vIUfM3iA\nqi+MW+jJj01iIvqmQx5hWYfCzL7mst45H78rIxNzFByEfEoff8U07ZZpJxbOAhb1\nKD5DEbGAomZNRjDwUp7H\n=zHV1\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcmPJeCRDCMfXrQKYV5wAAqukQAFgOaa3571K1S11KWc2cUZs5\nB65GamM+tP5Bjg0MIvybT+YQu9R7IdiQSPH/nWVrZhLnZW2OHseoufRhkMXd/G5Z\nvDBWqOG6WmRI1cvnDTPYrrj62KQIe1gmi1cjFLqNpLd4qFg0tVMCzpSai227yeOX\neUSwnGouAobZ9V8G6vSx0vgpqdOh5mwdL5f/Y7iLebfLWqHauPtyqsiu68ZT9W1T\nufS0cvw87zS5LphWnpUG4nOiJZsEjTkxweQLOySJFH6IsAu0RFssCojExTvtIPOv\n0Ug4fE3HhNVdrzcuNvD5HvqQfLnUZozk33s01TYHfZUSMXvKlYtDBGKfPultPDxy\nyYMZazZaPU1Zu01uHMa/en6Jc/hOSS6jmMZStD1eUre3TmN1/golNC9M6z/lsiN4\nQyDHQP3AYHtWPazIz9P7VbAlszHeanjGOaqyVDPUK3TgFnrrh7m0BSekuBgNwO0I\nw4tawi2JM6EiFMXnuAl0208bAeHJ6UVHnGUxoGjyWG6WnJ7mhYCL3Z99sqTq8Ef0\nHjmIXhdf/rzT/5vMd1w4Ih9jHeEM1aoY8t3121cR45pS94F1lC4fTFB7wHsrwuCM\nbM8hsB1+uv6VgkLrMR/wqd45d8qLd/JNKDMBX2edfTE/4i3jzl88qVkG6vKCYlTO\nheQB/iBeTb2MXEZLSUHA\n=EObn\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

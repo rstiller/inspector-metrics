@@ -223,4 +223,76 @@ export class MeterTest {
         expect(meter.get15MinuteRate()).to.be.greaterThan(10);
     }
 
+    @test
+    public "check serialization"(): void {
+        this.clock.setCurrentTime({
+            milliseconds: 0,
+            nanoseconds: 0,
+        });
+        const internalObject = {
+            property1: "value1",
+            property2: 2,
+        };
+        const meter = new Meter(this.clock, 1, "name", "description")
+            .setTag("key1", "value1")
+            .setTag("key2", "value2")
+            .setMetadata("internalObject", internalObject);
+
+        meter.mark(10);
+
+        this.clock.setCurrentTime({
+            milliseconds: 1001,
+            nanoseconds: 0,
+        });
+
+        meter.mark(80);
+
+        this.clock.setCurrentTime({
+            milliseconds: 5001,
+            nanoseconds: 0,
+        });
+
+        expect(meter.getCount()).to.equal(90);
+        expect(meter.getMeanRate()).to.be.lessThan(18);
+        expect(meter.getMeanRate()).to.be.greaterThan(17);
+        expect(meter.get1MinuteRate()).to.be.lessThan(11);
+        expect(meter.get1MinuteRate()).to.be.greaterThan(10);
+        expect(meter.get5MinuteRate()).to.be.lessThan(11);
+        expect(meter.get5MinuteRate()).to.be.greaterThan(10);
+        expect(meter.get15MinuteRate()).to.be.lessThan(11);
+        expect(meter.get15MinuteRate()).to.be.greaterThan(10);
+
+        const serializedMeter = JSON.parse(JSON.stringify(meter));
+        expect(Object.keys(serializedMeter).length).to.equal(7);
+
+        expect(serializedMeter).has.property("name");
+        expect(serializedMeter.name).to.equal("name");
+
+        expect(serializedMeter).has.property("description");
+        expect(serializedMeter.description).to.equal("description");
+
+        expect(serializedMeter).has.property("tags");
+        expect(Object.keys(serializedMeter.tags).length).to.equal(2);
+        expect(serializedMeter.tags.key1).to.equal("value1");
+        expect(serializedMeter.tags.key2).to.equal("value2");
+
+        expect(serializedMeter).has.property("metadata");
+        expect(Object.keys(serializedMeter.metadata).length).to.equal(1);
+        expect(serializedMeter.metadata.internalObject).to.deep.equal(internalObject);
+
+        expect(serializedMeter).has.property("count");
+        expect(serializedMeter.count).to.equal(90);
+
+        expect(serializedMeter).has.property("meanRate");
+        expect(serializedMeter.meanRate).to.gt(17);
+        expect(serializedMeter.meanRate).to.lte(18);
+
+        expect(serializedMeter).has.property("rates");
+        expect(serializedMeter.rates).to.deep.equal({
+            1: 10.612865007843881,
+            5: 10.131125373429745,
+            15: 10.044198060545371,
+        });
+    }
+
 }

@@ -1,12 +1,12 @@
 import "source-map-support/register";
 
-import { BucketCounting, Buckets, Counting } from "./model/counting";
+import { BucketCounting, Buckets, BucketToCountMap, Counting, SerializableBucketCounting } from "./model/counting";
 import { Int64Wrapper } from "./model/int64";
 import { BaseMetric, Metric } from "./model/metric";
 import { Reservoir } from "./model/reservoir";
-import { Sampling } from "./model/sampling";
-import { Snapshot } from "./model/snapshot";
-import { Summarizing } from "./model/summarizing";
+import { Sampling, SerializableSampling } from "./model/sampling";
+import { SerializedSnapshot, Snapshot } from "./model/snapshot";
+import { SerializableSummarizing, Summarizing } from "./model/summarizing";
 
 /**
  * Represents the distribution of values - e.g. number of logged-in users, search result count.
@@ -18,7 +18,10 @@ import { Summarizing } from "./model/summarizing";
  * @implements {Metric}
  * @implements {Sampling}
  */
-export class Histogram extends BaseMetric implements BucketCounting, Counting, Metric, Sampling, Summarizing {
+export class Histogram extends BaseMetric implements
+    BucketCounting, Counting, Metric, Sampling, Summarizing,
+    SerializableSummarizing, SerializableBucketCounting,
+    SerializableSampling {
 
     /**
      * The value reservoir used to do sampling.
@@ -43,7 +46,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {number}
      * @memberof Histogram
      */
-    protected sum: Int64Wrapper = new Int64Wrapper();
+    protected sumInternal: Int64Wrapper = new Int64Wrapper();
     /**
      * Contains all counts based on {@link Histogram#buckets}.
      *
@@ -59,7 +62,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @type {Buckets}
      * @memberof Histogram
      */
-    protected readonly buckets: Buckets;
+    protected readonly bucketsInternal: Buckets;
 
     /**
      * Creates an instance of Histogram.
@@ -74,10 +77,58 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
         this.reservoir = reservoir;
         this.name = name;
         this.description = description;
-        this.buckets = buckets;
-        for (const boundary of this.buckets.boundaries) {
+        this.bucketsInternal = buckets;
+        for (const boundary of this.bucketsInternal.boundaries) {
             this.bucketCounts.set(boundary, 0);
         }
+    }
+
+    /**
+     * Gets the buckets in serialized form.
+     *
+     * @returns {number[]}
+     * @memberof Histogram
+     */
+    public get buckets(): number[] {
+        return this.bucketsInternal.boundaries;
+    }
+
+    /**
+     * Gets the actual bucket counts in serialized form.
+     *
+     * @returns {BucketToCountMap}
+     * @memberof Histogram
+     */
+    public get counts(): BucketToCountMap {
+        const counts: BucketToCountMap = {};
+        for (const [bucket, count] of this.bucketCounts) {
+            counts[bucket] = count;
+        }
+        return counts;
+    }
+
+    /**
+     * Getter for sum property extracting the string representation from internal sum property (64bit number).
+     *
+     * @readonly
+     * @type {string}
+     * @memberof Histogram
+     */
+    public get sum(): string {
+        return this.sumInternal.toString();
+    }
+
+    /**
+     * Gets the {@link SerializedSnapshot} from the reservoir.
+     *
+     * @readonly
+     * @type {SerializedSnapshot}
+     * @memberof Histogram
+     */
+    public get snapshot(): SerializedSnapshot {
+        return {
+            values: this.reservoir.snapshot().getValues(),
+        };
     }
 
     /**
@@ -101,8 +152,8 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      */
     public update(value: number): this {
         this.count++;
-        this.sum.add(value);
-        for (const boundary of this.buckets.boundaries) {
+        this.sumInternal.add(value);
+        for (const boundary of this.bucketsInternal.boundaries) {
             if (value < boundary) {
                 this.bucketCounts.set(boundary, this.bucketCounts.get(boundary) + 1);
             }
@@ -138,7 +189,7 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @memberof Histogram
      */
     public getSum(): Int64Wrapper {
-        return this.sum;
+        return this.sumInternal;
     }
 
     /**
@@ -148,13 +199,13 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
      * @memberof Histogram
      */
     public getBuckets(): Buckets {
-        return this.buckets;
+        return this.bucketsInternal;
     }
 
     /**
      * Gets the actual bucket counts.
      *
-     * @returns {{ [boundary: number]: number; }}
+     * @returns {Map<number, number>}
      * @memberof Histogram
      */
     public getCounts(): Map<number, number> {
@@ -174,9 +225,10 @@ export class Histogram extends BaseMetric implements BucketCounting, Counting, M
         for (const [key, value] of this.bucketCounts) {
             json.counts[key] = value;
         }
-        json.buckets = this.buckets.boundaries;
+        json.buckets = this.bucketsInternal.boundaries;
         json.count = this.count;
-        json.sum = this.sum.toString();
+        json.sum = this.sumInternal.toString();
+        json.snapshot = this.snapshot;
         return json;
     }
 

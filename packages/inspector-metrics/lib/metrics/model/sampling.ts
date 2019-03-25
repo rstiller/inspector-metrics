@@ -3,7 +3,7 @@ import "source-map-support/register";
 import { SerializedSnapshot, SimpleSnapshot, Snapshot } from "./snapshot";
 
 /**
- * Interface fo all metric classes that can build a snapshot of values.
+ * Interface for all metric classes that can build a snapshot of values.
  *
  * @export
  * @interface Sampling
@@ -54,7 +54,7 @@ export function isSerializableSampling(metric: Sampling | SerializableSampling):
 }
 
 /**
- * Convenience method the get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
+ * Convenience method to get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
  *
  * @export
  * @param {(Sampling | SerializableSampling)} metric

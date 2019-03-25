@@ -89,7 +89,9 @@ export interface Taggable {
  */
 export function tagsToMap(tags: Tags): Map<string, string> {
     const tagMap: Map<string, string> = new Map();
-    Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]));
+    if (tags) {
+        Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]));
+    }
     return tagMap;
 }
 
@@ -102,6 +104,8 @@ export function tagsToMap(tags: Tags): Map<string, string> {
  */
 export function mapToTags(tagMap: Map<string, string>): Tags {
     const tags: Tags = {};
-    tagMap.forEach((tag, name) => tags[name] = tag);
+    if (tagMap) {
+        tagMap.forEach((tag, name) => tags[name] = tag);
+    }
     return tags;
 }
