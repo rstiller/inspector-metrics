@@ -726,15 +726,12 @@ export class TimerTest {
         expect(serializedTimer.snapshot.values).to.deep.equal([400, 450, 500]);
 
         expect(serializedTimer).has.property("meanRate");
-        expect(serializedTimer.meanRate).to.gt(4);
-        expect(serializedTimer.meanRate).to.lte(5);
+        expect(serializedTimer.meanRate).to.be.closeTo(4.99, 0.01);
 
         expect(serializedTimer).has.property("rates");
-        expect(serializedTimer.rates).to.deep.equal({
-            1: 4,
-            5: 4,
-            15: 4,
-        });
+        expect(serializedTimer.rates[1]).to.be.closeTo(4, 0.1);
+        expect(serializedTimer.rates[5]).to.be.closeTo(4, 0.1);
+        expect(serializedTimer.rates[15]).to.be.closeTo(4, 0.1);
     }
 
 }

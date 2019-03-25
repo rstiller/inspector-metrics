@@ -284,15 +284,12 @@ export class MeterTest {
         expect(serializedMeter.count).to.equal(90);
 
         expect(serializedMeter).has.property("meanRate");
-        expect(serializedMeter.meanRate).to.gt(17);
-        expect(serializedMeter.meanRate).to.lte(18);
+        expect(serializedMeter.meanRate).to.be.closeTo(17.99, 0.01);
 
         expect(serializedMeter).has.property("rates");
-        expect(serializedMeter.rates).to.deep.equal({
-            1: 10.612865007843881,
-            5: 10.131125373429745,
-            15: 10.044198060545371,
-        });
+        expect(serializedMeter.rates[1]).to.be.closeTo(10.612, 0.001);
+        expect(serializedMeter.rates[5]).to.be.closeTo(10.131, 0.001);
+        expect(serializedMeter.rates[15]).to.be.closeTo(10.044, 0.001);
     }
 
 }
