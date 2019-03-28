@@ -17,6 +17,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -103,6 +104,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     /**
      * Creates an instance of InfluxMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof InfluxMetricReporter
      */
     public constructor({
@@ -116,7 +119,9 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
         tags = new Map(),
-    }: InfluxMetricReporterOptions) {
+    }: InfluxMetricReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             interprocessReportMessageSender,
@@ -128,7 +133,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
             sender,
             tags,
             unit,
-        });
+        }, reporterType, eventReceiver);
 
         this.logMetadata = {
             reportInterval,

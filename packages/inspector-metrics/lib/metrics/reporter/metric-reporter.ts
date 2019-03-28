@@ -17,6 +17,7 @@ import { MetricReporterOptions } from "./metric-reporter-options";
 import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
 import { OverallReportContext } from "./overall-report-context";
+import { ReportMessageReceiver } from "./report-message-receiver";
 import { ReportingResult } from "./reporting-result";
 
 /**
@@ -204,15 +205,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * @param {O} options
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof MetricReporter
      */
-    public constructor(options: O, reporterType?: string) {
+    public constructor(options: O, reporterType?: string, eventReceiver: ReportMessageReceiver = cluster) {
         this.options = options;
         this.options.interprocessReportMessageSender = this.options.interprocessReportMessageSender ||
             (cluster.worker ? cluster.worker.send : null);
         this.reporterType = reporterType || this.constructor.name;
         if (!this.options.sendMetricsToMaster) {
-            cluster.on("message", (worker, message, handle) => {
+            eventReceiver.on("message", (worker, message, handle) => {
                 this.handleReportMessage(worker, message, handle);
             });
         }

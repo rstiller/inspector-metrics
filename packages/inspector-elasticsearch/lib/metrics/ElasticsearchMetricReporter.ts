@@ -17,6 +17,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -356,6 +357,9 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
 
     /**
      * Creates an instance of ElasticsearchMetricReporter.
+     *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      */
     public constructor(
         {
@@ -372,7 +376,9 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             tags = new Map(),
             sendMetricsToMaster = cluster.isWorker,
             interprocessReportMessageSender = null,
-        }: ElasticsearchMetricReporterOption) {
+        }: ElasticsearchMetricReporterOption,
+        reporterType?: string,
+        eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clientOptions,
             clock,
@@ -387,7 +393,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             tags,
             typeDeterminator,
             unit,
-        });
+        }, reporterType, eventReceiver);
 
         this.logMetadata = {
             reportInterval,

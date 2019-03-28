@@ -15,6 +15,7 @@ import { Logger } from "./logger";
 import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
 import { OverallReportContext } from "./overall-report-context";
+import { ReportMessageReceiver } from "./report-message-receiver";
 import { ReportingResult } from "./reporting-result";
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
@@ -107,7 +108,9 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         tags = new Map(),
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
-    }: LoggerReporterOptions) {
+    }: LoggerReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             interprocessReportMessageSender,
@@ -118,7 +121,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
             sendMetricsToMaster,
             tags,
             unit,
-        });
+        }, reporterType, eventReceiver);
         this.logMetadata = {
             reportInterval,
             tags,

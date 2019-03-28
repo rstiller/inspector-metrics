@@ -20,6 +20,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     SerializableMetric,
@@ -233,6 +234,8 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     /**
      * Creates an instance of CsvMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof CsvMetricReporter
      */
     public constructor({
@@ -257,7 +260,9 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         tags = new Map(),
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
-    }: CsvMetricReporterOptions) {
+    }: CsvMetricReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             columns,
@@ -280,7 +285,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
             unit,
             useSingleQuotes,
             writer,
-        });
+        }, reporterType, eventReceiver);
     }
 
     /**

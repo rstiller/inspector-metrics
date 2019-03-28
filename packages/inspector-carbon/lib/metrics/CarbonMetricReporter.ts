@@ -21,6 +21,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -97,6 +98,8 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Creates an instance of CarbonMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof CarbonMetricReporter
      */
     public constructor({
@@ -110,7 +113,9 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         tags = new Map(),
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
-    }: CarbonMetricReporterOptions) {
+    }: CarbonMetricReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             host,
@@ -122,7 +127,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             sendMetricsToMaster,
             tags,
             unit,
-        });
+        }, reporterType, eventReceiver);
 
         this.logMetadata = {
             reportInterval,

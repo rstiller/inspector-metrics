@@ -16,6 +16,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -89,6 +90,8 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     /**
      * Creates an instance of PushgatewayMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof PushgatewayMetricReporter
      */
     public constructor({
@@ -106,7 +109,9 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         unit = MILLISECOND,
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
-    }: PushgatewayReporterOptions) {
+    }: PushgatewayReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             host,
@@ -122,7 +127,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
             sendMetricsToMaster,
             tags,
             unit,
-        });
+        }, reporterType, eventReceiver);
     }
 
     /**

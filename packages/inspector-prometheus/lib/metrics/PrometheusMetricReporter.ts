@@ -28,6 +28,7 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
+    ReportMessageReceiver,
     Sampling,
     SerializableBucketCounting,
     SerializableMetric,
@@ -238,6 +239,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     /**
      * Creates an instance of PrometheusMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof PrometheusMetricReporter
      */
     public constructor({
@@ -249,7 +252,9 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         useUntyped = false,
         sendMetricsToMaster = cluster.isWorker,
         interprocessReportMessageSender = null,
-    }: PrometheusReporterOptions) {
+    }: PrometheusReporterOptions,
+                       reporterType?: string,
+                       eventReceiver: ReportMessageReceiver = cluster) {
         super({
             clock,
             emitComments,
@@ -259,7 +264,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
             sendMetricsToMaster,
             tags,
             useUntyped,
-        });
+        }, reporterType, eventReceiver);
     }
 
     /**

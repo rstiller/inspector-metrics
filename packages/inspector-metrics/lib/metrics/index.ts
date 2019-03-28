@@ -30,6 +30,7 @@ export * from "./reporter/metric-reporter-options";
 export * from "./reporter/metric-set-report-context";
 export * from "./reporter/metric-type";
 export * from "./reporter/overall-report-context";
+export * from "./reporter/report-message-receiver";
 export * from "./reporter/reporting-result";
 export * from "./reporter/scheduled-reporter";
 export * from "./size-gauge";
