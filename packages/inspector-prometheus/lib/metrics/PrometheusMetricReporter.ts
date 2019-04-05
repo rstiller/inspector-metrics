@@ -219,7 +219,11 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
      * @memberof DefaultClusterOptions
      */
     public async getWorkers(): Promise<cluster.Worker[]> {
-        return Object.values(cluster.workers);
+        const workers: cluster.Worker[] = [];
+        for (const key of Object.keys(cluster.workers)) {
+            workers.push(cluster.workers[key]);
+        }
+        return workers;
     }
     /**
      * Uses 'cluster.worker.send' to send messages.
