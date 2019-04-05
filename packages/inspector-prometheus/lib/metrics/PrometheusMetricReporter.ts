@@ -66,12 +66,46 @@ interface PrometheusMetricResult {
     readonly canBeReported: boolean;
 }
 
-interface InterprocessReportRequest extends InterprocessMessage {
+/**
+ * A message send from master process to forked processes in order
+ * to get a response message with a metrics-string.
+ *
+ * @export
+ * @interface InterprocessReportRequest
+ * @extends {InterprocessMessage}
+ */
+export interface InterprocessReportRequest extends InterprocessMessage {
+    /**
+     * A unique id used to identify responses send back from forked processes.
+     *
+     * @type {string}
+     * @memberof InterprocessReportRequest
+     */
     readonly id: string;
 }
 
-interface InterprocessReportResponse extends InterprocessMessage {
+/**
+ * A message send from forked processes to the master process as response
+ * to a metric-request-message.
+ *
+ * @export
+ * @interface InterprocessReportResponse
+ * @extends {InterprocessMessage}
+ */
+export interface InterprocessReportResponse extends InterprocessMessage {
+    /**
+     * Copy of the id from the request message.
+     *
+     * @type {string}
+     * @memberof InterprocessReportResponse
+     */
     readonly id: string;
+    /**
+     * The rendered metrics-string.
+     *
+     * @type {string}
+     * @memberof InterprocessReportResponse
+     */
     readonly metricsStr: string;
 }
 
@@ -394,13 +428,9 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
             co.enabled) {
             this.internalEventbus = new EventEmitter();
             if (co.sendMetricsToMaster) {
-                co.eventReceiver.on("message", (worker, message, handle) => {
-                    this.handleReportRequest(message);
-                });
+                co.eventReceiver.on("message", (worker, message, handle) => this.handleReportRequest(message));
             } else {
-                co.eventReceiver.on("message", (worker, message, handle) => {
-                    this.handleReportResponse(message);
-                });
+                co.eventReceiver.on("message", (worker, message, handle) => this.handleReportResponse(message));
             }
         }
     }
