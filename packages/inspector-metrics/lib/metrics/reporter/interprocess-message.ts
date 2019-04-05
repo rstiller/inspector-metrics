@@ -6,13 +6,36 @@ import { OverallReportContext } from "./overall-report-context";
 import { ReportingResult } from "./reporting-result";
 
 /**
+ * Interface for common inter-process messages.
+ *
+ * @export
+ * @interface InterprocessMessage
+ */
+export interface InterprocessMessage {
+    /**
+     * Type of the reported which sent the metrics to the master process.
+     *
+     * @type {string}
+     * @memberof InterprocessReportMessage
+     */
+    targetReporterType: string;
+    /**
+     * The type property of the message sent to the master process.
+     *
+     * @type {string}
+     * @memberof InterprocessReportMessage
+     */
+    type: string;
+}
+
+/**
  * Interface for reports from reporters in forked processes.
  *
  * @export
  * @interface InterprocessReportMessage
  * @template T
  */
-export interface InterprocessReportMessage<T> {
+export interface InterprocessReportMessage<T> extends InterprocessMessage {
     /**
      * Reporting context from forked process.
      *
@@ -55,28 +78,4 @@ export interface InterprocessReportMessage<T> {
         monotoneCounters: Array<ReportingResult<SerializableMetric, T>>;
         timers: Array<ReportingResult<SerializableMetric, T>>;
     };
-    /**
-     * Type of the reported which sent the metrics to the master process.
-     *
-     * @type {string}
-     * @memberof InterprocessReportMessage
-     */
-    targetReporterType: string;
-    /**
-     * The type property of the message sent to the master process.
-     *
-     * @type {string}
-     * @memberof InterprocessReportMessage
-     */
-    type: string;
 }
-
-/**
- * Sender abstraction for sending a {@link InterprocessReportMessage} object.
- * Compatible with {@code cluster.worker.send}.
- *
- * @exports
- * @type {(message: InterprocessReportMessage<T>) => any}
- * @template T
- */
-export type InterprocessReportMessageSender = <T> (message: InterprocessReportMessage<T>) => any;

@@ -1,7 +1,5 @@
 import "source-map-support/register";
 
-import * as cluster from "cluster";
-
 import { StdClock } from "../clock";
 import { Counter, MonotoneCounter } from "../counter";
 import { Event } from "../event";
@@ -12,10 +10,10 @@ import { MetricRegistry } from "../metric-registry";
 import { MILLISECOND } from "../model/time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
+import { DefaultClusterOptions } from "./metric-reporter-options";
 import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
 import { OverallReportContext } from "./overall-report-context";
-import { ReportMessageReceiver } from "./report-message-receiver";
 import { ReportingResult } from "./reporting-result";
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
@@ -106,22 +104,19 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultClusterOptions(),
     }: LoggerReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
-            interprocessReportMessageSender,
+            clusterOptions,
             log,
             minReportingTimeout,
             reportInterval,
             scheduler,
-            sendMetricsToMaster,
             tags,
             unit,
-        }, reporterType, eventReceiver);
+        }, reporterType);
         this.logMetadata = {
             reportInterval,
             tags,

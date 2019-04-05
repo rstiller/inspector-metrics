@@ -11,13 +11,12 @@ import { getMetricTags, Metric } from "../model/metric";
 import { mapToTags, Taggable, Tags, tagsToMap } from "../model/taggable";
 import { MILLISECOND, MINUTE } from "../model/time-unit";
 import { Timer } from "../timer";
-import { InterprocessReportMessage } from "./interprocess-report-message";
+import { InterprocessMessage, InterprocessReportMessage } from "./interprocess-message";
 import { MetricEntry } from "./metric-entry";
 import { MetricReporterOptions } from "./metric-reporter-options";
 import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
 import { OverallReportContext } from "./overall-report-context";
-import { ReportMessageReceiver } from "./report-message-receiver";
 import { ReportingResult } from "./reporting-result";
 
 /**
@@ -205,16 +204,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * @param {O} options
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof MetricReporter
      */
-    public constructor(options: O, reporterType?: string, eventReceiver: ReportMessageReceiver = cluster) {
+    public constructor(options: O, reporterType?: string) {
         this.options = options;
-        this.options.interprocessReportMessageSender = this.options.interprocessReportMessageSender ||
-            (cluster.worker ? cluster.worker.send : null);
         this.reporterType = reporterType || this.constructor.name;
-        if (!this.options.sendMetricsToMaster) {
-            eventReceiver.on("message", (worker, message, handle) => {
+        const clusterOptions = this.options.clusterOptions;
+        if (clusterOptions &&
+            clusterOptions.enabled &&
+            !clusterOptions.sendMetricsToMaster) {
+            clusterOptions.eventReceiver.on("message", (worker, message, handle) => {
                 this.handleReportMessage(worker, message, handle);
             });
         }
@@ -317,6 +316,23 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
+     * Checks if the specified message can be handle by this metric-reporter and is of the desired type.
+     *
+     * @protected
+     * @param {InterprocessMessage} message
+     * @param {string} [targetType=MetricReporter.MESSAGE_TYPE]
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected canHandleMessage(
+        message: InterprocessMessage,
+        targetType: string = MetricReporter.MESSAGE_TYPE): boolean {
+        return message &&
+            message.type && message.type === targetType &&
+            message.targetReporterType && message.targetReporterType === this.reporterType;
+    }
+
+    /**
      * Handles messages from forked processes.
      *
      * @protected
@@ -326,9 +342,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @memberof MetricReporter
      */
     protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
-        if (message &&
-            message.type && message.type === MetricReporter.MESSAGE_TYPE &&
-            message.targetReporterType && message.targetReporterType === this.reporterType) {
+        if (this.canHandleMessage(message)) {
             const report: InterprocessReportMessage<T> = message;
             const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
             await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
@@ -437,7 +451,9 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        if (this.options.sendMetricsToMaster) {
+        if (this.options.clusterOptions &&
+            this.options.clusterOptions.enabled &&
+            this.options.clusterOptions.sendMetricsToMaster) {
             const message: InterprocessReportMessage<T> = {
                 ctx,
                 date,
@@ -453,7 +469,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                 targetReporterType: this.reporterType,
                 type: MetricReporter.MESSAGE_TYPE,
             };
-            this.options.interprocessReportMessageSender(message);
+            this.options.clusterOptions.sendToMaster(message);
         } else {
             await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
             await this.handleResults(ctx, registry, date, "counter", counterResults);

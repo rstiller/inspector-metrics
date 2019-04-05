@@ -21,7 +21,7 @@ export * from "./model/snapshot";
 export * from "./model/summarizing";
 export * from "./model/taggable";
 export * from "./model/time-unit";
-export * from "./reporter/interprocess-report-message";
+export * from "./reporter/interprocess-message";
 export * from "./reporter/logger";
 export * from "./reporter/logger-reporter";
 export * from "./reporter/metric-entry";

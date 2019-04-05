@@ -3,6 +3,7 @@ import "source-map-support";
 import * as cluster from "cluster";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     getMetricDescription,
@@ -20,7 +21,6 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     SerializableMetric,
@@ -235,7 +235,6 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * Creates an instance of CsvMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof CsvMetricReporter
      */
     public constructor({
@@ -258,16 +257,14 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultClusterOptions(),
     }: CsvMetricReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             columns,
             dateFormat,
-            interprocessReportMessageSender,
             metadataColumnPrefix,
             metadataDelimiter,
             metadataExportMode,
@@ -275,7 +272,6 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
             minReportingTimeout,
             reportInterval,
             scheduler,
-            sendMetricsToMaster,
             tagColumnPrefix,
             tagDelimiter,
             tagExportMode,
@@ -285,12 +281,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
             unit,
             useSingleQuotes,
             writer,
-        }, reporterType, eventReceiver);
+        }, reporterType);
     }
 
     /**
      * Builds all headers and starts scheduling reporting runs.
-     * When call this method all metatdata and tags in each metric
+     * When call this method all metadata and tags in each metric
      * in the application need to be set / known, otherwise it cannot be
      * reported.
      *

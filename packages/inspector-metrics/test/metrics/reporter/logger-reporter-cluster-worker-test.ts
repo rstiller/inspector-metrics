@@ -10,8 +10,6 @@ import * as sinonChai from "sinon-chai";
 
 import {
     Clock,
-    InterprocessReportMessage,
-    InterprocessReportMessageSender,
     Logger,
     LoggerReporter,
     MetricRegistry,
@@ -59,8 +57,7 @@ export class LoggerReporterClusterWorkerTest {
     private internalCallback: () => Promise<any>;
     private scheduler: Scheduler;
     private schedulerSpy: SinonSpy;
-    private interprocessReportMessageSender: InterprocessReportMessageSender;
-    private interprocessReportMessageSenderSpy: SinonSpy;
+    private sendToMasterSpy: SinonSpy;
     private reporter: LoggerReporter;
 
     public before(): void {
@@ -78,16 +75,21 @@ export class LoggerReporterClusterWorkerTest {
             return null;
         };
         this.schedulerSpy = spy(this.scheduler);
-        this.interprocessReportMessageSender = (message: InterprocessReportMessage<any>) => {};
-        this.interprocessReportMessageSenderSpy = spy(this.interprocessReportMessageSender);
+        this.sendToMasterSpy = spy(async () => null);
         this.reporter = new LoggerReporter({
             clock: this.clock,
-            interprocessReportMessageSender: this.interprocessReportMessageSenderSpy,
+            clusterOptions: {
+                enabled: true,
+                eventReceiver: null,
+                getWorkers: async () => [],
+                sendMetricsToMaster: true,
+                sendToMaster: this.sendToMasterSpy,
+                sendToWorker: async () => null,
+            },
             log: this.logger,
             minReportingTimeout: 1,
             reportInterval: 1000,
             scheduler: this.schedulerSpy,
-            sendMetricsToMaster: true,
             tags: new Map(),
             unit: MILLISECOND,
         });
@@ -111,9 +113,9 @@ export class LoggerReporterClusterWorkerTest {
         await this.internalCallback();
 
         expect(this.loggerSpy).to.not.have.been.called;
-        expect(this.interprocessReportMessageSenderSpy.callCount).to.equal(1);
+        expect(this.sendToMasterSpy.callCount).to.equal(1);
 
-        let interprocessReportMessage = this.interprocessReportMessageSenderSpy.getCall(0).args[0];
+        let interprocessReportMessage = this.sendToMasterSpy.getCall(0).args[0];
         // simulating the serialization
         interprocessReportMessage = JSON.parse(JSON.stringify(interprocessReportMessage));
 
@@ -165,9 +167,9 @@ export class LoggerReporterClusterWorkerTest {
         await this.internalCallback();
 
         expect(this.loggerSpy).to.not.have.been.called;
-        expect(this.interprocessReportMessageSenderSpy.callCount).to.equal(1);
+        expect(this.sendToMasterSpy.callCount).to.equal(1);
 
-        let interprocessReportMessage = this.interprocessReportMessageSenderSpy.getCall(0).args[0];
+        let interprocessReportMessage = this.sendToMasterSpy.getCall(0).args[0];
         // simulating the serialization
         interprocessReportMessage = JSON.parse(JSON.stringify(interprocessReportMessage));
 
@@ -175,6 +177,45 @@ export class LoggerReporterClusterWorkerTest {
 
         expect(interprocessReportMessage.tags.tag1).to.equal("value1");
         expect(interprocessReportMessage.tags.tag2).to.equal("value2");
+    }
+
+    @test
+    public async "check metrics are not send to master if clustering is disabled"() {
+        this.registry.newCounter("counter1");
+        this.registry.setTag("tag1", "value1");
+        this.registry.setTag("tag2", "value2");
+
+        this.reporter = new LoggerReporter({
+            clock: this.clock,
+            clusterOptions: {
+                enabled: false,
+                eventReceiver: null,
+                getWorkers: async () => [],
+                sendMetricsToMaster: true,
+                sendToMaster: this.sendToMasterSpy,
+                sendToWorker: async () => null,
+            },
+            log: this.logger,
+            minReportingTimeout: 1,
+            reportInterval: 1000,
+            scheduler: this.schedulerSpy,
+            tags: new Map(),
+            unit: MILLISECOND,
+        });
+        this.reporter.addMetricRegistry(this.registry);
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.not.have.been.called;
+
+        await this.reporter.start();
+
+        expect(this.loggerSpy).to.not.have.been.called;
+        expect(this.schedulerSpy).to.have.been.called;
+
+        await this.internalCallback();
+
+        expect(this.loggerSpy).to.have.been.called;
+        expect(this.sendToMasterSpy).to.not.have.been.called;
     }
 
 }

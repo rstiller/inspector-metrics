@@ -42,12 +42,16 @@ export class LoggerReporterClusterMasterTest {
         this.loggerSpy = spy(this.logger.info);
         this.logger.info = this.loggerSpy;
         new LoggerReporter({
+            clusterOptions: {
+                enabled: true,
+                eventReceiver: this.eventEmitter,
+                getWorkers: async () => [],
+                sendMetricsToMaster: false,
+                sendToMaster: async () => null,
+                sendToWorker: async () => null,
+            },
             log: this.logger,
-            minReportingTimeout: 1,
-            reportInterval: 1000,
-            sendMetricsToMaster: false,
-            tags: new Map(),
-        }, "TestLoggerReportType", this.eventEmitter);
+        }, "TestLoggerReportType");
     }
 
     @test
@@ -123,6 +127,57 @@ export class LoggerReporterClusterMasterTest {
             targetReporterType: "NotTheSameLoggerImplementation",
             type: MetricReporter.MESSAGE_TYPE,
         };
+
+        expect(this.loggerSpy).to.not.have.been.called;
+
+        this.eventEmitter.emit("message", null /* worker */, message);
+
+        setImmediate(() => {
+            expect(this.loggerSpy).to.not.have.been.called;
+            done();
+        });
+    }
+
+    @test
+    public "check master does not handle metric report messages if clustering disabled"(done: (err?: any) => any) {
+        const message: InterprocessReportMessage<any> = {
+            ctx: {},
+            date: new Date(),
+            metrics: {
+                counters: [{
+                    metric: null,
+                    result: {
+                        message: `${new Date()} counter1: 0`,
+                        metadata: {
+                            hostname: "server1",
+                        },
+                    },
+                }],
+                gauges: [],
+                histograms: [],
+                meters: [],
+                monotoneCounters: [],
+                timers: [],
+            },
+            tags: null,
+            targetReporterType: "TestLoggerReportType",
+            type: MetricReporter.MESSAGE_TYPE,
+        };
+
+        this.logger = new MockedLogger();
+        this.loggerSpy = spy(this.logger.info);
+        this.logger.info = this.loggerSpy;
+        new LoggerReporter({
+            clusterOptions: {
+                enabled: false,
+                eventReceiver: this.eventEmitter,
+                getWorkers: async () => [],
+                sendMetricsToMaster: false,
+                sendToMaster: async () => null,
+                sendToWorker: async () => null,
+            },
+            log: this.logger,
+        }, "TestLoggerReportType");
 
         expect(this.loggerSpy).to.not.have.been.called;
 

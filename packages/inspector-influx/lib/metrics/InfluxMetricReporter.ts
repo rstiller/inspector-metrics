@@ -1,9 +1,9 @@
 import "source-map-support/register";
 
-import * as cluster from "cluster";
 import { IPoint } from "influx";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -17,7 +17,6 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -105,7 +104,6 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * Creates an instance of InfluxMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof InfluxMetricReporter
      */
     public constructor({
@@ -116,24 +114,21 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         clock = new StdClock(),
         scheduler = setInterval,
         minReportingTimeout = 1,
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultClusterOptions(),
         tags = new Map(),
     }: InfluxMetricReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
-            interprocessReportMessageSender,
+            clusterOptions,
             log,
             minReportingTimeout,
             reportInterval,
             scheduler,
-            sendMetricsToMaster,
             sender,
             tags,
             unit,
-        }, reporterType, eventReceiver);
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,

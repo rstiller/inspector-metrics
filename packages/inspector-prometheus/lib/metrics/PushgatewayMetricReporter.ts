@@ -1,9 +1,9 @@
 import "source-map-support";
 
-import * as cluster from "cluster";
 import * as http from "http";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -16,7 +16,6 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -78,7 +77,7 @@ export interface PushgatewayReporterOptions extends ScheduledMetricReporterOptio
 /**
  * Metric reporter for prometheus's pushgateway.
  * Simply sends the output of the provided {@link PrometheusMetricReporter}
- * to the configurated pushgateway using the text format.
+ * to the configured pushgateway using the text format.
  *
  * @see https://github.com/prometheus/pushgateway
  * @export
@@ -91,7 +90,6 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
      * Creates an instance of PushgatewayMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof PushgatewayMetricReporter
      */
     public constructor({
@@ -107,16 +105,14 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         scheduler = setInterval,
         tags = new Map(),
         unit = MILLISECOND,
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultClusterOptions(),
     }: PushgatewayReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             host,
             instance,
-            interprocessReportMessageSender,
             job,
             log,
             minReportingTimeout,
@@ -124,10 +120,9 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
             reportInterval,
             reporter,
             scheduler,
-            sendMetricsToMaster,
             tags,
             unit,
-        }, reporterType, eventReceiver);
+        }, reporterType);
     }
 
     /**

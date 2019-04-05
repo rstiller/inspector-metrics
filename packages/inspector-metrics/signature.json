@@ -42,18 +42,6 @@
       "sha512": "a785d12bab7ac1cc8e3a399ee53399715231ce939f9b5ff42208e53084a07bb3c75229d1fcd5e6099b4ff06e55347b3f156e01836e8bc32569bef49df1c3fd4e"
     },
     {
-      "path": "build/lib/metrics/counting.d.ts",
-      "sha512": "5522fbcfa149e93e64d7de0497070fe3293a144c7b93979bb6a1ea401694ce6fc08f3afa67b1e10fe7f6116ff65792283bcd8948684e4a9907bdfc96b2b418f4"
-    },
-    {
-      "path": "build/lib/metrics/counting.js",
-      "sha512": "6868c82ba82e2ff62a427147da20ab4254d2c5e0819e7e656c61e58f1e62ff9c4b7f07e3fcbc94703c13cc344acd08be51b6856e8d9e3ef863f48710a04c5036"
-    },
-    {
-      "path": "build/lib/metrics/counting.js.map",
-      "sha512": "f4439377d735a08c28dbc9c05c4fd6b8f95123d661357ead62527ce733db64f39c6f4d8f74bd11c1a647b1769b662b9d8f6b1b5625dc45c84a1053568ba56ca7"
-    },
-    {
       "path": "build/lib/metrics/event.d.ts",
       "sha512": "4e31db36ebfaa1d72098f9d472d149159ed0ada85ab470966e92334226252a06bb1e5bd097c9264e82b21a544310ca46dd64bddf64615822dfc8d7a5e80835fe"
     },
@@ -76,18 +64,6 @@
     {
       "path": "build/lib/metrics/gauge.js.map",
       "sha512": "021bee6425368e276396536a74253ce706b45b0ac214f52917208c07dfe815c15040d4be1094742919e9306094eeda4e5549c3832ae95aa6ccdde0a9d96337ed"
-    },
-    {
-      "path": "build/lib/metrics/groupable.d.ts",
-      "sha512": "e232aa9b78968ff1f1bcbd0ec86213d56a81ae336e609cd96a336a9b852c342fd419391a1b426231f3e0b1bae9739ac409e5a7cb913acd80894645ad47d02adb"
-    },
-    {
-      "path": "build/lib/metrics/groupable.js",
-      "sha512": "da2e839f44177604a81a64c19902d2b4dc0de831a75a4af1f0350b603978e780055c5ca188b097403fe5dc74e18d4b93b9e332ff785f6d3f2f3cb3808ecdcefe"
-    },
-    {
-      "path": "build/lib/metrics/groupable.js.map",
-      "sha512": "18fa2d1f27d8ba15abd0f6f9f860fc9af593b4f85bd88aeb4adbdc103156bb31d3eea4747654490236d8cad085435fccb0f550c84e7c0c430b0e966a780c4f2a"
     },
     {
       "path": "build/lib/metrics/hdr-histogram.d.ts",
@@ -115,39 +91,15 @@
     },
     {
       "path": "build/lib/metrics/index.d.ts",
-      "sha512": "b9510ea067a53b0ef8a503b5fe56d014ee82b58701efc619b6a9a8ed365333927dba8a98df40be7f21ef6052bbd0bdc6e8a4b10142083db2d68498c36f44a02f"
+      "sha512": "a554a890bd60a862f2a4667da1a977f65fb140e3da6f36a27548c05d16b6ed2c2b5c1d09c0c90634f6e638043a1a42746ad36e44ed2c9cd8235b09d14112ec12"
     },
     {
       "path": "build/lib/metrics/index.js",
-      "sha512": "1cb3e6bccbe74b85de10fb7d05469cfa19c1503f87b3bf8bd35999a9580ef32765fc6d27fcf989aff9700e36d1949f8272d23c29ff8412e3e8fb4dee12a3585f"
+      "sha512": "e340b66715996bd5baf839e2885b96d3b8de9b59a71bce4ffdff78984c186cc9ac8d3d14696f2e9e7065d841a4e2ba6f2ee06e634af9f60aff4e3ba788e53541"
     },
     {
       "path": "build/lib/metrics/index.js.map",
-      "sha512": "5f9946ea02acdb3df51aa052c83e23263b9d598a1c59948bb81949b6d00ce9a8320e7b42d734e22ad4bc5ec9ee9760750ca3a34a66d2aace3820904903522f21"
-    },
-    {
-      "path": "build/lib/metrics/int64.d.ts",
-      "sha512": "1f94bf3a098588c4a3f3bb168a6b5fb250b1569b2321d9433341c667cf4e58a494eae8fafaf1a3a235724f8bb427afba16302208a2669c4384191017c0348e5f"
-    },
-    {
-      "path": "build/lib/metrics/int64.js",
-      "sha512": "21820e882467268b36c70c955706a626af3ed06af3f934d7762bc68f60d429944365d79dbb6d3ba05e722f3ef75c1041061486aa275aa0faab58df5c1c17f486"
-    },
-    {
-      "path": "build/lib/metrics/int64.js.map",
-      "sha512": "3abe3a95b4449ec13a1660951ebbfe06ded553030f111a6709856efef84212d202ce86a91a1974de580deb48037f72d0707146f96caacff443ecc63b44dbd9c4"
-    },
-    {
-      "path": "build/lib/metrics/metadata-container.d.ts",
-      "sha512": "47cbab9c41686a63ce598344a6f14b0aa788ed7f2ef41c552ed8ef93ac9276cb6b687c4a9d9a87b54a727968a4127e826e3918b9e12612434052246079ffe719"
-    },
-    {
-      "path": "build/lib/metrics/metadata-container.js",
-      "sha512": "e0db68a0b57b0466625fb27242561e1b74f3813e5f50844c274a706713baf4e12778c7d5e3f7acfc548ae124e6046149372d88b3d5c7a673b26b7e49557befab"
-    },
-    {
-      "path": "build/lib/metrics/metadata-container.js.map",
-      "sha512": "0fc83dcf4c1944b0b383fda6fbcaa89929be095945bd7720e71e777aeebec34472097504f72df5ad800e3bef4a5cd3778f0b98c94527921007bff5b5aa39092d"
+      "sha512": "81718716c233f804d15a7b2d0a357d81f55375f7a1422861d43352a7ab557d8bfded85f30c692d48514e566945db50f59c557003858029d56917bd1c14b9b679"
     },
     {
       "path": "build/lib/metrics/meter.d.ts",
@@ -160,18 +112,6 @@
     {
       "path": "build/lib/metrics/meter.js.map",
       "sha512": "caff1ce358dac26bddcaaa45aff15586467d885033f47120676b2177e04fd556055471950f64eaf4ec3032a71572a2b1dbf33c6433dcc8af39873970502d728a"
-    },
-    {
-      "path": "build/lib/metrics/metered.d.ts",
-      "sha512": "a9ef967914bd62248323d748bcb06b7083d2d3cad35d474f6734791badfa7e42c802d404b9a0393c503278d05e1cce6903a37386c39a5cb32a7c8545b94aeb01"
-    },
-    {
-      "path": "build/lib/metrics/metered.js",
-      "sha512": "14849b4ce7ef76d9dbf351a103fb9a3a7bbceaa1a69711790b9b8145224ab8b12e6f25af73f17fa60a274cd8702ef53e2b4afb11e2246484cfb5fb27388089d7"
-    },
-    {
-      "path": "build/lib/metrics/metered.js.map",
-      "sha512": "e11f6ab4e0ffcea1fa56d2f3ab1061242f05b419bbc5664beec5fbff66d0cb09f3fd488d38c32108c8718e515d1e44c4887b5a910ecde7633ba634ee7d3d3590"
     },
     {
       "path": "build/lib/metrics/metric-registry-listener.d.ts",
@@ -208,18 +148,6 @@
     {
       "path": "build/lib/metrics/metric-set.js.map",
       "sha512": "d0c1fc48ac49fc19288c20379e1bee12849fc0e612f7c10e848d969de7133fe7a3df4c123c3f252903094315e20281d2f98aee8693d79c08ab335cbe0903b930"
-    },
-    {
-      "path": "build/lib/metrics/metric.d.ts",
-      "sha512": "d4a975c6f0109535a6661515c804ad9b79e5085686e41cdae791535b8ad2609a62eef5e7ec1af23f201fee9524343cc54117c70a7b7bcea6e43b86e629e1afdd"
-    },
-    {
-      "path": "build/lib/metrics/metric.js",
-      "sha512": "996031f47e3d138517cf0f5cc91d5616a27cb3ad297364bb691af8b084e2eda3548c0e7476f6eec4842624e7eff7256154d6d64a03d1e283daaaca3140327e57"
-    },
-    {
-      "path": "build/lib/metrics/metric.js.map",
-      "sha512": "800b66a04f5962fc99f76aada19e33c86530c382a0fd753d3bc85ce0b1ab53628a1bf384a013faef4cbd0866829bdbeb481392639bb44db025fb6254296cebd2"
     },
     {
       "path": "build/lib/metrics/model/counting.d.ts",
@@ -378,40 +306,28 @@
       "sha512": "7d5581cf65bb3ebf98e84979b6807f676b769fd6cdb517e3dbf093d6037bf25ec4ba05a65fe76409260d1390905f53d3ae3c501d801b5488c00d931375da20af"
     },
     {
-      "path": "build/lib/metrics/moving-average.d.ts",
-      "sha512": "e4ac5ed3c574c6d06f04447e8f240cbc28c2515b1f91a4039309b5f9970967d0448ba2836d4e108aac881687420a69d603fef818b7716d5ccf9749b561c8a9a4"
+      "path": "build/lib/metrics/reporter/interprocess-message.d.ts",
+      "sha512": "2af0f520a3941cfbcce42f44de0b71359957310f153e8b9d2c780a09d782b9aa8a2425b8bb9e55b752a996999eec98859a4cd79a7352ee5eff330e524f578053"
     },
     {
-      "path": "build/lib/metrics/moving-average.js",
-      "sha512": "8fbefbf7aaa38577482ea3b24b05f2f52d3eeee0ca43bb09b1f73591a451c3d611442631d36ca39893912e9a49bd52453a368f3ec0a4af8c002c0300421e2d37"
+      "path": "build/lib/metrics/reporter/interprocess-message.js",
+      "sha512": "1f577059d439fb39c7bc967ca1260826488f7c3aecd90e4787985c273175021e06f045ac5ceb7f7f5c7fff2dbb053e2cb9a96cb58d5b770ae698e2f65d98f08e"
     },
     {
-      "path": "build/lib/metrics/moving-average.js.map",
-      "sha512": "8045b268ee35a70b1ef6e686d9f8ac02b26358b23c5b118a95a097410cd23ed92c51f02aaa7d3ef6f463c858a75d34904c85e02cef3cbb94f9a07c38ebae7d92"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-report-message.d.ts",
-      "sha512": "6f98bf4416c182fdb684d771dc476357308a8f3c4c4da75e5697b0f892b9f7eda2b82bb4bef528fd872cccf5e4dcfdc4a68cc4ed6134245acda637633adda91c"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-report-message.js",
-      "sha512": "b324fb4ca368cab414c9eeaf71d5365b6a29443c86955ec3e7c25e9fe52218bc09b2f8bf3a5a7090cb99eb96dfe16417dba1d3f372217695d7cae4f237313c61"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-report-message.js.map",
-      "sha512": "24d62ee3ed0b560c08fbbe71e66152fefb31169fc34d5929fe9354f1b209c8105ad19a8385cffa53e12b7ce35dccaea1670a1293dae273f1f8ff553d7b17277c"
+      "path": "build/lib/metrics/reporter/interprocess-message.js.map",
+      "sha512": "8a1313800a264e208953c8cfbeb6257a566143a095ef79dea03bec74fc88ece5d1bd34e75b05729fff07d62cdd87d0af76787627fa3579ac87495cee4963e9f6"
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.d.ts",
-      "sha512": "1c6fc0872e201a6c1f4e8ef5526227f3f8c0509f44b033d179edd8b3b1aaf0fb4466d1d1b4299cf048847dee0e3ca54a0adb931ced7a075c07eba5e10ff4bc1e"
+      "sha512": "89ee45c52e5a7a1cd4b1410024896fb1929759370e2cbde0a9dbafafe5f6cd1b0e3a1fae5e5735cb6178c5e5e4254913344fdb473dc48d5775407066a4c00294"
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.js",
-      "sha512": "cf808553cecfd56d10cbbb3035c16c2c38566b487f589a95548b91cb9c5709741f98ec229242680e74ca40c89b1a1abdd4dd6b34f1c3017315e355f882747a6c"
+      "sha512": "4e7fbda252997f6dc75947138c9ffa1f0abe0bb79862f67d7c6b141d5566e0d918d37ce92882aabae5fc57d3b8e8f993547f7f2a1c62860bf3ea974edffad3e1"
     },
     {
       "path": "build/lib/metrics/reporter/logger-reporter.js.map",
-      "sha512": "40b55861380fe3746bd755506bc5aac34932810b7b7b5812c68628d0f0e9310935017aa28f14aac99a0d2253c753ecd6259b021219c2685bdee7ef525865b2aa"
+      "sha512": "6549280430ef790c120e1f28c7cce22330114c2f5c3fb11b11272f066391987f73dbcee14584df73cfe6e945f124d8d49f0f8d073e175f4b9dd97d3f2ed0281e"
     },
     {
       "path": "build/lib/metrics/reporter/logger.d.ts",
@@ -439,27 +355,27 @@
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter-options.d.ts",
-      "sha512": "c065aa82409ebe0d607a3b31355db6677a9952270a32420457a610ec7f3f7338784dc4018c9deb9d180c6084b6512c7b5a6eb2ed730b27997ff547b5bcbd8275"
+      "sha512": "73c963ac94a040090c99d67ab36ba6b5fe61115784f1e5ceb006410484f2c3cb59c8b04ac2dfa82f5020633c79c341b8ff3d67c24d1d3e2a33e96bc0eb5c05b0"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter-options.js",
-      "sha512": "9ae89e45bcd1e416c4a971e23851d1e2d2582ca3a9b4c78a24a116c0704eb692f9361c3f8fe5c8c6e3f367a97c2735b630a305f9213ac1cce9a97f3d66dfb6ca"
+      "sha512": "4b774f3388e7317efa9c84edc09959e43ce1e30672075dfd0a533df776aee0c1966c83d2f30abdc4e114ef26064745c6382c4b0e97f8b79b16beb1cf3618ae16"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter-options.js.map",
-      "sha512": "a711459712679b9d7f55bdbef5fe0f1cff07df1433b05ccd740b8a53dbb1c2c80f005c7d480cf6cff74ccfd5bf0eacdc43e5a37609604656eba0f947120b488f"
+      "sha512": "3d326848e0cefd76544ed9d6b4b93d662585746c4493ba9cbbb2ec636a56388ee6b935f4ffd04967e8633666e55d63699f76289f18e880cb2647cd32b06e3986"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.d.ts",
-      "sha512": "0501162c50159f94dc50600c70ba576fb5faa6a1db41192be44f005c63481d541868ada13a72ff8bb798ec3ccd5d16b0c9ead8ce24d46b14a134b639dfd4e4aa"
+      "sha512": "0a145759e6af26a33aaca63322cf9f1f9557dea753b313317d383dac6ed506f5244f108d8cefeb1113815b60584b97c54a82e8294e12d4cb295601856e926950"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js",
-      "sha512": "bb029cb02050a25e7eed9d7e55070f32cf84c989838ca4772cca58785dbfe4ff973474528f01199d9082f5c7f979a88a09c882183c768ea86387b6ea6e1a8f10"
+      "sha512": "e4e12e59773e0e106a78e15c5bf42326c6d7bb69ce123465eebd8f77bd2b9448959b2a2438e844c375cac2892889f8d7091821ce25ca089beab1188740c81e84"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js.map",
-      "sha512": "58a0bf90e7fbd4b92f01ad75001da34b3165a9c47b1587a83916fcbdf8a660c83979e5a7e306cf1b4ee4c4fae0bea9859406c75469514ad38893c6aed38090ab"
+      "sha512": "58dbe0cd35321ebf82f603123cf43c601aad525e39c56958e7f471308647105e10db8b5312accf3122a6efbe0e3c61f80dd8a219e838cbca9f85a8f81b66eb5b"
     },
     {
       "path": "build/lib/metrics/reporter/metric-set-report-context.d.ts",
@@ -523,51 +439,15 @@
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.d.ts",
-      "sha512": "3226b876ee9a45722bcd7e0073b71348541136572b30eb0550d6bea28e04cac07143b97e3b526cde9b0a6605a72714fd19a4d13a6e27e8f3e73340cf078e5de9"
+      "sha512": "b715378215778353789e6cb9584b0af2ede4d0525021996aab131474bc49b54d5817674186f12732353845dac3007b661c4809aa97fd3848e4e934715e7fddc1"
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.js",
-      "sha512": "79d7918643a332b5f46ca948fadce8fbf1489f1f44ab8262f7ec666ad5d3a78df40cd51212ffac8b552a19ea30bd6145f8e7b7cc48303e3ae28174539f0a6eb1"
+      "sha512": "6c3f175b153395eeb20eafda61a8f7535447c2086cc4687450cceea2338ac2da56f23228a82cf52d9e4180d97d8a10d5e479ed311291fc0f2aaa29863c5f5095"
     },
     {
       "path": "build/lib/metrics/reporter/scheduled-reporter.js.map",
-      "sha512": "56192fc90540c0d70f274bfe1f5d168878c4d04c92e3be7bfc5fb38fe43765ca2e170b63fe30bb271911f3d04e79d98dd18ac5f17dfc7814cbecf47bcb4288ba"
-    },
-    {
-      "path": "build/lib/metrics/reporter/tags.d.ts",
-      "sha512": "0347fa06723d3defbc919dc9ba6c92535b17c867e1ce47158dbb224ee181275e6bd3846da92be60da0362f17b2e5f21e2304175a530999b4a72a227958bceaca"
-    },
-    {
-      "path": "build/lib/metrics/reporter/tags.js",
-      "sha512": "87b290d5416738d5f6f3f1a32ef92f6453fbe8ba370f921585891018dd7f990c8f7df1af33db6edf10d788d2b5f43e44b52af5e7f4b08113c8d059bbf5914b82"
-    },
-    {
-      "path": "build/lib/metrics/reporter/tags.js.map",
-      "sha512": "c0bbd5852569c6f45e0113d7a0251ab461da5c3fe9ef60e8a0fdd047c481766afeeea4ef6c3049cf17992955f5bf47e5b61e704967d2188f41b5fbf135f67c21"
-    },
-    {
-      "path": "build/lib/metrics/reservoir.d.ts",
-      "sha512": "4e52acdd625192b3ebfb3bb470d62c8e843145652e3080db08a991b26e78a2fab7dea7a6f004aaa30a27a5448abcbfe2fe02147349e0a9f7391296427a298462"
-    },
-    {
-      "path": "build/lib/metrics/reservoir.js",
-      "sha512": "7874cb07448337e1f83c5d4e83ddf820f578decf08c57eba82ec78af12cf5a4f7cfe0e5dc1927cc7936a4fa5869fa7158c57cfd12296f71d399f875389780578"
-    },
-    {
-      "path": "build/lib/metrics/reservoir.js.map",
-      "sha512": "f323f95d3c23349c1763e74812b3ff19085b0096799ee7f97deae39bcd1e6b10c072e8bde7567f07ae64811e5dfc7d23b6aaae819df01e1cca63165168673b48"
-    },
-    {
-      "path": "build/lib/metrics/sampling.d.ts",
-      "sha512": "68c5420a4bb2e2f81e569468bcf62fbabc9ed513200c0b2db4be2bb050afed254ee8559f64c9e50084164d15501954dd33c5fc7d77dcecb8e61211e1f3910f56"
-    },
-    {
-      "path": "build/lib/metrics/sampling.js",
-      "sha512": "fba609cdc18c21c8861a427906e28f108ca22a320b04b1a865c2cd75df18fd68c28d9ef7c2ba442354f719eac6a7335683bbd9e899192cfde83cfd636c5ea9bf"
-    },
-    {
-      "path": "build/lib/metrics/sampling.js.map",
-      "sha512": "2a3b2eac0b831a12205fb29ce10366f42ab312123f0c51819f928a06098b0b4d3c7fcdb7dff2bd7a4c05639a316dc93e0db72e05b1a02dbb2af44c9abb350464"
+      "sha512": "0df01a0d876dde4b081480155cd45104ffcea0298c42766306f719a36c7b7336039b5a070d43b855899777e0567e6c7c0ff3b93a1be7db6b4fafb101db36eff1"
     },
     {
       "path": "build/lib/metrics/size-gauge.d.ts",
@@ -582,54 +462,6 @@
       "sha512": "70c8ea566f1409be0456bcf64dd78d0f08a9f3dda7679244ab412ada858f055e60be43b8b7dbb0adcc68b03cc0c13ce9b9c33e4abbd2b78a2e90bae86bdf4d82"
     },
     {
-      "path": "build/lib/metrics/snapshot.d.ts",
-      "sha512": "77a14a17df9e77107db612f2b423e8a0670ebabc3763edfd25351a3cc6688a2e36ff736f0c198a91d5814b95e3e5f0091545e0397d7f0fe61e41145ffeb65498"
-    },
-    {
-      "path": "build/lib/metrics/snapshot.js",
-      "sha512": "52b8e4a2b90fdb26db831b173b2a2d07bc989cfbf355e8c155cacf7827467d2f865bb43de0d093a3f1c55fefdcef4e08fb78f73154b0f22441219507cec24f84"
-    },
-    {
-      "path": "build/lib/metrics/snapshot.js.map",
-      "sha512": "046a842f711110bf51cd9d6dc642e84119c1b1bb7ad3f9ae7e999d53989066b41d55a2596747ab513aa11ee339a3de3d7494b2edcd22dc6469f65f13b4d69efe"
-    },
-    {
-      "path": "build/lib/metrics/summarizing.d.ts",
-      "sha512": "119c7c482aa12a14e709a12022a7bbc5ccd382db4860000a4115bb1923b0feb13676343e2be1ef755293f9f104387faa8156208a4e7a6cfcac90516be77edda8"
-    },
-    {
-      "path": "build/lib/metrics/summarizing.js",
-      "sha512": "08dfb1412c4f8d5e42a15b47c6aabde3fab5137b3f63ae6593c0e8caaf21075ef569f269b7be47431abfa58835e058add0cd847a3dcbc4c8d78a87c7641a769c"
-    },
-    {
-      "path": "build/lib/metrics/summarizing.js.map",
-      "sha512": "c1c9be54555fbc776706b58374b8f94f85e69c758253c70f9717f0a33199e54634abb7b1fabe63c37d145fd08cbb65d957fe380776e7641816a9684f779a07ba"
-    },
-    {
-      "path": "build/lib/metrics/taggable.d.ts",
-      "sha512": "fc201dbe023e1161be8ec441fc5944792454f5540551b34056902712744f82a27c164fa99f9c360438f229820c4a9e891b21dd345272a857808c6b1b725a9f6d"
-    },
-    {
-      "path": "build/lib/metrics/taggable.js",
-      "sha512": "ede16871160b5aa6688ee0fd069f20a17e44631e69a10462f2e55fb03a831a2f9018aa32eec9184aeb65311994fa06a6b17bc0794b228c615ef4fb7e86c670c0"
-    },
-    {
-      "path": "build/lib/metrics/taggable.js.map",
-      "sha512": "0b9e14f140df45097d10c29ff4b9b0453905a3b427bc602a37a923576ecc26692b673afea30b7511bc84862fc19f17d3ef31322a23202d72cf65d64cdfed2c69"
-    },
-    {
-      "path": "build/lib/metrics/time-unit.d.ts",
-      "sha512": "6925de3d7bb6892edbf2869424e27ad134dd01eb0b76cc2dece5b005e43906239646362491cd9d29edb540924d898c477443fcfee99d78d427e272b339cf6c2b"
-    },
-    {
-      "path": "build/lib/metrics/time-unit.js",
-      "sha512": "f96a5ae036a1145a9628a97021d84f3d6e90599dede21d790eb48e1c3aff9ac338f6e576478254f5913855c5c32cf5b7ac94ba17fbb1750a4268c1817dbfd107"
-    },
-    {
-      "path": "build/lib/metrics/time-unit.js.map",
-      "sha512": "06af552c5079aba2cfaf5884d936acac42c9ab7b6f2d1af356a51fafb1d9653142a09724c9024c96af28381507cf95600043112a793d8066a83e5975d0b5315f"
-    },
-    {
       "path": "build/lib/metrics/timer.d.ts",
       "sha512": "89582092bbcd10486e97063e38b6292936c5a40d7b8f9aaf8f7c6e3970789a9a015e4ba37b7ccc62c57003dbe981f974f789d06e2026ddd6c26df7472767f440"
     },
@@ -640,30 +472,6 @@
     {
       "path": "build/lib/metrics/timer.js.map",
       "sha512": "9f6a07b91e64d31b4b925aa2fa3080f51831471cf9fe4eecd02c150cb133c9880a7ebb7131882f7bf2354509ea056f44ffe93528d126e3caa357f5e9127cdf8d"
-    },
-    {
-      "path": "build/test/metrics/base-metric-test.d.ts",
-      "sha512": "0b09e93cccb29eafbc5f903eab6048f2936a48883a69270e1ada8bb3d9f74be3d43ad4becefe8092d2756b368680ed15d47eea8428d639c5303adefdbc9c92c6"
-    },
-    {
-      "path": "build/test/metrics/base-metric-test.js",
-      "sha512": "5cbd0331831e925d017ad42d9506ca7d9dccfc0f1440c4fe9bd5517c94b2012f273e5f8927f6756e794204a13573fc6dea475ad7ceb3c7b428f421cf01f83645"
-    },
-    {
-      "path": "build/test/metrics/base-metric-test.js.map",
-      "sha512": "795cfffa126c800286e394ccac537ce8fab538e5af9a1c90cf156486eba10e1a0fe442ff419a5d1c9249bd92cc962782b6101ebf31584a45a0f7a28ffe220710"
-    },
-    {
-      "path": "build/test/metrics/buckets-test.d.ts",
-      "sha512": "de6eb2d12e9d351b017dc7b23649912f759f845ce1162f7b5110e4c588a879dbc99c5907e33831cf598faa160eb8825c56dacb8b2493d99096debf09c26112a7"
-    },
-    {
-      "path": "build/test/metrics/buckets-test.js",
-      "sha512": "2e924d33d8f418f706d33213fb6a7ae00ca1b68ff962deb9a821660032db646bf86b4c86104c7153e4c8662ee3de4525709b8dfe1115645baff3ce3edc4fd8f8"
-    },
-    {
-      "path": "build/test/metrics/buckets-test.js.map",
-      "sha512": "7c81d2c6c050632dba8e3bdd3b0709ba56e2677be5c5889ae8029d67a481711d896655eb7fcea0643d86464a8f9e709d4c9f9af6eb5bf841cf6373937fcc423d"
     },
     {
       "path": "build/test/metrics/clock-test.d.ts",
@@ -688,18 +496,6 @@
     {
       "path": "build/test/metrics/counter-test.js.map",
       "sha512": "7a90ebabbeded4c9af313dcdf1d7ad0c15fa4c4eddb934ead920853194f875a3e2e174f5bd41953d06b1e6d3acc987195653c12597856093b8e8c698f2d8c807"
-    },
-    {
-      "path": "build/test/metrics/exponentially-weighted-moving-average-test.d.ts",
-      "sha512": "2f8d3556c899a5a574669f2fa0a0cf5160b901eb422349a04d3c0efac70612d20ff8254bee5b80d3ccd7d6189a157720ce793a36d9d89f4d912072b8fae4c0ca"
-    },
-    {
-      "path": "build/test/metrics/exponentially-weighted-moving-average-test.js",
-      "sha512": "0f21edbbd74946ba7a8ae3fc4950b6b9052f4c3eda0558c2145168c948896d82b859dae740dda0f3c041a4d93094bbb442cc607a4b9a72e3153984e03abb5536"
-    },
-    {
-      "path": "build/test/metrics/exponentially-weighted-moving-average-test.js.map",
-      "sha512": "02427cda74db0f3dd697962624185c3ada9e8eac19118888cafb033e42a30c2e5f5ad241783082abd6fa24374efd19ae1e4dc7a8551158f4e336fbb47cdb03de"
     },
     {
       "path": "build/test/metrics/gauge-test.d.ts",
@@ -883,27 +679,27 @@
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.d.ts",
-      "sha512": "68ce91f228af9da77568514d19e59a6a205adcd379a857844e81d696d5fa143c34a4e4a9d479cb4151c8682fbd45a84facbcc1d3cb2190e3f0bff966c5968efe"
+      "sha512": "82f3d6bb53aa857488eb8686a5e45ac53cd5d780d285f994a9c6e6851d63f63a7691fd7e37c80673a61a2ed2a350430aa2f1d167e4d500116123e62f50764a3a"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.js",
-      "sha512": "2b0e6dd2b41727bcc76be681641b78f196b3fdccdffa6123186bcd1a8555d09fbd9316f651ae0a0c03d744d881c954cc3abd0361d0ee7390e212fe9768c0cba1"
+      "sha512": "39b0e85be044d78da52d5d210f984918b3721c3cea77417ac534388026689c948fdbc668fb878155cb64a96f0a664d39d5821ac47f7cba60f414c7d4e52ccef0"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.js.map",
-      "sha512": "16edea8443b41c84bc68e012d6f21c817d7ce23d0091258f1fc6ca7d587e0b4528aab6d681789e7a15a8219380274a502dcebbc540c7ff7f1474f7546d983366"
+      "sha512": "8ef7eed116b491c6f4fa1d01552ee3895f116b0f861e8ddcab58238000335e80bc0958ada960b3814335538fc823d0ab6c9a1539351a8e032ad53aecf0c047f7"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.d.ts",
-      "sha512": "b921039274954d01bf00b98656ddc3ab9ae5942e9d9f45ea39b5a64ad7f0d2a22f5b5a9d07d239f07db4236c9b2a72a66447a55768beec5f5f9fbf4b713ddf9e"
+      "sha512": "832b0b33642c3048c19b964c4eddecd91b178681a630c44edb68d90a4fcf80a90c3ad8b78beae09518a5942d0a201037047c716a6c2ccb8181e5f4270a75a065"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js",
-      "sha512": "cc92f1c81a9cb3452aa19c7962f76709e99b9da89dad43830c6376f6ab6471be284f86151cb7e79179fc2dd9f8db8b51272deb10db7b70260a8a2fe7fd5a6a8e"
+      "sha512": "e8a6f1e64ef4b6cb1cb7d5f8da548ee1948c61648e508fd161c86c1216dea0dbe16b7fe734cd456e9080ec10d61a4f0439342594de3a121066fd8878fb85272a"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js.map",
-      "sha512": "405e40ea1d9a659e0f57399241f4cf399b1f6f1bcdbdafe8ebd389a1d9f1534d0a8fb9a00744c985f7ed7906c87b54c26b8180788ce3302ebb484e5b283d5366"
+      "sha512": "6d77321f3f5b04762c0cc2119a7835c97502d36e2eb8b66cc3ff66e2ea9055f35873c61c06d1b4fbe8dc37e36595e920abde6ca1268d6f30267ca86403996e09"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-test.d.ts",
@@ -930,18 +726,6 @@
       "sha512": "23707e04d711720aa903877a8e6d8d5bd2d4ffc48de085b7e34e64f757269e6a5a2f0c377f274fbc08bcaea20f9d227d00badec99d3e4da59b7cdb433291f5ea"
     },
     {
-      "path": "build/test/metrics/reservoir-test.d.ts",
-      "sha512": "1802c3e8a804c9712ba99222d3bfe61aa20b6e8a5a283e52d7e9267761d223de48c4d84e6f3fc33f9fddb125c59a01b25e5a1c893a43db8d13c5ee38aed2459f"
-    },
-    {
-      "path": "build/test/metrics/reservoir-test.js",
-      "sha512": "9ff55b356ab83fb1a9a46b626c9816605c2d1bd77ef7b83af8d8e2139509489045c218b1c93160928cfd947465b3abdb290c8d79da3509f2e593856f02f737da"
-    },
-    {
-      "path": "build/test/metrics/reservoir-test.js.map",
-      "sha512": "39d6e8390c5438677229929ac09147c71fd5e1cf535f8c6e0df9d11953f38305dd27b270881288d39ee619e306e00a3df083e660a780279a66764b70b5e16951"
-    },
-    {
       "path": "build/test/metrics/size-gauge-test.d.ts",
       "sha512": "47a2f614a0f378cd7e3eb600d4eb630fb7fd3f83f9e347870f0cf617bf2938a7f909e7eba4b30944134572f0894b0a2aa90c5a472c8edc54f758a6d336e6c18d"
     },
@@ -952,30 +736,6 @@
     {
       "path": "build/test/metrics/size-gauge-test.js.map",
       "sha512": "8c01667a95d086541b513701e38e431253015a33c6c471798e57f61361676b52f6508d1a0060ea668db5ad9cfc8ca4eba102e376b243407688168060684f57a5"
-    },
-    {
-      "path": "build/test/metrics/snapshot-test.d.ts",
-      "sha512": "9333ac667581bb45164a957990a3c10bb88ad44bd0b5ad3104ca3064a4dd700f34288b7863c20e597c9c56fda7fcef16706893f628375c4d0067214dd1a0145f"
-    },
-    {
-      "path": "build/test/metrics/snapshot-test.js",
-      "sha512": "ed7f53951b326b7a8119b1f3a8c465a5ae8f03aa4eb4af33b7edaa0a580225b6fb34515d9ffda124b78eea6a8c0d396a7e532a62ceb2583356fdbb8201ded9ce"
-    },
-    {
-      "path": "build/test/metrics/snapshot-test.js.map",
-      "sha512": "6f1ee6a8899d996296ac468c36642e8cd84b2b6809aa01d87a1a3199d1b825e5ba566cf72ee0b6c2fa22775abbb85c279a4de3592f02e6da57b7a28d4e2d36e5"
-    },
-    {
-      "path": "build/test/metrics/time-unit-test.d.ts",
-      "sha512": "ee17ffe9f948eb6259f975785127f8e4c958960843858bb3b2381937a58516e229155e33303dc67ea9b0b8c440efe26ed0a3a27cb4c5e0c9b235ce8d6dc688a8"
-    },
-    {
-      "path": "build/test/metrics/time-unit-test.js",
-      "sha512": "db2583ca36368717ae4d86552deb5e3318fd48287babdfd083251b389bbaab852afe2e270a7931d81de984cfc776ab50141587286a6d65542bad31535b18119f"
-    },
-    {
-      "path": "build/test/metrics/time-unit-test.js.map",
-      "sha512": "a87885caad99ad52aab76d0637d0d36ff64bc4aec1edd4ba6247a09e87243cdb5b8b6501625a310b2c8b1b23554290c124c3e7c511c50abe0c0ce4a2d50f02e0"
     },
     {
       "path": "build/test/metrics/timer-test.d.ts",
@@ -990,7 +750,7 @@
       "sha512": "b3dcf10ac48c80c8635df601fb4ca1454fa3b50f20dd212c1be3282a499fd7c66cf03b5d2f1b18ff89b4b50df358b97f82d4eb0196fb413ff360ecfab52ba4d1"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcnTY4CRDCMfXrQKYV5wAARO8QADvszJC3FSha1AFOtUGZ5u50\nIlM3g2DqTbqUyGJ1EFEgysUB63LDfDUTrR4yVhWnSC92vZiDW7D+FEeuKp0mJML4\nzFROC3FK3NRo7ageL5T01Q1WyeNbosk1HxGtLC8JXbXzKx/GqmmM6ECHA/Y49VMP\n2RhClzkq7+rhyBzrFNr5FynMuYAjkXzF/5vQv0AX2TW7uq3KsAGmYllhqAJo7nRA\nWcOsvDFPlDK4KIq14P5a+mTEmv/AKFR2VovjO5LbDj3N5I2lgc/BNWc41o8G2dAG\nBf9IVEJxf9IDGWiar2FGjjb65KjAE/nEtiZxm0dJ+KZOrWkCHe/0vLmTnLCLjI32\nnwdZ7sJoI3LQujpgagy7AIPsyky+sT2Sl7WeDVAWUZl+NwRLzHIXDUcAnVD4ik6n\nUNcILZm1Q+TYLS/wJwdBoVPsfKUFA8W++sGs18hGxohv/WqBwRpOUhE5QmK8ytVh\nPPMlP2HEm5lZrGw0JTB2yc5iPlo1Al+k+b6UwLp7SNWFwmrfKSwkpL62gKNvJIYo\ngjYvqex7m6l50k8ggDWD2upKKUiT9r4AyZ94Wb2Wg3Nzoq9xl+p1QDXzTv8ARN1F\nb67W8qaA42lWjz1wsmLkayxjWjm05/1/KRKkaHuNTqTq4UMA7/h7amctOWWXRGcq\ngkkmb/Ep0gPpqtkVjQxZ\n=46Ml\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcp5CKCRDCMfXrQKYV5wAAgCUQAGKPzD+tDqN99a8FhYm8+ZBt\nc8OaO6xlRcRTqwdGphvudJXNCB1Sh1XOpUneOS14EyvmNR0budHd0s/ezyHKzlPE\nTIaca61D3hnX4jeGkGt0q6DnugiT+gkNIZgKkYH8b/FYmqVwdutOZXGoTJLpYySJ\nYvhcsjhOxrU++yoZ2qgMvdJloZ1EizJN+H5vJKmDw/hOCMJYYyK+wgwdyz1Q1mK8\nVSTToKqtiwjq8NhtuAhFIhsqRlH1xjPJMSx9FXOQMYadlJZbQOqeALNdVsJz9ec+\nitxSS6vnS21R880q/Ez75wKTD4tMjIy1rCvGtwAbpqi0DjY7A0vfZmzEAoOTOseN\n0TTQvlndyGe4Qd6wNS1Xhw2FtROhqnxF/ERKux0n4rjTMFtN7WLdJqNHmWM+kyw8\nWjwBK9/hcnDcvBvjJ0u6rWjMlAnlTPmbgyUKLybYdQ09Pu55BvrX2/opfSSGAGGj\n3w/HAhwPUri7hIiuAAT7hu0tyf7rN2wZ95JWKkvMhefcMYGkm4ETXxIvPTKpPFp6\nfY823GVUG/mezuZPmtJ5y5RSe85YhG4YXiWxE6IjclK2JBhQl8ms+X6UjPXNFJz+\nyB8S8bfmABnFzURDFJ/wcScmedW5YTnebUXUO3snwPKDJWO/U0BObuUc+zWHRnfC\nBlGCRO1/GSpk/1kH4f9I\n=4nsq\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

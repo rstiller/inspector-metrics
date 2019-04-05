@@ -5,9 +5,9 @@ import "source-map-support/register";
  */
 const graphite = require("graphite");
 
-import * as cluster from "cluster";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -21,7 +21,6 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -99,7 +98,6 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      * Creates an instance of CarbonMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof CarbonMetricReporter
      */
     public constructor({
@@ -111,23 +109,20 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultClusterOptions(),
     }: CarbonMetricReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             host,
-            interprocessReportMessageSender,
             log,
             minReportingTimeout,
             reportInterval,
             scheduler,
-            sendMetricsToMaster,
             tags,
             unit,
-        }, reporterType, eventReceiver);
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,

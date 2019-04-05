@@ -1,10 +1,13 @@
 import "source-map-support";
 
 import * as cluster from "cluster";
+import { randomBytes } from "crypto";
+import { EventEmitter } from "events";
 import {
     BucketCounting,
     Buckets,
     BucketToCountMap,
+    ClusterOptions,
     Counter,
     Event,
     Gauge,
@@ -17,6 +20,7 @@ import {
     getMetricTags,
     getSnapshot,
     Histogram,
+    InterprocessMessage,
     Metadata,
     Meter,
     Metric,
@@ -62,6 +66,15 @@ interface PrometheusMetricResult {
     readonly canBeReported: boolean;
 }
 
+interface InterprocessReportRequest extends InterprocessMessage {
+    readonly id: string;
+}
+
+interface InterprocessReportResponse extends InterprocessMessage {
+    readonly id: string;
+    readonly metricsStr: string;
+}
+
 /**
  * List of values between 0 and 1 representing the percent boundaries for reporting.
  *
@@ -90,14 +103,98 @@ export class Percentiles {
         boundaries.sort((a: number, b: number) => a - b);
         boundaries.forEach((boundary) => {
             if (boundary <= 0.0) {
-                throw new Error("boundaries cannot be smaller or eqaul to 0.0");
+                throw new Error("boundaries cannot be smaller or equal to 0.0");
             }
             if (boundary >= 1.0) {
-                throw new Error("boundaries cannot be greater or eqaul to 1.0");
+                throw new Error("boundaries cannot be greater or equal to 1.0");
             }
         });
     }
 
+}
+
+/**
+ * Extends the standard {@link ClusterOptions} with a timeout for worker processes
+ * to response to metric report requests.
+ *
+ * @export
+ * @interface PrometheusClusterOptions
+ * @extends {ClusterOptions<Worker>}
+ * @template Worker
+ */
+export interface PrometheusClusterOptions<Worker> extends ClusterOptions<Worker> {
+    /**
+     * Sets the timeout in which a forked process can respond to metric report requests.
+     *
+     * @type {number}
+     * @memberof PrometheusClusterOptions
+     */
+    readonly workerResponseTimeout: number;
+}
+
+/**
+ * Default configuration for clustering support for the {@link PrometheusMetricReporter}.
+ *
+ * @export
+ * @class DefaultPrometheusClusterOptions
+ * @implements {PrometheusClusterOptions<cluster.Worker>}
+ */
+export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions<cluster.Worker> {
+
+    /**
+     * Sets the timeout in which a forked process can respond to metric report requests.
+     *
+     * @type {number}
+     * @memberof DefaultPrometheusClusterOptions
+     */
+    public readonly workerResponseTimeout: number = 500;
+    /**
+     * Set to true.
+     *
+     * @type {boolean}
+     * @memberof DefaultClusterOptions
+     */
+    public readonly enabled: boolean = true;
+    /**
+     * Set to cluster module.
+     *
+     * @type {ReportMessageReceiver}
+     * @memberof DefaultClusterOptions
+     */
+    public readonly eventReceiver: ReportMessageReceiver = cluster;
+    /**
+     * True for forked processes.
+     *
+     * @type {boolean}
+     * @memberof DefaultClusterOptions
+     */
+    public readonly sendMetricsToMaster: boolean = !!cluster.worker;
+    /**
+     * Uses 'worker.send' to send the specified message to the specified worker.
+     *
+     * @memberof DefaultClusterOptions
+     */
+    public async sendToWorker(worker: cluster.Worker, message: any): Promise<any> {
+        if (worker) {
+            worker.send(message);
+        }
+    }
+    /**
+     * Returns the values of 'cluster.workers'.
+     *
+     * @memberof DefaultClusterOptions
+     */
+    public async getWorkers(): Promise<cluster.Worker[]> {
+        return Object.values(cluster.workers);
+    }
+    /**
+     * Uses 'cluster.worker.send' to send messages.
+     *
+     * @memberof DefaultClusterOptions
+     */
+    public async sendToMaster(message: any): Promise<any> {
+        cluster.worker.send(message);
+    }
 }
 
 /**
@@ -128,6 +225,13 @@ export interface PrometheusReporterOptions extends MetricReporterOptions {
      * @memberof PrometheusReporterOptions
      */
     readonly useUntyped?: boolean;
+    /**
+     * Options for clustering support.
+     *
+     * @type {PrometheusClusterOptions<any>}
+     * @memberof MetricReporterOptions
+     */
+    clusterOptions?: PrometheusClusterOptions<any>;
 }
 
 /**
@@ -144,6 +248,22 @@ export interface PrometheusReporterOptions extends MetricReporterOptions {
  */
 export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterOptions, PrometheusMetricResult> {
 
+    /**
+     * Constant for the "type" variable of process-level message identifying report-request-messages
+     * from master process.
+     *
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    public static readonly MESSAGE_TYPE_REQUEST = "inspector-prometheus:metric-reporter:request-metrics";
+    /**
+     * Constant for the "type" variable of process-level message identifying report-response-messages
+     * from forked processes.
+     *
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    public static readonly MESSAGE_TYPE_RESPONSE = "inspector-prometheus:metric-reporter:response-metrics";
     /**
      * Used to replace unsupported characters from label name.
      *
@@ -235,12 +355,19 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @memberof PrometheusMetricReporter
      */
     private summaryType: PrometheusMetricType = "summary";
+    /**
+     * Internal eventbus used to forward received messages from forked metric reporters.
+     *
+     * @private
+     * @type {EventEmitter}
+     * @memberof PrometheusMetricReporter
+     */
+    private internalEventbus: EventEmitter;
 
     /**
      * Creates an instance of PrometheusMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof PrometheusMetricReporter
      */
     public constructor({
@@ -250,21 +377,32 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         minReportingTimeout = 1,
         tags = new Map(),
         useUntyped = false,
-        sendMetricsToMaster = cluster.isWorker,
-        interprocessReportMessageSender = null,
+        clusterOptions = new DefaultPrometheusClusterOptions(),
     }: PrometheusReporterOptions,
-                       reporterType?: string,
-                       eventReceiver: ReportMessageReceiver = cluster) {
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             emitComments,
             includeTimestamp,
-            interprocessReportMessageSender,
             minReportingTimeout,
-            sendMetricsToMaster,
             tags,
             useUntyped,
-        }, reporterType, eventReceiver);
+        }, reporterType);
+        const co = this.options.clusterOptions;
+        if (co &&
+            co.enabled) {
+            this.internalEventbus = new EventEmitter();
+            if (co.sendMetricsToMaster) {
+                co.eventReceiver.on("message", (worker, message, handle) => {
+                    this.handleReportRequest(message);
+                });
+            } else {
+                co.eventReceiver.on("message", (worker, message, handle) => {
+                    this.handleReportResponse(message);
+                });
+            }
+        }
     }
 
     /**
@@ -274,11 +412,35 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @memberof PrometheusMetricReporter
      */
     public async getMetricsString(): Promise<string> {
+        const workerPromises: Array<Promise<string>> = [];
+        const clusterOptions = this.options.clusterOptions;
+        if (this.canSendMessagesToWorkers()) {
+            const workers = await clusterOptions.getWorkers();
+            for (const worker of workers) {
+                const message: InterprocessReportRequest = {
+                    id: this.generateRandomId(),
+                    targetReporterType: this.reporterType,
+                    type: PrometheusMetricReporter.MESSAGE_TYPE_REQUEST,
+                };
+                const workerPromise: Promise<string> = new Promise((resolve) => {
+                    this.internalEventbus.once(message.id, (response: InterprocessReportResponse) => {
+                        resolve(response.metricsStr);
+                    });
+                });
+                const workerTimeout: Promise<string> = new Promise((resolve) => setTimeout(() => {
+                    resolve("");
+                    this.internalEventbus.removeAllListeners(message.id);
+                }, clusterOptions.workerResponseTimeout));
+                clusterOptions.sendToWorker(worker, message);
+                workerPromises.push(Promise.race([workerPromise, workerTimeout]));
+            }
+        }
+        const workerResponses = await Promise.all(workerPromises);
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const ctx = await this.report();
-            return ctx.result;
+            return ctx.result + workerResponses.join("\n");
         }
-        return "\n";
+        return workerResponses.join("\n") + "\n";
     }
 
     /**
@@ -351,6 +513,86 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      */
     public async stop(): Promise<this> {
         return this;
+    }
+
+    /**
+     * Checks if the clustering support is enabled and the 'getWorkers' and 'sendToWorker'
+     * method is not null.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    protected canSendMessagesToWorkers(): boolean {
+        const clusterOptions = this.options.clusterOptions;
+        return  clusterOptions.enabled &&
+                !!clusterOptions.getWorkers &&
+                !!clusterOptions.sendToWorker;
+    }
+
+    /**
+     * Generates a randomId used to identify worker report responses.
+     *
+     * @protected
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    protected generateRandomId(): string {
+        return randomBytes(32).toString("hex");
+    }
+
+    /**
+     * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_REQUEST},
+     * generates a response using {@link #getMetricsString} and sends it back to the master process
+     * with the id given through the request.
+     *
+     * @protected
+     * @param {*} message
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportRequest(message: any) {
+        if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_REQUEST)) {
+            const request: InterprocessReportRequest = message;
+            const metricsStr = await this.getMetricsString();
+            const response: InterprocessReportResponse = {
+                id: request.id,
+                metricsStr,
+                targetReporterType: request.targetReporterType,
+                type: PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE,
+            };
+            if (this.options.clusterOptions.sendToMaster) {
+                this.options.clusterOptions.sendToMaster(response);
+            }
+        }
+    }
+
+    /**
+     * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_RESPONSE}
+     * and forwards the message to the internal eventbus using the messages id as message and the message
+     * object as argument.
+     *
+     * @protected
+     * @param {*} message
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportResponse(message: any) {
+        if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE)) {
+            const response: InterprocessReportResponse = message;
+            this.internalEventbus.emit(response.id, response);
+        }
+    }
+
+    /**
+     * Ignores common report-messages.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @returns {Promise<void>}
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any): Promise<void> {
     }
 
     /**

@@ -1,9 +1,9 @@
 import "source-map-support/register";
 
-import * as cluster from "cluster";
 import { Client, ConfigOptions } from "elasticsearch";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -17,7 +17,6 @@ import {
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
     StdClock,
@@ -359,7 +358,6 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      * Creates an instance of ElasticsearchMetricReporter.
      *
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      */
     public constructor(
         {
@@ -374,26 +372,23 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             scheduler = setInterval,
             minReportingTimeout = 1,
             tags = new Map(),
-            sendMetricsToMaster = cluster.isWorker,
-            interprocessReportMessageSender = null,
+            clusterOptions = new DefaultClusterOptions(),
         }: ElasticsearchMetricReporterOption,
-        reporterType?: string,
-        eventReceiver: ReportMessageReceiver = cluster) {
+        reporterType?: string) {
         super({
             clientOptions,
             clock,
+            clusterOptions,
             indexnameDeterminator,
-            interprocessReportMessageSender,
             log,
             metricDocumentBuilder,
             minReportingTimeout,
             reportInterval,
             scheduler,
-            sendMetricsToMaster,
             tags,
             typeDeterminator,
             unit,
-        }, reporterType, eventReceiver);
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,

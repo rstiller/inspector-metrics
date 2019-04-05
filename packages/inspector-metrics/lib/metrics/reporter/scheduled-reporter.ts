@@ -1,11 +1,8 @@
 import "source-map-support/register";
 
-import * as cluster from "cluster";
-
 import { MILLISECOND, TimeUnit } from "../model/time-unit";
 import { MetricReporter } from "./metric-reporter";
 import { MetricReporterOptions } from "./metric-reporter-options";
-import { ReportMessageReceiver } from "./report-message-receiver";
 
 /**
  * Scheduler function type definition.
@@ -67,11 +64,10 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      *
      * @param {O} options
      * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @param {ReportMessageReceiver} [eventReceiver=cluster]
      * @memberof ScheduledMetricReporter
      */
-    public constructor(options: O, reporterType?: string, eventReceiver: ReportMessageReceiver = cluster) {
-        super(options, reporterType, eventReceiver);
+    public constructor(options: O, reporterType?: string) {
+        super(options, reporterType);
     }
 
     /**
