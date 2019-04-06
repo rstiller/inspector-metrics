@@ -21,7 +21,7 @@ chai.use(sinonChai);
 const expect = chai.expect;
 
 @suite
-export class PrometheusReporterTest {
+export class PrometheusReporterClusterMasterTest {
 
     private clock: MockedClock = new MockedClock();
     private registry: MetricRegistry;

@@ -7,7 +7,6 @@ import {
     BucketCounting,
     Buckets,
     BucketToCountMap,
-    ClusterOptions,
     Counter,
     Event,
     Gauge,
@@ -20,19 +19,16 @@ import {
     getMetricTags,
     getSnapshot,
     Histogram,
-    InterprocessMessage,
     Metadata,
     Meter,
     Metric,
     MetricRegistry,
     MetricReporter,
-    MetricReporterOptions,
     MetricSetReportContext,
     MetricType,
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
-    ReportMessageReceiver,
     Sampling,
     SerializableBucketCounting,
     SerializableMetric,
@@ -42,6 +38,11 @@ import {
     Tags,
     Timer,
 } from "inspector-metrics";
+import { DefaultPrometheusClusterOptions } from "./DefaultPrometheusClusterOptions";
+import { InterprocessReportRequest } from "./InterprocessReportRequest";
+import { InterprocessReportResponse } from "./InterprocessReportResponse";
+import { Percentiles } from "./Percentiles";
+import { PrometheusReporterOptions } from "./PrometheusReporterOptions";
 
 /**
  * Enumeration used to determine valid metric types of prometheus.
@@ -61,215 +62,27 @@ interface PrometheusFields { [key: string]: number | string; }
  * @interface PrometheusMetricResult
  */
 interface PrometheusMetricResult {
+    /**
+     * Type of the metrics in fields property.
+     *
+     * @type {PrometheusMetricType}
+     * @memberof PrometheusMetricResult
+     */
     readonly type: PrometheusMetricType;
+    /**
+     * Contains field-name to value mapping of this metric-result.
+     *
+     * @type {PrometheusFields}
+     * @memberof PrometheusMetricResult
+     */
     readonly fields: PrometheusFields;
+    /**
+     * Indicates if this result can be handle by the reporter.
+     *
+     * @type {boolean}
+     * @memberof PrometheusMetricResult
+     */
     readonly canBeReported: boolean;
-}
-
-/**
- * A message send from master process to forked processes in order
- * to get a response message with a metrics-string.
- *
- * @export
- * @interface InterprocessReportRequest
- * @extends {InterprocessMessage}
- */
-export interface InterprocessReportRequest extends InterprocessMessage {
-    /**
-     * A unique id used to identify responses send back from forked processes.
-     *
-     * @type {string}
-     * @memberof InterprocessReportRequest
-     */
-    readonly id: string;
-}
-
-/**
- * A message send from forked processes to the master process as response
- * to a metric-request-message.
- *
- * @export
- * @interface InterprocessReportResponse
- * @extends {InterprocessMessage}
- */
-export interface InterprocessReportResponse extends InterprocessMessage {
-    /**
-     * Copy of the id from the request message.
-     *
-     * @type {string}
-     * @memberof InterprocessReportResponse
-     */
-    readonly id: string;
-    /**
-     * The rendered metrics-string.
-     *
-     * @type {string}
-     * @memberof InterprocessReportResponse
-     */
-    readonly metricsStr: string;
-}
-
-/**
- * List of values between 0 and 1 representing the percent boundaries for reporting.
- *
- * @export
- * @class Percentiles
- */
-export class Percentiles {
-
-    /**
-     * Name constant for assigning an instance of this class as metadata to a metric instance.
-     *
-     * @static
-     * @memberof Percentiles
-     */
-    public static readonly METADATA_NAME = "quantiles";
-
-    /**
-     * Creates an instance of Percentiles.
-     *
-     * @param {number[]} [boundaries=[0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]]
-     * @memberof Percentiles
-     */
-    constructor(
-        public boundaries: number[] = [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999],
-    ) {
-        boundaries.sort((a: number, b: number) => a - b);
-        boundaries.forEach((boundary) => {
-            if (boundary <= 0.0) {
-                throw new Error("boundaries cannot be smaller or equal to 0.0");
-            }
-            if (boundary >= 1.0) {
-                throw new Error("boundaries cannot be greater or equal to 1.0");
-            }
-        });
-    }
-
-}
-
-/**
- * Extends the standard {@link ClusterOptions} with a timeout for worker processes
- * to response to metric report requests.
- *
- * @export
- * @interface PrometheusClusterOptions
- * @extends {ClusterOptions<Worker>}
- * @template Worker
- */
-export interface PrometheusClusterOptions<Worker> extends ClusterOptions<Worker> {
-    /**
-     * Sets the timeout in which a forked process can respond to metric report requests.
-     *
-     * @type {number}
-     * @memberof PrometheusClusterOptions
-     */
-    readonly workerResponseTimeout: number;
-}
-
-/**
- * Default configuration for clustering support for the {@link PrometheusMetricReporter}.
- *
- * @export
- * @class DefaultPrometheusClusterOptions
- * @implements {PrometheusClusterOptions<cluster.Worker>}
- */
-export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions<cluster.Worker> {
-
-    /**
-     * Sets the timeout in which a forked process can respond to metric report requests.
-     *
-     * @type {number}
-     * @memberof DefaultPrometheusClusterOptions
-     */
-    public readonly workerResponseTimeout: number = 500;
-    /**
-     * Set to true.
-     *
-     * @type {boolean}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly enabled: boolean = true;
-    /**
-     * Set to cluster module.
-     *
-     * @type {ReportMessageReceiver}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly eventReceiver: ReportMessageReceiver = cluster;
-    /**
-     * True for forked processes.
-     *
-     * @type {boolean}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly sendMetricsToMaster: boolean = !!cluster.worker;
-    /**
-     * Uses 'worker.send' to send the specified message to the specified worker.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public async sendToWorker(worker: cluster.Worker, message: any): Promise<any> {
-        if (worker) {
-            worker.send(message);
-        }
-    }
-    /**
-     * Returns the values of 'cluster.workers'.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public async getWorkers(): Promise<cluster.Worker[]> {
-        const workers: cluster.Worker[] = [];
-        for (const key of Object.keys(cluster.workers)) {
-            workers.push(cluster.workers[key]);
-        }
-        return workers;
-    }
-    /**
-     * Uses 'cluster.worker.send' to send messages.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public async sendToMaster(message: any): Promise<any> {
-        cluster.worker.send(message);
-    }
-}
-
-/**
- * Configuration object for {@link PrometheusMetricReporter}.
- *
- * @export
- * @interface PrometheusReporterOptions
- */
-export interface PrometheusReporterOptions extends MetricReporterOptions {
-    /**
-     * indicates if UTC converted timestamps should be appended to each metric data
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly includeTimestamp?: boolean;
-    /**
-     * indicates if comments like HELP and TYPE should be emitted
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly emitComments?: boolean;
-    /**
-     * indicates if the untyped should always be used
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly useUntyped?: boolean;
-    /**
-     * Options for clustering support.
-     *
-     * @type {PrometheusClusterOptions<any>}
-     * @memberof MetricReporterOptions
-     */
-    clusterOptions?: PrometheusClusterOptions<any>;
 }
 
 /**
