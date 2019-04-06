@@ -213,9 +213,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         if (clusterOptions &&
             clusterOptions.enabled &&
             !clusterOptions.sendMetricsToMaster) {
-            clusterOptions.eventReceiver.on("message", (worker, message, handle) => {
-                this.handleReportMessage(worker, message, handle);
-            });
+            clusterOptions.eventReceiver.on("message", (worker, message, handle) =>
+                this.handleReportMessage(worker, message, handle));
         }
     }
 
