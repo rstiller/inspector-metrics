@@ -3,7 +3,7 @@ import "source-map-support";
 import * as http from "http";
 import {
     Counter,
-    DefaultClusterOptions,
+    DisabledClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -79,6 +79,8 @@ export interface PushgatewayReporterOptions extends ScheduledMetricReporterOptio
  * Simply sends the output of the provided {@link PrometheusMetricReporter}
  * to the configured pushgateway using the text format.
  *
+ * Clustering support is not implemented and disabled by default.
+ *
  * @see https://github.com/prometheus/pushgateway
  * @export
  * @class PushgatewayMetricReporter
@@ -105,7 +107,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         scheduler = setInterval,
         tags = new Map(),
         unit = MILLISECOND,
-        clusterOptions = new DefaultClusterOptions(),
+        clusterOptions = new DisabledClusterOptions(),
     }: PushgatewayReporterOptions,
                        reporterType?: string) {
         super({
@@ -153,6 +155,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     /**
      * Calls the {@link PrometheusMetricReporter} to generate the metrics in a valid prometheus text format.
      * Sends the metrics via 'PUT' to the configured pushgateway.
+     * The {@link #beforeReport} and {@link #afterReport} methods are not invoked.
      *
      * @protected
      * @memberof PushgatewayMetricReporter

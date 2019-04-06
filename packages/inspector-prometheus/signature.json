@@ -18,28 +18,100 @@
       "sha512": "f38c5f22a5373ae8d24dfdb3ed78f4affbdf238d1629806e492a4b2bc10799da5c1e460e79a89fff2dfe3dacc9f9cf8dfed605c7f6008a5959a223f4c809c150"
     },
     {
+      "path": "build/lib/metrics/DefaultPrometheusClusterOptions.d.ts",
+      "sha512": "d50db51e6c6a156af62f79ada8256b1384bc5a037305e0cbc483e10f41aaf2c257af7de2f6287873ee887faa150e61b7f3656200991f7019ec2834cf7e200607"
+    },
+    {
+      "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js",
+      "sha512": "c7d113f8b6ba3433aa958de5ccf6923a0ad57172c4f3e03db8638364c0f9d8fb2fe497d8d9ff76865ac77049682a4ca8322a5aa3900d002e802f46c437d5f744"
+    },
+    {
+      "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js.map",
+      "sha512": "f881ea6a79a5e58b45b15a0588712d636ec2b1574b343e0f5acc27696340bee09957e88048801727360096f9da6d3c5f990572bc83266c2a45625f46f9d1f83a"
+    },
+    {
       "path": "build/lib/metrics/index.d.ts",
-      "sha512": "dd4301ec5ac6ecd787d66d2ee7c42ac47820249a55ca269f7bed66840deb5a3accafd74a957dbdd0791e462e3b307ade1831b8a8f7b7914167820c1117c8f134"
+      "sha512": "a7cb8456b68373283b15c229b2ebafeb5683a42c18c4a05b303b9b8545edf27db64ed420ae80957aae5fba523c36b1eab32b12eef1768984d7ad8e9ca5d4bc69"
     },
     {
       "path": "build/lib/metrics/index.js",
-      "sha512": "83e6ba19d108f0cf89fa49b0213dfde2a50bd540b477c1f1a693e26c0ef59e932e2383710f586dc6f59f5f0070e38c0933e19b084cf8ed56eaffae6af43b670f"
+      "sha512": "2a128d368c332ead4a77f86ea0c076e1c4384eb9b594454b1ed46fba384e5576a747347603e38310120db78235dcc2e40d57bd5b42058b0c4e37afb5aacf3fe7"
     },
     {
       "path": "build/lib/metrics/index.js.map",
-      "sha512": "67c890e77c72f4650488176e7274c5bb9db01b8500786e9ff161f4160d5d5e33a1640811071ee495066d9db3200aa5735686249d6380407851fbd47dc2b2c70f"
+      "sha512": "e31e432553c4beccb70793226df096fcc52d71e236c7038d04847d7a748e94d29ef9fcbbf020e540ce8841fc19689863cb14e3df044adb294ee687342ec43e0e"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportRequest.d.ts",
+      "sha512": "60b1685e7741066ac5a48203e72f148a57bdb894a955eb2cb62791384608d228107412fa5f1dced095a10ac656450e4fa1ec882143fc63b6ab0272c3d229e3d4"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportRequest.js",
+      "sha512": "329619f9f28c05207da4b01ba846b370ec5ca4410e587e5e8af0239dc8b0eada5e6b43ffa3b2a7bb2a344b1118fb55dbd09839bda594effad64271da155002db"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportRequest.js.map",
+      "sha512": "3ecfd35e50d2854d6ce1ec0225f85e6952d4665a48d9559dfbbd16f9f8f0d6d075ccbf9f6cb7a889f2953faa06c7dd4817dde5ccfddb606d2b2128924df7bc48"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportResponse.d.ts",
+      "sha512": "6f572bb6ebdf5423705e17f82b2db6a5a0a3a0374a727e6ce9b33d3397b3f41245edbcea601179d0baca7ef866b1da38bce7a01cf679e8bc5f369ec99210966d"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportResponse.js",
+      "sha512": "5d2cae19052818d21e6cdd1e12e1ba147c50a43fb00301c388dd94fb757b9d24864cbe62ed2da65f55a0ed6fa0301d19ade87ce12574faddac2cbfa464b33a84"
+    },
+    {
+      "path": "build/lib/metrics/InterprocessReportResponse.js.map",
+      "sha512": "26a66b6b2c720fe60b7056b625095b46241912174f7444a704f1824299d0705dfbcab761509e356944fdc183fb0c13a1df476f9c298f4d098d7ca4b515628f13"
+    },
+    {
+      "path": "build/lib/metrics/Percentiles.d.ts",
+      "sha512": "ae6873d9f30812ff234d941b204c1e3afcb613e721705adcbd847f8da9c8929a67b8a96cb190be24007f26d475ebbaa2241baa87cdb95fa487cfa18f7162d1b0"
+    },
+    {
+      "path": "build/lib/metrics/Percentiles.js",
+      "sha512": "fe68ceeea144d4e71374cce4e50d972ec15d8ad4a0c7783af5601bb2101919048b6d7ef935be572bef14da716d913d63a0d1eacff08a88ae2e1bf14ddf6a0466"
+    },
+    {
+      "path": "build/lib/metrics/Percentiles.js.map",
+      "sha512": "d4305cbadc33d82f17db404b94c7dd94230a9b4a3e9335ef6cc332bcf63df9af559261f2104140f5589814a9db58b19c71cd1487bbc5d586cc86335182406e22"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusClusterOptions.d.ts",
+      "sha512": "383e445ea1f80966fab6ec71b29e86deea8a742f529def05f823f945cd715a961da85b0924a54d62ac06482744c1cc23ecaf84a90d51a9e4343b020f133ef191"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusClusterOptions.js",
+      "sha512": "7f4b1dfb1c9d793d360ecb00b3bb42bc392a8987ef9dae3d10322cd211dfa642b41646c3b1653105bf25de7090ffc48852222c23b5871156c96db688d0214eb5"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusClusterOptions.js.map",
+      "sha512": "860bb8eb7d99953b228f318eab9107ffb5588f95ef3081fd5c1763db42f128e7ce7509e6fa8fa176a11035a33f6496a8f32754331cf0a189a7864b5d6243bf3e"
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.d.ts",
-      "sha512": "48eec51a886bf0dcce5329b9e0b8ca516996eec9fa6a28bf3c23c4bd202e4beb7717da8bae1af97a004ef45332336064d5487fc84e39b5961f0aa54ebdc685a6"
+      "sha512": "3cced5dc55983d148bd0bf11fe3a5c1433014d8bf617c42b743b9810fd1dae21271f14d8c955d1ba14cc76acb0d0a795bb5eb4cfa55fc8020dc0a23957504188"
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.js",
-      "sha512": "9d23212cf9d492f15e492166c6e19bbe3a6349e6f54cc0ec6d1b9e3ebb3e4997dc70802afb6744fb1486acb1a78abfcddeb01e603cce929ea520c3dfa32d194b"
+      "sha512": "ed8d4b73572bf0308c53ca0ca08f89c27e026c456096e918e40a64f34fc18b96bb2afcc68260c04de92db6acbfea62b904effb04240839d56d01d24b586c6ed9"
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.js.map",
-      "sha512": "68a5e17c96a91db46e1aedb18e418706ef2928053a768be8b675c0092189830f3f1aad34d11287d0f801f61b20271efd2a7cea29668d5ec1d9bf35ef959fe24d"
+      "sha512": "2dcc96edfa80770ff180d3c8ab8feca9c06a3919d96b12a04b004e96ce9720476e7a9c4958ee2df3068d6937fcafa92bf774ae6617ad283239cea1d361e3dbfe"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusReporterOptions.d.ts",
+      "sha512": "c4a89ddf6c3ae358846740d9161c4e82ee17752dba1de40c50b8c3be3af64a8b0dcd64d5bdaf023fb2c7632ae87c3ef5f6252726ec86e760c1721d72500ff461"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusReporterOptions.js",
+      "sha512": "2b5e57c31335f471f854bdbda1e40d1103d9d57d120064be7c60f4cbb6dec0990aa88343640f69c8640faea933eb26a4ac475b624d33224a2c259e75f2cca5a5"
+    },
+    {
+      "path": "build/lib/metrics/PrometheusReporterOptions.js.map",
+      "sha512": "4d649db1d4cda2f9f432ff1794c66422f036e7fe2b18f026a70ed965e94300d30c292c6e59e15fdccd3fde21b783cda6eaa1f0f4d8926d94a04d2535a870dd6d"
     },
     {
       "path": "build/lib/metrics/PushgatewayMetricReporter.d.ts",
@@ -67,15 +139,27 @@
     },
     {
       "path": "build/test/metrics/PrometheusReporterClusterMasterTest.d.ts",
-      "sha512": "5b31e80eb7352348b0deb88bc8907b20e69d97e1f880e9034c3d502df4dfac5fff19ee9fe82601ea7fbe1cbcd444bc7ae028b75328631e183392bbcc41a65e16"
+      "sha512": "e953f0a2d38cf745b502bc9ac79be30cf820eeb130f36ecba23481264847b48d565155fd1b815418f645573b9f72c681f2d41ff3c2a616f2e05752756525a13b"
     },
     {
       "path": "build/test/metrics/PrometheusReporterClusterMasterTest.js",
-      "sha512": "b355a4c9c7fbbbe3c32664dbdd0e5158e6b9850d16e3175e8bcfbfa57b3dda43e916dd1b97d6e70d878e884fcdb80251be9fd74e21f7d45f254d89a23f7f43d4"
+      "sha512": "2f51a15e47acffa5283b6ca11412f900f653dd04fbeabfe565fc70d90f3e5b37f422eabd841be225e80336935d6ccf40700b715ebd558f3bd3c2976a788becea"
     },
     {
       "path": "build/test/metrics/PrometheusReporterClusterMasterTest.js.map",
-      "sha512": "24af4e69369c48750f46072a5fc8fe9d469f978544a86a81b6bc46ffe3babccb0df96acf6305311ff1d2b1ee998cc8ccc3fb4c52e20cec5ceb88d5d64509abea"
+      "sha512": "d54e77cab8bd162b7a69640c14fbdd3d7c2f7b9bb0eaf1f5ccfd59497ce3e7520f6766220372054d344fce2011ea1412dddedd97a375341722264bfd238a6cd4"
+    },
+    {
+      "path": "build/test/metrics/PrometheusReporterClusterWorkerTest.d.ts",
+      "sha512": "9b12bd1f33e733322f3ed220a93fc64d8a52b6305c836235b93abc7a1f949cb422f2770600a897f3db72fed0b51e6e59c78d46ccc3a418a6eac099ab2d739865"
+    },
+    {
+      "path": "build/test/metrics/PrometheusReporterClusterWorkerTest.js",
+      "sha512": "5547cb7f0e665a5c32b549f81d5d80313ab02a5291a9c0abd25dc63bd11cc16f4f991d0b58bed8adbdadb200e4250fb4c3e0c30ff2e66dab99e407d809e3ef68"
+    },
+    {
+      "path": "build/test/metrics/PrometheusReporterClusterWorkerTest.js.map",
+      "sha512": "692a22ee069cb76d6fc11e09e011855a105e9d396b3eb7a9e8822bdb795bc83bcd5cd03735dc285c409c9acb6a6dd2748827be2bb05e32a4294d0a08dcbcdf97"
     },
     {
       "path": "build/test/metrics/PrometheusReporterTest.d.ts",
@@ -95,14 +179,26 @@
     },
     {
       "path": "build/test/metrics/PushgatewayReporterTest.js",
-      "sha512": "a6fb4a1fcefd2e40b5088943490d99a39b9fa69baad3282920dff68bd98c80ad2c2118c8946d73612dc049cddba2740e0c2b3dbef1a335d7b3aa3c1f503e0575"
+      "sha512": "d836abd5a0fd5bbeb5530efcd008a53b7de7d9d0f07ba5bfa3cee3010512ecec9178bc88c5b88a70fa3769b9b4179bfbe11c99ff0df82fb5a83d6c18799e5f67"
     },
     {
       "path": "build/test/metrics/PushgatewayReporterTest.js.map",
-      "sha512": "15c9741bc120bcb4ada7ad3dbfdc8dbcdc17c7a844fc972e69195e59676cb887964719c0462cab540ec2d244a4d9cb1947766c10a40f756ebe44767b8bdc0863"
+      "sha512": "5e2228addfaab7b4bf3373652d8f572be2df3c6b9703490cc80efc29cdd7e73640805869e6d7ef701096943a0677329e23ae035e6000337e954f7b0a68b3aa84"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.d.ts",
+      "sha512": "8fb5fe2ea1ec34fde592c6af48f8040da1927daaf2ee76e9e56569da8d13513c9aa539fd8c3dc33427d662fb427eac9351487092f76995fb812fe71736fd8cfc"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.js",
+      "sha512": "952d2b7d53a21d531d1a22905817b75a256c19be1bd4b459f45f387672e8ac96c0f3be73dcf93d8a36d105f0c813a5dee057b39580d5aa88d8ec5904e10e32f7"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.js.map",
+      "sha512": "28cd28d0ac31663b379b51e800341f20924254af08cbe7ffa5db00443e5dca6320fc6445a6bed7dc1d7275a0dc9e30c232ccdf8cf586c3586819f3b742a0e134"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcqJ4xCRDCMfXrQKYV5wAAsfQQAD128bFmxdGa+Q92aN6S8E+v\n+zm8GS/xH0RygKxt086NmW3gs9BnmeA3Kmmk3woj11kN0EXdNhsWdKut2sknfnzT\nTO8cYtvU83Cwg+714/ADj2+0E/pz7CbhgoV3LCnDM3JFQMevUUOfahD3nUjEgL1g\ns7zqsZV6H8ZcfMCPKvvmW4icd4SAEuVTRWYkAmNahrAI8fBQ2jVTM3S0Wep0JuDZ\nQWYU3oQBlf2z6H7ULR5KPQq9ALANBcPhe1Wge+bieETTiF/k+ufB/noMdrs/yoV9\ngAzAp0xFdBTvrEg3Vl/eJZLg3f8Ujo2p135SYIld/wNJGoB9hw47GukNFx3DbeYr\nxOkvFVHgpDDKV1yBqAQY65J3zwZzS0BQEIcgE1HQpCau/b8UCggDDHLhPF1cTCCQ\n2ULFA0PYo/kL1kaHcn3kPXaIbBsXMa5oIYlof9czkogpNgvoBlWePwKWNCDHmp0b\nPVTthM9HbNS/9XlM7XUAK8ITyjbUSi7kMXra11LuxIFvwOqG0mJAOIhNtNKtG3RQ\n/K1c+FH07RrvygF74FRZtO2UosgIZfimPZ/2jIVJGUQ33B1DX6c1FW5VcLU3KASx\nocfHdsptMnFXc30eLjucGJSMwlwNmgP0GTK1K6JBSC6Cbt58eDyUf2yUQLKgOUHY\n0phiap7UiOaBoLoVgWcS\n=FsS2\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcqPaNCRDCMfXrQKYV5wAACA8QAChYYgBnoe+fHr+8HwZ1aqdx\nfVOcDkcvwlTHSFKAcAqRjsNXgI0M6f9KMeQg4bzDNeJHcsiJwMtGsCpv6TD8aeRi\nIDbtfxubmpl00MobokRI31+SST1Jd/DMVUJWhcJQpEnXt77RpXjtaPHm7R6mnlsV\nuD0eK+V3HzhdW3PEbCFwC+USjvelmh67gZ41/j43NvrJ1TJy+VRBMLlPtXYfyAt1\nSs8+iA5icRpGnLsovdWQrLve+G1BTnctp2jSQ/19+iHysq0OEkfL6xtkEbNXne8X\nm6Ry5S2YHc7SKzIYr6bOTZcRYk0+STJE2cJIFkNG13ndGLzgWqbIaq+FgM9Y/CWM\n4z37LvPfVPz8Dn7J4Fzgw8L3YKCfFtxGeEw5AP44xunRRtU+o6ow8Vs2TfFWysjY\n7633BT1Muzkz9EAfHMpxIFevNDV07NkOvEqJxtkdl32Q+xbNEMiZ1FFhj4zUntpI\noaVFPjSnFGBdNaUjOmH4+5le0Kx31K46nE3ajp0rWO8pOV9eVr4NlXMCfVhyEV3h\nu3QTg9sFzewahmD5T8qamxAHae4isgFX7AWzy3JvIIhELRkXe/U7n6iF5mqPAjNY\nhGPV09bK3YqPM2RygJ7BVeTV7IcwlK+gRkvA+0s+7iHBT4xBwtbRsDGCFZc2mIUm\nmDnlk2jT1D0gBLUr/t2y\n=3hQ3\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
