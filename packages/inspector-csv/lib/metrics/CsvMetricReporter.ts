@@ -11,6 +11,7 @@ import {
     getMetricMetadata,
     getMetricName,
     Histogram,
+    InterprocessReportMessage,
     Metadata,
     Meter,
     Metric,
@@ -78,7 +79,7 @@ export enum ExportMode {
 export interface CsvFileWriter {
 
     /**
-     * Called on every metrics-report run one time - behaviour is implementation specific.
+     * Called on every metrics-report run one time - behavior is implementation specific.
      *
      * @param {Row} header
      * @returns {Promise<void>}
@@ -87,7 +88,7 @@ export interface CsvFileWriter {
     init(header: Row): Promise<void>;
 
     /**
-     * Called for each field of each metric and after init finished - behaviour is implementation specific.
+     * Called for each field of each metric and after init finished - behavior is implementation specific.
      *
      * @param {Metric | SerializableMetric} metric
      * @param {Row} values
@@ -324,11 +325,36 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         });
 
         if (result) {
-            await this.options.writer.init(this.header);
-            await this.handleResults(null, null, event.getTime(), "gauge", [{
-                metric: event,
-                result,
-            }]);
+            if (this.options.clusterOptions &&
+                this.options.clusterOptions.enabled &&
+                this.options.clusterOptions.sendMetricsToMaster) {
+                const message: InterprocessReportMessage<Fields> = {
+                    ctx: {},
+                    date: event.getTime(),
+                    metrics: {
+                        counters: [],
+                        gauges: [{
+                            metric: event,
+                            result,
+                        }],
+                        histograms: [],
+                        meters: [],
+                        monotoneCounters: [],
+                        timers: [],
+                    },
+                    tags: null,
+                    targetReporterType: this.reporterType,
+                    type: CsvMetricReporter.MESSAGE_TYPE,
+                };
+                await this.options.clusterOptions.sendToMaster(message);
+            } else {
+                await this.options.writer.init(this.header);
+                await this.handleResults(null, null, event.getTime(), "gauge", [{
+                    metric: event,
+                    result,
+                }]);
+            }
+
         }
         return event;
     }
@@ -343,13 +369,37 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     }
 
     /**
-     * Calls the init method of the writer instance.
+     * Makes sure the csv headers are built and write to the file and then
+     * calls the implementation of this method of the parent class.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @memberof CsvMetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
+        if (this.canHandleMessage(message)) {
+            if (!this.header) {
+                this.header = await this.buildHeaders();
+            }
+            await this.options.writer.init(this.header);
+            await super.handleReportMessage(worker, message, handle);
+        }
+    }
+
+    /**
+     * Calls the init method of the writer instance if
+     * the metrics are not send to the master process
+     * (so probably only called by master-process if clustering is enabled).
      *
      * @protected
      * @memberof CsvMetricReporter
      */
     protected async beforeReport(ctx: OverallReportContext) {
-        if (cluster.isMaster) {
+        if (!this.options.clusterOptions ||
+            !this.options.clusterOptions.enabled ||
+            (this.options.clusterOptions.enabled && !this.options.clusterOptions.sendMetricsToMaster)) {
             await this.options.writer.init(this.header);
         }
     }
@@ -707,7 +757,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     }
 
     /**
-     * Writes the rows by calling the corrsponding {@link CsvFileWriter}.
+     * Writes the rows by calling the corresponding {@link CsvFileWriter}.
      *
      * @private
      * @template T
