@@ -17,6 +17,7 @@ import {
     Row,
 } from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
+import { TestClusterOptions } from "./TestClusterOptions";
 
 chai.use(sinonChai);
 
@@ -69,9 +70,11 @@ export class AbstractReportTest {
         },
         minReportingTimeout = 1,
         tags = new Map(),
-    }: CsvMetricReporterOptions): CsvMetricReporter {
+        clusterOptions = new TestClusterOptions(false, false, []),
+    }: CsvMetricReporterOptions ): CsvMetricReporter {
         return new CsvMetricReporter({
             clock,
+            clusterOptions,
             columns,
             dateFormat,
             metadataColumnPrefix,
@@ -90,7 +93,7 @@ export class AbstractReportTest {
             unit,
             useSingleQuotes,
             writer,
-        });
+        }, "TestMetricReporter");
     }
 
     protected async triggerReporting() {

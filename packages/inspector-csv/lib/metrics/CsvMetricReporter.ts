@@ -369,8 +369,8 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     }
 
     /**
-     * Makes sure the csv headers are built and write to the file and then
-     * calls the implementation of this method of the parent class.
+     * Makes sure the csv headers are built, written to the file to then
+     * call the parent class's implementation of this method.
      *
      * @protected
      * @param {cluster.Worker} worker
