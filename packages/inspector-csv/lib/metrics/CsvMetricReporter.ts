@@ -298,7 +298,10 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             // rebuild header on every call to start
             this.header = await this.buildHeaders();
-            await this.options.writer.init(this.header);
+            // only call init on master process
+            if (this.shouldCallInit()) {
+                await this.options.writer.init(this.header);
+            }
             await super.start();
         }
         return this;
@@ -368,6 +371,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     public async flushEvents(): Promise<void> {
     }
 
+    protected shouldCallInit(): boolean {
+        return !this.options.clusterOptions ||
+                !this.options.clusterOptions.enabled ||
+                (this.options.clusterOptions.enabled && !this.options.clusterOptions.sendMetricsToMaster);
+    }
+
     /**
      * Makes sure the csv headers are built, written to the file to then
      * call the parent class's implementation of this method.
@@ -397,9 +406,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     protected async beforeReport(ctx: OverallReportContext) {
-        if (!this.options.clusterOptions ||
-            !this.options.clusterOptions.enabled ||
-            (this.options.clusterOptions.enabled && !this.options.clusterOptions.sendMetricsToMaster)) {
+        if (this.shouldCallInit()) {
             await this.options.writer.init(this.header);
         }
     }
