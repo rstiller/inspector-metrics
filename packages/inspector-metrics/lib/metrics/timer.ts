@@ -202,7 +202,7 @@ export class Timer extends BaseMetric implements
     }
 
     /**
-     * Getter emthod for mean-rate
+     * Getter method for mean-rate
      *
      * @readonly
      * @type {number}

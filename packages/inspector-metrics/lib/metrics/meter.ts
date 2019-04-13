@@ -154,7 +154,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
     }
 
     /**
-     * Getter emthod for mean-rate
+     * Getter method for mean-rate
      *
      * @readonly
      * @type {number}

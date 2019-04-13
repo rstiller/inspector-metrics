@@ -396,7 +396,7 @@ date,group,name,field,value,type,tags
 20181020194618.877+00:00,"","requests3","sum",32000256,"timer",type="metric";host="127.0.0.3";special_tag="test_abc"
 ```
 
-`example-with-separate-colunms.ts`
+`example-with-separate-columns.ts`
 ```typescript
 // same as in the example above ...
 

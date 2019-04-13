@@ -90,7 +90,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      */
     private metrics: Metric[] = [];
     /**
-     * Stores the size gauges for different speces.
+     * Stores the size gauges for different specs.
      *
      * @private
      * @type {Map<string, SpaceHistory>}
@@ -106,7 +106,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      */
     private totalHeapSize: SimpleGauge = new SimpleGauge("totalHeapSize");
     /**
-     * Total availabel size.
+     * Total available size.
      *
      * @private
      * @type {SimpleGauge}

@@ -25,7 +25,7 @@ import {
 } from "inspector-metrics";
 
 /**
- * Interface for getting a certain information using the specified emtric metadata -
+ * Interface for getting a certain information using the specified metric metadata -
  * e.g. name of the index, metric type, etc.
  */
 export type MetricInfoDeterminator =
@@ -323,7 +323,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
     }
 
     /**
-     * Either gets 0 or the specifed value.
+     * Either gets 0 or the specified value.
      *
      * @private
      * @param {number} value
