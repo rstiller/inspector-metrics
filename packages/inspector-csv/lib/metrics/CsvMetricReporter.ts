@@ -371,6 +371,13 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     public async flushEvents(): Promise<void> {
     }
 
+    /**
+     * Indicates if the init method of the writer instance should be called.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof CsvMetricReporter
+     */
     protected shouldCallInit(): boolean {
         return !this.options.clusterOptions ||
                 !this.options.clusterOptions.enabled ||
