@@ -48,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - abstracting the `cluster` module's messaging capabilities with `ClusterOptions`
 
 ### Changed
-- method `getHistogramsByname` renamed to `getHistogramsByName`
+- method `getHistogramsByname` in `MetricRegistry` renamed to `getHistogramsByName`
 - updated dependencies
 - refactored internal file structure
 - fixed some typos in docs
