@@ -28,6 +28,13 @@ import {
     Timer,
 } from "inspector-metrics";
 
+/**
+ * Extending standard options with `host` and `log` properties.
+ *
+ * @export
+ * @interface CarbonMetricReporterOptions
+ * @extends {ScheduledMetricReporterOptions}
+ */
 export interface CarbonMetricReporterOptions extends ScheduledMetricReporterOptions {
     /**
      * The graphite / carbon host.
@@ -73,7 +80,7 @@ export interface CarbonData {
  *
  * @export
  * @class CarbonMetricReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter<CarbonMetricReporterOptions, CarbonData>}
  */
 export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricReporterOptions, CarbonData> {
 
@@ -154,6 +161,8 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Reports an {@link Event}.
      *
+     * @template TEventData
+     * @template TEvent
      * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof CarbonMetricReporter
@@ -195,6 +204,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Uses the scheduler function to trigger periodical reporting.
      *
+     * @returns {Promise<this>}
      * @memberof CarbonMetricReporter
      */
     public async start(): Promise<this> {
@@ -205,6 +215,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Stops the timer reference returned by the scheduler function.
      *
+     * @returns {Promise<this>}
      * @memberof CarbonMetricReporter
      */
     public async stop(): Promise<this> {

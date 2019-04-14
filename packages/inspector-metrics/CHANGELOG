@@ -6,6 +6,53 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.19.0] - 2019-04-15
+### Added
+- added MacOS to test matrix
+- added serialized metrics
+    - metric classes can implement `toJSON` method to perform serialization
+    - new interfaces
+        - SerializableMetric (convenience methods `isSerializableMetric`, `getMetricName`, `getMetricDescription`, `getMetricGroup`, `getMetricTags`, `getMetricMetadata`, ``)
+        - SerializedSnapshot
+        - SerializableSummarizing
+        - SerializableBucketCounting (convenience methods `isSerializableBucketCounting`, `getMetricBuckets`, `getMetricCounts`)
+        - SerializableSampling (convenience methods `isSerializableSampling`, `getSnapshot`)
+        - SerializableMetered
+        - MeteredRates
+        - Metadata (convenience methods `metadataToMap`, `mapToMetadata`)
+        - Tags (convenience methods `tagsToMap`, `mapToTags`)
+    - implemented in
+        - Counter
+        - MonotoneCounter
+        - Event
+        - HdrHistogram
+            - HdrSnapshot (`values()` method always returns empty array)
+        - Histogram
+            - property `sum` renamed to `sumInternal`
+            - property `buckets` renamed to `bucketsInternal`
+        - Meter
+            - property `count` renamed to `countInternal`
+        - BaseMetric
+            - property `metadata` renamed to `metadataMap`
+            - property `tags` renamed to `tagMap`
+        - SizeGauge
+        - Timer
+- added support for multiple processes
+    - new interfaces
+        - InterprocessMessage
+        - InterprocessReportMessage
+        - ClusterOptions
+    - `DefaultClusterOptions` - send metrics from forked processes to master process
+    - `DisabledClusterOptions` - disables sending metrics from forked processes to master process
+    - `reporterType` property in each metric-reporter - indicating type of reporter
+    - abstracting the `cluster` module's messaging capabilities with `ClusterOptions`
+
+### Changed
+- method `getHistogramsByname` renamed to `getHistogramsByName`
+- updated dependencies
+- refactored internal file structure
+- fixed some typos in docs
+
 ## [1.18.0] - 2019-03-01
 ### Changed
 - turned into monorepo

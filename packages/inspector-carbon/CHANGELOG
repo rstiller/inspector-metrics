@@ -6,6 +6,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2019-04-15
+### Added
+- added MacOS to test matrix
+- added support for serialized metrics
+- added support for multiple processes
+    - use `DefaultClusterOptions` as default value for clusterOptions option
+    - events & metrics from forked processes are send to master (if enabled through options)
+
+### Changed
+- use inspector-metrics@1.19.0
+- updated dependencies
+- fixed some typos in docs
+
 ## [2.3.0] - 2019-03-01
 ### Changed
 - use inspector-metrics@1.18.0

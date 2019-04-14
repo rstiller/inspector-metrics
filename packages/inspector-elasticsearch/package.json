@@ -33,7 +33,7 @@
     "elasticsearch": "^15.4.1",
     "inspector-metrics": "^1.18.0",
     "lodash": "^4.17.11",
-    "source-map-support": "^0.5.11"
+    "source-map-support": "^0.5.12"
   },
   "files": [
     "build"
