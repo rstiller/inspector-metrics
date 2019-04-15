@@ -52,6 +52,7 @@ Some other reporter:
 * [CSV](https://github.com/rstiller/inspector-csv)
 * [Elasticsearch](https://github.com/rstiller/inspector-elasticsearch)
 * [Influx](https://github.com/rstiller/inspector-influx)
+* [NATS](https://github.com/ttous/inspector-nats)
 * [Prometheus / Pushgateway](https://github.com/rstiller/inspector-prometheus)
 
 ```typescript

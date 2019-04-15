@@ -88,6 +88,33 @@ const event = new Event<number>("application_started")
 await reporter.reportEvent(event);
 ```
 
+## multi process support (nodejs cluster)
+
+By default forked processes are sending the metrics as inter-process message  
+to the master process. The `InfluxMetricReporter` is listening for those messages  
+and report the metrics from the other processes.  
+
+To disable this behavior set the `DisabledClusterOptions` when creating an instance.  
+
+In each case you should set the `pid` as reporter tag.  
+
+```typescript
+import { DefaultSender, InfluxMetricReporter } from "inspector-influx";
+import { tagsToMap, DisabledClusterOptions, MetricRegistry, Timer } from "inspector-metrics";
+
+const dbConfig = {...};
+const sender = new DefaultSender(dbConfig);
+const reporter: InfluxMetricReporter = new InfluxMetricReporter({
+    clusterOptions: new DisabledClusterOptions(),
+    sender,
+});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)
