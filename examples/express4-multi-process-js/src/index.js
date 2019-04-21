@@ -21,13 +21,13 @@ async function start () {
       .setTag('type', 'application-start')
       .setTag('text', `application started at ${new Date()} on host ${os.hostname()}`)
       .setValue(1)
-    metrics.reporter.influx.reportEvent(event)
-    // metrics.reporter.console.reportEvent(event)
+    metrics.reporter.carbon.reportEvent(event)
     metrics.reporter.csv.reportEvent(event)
+    // metrics.reporter.influx.reportEvent(event)
   } else {
     const express = require('express')
     const app = express()
-    const port = 3000
+    const port = 8080
     app.get('/', (req, res) => res.send('Hello World!'))
     app.listen(port, () => console.log(`worker process listening on port ${port} with pid ${process.pid}!`))
   }

@@ -10,5 +10,5 @@ if [[ "${COMPILE}" == "--compile" ]]; then
 fi
 
 pushd "${SCRIPT_DIR}"
-    node .
+    node --inspect .
 popd

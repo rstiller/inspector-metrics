@@ -19,15 +19,15 @@
     },
     {
       "path": "build/lib/metrics/DefaultSender.d.ts",
-      "sha512": "1df899c55439a8b1e2649c773550d2bc1f6bbd150c52c3e2abef4f368d99089486d636f69ef533bd2554dd86c43b1617bf3a51286da66b5b8047c3904578ba9d"
+      "sha512": "2ca3337fd9122a6e3ea73d41ba62e216d318c52e202347d4fb05aaebb00fa063ac1fe0026238d0dd8d5a6ea495042449557487ff2a7b3b32f55d7efb3a0a29de"
     },
     {
       "path": "build/lib/metrics/DefaultSender.js",
-      "sha512": "ddbae9ce6272136298ed8ad1c696cae0048ec683b513e7816dc50c109441c8da2d3669b0096336499c7d53f504eb7d3fd0376a841e2a1f547a6a4990cca30d6b"
+      "sha512": "665b63b4f0ca828918f46c815aa799540db741f7c686a99ccd88131aa0d3664b119dc60b083a4d506d8d96df8d744f350cba40e8fa7b1b7d036db58f603b9c84"
     },
     {
       "path": "build/lib/metrics/DefaultSender.js.map",
-      "sha512": "9ef49a8972cf8c4b291e364770c8d0373fdda7aad02e14320ee37340855e5aba7879ae18a6e0798458bd5fd11bbb93ba1a8291adfec11bba1913408b8ceeab32"
+      "sha512": "7e1461409a75814ef1d7804d7f195b27e19563a857a55356685b4f0c76021ba3f8fa18c2f996af8de4e68ffabce2602862b4c63d590c5b6d0eaffebd5b19d628"
     },
     {
       "path": "build/lib/metrics/index.d.ts",
@@ -47,11 +47,11 @@
     },
     {
       "path": "build/lib/metrics/InfluxMetricReporter.js",
-      "sha512": "1fe3c24ca6da76912657c821792ba6a0803634fbfefeb5f8a35d396863c0108a669f313330ed633897df498f895956aec5550ce88a8b193e44926e0416c49d6f"
+      "sha512": "77aced35198478a8c0147ab8ac37296eea6baa659c9b87661d35841c90b7217aa1299e7f1b8c231f540fd62d71752f8ce008480d5b91f14c87c9487077ee5f22"
     },
     {
       "path": "build/lib/metrics/InfluxMetricReporter.js.map",
-      "sha512": "b2a03674c5f248d17c833113329a3086d788a6abb9b4f00b91303ebcb8f6b174257be47e12c70f73fc2b55dcaea5d46b1c0accf1aad86ee61e80ea2fbba080aa"
+      "sha512": "dac4af4f31d67204fd537fa729ae5f06479b0f0b184011177171a2f0386f1852a4111f95d2628b859174d05cc2cf34fc801c68653c2ed1d5c40836d929265198"
     },
     {
       "path": "build/test/metrics/InfluxMetricReporterTest.d.ts",
@@ -66,7 +66,7 @@
       "sha512": "eabf5183d3fe99ff1084c16e8c7185933f52c97e05b5d501da38486d791565c17eee5ba078168c5fd4735a755f269b3fa8da22ac80e8beaba75941c69a247ddb"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJctMnZCRDCMfXrQKYV5wAA+EcQABwnBzu87OFDVFW3Sgu+2xv5\npGO+ne5AR5pxyM3o3iFV9JrKQCEb4wAMTIGfLT6cp/pErFFB8Y/SKd7pIXwDOdNu\nLVJi3EJ691dEBuy8AraxNYwA+aY0/jczwuFp8KoGU51DR1VEHP08VhYz4PnDsFdm\nlFlQuGFY+Ph/X1LKfia6F6oF1CJdaSWfC/9e98300CgRAF2VcxdSguCf+BvZWMBE\nbzvyBhYmBZwExQQcuokz78zJwV6CnoE3Es6xaiNxE/cHPa2FEziL9MwU69aVeQSk\nZ1jIPJ14f63u/qdI6WcBep/kqxAPbZlsAZ6LzMGbUs3vaKfyvbIlQp8A/l6t/LDG\nlSQ4n+MmLM4jSgoo9lhqT2Mi/hsYUZiYnfFY6Q9LRH1rsQn1YTc3f05/eSmUZ93v\nJkKbyylR3JCi8uYu9zxkcX46dTSmgua531c1Q0XcHZ+KYa97CGjLrLmpx46qixnn\nlIPCbiH353fZpRYqFbOGQC3VfnYDvMPuQPF9Lf0KMMxLktUia9iSuG/QGMe9tWw5\nilAYQAezlFhKlFyfPx+8QmxJTvmH3CuqvlMXLpnIffCq3dIB4dS9H5NzQFie7JuQ\nzjCX1XIcgbVTMxlMv1WaRSs9cp409hAQj6Zt7pQ2c7yiVNb6+u243db9sdeAKh4d\nnxiis/OhkB97Awi5aCik\n=9fUa\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcvCIxCRDCMfXrQKYV5wAAUFoQAH9n9Qn8dZQBUB68w4D6vZvk\n1q1x0p+mwIC970TDVKqfwsvA6tARwegDnDdacAiS8BCuoPymZ/l5DHqpPvISM3Go\noe2zE0Ok8PiWaU1graOTbKGfvNBqIfISh3NW53bajhl9uMYDXTtGYNUhTAM6P9GS\nnDeUp17Hg29EffDU/uOcsKBwPW+7W39yziJakT4AY4/yz4qtY5L65dhNh+ku5+k2\ntqr8f+Pa+Cng8h5yD8D+5oyu8FEuxo4hTtBaPi4j2jC7/K/5KpMQZS5bOag3Ao4H\nvFG1UkMTYvcF6w6w5j+QmTCSRLIpxw175CaNrH+u/pKhk+cDPUvOtfFn0YnO/hm2\nxJf/Jw71rgZvYoh74sK2GvbynUjMAHYtsM98qpgtyCma9h6ruuHCWNEAl6/ch4rv\n/b1TTrrmRoVCozF/M29XK8VKaLvRYO0PC4xO+10EasMLRBhgWsWdDcNPQZvWNllJ\nBcAa0LGnekCnWP2OG2VzXy5yuwf2TzcZtnVa9Aej9omCC8dtTnTUchKLgW6DwPC6\nwvtLxrn1nMhjEzImIfQnma1uroValIJ47FyAr11rBCZ2dxI0vCvB9/jDoTs6SXOz\nFEzj/4PL8e3Ve049AOOhOlJcCPb8S153AdkuRhQBiALNU5eWqucAt2T4CvKMcz36\nmTh+IWwfmb8EA/eBBXkY\n=75Yg\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

@@ -103,11 +103,11 @@
     },
     {
       "path": "build/lib/metrics/meter.d.ts",
-      "sha512": "ed5de5664240bc27110e596d8c35508b2abbc330554ecd8b2144ad667b1a74605392eb7f43d5276f406fec4731c7c78b43ae1a0952801ea2cec3e30180b0ab06"
+      "sha512": "5ec16c36ee44145905d40f00e3bea1809f49d7793ecd3f387688d6b0ba8d4917a11224352b22a391b70e982dbaf38fe8891a3d12af7e74b506d35e0599f43127"
     },
     {
       "path": "build/lib/metrics/meter.js",
-      "sha512": "025d8e38ae18ca89351a249a72d20b18187c988397d1bf4921f3893d4194f9ebb3fe500cc41b41e86c84425de81d53a58af8195e8abd5cb1b8031f2785bc2ce6"
+      "sha512": "71c563aa7d7f0f83c091568bc9fc3778865f55be171efeb44358159f5c702bb9dda58bda72c06d07b07414021d72c4ef404561fd300b1d06c75c697b8fb8704f"
     },
     {
       "path": "build/lib/metrics/meter.js.map",
@@ -371,11 +371,11 @@
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js",
-      "sha512": "707242cd7ab333f769151c52a513f2a62ea3f313f56b1fa7d70630ef23381ae56ebb1da24b5b334c46994613815ecdeb0914b1e01676ee2405a2c0e7f5a43ccc"
+      "sha512": "316b7d44aae16c9c8b181f47ab829cfbd8422c21e0bd40e1d64c182e31eab4c6cb999ccf9ae2527fc4f0e9f3a97968d42f67301c16b53dbe9cd6b23a26ffb773"
     },
     {
       "path": "build/lib/metrics/reporter/metric-reporter.js.map",
-      "sha512": "04547da66efa4d19730dc93839ec36d4b9e671dbbb87d164b2680c881be5432579879f72d11b9721188236f87ebaec05b7aa67c0b844c7029eff603329bfe2df"
+      "sha512": "ee9f087f947f696df11395fc31876e967f5bd77657071720fe41ef21016f84aee3a35726390f91e2ef040f489edf6365c46fc496696fbb43478b6b9395ce73b7"
     },
     {
       "path": "build/lib/metrics/reporter/metric-set-report-context.d.ts",
@@ -463,11 +463,11 @@
     },
     {
       "path": "build/lib/metrics/timer.d.ts",
-      "sha512": "89582092bbcd10486e97063e38b6292936c5a40d7b8f9aaf8f7c6e3970789a9a015e4ba37b7ccc62c57003dbe981f974f789d06e2026ddd6c26df7472767f440"
+      "sha512": "5578761eb571afed3739d652ee7a4946fcc0e7ef0d920bac98c22a6b2181f6a1649120d76c774a38f8c5dcf0bebf7b17ff17496cf5be6eaf8b894f6791de4a5f"
     },
     {
       "path": "build/lib/metrics/timer.js",
-      "sha512": "d7b5358bff8191406cd049b9bdc85f3e1a63bb6e9afa204449eceb1d18f4545c783eab236c7407238c6685bdf2fcbcc3ec68bee03567a78fa60d5169e75f33d4"
+      "sha512": "729f0b227759b5cd0376bcf073ed6d058b7689183b7e832c08b4bc19234c994b60e3c2ca81fb55c1893bd489a18d9f1ab97f8a2c6bad0a68f432ac5de02b300a"
     },
     {
       "path": "build/lib/metrics/timer.js.map",
@@ -750,7 +750,7 @@
       "sha512": "b3dcf10ac48c80c8635df601fb4ca1454fa3b50f20dd212c1be3282a499fd7c66cf03b5d2f1b18ff89b4b50df358b97f82d4eb0196fb413ff360ecfab52ba4d1"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJctMnWCRDCMfXrQKYV5wAA92QQAJcdWu+5Tmf7WHao0gKnchOJ\nQrSFqrjaq5xELSUxccMI7hJU7uFekEZ8X3p4PprCLrhgr48c/pkcc4Bgx7q0wc4I\nc13kpG2XwN5KTkhdcRZQymtvzB16c8gvu5vGapASvQvxj5opzo6INvtzaFS+2uTF\nHX5vxWftkKoMsS2fKIU1rxPVDCfso1DmjFsQyRbBmZX3cJ/Nb+eGVlJ8U+LG482l\nSsBqf5h/DXh8hOxUTMbeLgLGGHYHYxiqRheeP1M4A1dxUPZ11cFuR792jOcLtVFh\n6mwZk4/Dm5Yr2tDP1N43M3No8JyaW50lG0hmT9wXRvgBi2wmxkqCgTbnK7pExYRP\ntRhD1J8vVwJnMmU+KNExFa8Q8GuPKYXwn0JyDxNZmP9QdlZtkcL6mgCg9qdP3GzY\ndGeAefpkX0/Eugu0wg15FhOvilYsSEq+hMWE9/bi4/urrbK4lLKf+UgfN/d8s6bN\nyqRtsXi1tfVqRk9esfaIpp/p3FqAqMelkbOHSl9UjCzxjp52L5Au3bVu9jLfSOAt\nlkayfmSAswKFXLBhD9ggBHt1fwHFokvGJINwiDaLu2/LZ+XdDqFKEq3k+FmWiFDm\nTOwZQhs+Ddo2tBOigWQ62Q3saCzxgU8gqg3PVB7Jrfw8dRjODAMGzi8S5ObGYeA+\nmsS2aAsWyIrpcigN3Esg\n=x3gT\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcvCItCRDCMfXrQKYV5wAAt4UQABqKqkhLDereObYCHvEeUCC/\n7S8Kc803MbxOxDLrVG8r+/rdiyxmoZe7cICcYoGRLotxeyJBag0xohsEYy6tOTLX\nGK7JeQLnkD/4fOOScbXvXZ08J9cSACpbfKRp4jGuERnuorT58xu5JKJHnOrzpVDZ\nwofutL6v6bWbPQ/DTTsJQ1PpewSZB/ReSNpSmx+YdAlSEGwzHuODR2jT+U95CDKe\nvKkfydAFX3hc8USeWcLcW315ypIK/19VFXVV8mjaboNXeSUg8mYg2WZtbAVOz14r\nf/sLty9j6Z2oGYJQ3pJyGHHFoHXk2FK1YGWbldfotd2pZoWzq+hf4Ivsn5R1Aaej\nwtxSRroZcVilq2z/d2HZKqvMjhDCZnPwoCXfeJt/4derTMRm70JTfdVaZjOcMRRx\noBGvhApTrvWTN6EZHJIqc8TCF5QZyb0KzxzRqlDbcYomJeXkflLWm5vpdlg+Ugq6\nBfbprpzivzXrrzgwJ82xMYQCMrGFO+fnCU1WwqHeLHfFIoOV6uxBwcm8NZLlhQvF\njOfzsjckEQT8u9W8I/CYoPBg3XJXSEGZTohox5isDpBXUGD15hcEBqfQK+yR11uS\nxXY/XOSXOkUPxibIxMFECx2LRviTl+kLOtJpaptDNM5SKTGDwgJ/cOi9Eh916HTW\n5f2oVQtMfsZfB6EjFPGG\n=Ru3g\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

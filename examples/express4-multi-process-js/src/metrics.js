@@ -1,24 +1,45 @@
 const cluster = require('cluster')
+const os = require('os')
 const packageJson = require('../package.json')
 
-async function influxReporter (registry, tags) {
-  const {
-    DefaultSender,
-    InfluxMetricReporter
-  } = require('inspector-influx')
+// async function influxReporter (registry, tags) {
+//   const {
+//     DefaultSender,
+//     InfluxMetricReporter
+//   } = require('inspector-influx')
 
-  const sender = new DefaultSender({
-    database: 'express4',
-    hosts: [{
-      host: '127.0.0.1',
-      port: 8086
-    }]
-  })
-  const reporter = new InfluxMetricReporter({
+//   const sender = new DefaultSender({
+//     database: 'express4',
+//     hosts: [{
+//       host: '127.0.0.1',
+//       port: 8086
+//     }]
+//   })
+//   const reporter = new InfluxMetricReporter({
+//     log: null,
+//     minReportingTimeout: 30,
+//     reportInterval: 5000,
+//     sender
+//   })
+
+//   reporter.setTags(tags)
+//   reporter.addMetricRegistry(registry)
+
+//   await reporter.start()
+
+//   return reporter
+// }
+
+async function carbonReporter (registry, tags) {
+  const {
+    CarbonMetricReporter
+  } = require('inspector-carbon')
+
+  const reporter = new CarbonMetricReporter({
+    host: 'http://localhost/',
     log: null,
-    minReportingTimeout: 1440,
-    reportInterval: 1000,
-    sender
+    minReportingTimeout: 30,
+    reportInterval: 5000
   })
 
   reporter.setTags(tags)
@@ -53,8 +74,10 @@ async function csvReporter (registry, tags) {
   } = require('inspector-csv')
 
   const reporter = new CsvMetricReporter({
-    log: null,
     columns: ['date', 'group', 'name', 'field', 'type', 'value', 'tags'],
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000,
     writer: new DefaultCsvFileWriter({})
   })
 
@@ -82,18 +105,19 @@ async function install () {
   registry.registerMetric(new V8MemoryMetrics('memory'))
   registry.registerMetric(new V8EventLoop('eventLoop'))
   registry.registerMetric(new V8ProcessMetrics('process'))
-  registry.setTag('pid', process.pid)
-  registry.setTag('isMaster', cluster.isMaster)
+  registry.setTag('isMaster', `${cluster.isMaster}`)
+  registry.setTag('hostname', os.hostname())
 
   const reportingTags = new Map()
+  reportingTags.set('pid', `${process.pid}`)
   reportingTags.set('application', packageJson.name)
   reportingTags.set('version', packageJson.version)
 
   module.exports.registry = registry
   module.exports.reporter = {
-    influx: await influxReporter(registry, reportingTags),
-    // console: await consoleReporter(registry, reportingTags),
+    carbon: await carbonReporter(registry, reportingTags),
     csv: await csvReporter(registry, reportingTags)
+    // influx: await influxReporter(registry, reportingTags)
   }
 }
 

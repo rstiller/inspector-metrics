@@ -253,9 +253,14 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
                             this.options.log.error(err, this.logMetadata);
                         }
                         reject(err);
+                        return;
                     }
                     resolve();
                 });
+            }).catch((err) => {
+                if (this.options.log) {
+                    this.options.log.error(err, this.logMetadata);
+                }
             })));
     }
 

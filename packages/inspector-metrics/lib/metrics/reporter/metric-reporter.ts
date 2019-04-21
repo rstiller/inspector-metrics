@@ -8,7 +8,7 @@ import { Histogram } from "../histogram";
 import { Meter } from "../meter";
 import { MetricRegistry } from "../metric-registry";
 import { getMetricTags, Metric } from "../model/metric";
-import { mapToTags, Taggable, Tags, tagsToMap } from "../model/taggable";
+import { Taggable, Tags, tagsToMap } from "../model/taggable";
 import { MILLISECOND, MINUTE } from "../model/time-unit";
 import { Timer } from "../timer";
 import { InterprocessMessage, InterprocessReportMessage } from "./interprocess-message";
@@ -464,7 +464,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
                     monotoneCounters: monotoneCounterResults,
                     timers: timerResults,
                 },
-                tags: mapToTags(registry.getTags()),
+                tags: this.buildTags(registry, null),
                 targetReporterType: this.reporterType,
                 type: MetricReporter.MESSAGE_TYPE,
             };

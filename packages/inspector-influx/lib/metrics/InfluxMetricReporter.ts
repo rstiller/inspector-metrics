@@ -246,7 +246,17 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         type: MetricType,
         results: Array<ReportingResult<any, IPoint>>): Promise<any> {
         const points = results.map((result) => result.result);
+        if (points.length === 0) {
+            return;
+        }
+
         try {
+            points.forEach((point) => {
+                if (!(point.timestamp instanceof Date)) {
+                    point.timestamp = new Date(point.timestamp);
+                }
+            });
+
             await this.options.sender.send(points);
             if (this.options.log) {
                 this.options.log.debug(`wrote ${type} metrics`, this.logMetadata);

@@ -12,7 +12,6 @@ import {
     getMetricName,
     Histogram,
     InterprocessReportMessage,
-    mapToTags,
     Metadata,
     Meter,
     Metric,
@@ -346,7 +345,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                         monotoneCounters: [],
                         timers: [],
                     },
-                    tags: mapToTags(this.getTags()),
+                    tags: this.buildTags(null, null),
                     targetReporterType: this.reporterType,
                     type: CsvMetricReporter.MESSAGE_TYPE,
                 };

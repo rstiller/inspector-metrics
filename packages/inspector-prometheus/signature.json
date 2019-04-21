@@ -119,11 +119,11 @@
     },
     {
       "path": "build/lib/metrics/PushgatewayMetricReporter.js",
-      "sha512": "68b7ad7f81c3edb38b7475ed0996ee8fac60616d1550301ae4c7b883389b1242b83c490bab6e0ebcf29936dc164671b6fb31846af45ed9a498e7dcfce310e8f9"
+      "sha512": "0ed39918803bafd2758e35c63591ab25c708cefa3bc6e24ac339c368c4ae3293fd560b7823837832417c5e596dcb2f879a8e37b3fe13672843b899d7591e4276"
     },
     {
       "path": "build/lib/metrics/PushgatewayMetricReporter.js.map",
-      "sha512": "696285c00267a9bf183123037da77d51afb5433f8a270b9a9276519858d8809939e531280344ba26c0cdc268a7a7a3d9f0001fc348a5c8f5b459eb7c5c760e59"
+      "sha512": "7642a45f48f34ccbcd390dea353c61103293983fffff3ab8d1c74c9e6d90ce09dcb73fa36060687c7ae91ed36d2e481bb07e6d593aeb4b810981364b45453899"
     },
     {
       "path": "build/test/metrics/mocked-clock.d.ts",
@@ -175,15 +175,15 @@
     },
     {
       "path": "build/test/metrics/PushgatewayReporterTest.d.ts",
-      "sha512": "4cc664ff2433e0adab7c33d91e97ebc563d24fb2d69b97e7689b6e6f833c7028637e12c09c1c4473f7d0f5cf9467429dd817d0303f19a168348d652b6822deb9"
+      "sha512": "106039b241b8486a6aa1baa3d6aa83f9cea50a3c03b2b3c07a46f5ce88a0ef35e914929c3aa2a1c787479ee816e2778637118175510b74423b0a6cdabd47185d"
     },
     {
       "path": "build/test/metrics/PushgatewayReporterTest.js",
-      "sha512": "d836abd5a0fd5bbeb5530efcd008a53b7de7d9d0f07ba5bfa3cee3010512ecec9178bc88c5b88a70fa3769b9b4179bfbe11c99ff0df82fb5a83d6c18799e5f67"
+      "sha512": "94cbe9184c9337965fed16d3739d342ec3c7259752d895ca461d28e9fe4bacf1682e16b8b79ec86164a1d38b6d6dd74b01b79c2f01f130e05e7b60032007ad00"
     },
     {
       "path": "build/test/metrics/PushgatewayReporterTest.js.map",
-      "sha512": "5e2228addfaab7b4bf3373652d8f572be2df3c6b9703490cc80efc29cdd7e73640805869e6d7ef701096943a0677329e23ae035e6000337e954f7b0a68b3aa84"
+      "sha512": "28ac4e9ec4a47f8ebd33797a8fbe9e067d5153360830632805b15024c954fd95df3b0bb3f8f79d973b64deacff2480f80854d0250655e0a4270b5131ca83f54f"
     },
     {
       "path": "build/test/metrics/TestClusterOptions.d.ts",
@@ -198,7 +198,7 @@
       "sha512": "28cd28d0ac31663b379b51e800341f20924254af08cbe7ffa5db00443e5dca6320fc6445a6bed7dc1d7275a0dc9e30c232ccdf8cf586c3586819f3b742a0e134"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJctMnaCRDCMfXrQKYV5wAAXx4QACJyIZK1I5YpP4jFH0e+6lzo\n4VwcGOQh10GSfCxFLpYm8eaGzxw4CZnZ3rPaTZzeYYPwskX104YcklXsFGNGrmTe\ntcSeP/Jj+zemH+9d3NavtRChzF5x+mHvEWSAYt7PzXjvHwr0curY02afdFqv85j+\nFbEbJWmZt+LnBLLCORxdfe8SHRAXMIcffou+SgpN3ifwy8EX131/Zxj/K+H8sOZX\nZT+w+OJ1IcFC7EnkIafC1WnVwFcGBODZZskx0nJc1WZzmTa9ejG3KOZyNhWCV802\nwyVfje9fB/UU+11/J3jCYfxaJtydvZnWGs2Zw448v2gkwXe7YtPwghB4rlFVFCi7\nVWGnSa/cBiMYxYZXTYWI/poc1ZheV4GU9uxJ0LRY+SK/jTzyoDMwqrxgxQ57kYYJ\nrZqz0CK+4zmkRNHCF5lKyyJWGs3lxzVrjIA2XDDQpHlEWbVlGUXWyLN81jH15c3Y\nnXUO/uh9T9IuTDp1Jsfh3vtQfiWNfgQdRLsk2wdvr65SB7qHP9lXCHbuAHRVyq45\ngDAjtauaIB9uQWjXMUwRviAk6a8MhvLvp0jFf4eIDICn2y+UD8ZROh0bb2or27N3\nQKZDHSFI9N8DOkJ446tcuuMiJwSpY6SFbsrjalpN0x7oAiFXqxcfdeoYIsn7qocD\nHe1CSlg4nYMLBzk3aT7v\n=iI3C\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcvCIxCRDCMfXrQKYV5wAAaYcQAAfTtYk7h7MtcYQU7lg0KDPB\nexfgmrOlHq8WO1ow0AgXYgNXAU6X1pZp55vdCLDANQyb26Y9Jujwb17O1RRpgNjN\n8ufkml7Tmb4vGnamNQ/6uIIvtH9wJpSVhwTHIrMkXoKdjk6sUSyc9lZFgfvRpDQu\nbgOfu8IkyEK37bjo7Q72/zxRMf59xa6HHVW4wOjmgG0fs+d+eoZ6lad+vHXby34m\na6LT8CFFPjQ/YdTozm6ZFmgZ+Q4LmTqaokOwdHKbGlxuZkEM0dO7ikvCE0dh8adp\n2p6BdTPXoXIiRGRPo/zQRzYnxEy/AJhqk0BqUhRtyK/pCTcY9yOZLBfcGVt0y5CE\nx98cvM2ZAfRByg9hF4vmFCVvcI9qvctTL8OHTFF62VAcszRL5hqFwIwS5vhzzX0p\nGd9UY4CPQXD+1wHHIOVqkg7ZIV0g5fF6lkDbRz1okrb0oUx/9GKjoNuW80RCFIlJ\ndN2PsW/DqKysMEPJHuq/l/+NXio0tCytl2HpBXFlO+P2ZpeiccZNO5oTWhyppUx+\nz7gzHPlgWQfYa8+gxtqB7ETqTkz4B9hTEUIFKpkosWYJo3CJMfAnMP/RU8u4FiVL\njpl1y3Sb+plcjjiMr2yA/q9grB3wh0znn180Gh0cFGQkWjBHC5+nFH9O61I1XBoR\ncYdp6UwBXE2OZGTmE2L+\n=Jny+\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
