@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "node-cint64": "2.0.1",
-    "source-map-support": "^0.5.11"
+    "source-map-support": "^0.5.12"
   },
   "files": [
     "build"

@@ -247,6 +247,10 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         return Promise.all(results
             .map((result) => result.result)
             .map((carbonData) => new Promise((resolve, reject) => {
+                // can happen during serialization
+                if (!(timestamp instanceof Date)) {
+                    timestamp = new Date(timestamp);
+                }
                 this.client.writeTagged(carbonData.measurement, carbonData.tags, timestamp, (err: any) => {
                     if (err != null) {
                         if (this.options.log) {
