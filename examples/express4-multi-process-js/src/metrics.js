@@ -2,24 +2,13 @@ const cluster = require('cluster')
 const os = require('os')
 const packageJson = require('../package.json')
 
-// async function influxReporter (registry, tags) {
+// async function consoleReporter (registry, tags) {
 //   const {
-//     DefaultSender,
-//     InfluxMetricReporter
-//   } = require('inspector-influx')
+//     LoggerReporter
+//   } = require('inspector-metrics')
 
-//   const sender = new DefaultSender({
-//     database: 'express4',
-//     hosts: [{
-//       host: '127.0.0.1',
-//       port: 8086
-//     }]
-//   })
-//   const reporter = new InfluxMetricReporter({
-//     log: null,
-//     minReportingTimeout: 30,
-//     reportInterval: 5000,
-//     sender
+//   const reporter = new LoggerReporter({
+//     log: console
 //   })
 
 //   reporter.setTags(tags)
@@ -30,33 +19,16 @@ const packageJson = require('../package.json')
 //   return reporter
 // }
 
-async function carbonReporter (registry, tags) {
-  const {
-    CarbonMetricReporter
-  } = require('inspector-carbon')
-
-  const reporter = new CarbonMetricReporter({
-    host: 'http://localhost/',
-    log: null,
-    minReportingTimeout: 30,
-    reportInterval: 5000
-  })
-
-  reporter.setTags(tags)
-  reporter.addMetricRegistry(registry)
-
-  await reporter.start()
-
-  return reporter
-}
-
-// async function consoleReporter (registry, tags) {
+// async function carbonReporter(registry, tags) {
 //   const {
-//     LoggerReporter
-//   } = require('inspector-metrics')
+//     CarbonMetricReporter
+//   } = require('inspector-carbon')
 
-//   const reporter = new LoggerReporter({
-//     log: console
+//   const reporter = new CarbonMetricReporter({
+//     host: 'http://localhost/',
+//     log: null,
+//     minReportingTimeout: 30,
+//     reportInterval: 5000
 //   })
 
 //   reporter.setTags(tags)
@@ -89,6 +61,59 @@ async function csvReporter (registry, tags) {
   return reporter
 }
 
+async function elasticsearchReporter (registry, tags) {
+  const {
+    ElasticsearchMetricReporter
+  } = require('inspector-elasticsearch')
+
+  const clientOptions = {
+    apiVersion: '6.0',
+    host: 'localhost:9200'
+  }
+  const reporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex('metric-express-multi-process-js'),
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000
+  })
+
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
+
+  await reporter.start()
+
+  return reporter
+}
+
+// async function influxReporter (registry, tags) {
+//   const {
+//     DefaultSender,
+//     InfluxMetricReporter
+//   } = require('inspector-influx')
+
+//   const sender = new DefaultSender({
+//     database: 'express4',
+//     hosts: [{
+//       host: '127.0.0.1',
+//       port: 8086
+//     }]
+//   })
+//   const reporter = new InfluxMetricReporter({
+//     log: null,
+//     minReportingTimeout: 30,
+//     reportInterval: 5000,
+//     sender
+//   })
+
+//   reporter.setTags(tags)
+//   reporter.addMetricRegistry(registry)
+
+//   await reporter.start()
+
+//   return reporter
+// }
+
 async function install () {
   const {
     MetricRegistry
@@ -115,8 +140,9 @@ async function install () {
 
   module.exports.registry = registry
   module.exports.reporter = {
-    carbon: await carbonReporter(registry, reportingTags),
-    csv: await csvReporter(registry, reportingTags)
+    // carbon: await carbonReporter(registry, reportingTags),
+    csv: await csvReporter(registry, reportingTags),
+    elasticsearch: await elasticsearchReporter(registry, reportingTags)
     // influx: await influxReporter(registry, reportingTags)
   }
 }

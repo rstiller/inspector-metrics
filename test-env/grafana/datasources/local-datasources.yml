@@ -16,21 +16,21 @@ datasources:
   url: http://prometheus:9090
   isDefault: false
   editable: true
-- name: influxdb-express4
+- name: influxdb-express-multi-process-js
   type: influxdb
   access: proxy
   url: http://influx:8086
   isDefault: false
   editable: true
-  database: express4
+  database: express-multi-process-js
   user: admin
   password: admin
-- name: elasticsearch-express4
+- name: elasticsearch-express-multi-process-js
   type: elasticsearch
   access: proxy
   isDefault: false
   editable: true
-  database: "[metric-express4-]YYYY-MM-DD"
+  database: "[metric-express-multi-process-js-]YYYY-MM-DD"
   url: http://elasticsearch:9200
   jsonData:
     interval: Daily

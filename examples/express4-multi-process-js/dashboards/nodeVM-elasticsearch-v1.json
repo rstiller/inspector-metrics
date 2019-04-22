@@ -7,33 +7,35 @@
         "enable": true,
         "hide": true,
         "iconColor": "rgba(0, 211, 255, 1)",
-        "limit": 100,
         "name": "Annotations & Alerts",
-        "showIn": 0,
         "type": "dashboard"
       },
       {
-        "datasource": "influxdb-express-multi-process-js",
-        "enable": false,
+        "datasource": "elasticsearch-express-multi-process-js",
+        "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
-        "name": "Application Starts",
-        "query": "SELECT * FROM \"event\" WHERE (\"type\" = 'application-start') AND $timeFilter",
+        "name": "Application Start",
+        "query": "tags.type: \"application-start\" AND tags.application: \"express-multi-process-js\"",
         "showIn": 0,
         "tags": [],
+        "tagsField": "",
+        "textField": "tags.text",
+        "timeField": "timestamp",
         "type": "tags"
       },
       {
-        "datasource": "influxdb-express-multi-process-js",
+        "datasource": "elasticsearch-express-multi-process-js",
         "enable": false,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Major GC Runs",
-        "query": "SELECT \"runs.count\" FROM \"gc\" WHERE (\"type\" = 'major') AND $timeFilter LIMIT 100",
+        "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.application: \"express-multi-process-js\"",
         "showIn": 0,
         "tags": [],
+        "timeField": "timestamp",
         "type": "tags"
       }
     ]
@@ -41,19 +43,17 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1555610389490,
+  "iteration": 1555963425141,
   "links": [],
   "panels": [
     {
-      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 10,
-      "panels": [],
+      "id": 8,
       "title": "Memory",
       "type": "row"
     },
@@ -62,7 +62,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
+      "datasource": "elasticsearch-express-multi-process-js",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -71,17 +71,18 @@
         "x": 0,
         "y": 1
       },
-      "id": 16,
-      "interval": "",
+      "id": 2,
+      "interval": "5s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
         "current": true,
+        "hideEmpty": true,
         "max": true,
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 500,
+        "sideWidth": 450,
         "total": false,
         "values": true
       },
@@ -99,66 +100,58 @@
       "steppedLine": false,
       "targets": [
         {
-          "groupBy": [
+          "alias": "used size (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
             {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
             },
             {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
             },
             {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
             }
           ],
-          "measurement": "memory",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"usedHeapSize.value\") AS \"used\", mean(\"totalHeapSizeExecutable.value\") AS \"executable\", mean(\"totalHeapSize.value\") AS \"total\" FROM \"memory\" WHERE (\"hostname\" =~ /^$hostname$/) AND $timeFilter GROUP BY time($__interval) fill(previous)",
-          "rawQuery": false,
+          "metrics": [
+            {
+              "field": "values.value",
+              "id": "1",
+              "inlineScript": null,
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"memory\" AND name: \"usedHeapSize\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
           "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "usedHeapSize.value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "used"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
-            }
-          ]
+          "timeField": "timestamp"
         }
       ],
       "thresholds": [],
@@ -183,606 +176,7 @@
         {
           "decimals": 1,
           "format": "decbytes",
-          "label": "",
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "decimals": null,
-          "format": "short",
           "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
-      "decimals": 1,
-      "fill": 1,
-      "gridPos": {
-        "h": 9,
-        "w": 24,
-        "x": 0,
-        "y": 10
-      },
-      "id": 18,
-      "interval": "",
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 500,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "memory",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT mean(\"usedHeapSize.value\") AS \"used\", mean(\"totalHeapSizeExecutable.value\") AS \"executable\", mean(\"totalHeapSize.value\") AS \"total\" FROM \"memory\" WHERE (\"hostname\" =~ /^$hostname$/) AND $timeFilter GROUP BY time($__interval) fill(previous)",
-          "rawQuery": false,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "spaceUsedSize.value"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              },
-              {
-                "params": [
-                  "used"
-                ],
-                "type": "alias"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
-            },
-            {
-              "condition": "AND",
-              "key": "space",
-              "operator": "=",
-              "value": "large_object_space"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "used large object space",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": null,
-          "format": "decbytes",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 19
-      },
-      "id": 21,
-      "panels": [],
-      "title": "Garbage Collection",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
-      "decimals": 1,
-      "fill": 1,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 20
-      },
-      "id": 12,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 500,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "gc",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "runs.mean"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "mean"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "major"
-            }
-          ],
-          "tz": ""
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "major GC runtime",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ns",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
-      "decimals": 1,
-      "fill": 1,
-      "gridPos": {
-        "h": 8,
-        "w": 24,
-        "x": 0,
-        "y": 28
-      },
-      "id": 14,
-      "legend": {
-        "alignAsTable": true,
-        "avg": true,
-        "current": false,
-        "max": true,
-        "min": true,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 500,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "connected",
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "previous"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "gc",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "runs.mean"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "stddev"
-              }
-            ]
-          ],
-          "tags": [
-            {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
-            },
-            {
-              "condition": "AND",
-              "key": "type",
-              "operator": "=",
-              "value": "major"
-            }
-          ]
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "major GC runtime deviation",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "ns",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ],
-      "yaxis": {
-        "align": false,
-        "alignLevel": null
-      }
-    },
-    {
-      "collapsed": false,
-      "gridPos": {
-        "h": 1,
-        "w": 24,
-        "x": 0,
-        "y": 36
-      },
-      "id": 4,
-      "panels": [],
-      "title": "Process Information",
-      "type": "row"
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
-      "decimals": 2,
-      "fill": 1,
-      "gridPos": {
-        "h": 10,
-        "w": 24,
-        "x": 0,
-        "y": 37
-      },
-      "id": 6,
-      "legend": {
-        "alignAsTable": true,
-        "avg": false,
-        "current": true,
-        "max": true,
-        "min": false,
-        "rightSide": true,
-        "show": true,
-        "sideWidth": 500,
-        "total": false,
-        "values": true
-      },
-      "lines": true,
-      "linewidth": 1,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 2,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "alias": "avg usage (pid $tag_pid)",
-          "groupBy": [
-            {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "process",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "query": "SELECT moving_average(derivative(last(\"cpu_usage.count\"), 10s), 10) / 100000000 FROM \"process\" WHERE (\"hostname\" =~ /^$hostname$/) AND $timeFilter GROUP BY time($__interval), \"pid\" fill(null)",
-          "rawQuery": true,
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "cpu_usage.count"
-                ],
-                "type": "field"
-              },
-              {
-                "params": [],
-                "type": "last"
-              },
-              {
-                "params": [
-                  "10s"
-                ],
-                "type": "derivative"
-              },
-              {
-                "params": [
-                  10
-                ],
-                "type": "moving_average"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeRegions": [],
-      "timeShift": null,
-      "title": "CPU Usage",
-      "tooltip": {
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "decimals": 3,
-          "format": "percentunit",
-          "label": "",
           "logBase": 1,
           "max": null,
           "min": "0",
@@ -807,25 +201,27 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
-      "description": "",
+      "datasource": "elasticsearch-express-multi-process-js",
+      "decimals": 1,
       "fill": 1,
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 47
+        "y": 10
       },
-      "id": 2,
+      "id": 15,
+      "interval": "5s",
       "legend": {
         "alignAsTable": true,
         "avg": false,
         "current": true,
+        "hideEmpty": true,
         "max": true,
-        "min": false,
+        "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 500,
+        "sideWidth": 450,
         "total": false,
         "values": true
       },
@@ -843,59 +239,645 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "lag (pid $tag_pid, master $tag_isMaster)",
-          "groupBy": [
+          "alias": "used space (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
             {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "eventLoop",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "lag.value"
-                ],
-                "type": "field"
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
               },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
+              "type": "terms"
+            },
             {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
             }
-          ]
+          ],
+          "metrics": [
+            {
+              "field": "values.value",
+              "id": "1",
+              "inlineScript": null,
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"memory\" AND name: \"spaceUsedSize\" AND tags.scope: \"large_object_space\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "large object space",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "decbytes",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 19
+      },
+      "id": 6,
+      "title": "Garbage Collection",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "elasticsearch-express-multi-process-js",
+      "decimals": 1,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 20
+      },
+      "id": 14,
+      "interval": "5s",
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 450,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "mean (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "values.mean",
+              "id": "1",
+              "inlineScript": null,
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "major GC runtime",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "ns",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "elasticsearch-express-multi-process-js",
+      "decimals": 1,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 29
+      },
+      "id": 13,
+      "interval": "5s",
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 450,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "mean stddev (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "values.stddev",
+              "id": "8",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "major GC runtime stddev",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": 1,
+          "format": "ns",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 38
+      },
+      "id": 4,
+      "title": "Process Information",
+      "type": "row"
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "elasticsearch-express-multi-process-js",
+      "decimals": 1,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 39
+      },
+      "id": 12,
+      "interval": "5s",
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 450,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "CPU Usage (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "values.count",
+              "hide": true,
+              "id": "1",
+              "inlineScript": "_value * 0.00000001",
+              "meta": {},
+              "pipelineAgg": "select metric",
+              "settings": {
+                "script": {
+                  "inline": "_value * 0.00000001"
+                }
+              },
+              "type": "avg"
+            },
+            {
+              "field": "1",
+              "id": "7",
+              "meta": {},
+              "pipelineAgg": "1",
+              "settings": {},
+              "type": "derivative"
+            }
+          ],
+          "query": "group: \"process\" AND name: \"cpu_usage\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "CPU Usage",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "decimals": null,
+          "format": "percentunit",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": "0",
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "elasticsearch-express-multi-process-js",
+      "decimals": 1,
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 48
+      },
+      "id": 10,
+      "interval": "5s",
+      "legend": {
+        "alignAsTable": true,
+        "avg": true,
+        "current": false,
+        "hideEmpty": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 450,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "connected",
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "lag (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
+            {
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
+            }
+          ],
+          "metrics": [
+            {
+              "field": "values.value",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"eventLoop\" AND name: \"lag\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
         }
       ],
       "thresholds": [],
@@ -918,11 +900,12 @@
       },
       "yaxes": [
         {
+          "decimals": null,
           "format": "ns",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -944,27 +927,27 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
+      "datasource": "elasticsearch-express-multi-process-js",
       "decimals": 0,
       "fill": 1,
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 0,
         "y": 57
       },
-      "id": 8,
+      "id": 9,
+      "interval": "5s",
       "legend": {
         "alignAsTable": true,
-        "avg": false,
-        "current": true,
+        "avg": true,
+        "current": false,
         "hideEmpty": true,
-        "hideZero": false,
         "max": true,
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 400,
         "total": false,
         "values": true
       },
@@ -982,66 +965,63 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "active handles (pid: $tag_pid, master: $tag_isMaster)",
-          "groupBy": [
+          "alias": "active handles (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
             {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "process",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "active_handles.value"
-                ],
-                "type": "field"
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
               },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
+              "type": "terms"
+            },
             {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
             }
-          ]
+          ],
+          "metrics": [
+            {
+              "field": "values.value",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"process\" AND name: \"active_handles\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Active Process Handles",
+      "title": "Active Handles",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1058,11 +1038,11 @@
       "yaxes": [
         {
           "decimals": 0,
-          "format": "short",
-          "label": "",
+          "format": "none",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1084,27 +1064,27 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "influxdb-express-multi-process-js",
+      "datasource": "elasticsearch-express-multi-process-js",
       "decimals": 0,
       "fill": 1,
       "gridPos": {
-        "h": 8,
+        "h": 9,
         "w": 12,
         "x": 12,
         "y": 57
       },
-      "id": 19,
+      "id": 11,
+      "interval": "5s",
       "legend": {
         "alignAsTable": true,
-        "avg": false,
-        "current": true,
+        "avg": true,
+        "current": false,
         "hideEmpty": true,
-        "hideZero": false,
         "max": true,
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 400,
         "total": false,
         "values": true
       },
@@ -1122,66 +1102,63 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "active requests (pid: $tag_pid, master: $tag_isMaster)",
-          "groupBy": [
+          "alias": "active requests (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "bucketAggs": [
             {
-              "params": [
-                "$__interval"
-              ],
-              "type": "time"
-            },
-            {
-              "params": [
-                "pid"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "isMaster"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "null"
-              ],
-              "type": "fill"
-            }
-          ],
-          "measurement": "process",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "active_requests.value"
-                ],
-                "type": "field"
+              "fake": true,
+              "field": "tags.pid.keyword",
+              "id": "6",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
               },
-              {
-                "params": [],
-                "type": "last"
-              }
-            ]
-          ],
-          "tags": [
+              "type": "terms"
+            },
             {
-              "key": "hostname",
-              "operator": "=~",
-              "value": "/^$hostname$/"
+              "fake": true,
+              "field": "tags.isMaster.keyword",
+              "id": "4",
+              "settings": {
+                "min_doc_count": 1,
+                "order": "desc",
+                "orderBy": "_term",
+                "size": "0"
+              },
+              "type": "terms"
+            },
+            {
+              "fake": true,
+              "field": "timestamp",
+              "id": "5",
+              "settings": {
+                "interval": "auto",
+                "min_doc_count": 0,
+                "trimEdges": 0
+              },
+              "type": "date_histogram"
             }
-          ]
+          ],
+          "metrics": [
+            {
+              "field": "values.value",
+              "id": "1",
+              "meta": {},
+              "settings": {},
+              "type": "avg"
+            }
+          ],
+          "query": "group: \"process\" AND name: \"active_requests\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "refId": "A",
+          "timeField": "timestamp"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Active Process Requests",
+      "title": "Active Requests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -1198,11 +1175,11 @@
       "yaxes": [
         {
           "decimals": 0,
-          "format": "short",
-          "label": "",
+          "format": "none",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": null,
+          "min": "0",
           "show": true
         },
         {
@@ -1220,7 +1197,7 @@
       }
     }
   ],
-  "refresh": "30s",
+  "refresh": false,
   "schemaVersion": 18,
   "style": "dark",
   "tags": [],
@@ -1229,18 +1206,18 @@
       {
         "allValue": null,
         "current": {
-          "text": "P320",
-          "value": "P320"
+          "text": "T470",
+          "value": "T470"
         },
-        "datasource": "influxdb-express-multi-process-js",
-        "definition": "SHOW TAG VALUES FROM \"process\" WITH KEY = \"hostname\"",
+        "datasource": "elasticsearch-express-multi-process-js",
+        "definition": "{\"find\": \"terms\", \"field\": \"tags.hostname.keyword\", \"query\": \"\"}",
         "hide": 0,
         "includeAll": false,
         "label": null,
         "multi": false,
         "name": "hostname",
         "options": [],
-        "query": "SHOW TAG VALUES FROM \"process\" WITH KEY = \"hostname\"",
+        "query": "{\"find\": \"terms\", \"field\": \"tags.hostname.keyword\", \"query\": \"\"}",
         "refresh": 2,
         "regex": "",
         "skipUrlSync": false,
@@ -1283,7 +1260,7 @@
     ]
   },
   "timezone": "",
-  "title": "nodeVM-influxdb",
-  "uid": "57XnTEgWz",
-  "version": 1
+  "title": "nodeVM-elasticsearch",
+  "uid": "xFndaWkZz",
+  "version": 4
 }
