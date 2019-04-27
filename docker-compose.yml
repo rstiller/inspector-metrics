@@ -86,6 +86,20 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=11
 
+  node12:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node12
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=12
+
   grafana:
     build:
       context: ./test-env/grafana

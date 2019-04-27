@@ -22,9 +22,10 @@ async function start () {
       .setTag('text', `application started at ${new Date()} on host ${os.hostname()}`)
       .setValue(1)
     // metrics.reporter.carbon.reportEvent(event)
-    metrics.reporter.csv.reportEvent(event)
-    metrics.reporter.elasticsearch.reportEvent(event)
+    // metrics.reporter.csv.reportEvent(event)
+    // metrics.reporter.elasticsearch.reportEvent(event)
     // metrics.reporter.influx.reportEvent(event)
+    metrics.reporter.prometheus.reportEvent(event)
   } else {
     const express = require('express')
     const app = express()
