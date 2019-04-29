@@ -19,100 +19,100 @@ const packageJson = require('../package.json')
 //   return reporter
 // }
 
-// async function carbonReporter(registry, tags) {
-//   const {
-//     CarbonMetricReporter
-//   } = require('inspector-carbon')
+async function carbonReporter (registry, tags) {
+  const {
+    CarbonMetricReporter
+  } = require('inspector-carbon')
 
-//   const reporter = new CarbonMetricReporter({
-//     host: 'http://localhost/',
-//     log: null,
-//     minReportingTimeout: 30,
-//     reportInterval: 5000
-//   })
+  const reporter = new CarbonMetricReporter({
+    host: 'http://localhost/',
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000
+  })
 
-//   reporter.setTags(tags)
-//   reporter.addMetricRegistry(registry)
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
 
-//   await reporter.start()
+  await reporter.start()
 
-//   return reporter
-// }
+  return reporter
+}
 
-// async function csvReporter (registry, tags) {
-//   const {
-//     CsvMetricReporter,
-//     DefaultCsvFileWriter
-//   } = require('inspector-csv')
+async function csvReporter (registry, tags) {
+  const {
+    CsvMetricReporter,
+    DefaultCsvFileWriter
+  } = require('inspector-csv')
 
-//   const reporter = new CsvMetricReporter({
-//     columns: ['date', 'group', 'name', 'field', 'type', 'value', 'tags'],
-//     log: null,
-//     minReportingTimeout: 30,
-//     reportInterval: 5000,
-//     writer: new DefaultCsvFileWriter({})
-//   })
+  const reporter = new CsvMetricReporter({
+    columns: ['date', 'group', 'name', 'field', 'type', 'value', 'tags'],
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000,
+    writer: new DefaultCsvFileWriter({})
+  })
 
-//   reporter.setTags(tags)
-//   reporter.addMetricRegistry(registry)
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
 
-//   await reporter.start()
+  await reporter.start()
 
-//   return reporter
-// }
+  return reporter
+}
 
-// async function elasticsearchReporter (registry, tags) {
-//   const {
-//     ElasticsearchMetricReporter
-//   } = require('inspector-elasticsearch')
+async function elasticsearchReporter (registry, tags) {
+  const {
+    ElasticsearchMetricReporter
+  } = require('inspector-elasticsearch')
 
-//   const clientOptions = {
-//     apiVersion: '6.0',
-//     host: 'localhost:9200'
-//   }
-//   const reporter = new ElasticsearchMetricReporter({
-//     clientOptions,
-//     indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex('metric-express-multi-process-js'),
-//     log: null,
-//     minReportingTimeout: 30,
-//     reportInterval: 5000
-//   })
+  const clientOptions = {
+    apiVersion: '6.0',
+    host: 'localhost:9200'
+  }
+  const reporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex('metric-express-multi-process-js'),
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000
+  })
 
-//   reporter.setTags(tags)
-//   reporter.addMetricRegistry(registry)
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
 
-//   await reporter.start()
+  await reporter.start()
 
-//   return reporter
-// }
+  return reporter
+}
 
-// async function influxReporter (registry, tags) {
-//   const {
-//     DefaultSender,
-//     InfluxMetricReporter
-//   } = require('inspector-influx')
+async function influxReporter (registry, tags) {
+  const {
+    DefaultSender,
+    InfluxMetricReporter
+  } = require('inspector-influx')
 
-//   const sender = new DefaultSender({
-//     database: 'express4',
-//     hosts: [{
-//       host: '127.0.0.1',
-//       port: 8086
-//     }]
-//   })
-//   const reporter = new InfluxMetricReporter({
-//     log: null,
-//     minReportingTimeout: 30,
-//     reportInterval: 5000,
-//     sender
-//   })
+  const sender = new DefaultSender({
+    database: 'express4',
+    hosts: [{
+      host: '127.0.0.1',
+      port: 8086
+    }]
+  })
+  const reporter = new InfluxMetricReporter({
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000,
+    sender
+  })
 
-//   reporter.setTags(tags)
-//   reporter.addMetricRegistry(registry)
+  reporter.setTags(tags)
+  reporter.addMetricRegistry(registry)
 
-//   await reporter.start()
+  await reporter.start()
 
-//   return reporter
-// }
+  return reporter
+}
 
 async function prometheusReporter (registry, tags) {
   const {
@@ -169,10 +169,10 @@ async function install () {
 
   module.exports.registry = registry
   module.exports.reporter = {
-    // carbon: await carbonReporter(registry, reportingTags),
-    // csv: await csvReporter(registry, reportingTags),
-    // elasticsearch: await elasticsearchReporter(registry, reportingTags),
-    // influx: await influxReporter(registry, reportingTags),
+    carbon: await carbonReporter(registry, reportingTags),
+    csv: await csvReporter(registry, reportingTags),
+    elasticsearch: await elasticsearchReporter(registry, reportingTags),
+    influx: await influxReporter(registry, reportingTags),
     prometheus: await prometheusReporter(registry, reportingTags)
   }
 }
