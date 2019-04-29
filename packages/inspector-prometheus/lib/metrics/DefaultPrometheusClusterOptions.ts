@@ -33,14 +33,29 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
      * @type {ReportMessageReceiver}
      * @memberof DefaultClusterOptions
      */
-    public readonly eventReceiver: ReportMessageReceiver = cluster;
+    public readonly eventReceiver: ReportMessageReceiver;
     /**
      * True for forked processes.
      *
      * @type {boolean}
      * @memberof DefaultClusterOptions
      */
-    public readonly sendMetricsToMaster: boolean = !!cluster.worker;
+    public readonly sendMetricsToMaster: boolean = cluster.isWorker;
+
+    public constructor() {
+        if (cluster.isWorker) {
+            this.eventReceiver = {
+                on: (
+                    messageType: any,
+                    callback: (worker: cluster.Worker, message: any, handle: any) => void) => {
+                    process.on(messageType, (message) => callback(null, message, null));
+                },
+            };
+        } else {
+            this.eventReceiver = cluster;
+        }
+    }
+
     /**
      * Uses 'worker.send' to send the specified message to the specified worker.
      *
@@ -58,17 +73,19 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
      */
     public async getWorkers(): Promise<cluster.Worker[]> {
         const workers: cluster.Worker[] = [];
-        for (const key of Object.keys(cluster.workers)) {
-            workers.push(cluster.workers[key]);
+        if (cluster.workers) {
+            for (const key of Object.keys(cluster.workers)) {
+                workers.push(cluster.workers[key]);
+            }
         }
         return workers;
     }
     /**
-     * Uses 'cluster.worker.send' to send messages.
+     * Uses 'process.send' to send messages.
      *
      * @memberof DefaultClusterOptions
      */
     public async sendToMaster(message: any): Promise<any> {
-        cluster.worker.send(message);
+        process.send(message);
     }
 }

@@ -450,9 +450,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        if (this.options.clusterOptions &&
-            this.options.clusterOptions.enabled &&
-            this.options.clusterOptions.sendMetricsToMaster) {
+        if (this.sendMetricsToMaster()) {
             const message: InterprocessReportMessage<T> = {
                 ctx,
                 date,
@@ -477,6 +475,19 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             await this.handleResults(ctx, registry, date, "meter", meterResults);
             await this.handleResults(ctx, registry, date, "timer", timerResults);
         }
+    }
+
+    /**
+     * Called in {@link #reportMetricRegistry} to determine to send a reporting-message to the master process.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected sendMetricsToMaster(): boolean {
+        return  this.options.clusterOptions &&
+                this.options.clusterOptions.enabled &&
+                this.options.clusterOptions.sendMetricsToMaster;
     }
 
     /**

@@ -130,10 +130,13 @@ async function prometheusReporter (registry, tags) {
   if (cluster.isMaster) {
     const app = express()
     const port = 3001
-    app.get('/metrics', async (req, res) => res
-      .status(200)
-      .type('text/plain')
-      .send(await reporter.getMetricsString()))
+    app.get('/metrics', async (req, res) => {
+      const metricStr = await reporter.getMetricsString()
+      res
+        .status(200)
+        .type('text/plain')
+        .send(metricStr)
+    })
     app.listen(port, () => console.log(`/metrics endpoint listening on port ${port} with pid ${process.pid}!`))
   }
 

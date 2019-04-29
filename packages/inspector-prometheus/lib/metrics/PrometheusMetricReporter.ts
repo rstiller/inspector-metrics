@@ -19,6 +19,7 @@ import {
     getMetricTags,
     getSnapshot,
     Histogram,
+    mapToTags,
     Metadata,
     Meter,
     Metric,
@@ -363,6 +364,17 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     }
 
     /**
+     * Always returns false, since the Prometheus reporter implements it's own messaging mechanism.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    protected sendMetricsToMaster(): boolean {
+        return false;
+    }
+
+    /**
      * Checks if the clustering support is enabled and the 'getWorkers' and 'sendToWorker'
      * method is not null.
      *
@@ -459,10 +471,11 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         type: MetricType,
         results: Array<ReportingResult<any, PrometheusMetricResult>>): Promise<void> {
         const lines = [];
+        const registryTags = registry ? mapToTags(registry.getTags()) : null;
         for (const result of results) {
             const metric = result.metric;
             const ctx = result.result;
-            const line = this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields);
+            const line = this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields, registryTags);
             lines.push(line);
         }
         overallCtx.result += lines.join("\n");
@@ -534,13 +547,18 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     /**
      * Gets the mapping of tags with normalized names and filtered for reserved tags.
      *
-     * @private
+     * @protected
      * @param {Taggable | SerializableMetric} taggable
      * @param {string[]} exclude
+     * @param {Tags} [registryTags]
      * @returns {Tags}
      * @memberof PrometheusMetricReporter
      */
-    protected buildPrometheusTags(taggable: Taggable | SerializableMetric, exclude: string[]): Tags {
+    protected buildPrometheusTags(
+        taggable: Taggable | SerializableMetric,
+        exclude: string[],
+        registryTags?: Tags,
+        ): Tags {
         exclude.sort();
 
         const tags: { [x: string]: string } = {};
@@ -551,6 +569,16 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
                 tags[normalizedKey] = value;
             }
         });
+        if (registryTags) {
+            Object.keys(registryTags).forEach((key) => {
+                const value = registryTags[key];
+                const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+                if (exclude.indexOf(normalizedKey) === -1 &&
+                    PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                    tags[normalizedKey] = value;
+                }
+            });
+        }
         const customTags = getMetricTags(taggable);
         Object.keys(customTags).forEach((key) => {
             const value = customTags[key];
@@ -575,6 +603,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @param {PrometheusMetricType} metricType
      * @param {boolean} canReport
      * @param {PrometheusFields} fields
+     * @param {Tags} [registryTags]
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
@@ -584,6 +613,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         metricType: PrometheusMetricType,
         canReport: boolean,
         fields: PrometheusFields,
+        registryTags?: Tags,
         ): string {
 
         if (!canReport) {
@@ -593,7 +623,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         const metricName = this.getMetricName(metric);
         const description = this.getDescription(metric, metricName);
         const timestamp = this.getTimestamp(now);
-        const tags = this.buildPrometheusTags(metric, ["le", "quantile"]);
+        const tags = this.buildPrometheusTags(metric, ["le", "quantile"], registryTags);
         const tagStr = Object
             .keys(tags)
             .map((tag) => `${tag}="${tags[tag]}"`)
