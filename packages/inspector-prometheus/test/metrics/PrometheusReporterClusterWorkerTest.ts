@@ -91,9 +91,9 @@ export class PrometheusReporterClusterWorkerTest {
         expect(this.getMetricsStringSpy).to.have.been.called;
         expect(this.getMetricsStringSpy.callCount).to.equal(1);
         expect(this.clusterOptions.sendToMasterSpy).to.have.been.called;
-        expect(this.clusterOptions.sendToMasterSpy.callCount).to.equal(2);
+        expect(this.clusterOptions.sendToMasterSpy.callCount).to.equal(1);
 
-        const responseMessage = this.clusterOptions.sendToMasterSpy.getCall(1).args[0];
+        const responseMessage = this.clusterOptions.sendToMasterSpy.getCall(0).args[0];
         expect(responseMessage).to.haveOwnProperty("metricsStr");
         expect(responseMessage.id).to.equal(requestMessage.id);
         expect(responseMessage.targetReporterType).to.equal("TestPrometheusMetricReporter");
