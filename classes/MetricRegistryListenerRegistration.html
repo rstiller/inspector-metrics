@@ -144,7 +144,7 @@ This instance can be used to safely remove the listener from registry again.</p>
                                                         <td>listener</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../interfaces/MetricRegistryListener.html" target="_self" >MetricRegistryListener</a></code>
+                                                                        <code><a href="../interfaces/MetricRegistryListener.html" target="_self" >MetricRegistryListener</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -156,7 +156,7 @@ This instance can be used to safely remove the listener from registry again.</p>
                                                         <td>registry</td>
                                                   
                                                         <td>
-                                                                    <code><a href="../interfaces/Metric.html" target="_self" >MetricRegistry</a></code>
+                                                                        <code><a href="../interfaces/Metric.html" target="_self" >MetricRegistry</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -176,51 +176,51 @@ This instance can be used to safely remove the listener from registry again.</p>
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="remove"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="remove"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
                             remove
-                            </b>
-                            <a href="#remove"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                            <span class="modifier-icon icon ion-ios-reset"></span>
-                        <code>remove()</code>
-                    </td>
-                </tr>
+                        </b>
+                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>remove()</code>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">lib/metrics/metric-registry.ts:42</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="42"
+                            class="link-to-prism">lib/metrics/metric-registry.ts:42</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Removes the managed listener from the metric registry.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Removes the managed listener from the metric registry.</p>
 </div>
 
-                            <div>
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    <div>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
 
 
@@ -234,15 +234,15 @@ This instance can be used to safely remove the listener from registry again.</p>
 
 import { Clock, StdClock } from &quot;./clock&quot;;
 import { Counter, MonotoneCounter } from &quot;./counter&quot;;
-import { Buckets } from &quot;./counting&quot;;
 import { Gauge } from &quot;./gauge&quot;;
 import { HdrHistogram } from &quot;./hdr-histogram&quot;;
 import { Histogram } from &quot;./histogram&quot;;
 import { Meter } from &quot;./meter&quot;;
-import { BaseMetric, Metric } from &quot;./metric&quot;;
 import { MetricRegistryListener } from &quot;./metric-registry-listener&quot;;
 import { MetricSet } from &quot;./metric-set&quot;;
-import { Reservoir, SlidingWindowReservoir } from &quot;./reservoir&quot;;
+import { Buckets } from &quot;./model/counting&quot;;
+import { BaseMetric, Metric } from &quot;./model/metric&quot;;
+import { Reservoir, SlidingWindowReservoir } from &quot;./model/reservoir&quot;;
 import { Timer } from &quot;./timer&quot;;
 
 export type NameFactory &#x3D; (baseName: string, metricName: string, metric: Metric) &#x3D;&gt; string;
@@ -476,7 +476,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     private listeners: MetricRegistryListener[] &#x3D; [];
 
     /**
-     * Adds the specified listener and returns the corrsponding
+     * Adds the specified listener and returns the corresponding
      * registration object.
      *
      * @param {MetricRegistryListener} listener
@@ -730,7 +730,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Gets all mamanged metric instance by name.
+     * Gets all managed metric instance by name.
      *
      * @param {string} name
      * @returns {Metric[]}
@@ -780,7 +780,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @returns {Histogram[]}
      * @memberof MetricRegistry
      */
-    public getHistogramsByname(name: string): Histogram[] {
+    public getHistogramsByName(name: string): Histogram[] {
         return this.getByName&lt;Histogram&gt;(name);
     }
 
@@ -1058,7 +1058,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Registeres a metric by name
+     * Registers a metric by name
      *
      * @param {string} name
      * @param {Metric} metric

@@ -59,6 +59,51 @@
                         <li>
                             <a href="#diff" title="lib/metrics/clock.ts"><b>diff</b>&nbsp;&nbsp;&nbsp;(lib/.../clock.ts)</a>
                         </li>
+                        <li>
+                            <a href="#getMetricBuckets" title="lib/metrics/model/counting.ts"><b>getMetricBuckets</b>&nbsp;&nbsp;&nbsp;(lib/.../counting.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricCounts" title="lib/metrics/model/counting.ts"><b>getMetricCounts</b>&nbsp;&nbsp;&nbsp;(lib/.../counting.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricDescription" title="lib/metrics/model/metric.ts"><b>getMetricDescription</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricGroup" title="lib/metrics/model/metric.ts"><b>getMetricGroup</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricMetadata" title="lib/metrics/model/metric.ts"><b>getMetricMetadata</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricName" title="lib/metrics/model/metric.ts"><b>getMetricName</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getMetricTags" title="lib/metrics/model/metric.ts"><b>getMetricTags</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#getSnapshot" title="lib/metrics/model/sampling.ts"><b>getSnapshot</b>&nbsp;&nbsp;&nbsp;(lib/.../sampling.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isSerializableBucketCounting" title="lib/metrics/model/counting.ts"><b>isSerializableBucketCounting</b>&nbsp;&nbsp;&nbsp;(lib/.../counting.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isSerializableMetric" title="lib/metrics/model/metric.ts"><b>isSerializableMetric</b>&nbsp;&nbsp;&nbsp;(lib/.../metric.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#isSerializableSampling" title="lib/metrics/model/sampling.ts"><b>isSerializableSampling</b>&nbsp;&nbsp;&nbsp;(lib/.../sampling.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#mapToMetadata" title="lib/metrics/model/metadata-container.ts"><b>mapToMetadata</b>&nbsp;&nbsp;&nbsp;(lib/.../metadata-container.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#mapToTags" title="lib/metrics/model/taggable.ts"><b>mapToTags</b>&nbsp;&nbsp;&nbsp;(lib/.../taggable.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#metadataToMap" title="lib/metrics/model/metadata-container.ts"><b>metadataToMap</b>&nbsp;&nbsp;&nbsp;(lib/.../metadata-container.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#tagsToMap" title="lib/metrics/model/taggable.ts"><b>tagsToMap</b>&nbsp;&nbsp;&nbsp;(lib/.../taggable.ts)</a>
+                        </li>
                     </ul>
                 </td>
             </tr>
@@ -68,90 +113,1034 @@
 
     <h3>lib/metrics/clock.ts</h3>
     <section>
-    <h3></h3>        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="diff"></a>
-                        <span class="name">
-                            <b>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="diff"></a>
+                    <span class="name">
+                        <b>
                             diff
-                            </b>
-                            <a href="#diff"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#diff"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>diff(one, two)</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Gets the time elapsed from parameter one to parameter two in nanoseconds.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets the time elapsed from parameter one to parameter two in nanoseconds.</p>
 <p>Also assumes that the first point in time is older than the second point in time.</p>
 </div>
 
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                <td>Optional</td>
-                                                    <td>Description</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>one</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                    <td>Description</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>one</td>
 
-                                                        <td>
-                                                                <p>time sample</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                                        </td>
-                                                </tr>
-                                                <tr>
-                                                        <td>two</td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
 
-                                                        <td>
-                                                                <p>time sample</p>
+                                    <td>
+                                        <p>time sample</p>
 
-                                                        </td>
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>two</td>
 
-                            </div>
-                                <div class="io-description">
-                                    <p>a duration in nanoseconds</p>
+                                    <td>
+                                        No
+                                    </td>
 
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+                                    <td>
+                                        <p>time sample</p>
+
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>a duration in nanoseconds</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>lib/metrics/model/counting.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricBuckets"></a>
+                    <span class="name">
+                        <b>
+                            getMetricBuckets
+                        </b>
+                        <a href="#getMetricBuckets"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricBuckets(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the <a href="../classes/Buckets.html">Buckets</a> of a
+<a href="../interfaces/BucketCounting.html">BucketCounting</a> or a <a href="../interfaces/SerializableBucketCounting.html">SerializableBucketCounting</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../classes/Buckets.html" target="_self" >Buckets</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricCounts"></a>
+                    <span class="name">
+                        <b>
+                            getMetricCounts
+                        </b>
+                        <a href="#getMetricCounts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricCounts(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the counts of a
+<a href="../interfaces/BucketCounting.html">BucketCounting</a> or a <a href="../interfaces/SerializableBucketCounting.html">SerializableBucketCounting</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/BucketToCountMap.html" target="_self" >BucketToCountMap</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSerializableBucketCounting"></a>
+                    <span class="name">
+                        <b>
+                            isSerializableBucketCounting
+                        </b>
+                        <a href="#isSerializableBucketCounting"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSerializableBucketCounting(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Determines if the metric passed is a <a href="../interfaces/SerializableBucketCounting.html">SerializableBucketCounting</a> or not.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SerializableBucketCounting.html" target="_self" >SerializableBucketCounting</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>is SerializableBucketCounting}</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>lib/metrics/model/metric.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricDescription"></a>
+                    <span class="name">
+                        <b>
+                            getMetricDescription
+                        </b>
+                        <a href="#getMetricDescription"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricDescription(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the description of a <a href="../interfaces/Metric.html">Metric</a> or a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricGroup"></a>
+                    <span class="name">
+                        <b>
+                            getMetricGroup
+                        </b>
+                        <a href="#getMetricGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricGroup(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the group of a <a href="../interfaces/Metric.html">Metric</a> or a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricMetadata"></a>
+                    <span class="name">
+                        <b>
+                            getMetricMetadata
+                        </b>
+                        <a href="#getMetricMetadata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricMetadata(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the metadata of a <a href="../interfaces/Metric.html">Metric</a> or a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Metadata.html" target="_self" >Metadata</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricName"></a>
+                    <span class="name">
+                        <b>
+                            getMetricName
+                        </b>
+                        <a href="#getMetricName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricName(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the name of a <a href="../interfaces/Metric.html">Metric</a> or a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMetricTags"></a>
+                    <span class="name">
+                        <b>
+                            getMetricTags
+                        </b>
+                        <a href="#getMetricTags"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMetricTags(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method the get the tags of a <a href="../interfaces/Metric.html">Metric</a> or a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Tags.html" target="_self" >Tags</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSerializableMetric"></a>
+                    <span class="name">
+                        <b>
+                            isSerializableMetric
+                        </b>
+                        <a href="#isSerializableMetric"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSerializableMetric(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Determines if the metric passed is a <a href="../interfaces/SerializableMetric.html">SerializableMetric</a> or not.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SerializableMetric.html" target="_self" >SerializableMetric</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>is SerializableMetric}</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>lib/metrics/model/sampling.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSnapshot"></a>
+                    <span class="name">
+                        <b>
+                            getSnapshot
+                        </b>
+                        <a href="#getSnapshot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getSnapshot(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Convenience method to get the snapshot of a <a href="../interfaces/Sampling.html">Sampling</a> or a <a href="../interfaces/SerializableSampling.html">SerializableSampling</a>.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSerializableSampling"></a>
+                    <span class="name">
+                        <b>
+                            isSerializableSampling
+                        </b>
+                        <a href="#isSerializableSampling"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isSerializableSampling(metric)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Determines if the metric passed is a <a href="../interfaces/SerializableSampling.html">SerializableSampling</a> or not.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metric</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/SerializableSampling.html" target="_self" >SerializableSampling</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        <p>is SerializableSampling}</p>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>lib/metrics/model/metadata-container.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapToMetadata"></a>
+                    <span class="name">
+                        <b>
+                            mapToMetadata
+                        </b>
+                        <a href="#mapToMetadata"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mapToMetadata(metadataMap)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Transforms the <a href="Map&lt;string,">any&gt;</a> object into a <a href="../interfaces/Metadata.html">Metadata</a> object.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metadataMap</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Metadata.html" target="_self" >Metadata</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metadataToMap"></a>
+                    <span class="name">
+                        <b>
+                            metadataToMap
+                        </b>
+                        <a href="#metadataToMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>metadataToMap(metadata)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Transforms the <a href="../interfaces/Metadata.html">Metadata</a> object into a <a href="Map&lt;string,">any&gt;</a> object.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>metadata</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, any&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>    <h3>lib/metrics/model/taggable.ts</h3>
+    <section>
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mapToTags"></a>
+                    <span class="name">
+                        <b>
+                            mapToTags
+                        </b>
+                        <a href="#mapToTags"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>mapToTags(tagMap)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Transforms the <a href="Map&lt;string,">string&gt;</a> object into a <a href="../interfaces/Tags.html">Tags</a> object.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>tagMap</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Tags.html" target="_self" >Tags</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tagsToMap"></a>
+                    <span class="name">
+                        <b>
+                            tagsToMap
+                        </b>
+                        <a href="#tagsToMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>tagsToMap(tags)</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Transforms the <a href="../interfaces/Tags.html">Tags</a> object into a <a href="Map&lt;string,">string&gt;</a> object.</p>
+</div>
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>tags</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, string&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
 
                    </div><div class="search-results">

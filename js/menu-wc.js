@@ -72,7 +72,13 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/Counter.html" data-type="entity-link">Counter</a>
                             </li>
                             <li class="link">
+                                <a href="classes/DefaultClusterOptions.html" data-type="entity-link">DefaultClusterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/DefaultReservoir.html" data-type="entity-link">DefaultReservoir</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DisabledClusterOptions.html" data-type="entity-link">DisabledClusterOptions</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Event.html" data-type="entity-link">Event</a>
@@ -135,6 +141,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/StopWatch.html" data-type="entity-link">StopWatch</a>
                             </li>
                             <li class="link">
+                                <a href="classes/TagsOnlyMetricRegistry.html" data-type="entity-link">TagsOnlyMetricRegistry</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/Timer.html" data-type="entity-link">Timer</a>
                             </li>
                             <li class="link">
@@ -154,6 +163,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/BucketCounting.html" data-type="entity-link">BucketCounting</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/BucketToCountMap.html" data-type="entity-link">BucketToCountMap</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ClusterOptions.html" data-type="entity-link">ClusterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Counting.html" data-type="entity-link">Counting</a>
                             </li>
                             <li class="link">
@@ -164,6 +179,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/IMetricReporter.html" data-type="entity-link">IMetricReporter</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InterprocessMessage.html" data-type="entity-link">InterprocessMessage</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InterprocessReportMessage.html" data-type="entity-link">InterprocessReportMessage</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/LengthAttributeInterface.html" data-type="entity-link">LengthAttributeInterface</a>
@@ -184,10 +205,16 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/LogLine.html" data-type="entity-link">LogLine</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/Metadata.html" data-type="entity-link">Metadata</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/MetadataContainer.html" data-type="entity-link">MetadataContainer</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Metered.html" data-type="entity-link">Metered</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MeteredRates.html" data-type="entity-link">MeteredRates</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Metric.html" data-type="entity-link">Metric</a>
@@ -217,6 +244,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/ReportingResult.html" data-type="entity-link">ReportingResult</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/ReportMessageReceiver.html" data-type="entity-link">ReportMessageReceiver</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/Reservoir.html" data-type="entity-link">Reservoir</a>
                             </li>
                             <li class="link">
@@ -224,6 +254,24 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ScheduledMetricReporterOptions.html" data-type="entity-link">ScheduledMetricReporterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializableBucketCounting.html" data-type="entity-link">SerializableBucketCounting</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializableMetered.html" data-type="entity-link">SerializableMetered</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializableMetric.html" data-type="entity-link">SerializableMetric</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializableSampling.html" data-type="entity-link">SerializableSampling</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializableSummarizing.html" data-type="entity-link">SerializableSummarizing</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/SerializedSnapshot.html" data-type="entity-link">SerializedSnapshot</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SizeAttributeInterface.html" data-type="entity-link">SizeAttributeInterface</a>

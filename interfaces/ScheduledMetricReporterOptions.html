@@ -76,7 +76,7 @@
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                    <code><a href="../interfaces/MetricReporterOptions.html" target="_self" >MetricReporterOptions</a></code>
+                        <code><a href="../interfaces/MetricReporterOptions.html" target="_self" >MetricReporterOptions</a></code>
             </p>
 
         <section>
@@ -124,7 +124,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>reportInterval:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                        <code>reportInterval:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -132,7 +132,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                                         </td>
                                     </tr>
@@ -164,7 +164,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>scheduler:     <code><a href="../miscellaneous/typealiases.html#Scheduler" target="_self" >Scheduler</a></code>
+                                        <code>scheduler:         <code><a href="../miscellaneous/typealiases.html#Scheduler" target="_self" >Scheduler</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -172,7 +172,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../miscellaneous/typealiases.html#Scheduler" target="_self" >Scheduler</a></code>
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Scheduler" target="_self" >Scheduler</a></code>
 
                                         </td>
                                     </tr>
@@ -204,7 +204,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>unit:     <code><a href="../interfaces/Time.html" target="_self" >TimeUnit</a></code>
+                                        <code>unit:         <code><a href="../interfaces/Time.html" target="_self" >TimeUnit</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -212,7 +212,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="../interfaces/Time.html" target="_self" >TimeUnit</a></code>
+                                            <i>Type : </i>        <code><a href="../interfaces/Time.html" target="_self" >TimeUnit</a></code>
 
                                         </td>
                                     </tr>
@@ -241,8 +241,9 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
 
-import { MILLISECOND, TimeUnit } from &quot;../time-unit&quot;;
-import { MetricReporter, MetricReporterOptions } from &quot;./metric-reporter&quot;;
+import { MILLISECOND, TimeUnit } from &quot;../model/time-unit&quot;;
+import { MetricReporter } from &quot;./metric-reporter&quot;;
+import { MetricReporterOptions } from &quot;./metric-reporter-options&quot;;
 
 /**
  * Scheduler function type definition.
@@ -291,7 +292,7 @@ export abstract class ScheduledMetricReporter&lt;O extends ScheduledMetricReport
     extends MetricReporter&lt;O, T&gt; {
 
     /**
-     * Timer instance retuned by the scheduler function.
+     * Timer instance returned by the scheduler function.
      *
      * @private
      * @type {NodeJS.Timer}
@@ -303,10 +304,11 @@ export abstract class ScheduledMetricReporter&lt;O extends ScheduledMetricReport
      * Creates an instance of ScheduledMetricReporter.
      *
      * @param {O} options
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof ScheduledMetricReporter
      */
-    public constructor(options: O) {
-        super(options);
+    public constructor(options: O, reporterType?: string) {
+        super(options, reporterType);
     }
 
     /**
@@ -318,7 +320,7 @@ export abstract class ScheduledMetricReporter&lt;O extends ScheduledMetricReport
      */
     public async start(): Promise&lt;this&gt; {
         const interval: number &#x3D; this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
-        this.timer &#x3D; this.options.scheduler(() &#x3D;&gt; this.report(), interval);
+        this.timer &#x3D; this.options.scheduler(async () &#x3D;&gt; this.report(), interval);
         return this;
     }
 

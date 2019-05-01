@@ -61,14 +61,14 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/sampling.ts</code>
+            <code>lib/metrics/model/sampling.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>Interface fo all metric classes that can build a snapshot of values.</p>
+                <p>Interface for all metric classes that can build a snapshot of values.</p>
 
             </p>
 
@@ -97,56 +97,56 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getSnapshot"></a>
-                        <span class="name">
-                            <b>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getSnapshot"></a>
+                    <span class="name">
+                        <b>
                             getSnapshot
-                            </b>
-                            <a href="#getSnapshot"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getSnapshot"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getSnapshot()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">lib/metrics/sampling.ts:19</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="19"
+                            class="link-to-prism">lib/metrics/model/sampling.ts:19</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Gets the snapshot of values.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets the snapshot of values.</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="../interfaces/Snapshot.html" target="_self" >Snapshot</a></code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
@@ -154,10 +154,10 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
 
-import { Snapshot } from &quot;./snapshot&quot;;
+import { SerializedSnapshot, SimpleSnapshot, Snapshot } from &quot;./snapshot&quot;;
 
 /**
- * Interface fo all metric classes that can build a snapshot of values.
+ * Interface for all metric classes that can build a snapshot of values.
  *
  * @export
  * @interface Sampling
@@ -172,6 +172,54 @@ export interface Sampling {
      */
     getSnapshot(): Snapshot;
 
+}
+
+/**
+ * The serialized version of {@link Sampling}.
+ *
+ * @export
+ * @interface SerializableSampling
+ */
+export interface SerializableSampling {
+
+    /**
+     * Gets the serialized, sorted collection of samples.
+     *
+     * @returns {SerializedSnapshot}
+     * @memberof SerializableSampling
+     */
+    snapshot: SerializedSnapshot;
+
+}
+
+/**
+ * Determines if the metric passed is a {@link SerializableSampling} or not.
+ *
+ * @export
+ * @param {(Sampling | SerializableSampling)} metric
+ * @returns {metric is SerializableSampling}
+ */
+export function isSerializableSampling(metric: Sampling | SerializableSampling): metric is SerializableSampling {
+    const anyMetric: any &#x3D; metric as any;
+    if ((anyMetric.getSnapshot &amp;&amp; typeof anyMetric.getSnapshot &#x3D;&#x3D;&#x3D; &quot;function&quot;)) {
+        return false;
+    }
+    return anyMetric.hasOwnProperty(&quot;snapshot&quot;);
+}
+
+/**
+ * Convenience method to get the snapshot of a {@link Sampling} or a {@link SerializableSampling}.
+ *
+ * @export
+ * @param {(Sampling | SerializableSampling)} metric
+ * @returns {Snapshot}
+ */
+export function getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
+    if (isSerializableSampling(metric)) {
+        return new SimpleSnapshot(metric.snapshot.values);
+    } else {
+        return metric.getSnapshot();
+    }
 }
 </code></pre>
     </div>

@@ -112,7 +112,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>message:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -120,7 +120,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 
                                         </td>
                                     </tr>
@@ -147,7 +147,7 @@
                                 </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <code>metadata:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                        <code>metadata:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -155,7 +155,7 @@
 
                                     <tr>
                                         <td class="col-md-4">
-                                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                                         </td>
                                     </tr>
@@ -186,11 +186,14 @@ import { Gauge } from &quot;../gauge&quot;;
 import { Histogram } from &quot;../histogram&quot;;
 import { Meter } from &quot;../meter&quot;;
 import { MetricRegistry } from &quot;../metric-registry&quot;;
-import { MILLISECOND } from &quot;../time-unit&quot;;
+import { MILLISECOND } from &quot;../model/time-unit&quot;;
 import { Timer } from &quot;../timer&quot;;
 import { Logger } from &quot;./logger&quot;;
-import { MetricSetReportContext, OverallReportContext, ReportingResult } from &quot;./metric-reporter&quot;;
+import { DefaultClusterOptions } from &quot;./metric-reporter-options&quot;;
+import { MetricSetReportContext } from &quot;./metric-set-report-context&quot;;
 import { MetricType } from &quot;./metric-type&quot;;
+import { OverallReportContext } from &quot;./overall-report-context&quot;;
+import { ReportingResult } from &quot;./reporting-result&quot;;
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from &quot;./scheduled-reporter&quot;;
 
 /**
@@ -280,16 +283,19 @@ export class LoggerReporter extends ScheduledMetricReporter&lt;LoggerReporterOpt
         scheduler &#x3D; setInterval,
         minReportingTimeout &#x3D; 1,
         tags &#x3D; new Map(),
-    }: LoggerReporterOptions) {
+        clusterOptions &#x3D; new DefaultClusterOptions(),
+    }: LoggerReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             log,
             minReportingTimeout,
             reportInterval,
             scheduler,
             tags,
             unit,
-        });
+        }, reporterType);
         this.logMetadata &#x3D; {
             reportInterval,
             tags,
@@ -339,7 +345,7 @@ export class LoggerReporter extends ScheduledMetricReporter&lt;LoggerReporterOpt
     }
 
     /**
-     * Creates a new {@link LoggerReportingContext} using the speicifed arguments.
+     * Creates a new {@link LoggerReportingContext} using the specified arguments.
      *
      * @protected
      * @param {OverallReportContext} overallCtx
@@ -374,7 +380,7 @@ export class LoggerReporter extends ScheduledMetricReporter&lt;LoggerReporterOpt
      *
      * @protected
      * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array&lt;ReportingResult&lt;any, LogLine&gt;&gt;} results
@@ -382,7 +388,7 @@ export class LoggerReporter extends ScheduledMetricReporter&lt;LoggerReporterOpt
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array&lt;ReportingResult&lt;any, LogLine&gt;&gt;) {

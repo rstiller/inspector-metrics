@@ -31,7 +31,7 @@
                    <div class="content-data">
 
 <h1 id="inspector-metrics">inspector-metrics</h1>
-<p>Monitoring / metric library similar to <a href="http://metrics.dropwizard.io">http://metrics.dropwizard.io</a></p>
+<p>Monitoring / metric library similar to http://metrics.dropwizard.io</p>
 <p align="center">
     <a href="https://www.npmjs.org/package/inspector-metrics">
         <img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version">
@@ -56,46 +56,41 @@
 <h2 id="basic-usage">basic usage</h2>
 <p>At least a <code>MetricRegistry</code>, a <code>Metric</code> and a <code>MetricReporter</code> is necessary
 to use the library.</p>
-<p>Supported metric types:</p>
-<ul>
-<li>Counter - measures an integer value (e.g. &quot;how many time was my function called, number of bookings in a sales system&quot;)</li>
-<li>MonotoneCounter - a monotonically increasing integer value (e.g. &quot;error count&quot;)</li>
-<li>Event - ad-hoc event to report events (e.g. &quot;application start / deployment&quot;, &quot;batch import started / ended&quot;)</li>
-<li>Gauge - measurement of a value (e.g. &quot;number of waiting threads on a resource&quot;)</li>
-<li>HdrHistogram - recording and analyzing sampled data value counts across a configurable integer value range with configurable value precision</li>
-<li>Histogram - measures the statistical distribution of all values</li>
-<li>Meter - measures the rate of events over time (e.g. &quot;requests per second&quot;)</li>
-<li>Timer - measures call-rate of a function and the distribution of the duration of all calls</li>
-</ul>
+<p>Supported metric types:
+* Counter - measures an integer value (e.g. &quot;how many time was my function called, number of bookings in a sales system&quot;)
+* MonotoneCounter - a monotonically increasing integer value (e.g. &quot;error count&quot;)
+* Event - ad-hoc event to report events (e.g. &quot;application start / deployment&quot;, &quot;batch import started / ended&quot;)
+* Gauge - measurement of a value (e.g. &quot;number of waiting threads on a resource&quot;)
+* HdrHistogram - recording and analyzing sampled data value counts across a configurable integer value range with configurable value precision
+* Histogram - measures the statistical distribution of all values
+* Meter - measures the rate of events over time (e.g. &quot;requests per second&quot;)
+* Timer - measures call-rate of a function and the distribution of the duration of all calls</p>
 <p>There are libraries which collect some metrics:</p>
 <ul>
 <li><a href="https://github.com/rstiller/inspector-vm">node VM</a> - collects memory &amp; garbage collection metric for node VM</li>
 </ul>
 <p>The library ships with a default <code>console</code> <code>MetricReporter</code>.</p>
-<p>Some other reporter:</p>
-<ul>
-<li><a href="https://github.com/ttous/inspector-amqp">AMQP</a></li>
-<li><a href="https://github.com/rstiller/inspector-carbon">Carbon / Graphite</a></li>
-<li><a href="https://github.com/rstiller/inspector-csv">CSV</a></li>
-<li><a href="https://github.com/rstiller/inspector-elasticsearch">Elasticsearch</a></li>
-<li><a href="https://github.com/rstiller/inspector-influx">Influx</a></li>
-<li><a href="https://github.com/rstiller/inspector-prometheus">Prometheus / Pushgateway</a></li>
-</ul>
-<div><pre class="line-numbers"><code class="language-typescript">import { LoggerReporter, MetricRegistry, Timer } from &quot;inspector-metrics&quot;;
-
-// a registry is a collection of metric objects
+<p>Some other reporter:
+* <a href="https://github.com/ttous/inspector-amqp">AMQP</a>
+* <a href="https://github.com/rstiller/inspector-carbon">Carbon / Graphite</a>
+* <a href="https://github.com/rstiller/inspector-csv">CSV</a>
+* <a href="https://github.com/rstiller/inspector-elasticsearch">Elasticsearch</a>
+* <a href="https://github.com/rstiller/inspector-influx">Influx</a>
+* <a href="https://github.com/ttous/inspector-nats">NATS</a>
+* <a href="https://github.com/rstiller/inspector-prometheus">Prometheus / Pushgateway</a></p>
+<p>```typescript
+import { LoggerReporter, MetricRegistry, Timer } from &quot;inspector-metrics&quot;;</p>
+<p>// a registry is a collection of metric objects
 const registry = new MetricRegistry();
 // the reporter prints the stats
 const reporter = new LoggerReporter({
     log: global.console,
 });
 // a new timer instance
-const requests: Timer = registry.newTimer(&quot;requests&quot;);
-
-reporter.addMetricRegistry(registry);
-reporter.start();
-
-// example usage
+const requests: Timer = registry.newTimer(&quot;requests&quot;);</p>
+<p>reporter.addMetricRegistry(registry);
+reporter.start();</p>
+<p>// example usage
 setInterval(() =&gt; {
     // should report a few milliseconds
     requests.time(() =&gt; {
@@ -106,144 +101,130 @@ setInterval(() =&gt; {
             a = b + i + a;
         }
     });
-}, 100);</code></pre></div><h3 id="counter">Counter</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { Counter, MetricRegistry } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
-const requestCount: Counter = registry.newCounter(&quot;requestCount&quot;);
-
-// +1
-requestCount.increment(1);
-
-// -1
-requestCount.decrement(1);
-
-// =0
-requestCount.getCount();
-
-requestCount.reset();</code></pre></div><h3 id="monotonecounter">MonotoneCounter</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { MonotoneCounter, MetricRegistry } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
-const errorCount: MonotoneCounter = registry.newMonotoneCounter(&quot;errorCount&quot;);
-
-// +1
-errorCount.increment(1);
-
-// causes error
-errorCount.increment(-1);
-
-// =1
-errorCount.getCount();
-
-errorCount.reset();</code></pre></div><h3 id="event">Event</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { BaseMetric, Event, MetricRegistry } from &quot;inspector-metrics&quot;;
-
-// common application tags - applied to each metric / event
+}, 100);
+```</p>
+<h3 id="counter">Counter</h3>
+<p>```typescript
+import { Counter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
+const requestCount: Counter = registry.newCounter(&quot;requestCount&quot;);</p>
+<p>// +1
+requestCount.increment(1);</p>
+<p>// -1
+requestCount.decrement(1);</p>
+<p>// =0
+requestCount.getCount();</p>
+<p>requestCount.reset();
+```</p>
+<h3 id="monotonecounter">MonotoneCounter</h3>
+<p>```typescript
+import { MonotoneCounter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
+const errorCount: MonotoneCounter = registry.newMonotoneCounter(&quot;errorCount&quot;);</p>
+<p>// +1
+errorCount.increment(1);</p>
+<p>// causes error
+errorCount.increment(-1);</p>
+<p>// =1
+errorCount.getCount();</p>
+<p>errorCount.reset();
+```</p>
+<h3 id="event">Event</h3>
+<p>```typescript
+import { BaseMetric, Event, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
+<p>// common application tags - applied to each metric / event
 const tags: Map&lt;string, string&gt; = new Map();
 tags.set(&quot;application&quot;, &quot;project-name&quot;);
-tags.set(&quot;hostname&quot;, &quot;127.0.0.4&quot;);
-
-// the reporter prints the stats
+tags.set(&quot;hostname&quot;, &quot;127.0.0.4&quot;);</p>
+<p>// the reporter prints the stats
 const reporter = new LoggerReporter({
     log: global.console,
     tags,
-});
-
-// not connected to a MetricRegistry like the other metrics
-const event = new Event&lt;string&gt;(&quot;application_started&quot;, &quot;signals an application start&quot;)
+});</p>
+<p>// not connected to a MetricRegistry like the other metrics
+const event = new Event<string>(&quot;application_started&quot;, &quot;signals an application start&quot;)
     .setValue(&quot;started&quot;)
     .setTag(&quot;mode&quot;, &quot;test&quot;)
-    .setTag(&quot;component&quot;, &quot;main&quot;);
-
-// directly send to time-series DB
-await reporter.reportEvent(event);</code></pre></div><h3 id="gauge">Gauge</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { BaseMetric, Gauge, MetricRegistry, SimpleGauge } from &quot;inspector-metrics&quot;;
-
-class ArrayLengthGauge extends BaseMetric implements Gauge&lt;number&gt; {
-
-    public constructor(name: string, private a: Array&lt;any&gt;) {
-        super();
-        this.name = name;
-    }
-
-    public getValue(): number {
-        return this.a.length;
-    }
-
+    .setTag(&quot;component&quot;, &quot;main&quot;);</p>
+<p>// directly send to time-series DB
+await reporter.reportEvent(event);
+```</p>
+<h3 id="gauge">Gauge</h3>
+<p>```typescript
+import { BaseMetric, Gauge, MetricRegistry, SimpleGauge } from &quot;inspector-metrics&quot;;</p>
+<p>class ArrayLengthGauge extends BaseMetric implements Gauge<number> {</p>
+<div><pre class="line-numbers"><code class="language-none">public constructor(name: string, private a: Array&lt;any&gt;) {
+    super();
+    this.name = name;
 }
 
-const registry = new MetricRegistry();
-const queueSize: Gauge&lt;number&gt; = new SimpleGauge(&quot;requestCount&quot;);
+public getValue(): number {
+    return this.a.length;
+}</code></pre></div><p>}</p>
+<p>const registry = new MetricRegistry();
+const queueSize: Gauge<number> = new SimpleGauge(&quot;requestCount&quot;);
 let myArray: number[] = [];
-const arrayLength: Gauge&lt;number&gt; = new ArrayLengthGauge(&quot;arrayLength&quot;, myArray);
-
-registry.registerMetric(queueSize);
-registry.registerMetric(arrayLength);
-
-queueSize.setValue(12345);
-
-// 12345
-queueSize.getValue();
-
-myArray.push(1);
+const arrayLength: Gauge<number> = new ArrayLengthGauge(&quot;arrayLength&quot;, myArray);</p>
+<p>registry.registerMetric(queueSize);
+registry.registerMetric(arrayLength);</p>
+<p>queueSize.setValue(12345);</p>
+<p>// 12345
+queueSize.getValue();</p>
+<p>myArray.push(1);
 myArray.push(2);
-myArray.push(3);
-
-// 3
-arrayLength.getValue();</code></pre></div><h3 id="histogram">Histogram</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { Histogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
+myArray.push(3);</p>
+<p>// 3
+arrayLength.getValue();
+```</p>
+<h3 id="histogram">Histogram</h3>
+<p>```typescript
+import { Histogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
 // measures a duration / latency
-const requestLatency: Histogram = registry.newHistogram(&quot;requestLatency&quot;);
-
-requestLatency.update(12345);
+const requestLatency: Histogram = registry.newHistogram(&quot;requestLatency&quot;);</p>
+<p>requestLatency.update(12345);
 requestLatency.update(23456);
-requestLatency.update(34567);
-
-// a copy of the current values
-const snapshot: Snapshot = requestLatency.getSnapshot();
-
-// mean count
-const mean: number = snapshot.getMean();</code></pre></div><h3 id="hdrhistogram">HdrHistogram</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { HdrHistogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
+requestLatency.update(34567);</p>
+<p>// a copy of the current values
+const snapshot: Snapshot = requestLatency.getSnapshot();</p>
+<p>// mean count
+const mean: number = snapshot.getMean();
+```</p>
+<h3 id="hdrhistogram">HdrHistogram</h3>
+<p>```typescript
+import { HdrHistogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
 // measures a duration / latency between 1 and 1000000000 nanoseconds
-const requestLatency: HdrHistogram = registry.newHdrHistogram(&quot;requestLatency&quot;, 1, 1000000000);
-
-// 102 microseconds in nanoseconds
+const requestLatency: HdrHistogram = registry.newHdrHistogram(&quot;requestLatency&quot;, 1, 1000000000);</p>
+<p>// 102 microseconds in nanoseconds
 requestLatency.update(102000);
 // 4.390 milliseconds in nanoseconds
-requestLatency.update(4390000);
-
-// only snapshot interface - always uses the current values
+requestLatency.update(4390000);</p>
+<p>// only snapshot interface - always uses the current values
 // since the native-hdr-histogram is used as a reference
-const snapshot: Snapshot = requestLatency.getSnapshot();
-
-// mean count
-const mean: number = snapshot.getMean();</code></pre></div><h3 id="meter">Meter</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { Meter, MetricRegistry } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
-const callCount: Meter = registry.newMeter(&quot;callCount&quot;);
-
-callCount.mark(1);
-
-const count: number = callCount.getCount();
+const snapshot: Snapshot = requestLatency.getSnapshot();</p>
+<p>// mean count
+const mean: number = snapshot.getMean();
+```</p>
+<h3 id="meter">Meter</h3>
+<p>```typescript
+import { Meter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
+const callCount: Meter = registry.newMeter(&quot;callCount&quot;);</p>
+<p>callCount.mark(1);</p>
+<p>const count: number = callCount.getCount();
 const m15: number = callCount.get15MinuteRate();
 const m5: number = callCount.get5MinuteRate();
 const m1: number = callCount.get1MinuteRate();
-const mean: number = callCount.getMeanRate();</code></pre></div><h3 id="timer">Timer</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { MetricRegistry, MILLISECOND, Snapshot, StopWatch, Timer } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
-const callStats: Timer = registry.newTimer(&quot;callStats&quot;);
-
-callStats.addDuration(100, MILLISECOND);
-
-// 1
+const mean: number = callCount.getMeanRate();
+```</p>
+<h3 id="timer">Timer</h3>
+<p>```typescript
+import { MetricRegistry, MILLISECOND, Snapshot, StopWatch, Timer } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
+const callStats: Timer = registry.newTimer(&quot;callStats&quot;);</p>
+<p>callStats.addDuration(100, MILLISECOND);</p>
+<p>// 1
 const count: number = callStats.getCount();
 // ~1
 const m15: number = callStats.get15MinuteRate();
@@ -252,76 +233,66 @@ const m5: number = callStats.get5MinuteRate();
 // ~1
 const m1: number = callStats.get1MinuteRate();
 // ~1
-const mean: number = callStats.getMeanRate();
-
-let snapshot: Snapshot = callStats.getSnapshot();
-
-// some value around 100000000 (100ms in nanoseconds)
-const mean: number = snapshot.getMean();
-
-const timer: StopWatch = callStats.newStopWatch();
-
-timer.start();
+const mean: number = callStats.getMeanRate();</p>
+<p>let snapshot: Snapshot = callStats.getSnapshot();</p>
+<p>// some value around 100000000 (100ms in nanoseconds)
+const mean: number = snapshot.getMean();</p>
+<p>const timer: StopWatch = callStats.newStopWatch();</p>
+<p>timer.start();
 // 100ms has passed
-timer.stop();
-
-snapshot = callStats.getSnapshot();
+timer.stop();</p>
+<p>snapshot = callStats.getSnapshot();
 // snapshot gets updated through stop-watch ...
-snapshot.getMean();
-
-callStats.time(() =&gt; {
+snapshot.getMean();</p>
+<p>callStats.time(() =&gt; {
     // some time has passed
-});
-
-// works with promise too
+});</p>
+<p>// works with promise too
 await callStats.timeAsync(async () =&gt; {
     // some time has passed
-});
-
-snapshot = callStats.getSnapshot();
+});</p>
+<p>snapshot = callStats.getSnapshot();
 // snapshot gets updated through time function ...
-snapshot.getMean();</code></pre></div><h3 id="metriclisteners">MetricListeners</h3>
-<div><pre class="line-numbers"><code class="language-typescript">import { Metric, MetricRegistry, MetricRegistryListener, MetricRegistryListenerRegistration } from &quot;inspector-metrics&quot;;
-
-class Listener implements MetricRegistryListener {
-
-    public metricAdded(name: string, metric: Metric): void {
-        console.log(`added metric ${name}: ${metric}`);
-    }
-
-    public metricRemoved(name: string, metric: Metric): void {
-        console.log(`removed metric ${name}: ${metric}`);
-    }
-
+snapshot.getMean();
+```</p>
+<h3 id="metriclisteners">MetricListeners</h3>
+<p>```typescript
+import { Metric, MetricRegistry, MetricRegistryListener, MetricRegistryListenerRegistration } from &quot;inspector-metrics&quot;;</p>
+<p>class Listener implements MetricRegistryListener {</p>
+<div><pre class="line-numbers"><code class="language-none">public metricAdded(name: string, metric: Metric): void {
+    console.log(`added metric ${name}: ${metric}`);
 }
 
-const registry = new MetricRegistry();
-const registration: MetricRegistryListenerRegistration = registry.addListener(new Listener());
-
-// prints &quot;added metric requests: Counter...&quot; via console
-registry.newCounter(&quot;requests&quot;);
-
-// removes the listener
-registration.remove();</code></pre></div><h3 id="metric-groups">Metric Groups</h3>
+public metricRemoved(name: string, metric: Metric): void {
+    console.log(`removed metric ${name}: ${metric}`);
+}</code></pre></div><p>}</p>
+<p>const registry = new MetricRegistry();
+const registration: MetricRegistryListenerRegistration = registry.addListener(new Listener());</p>
+<p>// prints &quot;added metric requests: Counter...&quot; via console
+registry.newCounter(&quot;requests&quot;);</p>
+<p>// removes the listener
+registration.remove();
+```</p>
+<h3 id="metric-groups">Metric Groups</h3>
 <p>Each metric can have a group, which is used to gather different metrics
 within metric reporter instances. E.g. if only gauges are used
 to gather metrics data a group can be used to report them all as one
 measure point with different fields.</p>
-<div><pre class="line-numbers"><code class="language-typescript">import { Gauge, MetricRegistry } from &quot;inspector-metrics&quot;;
-
-const registry = new MetricRegistry();
+<p>```typescript
+import { Gauge, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
+<p>const registry = new MetricRegistry();
 // reports the internal storage capacity of a queue
-const capacity: Gauge&lt;number&gt; = ...;
+const capacity: Gauge<number> = ...;
 // reports the element count in the queue
-const queueSize: Gauge&lt;number&gt; = ...;
-
-// all values grouped as buffer
+const queueSize: Gauge<number> = ...;</p>
+<p>// all values grouped as buffer
 registry.registerMetric(queueSize, &quot;buffer&quot;);
 registry.registerMetric(capacity, &quot;buffer&quot;);
 // counts the number of allocations during the execution of the application
-registry.newCounter(&quot;newAllocations&quot;, &quot;buffer&quot;);
-
-// the reporter can now report the values as a single measurement point if supported ...</code></pre></div><h2 id="license">License</h2>
+registry.newCounter(&quot;newAllocations&quot;, &quot;buffer&quot;);</p>
+<p>// the reporter can now report the values as a single measurement point if supported ...
+```</p>
+<h2 id="license">License</h2>
 <p><a href="https://www.opensource.org/licenses/mit-license.php">MIT</a></p>
 
 

@@ -1,0 +1,1055 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>inspector-metrics documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>TagsOnlyMetricRegistry</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>lib/metrics/reporter/metric-reporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Pseudo-<a href="../classes/MetricRegistry.html">MetricRegistry</a> used to provide an interface for registry tags.</p>
+
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#tags">tags</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getTags">getTags</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(tags: <a href="../interfaces/Tags.html">Tags</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">lib/metrics/reporter/metric-reporter.ts:123</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of TagsOnlyMetricRegistry.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>tags</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Tags.html" target="_self" >Tags</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="tags"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            tags</b>
+                            <a href="#tags"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Map&lt;string | string&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">lib/metrics/reporter/metric-reporter.ts:123</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>private tags map.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTags"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getTags
+                        </b>
+                        <a href="#getTags"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getTags()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">lib/metrics/reporter/metric-reporter.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets the tags map.</p>
+</div>
+
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>Map&lt;string, string&gt;</code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+
+import * as cluster from &quot;cluster&quot;;
+import { Counter, MonotoneCounter } from &quot;../counter&quot;;
+import { Event } from &quot;../event&quot;;
+import { Gauge } from &quot;../gauge&quot;;
+import { Histogram } from &quot;../histogram&quot;;
+import { Meter } from &quot;../meter&quot;;
+import { MetricRegistry } from &quot;../metric-registry&quot;;
+import { getMetricTags, Metric } from &quot;../model/metric&quot;;
+import { Taggable, Tags, tagsToMap } from &quot;../model/taggable&quot;;
+import { MILLISECOND, MINUTE } from &quot;../model/time-unit&quot;;
+import { Timer } from &quot;../timer&quot;;
+import { InterprocessMessage, InterprocessReportMessage } from &quot;./interprocess-message&quot;;
+import { MetricEntry } from &quot;./metric-entry&quot;;
+import { MetricReporterOptions } from &quot;./metric-reporter-options&quot;;
+import { MetricSetReportContext } from &quot;./metric-set-report-context&quot;;
+import { MetricType } from &quot;./metric-type&quot;;
+import { OverallReportContext } from &quot;./overall-report-context&quot;;
+import { ReportingResult } from &quot;./reporting-result&quot;;
+
+/**
+ * Interface for metric-reporter.
+ *
+ * @export
+ * @interface IMetricReporter
+ */
+export interface IMetricReporter {
+    /**
+     * Gets the reporter tags.
+     *
+     * @returns {Map&lt;string, string&gt;}
+     * @memberof IMetricReporter
+     */
+    getTags(): Map&lt;string, string&gt;;
+
+    /**
+     * Sets the reporter tags.
+     *
+     * @param {Map&lt;string, string&gt;} tags
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    setTags(tags: Map&lt;string, string&gt;): this;
+
+    /**
+     * Implementations start reporting metrics when called.
+     *
+     * @abstract
+     * @returns {Promise&lt;this&gt;}
+     * @memberof IMetricReporter
+     */
+    start(): Promise&lt;this&gt;;
+
+    /**
+     * Implementations stop reporting metrics when called.
+     *
+     * @abstract
+     * @returns {Promise&lt;this&gt;}
+     * @memberof IMetricReporter
+     */
+    stop(): Promise&lt;this&gt;;
+
+    /**
+     * Adds a new {@link MetricRegistry} to be reported.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    addMetricRegistry(metricRegistry: MetricRegistry): this;
+
+    /**
+     * Removes the given {@link MetricRegistry} if it was previously added.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof IMetricReporter
+     */
+    removeMetricRegistry(metricRegistry: MetricRegistry): this;
+
+    /**
+     * Reports an {@link Event}.
+     *
+     * Implementations can choose how to process ad-hoc events, wether it&#x27;s
+     * queuing the events to the next call to report or sending events
+     * immediately.
+     *
+     * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
+     * and call {@link #afterReport} may not be applied for ad-hoc events.
+     *
+     * This implementation does nothing and always resolved the specified event.
+     *
+     * @param {TEvent} event
+     * @returns {Promise&lt;TEvent&gt;}
+     * @memberof IMetricReporter
+     */
+    reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt;;
+
+    /**
+     * Sends events remaining in the queue (if a queue is used in the implementation).
+     *
+     * @returns {Promise&lt;void&gt;}
+     * @memberof IMetricReporter
+     */
+    flushEvents(): Promise&lt;void&gt;;
+}
+
+/**
+ * Pseudo-{@link MetricRegistry} used to provide an interface for registry tags.
+ *
+ * @class TagsOnlyMetricRegistry
+ */
+class TagsOnlyMetricRegistry {
+
+    /**
+     * private tags map.
+     *
+     * @private
+     * @type {Map&lt;string, string&gt;}
+     * @memberof TagsOnlyMetricRegistry
+     */
+    private tags: Map&lt;string, string&gt;;
+
+    /**
+     * Creates an instance of TagsOnlyMetricRegistry.
+     *
+     * @param {Tags} tags
+     * @memberof TagsOnlyMetricRegistry
+     */
+    public constructor(tags: Tags) {
+        this.tags &#x3D; tagsToMap(tags);
+    }
+
+    /**
+     * Gets the tags map.
+     *
+     * @returns {Map&lt;string, string&gt;}
+     * @memberof TagsOnlyMetricRegistry
+     */
+    public getTags(): Map&lt;string, string&gt; {
+        return this.tags;
+    }
+
+}
+
+/**
+ * Base-class for metric-reporter implementations.
+ *
+ * @export
+ * @abstract
+ * @class MetricReporter
+ */
+export abstract class MetricReporter&lt;O extends MetricReporterOptions, T&gt; implements IMetricReporter {
+
+    /**
+     * Constant for the &quot;type&quot; variable of process-level message identifying report-messages
+     * from reporter of forked processes.
+     *
+     * @static
+     * @memberof MetricReporter
+     */
+    public static readonly MESSAGE_TYPE &#x3D; &quot;inspector-metrics:metric-reporter:report&quot;;
+
+    /**
+     * {@link MetricRegistry} instances.
+     *
+     * @protected
+     * @readonly
+     * @type {MetricRegistry[]}
+     * @memberof MetricReporter
+     */
+    protected readonly metricRegistries: MetricRegistry[] &#x3D; [];
+    /**
+     * options for this reporter instance.
+     *
+     * @protected
+     * @readonly
+     * @type {O}
+     * @memberof MetricReporter
+     */
+    protected readonly options: O;
+    /**
+     * Keeps track of the reporting states for each metric.
+     *
+     * @protected
+     * @readonly
+     * @type {Map&lt;number, MetricEntry&gt;}
+     * @memberof MetricReporter
+     */
+    protected readonly metricStates: Map&lt;number, MetricEntry&gt; &#x3D; new Map();
+    /**
+     * The type of the reporter implementation - for internal use.
+     *
+     * @protected
+     * @readonly
+     * @type {string}
+     * @memberof MetricReporter
+     */
+    protected readonly reporterType: string;
+
+    /**
+     * Creates an instance of MetricReporter.
+     *
+     * @param {O} options
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
+     * @memberof MetricReporter
+     */
+    public constructor(options: O, reporterType?: string) {
+        this.options &#x3D; options;
+        this.reporterType &#x3D; reporterType || this.constructor.name;
+        const clusterOptions &#x3D; this.options.clusterOptions;
+        if (clusterOptions &amp;&amp;
+            clusterOptions.enabled &amp;&amp;
+            !clusterOptions.sendMetricsToMaster) {
+            clusterOptions.eventReceiver.on(&quot;message&quot;, (worker, message, handle) &#x3D;&gt;
+                this.handleReportMessage(worker, message, handle));
+        }
+    }
+
+    /**
+     * Gets the reporter tags.
+     *
+     * @returns {Map&lt;string, string&gt;}
+     * @memberof MetricReporter
+     */
+    public getTags(): Map&lt;string, string&gt; {
+        return this.options.tags;
+    }
+
+    /**
+     * Sets the reporter tags.
+     *
+     * @param {Map&lt;string, string&gt;} tags
+     * @returns {this}
+     * @memberof MetricReporter
+     */
+    public setTags(tags: Map&lt;string, string&gt;): this {
+        this.options.tags &#x3D; tags;
+        return this;
+    }
+
+    /**
+     * Implementations start reporting metrics when called.
+     *
+     * @abstract
+     * @returns {Promise&lt;this&gt;}
+     * @memberof MetricReporter
+     */
+    public abstract start(): Promise&lt;this&gt;;
+
+    /**
+     * Implementations stop reporting metrics when called.
+     *
+     * @abstract
+     * @returns {Promise&lt;this&gt;}
+     * @memberof MetricReporter
+     */
+    public abstract stop(): Promise&lt;this&gt;;
+
+    /**
+     * Adds a new {@link MetricRegistry} to be reported.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof MetricReporter
+     */
+    public addMetricRegistry(metricRegistry: MetricRegistry): this {
+        this.metricRegistries.push(metricRegistry);
+        return this;
+    }
+
+    /**
+     * Removes the given {@link MetricRegistry} if it was previously added.
+     *
+     * @param {MetricRegistry} metricRegistry
+     * @returns {this}
+     * @memberof MetricReporter
+     */
+    public removeMetricRegistry(metricRegistry: MetricRegistry): this {
+        const index: number &#x3D; this.metricRegistries.indexOf(metricRegistry);
+        if (index &gt; -1) {
+            this.metricRegistries.splice(index, 1);
+        }
+        return this;
+    }
+
+    /**
+     * Reports an {@link Event}.
+     *
+     * Implementations can choose how to process ad-hoc events, wether it&#x27;s
+     * queuing the events to the next call to report or sending events
+     * immediately.
+     *
+     * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
+     * and call {@link #afterReport} may not be applied for ad-hoc events.
+     *
+     * This implementation does nothing and always resolved the specified event.
+     *
+     * @param {TEvent} event
+     * @returns {Promise&lt;TEvent&gt;}
+     * @memberof MetricReporter
+     */
+    public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
+        return event;
+    }
+
+    /**
+     * Sends events remaining in the queue (if a queue is used in the implementation).
+     *
+     * @returns {Promise&lt;void&gt;}
+     * @memberof MetricReporter
+     */
+    public async flushEvents(): Promise&lt;void&gt; {
+    }
+
+    /**
+     * Checks if the specified message can be handle by this metric-reporter and is of the desired type.
+     *
+     * @protected
+     * @param {InterprocessMessage} message
+     * @param {string} [targetType&#x3D;MetricReporter.MESSAGE_TYPE]
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected canHandleMessage(
+        message: InterprocessMessage,
+        targetType: string &#x3D; MetricReporter.MESSAGE_TYPE): boolean {
+        return message &amp;&amp;
+            message.type &amp;&amp; message.type &#x3D;&#x3D;&#x3D; targetType &amp;&amp;
+            message.targetReporterType &amp;&amp; message.targetReporterType &#x3D;&#x3D;&#x3D; this.reporterType;
+    }
+
+    /**
+     * Handles messages from forked processes.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @memberof MetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
+        if (this.canHandleMessage(message)) {
+            const report: InterprocessReportMessage&lt;T&gt; &#x3D; message;
+            const reg: MetricRegistry &#x3D; (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
+            await this.handleResults(report.ctx, reg, report.date, &quot;counter&quot;, report.metrics.monotoneCounters);
+            await this.handleResults(report.ctx, reg, report.date, &quot;counter&quot;, report.metrics.counters);
+            await this.handleResults(report.ctx, reg, report.date, &quot;gauge&quot;, report.metrics.gauges);
+            await this.handleResults(report.ctx, reg, report.date, &quot;histogram&quot;, report.metrics.histograms);
+            await this.handleResults(report.ctx, reg, report.date, &quot;meter&quot;, report.metrics.meters);
+            await this.handleResults(report.ctx, reg, report.date, &quot;timer&quot;, report.metrics.timers);
+        }
+    }
+
+    /**
+     * Called before each reporting run.
+     *
+     * @protected
+     * @memberof MetricReporter
+     */
+    protected async beforeReport(ctx: OverallReportContext) {
+    }
+
+    /**
+     * Called after each reporting run.
+     *
+     * @protected
+     * @memberof MetricReporter
+     */
+    protected async afterReport(ctx: OverallReportContext) {
+    }
+
+    /**
+     * Run the reporting procedures. Calls {@link #beforeReport} before each
+     * {@link MetricRegistry}&#x27;s metrics are reported and {@link #afterReport}
+     * afterwards.
+     *
+     * @protected
+     * @memberof MetricReporter
+     */
+    protected async report(): Promise&lt;OverallReportContext&gt; {
+        if (this.metricRegistries &amp;&amp; this.metricRegistries.length &gt; 0) {
+            const ctx &#x3D; this.createOverallReportContext();
+            await this.beforeReport(ctx);
+            for (const registry of this.metricRegistries) {
+                await this.reportMetricRegistry(ctx, registry);
+            }
+            await this.afterReport(ctx);
+            return ctx;
+        }
+        return {};
+    }
+
+    /**
+     * Reporting function for a single {@link MetricRegistry}.
+     * Calls {@link #createReportingContext} for each metric type.
+     * Afterwards calls {@link #reportMetrics} for each of the
+     * registry&#x27;s metrics - grouped by type.
+     * And finally calls {@link #handleResults} for each of the results.
+     *
+     * @protected
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
+     * @memberof MetricReporter
+     */
+    protected async reportMetricRegistry(
+        ctx: OverallReportContext,
+        registry: MetricRegistry | null) {
+
+        const date: Date &#x3D; new Date(this.options.clock.time().milliseconds);
+        const counterCtx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt; &#x3D; this
+            .createMetricSetReportContext(ctx, registry, date, &quot;counter&quot;);
+        const gaugeCtx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt; &#x3D; this
+            .createMetricSetReportContext(ctx, registry, date, &quot;gauge&quot;);
+        const histogramCtx: MetricSetReportContext&lt;Histogram&gt; &#x3D; this
+            .createMetricSetReportContext(ctx, registry, date, &quot;histogram&quot;);
+        const meterCtx: MetricSetReportContext&lt;Meter&gt; &#x3D; this
+            .createMetricSetReportContext(ctx, registry, date, &quot;meter&quot;);
+        const timerCtx: MetricSetReportContext&lt;Timer&gt; &#x3D; this
+            .createMetricSetReportContext(ctx, registry, date, &quot;timer&quot;);
+
+        counterCtx.metrics &#x3D; registry.getMonotoneCounterList();
+        const monotoneCounterResults &#x3D; this.reportMetrics(ctx, counterCtx,
+            (counter: MonotoneCounter) &#x3D;&gt; this.reportCounter(counter, counterCtx),
+            (counter: MonotoneCounter) &#x3D;&gt; counter.getCount());
+
+        counterCtx.metrics &#x3D; registry.getCounterList();
+        const counterResults &#x3D; this.reportMetrics(ctx, counterCtx as MetricSetReportContext&lt;Counter&gt;,
+            (counter: Counter) &#x3D;&gt; this.reportCounter(counter, counterCtx),
+            (counter: Counter) &#x3D;&gt; counter.getCount());
+
+        gaugeCtx.metrics &#x3D; registry.getGaugeList();
+        const gaugeResults &#x3D; this.reportMetrics(ctx, gaugeCtx,
+            (gauge: Gauge&lt;any&gt;) &#x3D;&gt; this.reportGauge(gauge, gaugeCtx),
+            (gauge: Gauge&lt;any&gt;) &#x3D;&gt; gauge.getValue());
+
+        histogramCtx.metrics &#x3D; registry.getHistogramList();
+        const histogramResults &#x3D; this.reportMetrics(ctx, histogramCtx,
+            (histogram: Histogram) &#x3D;&gt; this.reportHistogram(histogram, histogramCtx),
+            (histogram: Histogram) &#x3D;&gt; histogram.getCount());
+
+        meterCtx.metrics &#x3D; registry.getMeterList();
+        const meterResults &#x3D; this.reportMetrics(ctx, meterCtx,
+            (meter: Meter) &#x3D;&gt; this.reportMeter(meter, meterCtx),
+            (meter: Meter) &#x3D;&gt; meter.getCount());
+
+        timerCtx.metrics &#x3D; registry.getTimerList();
+        const timerResults &#x3D; this.reportMetrics(ctx, timerCtx,
+            (timer: Timer) &#x3D;&gt; this.reportTimer(timer, timerCtx),
+            (timer: Timer) &#x3D;&gt; timer.getCount());
+
+        if (this.sendMetricsToMaster()) {
+            const message: InterprocessReportMessage&lt;T&gt; &#x3D; {
+                ctx,
+                date,
+                metrics: {
+                    counters: counterResults,
+                    gauges: gaugeResults,
+                    histograms: histogramResults,
+                    meters: meterResults,
+                    monotoneCounters: monotoneCounterResults,
+                    timers: timerResults,
+                },
+                tags: this.buildTags(registry, null),
+                targetReporterType: this.reporterType,
+                type: MetricReporter.MESSAGE_TYPE,
+            };
+            this.options.clusterOptions.sendToMaster(message);
+        } else {
+            await this.handleResults(ctx, registry, date, &quot;counter&quot;, monotoneCounterResults);
+            await this.handleResults(ctx, registry, date, &quot;counter&quot;, counterResults);
+            await this.handleResults(ctx, registry, date, &quot;gauge&quot;, gaugeResults);
+            await this.handleResults(ctx, registry, date, &quot;histogram&quot;, histogramResults);
+            await this.handleResults(ctx, registry, date, &quot;meter&quot;, meterResults);
+            await this.handleResults(ctx, registry, date, &quot;timer&quot;, timerResults);
+        }
+    }
+
+    /**
+     * Called in {@link #reportMetricRegistry} to determine to send a reporting-message to the master process.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected sendMetricsToMaster(): boolean {
+        return  this.options.clusterOptions &amp;&amp;
+                this.options.clusterOptions.enabled &amp;&amp;
+                this.options.clusterOptions.sendMetricsToMaster;
+    }
+
+    /**
+     * Creates an OverallReportContext.
+     *
+     * @protected
+     * @returns {OverallReportContext}
+     * @memberof MetricReporter
+     */
+    protected createOverallReportContext(): OverallReportContext {
+        return {
+        };
+    }
+
+    /**
+     * Creates a MetricSetReportContext with the specified arguments.
+     *
+     * @protected
+     * @param {OverallReportContext} overallCtx
+     * @param {MetricRegistry | null} registry
+     * @param {Date} date
+     * @param {MetricType} type
+     * @returns {MetricSetReportContext&lt;any&gt;}
+     * @memberof MetricReporter
+     */
+    protected createMetricSetReportContext(
+        overallCtx: OverallReportContext,
+        registry: MetricRegistry | null,
+        date: Date,
+        type: MetricType): MetricSetReportContext&lt;any&gt; {
+        return {
+            date,
+            metrics: [],
+            overallCtx,
+            registry,
+            type,
+        };
+    }
+
+    /**
+     * Filters out each metric that does not necessarily need to be reported
+     * and calls the specified reporting function for the remaining.
+     *
+     * @protected
+     * @template M type of the metric
+     * @template C typed ReportingContext
+     * @param {C} ctx
+     * @param {(metric: M, ctx: C) &#x3D;&gt; T} reportFunction
+     * @param {(metric: M, ctx: C) &#x3D;&gt; number} lastModifiedFunction
+     * @returns {Array&lt;ReportingResult&lt;M, T&gt;&gt;}
+     * @memberof MetricReporter
+     */
+    protected reportMetrics&lt;M extends Metric, C extends MetricSetReportContext&lt;M&gt;&gt;(
+        overallCtx: OverallReportContext,
+        ctx: C,
+        reportFunction: (metric: M, ctx: C) &#x3D;&gt; T,
+        lastModifiedFunction: (metric: M, ctx: C) &#x3D;&gt; number): Array&lt;ReportingResult&lt;M, T&gt;&gt; {
+
+        return ctx.metrics
+            .filter((metric) &#x3D;&gt; {
+                const metricId &#x3D; (metric as any).id;
+                return !metricId || this.hasChanged(metricId, lastModifiedFunction(metric, ctx), ctx.date.getTime());
+            })
+            .map((metric) &#x3D;&gt; ({
+                metric,
+                result: reportFunction(metric, ctx),
+            }))
+            .filter((result) &#x3D;&gt; !!result.result);
+    }
+
+    /**
+     * Handles the reporting result for a group of metric instances.
+     *
+     * @protected
+     * @abstract
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
+     * @param {Date} date
+     * @param {MetricType} type
+     * @param {Array&lt;ReportingResult&lt;any, T&gt;&gt;} results
+     * @returns {Promise&lt;void&gt;}
+     * @memberof MetricReporter
+     */
+    protected abstract handleResults(
+        ctx: OverallReportContext,
+        registry: MetricRegistry | null,
+        date: Date,
+        type: MetricType,
+        results: Array&lt;ReportingResult&lt;any, T&gt;&gt;): Promise&lt;void&gt;;
+
+    /**
+     * Does the reporting for a counter or monotone counter.
+     *
+     * @protected
+     * @abstract
+     * @param {(MonotoneCounter | Counter)} counter
+     * @param {(MetricSetReportContext&lt;MonotoneCounter | Counter&gt;)} ctx
+     * @returns {T}
+     * @memberof MetricReporter
+     */
+    protected abstract reportCounter(
+        counter: MonotoneCounter | Counter, ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): T;
+
+    /**
+     * Does the reporting for a gauge.
+     *
+     * @protected
+     * @abstract
+     * @param {Gauge&lt;any&gt;} gauge
+     * @param {MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;} ctx
+     * @returns {T}
+     * @memberof MetricReporter
+     */
+    protected abstract reportGauge(gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): T;
+
+    /**
+     * Does the reporting for a histogram.
+     *
+     * @protected
+     * @abstract
+     * @param {Histogram} histogram
+     * @param {MetricSetReportContext&lt;Histogram&gt;} ctx
+     * @returns {T}
+     * @memberof MetricReporter
+     */
+    protected abstract reportHistogram(histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): T;
+
+    /**
+     * Does the reporting for a meter.
+     *
+     * @protected
+     * @abstract
+     * @param {Meter} meter
+     * @param {MetricSetReportContext&lt;Meter&gt;} ctx
+     * @returns {T}
+     * @memberof MetricReporter
+     */
+    protected abstract reportMeter(meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): T;
+
+    /**
+     * Does the reporting for a timer.
+     *
+     * @protected
+     * @abstract
+     * @param {Timer} timer
+     * @param {MetricSetReportContext&lt;Timer&gt;} ctx
+     * @returns {T}
+     * @memberof MetricReporter
+     */
+    protected abstract reportTimer(timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): T;
+
+    /**
+     * Determines if a metric instance has changed it&#x27;s value since the last check.
+     * This is always true if the minimal-reporting timeout was reached.
+     *
+     * @private
+     * @param {number} metricId
+     * @param {number} lastValue
+     * @param {number} date
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected hasChanged(metricId: number, lastValue: number, date: number): boolean {
+        let changed &#x3D; true;
+        let metricEntry &#x3D; {
+            lastReport: 0,
+            lastValue,
+        };
+        if (this.metricStates.has(metricId)) {
+            metricEntry &#x3D; this.metricStates.get(metricId);
+            changed &#x3D; metricEntry.lastValue !&#x3D;&#x3D; lastValue;
+            if (!changed) {
+                const minReportingTimeout &#x3D; MINUTE.convertTo(this.options.minReportingTimeout, MILLISECOND);
+                changed &#x3D; metricEntry.lastReport + minReportingTimeout &lt; date;
+            }
+        }
+        if (changed) {
+            metricEntry.lastReport &#x3D; date;
+            metricEntry.lastValue &#x3D; lastValue;
+        }
+        this.metricStates.set(metricId, metricEntry);
+        return changed;
+    }
+
+    /**
+     * Combines the tags of this reporter instance, the specified {@link MetricRegistry}
+     * and the specified taggable metric (in this order).
+     *
+     * @protected
+     * @param {MetricRegistry | null} registry
+     * @param {Taggable} taggable
+     * @returns {Tags}
+     * @memberof MetricReporter
+     */
+    protected buildTags(registry: MetricRegistry | null, taggable: Taggable): Tags {
+        const tags: Tags &#x3D; {};
+        if (this.options.tags) {
+            this.options.tags.forEach((tag, key) &#x3D;&gt; tags[key] &#x3D; tag);
+        }
+        if (registry &amp;&amp; registry.getTags()) {
+            registry.getTags().forEach((tag, key) &#x3D;&gt; tags[key] &#x3D; tag);
+        }
+        if (taggable) {
+            const customTags &#x3D; getMetricTags(taggable);
+            Object.keys(customTags).forEach((key) &#x3D;&gt; tags[key] &#x3D; customTags[key]);
+        }
+        return tags;
+    }
+
+    /**
+     * Checks the number and gives it back or zero (0) if it&#x27;s not a number.
+     *
+     * @protected
+     * @param {number} value
+     * @returns {number}
+     * @memberof MetricReporter
+     */
+    protected getNumber(value: number): number {
+        if (isNaN(value)) {
+            return 0;
+        }
+        return value;
+    }
+
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'TagsOnlyMetricRegistry.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

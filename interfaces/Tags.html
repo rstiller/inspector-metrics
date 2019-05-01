@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/reporter/metric-reporter.ts</code>
+            <code>lib/metrics/model/taggable.ts</code>
         </p>
 
             <p class="comment">
@@ -81,13 +81,13 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <code>[key: string]:    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                        <code>[key: string]:        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
 </code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">lib/metrics/reporter/metric-reporter.ts:20</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">lib/metrics/model/taggable.ts:6</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -100,20 +100,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
 
-import { Clock } from &quot;../clock&quot;;
-import { Counter, MonotoneCounter } from &quot;../counter&quot;;
-import { Event } from &quot;../event&quot;;
-import { Gauge } from &quot;../gauge&quot;;
-import { Histogram } from &quot;../histogram&quot;;
-import { Meter } from &quot;../meter&quot;;
-import { Metric } from &quot;../metric&quot;;
-import { MetricRegistry } from &quot;../metric-registry&quot;;
-import { Taggable } from &quot;../taggable&quot;;
-import { MILLISECOND, MINUTE } from &quot;../time-unit&quot;;
-import { Timer } from &quot;../timer&quot;;
-import { MetricEntry } from &quot;./metric-entry&quot;;
-import { MetricType } from &quot;./metric-type&quot;;
-
 /**
  * Helper interface for handling tags.
  */
@@ -122,658 +108,106 @@ export interface Tags {
 }
 
 /**
- * Helper interface for a reporting run.
- */
-export interface OverallReportContext {
-    [key: string]: any;
-}
-
-/**
- * Helper interface for reporting runs.
- */
-export interface MetricSetReportContext&lt;M&gt; {
-    /**
-     * The OverallReportContext this context is running in.
-     *
-     * @type {OverallReportContext}
-     * @memberof ReportingContext
-     */
-    overallCtx: OverallReportContext;
-    /**
-     * The array of metric instance that is currently reported.
-     *
-     * @type {M[]}
-     * @memberof ReportingContext
-     */
-    metrics: M[];
-    /**
-     * The registry the metric are registered in.
-     *
-     * @type {MetricRegistry}
-     * @memberof ReportingContext
-     */
-    readonly registry: MetricRegistry;
-    /**
-     * The current date.
-     *
-     * @type {Date}
-     * @memberof ReportingContext
-     */
-    readonly date: Date;
-    /**
-     * The type of the metrics in the {@link #metrics} array.
-     *
-     * @type {MetricType}
-     * @memberof ReportingContext
-     */
-    readonly type: MetricType;
-}
-
-/**
- * Helper interface for reporting results.
- */
-export interface ReportingResult&lt;M, T&gt; {
-    /**
-     * The metric the result refers to.
-     *
-     * @type {M}
-     * @memberof ReportingResult
-     */
-    readonly metric: M;
-    /**
-     * The reporting result - implementation specific.
-     *
-     * @type {T}
-     * @memberof ReportingResult
-     */
-    readonly result: T;
-}
-
-/**
- * Options for the {@link MetricReporter}.
+ * An interface for taggable classes.
  *
  * @export
- * @interface MetricReporterOptions
+ * @interface Taggable
  */
-export interface MetricReporterOptions {
-    /**
-     * Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature.
-     *
-     * @type {Clock}
-     * @memberof MetricReporterOptions
-     */
-    readonly clock?: Clock;
-    /**
-     * Timeout in minutes a metric need to be included in the report without having changed.
-     *
-     * @type {number}
-     * @memberof MetricReporterOptions
-     */
-    minReportingTimeout?: number;
-    /**
-     * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
-     *
-     * @type {Map&lt;string, string&gt;}
-     * @memberof MetricReporterOptions
-     */
-    tags?: Map&lt;string, string&gt;;
-}
+export interface Taggable {
 
-/**
- * Interface for metric-reporter.
- *
- * @export
- * @interface IMetricReporter
- */
-export interface IMetricReporter {
     /**
-     * Gets the reporter tags.
+     * Gets all tags.
      *
      * @returns {Map&lt;string, string&gt;}
-     * @memberof IMetricReporter
+     * @memberof Taggable
      */
     getTags(): Map&lt;string, string&gt;;
 
     /**
-     * Sets the reporter tags.
+     * Gets the specified tag or {@code null}.
      *
-     * @param {Map&lt;string, string&gt;} tags
+     * @param {string} name
+     * @returns {string}
+     * @memberof Taggable
+     */
+    getTag(name: string): string;
+
+    /**
+     * Sets the specified tag.
+     *
+     * @param {string} name
+     * @param {string} value
      * @returns {this}
-     * @memberof IMetricReporter
+     * @memberof Taggable
+     */
+    setTag(name: string, value: string): this;
+
+    /**
+     * Sets tags set.
+     *
+     * @param {Map&lt;string, string&gt;} name
+     * @returns {this}
+     * @memberof Taggable
      */
     setTags(tags: Map&lt;string, string&gt;): this;
 
     /**
-     * Implementations start reporting metrics when called.
+     * Adds the specified tags to metric&#x27;s tags.
      *
-     * @abstract
-     * @returns {Promise&lt;this&gt;}
-     * @memberof IMetricReporter
-     */
-    start(): Promise&lt;this&gt;;
-
-    /**
-     * Implementations stop reporting metrics when called.
-     *
-     * @abstract
-     * @returns {Promise&lt;this&gt;}
-     * @memberof IMetricReporter
-     */
-    stop(): Promise&lt;this&gt;;
-
-    /**
-     * Adds a new {@link MetricRegistry} to be reported.
-     *
-     * @param {MetricRegistry} metricRegistry
+     * @param {Map&lt;string, string&gt;} name
      * @returns {this}
-     * @memberof IMetricReporter
+     * @memberof Taggable
      */
-    addMetricRegistry(metricRegistry: MetricRegistry): this;
+    addTags(tags: Map&lt;string, string&gt;): this;
 
     /**
-     * Removes the given {@link MetricRegistry} if it was previously added.
+     * Removes the specified tag.
      *
-     * @param {MetricRegistry} metricRegistry
+     * @param {string} name
      * @returns {this}
-     * @memberof IMetricReporter
+     * @memberof Taggable
      */
-    removeMetricRegistry(metricRegistry: MetricRegistry): this;
+    removeTag(name: string): this;
 
     /**
-     * Reports an {@link Event}.
+     * Removes the specified tag names.
      *
-     * Implementations can choose how to process ad-hoc events, wether it&#x27;s
-     * queuing the events to the next call to report or sending events
-     * immediately.
-     *
-     * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
-     * and call {@link #afterReport} may not be applied for ad-hoc events.
-     *
-     * This implementation does nothing and always resolved the specified evnet.
-     *
-     * @param {MetricRegistry} event
+     * @param {string[]} names
      * @returns {this}
-     * @memberof IMetricReporter
+     * @memberof Taggable
      */
-    reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt;;
+    removeTags(...names: string[]): this;
 
-    /**
-     * Sends events remaining in the queue (if a queue is used in the implementation).
-     *
-     * @returns {Promise&lt;void&gt;}
-     * @memberof IMetricReporter
-     */
-    flushEvents(): Promise&lt;void&gt;;
 }
 
 /**
- * Base-class for metric-reporter implementations.
+ * Transforms the {@link Tags} object into a {@link Map&lt;string, string&gt;} object.
  *
  * @export
- * @abstract
- * @class MetricReporter
+ * @param {Tags} tags
+ * @returns {Map&lt;string, string&gt;}
  */
-export abstract class MetricReporter&lt;O extends MetricReporterOptions, T&gt; implements IMetricReporter {
-
-    /**
-     * {@link MetricRegistry} instances.
-     *
-     * @protected
-     * @type {MetricRegistry[]}
-     * @memberof MetricReporter
-     */
-    protected readonly metricRegistries: MetricRegistry[] &#x3D; [];
-    /**
-     * options for this reporter instance.
-     *
-     * @protected
-     * @type {O}
-     * @memberof MetricReporter
-     */
-    protected readonly options: O;
-    /**
-     * Keeps track of the reporting states for each metric.
-     *
-     * @protected
-     * @type {Map&lt;number, MetricEntry&gt;}
-     * @memberof MetricReporter
-     */
-    protected readonly metricStates: Map&lt;number, MetricEntry&gt; &#x3D; new Map();
-
-    /**
-     * Creates an instance of MetricReporter.
-     *
-     * @param {O} options
-     * @param {Map&lt;string, string&gt;} [tags&#x3D;new Map()]
-     *          tags for this reporter instance - to be combined with the tags of each metric while reporting
-     * @param {Clock} [clock&#x3D;new StdClock()]
-     *          clock used to determine the date for the reporting as well as the minimum-reporting timeout feature
-     * @param {number} [minReportingTimeout&#x3D;1]
-     *          timeout in minutes a metric need to be included in the report without having changed
-     * @memberof MetricReporter
-     */
-    public constructor(options: O) {
-        this.options &#x3D; options;
+export function tagsToMap(tags: Tags): Map&lt;string, string&gt; {
+    const tagMap: Map&lt;string, string&gt; &#x3D; new Map();
+    if (tags) {
+        Object.keys(tags).forEach((key) &#x3D;&gt; tagMap.set(key, tags[key]));
     }
+    return tagMap;
+}
 
-    /**
-     * Gets the reporter tags.
-     *
-     * @returns {Map&lt;string, string&gt;}
-     * @memberof MetricReporter
-     */
-    public getTags(): Map&lt;string, string&gt; {
-        return this.options.tags;
+/**
+ * Transforms the {@link Map&lt;string, string&gt;} object into a {@link Tags} object.
+ *
+ * @export
+ * @param {Map&lt;string, string&gt;} tagMap
+ * @returns {Tags}
+ */
+export function mapToTags(tagMap: Map&lt;string, string&gt;): Tags {
+    const tags: Tags &#x3D; {};
+    if (tagMap) {
+        tagMap.forEach((tag, name) &#x3D;&gt; tags[name] &#x3D; tag);
     }
-
-    /**
-     * Sets the reporter tags.
-     *
-     * @param {Map&lt;string, string&gt;} tags
-     * @returns {this}
-     * @memberof MetricReporter
-     */
-    public setTags(tags: Map&lt;string, string&gt;): this {
-        this.options.tags &#x3D; tags;
-        return this;
-    }
-
-    /**
-     * Implementations start reporting metrics when called.
-     *
-     * @abstract
-     * @returns {Promise&lt;this&gt;}
-     * @memberof MetricReporter
-     */
-    public abstract start(): Promise&lt;this&gt;;
-
-    /**
-     * Implementations stop reporting metrics when called.
-     *
-     * @abstract
-     * @returns {Promise&lt;this&gt;}
-     * @memberof MetricReporter
-     */
-    public abstract stop(): Promise&lt;this&gt;;
-
-    /**
-     * Adds a new {@link MetricRegistry} to be reported.
-     *
-     * @param {MetricRegistry} metricRegistry
-     * @returns {this}
-     * @memberof MetricReporter
-     */
-    public addMetricRegistry(metricRegistry: MetricRegistry): this {
-        this.metricRegistries.push(metricRegistry);
-        return this;
-    }
-
-    /**
-     * Removes the given {@link MetricRegistry} if it was previously added.
-     *
-     * @param {MetricRegistry} metricRegistry
-     * @returns {this}
-     * @memberof MetricReporter
-     */
-    public removeMetricRegistry(metricRegistry: MetricRegistry): this {
-        const index: number &#x3D; this.metricRegistries.indexOf(metricRegistry);
-        if (index &gt; -1) {
-            this.metricRegistries.splice(index, 1);
-        }
-        return this;
-    }
-
-    /**
-     * Reports an {@link Event}.
-     *
-     * Implementations can choose how to process ad-hoc events, wether it&#x27;s
-     * queuing the events to the next call to report or sending events
-     * immediately.
-     *
-     * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
-     * and call {@link #afterReport} may not be applied for ad-hoc events.
-     *
-     * This implementation does nothing and always resolved the specified event.
-     *
-     * @param {Event} event
-     * @returns {Promise&lt;TEvent&gt;}
-     * @memberof MetricReporter
-     */
-    public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
-        return event;
-    }
-
-    /**
-     * Sends events remaining in the queue (if a queue is used in the implementation).
-     *
-     * @returns {Promise&lt;void&gt;}
-     * @memberof MetricReporter
-     */
-    public async flushEvents(): Promise&lt;void&gt; {
-    }
-
-    /**
-     * Called be before each reporting run.
-     *
-     * @protected
-     * @memberof MetricReporter
-     */
-    protected async beforeReport(ctx: OverallReportContext) {
-    }
-
-    /**
-     * Called after each reporting run.
-     *
-     * @protected
-     * @memberof MetricReporter
-     */
-    protected async afterReport(ctx: OverallReportContext) {
-    }
-
-    /**
-     * Run the reporting procedures. Calls {@link #beforeReport} before each
-     * {@link MetricRegistry}&#x27;s metrics are reported and {@link #afterReport}
-     * afterwards.
-     *
-     * @protected
-     * @memberof MetricReporter
-     */
-    protected async report(): Promise&lt;OverallReportContext&gt; {
-        if (this.metricRegistries &amp;&amp; this.metricRegistries.length &gt; 0) {
-            const ctx &#x3D; this.createOverallReportContext();
-            await this.beforeReport(ctx);
-            for (const registry of this.metricRegistries) {
-                await this.reportMetricRegistry(ctx, registry);
-            }
-            await this.afterReport(ctx);
-            return ctx;
-        }
-        return {};
-    }
-
-    /**
-     * Reporting function for a sinlge {@link MetricRegistry}.
-     * Calls {@link #createReportingContext} for each metric type.
-     * Afterwarsds calls {@link #reportMetrics} for each of the
-     * registry&#x27;s metrics - grouped by type.
-     * And finally calls {@link #handleResults} for each of the results.
-     *
-     * @protected
-     * @param {MetricRegistry} registry
-     * @memberof MetricReporter
-     */
-    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry) {
-        const date: Date &#x3D; new Date(this.options.clock.time().milliseconds);
-        const counterCtx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt; &#x3D; this
-            .createMetricSetReportContext(ctx, registry, date, &quot;counter&quot;);
-        const gaugeCtx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt; &#x3D; this
-            .createMetricSetReportContext(ctx, registry, date, &quot;gauge&quot;);
-        const histogramCtx: MetricSetReportContext&lt;Histogram&gt; &#x3D; this
-            .createMetricSetReportContext(ctx, registry, date, &quot;histogram&quot;);
-        const meterCtx: MetricSetReportContext&lt;Meter&gt; &#x3D; this
-            .createMetricSetReportContext(ctx, registry, date, &quot;meter&quot;);
-        const timerCtx: MetricSetReportContext&lt;Timer&gt; &#x3D; this
-            .createMetricSetReportContext(ctx, registry, date, &quot;timer&quot;);
-
-        counterCtx.metrics &#x3D; registry.getMonotoneCounterList();
-        const monotoneCounterResults &#x3D; this.reportMetrics(ctx, counterCtx,
-            (counter: MonotoneCounter) &#x3D;&gt; this.reportCounter(counter, counterCtx),
-            (counter: MonotoneCounter) &#x3D;&gt; counter.getCount());
-
-        counterCtx.metrics &#x3D; registry.getCounterList();
-        const counterResults &#x3D; this.reportMetrics(ctx, counterCtx as MetricSetReportContext&lt;Counter&gt;,
-            (counter: Counter) &#x3D;&gt; this.reportCounter(counter, counterCtx),
-            (counter: Counter) &#x3D;&gt; counter.getCount());
-
-        gaugeCtx.metrics &#x3D; registry.getGaugeList();
-        const gaugeResults &#x3D; this.reportMetrics(ctx, gaugeCtx,
-            (gauge: Gauge&lt;any&gt;) &#x3D;&gt; this.reportGauge(gauge, gaugeCtx),
-            (gauge: Gauge&lt;any&gt;) &#x3D;&gt; gauge.getValue());
-
-        histogramCtx.metrics &#x3D; registry.getHistogramList();
-        const histogramResults &#x3D; this.reportMetrics(ctx, histogramCtx,
-            (histogram: Histogram) &#x3D;&gt; this.reportHistogram(histogram, histogramCtx),
-            (histogram: Histogram) &#x3D;&gt; histogram.getCount());
-
-        meterCtx.metrics &#x3D; registry.getMeterList();
-        const meterResults &#x3D; this.reportMetrics(ctx, meterCtx,
-            (meter: Meter) &#x3D;&gt; this.reportMeter(meter, meterCtx),
-            (meter: Meter) &#x3D;&gt; meter.getCount());
-
-        timerCtx.metrics &#x3D; registry.getTimerList();
-        const timerResults &#x3D; this.reportMetrics(ctx, timerCtx,
-            (timer: Timer) &#x3D;&gt; this.reportTimer(timer, timerCtx),
-            (timer: Timer) &#x3D;&gt; timer.getCount());
-
-        await this.handleResults(ctx, registry, date, &quot;counter&quot;, monotoneCounterResults);
-        await this.handleResults(ctx, registry, date, &quot;counter&quot;, counterResults);
-        await this.handleResults(ctx, registry, date, &quot;gauge&quot;, gaugeResults);
-        await this.handleResults(ctx, registry, date, &quot;histogram&quot;, histogramResults);
-        await this.handleResults(ctx, registry, date, &quot;meter&quot;, meterResults);
-        await this.handleResults(ctx, registry, date, &quot;timer&quot;, timerResults);
-    }
-
-    /**
-     * Creates an OverallReportContext.
-     *
-     * @protected
-     * @returns {OverallReportContext}
-     * @memberof MetricReporter
-     */
-    protected createOverallReportContext(): OverallReportContext {
-        return {
-        };
-    }
-
-    /**
-     * Creates a MetricSetReportContext with the specified arguments.
-     *
-     * @protected
-     * @param {OverallReportContext} overallCtx
-     * @param {MetricRegistry} registry
-     * @param {Date} date
-     * @param {MetricType} type
-     * @returns {MetricSetReportContext&lt;any&gt;}
-     * @memberof MetricReporter
-     */
-    protected createMetricSetReportContext(
-        overallCtx: OverallReportContext,
-        registry: MetricRegistry,
-        date: Date,
-        type: MetricType): MetricSetReportContext&lt;any&gt; {
-        return {
-            date,
-            metrics: [],
-            overallCtx,
-            registry,
-            type,
-        };
-    }
-
-    /**
-     * Filters out each metric that does not necessarily need to be reported
-     * and calls the specified reporting function for the remaining.
-     *
-     * @protected
-     * @template M type of the metric
-     * @template C typed ReportingContext
-     * @param {C} ctx
-     * @param {(metric: M, ctx: C) &#x3D;&gt; T} reportFunction
-     * @param {(metric: M, ctx: C) &#x3D;&gt; number} lastModifiedFunction
-     * @returns {Array&lt;ReportingResult&lt;M, T&gt;&gt;}
-     * @memberof MetricReporter
-     */
-    protected reportMetrics&lt;M extends Metric, C extends MetricSetReportContext&lt;M&gt;&gt;(
-        overallCtx: OverallReportContext,
-        ctx: C,
-        reportFunction: (metric: M, ctx: C) &#x3D;&gt; T,
-        lastModifiedFunction: (metric: M, ctx: C) &#x3D;&gt; number): Array&lt;ReportingResult&lt;M, T&gt;&gt; {
-
-        return ctx.metrics
-            .filter((metric) &#x3D;&gt; {
-                const metricId &#x3D; (metric as any).id;
-                return !metricId || this.hasChanged(metricId, lastModifiedFunction(metric, ctx), ctx.date.getTime());
-            })
-            .map((metric) &#x3D;&gt; ({
-                metric,
-                result: reportFunction(metric, ctx),
-            }))
-            .filter((result) &#x3D;&gt; !!result.result);
-    }
-
-    /**
-     * Handles the reporting result for a group of metric instances.
-     *
-     * @protected
-     * @abstract
-     * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
-     * @param {Date} date
-     * @param {MetricType} type
-     * @param {Array&lt;ReportingResult&lt;any, T&gt;&gt;} results
-     * @returns {Promise&lt;void&gt;}
-     * @memberof MetricReporter
-     */
-    protected abstract handleResults(
-        ctx: OverallReportContext,
-        registry: MetricRegistry,
-        date: Date,
-        type: MetricType,
-        results: Array&lt;ReportingResult&lt;any, T&gt;&gt;): Promise&lt;void&gt;;
-
-    /**
-     * Does the reporting for a counter or monotone counter.
-     *
-     * @protected
-     * @abstract
-     * @param {(MonotoneCounter | Counter)} counter
-     * @param {(MetricSetReportContext&lt;MonotoneCounter | Counter&gt;)} ctx
-     * @returns {T}
-     * @memberof MetricReporter
-     */
-    protected abstract reportCounter(
-        counter: MonotoneCounter | Counter, ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): T;
-
-    /**
-     * Does the reporting for a gauge.
-     *
-     * @protected
-     * @abstract
-     * @param {Gauge&lt;any&gt;} gauge
-     * @param {MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;} ctx
-     * @returns {T}
-     * @memberof MetricReporter
-     */
-    protected abstract reportGauge(gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): T;
-
-    /**
-     * Does the reporting for a histogram.
-     *
-     * @protected
-     * @abstract
-     * @param {Histogram} histogram
-     * @param {MetricSetReportContext&lt;Histogram&gt;} ctx
-     * @returns {T}
-     * @memberof MetricReporter
-     */
-    protected abstract reportHistogram(histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): T;
-
-    /**
-     * Does the reporting for a meter.
-     *
-     * @protected
-     * @abstract
-     * @param {Meter} meter
-     * @param {MetricSetReportContext&lt;Meter&gt;} ctx
-     * @returns {T}
-     * @memberof MetricReporter
-     */
-    protected abstract reportMeter(meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): T;
-
-    /**
-     * Does the reporting for a timer.
-     *
-     * @protected
-     * @abstract
-     * @param {Timer} timer
-     * @param {MetricSetReportContext&lt;Timer&gt;} ctx
-     * @returns {T}
-     * @memberof MetricReporter
-     */
-    protected abstract reportTimer(timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): T;
-
-    /**
-     * Determines if a metric instance has changed it&#x27;s value since the last check.
-     * This is always true if the minimal-reporting timeout was reached.
-     *
-     * @private
-     * @param {number} metricId
-     * @param {number} lastValue
-     * @param {number} date
-     * @returns {boolean}
-     * @memberof MetricReporter
-     */
-    protected hasChanged(metricId: number, lastValue: number, date: number): boolean {
-        let changed &#x3D; true;
-        let metricEntry &#x3D; {
-            lastReport: 0,
-            lastValue,
-        };
-        if (this.metricStates.has(metricId)) {
-            metricEntry &#x3D; this.metricStates.get(metricId);
-            changed &#x3D; metricEntry.lastValue !&#x3D;&#x3D; lastValue;
-            if (!changed) {
-                const minReportingTimeout &#x3D; MINUTE.convertTo(this.options.minReportingTimeout, MILLISECOND);
-                changed &#x3D; metricEntry.lastReport + minReportingTimeout &lt; date;
-            }
-        }
-        if (changed) {
-            metricEntry.lastReport &#x3D; date;
-            metricEntry.lastValue &#x3D; lastValue;
-        }
-        this.metricStates.set(metricId, metricEntry);
-        return changed;
-    }
-
-    /**
-     * Combines the tags of this reporter instance, the specified {@link MetricRegistry}
-     * and the specified taggable metric (in this order).
-     *
-     * @protected
-     * @param {MetricRegistry} registry
-     * @param {Taggable} taggable
-     * @returns {Tags}
-     * @memberof MetricReporter
-     */
-    protected buildTags(registry: MetricRegistry, taggable: Taggable): Tags {
-        const tags: Tags &#x3D; {};
-        if (this.options.tags) {
-            this.options.tags.forEach((tag, key) &#x3D;&gt; tags[key] &#x3D; tag);
-        }
-        if (registry &amp;&amp; registry.getTags()) {
-            registry.getTags().forEach((tag, key) &#x3D;&gt; tags[key] &#x3D; tag);
-        }
-        if (taggable.getTags()) {
-            taggable.getTags().forEach((tag, key) &#x3D;&gt; tags[key] &#x3D; tag);
-        }
-        return tags;
-    }
-
-    /**
-     * Checks the number and gives it back or zero (0) if it&#x27;s not a number.
-     *
-     * @protected
-     * @param {number} value
-     * @returns {number}
-     * @memberof MetricReporter
-     */
-    protected getNumber(value: number): number {
-        if (isNaN(value)) {
-            return 0;
-        }
-        return value;
-    }
-
+    return tags;
 }
 </code></pre>
     </div>

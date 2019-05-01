@@ -34,60 +34,127 @@
 <p>All notable changes to this project will be documented in this file.</p>
 <p>The format is based on <a href="https://keepachangelog.com/en/1.0.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
-<h2 id="-unreleased-">[Unreleased]</h2>
-<h2 id="-1-18-0-2019-03-01">[1.18.0] - 2019-03-01</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="unreleased">[Unreleased]</h2>
+<h2 id="1190---2019-05-01">[1.19.0] - 2019-05-01</h2>
+<h3 id="added">Added</h3>
 <ul>
-<li>turned into monorepo</li>
-<li>shrinked package to contain only necessary files</li>
+<li>added MacOS to test matrix</li>
+<li>added serialized metrics<ul>
+<li>metric classes can implement <code>toJSON</code> method to perform serialization</li>
+<li>new interfaces<ul>
+<li>SerializableMetric (convenience methods <code>isSerializableMetric</code>, <code>getMetricName</code>, <code>getMetricDescription</code>, <code>getMetricGroup</code>, <code>getMetricTags</code>, <code>getMetricMetadata</code>, ``)</li>
+<li>SerializedSnapshot</li>
+<li>SerializableSummarizing</li>
+<li>SerializableBucketCounting (convenience methods <code>isSerializableBucketCounting</code>, <code>getMetricBuckets</code>, <code>getMetricCounts</code>)</li>
+<li>SerializableSampling (convenience methods <code>isSerializableSampling</code>, <code>getSnapshot</code>)</li>
+<li>SerializableMetered</li>
+<li>MeteredRates</li>
+<li>Metadata (convenience methods <code>metadataToMap</code>, <code>mapToMetadata</code>)</li>
+<li>Tags (convenience methods <code>tagsToMap</code>, <code>mapToTags</code>)</li>
 </ul>
-<h2 id="-1-17-3-2019-02-13">[1.17.3] - 2019-02-13</h2>
-<h3 id="changed">Changed</h3>
-<ul>
-<li>fix NaN check in logger report<ul>
-<li><a href="https://github.com/rstiller/inspector-metrics/pull/13">https://github.com/rstiller/inspector-metrics/pull/13</a></li>
-<li>thanks to <a href="https://github.com/ttous">https://github.com/ttous</a></li>
+</li>
+<li>implemented in<ul>
+<li>Counter</li>
+<li>MonotoneCounter</li>
+<li>Event</li>
+<li>HdrHistogram<ul>
+<li>HdrSnapshot (<code>values()</code> method always returns empty array)</li>
+</ul>
+</li>
+<li>Histogram<ul>
+<li>property <code>sum</code> renamed to <code>sumInternal</code></li>
+<li>property <code>buckets</code> renamed to <code>bucketsInternal</code></li>
+</ul>
+</li>
+<li>Meter<ul>
+<li>property <code>count</code> renamed to <code>countInternal</code></li>
+</ul>
+</li>
+<li>BaseMetric<ul>
+<li>property <code>metadata</code> renamed to <code>metadataMap</code></li>
+<li>property <code>tags</code> renamed to <code>tagMap</code></li>
+</ul>
+</li>
+<li>SizeGauge</li>
+<li>Timer</li>
 </ul>
 </li>
 </ul>
-<h2 id="-1-17-2-2019-02-08">[1.17.2] - 2019-02-08</h2>
+</li>
+<li>added support for multiple processes<ul>
+<li>new interfaces<ul>
+<li>InterprocessMessage</li>
+<li>InterprocessReportMessage</li>
+<li>ClusterOptions</li>
+</ul>
+</li>
+<li><code>DefaultClusterOptions</code> - send metrics from forked processes to master process</li>
+<li><code>DisabledClusterOptions</code> - disables sending metrics from forked processes to master process</li>
+<li><code>reporterType</code> property in each metric-reporter - indicating type of reporter</li>
+<li>abstracting the <code>cluster</code> module&#39;s messaging capabilities with <code>ClusterOptions</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="changed">Changed</h3>
+<ul>
+<li>method <code>getHistogramsByname</code> in <code>MetricRegistry</code> renamed to <code>getHistogramsByName</code></li>
+<li>updated dependencies</li>
+<li>refactored internal file structure</li>
+<li>fixed some typos in docs</li>
+</ul>
+<h2 id="1180---2019-03-01">[1.18.0] - 2019-03-01</h2>
+<h3 id="changed-1">Changed</h3>
+<ul>
+<li>turned into monorepo</li>
+<li>shrunk package to contain only necessary files</li>
+</ul>
+<h2 id="1173---2019-02-13">[1.17.3] - 2019-02-13</h2>
+<h3 id="changed-2">Changed</h3>
+<ul>
+<li>fix NaN check in logger report<ul>
+<li>https://github.com/rstiller/inspector-metrics/pull/13</li>
+<li>thanks to https://github.com/ttous</li>
+</ul>
+</li>
+</ul>
+<h2 id="1172---2019-02-08">[1.17.2] - 2019-02-08</h2>
+<h3 id="changed-3">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-17-1-2018-12-17">[1.17.1] - 2018-12-17</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="1171---2018-12-17">[1.17.1] - 2018-12-17</h2>
+<h3 id="changed-4">Changed</h3>
 <ul>
 <li>fixed typos in docs</li>
 <li>fixed minimum reporting timeout bug</li>
 <li>fixed last value reported bug</li>
 </ul>
-<h2 id="-1-17-0-2018-11-30">[1.17.0] - 2018-11-30</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="1170---2018-11-30">[1.17.0] - 2018-11-30</h2>
+<h3 id="changed-5">Changed</h3>
 <ul>
 <li>metric-reporter start and stop methods return promise</li>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-16-0-2018-11-27">[1.16.0] - 2018-11-27</h2>
-<h3 id="added">Added</h3>
+<h2 id="1160---2018-11-27">[1.16.0] - 2018-11-27</h2>
+<h3 id="added-1">Added</h3>
 <ul>
 <li>convenience methods for setting tags on all metrics and reporters<ul>
-<li><a href="https://github.com/rstiller/inspector-metrics/pull/11">https://github.com/rstiller/inspector-metrics/pull/11</a></li>
-<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+<li>https://github.com/rstiller/inspector-metrics/pull/11</li>
+<li>thanks to https://github.com/doubret</li>
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-6">Changed</h3>
 <ul>
 <li>added nodejs 11 to playground</li>
 <li>set version of transitive dependency event-stream to 3.3.4</li>
 </ul>
-<h2 id="-1-15-0-2018-11-25">[1.15.0] - 2018-11-25</h2>
-<h3 id="added">Added</h3>
+<h2 id="1150---2018-11-25">[1.15.0] - 2018-11-25</h2>
+<h3 id="added-2">Added</h3>
 <ul>
 <li>ad-hoc events<ul>
-<li><a href="https://github.com/rstiller/inspector-metrics/pull/10">https://github.com/rstiller/inspector-metrics/pull/10</a></li>
-<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+<li>https://github.com/rstiller/inspector-metrics/pull/10</li>
+<li>thanks to https://github.com/doubret</li>
 </ul>
 </li>
 <li>metric-reporter<ul>
@@ -96,23 +163,23 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h2 id="-1-14-0-2018-11-22">[1.14.0] - 2018-11-22</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="1140---2018-11-22">[1.14.0] - 2018-11-22</h2>
+<h3 id="changed-7">Changed</h3>
 <ul>
 <li>introduced fluent interface for public setter functions<ul>
-<li><a href="https://github.com/rstiller/inspector-metrics/pull/8">https://github.com/rstiller/inspector-metrics/pull/8</a></li>
-<li>thanks to <a href="https://github.com/doubret">https://github.com/doubret</a></li>
+<li>https://github.com/rstiller/inspector-metrics/pull/8</li>
+<li>thanks to https://github.com/doubret</li>
 </ul>
 </li>
 </ul>
-<h2 id="-1-13-1-2018-11-21">[1.13.1] - 2018-11-21</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="1131---2018-11-21">[1.13.1] - 2018-11-21</h2>
+<h3 id="changed-8">Changed</h3>
 <ul>
-<li>updated docs in README / added <a href="https://github.com/rstiller/inspector-vm">https://github.com/rstiller/inspector-vm</a> reference</li>
+<li>updated docs in README / added https://github.com/rstiller/inspector-vm reference</li>
 <li>updated docs in README / fixed first example code</li>
 </ul>
-<h2 id="-1-13-0-2018-11-04">[1.13.0] - 2018-11-04</h2>
-<h3 id="added">Added</h3>
+<h2 id="1130---2018-11-04">[1.13.0] - 2018-11-04</h2>
+<h3 id="added-3">Added</h3>
 <ul>
 <li>CHANGELOG</li>
 <li>compile and test script for different node versions</li>
@@ -124,56 +191,56 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-9">Changed</h3>
 <ul>
 <li>updated dependencies</li>
-<li>updated docs in README / added <a href="https://github.com/rstiller/inspector-csv">https://github.com/rstiller/inspector-csv</a> reference</li>
+<li>updated docs in README / added https://github.com/rstiller/inspector-csv reference</li>
 <li>refactored logger-reporter and metric-reporter</li>
-<li>travisci build for node version 6, 7, 8, 9, 10, 11</li>
+<li>travis-ci build for node version 6, 7, 8, 9, 10, 11</li>
 <li>compile target from &quot;es2017&quot; to &quot;es6&quot;</li>
 </ul>
-<h2 id="-1-12-1-2018-10-16">[1.12.1] - 2018-10-16</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="1121---2018-10-16">[1.12.1] - 2018-10-16</h2>
+<h3 id="changed-10">Changed</h3>
 <ul>
 <li>fixed naming bug within metric-registry</li>
 </ul>
-<h2 id="-1-12-0-2018-10-06">[1.12.0] - 2018-10-06</h2>
-<h3 id="added">Added</h3>
+<h2 id="1120---2018-10-06">[1.12.0] - 2018-10-06</h2>
+<h3 id="added-4">Added</h3>
 <ul>
 <li>optional dependency &#39;native-hdr-histogram&#39;</li>
 <li>HdrHistogram (extends Histogram)</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-11">Changed</h3>
 <ul>
-<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-prometheus">https://github.com/rstiller/inspector-prometheus</a> reference</li>
+<li>updated doc in README / added https://github.com/rstiller/inspector-prometheus reference</li>
 <li>metric-registry<ul>
 <li>added &#39;newHdrHistogram&#39; method</li>
 </ul>
 </li>
 </ul>
-<h2 id="-1-11-0-2018-10-01">[1.11.0] - 2018-10-01</h2>
-<h3 id="added">Added</h3>
+<h2 id="1110---2018-10-01">[1.11.0] - 2018-10-01</h2>
+<h3 id="added-5">Added</h3>
 <ul>
 <li>Buckets &amp; BucketCounting interfaces<ul>
 <li>implemented by Histogram &amp; Timer</li>
 </ul>
 </li>
 </ul>
-<h2 id="-1-10-0-2018-09-29">[1.10.0] - 2018-09-29</h2>
-<h3 id="added">Added</h3>
+<h2 id="1100---2018-09-29">[1.10.0] - 2018-09-29</h2>
+<h3 id="added-6">Added</h3>
 <ul>
 <li>MetadataContainer interface<ul>
 <li>implemented by BaseMetric</li>
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-12">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>updated docs in README</li>
 </ul>
-<h2 id="-1-9-1-2018-09-29">[1.9.1] - 2018-09-29</h2>
-<h3 id="added">Added</h3>
+<h2 id="191---2018-09-29">[1.9.1] - 2018-09-29</h2>
+<h3 id="added-7">Added</h3>
 <ul>
 <li>metric-registry<ul>
 <li>&#39;isPureMonotoneCounter&#39; static method</li>
@@ -182,7 +249,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>&#39;compodoc&#39; as dev-dependency</li>
 <li>&#39;homepage&#39; field in package.json</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-13">Changed</h3>
 <ul>
 <li>fixed logger-reporter bug (log-metadata object mutated)</li>
 <li>added MonotoneCounter to logger-reporter</li>
@@ -197,8 +264,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Jenkinsfile</li>
 <li>&#39;typedoc&#39; as dev dependency</li>
 </ul>
-<h2 id="-1-9-0-2018-09-28">[1.9.0] - 2018-09-28</h2>
-<h3 id="added">Added</h3>
+<h2 id="190---2018-09-28">[1.9.0] - 2018-09-28</h2>
+<h3 id="added-8">Added</h3>
 <ul>
 <li>MonotoneCounter class + tests</li>
 <li>description field to metrics</li>
@@ -210,81 +277,81 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>added &#39;node-cint64&#39; as dependency for 64bit integer support</li>
 <li>added Int64Wrapper for &#39;node-cint64&#39; module</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-14">Changed</h3>
 <ul>
 <li>updated build scripts</li>
 </ul>
-<h2 id="-1-8-8-2018-09-21">[1.8.8] - 2018-09-21</h2>
-<h3 id="added">Added</h3>
+<h2 id="188---2018-09-21">[1.8.8] - 2018-09-21</h2>
+<h3 id="added-9">Added</h3>
 <ul>
 <li>jsdoc comments for most of the components</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-15">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>updated keywords in package.json</li>
 <li>added description in package.json</li>
 </ul>
-<h2 id="-1-8-7-2018-07-08">[1.8.7] - 2018-07-08</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="187---2018-07-08">[1.8.7] - 2018-07-08</h2>
+<h3 id="changed-16">Changed</h3>
 <ul>
-<li>travisci build for node version 6, 7, 8, 9, 10</li>
+<li>travis-ci build for node version 6, 7, 8, 9, 10</li>
 <li>updated dependencies</li>
 </ul>
-<h3 id="removed">Removed</h3>
+<h3 id="removed-1">Removed</h3>
 <ul>
 <li>&#39;async&#39; as dependency</li>
 </ul>
-<h2 id="-1-8-6-2018-02-14">[1.8.6] - 2018-02-14</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="186---2018-02-14">[1.8.6] - 2018-02-14</h2>
+<h3 id="changed-17">Changed</h3>
 <ul>
 <li>updated docs in README</li>
-<li>bug fix for <a href="https://github.com/rstiller/inspector-metrics/issues/3">https://github.com/rstiller/inspector-metrics/issues/3</a> (thanks to <a href="https://github.com/rwfaulkner">https://github.com/rwfaulkner</a>)</li>
+<li>bug fix for https://github.com/rstiller/inspector-metrics/issues/3 (thanks to https://github.com/rwfaulkner)</li>
 </ul>
-<h2 id="-1-8-5-2018-02-08">[1.8.5] - 2018-02-08</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="185---2018-02-08">[1.8.5] - 2018-02-08</h2>
+<h3 id="changed-18">Changed</h3>
 <ul>
 <li>removed docs folder from npm package</li>
-<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-carbon">https://github.com/rstiller/inspector-carbon</a> reference</li>
+<li>updated doc in README / added https://github.com/rstiller/inspector-carbon reference</li>
 </ul>
-<h2 id="-1-8-4-2018-02-02">[1.8.4] - 2018-02-02</h2>
-<h3 id="added">Added</h3>
+<h2 id="184---2018-02-02">[1.8.4] - 2018-02-02</h2>
+<h3 id="added-10">Added</h3>
 <ul>
 <li>typedoc as dev-dependency</li>
 <li>jsdoc comments for clock</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-19">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>updated Jenkinsfile</li>
 <li>docs folder in npm package</li>
-<li>updated doc in README / added <a href="https://github.com/rstiller/inspector-elasticsearch">https://github.com/rstiller/inspector-elasticsearch</a> reference</li>
+<li>updated doc in README / added https://github.com/rstiller/inspector-elasticsearch reference</li>
 </ul>
-<h2 id="-1-8-3-2017-11-20">[1.8.3] - 2017-11-20</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="183---2017-11-20">[1.8.3] - 2017-11-20</h2>
+<h3 id="changed-20">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>removed ts-node/register from mocha config</li>
 </ul>
-<h2 id="-1-8-2-2017-11-19">[1.8.2] - 2017-11-19</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="182---2017-11-19">[1.8.2] - 2017-11-19</h2>
+<h3 id="changed-21">Changed</h3>
 <ul>
-<li>travisci build for node version 6, 7, 8, 9</li>
+<li>travis-ci build for node version 6, 7, 8, 9</li>
 <li>logger-reporter doesn&#39;t use async queue anymore</li>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-8-1-2017-09-17">[1.8.1] - 2017-09-17</h2>
-<h3 id="added">Added</h3>
+<h2 id="181---2017-09-17">[1.8.1] - 2017-09-17</h2>
+<h3 id="added-11">Added</h3>
 <ul>
 <li>size / length gauges for arrays, maps, etc</li>
 </ul>
-<h2 id="-1-7-0-2017-08-26">[1.7.0] - 2017-08-26</h2>
-<h3 id="added">Added</h3>
+<h2 id="170---2017-08-26">[1.7.0] - 2017-08-26</h2>
+<h3 id="added-12">Added</h3>
 <ul>
 <li>private id field to BaseMetric (incremented for each new metric instance)</li>
 </ul>
-<h2 id="-1-6-0-2017-08-26">[1.6.0] - 2017-08-26</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="160---2017-08-26">[1.6.0] - 2017-08-26</h2>
+<h3 id="changed-22">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>adjusted line feed in tsconfig</li>
@@ -293,59 +360,59 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h3 id="removed">Removed</h3>
-<h2 id="-1-5-4-2017-08-18">[1.5.4] - 2017-08-18</h2>
-<h3 id="changed">Changed</h3>
+<h3 id="removed-2">Removed</h3>
+<h2 id="154---2017-08-18">[1.5.4] - 2017-08-18</h2>
+<h3 id="changed-23">Changed</h3>
 <ul>
 <li>timer<ul>
 <li>fixed &#39;timeAsync&#39; method to be compatible with nodejs 6</li>
 </ul>
 </li>
 </ul>
-<h2 id="-1-5-3-2017-08-18">[1.5.3] - 2017-08-18</h2>
-<h3 id="added">Added</h3>
+<h2 id="153---2017-08-18">[1.5.3] - 2017-08-18</h2>
+<h3 id="added-13">Added</h3>
 <ul>
 <li>timer<ul>
 <li>&#39;timeAsync&#39; method</li>
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-24">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 <li>updated timer doc in README</li>
 </ul>
-<h3 id="removed">Removed</h3>
-<h2 id="-1-5-2-2017-08-01">[1.5.2] - 2017-08-01</h2>
-<h3 id="added">Added</h3>
+<h3 id="removed-3">Removed</h3>
+<h2 id="152---2017-08-01">[1.5.2] - 2017-08-01</h2>
+<h3 id="added-14">Added</h3>
 <ul>
-<li>travisci config</li>
+<li>travis-ci config</li>
 <li>badges in README</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-25">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-5-1-2017-06-10">[1.5.1] - 2017-06-10</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="151---2017-06-10">[1.5.1] - 2017-06-10</h2>
+<h3 id="changed-26">Changed</h3>
 <ul>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-5-0-2017-06-10">[1.5.0] - 2017-06-10</h2>
-<h3 id="added">Added</h3>
+<h2 id="150---2017-06-10">[1.5.0] - 2017-06-10</h2>
+<h3 id="added-15">Added</h3>
 <ul>
 <li>metric-registry<ul>
 <li>&#39;registerMetric&#39; method</li>
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-27">Changed</h3>
 <ul>
 <li>change typescript compilation target from &#39;es6&#39; to &#39;es2017&#39;</li>
 <li>updated documentation in README</li>
 </ul>
-<h2 id="-1-4-2-2017-06-09">[1.4.2] - 2017-06-09</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="142---2017-06-09">[1.4.2] - 2017-06-09</h2>
+<h3 id="changed-28">Changed</h3>
 <ul>
 <li>metric-registry<ul>
 <li>fixed bug &#39;isCounter&#39; method</li>
@@ -355,8 +422,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h2 id="-1-4-1-2017-06-09">[1.4.1] - 2017-06-09</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="141---2017-06-09">[1.4.1] - 2017-06-09</h2>
+<h3 id="changed-29">Changed</h3>
 <ul>
 <li>use rimraf to erase build folder</li>
 <li>metric-registry<ul>
@@ -369,8 +436,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h2 id="-1-3-0-2017-05-29">[1.3.0] - 2017-05-29</h2>
-<h3 id="added">Added</h3>
+<h2 id="130---2017-05-29">[1.3.0] - 2017-05-29</h2>
+<h3 id="added-16">Added</h3>
 <ul>
 <li>.editorconfig file</li>
 <li>name attribute to metric classes</li>
@@ -387,7 +454,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 </ul>
 </li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-30">Changed</h3>
 <ul>
 <li>use metric array instead of Maps for metric instances in metric-registry internally</li>
 <li>metric-registry<ul>
@@ -412,54 +479,54 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>don&#39;t remove comments / jsdocs from source when compiling</li>
 <li>updated dependencies</li>
 </ul>
-<h2 id="-1-2-1-2017-05-11">[1.2.1] - 2017-05-11</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="121---2017-05-11">[1.2.1] - 2017-05-11</h2>
+<h3 id="changed-31">Changed</h3>
 <ul>
 <li>refactored test / test suites</li>
 </ul>
-<h2 id="-1-2-0-2017-04-10">[1.2.0] - 2017-04-10</h2>
-<h3 id="added">Added</h3>
+<h2 id="120---2017-04-10">[1.2.0] - 2017-04-10</h2>
+<h3 id="added-17">Added</h3>
 <ul>
 <li>metric-registry-listener + tests</li>
 <li>documentation for metric-registry listener in README</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-32">Changed</h3>
 <ul>
-<li>renamed &#39;IGroupable&#39; &amp; &#39;ITaggable&#39; interfacer to &#39;Groupable&#39; and &#39;Taggable&#39;</li>
+<li>renamed &#39;IGroupable&#39; &amp; &#39;ITaggable&#39; interface to &#39;Groupable&#39; and &#39;Taggable&#39;</li>
 </ul>
-<h2 id="-1-1-1-2017-04-09">[1.1.1] - 2017-04-09</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="111---2017-04-09">[1.1.1] - 2017-04-09</h2>
+<h3 id="changed-33">Changed</h3>
 <ul>
 <li>fixed import of group related classes and interfaces</li>
 </ul>
-<h2 id="-1-1-0-2017-04-09">[1.1.0] - 2017-04-09</h2>
-<h3 id="added">Added</h3>
+<h2 id="110---2017-04-09">[1.1.0] - 2017-04-09</h2>
+<h3 id="added-18">Added</h3>
 <ul>
 <li>base-metric class</li>
 <li>support for setting groups to metrics</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed-34">Changed</h3>
 <ul>
 <li>logger-reporter uses group for metric names</li>
 </ul>
-<h2 id="-1-0-3-2017-04-05">[1.0.3] - 2017-04-05</h2>
-<h3 id="added">Added</h3>
+<h2 id="103---2017-04-05">[1.0.3] - 2017-04-05</h2>
+<h3 id="added-19">Added</h3>
 <ul>
 <li>documentation in README</li>
 </ul>
-<h2 id="-1-0-2-2017-03-31">[1.0.2] - 2017-03-31</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="102---2017-03-31">[1.0.2] - 2017-03-31</h2>
+<h3 id="changed-35">Changed</h3>
 <ul>
 <li>fixed main / typings path in package.json</li>
 </ul>
-<h2 id="-1-0-1-2017-03-31">[1.0.1] - 2017-03-31</h2>
-<h3 id="changed">Changed</h3>
+<h2 id="101---2017-03-31">[1.0.1] - 2017-03-31</h2>
+<h3 id="changed-36">Changed</h3>
 <ul>
-<li>defined fileset for npm package</li>
+<li>defined file set for npm package</li>
 </ul>
-<h2 id="-1-0-0-2017-03-31">[1.0.0] - 2017-03-31</h2>
+<h2 id="100---2017-03-31">[1.0.0] - 2017-03-31</h2>
 <p>Initial commit.</p>
-<h3 id="added">Added</h3>
+<h3 id="added-20">Added</h3>
 <ul>
 <li>project setup<ul>
 <li>README</li>

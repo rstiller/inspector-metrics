@@ -76,7 +76,7 @@
                 <h3>Extends</h3>
             </p>
             <p class="comment">
-                    <code><a href="../interfaces/Metric.html" target="_self" >Metric</a></code>
+                        <code><a href="../interfaces/Metric.html" target="_self" >Metric</a></code>
             </p>
 
         <section>
@@ -103,56 +103,56 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="getValue"></a>
-                        <span class="name">
-                            <b>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getValue"></a>
+                    <span class="name">
+                        <b>
                             getValue
-                            </b>
-                            <a href="#getValue"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#getValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>getValue()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">lib/metrics/gauge.ts:21</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="22"
+                            class="link-to-prism">lib/metrics/gauge.ts:22</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
-                            <div class="io-description"><p>Gets the current value of the gauge.</p>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Gets the current value of the gauge.</p>
 </div>
 
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code>T</code>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>    <code>T</code>
 
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
@@ -160,7 +160,7 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
 
-import { BaseMetric, Metric } from &quot;./metric&quot;;
+import { BaseMetric, Metric, SerializableMetric } from &quot;./model/metric&quot;;
 
 /**
  * A gauge can represent any value - regardless of the type.
@@ -168,9 +168,10 @@ import { BaseMetric, Metric } from &quot;./metric&quot;;
  * @export
  * @interface Gauge
  * @extends {Metric}
+ * @extends {SerializableMetric}
  * @template T
  */
-export interface Gauge&lt;T&gt; extends Metric {
+export interface Gauge&lt;T&gt; extends Metric, SerializableMetric {
 
     /**
      * Gets the current value of the gauge.
@@ -234,6 +235,18 @@ export class SimpleGauge extends BaseMetric implements Gauge&lt;number&gt; {
     public setValue(value: number): this {
         this.value &#x3D; value;
         return this;
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SimpleGauge
+     */
+    public toJSON(): any {
+        const json &#x3D; super.toJSON();
+        json.value &#x3D; this.value;
+        return json;
     }
 
 }

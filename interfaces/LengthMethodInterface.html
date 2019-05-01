@@ -97,49 +97,49 @@
 
             <section>
     
-        <h3 id="methods">
-            Methods
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="length"></a>
-                        <span class="name">
-                            <b>
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="length"></a>
+                    <span class="name">
+                        <b>
                             length
-                            </b>
-                            <a href="#length"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
+                        </b>
+                        <a href="#length"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
 <code>length()</code>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
 
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">lib/metrics/size-gauge.ts:13</a></div>
-                            </td>
-                        </tr>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="13"
+                            class="link-to-prism">lib/metrics/size-gauge.ts:13</a></div>
+                </td>
+            </tr>
 
 
-                <tr>
-                    <td class="col-md-4">
+            <tr>
+                <td class="col-md-4">
 
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
-                            </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
-
 
     </div>
 
@@ -148,7 +148,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
 
 import { Gauge } from &quot;./gauge&quot;;
-import { BaseMetric } from &quot;./metric&quot;;
+import { BaseMetric } from &quot;./model/metric&quot;;
 
 /**
  * Accessor-interface for objects with &quot;length()&quot; method.
@@ -301,6 +301,18 @@ export class SizeGauge extends BaseMetric implements Gauge&lt;number&gt; {
      */
     public getValue(): number {
         return this.extractor();
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SizeGauge
+     */
+    public toJSON(): any {
+        const json &#x3D; super.toJSON();
+        json.value &#x3D; this.extractor();
+        return json;
     }
 
 }
