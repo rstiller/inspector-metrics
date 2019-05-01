@@ -1,4 +1,4 @@
-FROM graphiteapp/graphite-statsd:1.1.5-7
+FROM graphiteapp/graphite-statsd:1.1.5-10
 
 ARG TZ
 ENV TZ=$TZ

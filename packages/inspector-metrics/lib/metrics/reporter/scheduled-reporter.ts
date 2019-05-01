@@ -1,7 +1,8 @@
 import "source-map-support/register";
 
-import { MILLISECOND, TimeUnit } from "../time-unit";
-import { MetricReporter, MetricReporterOptions } from "./metric-reporter";
+import { MILLISECOND, TimeUnit } from "../model/time-unit";
+import { MetricReporter } from "./metric-reporter";
+import { MetricReporterOptions } from "./metric-reporter-options";
 
 /**
  * Scheduler function type definition.
@@ -50,7 +51,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
     extends MetricReporter<O, T> {
 
     /**
-     * Timer instance retuned by the scheduler function.
+     * Timer instance returned by the scheduler function.
      *
      * @private
      * @type {NodeJS.Timer}
@@ -62,10 +63,11 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      * Creates an instance of ScheduledMetricReporter.
      *
      * @param {O} options
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof ScheduledMetricReporter
      */
-    public constructor(options: O) {
-        super(options);
+    public constructor(options: O, reporterType?: string) {
+        super(options, reporterType);
     }
 
     /**
@@ -77,7 +79,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
      */
     public async start(): Promise<this> {
         const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
-        this.timer = this.options.scheduler(() => this.report(), interval);
+        this.timer = this.options.scheduler(async () => this.report(), interval);
         return this;
     }
 

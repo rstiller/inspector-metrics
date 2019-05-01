@@ -4,7 +4,7 @@ import * as async from "async";
 import { appendFile, mkdir, stat, Stats } from "fs";
 import { join } from "path";
 
-import { Metric } from "inspector-metrics";
+import { Metric, SerializableMetric } from "inspector-metrics";
 import moment = require("moment");
 import { CsvFileWriter } from "./CsvMetricReporter";
 
@@ -188,11 +188,11 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
     /**
      * Schedules a new write command for the given row fields.
      *
-     * @param {Metric} metric
+     * @param {Metric | SerializableMetric} metric
      * @param {string[]} values
      * @memberof DefaultCsvFileWriter
      */
-    public async writeRow(metric: Metric, values: string[]) {
+    public async writeRow(metric: Metric | SerializableMetric, values: string[]) {
         const normalizedFilename = join(this.currentDir, this.currentFilename);
         this.queue.push(async (callback: () => void) => {
             await this.write(

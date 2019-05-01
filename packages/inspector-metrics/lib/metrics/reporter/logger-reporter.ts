@@ -7,11 +7,14 @@ import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
 import { MetricRegistry } from "../metric-registry";
-import { MILLISECOND } from "../time-unit";
+import { MILLISECOND } from "../model/time-unit";
 import { Timer } from "../timer";
 import { Logger } from "./logger";
-import { MetricSetReportContext, OverallReportContext, ReportingResult } from "./metric-reporter";
+import { DefaultClusterOptions } from "./metric-reporter-options";
+import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
+import { OverallReportContext } from "./overall-report-context";
+import { ReportingResult } from "./reporting-result";
 import { ScheduledMetricReporter, ScheduledMetricReporterOptions } from "./scheduled-reporter";
 
 /**
@@ -101,16 +104,19 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-    }: LoggerReporterOptions) {
+        clusterOptions = new DefaultClusterOptions(),
+    }: LoggerReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             log,
             minReportingTimeout,
             reportInterval,
             scheduler,
             tags,
             unit,
-        });
+        }, reporterType);
         this.logMetadata = {
             reportInterval,
             tags,
@@ -160,7 +166,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
     }
 
     /**
-     * Creates a new {@link LoggerReportingContext} using the speicifed arguments.
+     * Creates a new {@link LoggerReportingContext} using the specified arguments.
      *
      * @protected
      * @param {OverallReportContext} overallCtx
@@ -195,7 +201,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      *
      * @protected
      * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, LogLine>>} results
@@ -203,7 +209,7 @@ export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOption
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, LogLine>>) {

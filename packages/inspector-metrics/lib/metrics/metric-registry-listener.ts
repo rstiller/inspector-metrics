@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { Metric } from "./metric";
+import { Metric } from "./model/metric";
 
 /**
  * A listener interface to keep track of metric insertion / removal.

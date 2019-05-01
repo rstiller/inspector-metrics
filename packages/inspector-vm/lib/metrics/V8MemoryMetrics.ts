@@ -90,7 +90,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      */
     private metrics: Metric[] = [];
     /**
-     * Stores the size gauges for different speces.
+     * Stores the size gauges for different specs.
      *
      * @private
      * @type {Map<string, SpaceHistory>}
@@ -106,7 +106,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      */
     private totalHeapSize: SimpleGauge = new SimpleGauge("totalHeapSize");
     /**
-     * Total availabel size.
+     * Total available size.
      *
      * @private
      * @type {SimpleGauge}
@@ -290,7 +290,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      * @memberof V8MemoryMetrics
      */
     public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
+        this.tagMap.set(name, value);
 
         this.totalHeapSize.setTag(name, value);
         this.totalAvailableSize.setTag(name, value);
@@ -318,7 +318,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
      * @memberof V8MemoryMetrics
      */
     public removeTag(name: string): this {
-        this.tags.delete(name);
+        this.tagMap.delete(name);
 
         this.totalHeapSize.removeTag(name);
         this.totalAvailableSize.removeTag(name);

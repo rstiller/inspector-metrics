@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
-import { Counting } from "./counting";
-import { BaseMetric, Metric } from "./metric";
+import { Counting } from "./model/counting";
+import { BaseMetric, Metric } from "./model/metric";
 
 /**
  * A monotonically increasing number.
@@ -71,6 +71,18 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
     public reset(): this {
         this.count = 0;
         return this;
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding count property.
+     *
+     * @returns {*}
+     * @memberof MonotoneCounter
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.count = this.count;
+        return json;
     }
 
 }

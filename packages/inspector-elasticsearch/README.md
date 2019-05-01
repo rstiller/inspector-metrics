@@ -118,6 +118,37 @@ const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
 });
 ```
 
+### multi process support (nodejs cluster)
+
+By default forked processes are sending the metrics as inter-process message  
+to the master process. The `ElasticsearchMetricReporter` is listening for those messages  
+and report the metrics from the other processes.  
+
+To disable this behavior set the `DisabledClusterOptions` when creating an instance.  
+
+In each case you should set the `pid` as reporter tag.  
+
+```typescript
+import { tagsToMap, DisabledClusterOptions } from "inspector-metrics";
+import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
+import { ConfigOptions } from "elasticsearch";
+
+const clientOptions: ConfigOptions = {
+    apiVersion: "6.0",
+    host: "localhost:9200",
+};
+// instance the elasticsearch reporter
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    clusterOptions: new DisabledClusterOptions(),
+});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)

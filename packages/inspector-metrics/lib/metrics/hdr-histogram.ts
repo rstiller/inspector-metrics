@@ -1,11 +1,11 @@
 import "source-map-support/register";
 
-import { BucketCounting, Buckets, Counting } from "./counting";
 import { Histogram } from "./histogram";
-import { Metric } from "./metric";
-import { Sampling } from "./sampling";
-import { Snapshot } from "./snapshot";
-import { Summarizing } from "./summarizing";
+import { BucketCounting, Buckets, Counting } from "./model/counting";
+import { Metric } from "./model/metric";
+import { Sampling } from "./model/sampling";
+import { SerializedSnapshot, Snapshot } from "./model/snapshot";
+import { Summarizing } from "./model/summarizing";
 
 /**
  * The 'native-hdr-histogram' module (optional).
@@ -23,7 +23,7 @@ try {
  * @class HdrSnapshot
  * @implements {Snapshot}
  */
-export class HdrSnapshot implements Snapshot {
+export class HdrSnapshot implements Snapshot, SerializedSnapshot {
 
     /**
      * Creates an instance of HdrSnapshot.
@@ -127,6 +127,16 @@ export class HdrSnapshot implements Snapshot {
      * @returns {number[]}
      * @memberof HdrSnapshot
      */
+    public get values(): number[] {
+        return [];
+    }
+
+    /**
+     * Always returns an empty array.
+     *
+     * @returns {number[]}
+     * @memberof HdrSnapshot
+     */
     public getValues(): number[] {
         return [];
     }
@@ -205,11 +215,11 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
      * @type {HdrSnapshot}
      * @memberof HdrHistogram
      */
-    private snapshot: HdrSnapshot;
+    private hdrSnapshot: HdrSnapshot;
 
     /**
      * Creates an instance of HdrHistogram.
-     * Throws anerror if the 'native-hdr-histogram' module is not installed.
+     * Throws an error if the 'native-hdr-histogram' module is not installed.
      *
      * @param {number} [lowest=1] is the lowest possible number that can be recorded
      * @param {number} [max=100] is the maximum number that can be recorded
@@ -235,7 +245,18 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
         }
 
         this.histogram = new NativeHistogram(lowest, max, figures);
-        this.snapshot = new HdrSnapshot(this);
+        this.hdrSnapshot = new HdrSnapshot(this);
+    }
+
+    /**
+     * Returns the internal instance of {@link HdrSnapshot}.
+     *
+     * @readonly
+     * @type {SerializedSnapshot}
+     * @memberof HdrHistogram
+     */
+    public get snapshot(): SerializedSnapshot {
+        return this.hdrSnapshot;
     }
 
     /**
@@ -245,7 +266,7 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
      * @memberof HdrHistogram
      */
     public getSnapshot(): Snapshot {
-        return this.snapshot;
+        return this.hdrSnapshot;
     }
 
     /**
@@ -257,14 +278,36 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
      */
     public update(value: number): this {
         this.count++;
-        this.sum.add(value);
-        for (const boundary of this.buckets.boundaries) {
+        this.sumInternal.add(value);
+        for (const boundary of this.bucketsInternal.boundaries) {
             if (value < boundary) {
                 this.bucketCounts.set(boundary, this.bucketCounts.get(boundary) + 1);
             }
         }
         this.histogram.record(value);
         return this;
+    }
+
+    /**
+     * Same as {@link Histogram#toJSON()}, also adding
+     * bucketCounts, buckets, count and sum (64bit number stringified) property.
+     *
+     * @returns {*}
+     * @memberof HdrHistogram
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.counts = {};
+        for (const [key, value] of this.bucketCounts) {
+            json.counts[key] = value;
+        }
+        json.buckets = this.bucketsInternal.boundaries;
+        json.count = this.count;
+        json.sum = this.sumInternal.toString();
+        json.snapshot = {
+            values: this.snapshot.values,
+        };
+        return json;
     }
 
 }

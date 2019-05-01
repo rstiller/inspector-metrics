@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Gauge } from "./gauge";
-import { BaseMetric } from "./metric";
+import { BaseMetric } from "./model/metric";
 
 /**
  * Accessor-interface for objects with "length()" method.
@@ -154,6 +154,18 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
      */
     public getValue(): number {
         return this.extractor();
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SizeGauge
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.extractor();
+        return json;
     }
 
 }

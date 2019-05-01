@@ -86,6 +86,20 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=11
 
+  node12:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node12
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=12
+
   grafana:
     build:
       context: ./test-env/grafana
@@ -96,7 +110,7 @@ services:
       - grafana-logs:/var/log/grafana
       - ./test-env/grafana/datasources:/etc/grafana/provisioning/datasources
       - ./test-env/grafana/dashboards:/etc/grafana/provisioning/dashboards
-      - ./playground/dashboards:/dashboards
+      - ./examples:/examples
     ports:
       - "3000:3000"
     restart: "no"
@@ -154,6 +168,8 @@ services:
         aliases:
          - elasticsearch
     hostname: elasticsearch
+    volumes:
+      - ./test-env/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
   
   kibana:
     build:
@@ -168,6 +184,8 @@ services:
         aliases:
          - kibana
     hostname: kibana
+    volumes:
+      - ./test-env/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
 
   influx:
     build:

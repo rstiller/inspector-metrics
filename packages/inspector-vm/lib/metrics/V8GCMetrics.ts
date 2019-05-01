@@ -197,7 +197,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
      * @memberof V8GCMetrics
      */
     public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
+        this.tagMap.set(name, value);
         this.allRuns.setTag(name, value);
         this.incrementalMarkingRuns.setTag(name, value);
         this.majorRuns.setTag(name, value);
@@ -214,7 +214,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
      * @memberof V8GCMetrics
      */
     public removeTag(name: string): this {
-        this.tags.delete(name);
+        this.tagMap.delete(name);
         this.allRuns.removeTag(name);
         this.incrementalMarkingRuns.removeTag(name);
         this.majorRuns.removeTag(name);

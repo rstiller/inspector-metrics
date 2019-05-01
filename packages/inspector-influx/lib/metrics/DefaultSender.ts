@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { IClusterConfig, InfluxDB, IPoint } from "influx";
+import { IClusterConfig, InfluxDB, IPoint, TimePrecision } from "influx";
 import { Sender } from "./InfluxMetricReporter";
 
 /**
@@ -36,15 +36,25 @@ export class DefaultSender implements Sender {
      * @memberof DefaultSender
      */
     private ready: boolean = false;
+    /**
+     * Defines the precision for the write operations.
+     *
+     * @private
+     * @type {TimePrecision}
+     * @memberof DefaultSender
+     */
+    private precision: TimePrecision;
 
     /**
      * Creates an instance of DefaultSender.
      *
      * @param {IClusterConfig} config
+     * @param {TimePrecision} [precision="s"] will be passed to write-options
      * @memberof DefaultSender
      */
-    public constructor(config: IClusterConfig) {
+    public constructor(config: IClusterConfig, precision: TimePrecision = "s") {
         this.config = config;
+        this.precision = precision;
         this.db = new InfluxDB(config);
     }
 
@@ -82,7 +92,7 @@ export class DefaultSender implements Sender {
      * @memberof DefaultSender
      */
     public send(points: IPoint[]): Promise<void> {
-        return this.db.writePoints(points);
+        return this.db.writePoints(points, { precision: this.precision });
     }
 
 }

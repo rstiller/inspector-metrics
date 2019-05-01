@@ -6,8 +6,8 @@ import "source-map-support/register";
 const graphite = require("graphite");
 
 import {
-    Clock,
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -23,13 +23,18 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Tags,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
+/**
+ * Extending standard options with `host` and `log` properties.
+ *
+ * @export
+ * @interface CarbonMetricReporterOptions
+ * @extends {ScheduledMetricReporterOptions}
+ */
 export interface CarbonMetricReporterOptions extends ScheduledMetricReporterOptions {
     /**
      * The graphite / carbon host.
@@ -75,7 +80,7 @@ export interface CarbonData {
  *
  * @export
  * @class CarbonMetricReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter<CarbonMetricReporterOptions, CarbonData>}
  */
 export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricReporterOptions, CarbonData> {
 
@@ -99,6 +104,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Creates an instance of CarbonMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof CarbonMetricReporter
      */
     public constructor({
@@ -110,50 +116,12 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-    }: {
-        /**
-         * The graphite / carbon host.
-         * @type {string}
-         */
-        host: string,
-        /**
-         * The logger instance used to report metrics.
-         * @type {Logger}
-         */
-        log?: Logger,
-        /**
-         * Reporting interval in the time-unit of {@link #unit}.
-         * @type {number}
-         */
-        reportInterval?: number;
-        /**
-         * The time-unit of the reporting interval.
-         * @type {TimeUnit}
-         */
-        unit?: TimeUnit;
-        /**
-         * The clock instance used determine the current time.
-         * @type {Clock}
-         */
-        clock?: Clock;
-        /**
-         * The scheduler function used to trigger reporting.
-         * @type {Scheduler}
-         */
-        scheduler?: Scheduler;
-        /**
-         * The timeout in which a metrics gets reported wether it's value has changed or not.
-         * @type {number}
-         */
-        minReportingTimeout?: number;
-        /**
-         * Common tags for this reporter instance.
-         * @type {Map<string, string>}
-         */
-        tags?: Map<string, string>;
-    }) {
+        clusterOptions = new DefaultClusterOptions(),
+    }: CarbonMetricReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             host,
             log,
             minReportingTimeout,
@@ -161,7 +129,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
             scheduler,
             tags,
             unit,
-        });
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,
@@ -193,7 +161,9 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @template TEventData
+     * @template TEvent
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof CarbonMetricReporter
      */
@@ -234,6 +204,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Uses the scheduler function to trigger periodical reporting.
      *
+     * @returns {Promise<this>}
      * @memberof CarbonMetricReporter
      */
     public async start(): Promise<this> {
@@ -244,6 +215,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     /**
      * Stops the timer reference returned by the scheduler function.
      *
+     * @returns {Promise<this>}
      * @memberof CarbonMetricReporter
      */
     public async stop(): Promise<this> {
@@ -258,7 +230,8 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      * Uses the client instance to report the given metric results.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
      * @param {Date} timestamp
      * @param {MetricType} type
      * @param {ReportingResult<any, CarbonData>[]} results
@@ -267,22 +240,31 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
      */
     protected handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         timestamp: Date,
         type: MetricType,
         results: Array<ReportingResult<any, CarbonData>>): Promise<any> {
         return Promise.all(results
             .map((result) => result.result)
             .map((carbonData) => new Promise((resolve, reject) => {
+                // can happen during serialization
+                if (!(timestamp instanceof Date)) {
+                    timestamp = new Date(timestamp);
+                }
                 this.client.writeTagged(carbonData.measurement, carbonData.tags, timestamp, (err: any) => {
                     if (err != null) {
                         if (this.options.log) {
                             this.options.log.error(err, this.logMetadata);
                         }
                         reject(err);
+                        return;
                     }
                     resolve();
                 });
+            }).catch((err) => {
+                if (this.options.log) {
+                    this.options.log.error(err, this.logMetadata);
+                }
             })));
     }
 

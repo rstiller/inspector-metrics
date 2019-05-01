@@ -2,15 +2,15 @@ import "source-map-support/register";
 
 import { Clock, StdClock } from "./clock";
 import { Counter, MonotoneCounter } from "./counter";
-import { Buckets } from "./counting";
 import { Gauge } from "./gauge";
 import { HdrHistogram } from "./hdr-histogram";
 import { Histogram } from "./histogram";
 import { Meter } from "./meter";
-import { BaseMetric, Metric } from "./metric";
 import { MetricRegistryListener } from "./metric-registry-listener";
 import { MetricSet } from "./metric-set";
-import { Reservoir, SlidingWindowReservoir } from "./reservoir";
+import { Buckets } from "./model/counting";
+import { BaseMetric, Metric } from "./model/metric";
+import { Reservoir, SlidingWindowReservoir } from "./model/reservoir";
 import { Timer } from "./timer";
 
 export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;
@@ -244,7 +244,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     private listeners: MetricRegistryListener[] = [];
 
     /**
-     * Adds the specified listener and returns the corrsponding
+     * Adds the specified listener and returns the corresponding
      * registration object.
      *
      * @param {MetricRegistryListener} listener
@@ -498,7 +498,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Gets all mamanged metric instance by name.
+     * Gets all managed metric instance by name.
      *
      * @param {string} name
      * @returns {Metric[]}
@@ -548,7 +548,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
      * @returns {Histogram[]}
      * @memberof MetricRegistry
      */
-    public getHistogramsByname(name: string): Histogram[] {
+    public getHistogramsByName(name: string): Histogram[] {
         return this.getByName<Histogram>(name);
     }
 
@@ -826,7 +826,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
     }
 
     /**
-     * Registeres a metric by name
+     * Registers a metric by name
      *
      * @param {string} name
      * @param {Metric} metric

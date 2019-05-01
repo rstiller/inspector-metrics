@@ -1,123 +1,23 @@
 import "source-map-support/register";
 
-import { Clock } from "../clock";
+import * as cluster from "cluster";
 import { Counter, MonotoneCounter } from "../counter";
 import { Event } from "../event";
 import { Gauge } from "../gauge";
 import { Histogram } from "../histogram";
 import { Meter } from "../meter";
-import { Metric } from "../metric";
 import { MetricRegistry } from "../metric-registry";
-import { Taggable } from "../taggable";
-import { MILLISECOND, MINUTE } from "../time-unit";
+import { getMetricTags, Metric } from "../model/metric";
+import { Taggable, Tags, tagsToMap } from "../model/taggable";
+import { MILLISECOND, MINUTE } from "../model/time-unit";
 import { Timer } from "../timer";
+import { InterprocessMessage, InterprocessReportMessage } from "./interprocess-message";
 import { MetricEntry } from "./metric-entry";
+import { MetricReporterOptions } from "./metric-reporter-options";
+import { MetricSetReportContext } from "./metric-set-report-context";
 import { MetricType } from "./metric-type";
-
-/**
- * Helper interface for handling tags.
- */
-export interface Tags {
-    [key: string]: string;
-}
-
-/**
- * Helper interface for a reporting run.
- */
-export interface OverallReportContext {
-    [key: string]: any;
-}
-
-/**
- * Helper interface for reporting runs.
- */
-export interface MetricSetReportContext<M> {
-    /**
-     * The OverallReportContext this context is running in.
-     *
-     * @type {OverallReportContext}
-     * @memberof ReportingContext
-     */
-    overallCtx: OverallReportContext;
-    /**
-     * The array of metric instance that is currently reported.
-     *
-     * @type {M[]}
-     * @memberof ReportingContext
-     */
-    metrics: M[];
-    /**
-     * The registry the metric are registered in.
-     *
-     * @type {MetricRegistry}
-     * @memberof ReportingContext
-     */
-    readonly registry: MetricRegistry;
-    /**
-     * The current date.
-     *
-     * @type {Date}
-     * @memberof ReportingContext
-     */
-    readonly date: Date;
-    /**
-     * The type of the metrics in the {@link #metrics} array.
-     *
-     * @type {MetricType}
-     * @memberof ReportingContext
-     */
-    readonly type: MetricType;
-}
-
-/**
- * Helper interface for reporting results.
- */
-export interface ReportingResult<M, T> {
-    /**
-     * The metric the result refers to.
-     *
-     * @type {M}
-     * @memberof ReportingResult
-     */
-    readonly metric: M;
-    /**
-     * The reporting result - implementation specific.
-     *
-     * @type {T}
-     * @memberof ReportingResult
-     */
-    readonly result: T;
-}
-
-/**
- * Options for the {@link MetricReporter}.
- *
- * @export
- * @interface MetricReporterOptions
- */
-export interface MetricReporterOptions {
-    /**
-     * Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature.
-     *
-     * @type {Clock}
-     * @memberof MetricReporterOptions
-     */
-    readonly clock?: Clock;
-    /**
-     * Timeout in minutes a metric need to be included in the report without having changed.
-     *
-     * @type {number}
-     * @memberof MetricReporterOptions
-     */
-    minReportingTimeout?: number;
-    /**
-     * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
-     *
-     * @type {Map<string, string>}
-     * @memberof MetricReporterOptions
-     */
-    tags?: Map<string, string>;
-}
+import { OverallReportContext } from "./overall-report-context";
+import { ReportingResult } from "./reporting-result";
 
 /**
  * Interface for metric-reporter.
@@ -189,10 +89,10 @@ export interface IMetricReporter {
      * Also the usual reporting process of calling {@link #beforeReport}, do the reporting
      * and call {@link #afterReport} may not be applied for ad-hoc events.
      *
-     * This implementation does nothing and always resolved the specified evnet.
+     * This implementation does nothing and always resolved the specified event.
      *
-     * @param {MetricRegistry} event
-     * @returns {this}
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof IMetricReporter
      */
     reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>;
@@ -207,6 +107,44 @@ export interface IMetricReporter {
 }
 
 /**
+ * Pseudo-{@link MetricRegistry} used to provide an interface for registry tags.
+ *
+ * @class TagsOnlyMetricRegistry
+ */
+class TagsOnlyMetricRegistry {
+
+    /**
+     * private tags map.
+     *
+     * @private
+     * @type {Map<string, string>}
+     * @memberof TagsOnlyMetricRegistry
+     */
+    private tags: Map<string, string>;
+
+    /**
+     * Creates an instance of TagsOnlyMetricRegistry.
+     *
+     * @param {Tags} tags
+     * @memberof TagsOnlyMetricRegistry
+     */
+    public constructor(tags: Tags) {
+        this.tags = tagsToMap(tags);
+    }
+
+    /**
+     * Gets the tags map.
+     *
+     * @returns {Map<string, string>}
+     * @memberof TagsOnlyMetricRegistry
+     */
+    public getTags(): Map<string, string> {
+        return this.tags;
+    }
+
+}
+
+/**
  * Base-class for metric-reporter implementations.
  *
  * @export
@@ -216,9 +154,19 @@ export interface IMetricReporter {
 export abstract class MetricReporter<O extends MetricReporterOptions, T> implements IMetricReporter {
 
     /**
+     * Constant for the "type" variable of process-level message identifying report-messages
+     * from reporter of forked processes.
+     *
+     * @static
+     * @memberof MetricReporter
+     */
+    public static readonly MESSAGE_TYPE = "inspector-metrics:metric-reporter:report";
+
+    /**
      * {@link MetricRegistry} instances.
      *
      * @protected
+     * @readonly
      * @type {MetricRegistry[]}
      * @memberof MetricReporter
      */
@@ -227,6 +175,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * options for this reporter instance.
      *
      * @protected
+     * @readonly
      * @type {O}
      * @memberof MetricReporter
      */
@@ -235,25 +184,38 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * Keeps track of the reporting states for each metric.
      *
      * @protected
+     * @readonly
      * @type {Map<number, MetricEntry>}
      * @memberof MetricReporter
      */
     protected readonly metricStates: Map<number, MetricEntry> = new Map();
+    /**
+     * The type of the reporter implementation - for internal use.
+     *
+     * @protected
+     * @readonly
+     * @type {string}
+     * @memberof MetricReporter
+     */
+    protected readonly reporterType: string;
 
     /**
      * Creates an instance of MetricReporter.
      *
      * @param {O} options
-     * @param {Map<string, string>} [tags=new Map()]
-     *          tags for this reporter instance - to be combined with the tags of each metric while reporting
-     * @param {Clock} [clock=new StdClock()]
-     *          clock used to determine the date for the reporting as well as the minimum-reporting timeout feature
-     * @param {number} [minReportingTimeout=1]
-     *          timeout in minutes a metric need to be included in the report without having changed
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof MetricReporter
      */
-    public constructor(options: O) {
+    public constructor(options: O, reporterType?: string) {
         this.options = options;
+        this.reporterType = reporterType || this.constructor.name;
+        const clusterOptions = this.options.clusterOptions;
+        if (clusterOptions &&
+            clusterOptions.enabled &&
+            !clusterOptions.sendMetricsToMaster) {
+            clusterOptions.eventReceiver.on("message", (worker, message, handle) =>
+                this.handleReportMessage(worker, message, handle));
+        }
     }
 
     /**
@@ -335,7 +297,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * This implementation does nothing and always resolved the specified event.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof MetricReporter
      */
@@ -353,7 +315,46 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Called be before each reporting run.
+     * Checks if the specified message can be handle by this metric-reporter and is of the desired type.
+     *
+     * @protected
+     * @param {InterprocessMessage} message
+     * @param {string} [targetType=MetricReporter.MESSAGE_TYPE]
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected canHandleMessage(
+        message: InterprocessMessage,
+        targetType: string = MetricReporter.MESSAGE_TYPE): boolean {
+        return message &&
+            message.type && message.type === targetType &&
+            message.targetReporterType && message.targetReporterType === this.reporterType;
+    }
+
+    /**
+     * Handles messages from forked processes.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @memberof MetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
+        if (this.canHandleMessage(message)) {
+            const report: InterprocessReportMessage<T> = message;
+            const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
+            await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
+            await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.counters);
+            await this.handleResults(report.ctx, reg, report.date, "gauge", report.metrics.gauges);
+            await this.handleResults(report.ctx, reg, report.date, "histogram", report.metrics.histograms);
+            await this.handleResults(report.ctx, reg, report.date, "meter", report.metrics.meters);
+            await this.handleResults(report.ctx, reg, report.date, "timer", report.metrics.timers);
+        }
+    }
+
+    /**
+     * Called before each reporting run.
      *
      * @protected
      * @memberof MetricReporter
@@ -392,17 +393,21 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
     }
 
     /**
-     * Reporting function for a sinlge {@link MetricRegistry}.
+     * Reporting function for a single {@link MetricRegistry}.
      * Calls {@link #createReportingContext} for each metric type.
-     * Afterwarsds calls {@link #reportMetrics} for each of the
+     * Afterwards calls {@link #reportMetrics} for each of the
      * registry's metrics - grouped by type.
      * And finally calls {@link #handleResults} for each of the results.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
      * @memberof MetricReporter
      */
-    protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry) {
+    protected async reportMetricRegistry(
+        ctx: OverallReportContext,
+        registry: MetricRegistry | null) {
+
         const date: Date = new Date(this.options.clock.time().milliseconds);
         const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this
             .createMetricSetReportContext(ctx, registry, date, "counter");
@@ -445,12 +450,44 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
             (timer: Timer) => this.reportTimer(timer, timerCtx),
             (timer: Timer) => timer.getCount());
 
-        await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
-        await this.handleResults(ctx, registry, date, "counter", counterResults);
-        await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
-        await this.handleResults(ctx, registry, date, "histogram", histogramResults);
-        await this.handleResults(ctx, registry, date, "meter", meterResults);
-        await this.handleResults(ctx, registry, date, "timer", timerResults);
+        if (this.sendMetricsToMaster()) {
+            const message: InterprocessReportMessage<T> = {
+                ctx,
+                date,
+                metrics: {
+                    counters: counterResults,
+                    gauges: gaugeResults,
+                    histograms: histogramResults,
+                    meters: meterResults,
+                    monotoneCounters: monotoneCounterResults,
+                    timers: timerResults,
+                },
+                tags: this.buildTags(registry, null),
+                targetReporterType: this.reporterType,
+                type: MetricReporter.MESSAGE_TYPE,
+            };
+            this.options.clusterOptions.sendToMaster(message);
+        } else {
+            await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
+            await this.handleResults(ctx, registry, date, "counter", counterResults);
+            await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
+            await this.handleResults(ctx, registry, date, "histogram", histogramResults);
+            await this.handleResults(ctx, registry, date, "meter", meterResults);
+            await this.handleResults(ctx, registry, date, "timer", timerResults);
+        }
+    }
+
+    /**
+     * Called in {@link #reportMetricRegistry} to determine to send a reporting-message to the master process.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof MetricReporter
+     */
+    protected sendMetricsToMaster(): boolean {
+        return  this.options.clusterOptions &&
+                this.options.clusterOptions.enabled &&
+                this.options.clusterOptions.sendMetricsToMaster;
     }
 
     /**
@@ -470,7 +507,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      *
      * @protected
      * @param {OverallReportContext} overallCtx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @returns {MetricSetReportContext<any>}
@@ -478,7 +515,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      */
     protected createMetricSetReportContext(
         overallCtx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType): MetricSetReportContext<any> {
         return {
@@ -527,7 +564,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * @protected
      * @abstract
      * @param {OverallReportContext} ctx
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, T>>} results
@@ -536,7 +573,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      */
     protected abstract handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, T>>): Promise<void>;
@@ -640,12 +677,12 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
      * and the specified taggable metric (in this order).
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Taggable} taggable
      * @returns {Tags}
      * @memberof MetricReporter
      */
-    protected buildTags(registry: MetricRegistry, taggable: Taggable): Tags {
+    protected buildTags(registry: MetricRegistry | null, taggable: Taggable): Tags {
         const tags: Tags = {};
         if (this.options.tags) {
             this.options.tags.forEach((tag, key) => tags[key] = tag);
@@ -653,8 +690,9 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
         if (registry && registry.getTags()) {
             registry.getTags().forEach((tag, key) => tags[key] = tag);
         }
-        if (taggable.getTags()) {
-            taggable.getTags().forEach((tag, key) => tags[key] = tag);
+        if (taggable) {
+            const customTags = getMetricTags(taggable);
+            Object.keys(customTags).forEach((key) => tags[key] = customTags[key]);
         }
         return tags;
     }

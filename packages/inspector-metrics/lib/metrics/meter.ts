@@ -1,10 +1,10 @@
 import "source-map-support/register";
 
 import { Clock, diff, Time } from "./clock";
-import { Metered } from "./metered";
-import { BaseMetric } from "./metric";
-import { ExponentiallyWeightedMovingAverage, MovingAverage } from "./moving-average";
-import { NANOSECOND, SECOND } from "./time-unit";
+import { Metered, MeteredRates, SerializableMetered } from "./model/metered";
+import { BaseMetric } from "./model/metric";
+import { ExponentiallyWeightedMovingAverage, MovingAverage } from "./model/moving-average";
+import { NANOSECOND, SECOND } from "./model/time-unit";
 
 /**
  * Standard implementation of a rate-measuring metrics.
@@ -14,7 +14,7 @@ import { NANOSECOND, SECOND } from "./time-unit";
  * @extends {BaseMetric}
  * @implements {Metered}
  */
-export class Meter extends BaseMetric implements Metered {
+export class Meter extends BaseMetric implements Metered, SerializableMetered {
 
     /**
      * Alpha value for 1 min within a {@link ExponentiallyWeightedMovingAverage}.
@@ -80,7 +80,7 @@ export class Meter extends BaseMetric implements Metered {
      * @type {number}
      * @memberof Meter
      */
-    private count: number = 0;
+    private countInternal: number = 0;
     /**
      * Number of samples per second.
      *
@@ -143,6 +143,43 @@ export class Meter extends BaseMetric implements Metered {
     }
 
     /**
+     * Gets the count of event reported.
+     *
+     * @readonly
+     * @type {number}
+     * @memberof Meter
+     */
+    public get count(): number {
+        return this.getCount();
+    }
+
+    /**
+     * Getter method for mean-rate
+     *
+     * @readonly
+     * @type {number}
+     * @memberof Meter
+     */
+    public get meanRate(): number {
+        return this.getMeanRate();
+    }
+
+    /**
+     * Getter method for rates 'snapshot'
+     *
+     * @readonly
+     * @type {MeteredRates}
+     * @memberof Meter
+     */
+    public get rates(): MeteredRates {
+        return {
+            15: this.get15MinuteRate(),
+            5: this.get5MinuteRate(),
+            1: this.get1MinuteRate(),
+        };
+    }
+
+    /**
      * Increases the counter and updates the averages.
      *
      * @param {number} value
@@ -151,7 +188,7 @@ export class Meter extends BaseMetric implements Metered {
      */
     public mark(value: number): this {
         this.tickIfNeeded();
-        this.count += value;
+        this.countInternal += value;
         this.avg15Minute.update(value);
         this.avg5Minute.update(value);
         this.avg1Minute.update(value);
@@ -165,7 +202,7 @@ export class Meter extends BaseMetric implements Metered {
      * @memberof Meter
      */
     public getCount(): number {
-        return this.count;
+        return this.countInternal;
     }
 
     /**
@@ -208,12 +245,26 @@ export class Meter extends BaseMetric implements Metered {
      * @memberof Meter
      */
     public getMeanRate(): number {
-        if (this.count === 0) {
+        if (this.countInternal === 0) {
             return 0.0;
         } else {
             const elapsed: number = diff(this.startTime, this.clock.time());
-            return this.count / elapsed * Meter.SECOND_1_NANOS;
+            return this.countInternal / elapsed * Meter.SECOND_1_NANOS;
         }
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding count property.
+     *
+     * @returns {*}
+     * @memberof Meter
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.count = this.countInternal;
+        json.meanRate = this.meanRate;
+        json.rates = this.rates;
+        return json;
     }
 
     /**
@@ -245,4 +296,5 @@ export class Meter extends BaseMetric implements Metered {
             this.tick(Math.floor(age / this.interval));
         }
     }
+
 }

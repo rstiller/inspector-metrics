@@ -8,8 +8,15 @@ Monitoring / metric library similar to http://metrics.dropwizard.io
     </a>
 </p>
 
-This is the monorepository for the `inspector-metrics` modules.  
+This is the mono repository for the `inspector-metrics` modules.  
 `inspector-metrics` modules are a collection of modules around application metrics and monitoring for nodejs.  
+
+## Features
+
+- metric model independent from time-series DB
+- multiple reporter modules
+- multi process support ([nodejs cluster](https://nodejs.org/api/cluster.html))
+- business friendly license ([MIT](https://www.opensource.org/licenses/mit-license.php) License)
 
 ## Modules
 
@@ -23,11 +30,12 @@ This is the monorepository for the `inspector-metrics` modules.
 | [inspector-prometheus](packages/inspector-prometheus) | reporter for prometheus / pushgateway | [prometheus](https://prometheus.io/docs/introduction/overview/) | ![NPM Version](https://img.shields.io/npm/v/inspector-prometheus.svg) ![License](https://img.shields.io/npm/l/inspector-prometheus.svg) ![Dependencies Status](https://img.shields.io/david/rstiller/inspector-prometheus.svg) |
 | [inspector-vm](packages/inspector-vm) | metric collection for nodejs VM |  | ![NPM Version](https://img.shields.io/npm/v/inspector-vm.svg) ![License](https://img.shields.io/npm/l/inspector-vm.svg) ![Dependencies Status](https://img.shields.io/david/rstiller/inspector-vm.svg) |
 
-## 3rd party packages
+## 3rd party modules
 
 | Module | Description | Link |  |
 | :--- | :--- | :--- | :--- |
 | [inspector-amqp](https://github.com/ttous/inspector-amqp) | reporter for AMQP | [amqp-ts](https://github.com/abreits/amqp-ts) | ![NPM Version](https://img.shields.io/npm/v/inspector-amqp.svg) ![License](https://img.shields.io/npm/l/inspector-amqp.svg) ![Dependencies Status](https://img.shields.io/david/ttous/inspector-amqp.svg) |
+| [inspector-nats](https://github.com/ttous/inspector-nats) | reporter for [NATS](https://nats.io/) | [node-nats](https://github.com/nats-io/node-nats) | ![NPM Version](https://img.shields.io/npm/v/inspector-nats.svg) ![License](https://img.shields.io/npm/l/inspector-nats.svg) ![Dependencies Status](https://img.shields.io/david/ttous/inspector-nats.svg) |
 
 ## development
 

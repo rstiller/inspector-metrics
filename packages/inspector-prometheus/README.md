@@ -107,7 +107,7 @@ requests_count{app_version="1.0.0",host="127.0.0.3"} 362
 requests_sum{app_version="1.0.0",host="127.0.0.3"} 283998208
 ```
 
-## reporting options for PrometheusMetricReporter
+### reporting options for PrometheusMetricReporter
 
 ```typescript
 import {
@@ -119,6 +119,59 @@ const reporter = new PrometheusMetricReporter({
     emitComments: true,
     useUntyped: false,
 });
+```
+
+### multi process support (nodejs cluster)
+
+Due to the nature of prometheus scraping multiple processes need to collect  
+metrics in order report all metrics of every process.  
+
+Therefore the `PrometheusMetricReporter` implements an internal  
+request/response mechanism to gather all metrics from all forked processes  
+and wait for the response before serving all metrics data.  
+
+You should set the `pid` as reporter tag to be able to determine  
+between the multiple metrics sources.  
+
+Only the master process should serve the metrics to the `prometheus` server.  
+
+```typescript
+import * as cluster from "cluster";
+
+import {
+    tagsToMap,
+} from "inspector-metrics";
+
+import {
+    PrometheusMetricReporter,
+} from "inspector-prometheus";
+
+const reporter = new PrometheusMetricReporter({});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
+
+if (cluster.isMaster) {
+    // some server implementation - could be anything KOA, Express, HAPI ...
+    const server = new Hapi.Server({ host: "0.0.0.0", port: 8080 });
+
+    // '/metrics' is the standard route used by prometheus ...
+    server.route({
+        method: "GET",
+        path: "/metrics",
+        handler(request, h) {
+            console.log("reporting metrics");
+            return h.response(reporter.getMetricsString())
+                .code(200)
+                .type("text/plain");
+        },
+    });
+
+    // starts the server
+    server.start();
+}
 ```
 
 ## report metrics with pushgateway
@@ -147,6 +200,36 @@ const pushReporter = new PushgatewayMetricReporter({
     job: "pushgateway",
     instance: "127.0.0.4",
 });
+
+// start reporting
+await pushReporter.start();
+```
+
+### multi process support (nodejs cluster)
+
+By default cluster support is disabled for `PushgatewayMetricReporter`.  
+You should set the `pid` as reporter tag.  
+
+```typescript
+import {
+    tagsToMap,
+} from "inspector-metrics";
+
+import {
+    PrometheusMetricReporter,
+    PushgatewayMetricReporter,
+} from "inspector-prometheus";
+
+const reporter = new PrometheusMetricReporter({});
+const pushReporter = new PushgatewayMetricReporter({
+    reporter,
+    ...
+});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
 
 // start reporting
 await pushReporter.start();

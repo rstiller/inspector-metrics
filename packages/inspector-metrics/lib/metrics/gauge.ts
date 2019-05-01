@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { BaseMetric, Metric } from "./metric";
+import { BaseMetric, Metric, SerializableMetric } from "./model/metric";
 
 /**
  * A gauge can represent any value - regardless of the type.
@@ -8,9 +8,10 @@ import { BaseMetric, Metric } from "./metric";
  * @export
  * @interface Gauge
  * @extends {Metric}
+ * @extends {SerializableMetric}
  * @template T
  */
-export interface Gauge<T> extends Metric {
+export interface Gauge<T> extends Metric, SerializableMetric {
 
     /**
      * Gets the current value of the gauge.
@@ -74,6 +75,18 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
     public setValue(value: number): this {
         this.value = value;
         return this;
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value property.
+     *
+     * @returns {*}
+     * @memberof SimpleGauge
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.value;
+        return json;
     }
 
 }

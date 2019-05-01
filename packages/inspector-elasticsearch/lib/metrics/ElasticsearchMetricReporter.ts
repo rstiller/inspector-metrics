@@ -2,8 +2,8 @@ import "source-map-support/register";
 
 import { Client, ConfigOptions } from "elasticsearch";
 import {
-    Clock,
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -19,15 +19,13 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Tags,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 /**
- * Interface for getting a certain information using the specified emtric metadata -
+ * Interface for getting a certain information using the specified metric metadata -
  * e.g. name of the index, metric type, etc.
  */
 export type MetricInfoDeterminator =
@@ -325,7 +323,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
     }
 
     /**
-     * Either gets 0 or the specifed value.
+     * Either gets 0 or the specified value.
      *
      * @private
      * @param {number} value
@@ -358,6 +356,8 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
 
     /**
      * Creates an instance of ElasticsearchMetricReporter.
+     *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      */
     public constructor(
         {
@@ -372,66 +372,13 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             scheduler = setInterval,
             minReportingTimeout = 1,
             tags = new Map(),
-        }: {
-                /**
-                 * Elasticsearch client options.
-                 * @type {ConfigOptions}
-                 */
-                clientOptions: ConfigOptions,
-                /**
-                 * Used to build the document for a metric.
-                 * @type {MetricDocumentBuilder}
-                 */
-                metricDocumentBuilder?: MetricDocumentBuilder,
-                /**
-                 * Used to get the name of the index.
-                 * @type {MetricInfoDeterminator}
-                 */
-                indexnameDeterminator?: MetricInfoDeterminator,
-                /**
-                 * Used to get the type of the metric instance.
-                 * @type {MetricInfoDeterminator}
-                 */
-                typeDeterminator?: MetricInfoDeterminator,
-                /**
-                 * The logger instance used to report metrics.
-                 * @type {Logger}
-                 */
-                log?: Logger,
-                /**
-                 * Reporting interval in the time-unit of {@link #unit}.
-                 * @type {number}
-                 */
-                reportInterval?: number;
-                /**
-                 * The time-unit of the reporting interval.
-                 * @type {TimeUnit}
-                 */
-                unit?: TimeUnit;
-                /**
-                 * The clock instance used determine the current time.
-                 * @type {Clock}
-                 */
-                clock?: Clock;
-                /**
-                 * The scheduler function used to trigger reporting.
-                 * @type {Scheduler}
-                 */
-                scheduler?: Scheduler;
-                /**
-                 * The timeout in which a metrics gets reported wether it's value has changed or not.
-                 * @type {number}
-                 */
-                minReportingTimeout?: number;
-                /**
-                 * Common tags for this reporter instance.
-                 * @type {Map<string, string>}
-                 */
-                tags?: Map<string, string>;
-            }) {
+            clusterOptions = new DefaultClusterOptions(),
+        }: ElasticsearchMetricReporterOption,
+        reporterType?: string) {
         super({
             clientOptions,
             clock,
+            clusterOptions,
             indexnameDeterminator,
             log,
             metricDocumentBuilder,
@@ -441,7 +388,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             tags,
             typeDeterminator,
             unit,
-        });
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,
@@ -475,7 +422,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof ElasticsearchMetricReporter
      */
@@ -512,7 +459,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      * using the bulk method of the elasticsearch client.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, any[]>>} results
@@ -521,7 +468,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
      */
     protected handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, any[]>>): Promise<void> {

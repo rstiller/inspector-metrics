@@ -80,6 +80,32 @@ const event = new Event<number>("application_started")
 reporter.reportEvent(event);
 ```
 
+### multi process support (nodejs cluster)
+
+By default forked processes are sending the metrics as inter-process message  
+to the master process. The `CarbonMetricReporter` is listening for those messages  
+and reports the metrics from the other processes.  
+
+To disable this behavior set the `DisabledClusterOptions` when creating an instance.  
+
+In each case you should set the `pid` as reporter tag.  
+
+```typescript
+import { tagsToMap, DisabledClusterOptions } from "inspector-metrics";
+import { CarbonMetricReporter } from "inspector-carbon";
+
+// instance the carbon reporter
+const reporter: CarbonMetricReporter = new CarbonMetricReporter({
+    clusterOptions: new DisabledClusterOptions(),
+    host: "http://graphite-server/",
+});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
+```
+
 ## License
 
 [MIT](https://www.opensource.org/licenses/mit-license.php)

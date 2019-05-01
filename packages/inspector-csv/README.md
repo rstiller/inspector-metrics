@@ -396,7 +396,7 @@ date,group,name,field,value,type,tags
 20181020194618.877+00:00,"","requests3","sum",32000256,"timer",type="metric";host="127.0.0.3";special_tag="test_abc"
 ```
 
-`example-with-separate-colunms.ts`
+`example-with-separate-columns.ts`
 ```typescript
 // same as in the example above ...
 
@@ -495,6 +495,42 @@ date,group,name,field,value,type,tag_type,tag_host,tag_special_tag
 20181020195009.787+00:00,"","requests3","p999",3000064,"timer","metric","127.0.0.3","test_abc"
 20181020195009.787+00:00,"","requests3","stddev",545386.4756426474,"timer","metric","127.0.0.3","test_abc"
 20181020195009.787+00:00,"","requests3","sum",35999488,"timer","metric","127.0.0.3","test_abc"
+```
+
+## multi process support (nodejs cluster)
+
+By default forked processes are sending the metrics as inter-process message  
+to the master process. The `CsvMetricReporter` is listening for those messages  
+and writes the metrics from the other processes into the CSV file.  
+
+Only the master process writes the header of the CSV file.  
+Also each write-operation is handled by the master process.  
+
+To disable this behavior set the `DisabledClusterOptions` when creating an instance.  
+
+In each case you should set the `pid` as reporter tag.  
+And in case of disabling cluster support the `pid` should be part of the filename.  
+
+```typescript
+import { tagsToMap, DisabledClusterOptions } from "inspector-metrics";
+import { CsvMetricReporter } from "inspector-csv";
+
+const writer = new DefaultCsvFileWriter({
+    filename: async () => `${moment().format("YYYYMMDDHH00")}_${process.pid}_metrics.csv`
+});
+
+// configure CSV metric reporter instance
+const reporter = new CsvMetricReporter({
+    clusterOptions: new DisabledClusterOptions(),
+    columns: ["date", "group", "name", "field", "value", "type", "tags"],
+    writer,
+    ...
+});
+
+// set "pid" to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));
 ```
 
 ## License

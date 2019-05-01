@@ -8,7 +8,7 @@ import { suite, test } from "mocha-typescript";
 
 import { Buckets } from "../../lib/metrics";
 import { Histogram } from "../../lib/metrics/histogram";
-import { DefaultReservoir } from "../../lib/metrics/reservoir";
+import { DefaultReservoir } from "../../lib/metrics/model/reservoir";
 
 const expect = chai.expect;
 
@@ -328,6 +328,70 @@ export class HistogramTest {
         expect(histogram.getCounts().get(30)).to.be.equal(5);
         expect(histogram.getCounts().get(40)).to.be.equal(7);
         expect(histogram.getCounts().get(50)).to.be.equal(9);
+    }
+
+    @test
+    public "check serialization"(): void {
+        const internalObject = {
+            property1: "value1",
+            property2: 2,
+        };
+        const buckets = Buckets.linear(10, 10, 5);
+        const histogram: Histogram = new Histogram(new DefaultReservoir(3), "name", "description", buckets)
+            .setTag("key1", "value1")
+            .setTag("key2", "value2")
+            .setMetadata("internalObject", internalObject);
+
+        expect(histogram.getCount()).to.equal(0);
+        expect(histogram.getSum().toNumber()).to.equal(0);
+        histogram.update(1);
+        expect(histogram.getCount()).to.equal(1);
+        expect(histogram.getSum().toNumber()).to.equal(1);
+        histogram.update(3);
+        expect(histogram.getCount()).to.equal(2);
+        expect(histogram.getSum().toNumber()).to.equal(4);
+        histogram.update(5);
+        expect(histogram.getCount()).to.equal(3);
+        expect(histogram.getSum().toNumber()).to.equal(9);
+
+        const serializedHistogram = JSON.parse(JSON.stringify(histogram));
+        expect(Object.keys(serializedHistogram).length).to.equal(9);
+
+        expect(serializedHistogram).has.property("name");
+        expect(serializedHistogram.name).to.equal("name");
+
+        expect(serializedHistogram).has.property("description");
+        expect(serializedHistogram.description).to.equal("description");
+
+        expect(serializedHistogram).has.property("tags");
+        expect(Object.keys(serializedHistogram.tags).length).to.equal(2);
+        expect(serializedHistogram.tags.key1).to.equal("value1");
+        expect(serializedHistogram.tags.key2).to.equal("value2");
+
+        expect(serializedHistogram).has.property("metadata");
+        expect(Object.keys(serializedHistogram.metadata).length).to.equal(1);
+        expect(serializedHistogram.metadata.internalObject).to.deep.equal(internalObject);
+
+        expect(serializedHistogram).has.property("count");
+        expect(serializedHistogram.count).to.equal(3);
+
+        expect(serializedHistogram).has.property("sum");
+        expect(serializedHistogram.sum).to.equal("9");
+
+        expect(serializedHistogram).has.property("buckets");
+        expect(serializedHistogram.buckets).to.deep.equal(buckets.boundaries);
+
+        expect(serializedHistogram).has.property("counts");
+        expect(serializedHistogram.counts).to.deep.equal({
+            10: 3,
+            20: 3,
+            30: 3,
+            40: 3,
+            50: 3,
+        });
+
+        expect(serializedHistogram).has.property("snapshot");
+        expect(serializedHistogram.snapshot.values).to.deep.equal([1, 3, 5]);
     }
 
 }

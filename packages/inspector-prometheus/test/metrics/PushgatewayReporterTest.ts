@@ -9,7 +9,15 @@ import { SinonSpy, spy } from "sinon";
 import * as sinonChai from "sinon-chai";
 
 import {
-    Buckets, Event, MetricRegistry, Scheduler, SimpleGauge, SlidingWindowReservoir,
+    Buckets,
+    Event,
+    InterprocessReportMessage,
+    mapToTags,
+    MetricRegistry,
+    MetricReporter,
+    Scheduler,
+    SimpleGauge,
+    SlidingWindowReservoir,
 } from "inspector-metrics";
 import { suite, test } from "mocha-typescript";
 import {
@@ -18,6 +26,7 @@ import {
     PushgatewayMetricReporter,
 } from "../../lib/metrics";
 import { MockedClock } from "./mocked-clock";
+import { TestClusterOptions } from "./TestClusterOptions";
 
 chai.use(sinonChai);
 
@@ -33,6 +42,8 @@ export class PushgatewayReporterTest {
     private internalCallback: () => Promise<any>;
     private scheduler: Scheduler;
     private schedulerSpy: SinonSpy;
+    private handleResultsSpy: SinonSpy;
+    private clusterOptions: TestClusterOptions;
 
     public before() {
         this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 });
@@ -48,14 +59,20 @@ export class PushgatewayReporterTest {
         };
         this.schedulerSpy = spy(this.scheduler);
 
+        this.clusterOptions = new TestClusterOptions(false, false, []);
+
         this.reporter = new PushgatewayMetricReporter({
+            clusterOptions: this.clusterOptions,
             host: "localhost",
             instance: "localhost",
             job: "test-pushgateway-reporter",
+            log: null,
             port: 9091,
             reporter: this.prometheusReporter,
             scheduler: this.schedulerSpy,
         });
+        this.handleResultsSpy = spy((this.reporter as any).handleResults);
+        (this.reporter as any).handleResults = this.handleResultsSpy;
     }
 
     @test
@@ -143,6 +160,7 @@ export class PushgatewayReporterTest {
             host: "localhost",
             instance: "localhost",
             job: "test-pushgateway-reporter",
+            log: null,
             port: 9091,
             reporter: this.prometheusReporter,
             scheduler: this.schedulerSpy,
@@ -158,6 +176,65 @@ export class PushgatewayReporterTest {
         await this.reporter.reportEvent(event);
 
         expect(this.schedulerSpy).to.not.have.been.called;
+    }
+
+    @test
+    public async "check if clustering is disabled by default"() {
+        expect(this.clusterOptions.eventReceiverOnSpy).to.not.have.been.called;
+    }
+
+    @test
+    public async "check if clustering can be enabled, but does nothing"() {
+        const message: InterprocessReportMessage<any> = {
+            ctx: {},
+            date: new Date(),
+            metrics: {
+                counters: [{
+                    metric: null,
+                    result: {
+                        message: `${new Date()} counter1: 0`,
+                        metadata: {
+                            hostname: "server1",
+                        },
+                    },
+                }],
+                gauges: [],
+                histograms: [],
+                meters: [],
+                monotoneCounters: [],
+                timers: [],
+            },
+            tags: mapToTags(new Map()),
+            targetReporterType: "TestPushgatewayMetricReporter",
+            type: MetricReporter.MESSAGE_TYPE,
+        };
+
+        this.clusterOptions = new TestClusterOptions(true, false, []);
+
+        expect(this.clusterOptions.eventReceiverOnSpy).to.not.have.been.called;
+        expect(this.handleResultsSpy).to.not.have.been.called;
+
+        this.reporter = new PushgatewayMetricReporter({
+            clusterOptions: this.clusterOptions,
+            host: "localhost",
+            instance: "localhost",
+            job: "test-pushgateway-reporter",
+            log: null,
+            port: 9091,
+            reporter: this.prometheusReporter,
+            scheduler: this.schedulerSpy,
+        }, "TestPushgatewayMetricReporter");
+
+        expect(this.clusterOptions.eventReceiverOnSpy).to.have.been.called;
+        const messageType = this.clusterOptions.eventReceiverOnSpy.getCall(0).args[0];
+        const callback = this.clusterOptions.eventReceiverOnSpy.getCall(0).args[1];
+
+        expect(messageType).to.equal("message");
+        expect(callback).to.exist;
+
+        await callback(null /* worker */, message);
+
+        expect(this.handleResultsSpy).to.not.have.been.called;
     }
 
 }

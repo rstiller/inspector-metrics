@@ -3,6 +3,7 @@ import "source-map-support";
 import * as http from "http";
 import {
     Counter,
+    DisabledClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -76,7 +77,9 @@ export interface PushgatewayReporterOptions extends ScheduledMetricReporterOptio
 /**
  * Metric reporter for prometheus's pushgateway.
  * Simply sends the output of the provided {@link PrometheusMetricReporter}
- * to the configurated pushgateway using the text format.
+ * to the configured pushgateway using the text format.
+ *
+ * Clustering support is not implemented and disabled by default.
  *
  * @see https://github.com/prometheus/pushgateway
  * @export
@@ -88,6 +91,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     /**
      * Creates an instance of PushgatewayMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof PushgatewayMetricReporter
      */
     public constructor({
@@ -103,9 +107,12 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
         scheduler = setInterval,
         tags = new Map(),
         unit = MILLISECOND,
-    }: PushgatewayReporterOptions) {
+        clusterOptions = new DisabledClusterOptions(),
+    }: PushgatewayReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             host,
             instance,
             job,
@@ -117,15 +124,15 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
             scheduler,
             tags,
             unit,
-        });
+        }, reporterType);
     }
 
     /**
      * Uses {@link PrometheusMetricReporter#getEventString} to build the string and sends the event
      * straight to the pushgateway.
      *
-     * @param {Event} event
-     * @returns {Promise<Event>} always the specified event.
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof PushgatewayMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -148,6 +155,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
     /**
      * Calls the {@link PrometheusMetricReporter} to generate the metrics in a valid prometheus text format.
      * Sends the metrics via 'PUT' to the configured pushgateway.
+     * The {@link #beforeReport} and {@link #afterReport} methods are not invoked.
      *
      * @protected
      * @memberof PushgatewayMetricReporter
@@ -198,7 +206,7 @@ export class PushgatewayMetricReporter extends ScheduledMetricReporter<Pushgatew
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, any>>): Promise<any> {

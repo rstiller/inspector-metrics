@@ -120,7 +120,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      * @memberof V8EventLoop
      */
     public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
+        this.tagMap.set(name, value);
         this.eventLoopLag.setTag(name, value);
         return this;
     }
@@ -133,7 +133,7 @@ export class V8EventLoop extends BaseMetric implements MetricSet {
      * @memberof V8EventLoop
      */
     public removeTag(name: string): this {
-        this.tags.delete(name);
+        this.tagMap.delete(name);
         this.eventLoopLag.removeTag(name);
         return this;
     }

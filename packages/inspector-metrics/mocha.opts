@@ -4,4 +4,6 @@
 --watch-extensions ts
 --bail
 --full-trace
+--check-leaks
+--retries 1
 test/**/*-test.ts

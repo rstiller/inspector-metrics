@@ -1,10 +1,18 @@
 import "source-map-support";
 
+import * as cluster from "cluster";
 import {
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
+    getMetricDescription,
+    getMetricGroup,
+    getMetricMetadata,
+    getMetricName,
     Histogram,
+    InterprocessReportMessage,
+    Metadata,
     Meter,
     Metric,
     MetricRegistry,
@@ -16,6 +24,7 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
+    SerializableMetric,
     StdClock,
     Timer,
 } from "inspector-metrics";
@@ -70,7 +79,7 @@ export enum ExportMode {
 export interface CsvFileWriter {
 
     /**
-     * Called on every metrics-report run one time - behaviour is implementation specific.
+     * Called on every metrics-report run one time - behavior is implementation specific.
      *
      * @param {Row} header
      * @returns {Promise<void>}
@@ -79,14 +88,14 @@ export interface CsvFileWriter {
     init(header: Row): Promise<void>;
 
     /**
-     * Called for each field of each metric and after init finished - behaviour is implementation specific.
+     * Called for each field of each metric and after init finished - behavior is implementation specific.
      *
-     * @param {Metric} metric
+     * @param {Metric | SerializableMetric} metric
      * @param {Row} values
      * @returns {Promise<void>}
      * @memberof CsvFileWriter
      */
-    writeRow(metric: Metric, values: Row): Promise<void>;
+    writeRow(metric: Metric | SerializableMetric, values: Row): Promise<void>;
 }
 
 /**
@@ -226,6 +235,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     /**
      * Creates an instance of CsvMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof CsvMetricReporter
      */
     public constructor({
@@ -248,9 +258,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         scheduler = setInterval,
         minReportingTimeout = 1,
         tags = new Map(),
-    }: CsvMetricReporterOptions) {
+        clusterOptions = new DefaultClusterOptions(),
+    }: CsvMetricReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             columns,
             dateFormat,
             metadataColumnPrefix,
@@ -269,12 +282,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
             unit,
             useSingleQuotes,
             writer,
-        });
+        }, reporterType);
     }
 
     /**
      * Builds all headers and starts scheduling reporting runs.
-     * When call this method all metatdata and tags in each metric
+     * When call this method all metadata and tags in each metric
      * in the application need to be set / known, otherwise it cannot be
      * reported.
      *
@@ -285,6 +298,10 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             // rebuild header on every call to start
             this.header = await this.buildHeaders();
+            // only call init on master process
+            if (this.shouldCallInit()) {
+                await this.options.writer.init(this.header);
+            }
             await super.start();
         }
         return this;
@@ -293,7 +310,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     /**
      * Reports an {@link Event}.
      *
-     * @param {Event} event
+     * @param {TEvent} event
      * @returns {Promise<TEvent>}
      * @memberof CsvMetricReporter
      */
@@ -311,11 +328,36 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         });
 
         if (result) {
-            await this.options.writer.init(this.header);
-            await this.handleResults(null, null, event.getTime(), "gauge", [{
-                metric: event,
-                result,
-            }]);
+            if (this.options.clusterOptions &&
+                this.options.clusterOptions.enabled &&
+                this.options.clusterOptions.sendMetricsToMaster) {
+                const message: InterprocessReportMessage<Fields> = {
+                    ctx: {},
+                    date: event.getTime(),
+                    metrics: {
+                        counters: [],
+                        gauges: [{
+                            metric: event,
+                            result,
+                        }],
+                        histograms: [],
+                        meters: [],
+                        monotoneCounters: [],
+                        timers: [],
+                    },
+                    tags: this.buildTags(null, null),
+                    targetReporterType: this.reporterType,
+                    type: CsvMetricReporter.MESSAGE_TYPE,
+                };
+                await this.options.clusterOptions.sendToMaster(message);
+            } else {
+                await this.options.writer.init(this.header);
+                await this.handleResults(null, null, event.getTime(), "gauge", [{
+                    metric: event,
+                    result,
+                }]);
+            }
+
         }
         return event;
     }
@@ -330,20 +372,57 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     }
 
     /**
-     * Calls the init method of the writer instance.
+     * Indicates if the init method of the writer instance should be called.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof CsvMetricReporter
+     */
+    protected shouldCallInit(): boolean {
+        return !this.options.clusterOptions ||
+                !this.options.clusterOptions.enabled ||
+                (this.options.clusterOptions.enabled && !this.options.clusterOptions.sendMetricsToMaster);
+    }
+
+    /**
+     * Makes sure the csv headers are built, written to the file to then
+     * call the parent class's implementation of this method.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @memberof CsvMetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
+        if (this.canHandleMessage(message)) {
+            if (!this.header) {
+                this.header = await this.buildHeaders();
+            }
+            await this.options.writer.init(this.header);
+            await super.handleReportMessage(worker, message, handle);
+        }
+    }
+
+    /**
+     * Calls the init method of the writer instance if
+     * the metrics are not send to the master process
+     * (so probably only called by master-process if clustering is enabled).
      *
      * @protected
      * @memberof CsvMetricReporter
      */
     protected async beforeReport(ctx: OverallReportContext) {
-        await this.options.writer.init(this.header);
+        if (this.shouldCallInit()) {
+            await this.options.writer.init(this.header);
+        }
     }
 
     /**
      * Writes the reporting results to the writer instance.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, Fields>>} results
@@ -351,7 +430,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, Fields>>) {
@@ -600,6 +679,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      *
      * @private
      * @template T
+     * @param {MetricRegistry | null} registry
      * @param {string} dateStr
      * @param {T} metric
      * @param {MetricType} type
@@ -608,8 +688,8 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @returns {Row}
      * @memberof CsvMetricReporter
      */
-    private buildRow<T extends Metric>(
-        registry: MetricRegistry,
+    private buildRow<T extends Metric | SerializableMetric>(
+        registry: MetricRegistry | null,
         dateStr: string,
         metric: T,
         type: MetricType,
@@ -622,7 +702,9 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
 
         let metadataStr = "";
         if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
-            metric.getMetadataMap().forEach((metadataValue, metadataName) => {
+            const metadata: Metadata = getMetricMetadata(metric);
+            Object.keys(metadata).forEach((metadataName) => {
+                const metadataValue = metadata[metadataName];
                 metadataStr += `${metadataName}=${quote}${metadataValue}${quote}${this.options.metadataDelimiter}`;
             });
             metadataStr = metadataStr.slice(0, -1);
@@ -641,7 +723,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(dateStr);
                     break;
                 case "description":
-                    let desc = encodeURIComponent(metric.getDescription() || "");
+                    let desc = encodeURIComponent(getMetricDescription(metric) || "");
                     if (quote === "'") {
                         desc = desc.replace(/'/g, "\\'");
                     }
@@ -651,19 +733,20 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
                     row.push(`${quote}${field || ""}${quote}`);
                     break;
                 case "group":
-                    row.push(`${quote}${metric.getGroup() || ""}${quote}`);
+                    row.push(`${quote}${getMetricGroup(metric) || ""}${quote}`);
                     break;
                 case "metadata":
                     if (this.options.metadataExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
                         row.push(metadataStr);
                     } else {
-                        for (const metadata of this.metadataNames) {
-                            row.push(`${quote}${metric.getMetadata(metadata) || ""}${quote}`);
+                        const metadata: Metadata = getMetricMetadata(metric);
+                        for (const metadataName of this.metadataNames) {
+                            row.push(`${quote}${metadata[metadataName] || ""}${quote}`);
                         }
                     }
                     break;
                 case "name":
-                    row.push(`${quote}${metric.getName() || ""}${quote}`);
+                    row.push(`${quote}${getMetricName(metric) || ""}${quote}`);
                     break;
                 case "tags":
                     if (this.options.tagExportMode === ExportMode.ALL_IN_ONE_COLUMN) {
@@ -688,7 +771,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     }
 
     /**
-     * Writes the rows by calling the corrsponding {@link CsvFileWriter}.
+     * Writes the rows by calling the corresponding {@link CsvFileWriter}.
      *
      * @private
      * @template T
@@ -697,7 +780,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @param {MetricType} type
      * @memberof CsvMetricReporter
      */
-    private async writeRows<T extends Metric>(metric: T, rows: Rows, type: MetricType) {
+    private async writeRows<T extends Metric | SerializableMetric>(metric: T, rows: Rows, type: MetricType) {
         for (const row of rows) {
             await this.options.writer.writeRow(metric, row);
         }

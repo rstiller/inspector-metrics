@@ -3,11 +3,11 @@
   "files": [
     {
       "path": "package.json",
-      "sha512": "a683f6d58f75b12e3bf85d7afffae9e648927cca507e273ad045abf7d2a8dff6982027426248e4a10f47eb471ffd54c48a6c4736b49f5fecd6a8b51e93527530"
+      "sha512": "a87e8dc02aa38696c9cc605e3f9e1ad1cd43e07d3556fa993e2447078ff6db362ca7a841aa64fe24402847a1ebddd53fc3f18a9d19bac95a444d8bda12a20bb2"
     },
     {
       "path": "CHANGELOG",
-      "sha512": "27b2079c70b1e1f65dd2e543997fde402b68cc85a46d4d4fcafbd47bbe512d00b621ef5d6de86a140d6fd9ed6b7ade03d971a01caf4a2578ce586c1772f00ad1"
+      "sha512": "1b90ece3e55146572c2b4e3410e680153835ada53164bcb99c180da548e6adb548a6b9f2827c0ca664bcec4c850d4730f6ec11c34ca35d661aa9f4ee3dab59c0"
     },
     {
       "path": "LICENSE",
@@ -15,10 +15,154 @@
     },
     {
       "path": "README.md",
-      "sha512": "342932b207dda316cb46db33a89cec93a2497387f296aa6adfcfbe91efcf64e313c0533d4c1cd2ae2432506b2d0c2c1d972df901ff495af78c994e981a3ce6e5"
+      "sha512": "fd023bf23381d89c5533ce648d1103c5ab48d437af760b80cf8e953ba4392c698944bc1405e46eb1f36a3a3af4ed84497839848bd13e3e42295e80905b57f9f5"
+    },
+    {
+      "path": "build/lib/metrics/CsvMetricReporter.d.ts",
+      "sha512": "d27d10ed2a70cb8332c4ff8fd1ceede6ca84d0fe921232e5d21f0f3b8cc18a36cf74a420d1cb392c63f5ed33d7443d03dd0ec26ed58c682b38024631626f8cbb"
+    },
+    {
+      "path": "build/lib/metrics/CsvMetricReporter.js",
+      "sha512": "ed3309f8dee656e7bda3e02ea1095af8caae1a7557ff3d1740999a0872d221bcd7b5f3c937402448e6ce03d89f1b72e96287a299ae64f12c4c4eeec705c123d2"
+    },
+    {
+      "path": "build/lib/metrics/CsvMetricReporter.js.map",
+      "sha512": "c4605aad1ed2122b1fbb1b18e492c2190b3dcf4a98a5673fc67054448ceeedec15fe454f416653ac6e00b918f72393e9286ffd04d26e1669bc2657cfc5bca25a"
+    },
+    {
+      "path": "build/lib/metrics/DefaultCsvFileWriter.d.ts",
+      "sha512": "c3a4db07e0b136a41393943da4e62af6477f06d239746eeeddfd44900ca5deed22671828cae59fef6b5f965d7a4c348e7669bcdc851f6ca69a6d01bc37ff1a6a"
+    },
+    {
+      "path": "build/lib/metrics/DefaultCsvFileWriter.js",
+      "sha512": "bcbd90fac932a123935121f424ce26b3a69fa8956216bda6691e936226acd9f207268357755ce1eeb45d73db973f2e64d2307d6a7127a8eaf0ec6257f46e6786"
+    },
+    {
+      "path": "build/lib/metrics/DefaultCsvFileWriter.js.map",
+      "sha512": "7b7487ec5b2b4f1e6446e2c73bdd14c441f51ce964b95dd007559e0e47d27ae5f5769aab7f7466b49b31bf2f0a9af90f905056d58f040f1dc4d75387100a791d"
+    },
+    {
+      "path": "build/lib/metrics/index.d.ts",
+      "sha512": "f9714663f67ba36cdd44c7887c93a2c2ce175e0a70816bad85e48dcbbc7468301718143b7593e65e99d8a534422f6584f69909a7cdaf453592f39196f55c7c6c"
+    },
+    {
+      "path": "build/lib/metrics/index.js",
+      "sha512": "9b1228117170a734008df1a8346cbd24fd35875226c1cfffc7a97dfcee5a5b65485cf75a4d1eb5132a68314afbbbf75ecc787aca2dc23a7773c07474d6d04c79"
+    },
+    {
+      "path": "build/lib/metrics/index.js.map",
+      "sha512": "e18a146cfc4ebbec44044708bf986a2d6a7c9408946886b49b570b304ed3ff6f5600be40360ab2c51760084d393e8b906ba7f2eaa5991b8085a222677979cc90"
+    },
+    {
+      "path": "build/test/metrics/AbstractReporterTest.d.ts",
+      "sha512": "14c9e8ecb425523cba1161baeeabadaf6eee901b09dd3dd5631bee42235b41e3a47bb8ff42e3f697467d9c91af1dda3519cbbcdc6d77c3c335754f12f7f1dbaf"
+    },
+    {
+      "path": "build/test/metrics/AbstractReporterTest.js",
+      "sha512": "81e24f7c53227989eb37bb8978c5b34bb9caffca6203891447ac39eb27a9d14181eb66ad1171c93d127d9278bf5ad6c2fb10e19fe9352e2c0b0f02f57405a0c2"
+    },
+    {
+      "path": "build/test/metrics/AbstractReporterTest.js.map",
+      "sha512": "6445050768c553ca059ecdf9d4abafa76e65f58e65bef0519d66fa1ec796b379a08ac7dd142da684ebb022012d353f2e00ea8075d835e6db2c2e80af34c10e8f"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterMasterTest.d.ts",
+      "sha512": "05465f4d02e364ed5a002d6b39e0789d14aafdcb1c29f17a232958804b9925574c2cd38d5b6eb17cbc5bc740761743ea7e50c1a5993cce1a9cbe73e8b315e768"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterMasterTest.js",
+      "sha512": "eaee24d3daf8fa6dcc30db58581d3382211e347545ae6cf94015dbcfd09bafd95ef6e250091bb98231d52703f3be6c56d66ca735b24f48ca5ad71422025052ec"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterMasterTest.js.map",
+      "sha512": "c47b69cb9d33f12b062517daf7998ebeeebaf0046e9d41b7d076631ee12bea566f08134d678f648cd430fe4ad39cfab7a890e8f91e97bd91838dad660c095f31"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterWorkerTest.d.ts",
+      "sha512": "04f8b56d770afe58bbe709a7556073239a8ace5b74fcb67084d9bb93151d8e7192c7cfd7cca8784edc3a0e1239e90b4c69c043e2ca25a8ada7b7cd0469944d33"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterWorkerTest.js",
+      "sha512": "b9830c779e78ace2be9644e66c51e289fb7c2c03563b25467c57f3ce44cb15eddb90c34eb9fe321acfcf54c4b11071679dddfbc8961bbb45c77f008011e14c57"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterClusterWorkerTest.js.map",
+      "sha512": "014c54380f77b1548ac6bc365bb5f00217c9d6af5739a77465cf205d6ef69c422bcd3147c51a8e3412e0ab590fa5502792e10971210850b48a997ef0f5f6447c"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterMetadataTest.d.ts",
+      "sha512": "c1f8e3b57cd89438a45bd2214c1dbca8d5d263757168a2b542855c8aed9ce9dabdccafee32e9b30d1faa824f387afd1caef15651e53859266ee211869eff44b4"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterMetadataTest.js",
+      "sha512": "6bdd4fa5dc3dcf964990752440f4586839b5bf4072ca4aacf7a2b295694d05651b0fa0183b35351163d635a100eb003b39a5e611840052a016bb0316cb647dda"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterMetadataTest.js.map",
+      "sha512": "77d0a6626c4879c78071881a69d09c817097f4046a389257c638ca3f42d66e888f441099522a4ec82730cefac942f2f33b800fe88047c9370b71c1625394cb61"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterSerializationTest.d.ts",
+      "sha512": "5cdce8e996d907b842e1a43844068cd710c72e370b1131718c1c93643c2b3c210f96dd41b729602b95501e1013380780d3b079a60f7fb6a22ebc64efa5d596bb"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterSerializationTest.js",
+      "sha512": "06f8bcfc069aaddde08eb8cdbcacf82a7a2af3dc0d3ec275bac2774b71ef5332573a037168e087bba1490dfcae7e04541f43d548733bddadbf8b7c6579b93fe5"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterSerializationTest.js.map",
+      "sha512": "8c6f9a47c70c429ad07f98810080ec9b87adc367df9986c1f38a4d1d74ff39b86e6be698a95a54e2c3aabc9b3964156fed66c889c741bfae4c9531ea80920423"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTagsTest.d.ts",
+      "sha512": "aff1a285923d2516b2e3e43b6276292f7eda27b23370dfa2dcdf3686d28db31ce4a15b4676594bef60226bb094de8d1a5ab5a6a762c48d412e5d489cb2d5ff4d"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTagsTest.js",
+      "sha512": "62bb008ba25c739d3885164a29fb5670997b95d028a9997d61b83d5a69da0cb5351b36fa15ea8e5baf24d8543f8ee8e356004bfba8eb2b7cd8d28fc330424bdb"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTagsTest.js.map",
+      "sha512": "5113b86dfd7079d45e002cf334c7dcd5db7f4168146e7e812852bb4354d89fc40cc2d07d1111294dfd0deacac37927e22640b7255c6e04b373d993dc4fadbfcb"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTest.d.ts",
+      "sha512": "29ff998883f8fbd0fdb7a9a5aefc7ad2f47308996ab481c87d28ee65715a2d44c2e5b238dd6408edbb3c8e13d73771777886cd391b1db98e85175522a81c5fa2"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTest.js",
+      "sha512": "892d4a597378fa2d630969a4d6ba483ceab3c41d3549433b5903b3c12be8edc7a60d8086ab571e9534e4236c74165cf5eef4506cdb779275c94c47d04c01da5b"
+    },
+    {
+      "path": "build/test/metrics/CsvReporterTest.js.map",
+      "sha512": "cf86bc4d3df2aa55273292aa2893df967aab95272a79137b1b313ec0d151f48bc1818146e6bda8f8a6b4162eda6605d132b26b505d27f63a3e81836465f29e4e"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.d.ts",
+      "sha512": "8f5cb0d403c7d1660c4c0e4ec6f1a7f61e4e1ea75afc5e2c1933a028196b9e9aaeac43e82bdbe84869a62276d4a0417a70292afa1be575cab26f326e1063d3d4"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.js",
+      "sha512": "f76c8f6f15a15592b3c147f57eb05e871194f525fbdeb09ebf03a11cd77056b946a546984351be7272c77a37b09e273606feed44e042bb45d2baabbd0fe5d104"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.js.map",
+      "sha512": "a0274a791006eac7ecaed3694fc7dff08b8610f460e5410d3dc5e654cdd6e3affcfc517cb46e7aebe858e4c79d70be1c8e96d1183971da1ecf470f94f4f3e9e5"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.d.ts",
+      "sha512": "74ae6e455de0f7f620ca6a63d0f995c102f44a0a8c76f16fd0dd78ed38a35f21c5d211554a0f04c1d5cf71f89baba75a03dbcd6fe7426035980c80283e5f4214"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.js",
+      "sha512": "2cef745e2448cb992e4619f7ca44a1b974c2ee99e0824c2fdd4ddf61458979c89e781be593b09a5a741570e65090630f71e52e82e796c698bdef32fb5d7c52ee"
+    },
+    {
+      "path": "build/test/metrics/TestClusterOptions.js.map",
+      "sha512": "c9c4adc48524e677469db95106f48e1cebf3a40aec90e59c46b9a4ff5fbbdb4561efbf79678e3dd88ff2de7f70e7924b71e2d8e29e138eee79dcf3bbbff3cfbc"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJceTtgCRDCMfXrQKYV5wAAr3YQAH2ru52poAtuYYRrbu5LsNTv\nGKNd5w49rX/0rSahIDORN8FqgKXOQpu2zKSZv9UPDABR7KxJ37+HVRBmFKkMZwlN\nujMghS+lxKJnCqb8vhSMA7cX2zOMgcVUb9id43lZxNoGpnQUuGxxTUs2E9/1B4q5\nru4JsYO6eP4qv37L1+LXdBJyFS5cE7Jkll2hQZbMRmz6zu4hQJsmCGaPKmbRQlVY\nIXkDU6ARgUMncBQq6IWSPiX7RmbcUDx02k//o2xY9b6CqfrwXLuaMCdhI82/Ohh1\n975vUmkvd08H/olZmHrnYSbRykgeEG8+Tm0EVkdhkZej4AsmLEzLeg/Xyg+2rrEH\nbs44lw7U86imlXz/+NLEr28yJIsYzHC2Ptf1QgmO5L7xbPd2W/Xn3Qw/aincRLDs\nWihgW6KvxKExcxxRFahDrHLIfEvPEt7iwREiUQ+EtwkhtswTFoajCJUQrKtee+Vh\nnIGshbHC3eW78z5+wrCPw7jaE8KKux6GeS++cPL0YpShKevRZHDvr+e6Z5rpViw4\ngRMbqOWG0YkxZ+6+2FNsnOXdRttwUi4Xo6E/flXC9YWPCJoJw5gmjevRH+V6tasS\nji8STFKZ4pLTRU7vczX+mXgRuY70pLbI0P6+Ieez0poIy2Tfom/lgVJCmEfBFpED\niV/oDfxiHWeau8gYgvQV\n=okqn\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJcya64CRDCMfXrQKYV5wAAyakQADWJH0EV0EnhjT8cwQlm5OPi\nKtjMhsNGXO0LBYH8MXG5bj3dlBKnc2cavXWVy5OF/VY8dJG8r3PkV79wQG9Yyuxb\n2juGVZT4naAEWx+4EfGh15c8Qu8/1X4zIPDcItV4iJoIAM7us2cIGML2LFQ04OEO\n0s/Ktl0vGLvbpWrtlcYSzkxbBFQdtqjgJSdwiH0FNjBAvZA9yW1QjLIgtSdWIgFL\nTL7WF07BjQaY7UAPoQyfhKSL681soi8Cwy7n//xR6GzcdlHf5ZkYsTeUOmJAy5vd\nDSspU2kGWjuAHAB1K5PVYWjAaVD7nuoBTOfJ+lRpZx0bdvVu3U7nWS+LBDgFUOUY\nMW6/vC+cVDiYp0yGPFM3Gi9xzvrl+bRyJ+93JLwjZ/l+948klAEPOWCiQE0jWMiX\nxUmOIo19untDf5dvXAQkIDuHcQIPamuK/d8Jfr8kIeOMOI6UJV0SDLrnKVezJIe5\n9aOGw3ovDw9+R64vefW+PPAdJQ3b6D8MKG/dhPDSg9zOskK9kjLUfwnjGomNOwbF\nZgtn0ikuWgWqTPNq5+xCOvBEgrbZUcM9DSRk67OdORz1vnS3tsT7NYV41Kbhk7P+\ngJ/lb3NjQ+tniXnTgi49V87l2JIWyFMwOQQdQebH94ExtI+XPkndkWQ+8ks3cEBm\n+5tmCi8sxpbkEv+5Iz7v\n=2Smq\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

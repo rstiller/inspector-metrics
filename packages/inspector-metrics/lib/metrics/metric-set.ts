@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { Metric } from "./metric";
+import { Metric } from "./model/metric";
 
 /**
  * Represents a collection of metric instances as a single metric.

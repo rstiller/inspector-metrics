@@ -177,7 +177,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
      * @memberof V8ProcessMetrics
      */
     public setTag(name: string, value: string): this {
-        this.tags.set(name, value);
+        this.tagMap.set(name, value);
 
         this.activeHandles.setTag(name, value);
         this.activeRequests.setTag(name, value);
@@ -196,7 +196,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
      * @memberof V8ProcessMetrics
      */
     public removeTag(name: string): this {
-        this.tags.delete(name);
+        this.tagMap.delete(name);
 
         this.activeHandles.removeTag(name);
         this.activeRequests.removeTag(name);

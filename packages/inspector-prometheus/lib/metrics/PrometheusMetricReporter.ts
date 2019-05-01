@@ -1,28 +1,49 @@
 import "source-map-support";
 
+import * as cluster from "cluster";
+import { randomBytes } from "crypto";
+import { EventEmitter } from "events";
 import {
     BucketCounting,
     Buckets,
+    BucketToCountMap,
     Counter,
     Event,
     Gauge,
+    getMetricBuckets,
+    getMetricCounts,
+    getMetricDescription,
+    getMetricGroup,
+    getMetricMetadata,
+    getMetricName,
+    getMetricTags,
+    getSnapshot,
     Histogram,
+    mapToTags,
+    Metadata,
     Meter,
     Metric,
     MetricRegistry,
     MetricReporter,
-    MetricReporterOptions,
     MetricSetReportContext,
     MetricType,
     MonotoneCounter,
     OverallReportContext,
     ReportingResult,
     Sampling,
+    SerializableBucketCounting,
+    SerializableMetric,
+    SerializableSampling,
     StdClock,
     Taggable,
     Tags,
     Timer,
 } from "inspector-metrics";
+import { DefaultPrometheusClusterOptions } from "./DefaultPrometheusClusterOptions";
+import { InterprocessReportRequest } from "./InterprocessReportRequest";
+import { InterprocessReportResponse } from "./InterprocessReportResponse";
+import { Percentiles } from "./Percentiles";
+import { PrometheusReporterOptions } from "./PrometheusReporterOptions";
 
 /**
  * Enumeration used to determine valid metric types of prometheus.
@@ -42,77 +63,27 @@ interface PrometheusFields { [key: string]: number | string; }
  * @interface PrometheusMetricResult
  */
 interface PrometheusMetricResult {
+    /**
+     * Type of the metrics in fields property.
+     *
+     * @type {PrometheusMetricType}
+     * @memberof PrometheusMetricResult
+     */
     readonly type: PrometheusMetricType;
+    /**
+     * Contains field-name to value mapping of this metric-result.
+     *
+     * @type {PrometheusFields}
+     * @memberof PrometheusMetricResult
+     */
     readonly fields: PrometheusFields;
+    /**
+     * Indicates if this result can be handle by the reporter.
+     *
+     * @type {boolean}
+     * @memberof PrometheusMetricResult
+     */
     readonly canBeReported: boolean;
-}
-
-/**
- * List of values between 0 and 1 representing the percent boundaries for reporting.
- *
- * @export
- * @class Percentiles
- */
-export class Percentiles {
-
-    /**
-     * Name constant for assigning an instance of this class as metadata to a metric instance.
-     *
-     * @static
-     * @memberof Percentiles
-     */
-    public static readonly METADATA_NAME = "quantiles";
-
-    /**
-     * Creates an instance of Percentiles.
-     *
-     * @param {number[]} [boundaries=[0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]]
-     * @memberof Percentiles
-     */
-    constructor(
-        public boundaries: number[] = [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999],
-    ) {
-        boundaries.sort((a: number, b: number) => a - b);
-        boundaries.forEach((boundary) => {
-            if (boundary <= 0.0) {
-                throw new Error("boundaries cannot be smaller or eqaul to 0.0");
-            }
-            if (boundary >= 1.0) {
-                throw new Error("boundaries cannot be greater or eqaul to 1.0");
-            }
-        });
-    }
-
-}
-
-/**
- * Configuration object for {@link PrometheusMetricReporter}.
- *
- * @export
- * @interface PrometheusReporterOptions
- */
-export interface PrometheusReporterOptions extends MetricReporterOptions {
-    /**
-     * indicates if UTC converted timestamps should be appended to each metric data
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly includeTimestamp?: boolean;
-    /**
-     * indicates if comments like HELP and TYPE should be emitted
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly emitComments?: boolean;
-    /**
-     * indicates if the untyped should always be used
-     *
-     * @type {boolean}
-     * @memberof PrometheusReporterOptions
-     */
-    readonly useUntyped?: boolean;
 }
 
 /**
@@ -129,6 +100,22 @@ export interface PrometheusReporterOptions extends MetricReporterOptions {
  */
 export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterOptions, PrometheusMetricResult> {
 
+    /**
+     * Constant for the "type" variable of process-level message identifying report-request-messages
+     * from master process.
+     *
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    public static readonly MESSAGE_TYPE_REQUEST = "inspector-prometheus:metric-reporter:request-metrics";
+    /**
+     * Constant for the "type" variable of process-level message identifying report-response-messages
+     * from forked processes.
+     *
+     * @static
+     * @memberof PrometheusMetricReporter
+     */
+    public static readonly MESSAGE_TYPE_RESPONSE = "inspector-prometheus:metric-reporter:response-metrics";
     /**
      * Used to replace unsupported characters from label name.
      *
@@ -220,10 +207,19 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @memberof PrometheusMetricReporter
      */
     private summaryType: PrometheusMetricType = "summary";
+    /**
+     * Internal eventbus used to forward received messages from forked metric reporters.
+     *
+     * @private
+     * @type {EventEmitter}
+     * @memberof PrometheusMetricReporter
+     */
+    private internalEventbus: EventEmitter;
 
     /**
      * Creates an instance of PrometheusMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof PrometheusMetricReporter
      */
     public constructor({
@@ -233,15 +229,28 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         minReportingTimeout = 1,
         tags = new Map(),
         useUntyped = false,
-    }: PrometheusReporterOptions) {
+        clusterOptions = new DefaultPrometheusClusterOptions(),
+    }: PrometheusReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             emitComments,
             includeTimestamp,
             minReportingTimeout,
             tags,
             useUntyped,
-        });
+        }, reporterType);
+        const co = this.options.clusterOptions;
+        if (co &&
+            co.enabled) {
+            this.internalEventbus = new EventEmitter();
+            if (co.sendMetricsToMaster) {
+                co.eventReceiver.on("message", (worker, message, handle) => this.handleReportRequest(message));
+            } else {
+                co.eventReceiver.on("message", (worker, message, handle) => this.handleReportResponse(message));
+            }
+        }
     }
 
     /**
@@ -251,11 +260,35 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @memberof PrometheusMetricReporter
      */
     public async getMetricsString(): Promise<string> {
+        const workerPromises: Array<Promise<string>> = [];
+        const clusterOptions = this.options.clusterOptions;
+        if (this.canSendMessagesToWorkers()) {
+            const workers = await clusterOptions.getWorkers();
+            for (const worker of workers) {
+                const message: InterprocessReportRequest = {
+                    id: this.generateRandomId(),
+                    targetReporterType: this.reporterType,
+                    type: PrometheusMetricReporter.MESSAGE_TYPE_REQUEST,
+                };
+                const workerPromise: Promise<string> = new Promise((resolve) => {
+                    this.internalEventbus.once(message.id, (response: InterprocessReportResponse) => {
+                        resolve(response.metricsStr);
+                    });
+                });
+                const workerTimeout: Promise<string> = new Promise((resolve) => setTimeout(() => {
+                    resolve("");
+                    this.internalEventbus.removeAllListeners(message.id);
+                }, clusterOptions.workerResponseTimeout));
+                clusterOptions.sendToWorker(worker, message);
+                workerPromises.push(Promise.race([workerPromise, workerTimeout]));
+            }
+        }
+        const workerResponses = await Promise.all(workerPromises);
         if (this.metricRegistries && this.metricRegistries.length > 0) {
             const ctx = await this.report();
-            return ctx.result;
+            return ctx.result + workerResponses.join("\n");
         }
-        return "\n";
+        return workerResponses.join("\n") + "\n";
     }
 
     /**
@@ -295,8 +328,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     /**
      * Use {@link #getEventString} instead.
      *
-     * @param {Event} event
-     * @returns {Promise<Event>} always the specified event.
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof PrometheusMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -331,7 +364,98 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     }
 
     /**
-     * Called be before each reporting run.
+     * Always returns false, since the Prometheus reporter implements it's own messaging mechanism.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    protected sendMetricsToMaster(): boolean {
+        return false;
+    }
+
+    /**
+     * Checks if the clustering support is enabled and the 'getWorkers' and 'sendToWorker'
+     * method is not null.
+     *
+     * @protected
+     * @returns {boolean}
+     * @memberof PrometheusMetricReporter
+     */
+    protected canSendMessagesToWorkers(): boolean {
+        const clusterOptions = this.options.clusterOptions;
+        return  clusterOptions.enabled &&
+                !!clusterOptions.getWorkers &&
+                !!clusterOptions.sendToWorker;
+    }
+
+    /**
+     * Generates a randomId used to identify worker report responses.
+     *
+     * @protected
+     * @returns {string}
+     * @memberof PrometheusMetricReporter
+     */
+    protected generateRandomId(): string {
+        return randomBytes(32).toString("hex");
+    }
+
+    /**
+     * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_REQUEST},
+     * generates a response using {@link #getMetricsString} and sends it back to the master process
+     * with the id given through the request.
+     *
+     * @protected
+     * @param {*} message
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportRequest(message: any) {
+        if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_REQUEST)) {
+            const request: InterprocessReportRequest = message;
+            const metricsStr = await this.getMetricsString();
+            const response: InterprocessReportResponse = {
+                id: request.id,
+                metricsStr,
+                targetReporterType: request.targetReporterType,
+                type: PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE,
+            };
+            if (this.options.clusterOptions.sendToMaster) {
+                this.options.clusterOptions.sendToMaster(response);
+            }
+        }
+    }
+
+    /**
+     * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_RESPONSE}
+     * and forwards the message to the internal eventbus using the messages id as message and the message
+     * object as argument.
+     *
+     * @protected
+     * @param {*} message
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportResponse(message: any) {
+        if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE)) {
+            const response: InterprocessReportResponse = message;
+            this.internalEventbus.emit(response.id, response);
+        }
+    }
+
+    /**
+     * Ignores common report-messages.
+     *
+     * @protected
+     * @param {cluster.Worker} worker
+     * @param {*} message
+     * @param {*} handle
+     * @returns {Promise<void>}
+     * @memberof PrometheusMetricReporter
+     */
+    protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any): Promise<void> {
+    }
+
+    /**
+     * Called before each reporting run.
      *
      * @protected
      * @memberof MetricReporter
@@ -342,15 +466,16 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
 
     protected async handleResults(
         overallCtx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, PrometheusMetricResult>>): Promise<void> {
         const lines = [];
+        const registryTags = registry ? mapToTags(registry.getTags()) : null;
         for (const result of results) {
             const metric = result.metric;
             const ctx = result.result;
-            const line = this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields);
+            const line = this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields, registryTags);
             lines.push(line);
         }
         overallCtx.result += lines.join("\n");
@@ -422,13 +547,18 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
     /**
      * Gets the mapping of tags with normalized names and filtered for reserved tags.
      *
-     * @private
-     * @param {Taggable} taggable
+     * @protected
+     * @param {Taggable | SerializableMetric} taggable
      * @param {string[]} exclude
+     * @param {Tags} [registryTags]
      * @returns {Tags}
      * @memberof PrometheusMetricReporter
      */
-    protected buildPrometheusTags(taggable: Taggable, exclude: string[]): Tags {
+    protected buildPrometheusTags(
+        taggable: Taggable | SerializableMetric,
+        exclude: string[],
+        registryTags?: Tags,
+        ): Tags {
         exclude.sort();
 
         const tags: { [x: string]: string } = {};
@@ -439,7 +569,19 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
                 tags[normalizedKey] = value;
             }
         });
-        taggable.getTags().forEach((value, key) => {
+        if (registryTags) {
+            Object.keys(registryTags).forEach((key) => {
+                const value = registryTags[key];
+                const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
+                if (exclude.indexOf(normalizedKey) === -1 &&
+                    PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
+                    tags[normalizedKey] = value;
+                }
+            });
+        }
+        const customTags = getMetricTags(taggable);
+        Object.keys(customTags).forEach((key) => {
+            const value = customTags[key];
             const normalizedKey = key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, "_");
             if (exclude.indexOf(normalizedKey) === -1 &&
                 PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.indexOf(normalizedKey.charAt(0)) === -1) {
@@ -461,15 +603,17 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @param {PrometheusMetricType} metricType
      * @param {boolean} canReport
      * @param {PrometheusFields} fields
+     * @param {Tags} [registryTags]
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getMetricString<T extends Metric>(
+    private getMetricString<T extends Metric | SerializableMetric>(
         now: Date,
         metric: T,
         metricType: PrometheusMetricType,
         canReport: boolean,
         fields: PrometheusFields,
+        registryTags?: Tags,
         ): string {
 
         if (!canReport) {
@@ -479,7 +623,7 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
         const metricName = this.getMetricName(metric);
         const description = this.getDescription(metric, metricName);
         const timestamp = this.getTimestamp(now);
-        const tags = this.buildPrometheusTags(metric, ["le", "quantile"]);
+        const tags = this.buildPrometheusTags(metric, ["le", "quantile"], registryTags);
         const tagStr = Object
             .keys(tags)
             .map((tag) => `${tag}="${tags[tag]}"`)
@@ -524,8 +668,8 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getDescription<T extends Metric>(metric: T, metricName: string): string {
-        let description = metric.getDescription();
+    private getDescription<T extends Metric | SerializableMetric>(metric: T, metricName: string): string {
+        let description = getMetricDescription(metric);
         if (PrometheusMetricReporter.isEmpty(description)) {
             description = `${metricName} description`;
         }
@@ -579,25 +723,25 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getBuckets<T extends Metric & BucketCounting>(
+    private getBuckets<T extends (Metric | SerializableMetric) & (BucketCounting | SerializableBucketCounting)>(
         metric: T,
         metricName: string,
         count: number,
         tagStr: string,
         timestamp: string): string {
 
-        const buckets: Buckets = metric.getBuckets();
+        const buckets: Buckets = getMetricBuckets(metric);
         if (buckets) {
             const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? "," : "";
             const bucketStrings: string[] = [];
+            const counts: BucketToCountMap = getMetricCounts(metric);
 
-            metric
-                .getCounts()
-                .forEach((bucketCount: number, boundary: number) => {
-                    bucketStrings.push(
-                        `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}${timestamp}`,
-                    );
-                });
+            for (const boundary of Object.keys(counts)) {
+                const bucketCount: number = counts[boundary as any];
+                bucketStrings.push(
+                    `${metricName}_bucket{${tagStr}${tagPrefix}le="${boundary}"} ${bucketCount}${timestamp}`,
+                );
+            }
 
             return bucketStrings.join("\n") +
                 `\n${metricName}_bucket{${tagStr}${tagPrefix}le="+Inf"} ${count}${timestamp}\n`;
@@ -618,18 +762,19 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getQuantiles<T extends Metric & Sampling>(
+    private getQuantiles<T extends (Metric | SerializableMetric) & (Sampling | SerializableSampling)>(
         metric: T,
         metricName: string,
         tagStr: string,
         timestamp: string): string {
 
-        let quantiles: Percentiles = metric.getMetadata(Percentiles.METADATA_NAME);
+        const metadata: Metadata = getMetricMetadata(metric);
+        let quantiles: Percentiles | null = metadata[Percentiles.METADATA_NAME];
         if (!quantiles) {
             quantiles = new Percentiles();
         }
         const tagPrefix = !PrometheusMetricReporter.isEmpty(tagStr) ? "," : "";
-        const snapshot = metric.getSnapshot();
+        const snapshot = getSnapshot(metric);
 
         return quantiles
             .boundaries
@@ -644,14 +789,15 @@ export class PrometheusMetricReporter extends MetricReporter<PrometheusReporterO
      * Gets the normalized metric name.
      *
      * @private
-     * @param {Metric} metric
+     * @param {Metric | SerializableMetric} metric
      * @returns {string}
      * @memberof PrometheusMetricReporter
      */
-    private getMetricName(metric: Metric): string {
-        let name = metric.getName();
-        if (metric.getGroup()) {
-            name = `${metric.getGroup()}:${metric.getName()}`;
+    private getMetricName(metric: Metric | SerializableMetric): string {
+        let name = getMetricName(metric);
+        const group = getMetricGroup(metric);
+        if (group) {
+            name = `${group}:${name}`;
         }
 
         name = name.replace(PrometheusMetricReporter.METRIC_NAME_REPLACEMENT_REGEXP, "_");

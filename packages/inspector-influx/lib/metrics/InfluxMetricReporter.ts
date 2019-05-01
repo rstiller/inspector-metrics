@@ -2,8 +2,8 @@ import "source-map-support/register";
 
 import { IPoint } from "influx";
 import {
-    Clock,
     Counter,
+    DefaultClusterOptions,
     Event,
     Gauge,
     Histogram,
@@ -19,10 +19,8 @@ import {
     ReportingResult,
     ScheduledMetricReporter,
     ScheduledMetricReporterOptions,
-    Scheduler,
     StdClock,
     Timer,
-    TimeUnit,
 } from "inspector-metrics";
 
 /**
@@ -105,6 +103,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     /**
      * Creates an instance of InfluxMetricReporter.
      *
+     * @param {string} [reporterType] the type of the reporter implementation - for internal use
      * @memberof InfluxMetricReporter
      */
     public constructor({
@@ -115,51 +114,13 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
         clock = new StdClock(),
         scheduler = setInterval,
         minReportingTimeout = 1,
+        clusterOptions = new DefaultClusterOptions(),
         tags = new Map(),
-    }: {
-            /**
-             * A sender implementation used to send metrics to influx DB server.
-             * @type {Sender}
-             */
-            sender: Sender,
-            /**
-             * The logger instance used to report metrics.
-             * @type {(Logger | null)}
-             */
-            log?: Logger,
-            /**
-             * Reporting interval in the time-unit of {@link #unit}.
-             * @type {number}
-             */
-            reportInterval?: number;
-            /**
-             * The time-unit of the reporting interval.
-             * @type {TimeUnit}
-             */
-            unit?: TimeUnit;
-            /**
-             * The clock instance used determine the current time.
-             * @type {Clock}
-             */
-            clock?: Clock;
-            /**
-             * The scheduler function used to trigger reporting.
-             * @type {Scheduler}
-             */
-            scheduler?: Scheduler;
-            /**
-             * The timeout in which a metrics gets reported wether it's value has changed or not.
-             * @type {number}
-             */
-            minReportingTimeout?: number;
-            /**
-             * Common tags for this reporter instance.
-             * @type {Map<string, string>}
-             */
-            tags?: Map<string, string>;
-        }) {
+    }: InfluxMetricReporterOptions,
+                       reporterType?: string) {
         super({
             clock,
+            clusterOptions,
             log,
             minReportingTimeout,
             reportInterval,
@@ -167,7 +128,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
             sender,
             tags,
             unit,
-        });
+        }, reporterType);
 
         this.logMetadata = {
             reportInterval,
@@ -210,7 +171,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     /**
      * Sends an event directly to influxdb.
      *
-     * @param {Event} event
+     * @param {TEvent} event
+     * @returns {Promise<TEvent>}
      * @memberof InfluxMetricReporter
      */
     public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
@@ -269,7 +231,8 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      * Uses the sender to report the given data points.
      *
      * @protected
-     * @param {MetricRegistry} registry
+     * @param {OverallReportContext} ctx
+     * @param {MetricRegistry | null} registry
      * @param {Date} date
      * @param {MetricType} type
      * @param {Array<ReportingResult<any, IPoint>>} results
@@ -278,12 +241,22 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
      */
     protected async handleResults(
         ctx: OverallReportContext,
-        registry: MetricRegistry,
+        registry: MetricRegistry | null,
         date: Date,
         type: MetricType,
         results: Array<ReportingResult<any, IPoint>>): Promise<any> {
         const points = results.map((result) => result.result);
+        if (points.length === 0) {
+            return;
+        }
+
         try {
+            points.forEach((point) => {
+                if (!(point.timestamp instanceof Date)) {
+                    point.timestamp = new Date(point.timestamp);
+                }
+            });
+
             await this.options.sender.send(points);
             if (this.options.log) {
                 this.options.log.debug(`wrote ${type} metrics`, this.logMetadata);

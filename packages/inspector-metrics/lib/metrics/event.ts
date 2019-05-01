@@ -1,7 +1,7 @@
 import "source-map-support/register";
 
 import { Gauge } from "./gauge";
-import { BaseMetric } from "./metric";
+import { BaseMetric } from "./model/metric";
 
 /**
  * Represents an ad-hoc event which can directly be reported using the
@@ -10,7 +10,8 @@ import { BaseMetric } from "./metric";
  *
  * @export
  * @class Event
- * @implements {Taggable}
+ * @extends {BaseMetric}
+ * @implements {Gauge<TEventData>}
  * @template TEventData
  */
 export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
@@ -41,7 +42,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
      * @param {string} [group] optional group
      * @param {Date} [time=new Date()]
      *              can be set to <pre><code>new Date(clock.time().milliseconds)</code></pre>
-     *              to be in line with orinary {@link MetricReporter} implementations.
+     *              to be in line with ordinary {@link MetricReporter} implementations.
      * @memberof Event
      */
     public constructor(name: string, description?: string, group?: string, time: Date = new Date()) {
@@ -104,6 +105,19 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
      */
     public toString(): string {
         return this.name;
+    }
+
+    /**
+     * Same as {@link BaseMetric#toJSON()}, also adding value and time property.
+     *
+     * @returns {*}
+     * @memberof Event
+     */
+    public toJSON(): any {
+        const json = super.toJSON();
+        json.value = this.value;
+        json.time = this.time;
+        return json;
     }
 
 }
