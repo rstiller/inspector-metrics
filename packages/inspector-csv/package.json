@@ -30,10 +30,10 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "async": "^2.6.2",
+    "async": "^3.0.1",
     "inspector-metrics": "^1.19.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.23",
+    "moment-timezone": "^0.5.25",
     "source-map-support": "^0.5.12"
   },
   "files": [

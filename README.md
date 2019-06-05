@@ -41,7 +41,7 @@ This is the mono repository for the `inspector-metrics` modules.
 
 ### local setup / prerequisites
 
-You should have [nodejs](https://nodejs.org/en/) and [docker](https://www.docker.com/) installed.
+You should have [nodejs](https://nodejs.org/en/), [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed.
 
 boot test environment:  
 `./test-env/boot.sh`
@@ -51,12 +51,18 @@ shutdown test environment:
 
 execute compatibility tests:  
 `docker-compose run --rm nodeX`  
-_X = nodejs version (available: 6, 7, 8, 9, 10, 11)_
+_X = nodejs version (available: 6, 7, 8, 9, 10, 11, 12)_
 
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
 npm i
 npm run bootstrap
+```
+
+generate dependency report:  
+```bash
+# run 'npm run build' before checking dependencies
+docker-compose run --rm deps
 ```
 
 release packages / publish docs:  

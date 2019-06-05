@@ -615,7 +615,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     private async filterKeys(keys: Set<string>, filter: Filter): Promise<Set<string>> {
-        const filteredKeys = new Set();
+        const filteredKeys = new Set<string>();
         const tasks: Array<Promise<any>> = [];
         keys.forEach((key) => {
             tasks.push((async () => {
@@ -636,7 +636,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     private getAllMetadataKeys(): Set<string> {
-        const metadataNames = new Set();
+        const metadataNames = new Set<string>();
         this.metricRegistries
             .map((registry) => registry.getMetricList())
             .map((metrics) => metrics.map((metric) => metric.getMetadataMap()))
@@ -658,7 +658,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
      * @memberof CsvMetricReporter
      */
     private getAllTagKeys(): Set<string> {
-        const tags = new Set();
+        const tags = new Set<string>();
         this.options.tags.forEach((value, tag) => tags.add(tag));
         this.metricRegistries
             .map((registry) => ({

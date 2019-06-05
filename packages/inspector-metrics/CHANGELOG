@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- updated dependencies
+- moved `compodoc` and `npm-check` to docker image
+
 ## [1.19.0] - 2019-05-01
 ### Added
 - added MacOS to test matrix

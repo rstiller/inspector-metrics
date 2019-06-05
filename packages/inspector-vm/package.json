@@ -31,7 +31,7 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "gc-stats": "^1.2.1",
+    "gc-stats": "^1.4.0",
     "inspector-metrics": "^1.19.0",
     "source-map-support": "^0.5.12"
   },

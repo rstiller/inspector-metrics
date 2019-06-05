@@ -29,10 +29,10 @@
     "npm": ">= 3"
   },
   "optionalDependencies": {
-    "native-hdr-histogram": "^0.5.0"
+    "native-hdr-histogram": "^0.7.0"
   },
   "dependencies": {
-    "node-cint64": "2.0.1",
+    "node-cint64": "^3.0.0",
     "source-map-support": "^0.5.12"
   },
   "files": [
@@ -45,7 +45,7 @@
     "compile": "tsc -p .",
     "compodoc": "compodoc lib",
     "coverage": "nyc npm run test",
-    "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+    "deps": "npm-check --ignore @types/* --ignore node-cint64 --no-spinner --no-emoji --no-color ",
     "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
     "precompodoc": "npm run coverage",
     "prepublishOnly": "npm run build",

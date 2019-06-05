@@ -6,6 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+- use inspector-metrics@1.20.0
+- updated dependencies
+- fixed type definitions for internal methods
+
 ## [2.3.0] - 2019-05-01
 ### Added
 - added MacOS to test matrix

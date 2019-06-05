@@ -66,8 +66,11 @@ export class DefaultSender implements Sender {
     public init(): Promise<any> {
         const database = this.config.database;
         return this.db.getDatabaseNames()
-            .then((names) => {
-                if (!names.find((value: string, index: number, arr: string[]) => value.localeCompare(database) === 0)) {
+            .then((result) => {
+                if ((result instanceof String && result.localeCompare(database) !== 0) ||
+                    (result instanceof Array &&
+                     !result.find((value: string, index: number, arr: string[]) =>
+                        value.localeCompare(database) === 0))) {
                     return this.db.createDatabase(database);
                 }
                 return Promise.resolve();

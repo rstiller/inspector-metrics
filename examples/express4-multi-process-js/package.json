@@ -13,7 +13,7 @@
     }
   ],
   "dependencies": {
-    "express": "^4.16.4",
+    "express": "^4.17.1",
     "inspector-carbon": "^2.4.0",
     "inspector-csv": "^2.3.0",
     "inspector-elasticsearch": "^2.5.0",

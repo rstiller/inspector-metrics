@@ -239,6 +239,36 @@ services:
       - prometheus-data:/prometheus-data
       - ./test-env/prometheus/config.yml:/etc/prometheus/config.yml
 
+  docs:
+    build:
+      context: ./test-env/node-dev
+      args:
+        TZ: Europe/Berlin
+    user: "node"
+    entrypoint: bash
+    command:
+      - "-c"
+      - "npm rebuild && lerna run compodoc --scope inspector-metrics && cp -r packages/inspector-metrics/docs ."
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+
+  deps:
+    build:
+      context: ./test-env/node-dev
+      args:
+        TZ: Europe/Berlin
+    user: "node"
+    entrypoint: bash
+    command:
+      - "-c"
+      - "lerna run deps"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+
 volumes:
   grafana-data:
   grafana-logs:
