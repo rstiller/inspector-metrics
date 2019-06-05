@@ -39,6 +39,10 @@ const clientOptions: ConfigOptions = {
 // instance the elasticsearch reporter
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
+    log: null,
+    metricDocumentBuilder: ElasticsearchMetricReporter.defaultDocumentBuilder(),
+    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 const registry: MetricRegistry = new MetricRegistry();
 
@@ -75,7 +79,10 @@ const indexnameDeterminator: MetricInfoDeterminator = (
 // the indexname generator needs to be specified when instancing the reporter
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
-    indexnameDeterminator, 
+    indexnameDeterminator,
+    log: null,
+    metricDocumentBuilder: ElasticsearchMetricReporter.defaultDocumentBuilder(),
+    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 ```
 
@@ -114,7 +121,10 @@ const metricDocumentBuilder: MetricDocumentBuilder = (
 // the document builder needs to be specified when instancing the reporter
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
+    log: null,
     metricDocumentBuilder,
+    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 ```
 
@@ -141,6 +151,10 @@ const clientOptions: ConfigOptions = {
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
     clusterOptions: new DisabledClusterOptions(),
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
+    log: null,
+    metricDocumentBuilder: ElasticsearchMetricReporter.defaultDocumentBuilder(),
+    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 
 // set "pid" to process id
