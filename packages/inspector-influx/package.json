@@ -23,7 +23,7 @@
     "influxdb"
   ],
   "engines": {
-    "node": ">= 6",
+    "node": ">= 8",
     "npm": ">= 3"
   },
   "peerDependencies": {

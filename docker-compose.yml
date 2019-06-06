@@ -2,34 +2,6 @@ version: "3"
 
 services:
 
-  node6:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node6
-    user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=6
-
-  node7:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node7
-    user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=7
-
   node8:
     build:
       context: ./test-env
