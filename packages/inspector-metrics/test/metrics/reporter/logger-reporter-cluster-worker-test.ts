@@ -143,7 +143,7 @@ export class LoggerReporterClusterWorkerTest {
         const result: ReportingResult<any, any> = counters[0];
         expect(result.metric.name).to.equal("counter1");
         expect(result.metric.count).to.equal(0);
-        expect(result.result.message).to.match(/Thu Jan 01 1970 01\:00\:00 GMT\+0100 \(.*\) - counter counter1\: 0/g);
+        expect(result.result.message).to.match(/Thu Jan 01 1970 \(.*\) - counter counter1\: 0/g);
         expect(result.result.metadata.reportInterval).to.equal(1000);
         expect(result.result.metadata.measurement).to.equal("counter1");
         expect(result.result.metadata.measurement_type).to.equal("counter");
