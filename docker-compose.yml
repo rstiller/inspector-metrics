@@ -7,7 +7,7 @@ services:
       context: ./test-env
       dockerfile: Dockerfile-node8
     user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
@@ -21,7 +21,7 @@ services:
       context: ./test-env
       dockerfile: Dockerfile-node9
     user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
@@ -35,7 +35,7 @@ services:
       context: ./test-env
       dockerfile: Dockerfile-node10
     user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
@@ -49,7 +49,7 @@ services:
       context: ./test-env
       dockerfile: Dockerfile-node11
     user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
@@ -63,7 +63,7 @@ services:
       context: ./test-env
       dockerfile: Dockerfile-node12
     user: "node"
-    entrypoint: "/opt/inspector-metrics/test/compile+test.sh"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
