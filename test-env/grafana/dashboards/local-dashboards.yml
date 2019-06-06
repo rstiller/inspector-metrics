@@ -2,10 +2,31 @@ apiVersion: 1
 
 # see http://docs.grafana.org/administration/provisioning/#dashboards
 providers:
-- name: 'default'
+- name: 'express4-multi-process-js'
   folder: 'express4-multi-process-js'
   type: file
   disableDeletion: false
   updateIntervalSeconds: 10
   options:
     path: /examples/express4-multi-process-js/dashboards
+- name: 'elasticsearch-5'
+  folder: 'elasticsearch-5'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10
+  options:
+    path: /examples/elasticsearch-5/dashboards
+- name: 'elasticsearch-6'
+  folder: 'elasticsearch-6'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10
+  options:
+    path: /examples/elasticsearch-6/dashboards
+- name: 'elasticsearch-7'
+  folder: 'elasticsearch-7'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10
+  options:
+    path: /examples/elasticsearch-7/dashboards

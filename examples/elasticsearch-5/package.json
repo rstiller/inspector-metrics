@@ -1,0 +1,33 @@
+{
+  "name": "elasticsearch-5",
+  "private": true,
+  "description": "Example project showing the usage of inspector-metrics and inspector-elasticsearch 5.x.x",
+  "homepage": "https://rstiller.github.io/inspector-metrics/",
+  "version": "0.1.0",
+  "main": "./build/src/index.js",
+  "typings": "./build/src/index.d.ts",
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://www.opensource.org/licenses/mit-license.php"
+    }
+  ],
+  "dependencies": {
+    "@elastic/elasticsearch": "^5.6.16",
+    "inspector-elasticsearch": "^2.5.0",
+    "inspector-metrics": "^1.19.0",
+    "inspector-vm": "^3.3.1"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run lint && npm run compile",
+    "sign": "exit 0",
+    "clean": "rimraf build",
+    "compile": "tsc --incremental -p .",
+    "compodoc": "exit 0",
+    "coverage": "exit 0",
+    "deps": "npm-check --no-spinner --no-emoji --no-color",
+    "lint": "tslint -c ../../tslint.json src/**/*.ts",
+    "test": "exit 0"
+  }
+}

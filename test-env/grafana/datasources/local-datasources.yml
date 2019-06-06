@@ -35,3 +35,33 @@ datasources:
   jsonData:
     interval: Daily
     timeField: "timestamp"
+- name: elasticsearch-5
+  type: elasticsearch
+  access: proxy
+  isDefault: false
+  editable: true
+  database: "[metric-elasticsearch-5-]YYYY-MM-DD"
+  url: http://elasticsearch:9200
+  jsonData:
+    interval: Daily
+    timeField: "timestamp"
+- name: elasticsearch-6
+  type: elasticsearch
+  access: proxy
+  isDefault: false
+  editable: true
+  database: "[metric-elasticsearch-6-]YYYY-MM-DD"
+  url: http://elasticsearch:9200
+  jsonData:
+    interval: Daily
+    timeField: "timestamp"
+- name: elasticsearch-7
+  type: elasticsearch
+  access: proxy
+  isDefault: false
+  editable: true
+  database: "[metric-elasticsearch-7-]YYYY-MM-DD"
+  url: http://elasticsearch:9200
+  jsonData:
+    interval: Daily
+    timeField: "timestamp"

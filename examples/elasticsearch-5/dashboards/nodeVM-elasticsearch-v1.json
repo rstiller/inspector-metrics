@@ -11,13 +11,13 @@
         "type": "dashboard"
       },
       {
-        "datasource": "elasticsearch-express-multi-process-js",
+        "datasource": "elasticsearch-5",
         "enable": true,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Application Start",
-        "query": "tags.type: \"application-start\" AND tags.application: \"express-multi-process-js\"",
+        "query": "tags.type: \"application-start\" AND tags.application: \"elasticsearch-5\"",
         "showIn": 0,
         "tags": [],
         "tagsField": "",
@@ -26,13 +26,13 @@
         "type": "tags"
       },
       {
-        "datasource": "elasticsearch-express-multi-process-js",
+        "datasource": "elasticsearch-5",
         "enable": false,
         "hide": false,
         "iconColor": "rgba(255, 96, 96, 1)",
         "limit": 100,
         "name": "Major GC Runs",
-        "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.application: \"express-multi-process-js\"",
+        "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.application: \"elasticsearch-5\"",
         "showIn": 0,
         "tags": [],
         "timeField": "timestamp",
@@ -43,7 +43,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1555963425141,
+  "iteration": 1559850681546,
   "links": [],
   "panels": [
     {
@@ -62,7 +62,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -82,7 +82,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -100,24 +100,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "used size (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "used size (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -149,7 +137,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"memory\" AND name: \"usedHeapSize\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"memory\" AND name: \"usedHeapSize\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -201,7 +189,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -221,7 +209,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -239,24 +227,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "used space (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "used space (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -288,7 +264,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"memory\" AND name: \"spaceUsedSize\" AND tags.scope: \"large_object_space\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"memory\" AND name: \"spaceUsedSize\" AND tags.scope: \"large_object_space\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -351,7 +327,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -371,7 +347,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -389,24 +365,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "mean (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "mean (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -438,7 +402,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -490,7 +454,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -510,7 +474,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -528,24 +492,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "mean stddev (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "mean stddev (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -575,7 +527,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"gc\" AND name: \"runs\" AND tags.type: \"major\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -638,7 +590,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -658,7 +610,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -676,24 +628,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "CPU Usage (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "CPU Usage (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -738,7 +678,7 @@
               "type": "derivative"
             }
           ],
-          "query": "group: \"process\" AND name: \"cpu_usage\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"process\" AND name: \"cpu_usage\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -790,7 +730,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 1,
       "fill": 1,
       "gridPos": {
@@ -810,7 +750,7 @@
         "min": true,
         "rightSide": true,
         "show": true,
-        "sideWidth": 450,
+        "sideWidth": 350,
         "total": false,
         "values": true
       },
@@ -828,24 +768,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "lag (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "lag (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -875,7 +803,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"eventLoop\" AND name: \"lag\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"eventLoop\" AND name: \"lag\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -927,7 +855,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 0,
       "fill": 1,
       "gridPos": {
@@ -945,9 +873,9 @@
         "hideEmpty": true,
         "max": true,
         "min": true,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
-        "sideWidth": 400,
+        "sideWidth": 300,
         "total": false,
         "values": true
       },
@@ -965,24 +893,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "active handles (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "active handles (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -1012,7 +928,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"process\" AND name: \"active_handles\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"process\" AND name: \"active_handles\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -1064,7 +980,7 @@
       "bars": false,
       "dashLength": 10,
       "dashes": false,
-      "datasource": "elasticsearch-express-multi-process-js",
+      "datasource": "elasticsearch-5",
       "decimals": 0,
       "fill": 1,
       "gridPos": {
@@ -1082,7 +998,7 @@
         "hideEmpty": true,
         "max": true,
         "min": true,
-        "rightSide": true,
+        "rightSide": false,
         "show": true,
         "sideWidth": 400,
         "total": false,
@@ -1102,24 +1018,12 @@
       "steppedLine": false,
       "targets": [
         {
-          "alias": "active requests (pid: {{term tags.pid.keyword}}, master: {{term tags.isMaster.keyword}})",
+          "alias": "active requests (pid: {{term tags.pid.keyword}})",
           "bucketAggs": [
             {
               "fake": true,
               "field": "tags.pid.keyword",
               "id": "6",
-              "settings": {
-                "min_doc_count": 1,
-                "order": "desc",
-                "orderBy": "_term",
-                "size": "0"
-              },
-              "type": "terms"
-            },
-            {
-              "fake": true,
-              "field": "tags.isMaster.keyword",
-              "id": "4",
               "settings": {
                 "min_doc_count": 1,
                 "order": "desc",
@@ -1149,7 +1053,7 @@
               "type": "avg"
             }
           ],
-          "query": "group: \"process\" AND name: \"active_requests\" AND tags.hostname: \"$hostname\" AND tags.application: \"express-multi-process-js\"",
+          "query": "group: \"process\" AND name: \"active_requests\" AND tags.hostname: \"$hostname\" AND tags.application: \"elasticsearch-5\"",
           "refId": "A",
           "timeField": "timestamp"
         }
@@ -1209,7 +1113,7 @@
           "text": "T470",
           "value": "T470"
         },
-        "datasource": "elasticsearch-express-multi-process-js",
+        "datasource": "elasticsearch-5",
         "definition": "{\"find\": \"terms\", \"field\": \"tags.hostname.keyword\", \"query\": \"\"}",
         "hide": 0,
         "includeAll": false,
@@ -1260,7 +1164,7 @@
     ]
   },
   "timezone": "",
-  "title": "nodeVM-elasticsearch",
-  "uid": "zCMdC4Z3yK1VN6hResEt",
-  "version": 4
+  "title": "nodeVM-elasticsearch-5",
+  "uid": "SgjedCzGfUnvm9ifqQcT",
+  "version": 1
 }
