@@ -19,7 +19,7 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and
 is meant to be used with `typescript` / `nodejs`.  
-It uses [elasticsearch-js](https://github.com/elastic/elasticsearch-js) as elasticsearch client.
+It uses the [official elasticsearch js client](https://www.npmjs.com/package/@elastic/elasticsearch).
 
 ## install
 
@@ -27,6 +27,30 @@ It uses [elasticsearch-js](https://github.com/elastic/elasticsearch-js) as elast
 
 ## basic usage
 
+From version `2.6.0` onwards this library uses the [official elasticsearch js client](https://www.npmjs.com/package/@elastic/elasticsearch) instead of the [legacy elasticsearch js client](https://www.npmjs.com/package/elasticsearch).
+
+```typescript
+import { MetricRegistry } from "inspector-metrics";
+import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
+import { ClientOptions } from "@elastic/elasticsearch";
+
+const clientOptions: ClientOptions = {
+    node: "http://localhost:9200",
+};
+// instance the elasticsearch reporter
+const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
+    clientOptions,
+    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
+});
+const registry: MetricRegistry = new MetricRegistry();
+
+// add the registry to the reporter
+reporter.addMetricRegistry(registry);
+// start reporting
+await reporter.start();
+```
+
+For users of versions before `2.6.0`:  
 ```typescript
 import { MetricRegistry } from "inspector-metrics";
 import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
@@ -60,9 +84,9 @@ import {
     ElasticsearchMetricReporter,
     MetricInfoDeterminator
 } from "inspector-elasticsearch";
-import { ConfigOptions } from "elasticsearch";
+import { ClientOptions } from "@elastic/elasticsearch";
 
-const clientOptions: ConfigOptions = { ... };
+const clientOptions: ClientOptions = { ... };
 // computes the name of the index using the timestamp of the metric
 const indexnameDeterminator: MetricInfoDeterminator = (
     registry: MetricRegistry,
@@ -80,9 +104,6 @@ const indexnameDeterminator: MetricInfoDeterminator = (
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
     indexnameDeterminator,
-    log: null,
-    metricDocumentBuilder: ElasticsearchMetricReporter.defaultDocumentBuilder(),
-    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 ```
 
@@ -95,9 +116,9 @@ import {
     MetricDocumentBuilder,
     MetricType
 } from "inspector-elasticsearch";
-import { ConfigOptions } from "elasticsearch";
+import { ClientOptions } from "@elastic/elasticsearch";
 
-const clientOptions: ConfigOptions = { ... };
+const clientOptions: ClientOptions = { ... };
 // only build documents for counter metrics
 const metricDocumentBuilder: MetricDocumentBuilder = (
     registry: MetricRegistry,
@@ -121,10 +142,7 @@ const metricDocumentBuilder: MetricDocumentBuilder = (
 // the document builder needs to be specified when instancing the reporter
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
-    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
-    log: null,
     metricDocumentBuilder,
-    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 ```
 
@@ -141,9 +159,9 @@ In each case you should set the `pid` as reporter tag.
 ```typescript
 import { tagsToMap, DisabledClusterOptions } from "inspector-metrics";
 import { ElasticsearchMetricReporter } from "inspector-elasticsearch";
-import { ConfigOptions } from "elasticsearch";
+import { ClientOptions } from "@elastic/elasticsearch";
 
-const clientOptions: ConfigOptions = {
+const clientOptions: ClientOptions = {
     apiVersion: "6.0",
     host: "localhost:9200",
 };
@@ -151,10 +169,6 @@ const clientOptions: ConfigOptions = {
 const reporter: ElasticsearchMetricReporter = new ElasticsearchMetricReporter({
     clientOptions,
     clusterOptions: new DisabledClusterOptions(),
-    indexnameDeterminator: ElasticsearchMetricReporter.dailyIndex(`metrics`),
-    log: null,
-    metricDocumentBuilder: ElasticsearchMetricReporter.defaultDocumentBuilder(),
-    typeDeterminator: ElasticsearchMetricReporter.defaultTypeDeterminator(),
 });
 
 // set "pid" to process id

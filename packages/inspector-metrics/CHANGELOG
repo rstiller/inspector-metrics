@@ -5,10 +5,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- added windows to test matrix
 
 ### Changed
 - updated dependencies
 - moved `compodoc` and `npm-check` to docker image
+
+### Removed
+- removed support for nodejs 6 & 7
 
 ## [1.19.0] - 2019-05-01
 ### Added
