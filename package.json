@@ -43,7 +43,7 @@
         "coverage": "lerna run coverage",
         "deps": "lerna run deps",
         "lint": "lerna run lint",
-        "publish": "lerna publish --scope inspector-*",
+        "publish": "lerna publish --contents packages",
         "publish-dry-run": "lerna publish --skip-npm --no-git-tag-version --no-push",
         "pretest": "lerna run compile --scope inspector-metrics",
         "publishDocs": "cd docs && git add --all . && git commit -nm 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
