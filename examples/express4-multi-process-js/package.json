@@ -3,7 +3,7 @@
   "private": true,
   "description": "Example project in pure javascript showing the usage of inspector-metrics in a multi-process express application",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "./src/index.js",
   "license": "MIT",
   "licenses": [
