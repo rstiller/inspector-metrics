@@ -20,7 +20,7 @@ Example project in pure javascript showing the usage of [inspector-metrics](http
 1. start the example application
    ```bash
    cd <project-path>/
-   examples/express4-multi-process-js/run.sh # method one: compiles the lib and starts the application
+   examples/express4-multi-process-js/run.sh --compile # method one: compiles the lib and starts the application
    # or
    node examples/express4-multi-process-js/ # method two: starts the application
    ```

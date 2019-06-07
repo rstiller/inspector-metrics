@@ -5,7 +5,6 @@
     "devDependencies": {
         "@types/async": "3.0.0",
         "@types/chai": "4.1.7",
-        "@types/elasticsearch": "5.0.33",
         "@types/hapi": "18.0.2",
         "@types/lodash": "4.14.133",
         "@types/mocha": "5.2.7",

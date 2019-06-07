@@ -6,10 +6,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.4.0] - 2019-06-07
+### Added
+- added windows to test matrix
+
 ### Changed
-- use inspector-metrics@1.20.0
+- uses inspector-metrics@1.20.0
 - updated dependencies
 - fixed type definitions for internal methods
+
+### Removed
+- removed support for nodejs 6 & 7
 
 ## [2.3.0] - 2019-05-01
 ### Added
@@ -21,20 +28,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     - events & metrics from forked processes are send to master (if enabled through options)
 
 ### Changed
-- use inspector-metrics@1.19.0
+- uses inspector-metrics@1.19.0
 - updated dependencies
 - fixed some typos in docs
 
 ## [2.2.0] - 2019-03-01
 ### Changed
-- use inspector-metrics@1.18.0
+- uses inspector-metrics@1.18.0
 - transferred into monorepo
 - shrunk package to contain only necessary files
 
 ## [2.1.1] - 2019-02-08
 ### Changed
 - updated dependencies
-- use inspector-metrics@1.17.2
+- uses inspector-metrics@1.17.2
 
 ## [2.1.0] - 2018-11-30
 ### Added
@@ -43,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - added nodejs 11 to playground
 - updated dependencies
-- use inspector-metrics@1.17.0
+- uses inspector-metrics@1.17.0
 - set version of transitive dependency event-stream to 3.3.4
 
 ## [2.0.0] - 2018-11-04
@@ -55,7 +62,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - compile target from "es2017" to "es6"
 - added nodejs 11 to travis.yml
 - updated dependencies
-- use inspector-metrics@1.13.0
+- uses inspector-metrics@1.13.0
 - adapted new MetricLogger implementation
 
 ## [1.0.0] - 2018-10-20
@@ -75,4 +82,4 @@ Initial release.
 - added editorconfig file
 - travis.yml for nodejs 6, 7, 8, 9, 10
 - basic playground setup
-- use inspector-metrics@1.12.1
+- uses inspector-metrics@1.12.1

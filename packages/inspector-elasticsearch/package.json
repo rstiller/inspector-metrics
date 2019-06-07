@@ -23,14 +23,15 @@
     "elasticsearch"
   ],
   "engines": {
-    "node": ">= 6",
+    "node": ">= 8",
     "npm": ">= 3"
   },
   "peerDependencies": {
+    "@elastic/elasticsearch": ">=5.6.0",
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "elasticsearch": "^16.1.1",
+    "@elastic/elasticsearch": ">=5.6.0",
     "inspector-metrics": "^1.19.0",
     "lodash": "^4.17.11",
     "source-map-support": "^0.5.12"
@@ -42,7 +43,7 @@
     "build": "npm run clean && npm run lint && npm run compile",
     "sign": "pkgsign sign .",
     "clean": "rimraf build coverage docs",
-    "compile": "tsc -p .",
+    "compile": "tsc --incremental -p .",
     "compodoc": "compodoc lib",
     "coverage": "nyc npm run test",
     "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",

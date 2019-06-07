@@ -3,11 +3,11 @@
   "files": [
     {
       "path": "package.json",
-      "sha512": "4cfb47913fc9385b83bd341f58f8f943f02eeb0222c77e85a2cb45b97525da0ec6786d35f2958ff854c2b60b73a5f452c1faf840b975e3c4834eaacb98b8462a"
+      "sha512": "9c85e227a4e5d1e39c14e56cc1ecec7e6691877a4e3f36d9d366715c45ecb8147ee0292fdddee5ff94e382364682463889a099a5ff12d8bbc3274ad78b6c9669"
     },
     {
       "path": "CHANGELOG",
-      "sha512": "93e2104fd74409e0e23127cb29971a7f6ac7254e277428ec258dbefaacebae4637990e47889cf715eaaa2082632511887a650e9d7edb7dc918821ac5bb9bf1a0"
+      "sha512": "5f2229885484b5c62adcf21493a7cc08f4842d943a5fc9eaf06cccfa886c917791b411529b33de7402fbc280ea41994897095d881f134e7738f65100c12de960"
     },
     {
       "path": "LICENSE",
@@ -19,15 +19,15 @@
     },
     {
       "path": "build/lib/metrics/DefaultPrometheusClusterOptions.d.ts",
-      "sha512": "d50db51e6c6a156af62f79ada8256b1384bc5a037305e0cbc483e10f41aaf2c257af7de2f6287873ee887faa150e61b7f3656200991f7019ec2834cf7e200607"
+      "sha512": "24bf04f6e578dc8eeb09bc43104d19788403b0d99268ead80ec31242e7d6270bdf8687ac231fb40b720e907dbcacf9e5a7f8ed0b8cf3258b914f5b32167340a5"
     },
     {
       "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js",
-      "sha512": "c7d113f8b6ba3433aa958de5ccf6923a0ad57172c4f3e03db8638364c0f9d8fb2fe497d8d9ff76865ac77049682a4ca8322a5aa3900d002e802f46c437d5f744"
+      "sha512": "40ace21866d5f8672ffcaffce21cd86b8655cfe90f8289a2ef56d89c5fb416456b10817b3b8d0737be4f6744405002b47ed3b491b302400fb0caf49f8ace4bc1"
     },
     {
       "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js.map",
-      "sha512": "f881ea6a79a5e58b45b15a0588712d636ec2b1574b343e0f5acc27696340bee09957e88048801727360096f9da6d3c5f990572bc83266c2a45625f46f9d1f83a"
+      "sha512": "49b9635d5925485315ac90a7373c4d888a5ee8b4cdc4c05e356e27689cc6acaccd12bd513a40a9624b79c0bec8b50b81df3042dbb1a991aab42f278695164a9e"
     },
     {
       "path": "build/lib/metrics/index.d.ts",
@@ -91,15 +91,15 @@
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.d.ts",
-      "sha512": "3cced5dc55983d148bd0bf11fe3a5c1433014d8bf617c42b743b9810fd1dae21271f14d8c955d1ba14cc76acb0d0a795bb5eb4cfa55fc8020dc0a23957504188"
+      "sha512": "b085f7b0cb5ea4796a133d8a6ce130f6a105b5f2923c55239b31c444e51a74a7a83e15c28081f34b7729ca48248306a6001136887087082995c7548875e27d10"
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.js",
-      "sha512": "ed8d4b73572bf0308c53ca0ca08f89c27e026c456096e918e40a64f34fc18b96bb2afcc68260c04de92db6acbfea62b904effb04240839d56d01d24b586c6ed9"
+      "sha512": "6b2cd7fe32d732054fb7215c48b2f7dbbee085b53c4d2c68214aa365c9224b7328d68948a80660f4c40b02ece25ea061a433dc6371fe14a817621696595d3731"
     },
     {
       "path": "build/lib/metrics/PrometheusMetricReporter.js.map",
-      "sha512": "2dcc96edfa80770ff180d3c8ab8feca9c06a3919d96b12a04b004e96ce9720476e7a9c4958ee2df3068d6937fcafa92bf774ae6617ad283239cea1d361e3dbfe"
+      "sha512": "8b44f1f39f67ada0588b93fe48376e7c778a2cab62c9c4e739bedecd647e298e5e2327dc7ca48fd03bb7b953ae4940dc140cbef666d80fcfc067cf6b5f05f4c4"
     },
     {
       "path": "build/lib/metrics/PrometheusReporterOptions.d.ts",
@@ -155,7 +155,7 @@
     },
     {
       "path": "build/test/metrics/PrometheusReporterClusterWorkerTest.js",
-      "sha512": "5547cb7f0e665a5c32b549f81d5d80313ab02a5291a9c0abd25dc63bd11cc16f4f991d0b58bed8adbdadb200e4250fb4c3e0c30ff2e66dab99e407d809e3ef68"
+      "sha512": "712b395f9a5e722ad646e0b96b2af46831911a5d086607ee8d25be4388ef99ca4ae7237d478fab5674c4152717f7fa58fa6a1977e0724e7ef21df23de0d9b767"
     },
     {
       "path": "build/test/metrics/PrometheusReporterClusterWorkerTest.js.map",
@@ -196,9 +196,13 @@
     {
       "path": "build/test/metrics/TestClusterOptions.js.map",
       "sha512": "28cd28d0ac31663b379b51e800341f20924254af08cbe7ffa5db00443e5dca6320fc6445a6bed7dc1d7275a0dc9e30c232ccdf8cf586c3586819f3b742a0e134"
+    },
+    {
+      "path": "build/tsconfig.tsbuildinfo",
+      "sha512": "da4332baa4164ed4d61ab8322d4924dbd36d80afc11d0236f52f982ebeb0fb06751e18299a6d857e70162a5531fa75174753ff54ace6b1963e9509c6ebe3604a"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+E0xCRDCMfXrQKYV5wAARnoQAFXg7RkwNGxoaP5TBJtXsnmI\nkoqn/Hysa34UbO7QA6eFqEvTQ3Pivr/DScMcdplmg0yVD3eUFXxGjsR6HcS3ssH2\nk0JAnqx7rgWj8MQHvXqC/y1qk/AZCB/Dr/n3e4ZWulJDsKmUt4OqFoUKsy52IbBe\nlLcB1muqS/V0fGA0XusyJFpOGF7kYQv1pqpv8zDRZOmQE/HdGJdzSCzWd9GlPx9+\ndBIs+5BUGrF2C830ld1QXij63XRFNY5tXDKPrGvtDxuyvqvJ71ocN9MBn/uDwH0C\nzyYtAhC/+6MDJ8oWe9Vu99uk8LkPxt9mOzSWHVe0O9RTjbF9lR9bJUWXZe36aqUF\nLaTPaT1gI7n/yJIHQVEpEwU2iACgfhT+aRiy+DhoG5e4T6wPM+HJhymCLOOrvnMz\nTyZjRZ9s4Z707Dx/5atTWHXiwSO+wOeXR9fOArJMNnD6WX5TnLhV3gf54t/ex4JC\nEkbD5yaU5h9MCNyopySoNbdA0cP4/YBc58ONJ+fFiThh6X+CsrM9n4v3cWQTZ+Hh\nsKJ/8yCF1aaGlvy7WuwUf3piNWkpPX5OoyTytVby0UBDH+FU8fMOHFw710NYXc+y\nv44yo7WLnKAZvZ9KIwQOI/aqdxtmT4i3is9yZO9mzdNWQuHeghRCowCJOu0sOwnR\nbobj8rwD8S7CDUhslSYF\n=T4Ng\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+spKCRDCMfXrQKYV5wAALe0QAGy6+CnZBg8IlgASmL2E/2rf\noniiYBC+pcG/zbtN8e2yeoBpY12QPv6vVnWajv9tTzTeUaCDW2fgK4pEVSfoLMrm\nX06XEE5pFCpUPe7EZGqcUSGGlhJbw+nmcE77/62BEcmB4gUPQLG/K4xWz2M3SrkB\nURAlQve/EvyQWkCVz8dtrHeVu6QYWJNPX6uTxyiU0eRlxlDdUu850Q0aGpIrc7w3\nDIZIzKgUUHJSnDbfnqXUi0AikJkf/7fcBiYKhKxgvBniwehk1L65QCbN1Bpb7cqm\nU0X7dAqYIxM0xwaIqh4V5uAE2vmvn14gDg0uS936JzTF6Hnw7sZhn5VckVY+YCzv\n4ydnxX2d7RqxKvoaKqQGWqorrKwls/Ola/CyEIuCMYAwoNcXX2h16oBDGSxYqAE1\nqc8W7ukNNr15+0+mJswdZp6K71G01zi5pcpTWVzN0Uj2XSeiN1CZERj2SmDKtO5M\nv1ptPY5BJDXBL3ggq386zqZomVFuBMadpWOsstrooENhbLdazdt8Qcqa6n6/cJOA\nKwWuGD4dSs3Xjn3AUuVivc4S9OlbWiAMgeb2Qieey5YkouhZ7V7Vm4oOPZeEp8VL\nDOA3RCHcE1mAfSZ69L7FFgGhJ4VHMzlTWI5tncrZ4T+b++2lPshxE2z3QdZBhjCP\noAv4jI3lgL512nz76t3R\n=JKWG\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { Client, ConfigOptions } from "elasticsearch";
+import { Client, ClientOptions } from "@elastic/elasticsearch";
 import {
     Counter,
     DefaultClusterOptions,
@@ -52,38 +52,38 @@ export interface ElasticsearchMetricReporterOption extends ScheduledMetricReport
     /**
      * Elasticsearch client options.
      *
-     * @type {ConfigOptions}
+     * @type {ClientOptions}
      * @memberof ElasticsearchMetricReporterOption
      */
-    readonly clientOptions: ConfigOptions;
+    readonly clientOptions: ClientOptions;
     /**
      * Logger instance used to report errors.
      *
      * @type {Logger}
      * @memberof ElasticsearchMetricReporterOption
      */
-    log: Logger;
+    log?: Logger;
     /**
      * Used to get the name of the index.
      *
      * @type {MetricInfoDeterminator}
      * @memberof ElasticsearchMetricReporterOption
      */
-    readonly indexnameDeterminator: MetricInfoDeterminator;
+    readonly indexnameDeterminator?: MetricInfoDeterminator;
     /**
      * Used to get the type of the metric instance.
      *
      * @type {MetricInfoDeterminator}
      * @memberof ElasticsearchMetricReporterOption
      */
-    readonly typeDeterminator: MetricInfoDeterminator;
+    readonly typeDeterminator?: MetricInfoDeterminator;
     /**
      * Used to build the document for a metric.
      *
      * @type {MetricDocumentBuilder}
      * @memberof ElasticsearchMetricReporterOption
      */
-    readonly metricDocumentBuilder: MetricDocumentBuilder;
+    readonly metricDocumentBuilder?: MetricDocumentBuilder;
 }
 
 /**
@@ -484,7 +484,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
             .then((response) => {
                 if (this.options.log) {
                     this.options.log.debug(
-                        `took ${response.took}ms to write ${type} metrics - errors ${response.errors}`,
+                        `wrote ${type} metrics - warnings ${response.warnings}`,
                         this.logMetadata,
                     );
                 }

@@ -3,11 +3,11 @@
   "files": [
     {
       "path": "package.json",
-      "sha512": "97cd8bf0bd9d93ede9db24956df7bdb27243721c3380e8f03a36647cee3371bbd8bc98075a74c5a528f3e50db6f12a407164da01448a1df171242d63ca1b70c6"
+      "sha512": "a01ee737588b833577030e623b4d7c17bc8616b4a783a41f88566dce7d07c5a9b720b5b78b6ea6fb287ac7a4e179985b44793353a3cf5536c4372c73f9845101"
     },
     {
       "path": "CHANGELOG",
-      "sha512": "6d579a9c7ef388f9c005da7e0550e5233ece6624f61d54f220788a7406ef878a76efe7f6b2cde2d6d0cbfab7808e35064b42b03cb1fbba33f5e43c9b0a51b5b2"
+      "sha512": "ff157d560eaba778187887c833a7726edd8c5c135d4b1ba3350088d6b1d915d01839e8cf95d52c2ad2defb800009654c00bb1c62c79b3af97cae9c1e697e3b7c"
     },
     {
       "path": "LICENSE",
@@ -23,11 +23,11 @@
     },
     {
       "path": "build/lib/metrics/DefaultSender.js",
-      "sha512": "665b63b4f0ca828918f46c815aa799540db741f7c686a99ccd88131aa0d3664b119dc60b083a4d506d8d96df8d744f350cba40e8fa7b1b7d036db58f603b9c84"
+      "sha512": "b12d2e46f4c43a407954a01694e2da84edb1dea5d8f3655a0938e93f03389c4553b2e15ec25c9da5b463b48719697f28aca1c01e46764c6ffc333d7bc9bab6e0"
     },
     {
       "path": "build/lib/metrics/DefaultSender.js.map",
-      "sha512": "7e1461409a75814ef1d7804d7f195b27e19563a857a55356685b4f0c76021ba3f8fa18c2f996af8de4e68ffabce2602862b4c63d590c5b6d0eaffebd5b19d628"
+      "sha512": "0f9a87ac742d36b27e8a66f65c5e6924c77ff6eaf338c1829acb8d5e0af4ae11f555d2a7ab9f0813c999cf9627b39a8b81164936decb98341d4ed7ceb7aea055"
     },
     {
       "path": "build/lib/metrics/index.d.ts",
@@ -64,9 +64,13 @@
     {
       "path": "build/test/metrics/InfluxMetricReporterTest.js.map",
       "sha512": "eabf5183d3fe99ff1084c16e8c7185933f52c97e05b5d501da38486d791565c17eee5ba078168c5fd4735a755f269b3fa8da22ac80e8beaba75941c69a247ddb"
+    },
+    {
+      "path": "build/tsconfig.tsbuildinfo",
+      "sha512": "94c5f5da00939acff861cb8b6d87670521adf130619f5c663d796ecda63c864a9ebfe4a1625b1e9f8ba830f4eda95c7cc09f81ddd8d199f9d1c811dddf5e2066"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+E0vCRDCMfXrQKYV5wAAhNIQAAy3MqxfM1DiRzTJaMyPj6mJ\nebh5qmFfitNByli4HK915czRDIhsEOzV4nt/Wuk7ZNytHOpCpLTa7KnMqAx37bRL\n/NgELCUxtI1p7IDlfoFjAqyXyb3W7pfScxQrW0DgL2Snn8q3TDFNF4lnq0Kvujkt\nvQvovobpYDTNTvEMJQtWtJVnKX55uL+q80EdlJT+qPdDJe8xsEvzRXqM0r7A0DkT\nRoKW8Unxy87Ukg4UAKKfPiukf5guQRk6BNfH7rw5MO1tnmpT5J8Jg+Xcvboy6THP\nBz6WhZZhK/qEJ5gvVdA+mavt/jzfzpvFk8tBqfwXECAgVolefxB3PurqQwrjzC6y\n+rsSOcvAPwmzZqI4/siP3QZmIhnjsfYbREtSmBiKiWNAehuRGcMJ15fYej44MkEv\n8tJwQn0cCCPSQLUXxmXFJDgF3kPmknC5HTxHQvP5bUdBMNXyTxRocEfNjWTGvEsV\njLaPqoIAn6aHRCINL06JOjN7ab7zRJE7tV/QIRJXttdf2xNHNrZcwzurVIXldX8y\nYYOPAk9Z+nQOoAh5gm/oHNuZIKCKtJlA7B5loXgh4PE2AzR8TBFnNeEUHD3vcun0\nP7MsOBZh2kXJgK0eham/bfYpzAVi3gftTSuVQgVP/czLmU7JtNouEpHvXpESJDXP\nJ0bBEI6TcNahLLvhZQLb\n=itPb\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+spICRDCMfXrQKYV5wAALu8QALAN914QH4Wu08b14u9gHzCt\n1L6pIY1HkDuDAChgJT2q83Cb614kKAt/hJIO7o4x86SGNQyKSOmDAQgSbXDX9jn+\ng8vOcUNvTlkE5Gt55BCqyZr9JpKrHRgjgguoi3e5bxNRCMXib56MDU4yQtHBtXYv\nEkW399S//va22+I12MNUKJ9tgTBisnFelj2RFl/GBj5+af22T6yVVFplu18Y/jP2\nTVArHsoZStqerhewWI5pMBcL/gPhVQYrtOV3Bw0lcx0O6lgIr57gsRYatYj49StU\nJUTwsBS7w0rcvNBY0wiR9XD7IHT3Rb/nA+crggWps8LHvK4XhI5KcKjtBaSjx98m\nHZmAquwCO1T32cX0BomJL0fOCseBiO0RHUYYWVN35HX2hkP64QQiN8c5lksgOis3\nRf5KQGCRlwyYzeBmXuHCmcxFbrt72svKoB8OHXE0m1m41bdBB/W+96E/zxjm9eah\nU3vFBUKmbrqa5WSefZw4zZyxQQWRqQjUeNCf1Pwd6LSuaYHPZ0Qr+isWeb3FROhJ\nQ01SEoE7fjRmBi1qZQNAD5WJ6Nsjg/5ONA7PrSbIDVOGji873+qZY9auI+wIVDJo\nFTgE8FjJosyL4CLKjBhcg7dFd7Hn3X7FsWsMfQCHqzN6LxF2C+C/8q8tMfmbiM4F\nqjSvxFAfK1hxJvu4lYzz\n=2xcI\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
