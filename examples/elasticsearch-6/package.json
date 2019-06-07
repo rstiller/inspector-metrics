@@ -15,9 +15,9 @@
   ],
   "dependencies": {
     "@elastic/elasticsearch": "^6.7.0",
-    "inspector-elasticsearch": "^2.5.0",
-    "inspector-metrics": "^1.19.0",
-    "inspector-vm": "^3.3.1"
+    "inspector-elasticsearch": "^2.6.0",
+    "inspector-metrics": "^1.20.0",
+    "inspector-vm": "^3.4.0"
   },
   "scripts": {
     "build": "npm run clean && npm run lint && npm run compile",

@@ -14,13 +14,13 @@
   ],
   "dependencies": {
     "express": "^4.17.1",
-    "inspector-carbon": "^2.4.0",
-    "inspector-csv": "^2.3.0",
-    "inspector-elasticsearch": "^2.5.0",
-    "inspector-influx": "^2.5.0",
-    "inspector-metrics": "^1.19.0",
-    "inspector-prometheus": "^2.4.0",
-    "inspector-vm": "^3.3.1"
+    "inspector-carbon": "^2.5.0",
+    "inspector-csv": "^2.4.0",
+    "inspector-elasticsearch": "^2.6.0",
+    "inspector-influx": "^2.6.0",
+    "inspector-metrics": "^1.20.0",
+    "inspector-prometheus": "^2.5.0",
+    "inspector-vm": "^3.4.0"
   },
   "scripts": {
     "build": "npm run lint",
