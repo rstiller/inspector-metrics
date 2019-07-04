@@ -34,7 +34,8 @@
     "@elastic/elasticsearch": ">=5.6.0",
     "inspector-metrics": "^1.20.0",
     "lodash": "^4.17.11",
-    "source-map-support": "^0.5.12"
+    "source-map-support": "^0.5.12",
+    "snyk": "^1.189.0"
   },
   "files": [
     "build"
@@ -50,7 +51,9 @@
     "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
     "precompodoc": "npm run coverage",
     "prepublishOnly": "npm run build",
-    "test": "mocha --opts mocha.opts"
+    "test": "mocha --opts mocha.opts",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "compodoc": {
     "tsconfig": "./tsconfig.json",
@@ -75,5 +78,6 @@
       "json-summary"
     ],
     "all": true
-  }
+  },
+  "snyk": true
 }
