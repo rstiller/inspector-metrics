@@ -2,10 +2,6 @@
   "version": "v1alpha",
   "files": [
     {
-      "path": "package.json",
-      "sha512": "4c00ed5d0f80f81ca9739569d58198ba09b24bf562dbad32eb44abc6241eb6bac511f737ab533ebbff11656f44bdae29edee54364fdd110d98a75758e5084950"
-    },
-    {
       "path": "CHANGELOG",
       "sha512": "546852627b190ef0451349cd3b462a69958a55f4e3147b84ab7cca4884e0568c8c313600472806028f4646eb71a5766d018bbf751941bf88eaeea65a4c1c8afd"
     },
@@ -14,747 +10,747 @@
       "sha512": "1489ff64267bcf357ff9734a52f0637b09486161c6b43d32d3c439372648e04e3281f2d9ef0449a54d8a68ffb0d046232ecee9a9818baa96a0087acac663f708"
     },
     {
-      "path": "README.md",
-      "sha512": "d87d09ab3382d00e9665900024a0987df9ff185133543d9ef9b7bd610fb06b3535e563c873021dab4c208a02dafb97863d0d98e8bdbd91f92aedc83042c499db"
-    },
-    {
-      "path": "build/lib/metrics/clock.d.ts",
-      "sha512": "cd6bdf24add964fcc596132a4fb0d3e320b0468194cb0567fa8d769ef23db95f23c2e1e8e7001d0e41fa85f5cceb97f72c271cdd96c3617715e3dc852d8fabea"
-    },
-    {
-      "path": "build/lib/metrics/clock.js",
-      "sha512": "102f902e04e5986c128d8787b1eb51419505eb6b69b7dab2de718a6003d4bb302f48bf88cb7748bc161dce75ce6cfe8b753f90e73ca732fc3a8b0ae522700e35"
-    },
-    {
-      "path": "build/lib/metrics/clock.js.map",
-      "sha512": "f6db0bebef7780243402fa16c7c49f679a57f3383c1e9c8c1a94ba2335658eabda2873d461f68ba306b65024503999cd56706a17475771f8463b2a8271fbc096"
-    },
-    {
-      "path": "build/lib/metrics/counter.d.ts",
-      "sha512": "60f54f15a54546e4c058e697547d164d05e35ef928614abe75c624b1bb7f2331025f93ec19646ef40b6fa087e93a6708d11d054e93f5edc2da3a8ba8fbfc6fb4"
-    },
-    {
-      "path": "build/lib/metrics/counter.js",
-      "sha512": "3c84987a8fb9f81db08933420f60d1014ee277c30e50d7f2c3df7bb0dbd17cd54539f58e9ce85fa1537f53bedfedbec7171d4c8ed4c935ef5beb2af8fab13c0d"
-    },
-    {
-      "path": "build/lib/metrics/counter.js.map",
-      "sha512": "a785d12bab7ac1cc8e3a399ee53399715231ce939f9b5ff42208e53084a07bb3c75229d1fcd5e6099b4ff06e55347b3f156e01836e8bc32569bef49df1c3fd4e"
-    },
-    {
-      "path": "build/lib/metrics/event.d.ts",
-      "sha512": "4e31db36ebfaa1d72098f9d472d149159ed0ada85ab470966e92334226252a06bb1e5bd097c9264e82b21a544310ca46dd64bddf64615822dfc8d7a5e80835fe"
-    },
-    {
-      "path": "build/lib/metrics/event.js",
-      "sha512": "cdc9399f719c7f075557b77c014cbf48fd600b80cb255020abfd2b6df966992f5ea34922b8926564c5751b809c921b538801827e757bdf0298b19e8a3b6743a8"
-    },
-    {
-      "path": "build/lib/metrics/event.js.map",
-      "sha512": "6fed59fa1338b74287202578e5311d33806821973d0f2d55723d7dc40b12cadec838a153a46937960a1023a3e48d108edbbd5347877212d08beab39d6b4187d2"
-    },
-    {
-      "path": "build/lib/metrics/gauge.d.ts",
-      "sha512": "76afea522a90b9c7886a706c8cdd49851f3832bc826b64692b35a2bbca47d7a7f4bc05e378d53f2114252fd8474b4fa5e12e40a96d7627895b7a6ff1f16765f6"
-    },
-    {
-      "path": "build/lib/metrics/gauge.js",
-      "sha512": "1747f0f5e9313f96f15c3a5b2ee59508973ad114626675e184f13bfc002d553aa66ea85af466d18650c4cf15a022f42dfb4454abad989cdbb228f5d6e82abbd7"
-    },
-    {
-      "path": "build/lib/metrics/gauge.js.map",
-      "sha512": "021bee6425368e276396536a74253ce706b45b0ac214f52917208c07dfe815c15040d4be1094742919e9306094eeda4e5549c3832ae95aa6ccdde0a9d96337ed"
-    },
-    {
-      "path": "build/lib/metrics/hdr-histogram.d.ts",
-      "sha512": "1c272b46fdc6f66550036ebd10b96809b391b2f4a429622e25406306da4dea6f2adc1aaa42196abab66a33a95f18a1ef2bb4436a913edb2f078d2021e93be344"
-    },
-    {
-      "path": "build/lib/metrics/hdr-histogram.js",
-      "sha512": "bf200d0930fd4fbca8a0348fcc90ea392cb09f727b44ba88d75eef90e830f0826688d62a063214cb71f5d830681db8c7a51216cd6b0fc2de0f68f3bd3dbd7693"
-    },
-    {
-      "path": "build/lib/metrics/hdr-histogram.js.map",
-      "sha512": "9572a642de360d51fc67ac539a9f54d7a230439a6eadd6e4e2ee5ab493f40d0006e05c8ad43f03562164b159b0f8cd61295242c5d3a6e0daed91792bfdf74aeb"
-    },
-    {
-      "path": "build/lib/metrics/histogram.d.ts",
-      "sha512": "dd401c4e97fe98b0df46c9f0ad0170cbcb6ecea4110af5fd55a7893db1e82ef91cc4baafd7edaaaf14cb53587802123ea9a5547e545dbabbd581c9a45572870d"
-    },
-    {
-      "path": "build/lib/metrics/histogram.js",
-      "sha512": "0ee1a35166e9da785000a5675b43a08fff632ce93a829056b55cb61fdf6076281efe49941ae0939dcbff798c6718e59195e2097ef8ae0d94baef1f56b9c0b920"
-    },
-    {
-      "path": "build/lib/metrics/histogram.js.map",
-      "sha512": "94fa4bcc21bebae9e1ae7e1bc764ccd558d81e8d04fd5b57a7f3d4a86d70ef329dbbe29d427ae37316a0073339be051daf4f8ac67e4f152702123dbd2216303d"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "a554a890bd60a862f2a4667da1a977f65fb140e3da6f36a27548c05d16b6ed2c2b5c1d09c0c90634f6e638043a1a42746ad36e44ed2c9cd8235b09d14112ec12"
-    },
-    {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "e340b66715996bd5baf839e2885b96d3b8de9b59a71bce4ffdff78984c186cc9ac8d3d14696f2e9e7065d841a4e2ba6f2ee06e634af9f60aff4e3ba788e53541"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "81718716c233f804d15a7b2d0a357d81f55375f7a1422861d43352a7ab557d8bfded85f30c692d48514e566945db50f59c557003858029d56917bd1c14b9b679"
-    },
-    {
-      "path": "build/lib/metrics/meter.d.ts",
-      "sha512": "5ec16c36ee44145905d40f00e3bea1809f49d7793ecd3f387688d6b0ba8d4917a11224352b22a391b70e982dbaf38fe8891a3d12af7e74b506d35e0599f43127"
-    },
-    {
-      "path": "build/lib/metrics/meter.js",
-      "sha512": "71c563aa7d7f0f83c091568bc9fc3778865f55be171efeb44358159f5c702bb9dda58bda72c06d07b07414021d72c4ef404561fd300b1d06c75c697b8fb8704f"
-    },
-    {
-      "path": "build/lib/metrics/meter.js.map",
-      "sha512": "caff1ce358dac26bddcaaa45aff15586467d885033f47120676b2177e04fd556055471950f64eaf4ec3032a71572a2b1dbf33c6433dcc8af39873970502d728a"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry-listener.d.ts",
-      "sha512": "c705a4d80646e28d6e47e50e237c998e0c5be5f442d833755a0d16536e90310894655bec9b233fefa5a3fc201aea9d52c6925f1e450af727697b2ed1f744a6e3"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry-listener.js",
-      "sha512": "15717e46904dbea6b75ee7549e14e0aaeac780680b983fa122aaded25214151c267354ed56bab5a033541b4cba30728fd3136dc2bc0a74f11df9df6201812d15"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry-listener.js.map",
-      "sha512": "a841eb7dbc55ffe8c31240c205d8b0b370b9eb9d204d95b47cd5b49e2b7b2cb6cfd06c50caa4de8ed404d594c4b8e9120b346934d11e62a92b952e7589247992"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry.d.ts",
-      "sha512": "65eb4afbb830a46e7b56efd30c90ab643151f021f995d0fe2415e2887d1fb7fcc444bdd308b5d57d24852c5dcb1e2e5fb795bff38fc9c2c3d1e350dd7730c80b"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry.js",
-      "sha512": "b34baef121b75e6223957871b62e397105334b7b4294e9db5f4674e96546f5987e48466e078c611bc37ee6d9008f69e8df8b1020ad1aba8bc1dddf1984a1cb07"
-    },
-    {
-      "path": "build/lib/metrics/metric-registry.js.map",
-      "sha512": "fc725a951838acc5470c3332092571f83f8c015d8df48de31c9eb0012415e6205c574c81dbca6f055530df4e3e6c5a6218561f8f1ff0dd10f0eb87c3b9fc70f5"
-    },
-    {
-      "path": "build/lib/metrics/metric-set.d.ts",
-      "sha512": "be3643e13698ee3f9801c716b87bc24ae24d40ad2f22aca8cb6d11d7aa5ed7ea22c8ab4b5ecf455b23eb6301aa760a95fcab8c26ee3a0e5d8b022df0499f16e6"
-    },
-    {
-      "path": "build/lib/metrics/metric-set.js",
-      "sha512": "1e96aa855f7897c5f804255b4407a144dcb8eee647334bd3c77a531f677b1b5474023b1891e200e62fdd2bcf7b354deebc7ed0a675b644fbf7216e1af0999a9e"
-    },
-    {
-      "path": "build/lib/metrics/metric-set.js.map",
-      "sha512": "d0c1fc48ac49fc19288c20379e1bee12849fc0e612f7c10e848d969de7133fe7a3df4c123c3f252903094315e20281d2f98aee8693d79c08ab335cbe0903b930"
-    },
-    {
-      "path": "build/lib/metrics/model/counting.d.ts",
-      "sha512": "ba074d0e84ab84fb857bc219461c02ec123835fa2742a99991fec61653d9eae3a1ed26eabf67e4a63f621a10da3c398194b83a8aaa02b9e1fdd19681833208aa"
-    },
-    {
-      "path": "build/lib/metrics/model/counting.js",
-      "sha512": "efbe9b4a5903c0cd6254e140c4f723faf4709039a27c29b2ece838110649a1d995643b57450321eefed3344ff276459f3621e4ef0016d16f22d1094ac06079fd"
-    },
-    {
-      "path": "build/lib/metrics/model/counting.js.map",
-      "sha512": "7c7a5ac21b01a3548674d2803b2a3bc1dae55deebca077c4372922bc9fae94c819b72ca2042dbdbf16bc7c3cd4fec579196408d4cb5c5cf9c273309ac5a7cfeb"
-    },
-    {
-      "path": "build/lib/metrics/model/groupable.d.ts",
-      "sha512": "e232aa9b78968ff1f1bcbd0ec86213d56a81ae336e609cd96a336a9b852c342fd419391a1b426231f3e0b1bae9739ac409e5a7cb913acd80894645ad47d02adb"
-    },
-    {
-      "path": "build/lib/metrics/model/groupable.js",
-      "sha512": "da2e839f44177604a81a64c19902d2b4dc0de831a75a4af1f0350b603978e780055c5ca188b097403fe5dc74e18d4b93b9e332ff785f6d3f2f3cb3808ecdcefe"
-    },
-    {
-      "path": "build/lib/metrics/model/groupable.js.map",
-      "sha512": "26172abc4d6ed413766d63d8938e2d01eb680462ff9daf24cf7ea4a0f746035c04ed21ad182bd85d97adc0384b92cddffe8dfe5ed850205a14d1c2b6e9e807b9"
-    },
-    {
-      "path": "build/lib/metrics/model/int64.d.ts",
-      "sha512": "1f94bf3a098588c4a3f3bb168a6b5fb250b1569b2321d9433341c667cf4e58a494eae8fafaf1a3a235724f8bb427afba16302208a2669c4384191017c0348e5f"
-    },
-    {
-      "path": "build/lib/metrics/model/int64.js",
-      "sha512": "21820e882467268b36c70c955706a626af3ed06af3f934d7762bc68f60d429944365d79dbb6d3ba05e722f3ef75c1041061486aa275aa0faab58df5c1c17f486"
-    },
-    {
-      "path": "build/lib/metrics/model/int64.js.map",
-      "sha512": "667dc806da5dd87e818c4c0dc7a4b08cee074b31cf296a067e43be5cf6de8375e07c6ef6cda64af4af48ab311ee0cc94693b90cd346db0db3010a028a192e986"
-    },
-    {
-      "path": "build/lib/metrics/model/metadata-container.d.ts",
-      "sha512": "b62df26466e57d767ded45df663e3630902b16a1d6ba2e728be8b17758a4093a755cd9fe784449bb4196bd020f4d75edbab224096f8a86bd4de2efa6a9e88bde"
-    },
-    {
-      "path": "build/lib/metrics/model/metadata-container.js",
-      "sha512": "7e3acf2c58476622343c0674ee6a374cdbf334b33e1b356e83496bd8fa9e9416ee329e81a81625c55651e833453ec908c87447408e5afb584767c73d3fc3848d"
-    },
-    {
-      "path": "build/lib/metrics/model/metadata-container.js.map",
-      "sha512": "7c69ac1d6792c342d9210a14d7941f93b3198af65b9a1298565b0407d8dfe32b92683e0741d7d73f628e3fb2b7961da6d717750d368054e7c9f2f983b7fde768"
-    },
-    {
-      "path": "build/lib/metrics/model/metered.d.ts",
-      "sha512": "e2c506526b8436a614071580e92d6915db06f5b004d91c965c373bbf74731c034c1f432a50eb84af2da3fb33d8d80f6409876f30788c1ce8cf7506b7292a201e"
-    },
-    {
-      "path": "build/lib/metrics/model/metered.js",
-      "sha512": "14849b4ce7ef76d9dbf351a103fb9a3a7bbceaa1a69711790b9b8145224ab8b12e6f25af73f17fa60a274cd8702ef53e2b4afb11e2246484cfb5fb27388089d7"
-    },
-    {
-      "path": "build/lib/metrics/model/metered.js.map",
-      "sha512": "d601fae5ee4b928eaf9b4fedab8cfbbce1e8eb231d070fea561f438b4dba3fceecd4355c3ebb69b20f4300a504695e514e2d5a4aed24a669cffbd3875a539cfb"
-    },
-    {
-      "path": "build/lib/metrics/model/metric.d.ts",
-      "sha512": "8ccbae9219957dfa65e8b357efd225433f8008c5152ec27c2fae59740795ca8f2a91233f2cf6add69c04bde098a181da04db08e43113b0fb05c8ebd69d96e63d"
-    },
-    {
-      "path": "build/lib/metrics/model/metric.js",
-      "sha512": "c364d4a0163097168564a8d0e38a3c02e3626d5f41da120efdd3e94d5df067338b10a500cb7d117bc757504b56f9c8657b515e80e4f7ad19467761391f42e7b6"
-    },
-    {
-      "path": "build/lib/metrics/model/metric.js.map",
-      "sha512": "ac792f0e86862b3e21a81ffdc9d12c4239cfc3b90a07114fd2e1cf0f5b62a01907533ed80f292fd1d590ac4c669310906f5c1d1dea616e4003a3cd0630fc92f5"
-    },
-    {
-      "path": "build/lib/metrics/model/moving-average.d.ts",
-      "sha512": "e4ac5ed3c574c6d06f04447e8f240cbc28c2515b1f91a4039309b5f9970967d0448ba2836d4e108aac881687420a69d603fef818b7716d5ccf9749b561c8a9a4"
-    },
-    {
-      "path": "build/lib/metrics/model/moving-average.js",
-      "sha512": "8fbefbf7aaa38577482ea3b24b05f2f52d3eeee0ca43bb09b1f73591a451c3d611442631d36ca39893912e9a49bd52453a368f3ec0a4af8c002c0300421e2d37"
-    },
-    {
-      "path": "build/lib/metrics/model/moving-average.js.map",
-      "sha512": "a88ce0eadfe29705589ba3daf71fa00ba9117f48db1ae0df005b103be606adc925aa4b3eef47255fd93a0c3962174ffea1d0094f47ca9a609020e4c30262a084"
-    },
-    {
-      "path": "build/lib/metrics/model/reservoir.d.ts",
-      "sha512": "4e52acdd625192b3ebfb3bb470d62c8e843145652e3080db08a991b26e78a2fab7dea7a6f004aaa30a27a5448abcbfe2fe02147349e0a9f7391296427a298462"
-    },
-    {
-      "path": "build/lib/metrics/model/reservoir.js",
-      "sha512": "7874cb07448337e1f83c5d4e83ddf820f578decf08c57eba82ec78af12cf5a4f7cfe0e5dc1927cc7936a4fa5869fa7158c57cfd12296f71d399f875389780578"
-    },
-    {
-      "path": "build/lib/metrics/model/reservoir.js.map",
-      "sha512": "b59aafa05110b3b896e97b40f1b974a5d65311b5610dcc8ef4b39df00885b84e51983e1a9cc8ce6a0d6883048f0fff0914b6ae5d148bdc3e39588b8f1e47ff8f"
-    },
-    {
-      "path": "build/lib/metrics/model/sampling.d.ts",
-      "sha512": "ad66b8aaba419d011b989202d763a8e286f835869319c85971f5ddbde796076ac71f33dca0aa272e11eda82991c1d21076de8a31a3933f7950ea7148f60226c1"
-    },
-    {
-      "path": "build/lib/metrics/model/sampling.js",
-      "sha512": "aebc611a2d696ec9c7824f2904b7cca5fda51ba390cc6dcf51385b0907fff569ab10b2909c0e31ccc67546b8b7090d8b2572eecf703acf3178ae5a86b2345522"
-    },
-    {
-      "path": "build/lib/metrics/model/sampling.js.map",
-      "sha512": "29117bb7dfb688a26542c78850267536fd62d3bf8ccb5be25763be6fed74e3d6767dc024db8715b083f8678fc0929d57f022cbc8b696611c2ce8e52cc40351f8"
-    },
-    {
-      "path": "build/lib/metrics/model/snapshot.d.ts",
-      "sha512": "77a14a17df9e77107db612f2b423e8a0670ebabc3763edfd25351a3cc6688a2e36ff736f0c198a91d5814b95e3e5f0091545e0397d7f0fe61e41145ffeb65498"
-    },
-    {
-      "path": "build/lib/metrics/model/snapshot.js",
-      "sha512": "52b8e4a2b90fdb26db831b173b2a2d07bc989cfbf355e8c155cacf7827467d2f865bb43de0d093a3f1c55fefdcef4e08fb78f73154b0f22441219507cec24f84"
-    },
-    {
-      "path": "build/lib/metrics/model/snapshot.js.map",
-      "sha512": "94da5031fb7e58aa58f905acbd9a6b1c5ce769278b7cf72d8d5de8757140bd6d3af0a5ce29d8f088b5cc17bef23d929a8dc141b27c5b97b352434cea3f6f23bf"
-    },
-    {
-      "path": "build/lib/metrics/model/summarizing.d.ts",
-      "sha512": "9955ea0dd4e22deb4c601fce7173cf96cf5595119b222184e97f9d06b6f41e75fe07a374d9990035c97fc94da024649955cf6d8d18740ee39a963a65567f590a"
-    },
-    {
-      "path": "build/lib/metrics/model/summarizing.js",
-      "sha512": "08dfb1412c4f8d5e42a15b47c6aabde3fab5137b3f63ae6593c0e8caaf21075ef569f269b7be47431abfa58835e058add0cd847a3dcbc4c8d78a87c7641a769c"
-    },
-    {
-      "path": "build/lib/metrics/model/summarizing.js.map",
-      "sha512": "3e1f986c7d99b75ff5ccba6c01f0956132373515c64af51827326f92e6b54ee281672b8685979e56b439997bfdbe5182b8670a9b50aacd0a819cb794ab51eafc"
-    },
-    {
-      "path": "build/lib/metrics/model/taggable.d.ts",
-      "sha512": "6620406643bf8b12ba90918c8ef8a17538753c30d7f0ca0819d07d35169134f7fbdc0f0e41859d8cce320864dec1770a31c604ec094fb0351e56f2f38669e157"
-    },
-    {
-      "path": "build/lib/metrics/model/taggable.js",
-      "sha512": "e738a6655c214830efd47be70fca99f4a11661b83d760255bdac7695902a75bb1e9fd81d46f26adf2add1b14019d5282b1c4d4018a96064e9246e416f4481092"
-    },
-    {
-      "path": "build/lib/metrics/model/taggable.js.map",
-      "sha512": "56be53dbf611dcf7e5ab6b1a43afd81d6533adc0b57c4852b597613afbadeab7edfd09e6dae0e40893279282eda7a99aaf70ba34f481e806c1420cdefc864ca6"
-    },
-    {
-      "path": "build/lib/metrics/model/time-unit.d.ts",
-      "sha512": "6925de3d7bb6892edbf2869424e27ad134dd01eb0b76cc2dece5b005e43906239646362491cd9d29edb540924d898c477443fcfee99d78d427e272b339cf6c2b"
-    },
-    {
-      "path": "build/lib/metrics/model/time-unit.js",
-      "sha512": "f96a5ae036a1145a9628a97021d84f3d6e90599dede21d790eb48e1c3aff9ac338f6e576478254f5913855c5c32cf5b7ac94ba17fbb1750a4268c1817dbfd107"
-    },
-    {
-      "path": "build/lib/metrics/model/time-unit.js.map",
-      "sha512": "7d5581cf65bb3ebf98e84979b6807f676b769fd6cdb517e3dbf093d6037bf25ec4ba05a65fe76409260d1390905f53d3ae3c501d801b5488c00d931375da20af"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-message.d.ts",
-      "sha512": "2af0f520a3941cfbcce42f44de0b71359957310f153e8b9d2c780a09d782b9aa8a2425b8bb9e55b752a996999eec98859a4cd79a7352ee5eff330e524f578053"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-message.js",
-      "sha512": "1f577059d439fb39c7bc967ca1260826488f7c3aecd90e4787985c273175021e06f045ac5ceb7f7f5c7fff2dbb053e2cb9a96cb58d5b770ae698e2f65d98f08e"
-    },
-    {
-      "path": "build/lib/metrics/reporter/interprocess-message.js.map",
-      "sha512": "8a1313800a264e208953c8cfbeb6257a566143a095ef79dea03bec74fc88ece5d1bd34e75b05729fff07d62cdd87d0af76787627fa3579ac87495cee4963e9f6"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger-reporter.d.ts",
-      "sha512": "89ee45c52e5a7a1cd4b1410024896fb1929759370e2cbde0a9dbafafe5f6cd1b0e3a1fae5e5735cb6178c5e5e4254913344fdb473dc48d5775407066a4c00294"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger-reporter.js",
-      "sha512": "4e7fbda252997f6dc75947138c9ffa1f0abe0bb79862f67d7c6b141d5566e0d918d37ce92882aabae5fc57d3b8e8f993547f7f2a1c62860bf3ea974edffad3e1"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger-reporter.js.map",
-      "sha512": "6549280430ef790c120e1f28c7cce22330114c2f5c3fb11b11272f066391987f73dbcee14584df73cfe6e945f124d8d49f0f8d073e175f4b9dd97d3f2ed0281e"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger.d.ts",
-      "sha512": "05012fdd342b1521386b0821af4e8e60b96acc9460a229d95c2df0e5245496f8e74ba64f63fd847c38bfe577c697448cd72dca8aa01d99fa51e95fe27ecf6709"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger.js",
-      "sha512": "90146334f71be047c9d38a7b2442bc630bc7c14df9154ff7468c59c5cafa7a498f960b983bec59494c4af45c82a88af06fdfcf8ea0539e1ad53a1167a376f9b0"
-    },
-    {
-      "path": "build/lib/metrics/reporter/logger.js.map",
-      "sha512": "e9d80dfbf82392647594078d38264cf1e5dfc6ff6e64fb322e7072a80a6ad9e2b1abce457779399a7bd00e8c35646d509444abf3165bbea497b87338cbf092fd"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-entry.d.ts",
-      "sha512": "a19151e5d423d287430f4c07fe88e348c0bd9e3fbd97ce7564a89f62e33581314f9c90bca9c6cbad087d4141bdd41ef8bd65f975a9b7ed0588eceea3a6b0a669"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-entry.js",
-      "sha512": "96b35e27e5d3a488b7090fcd1cfceaa045dce4d6f9f59aa88f68c0b202d99600d2df27086d3b3f9336a64b72c78aa8f4e3e73c8c1071ce19ee0744c2d8dcef15"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-entry.js.map",
-      "sha512": "3ecbb6db6f2b503335e247ebb8315f775c44fa70911f8c4ccfd3e906947b425a6da882081706156554dda87ec81909f7523f42db9607d201888cf8395519bea3"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter-options.d.ts",
-      "sha512": "73c963ac94a040090c99d67ab36ba6b5fe61115784f1e5ceb006410484f2c3cb59c8b04ac2dfa82f5020633c79c341b8ff3d67c24d1d3e2a33e96bc0eb5c05b0"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter-options.js",
-      "sha512": "4b774f3388e7317efa9c84edc09959e43ce1e30672075dfd0a533df776aee0c1966c83d2f30abdc4e114ef26064745c6382c4b0e97f8b79b16beb1cf3618ae16"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter-options.js.map",
-      "sha512": "3d326848e0cefd76544ed9d6b4b93d662585746c4493ba9cbbb2ec636a56388ee6b935f4ffd04967e8633666e55d63699f76289f18e880cb2647cd32b06e3986"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter.d.ts",
-      "sha512": "19df9cb0e615290e67d5058e18526f35c71cc4a85f9ed26b2b44877dcd188a8e46a5ed1772d015e736e23c7033df97e69b4613ccc4ce69b2e7b7783c611fd851"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter.js",
-      "sha512": "c2f1b2b81bd0e7c90b8a83597b36780fd1fdff24840dab68c8efb148dee7a5ccfda0e116eb019fe5b1766433de1bda58a8fb76050ca1128635932cc688980665"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-reporter.js.map",
-      "sha512": "31a7503b740688c15ec5a8ee57b0a372239b6804cca8505a741714ee721d42cfc63ecac78e61f533df1bfc98c821cc4c9e4f0beee44f71636e418062fff1ff29"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-set-report-context.d.ts",
-      "sha512": "223df454f21eb15fc21f86dce42b718ded50d615ae2893d2f500ed7089a993bcc7c3cd24d1741a7b56620f87ea5cbfe8235f022527700aba2525856466f50f4e"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-set-report-context.js",
-      "sha512": "33592104da7688d18851c70533280ba354bc4d62e932f52788867290646d54862cbec8f34255ace13b7162f15c2deb96260d16baacbc1eb34e14aeb60215e4c4"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-set-report-context.js.map",
-      "sha512": "2336f0fbe905585e5eba1e20db21970c89daae0410de8f57675644b3c557183f0eedce33eb25ec515cacd5f47e56e0d6b7c586054470431f7de5a9815dbb0c24"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-type.d.ts",
-      "sha512": "05387802722cf5c523b9d4424f4164260b2e76e8bfff131d8621cc50928a4a8bf11057f6a89259993a3e9be9ffcebaef5e480e07f03cd4147283a48e46ec3595"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-type.js",
-      "sha512": "06917e61e9719036dc57bed166233d0c6e60f4ed75373ddd61e9f1b60a8c1ebff2129db2c6f6cdc450ad065a12dcf1558e474d9f306a15f07853ec48719aac62"
-    },
-    {
-      "path": "build/lib/metrics/reporter/metric-type.js.map",
-      "sha512": "92bf16e08bdc35801937c35d4122f14a0972da33547d8d70e4f2c346e535b37c093b3e379e865a28c577bc1dc946dc789c5646dc7bc42c498ba396b6614f4a84"
-    },
-    {
-      "path": "build/lib/metrics/reporter/overall-report-context.d.ts",
-      "sha512": "933794516b9a3984b2c77219199bd98dc500be1bdd15cd03d822c92b3c6f17c7c0cb2da3f8413cb1859db57fd05831da058b59918b09abe9e76c4f909bba570c"
-    },
-    {
-      "path": "build/lib/metrics/reporter/overall-report-context.js",
-      "sha512": "89f628b60113928161474ad6a1e254596c96120d9272aa53f9d535849a1f827df03584823a5c8e6a7af05227ab67b0ca58ac5f7662afed9a6d6c5e2c4ef56ac3"
-    },
-    {
-      "path": "build/lib/metrics/reporter/overall-report-context.js.map",
-      "sha512": "b2a901b1b7082068bbadc56412a97ef4c3c39f84d6432b1c383dceba140da1f47dc300fbf44359d2786117a6e0fba2df51a44fa5c5ed608b75d9bfc70dca14c8"
-    },
-    {
-      "path": "build/lib/metrics/reporter/report-message-receiver.d.ts",
-      "sha512": "9d649e0ba994834d3eb9cba273f1145611a0a9556edb1f84b926d8fe07cff2bff9713c351376ca3068ce15330b4978da7f2bb3c2d73fad5099c2f9de6470ee56"
-    },
-    {
-      "path": "build/lib/metrics/reporter/report-message-receiver.js",
-      "sha512": "99a0a5a80f3c7eea55382f52068703f51566c0b094f1ee5442286aa0dbc2d67bc9c2f2ba2352f47be5005085a0325be06fb4db711b3cb839fdcc0561484c2c65"
-    },
-    {
-      "path": "build/lib/metrics/reporter/report-message-receiver.js.map",
-      "sha512": "57e758082901044d7bab349f838cb0673ced202b180a78aeae83198fa9b81b0dd7ad1ce50444010b3a08e48d53ccf17b77776c383ae3a2c6b9e330f0c47e90b0"
-    },
-    {
-      "path": "build/lib/metrics/reporter/reporting-result.d.ts",
-      "sha512": "5ed246b82e7e6c3a4ad36ec47e060ef361da52c8118aaec307df8f59413a0084c718d4a884a734d77ac370d5b6594469dd217169e56835f618cef1bb8ad63427"
-    },
-    {
-      "path": "build/lib/metrics/reporter/reporting-result.js",
-      "sha512": "a6da2b6ae45d90888dd3d2cb7c6add11d7da5f2162444b6eb54b262a306d68531ec14a03649dd7559e30e06ec2f5dfc46f7d1e29f0fa72e3c5d5ca52437a67ad"
-    },
-    {
-      "path": "build/lib/metrics/reporter/reporting-result.js.map",
-      "sha512": "393d68c5afcfc6ef9e10778e2989de8aa90be68b5954c45a78fc3557e4684e9b6e6123ae2d80fc50b7c21d32323bb1fb432602815f2803effd9c268632a71af0"
-    },
-    {
-      "path": "build/lib/metrics/reporter/scheduled-reporter.d.ts",
-      "sha512": "b715378215778353789e6cb9584b0af2ede4d0525021996aab131474bc49b54d5817674186f12732353845dac3007b661c4809aa97fd3848e4e934715e7fddc1"
-    },
-    {
-      "path": "build/lib/metrics/reporter/scheduled-reporter.js",
-      "sha512": "6c3f175b153395eeb20eafda61a8f7535447c2086cc4687450cceea2338ac2da56f23228a82cf52d9e4180d97d8a10d5e479ed311291fc0f2aaa29863c5f5095"
-    },
-    {
-      "path": "build/lib/metrics/reporter/scheduled-reporter.js.map",
-      "sha512": "0df01a0d876dde4b081480155cd45104ffcea0298c42766306f719a36c7b7336039b5a070d43b855899777e0567e6c7c0ff3b93a1be7db6b4fafb101db36eff1"
-    },
-    {
-      "path": "build/lib/metrics/size-gauge.d.ts",
-      "sha512": "8f671a6b5050e73a5ee02c55946bcd25df71062d7c1793b3dc4390866afbf3c55657d15c34d70617dcfdbe5414648efe16f43f69be0dc8da60d64185ed96f6fe"
-    },
-    {
-      "path": "build/lib/metrics/size-gauge.js",
-      "sha512": "afb9bf3a0da91058fd3553330865234113aa7084ece83217cdf92a801b9c9f4ae5dca6348ed0cd5393d7b9ed31ec67b9bf297258d7aa69188dd9bc2e70f6a62a"
-    },
-    {
-      "path": "build/lib/metrics/size-gauge.js.map",
-      "sha512": "70c8ea566f1409be0456bcf64dd78d0f08a9f3dda7679244ab412ada858f055e60be43b8b7dbb0adcc68b03cc0c13ce9b9c33e4abbd2b78a2e90bae86bdf4d82"
-    },
-    {
-      "path": "build/lib/metrics/timer.d.ts",
-      "sha512": "5578761eb571afed3739d652ee7a4946fcc0e7ef0d920bac98c22a6b2181f6a1649120d76c774a38f8c5dcf0bebf7b17ff17496cf5be6eaf8b894f6791de4a5f"
-    },
-    {
-      "path": "build/lib/metrics/timer.js",
-      "sha512": "729f0b227759b5cd0376bcf073ed6d058b7689183b7e832c08b4bc19234c994b60e3c2ca81fb55c1893bd489a18d9f1ab97f8a2c6bad0a68f432ac5de02b300a"
-    },
-    {
-      "path": "build/lib/metrics/timer.js.map",
-      "sha512": "9f6a07b91e64d31b4b925aa2fa3080f51831471cf9fe4eecd02c150cb133c9880a7ebb7131882f7bf2354509ea056f44ffe93528d126e3caa357f5e9127cdf8d"
-    },
-    {
-      "path": "build/test/metrics/clock-test.d.ts",
-      "sha512": "77d430465cfd8f6083d8fc20624cbcb355de503a1ba69393836cc596c63ee83860e76a317ba1fa2c1595f132e3ad296e1973bff4e1cfebcd7ddb64055d0c66e6"
-    },
-    {
-      "path": "build/test/metrics/clock-test.js",
-      "sha512": "36732555d6892b07e39e0f53ef2d36a6fc91d63246301af5ed2bdfb57dfe4ad227a6563b89f3f0e23f6548a7bb0584c2a70f681508901292aa59a81f2d52969b"
-    },
-    {
-      "path": "build/test/metrics/clock-test.js.map",
-      "sha512": "98c1ef8fbe0b700a010423454f067a3b5e3d54a261d937f519733f1b7c1f66a06d63061934c554c64730d9281439d5f2aaf62d2b7543d55fd25c891679d2eed9"
-    },
-    {
-      "path": "build/test/metrics/counter-test.d.ts",
-      "sha512": "55bcbf62eda0b0e9374d225d1002af2854721fbf653d1ce85f2fbeec8549a230341cb339ff1e5ab22dc8e70acb98dcd363517fc6878dd5f9f5a5e590c09f60e4"
-    },
-    {
-      "path": "build/test/metrics/counter-test.js",
-      "sha512": "0fa77b7fe97cf304ec8501c5256c61c44184227c87458a7048bcbe2e5a89eac3257949f51ed88e8dabba0c3bd1a6efb83b87564e52d85ff571fcacba823931e5"
-    },
-    {
-      "path": "build/test/metrics/counter-test.js.map",
-      "sha512": "7a90ebabbeded4c9af313dcdf1d7ad0c15fa4c4eddb934ead920853194f875a3e2e174f5bd41953d06b1e6d3acc987195653c12597856093b8e8c698f2d8c807"
-    },
-    {
-      "path": "build/test/metrics/gauge-test.d.ts",
-      "sha512": "7ffc109223f25e4cc8eb67afe73566df133402d2cde6fdc3628c4f0f2bf606bc7ffee78ab1ccb84b3cb5bf6616a6ea5854d65e521e51738c13fb89c45f02ae48"
-    },
-    {
-      "path": "build/test/metrics/gauge-test.js",
-      "sha512": "da3acb4f80615eb0477fbbb606ca1eb8ef15acd8f8df999dd16eae4b3e764d5c88b6145ef0f342bc34bb33e80101303b6a62fb81f242e9153581ebb3067acbeb"
-    },
-    {
-      "path": "build/test/metrics/gauge-test.js.map",
-      "sha512": "cb1ff5931542dfb08947911fe4c2a8feb796956a68a7fea067ccb9bede8750015556af972be731a2e8426019278aee4aedceb12cfbd98a58aa0225f1eeecc348"
-    },
-    {
-      "path": "build/test/metrics/hdr-histogram-test.d.ts",
-      "sha512": "08f5f38354f6636016be2b2b54eed781a84b0e5ce8e5da145ce16f97aaeaf94aeec2bcb168ee053e4e0705fe8dfc66073d23090df1d73d4bf31f0f20a1f63ccc"
-    },
-    {
-      "path": "build/test/metrics/hdr-histogram-test.js",
-      "sha512": "9c386882c11337fc095dac51a01d4ceda40b8f75bdb8c6d159671972b0df3661542aa212d18d6976f20b1aa8fa4d35d356a4d637ece6875ab7b6ce5e4353e3a4"
-    },
-    {
-      "path": "build/test/metrics/hdr-histogram-test.js.map",
-      "sha512": "0555dd7d4ddab6297e75fb320a6d0eaacf6e0919505206f62aaaa7cee97a99103e5ebfda7712b9c65c761b5cc94da1402245ce5cf87164e6507882efc89e35e1"
-    },
-    {
-      "path": "build/test/metrics/histogram-test.d.ts",
-      "sha512": "93e16ae78f50c450974f672c1679f5dc38fa3ae518e9a2fd9bef6057a87e2f28b03c118c7e3574631cec346c01d6f1c8aaa92349a9f07982ccb3dd74e0d01251"
-    },
-    {
-      "path": "build/test/metrics/histogram-test.js",
-      "sha512": "0f50028e1564a236619428c4896d5fa0f183476167e258716bf2bd1cc7eaff94b42e8c19a609265fb0a64cf80ae0605ee6b1b1ec98b52a970b8f2e69bfc0d6e6"
-    },
-    {
-      "path": "build/test/metrics/histogram-test.js.map",
-      "sha512": "6e39643b1d45e54cb85b7444239ac07f3ee7f86d966c92b4f4ebfda5c3b7f76104b79d2ed053872c63d449b9f532c59fb0ee1494f41339a263a51a3bbb55802a"
-    },
-    {
-      "path": "build/test/metrics/meter-test.d.ts",
-      "sha512": "73dad943ef1fdee4d36c62e8163bbc4991700c0450d6402ac81ddbc30df1d5f549910f5a35f45b3653d97a069c973a9ad9cd692a0d97b1e3e412f18216387186"
-    },
-    {
-      "path": "build/test/metrics/meter-test.js",
-      "sha512": "caaa6a9b9eea09507b3c44d025ec85a626fb8eb5736c7e73b950d09182cba453db82d831fd51d5df6219141002aafad4dab88a392a676b5a702e528dacd54f3e"
-    },
-    {
-      "path": "build/test/metrics/meter-test.js.map",
-      "sha512": "21f5b8a8747d4ab279a63011ba04186f169dad59b8d24dfc832ab097e357d1883dcd755a925194d62e6c58b416f8dc76f97c3d375e01a0cd86f82cc3fb1640e9"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-test.d.ts",
-      "sha512": "5446002c1094ff0a73671ceba2eae9781ad257f586522d5c20d9867d81edce37b9012c5bdfe43afcef9ed440d4de88093f4418988a021bb79db800fd76e93b06"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-test.js",
-      "sha512": "ba841d1a297c6ef4e3750d6c0667c3fc2157d52ca6378a4e6021b0c452f1d02d2b2d5640f6a7fa7d24dccd94d3ba671dc6c8db7f3edd13e922d120fd5481260e"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-test.js.map",
-      "sha512": "46f57fd1326f60fb7a149089d7ca39daa45e1d5c9adc7103beb901389b10d908ec27684e9e1ddbf34a38c9a34b32a841f0a4dce1daae774f196cd9d897beaee5"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-v1.3-test.d.ts",
-      "sha512": "4734e4d4b2ab469f1e812fac89ff04ef3eab198b25ff01af9e56cd3563dc13e5e948a31aa6b91b21db369386c1dfc3d8a916d83cc3806aa4737dcfabfb37dae9"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-v1.3-test.js",
-      "sha512": "467e40b2da69339176d5eec3bd3d9d3e219942ab7d797d54ee39fd75cf1d072b1795956cafee8b70f979fe05cc7443f98151772900e824200923b1ea9d703d33"
-    },
-    {
-      "path": "build/test/metrics/metric-registry-v1.3-test.js.map",
-      "sha512": "f79c8ddbd76fdc91c75a4a8bb74f9f11e65d7e58882ab531cc83ac13e9fa830c064aec616b66783ee714fba87302c6dd24d299e1a8db0d4e70bbc0124ff4fba8"
-    },
-    {
-      "path": "build/test/metrics/mocked-clock.d.ts",
-      "sha512": "d44e405415f20a3da542fee974414a82b7bfe812b3e103d1e8f2ad9341fe649d8a7740365fd0f249ec2af666f025bd567e1aafbb23ba34e2c8b03316080330ab"
-    },
-    {
-      "path": "build/test/metrics/mocked-clock.js",
-      "sha512": "f76c8f6f15a15592b3c147f57eb05e871194f525fbdeb09ebf03a11cd77056b946a546984351be7272c77a37b09e273606feed44e042bb45d2baabbd0fe5d104"
-    },
-    {
-      "path": "build/test/metrics/mocked-clock.js.map",
-      "sha512": "a0274a791006eac7ecaed3694fc7dff08b8610f460e5410d3dc5e654cdd6e3affcfc517cb46e7aebe858e4c79d70be1c8e96d1183971da1ecf470f94f4f3e9e5"
-    },
-    {
-      "path": "build/test/metrics/model/base-metric-test.d.ts",
-      "sha512": "2b79b1cba1c7e24cd9916cb4f2a3c2cf0f90255574ba89163fb94b612fc07fe12faa448ea55c351175f82641423de246c4544f8262b28aa6b2252567972a0f23"
-    },
-    {
       "path": "build/test/metrics/model/base-metric-test.js",
       "sha512": "d7e20e102b4f1751157a292fc2ad98ae3a6d3cca3bc1f61464a7d28f215b0113bb8792b6f4d10428486a85603e59e8712394dd114a548f5f06eec0bcb151e3f8"
-    },
-    {
-      "path": "build/test/metrics/model/base-metric-test.js.map",
-      "sha512": "f1e7e494209dd8923616db257810a4ce8749993858bdb2ab9517d10ea1fde683ddb1d8742f9ac19982f4bcfaa049cae4facec6f722e1fb0ac785da3fadd5ea6c"
-    },
-    {
-      "path": "build/test/metrics/model/buckets-test.d.ts",
-      "sha512": "272924f6548e1c6b5abc6980448ee963b39caeb09757d220c6bc3a7fea2c0ce4b820d5d97c48d4b01fb82fe7b0f0fafcacd2cac4e66ed0dd97a9c781443b6981"
     },
     {
       "path": "build/test/metrics/model/buckets-test.js",
       "sha512": "dba7f2f93990942e89174f3c5dc64d73401be10da6cbf866033a322f05fd0913210dec190fb3e0dffd43c2ddd52f29ba236e198cc11c58e423b053884141b02b"
     },
     {
-      "path": "build/test/metrics/model/buckets-test.js.map",
-      "sha512": "60e870550ebd5ee651c506e0c91a9ca1e182df9fca0649ca26e10c63b4d414cdd9881a4920d128291fbe25f6af8d8ea67e4c0bc07d739abd669b25aeec258949"
+      "path": "build/test/metrics/clock-test.js",
+      "sha512": "36732555d6892b07e39e0f53ef2d36a6fc91d63246301af5ed2bdfb57dfe4ad227a6563b89f3f0e23f6548a7bb0584c2a70f681508901292aa59a81f2d52969b"
     },
     {
-      "path": "build/test/metrics/model/exponentially-weighted-moving-average-test.d.ts",
-      "sha512": "2f8d3556c899a5a574669f2fa0a0cf5160b901eb422349a04d3c0efac70612d20ff8254bee5b80d3ccd7d6189a157720ce793a36d9d89f4d912072b8fae4c0ca"
+      "path": "build/lib/metrics/clock.js",
+      "sha512": "102f902e04e5986c128d8787b1eb51419505eb6b69b7dab2de718a6003d4bb302f48bf88cb7748bc161dce75ce6cfe8b753f90e73ca732fc3a8b0ae522700e35"
+    },
+    {
+      "path": "build/test/metrics/counter-test.js",
+      "sha512": "0fa77b7fe97cf304ec8501c5256c61c44184227c87458a7048bcbe2e5a89eac3257949f51ed88e8dabba0c3bd1a6efb83b87564e52d85ff571fcacba823931e5"
+    },
+    {
+      "path": "build/lib/metrics/counter.js",
+      "sha512": "3c84987a8fb9f81db08933420f60d1014ee277c30e50d7f2c3df7bb0dbd17cd54539f58e9ce85fa1537f53bedfedbec7171d4c8ed4c935ef5beb2af8fab13c0d"
+    },
+    {
+      "path": "build/lib/metrics/model/counting.js",
+      "sha512": "efbe9b4a5903c0cd6254e140c4f723faf4709039a27c29b2ece838110649a1d995643b57450321eefed3344ff276459f3621e4ef0016d16f22d1094ac06079fd"
+    },
+    {
+      "path": "build/lib/metrics/event.js",
+      "sha512": "cdc9399f719c7f075557b77c014cbf48fd600b80cb255020abfd2b6df966992f5ea34922b8926564c5751b809c921b538801827e757bdf0298b19e8a3b6743a8"
     },
     {
       "path": "build/test/metrics/model/exponentially-weighted-moving-average-test.js",
       "sha512": "4a8df1d176ad200a6e1941d7bed7d8011f9ad2096ec6743d30614f318c89d179352c1cc46bf75672e4b31f558c7492e6b338f38892950d1f55bf281be78dcfe8"
     },
     {
-      "path": "build/test/metrics/model/exponentially-weighted-moving-average-test.js.map",
-      "sha512": "22b86c01fe3474e18a9387688c7191e0ef5b987b6794d31f921d4c7777f69b3db09015bf5ff9e4d2e87d45517f279c180f652c9eb6c72c790137392473d18ead"
+      "path": "build/test/metrics/gauge-test.js",
+      "sha512": "da3acb4f80615eb0477fbbb606ca1eb8ef15acd8f8df999dd16eae4b3e764d5c88b6145ef0f342bc34bb33e80101303b6a62fb81f242e9153581ebb3067acbeb"
     },
     {
-      "path": "build/test/metrics/model/metadata-container-test.d.ts",
-      "sha512": "3c1016b814a3e3da5050f6362bff77e516940bec953ecafd155ea695f67b68988b5a95a91b00c2b5be7ca4f8d9a37854ccec28ff7442b950382105b908f75db1"
+      "path": "build/lib/metrics/gauge.js",
+      "sha512": "1747f0f5e9313f96f15c3a5b2ee59508973ad114626675e184f13bfc002d553aa66ea85af466d18650c4cf15a022f42dfb4454abad989cdbb228f5d6e82abbd7"
     },
     {
-      "path": "build/test/metrics/model/metadata-container-test.js",
-      "sha512": "204aa199b50ee15c2898e19ec41d43de8e4e6b1e39e9346d37bb206d396672a673ea0fa432ccfdbcbb63f4f8178f137ca0423685757d3f7174616e3bb144e01e"
+      "path": "build/lib/metrics/model/groupable.js",
+      "sha512": "da2e839f44177604a81a64c19902d2b4dc0de831a75a4af1f0350b603978e780055c5ca188b097403fe5dc74e18d4b93b9e332ff785f6d3f2f3cb3808ecdcefe"
     },
     {
-      "path": "build/test/metrics/model/metadata-container-test.js.map",
-      "sha512": "d7ff6d48d1c6cb3ef658cebafce0d332f0735a517cff8d6f92d7532f709c3ea324b7509d494998190d41ecaaa81f3065c376dfa92375c55ea6c2c7f5f30d8293"
+      "path": "build/test/metrics/hdr-histogram-test.js",
+      "sha512": "9c386882c11337fc095dac51a01d4ceda40b8f75bdb8c6d159671972b0df3661542aa212d18d6976f20b1aa8fa4d35d356a4d637ece6875ab7b6ce5e4353e3a4"
     },
     {
-      "path": "build/test/metrics/model/reservoir-test.d.ts",
-      "sha512": "1802c3e8a804c9712ba99222d3bfe61aa20b6e8a5a283e52d7e9267761d223de48c4d84e6f3fc33f9fddb125c59a01b25e5a1c893a43db8d13c5ee38aed2459f"
+      "path": "build/lib/metrics/hdr-histogram.js",
+      "sha512": "bf200d0930fd4fbca8a0348fcc90ea392cb09f727b44ba88d75eef90e830f0826688d62a063214cb71f5d830681db8c7a51216cd6b0fc2de0f68f3bd3dbd7693"
     },
     {
-      "path": "build/test/metrics/model/reservoir-test.js",
-      "sha512": "05424aef52ec434d9bedf02740184ba5c5c20d0a4d411e2894d8c9667b33c88d1bbfb5f6fdf85508f76c9c63cf6c801b56b52d8455d96eebef6e9427f737d13e"
+      "path": "build/test/metrics/histogram-test.js",
+      "sha512": "0f50028e1564a236619428c4896d5fa0f183476167e258716bf2bd1cc7eaff94b42e8c19a609265fb0a64cf80ae0605ee6b1b1ec98b52a970b8f2e69bfc0d6e6"
     },
     {
-      "path": "build/test/metrics/model/reservoir-test.js.map",
-      "sha512": "fd8c53d9a3d5a247d82d75b7f6ad4b5431026fe832682b4deaea0591a0d81df2e7ed3bf5f1c574fbf0bb82a1a3bc959dfcbb425ebc88ceaba973648fc14ad5f3"
+      "path": "build/lib/metrics/histogram.js",
+      "sha512": "0ee1a35166e9da785000a5675b43a08fff632ce93a829056b55cb61fdf6076281efe49941ae0939dcbff798c6718e59195e2097ef8ae0d94baef1f56b9c0b920"
     },
     {
-      "path": "build/test/metrics/model/snapshot-test.d.ts",
-      "sha512": "9333ac667581bb45164a957990a3c10bb88ad44bd0b5ad3104ca3064a4dd700f34288b7863c20e597c9c56fda7fcef16706893f628375c4d0067214dd1a0145f"
+      "path": "build/lib/metrics/index.js",
+      "sha512": "e340b66715996bd5baf839e2885b96d3b8de9b59a71bce4ffdff78984c186cc9ac8d3d14696f2e9e7065d841a4e2ba6f2ee06e634af9f60aff4e3ba788e53541"
     },
     {
-      "path": "build/test/metrics/model/snapshot-test.js",
-      "sha512": "6b9ca2d474842754f5995173b2e229e51a1bef996f8b4d2572beeaa988c0eedf7d253693fa1201933b95afbdcc98482cba0a919c6e4cd5491d867d692784734c"
+      "path": "build/lib/metrics/model/int64.js",
+      "sha512": "21820e882467268b36c70c955706a626af3ed06af3f934d7762bc68f60d429944365d79dbb6d3ba05e722f3ef75c1041061486aa275aa0faab58df5c1c17f486"
     },
     {
-      "path": "build/test/metrics/model/snapshot-test.js.map",
-      "sha512": "d5a2784370acd76b191e513a0d690f25b2d7f4d31f37814468074294e61d85b663693aabce7190bbdefe117e31680cea33415c1cb9b4eb8cb2643d8fa86416ec"
-    },
-    {
-      "path": "build/test/metrics/model/taggable-test.d.ts",
-      "sha512": "195dc1b75232f613e2088404d9822be8549914c09042a5497a4e4df004a4d1886a818f90a63f369f2d27400b449616605861b7692bbc46448ca13984a6f4debe"
-    },
-    {
-      "path": "build/test/metrics/model/taggable-test.js",
-      "sha512": "907092adf19f88568eac7f8b1172377bb8568481a34aa1608f1473a0620b7f4c42be6d611450261363e5ab846c5a5022b0dbd02a1fa580a35d9cc8cf1299a082"
-    },
-    {
-      "path": "build/test/metrics/model/taggable-test.js.map",
-      "sha512": "5a082ddfcceeaceee53eb8d7a4b6e682997f30bfb8dfc5fc437e9e72885fdf8c995e75bd5401ee8731e682802a3cd57d19e270c564cc8f2f743605894cf8f438"
-    },
-    {
-      "path": "build/test/metrics/model/time-unit-test.d.ts",
-      "sha512": "ee17ffe9f948eb6259f975785127f8e4c958960843858bb3b2381937a58516e229155e33303dc67ea9b0b8c440efe26ed0a3a27cb4c5e0c9b235ce8d6dc688a8"
-    },
-    {
-      "path": "build/test/metrics/model/time-unit-test.js",
-      "sha512": "10b2539c144700d21ecbe8ab601a65e148fe4d00fba38bf9062d6e9f18e90f650c1fbc6385f99c7fb5069329e184040cb033576fb1884081a6be5d04d3f272c4"
-    },
-    {
-      "path": "build/test/metrics/model/time-unit-test.js.map",
-      "sha512": "96fdc9a21d5b47c14937162be3ad0ba74e13094ec64d5cf93948df5f364664c4ef7252e336dfc409f5de301cf50d5e17177535c702d8fce394e91facba092b71"
-    },
-    {
-      "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.d.ts",
-      "sha512": "82f3d6bb53aa857488eb8686a5e45ac53cd5d780d285f994a9c6e6851d63f63a7691fd7e37c80673a61a2ed2a350430aa2f1d167e4d500116123e62f50764a3a"
+      "path": "build/lib/metrics/reporter/interprocess-message.js",
+      "sha512": "1f577059d439fb39c7bc967ca1260826488f7c3aecd90e4787985c273175021e06f045ac5ceb7f7f5c7fff2dbb053e2cb9a96cb58d5b770ae698e2f65d98f08e"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.js",
       "sha512": "39b0e85be044d78da52d5d210f984918b3721c3cea77417ac534388026689c948fdbc668fb878155cb64a96f0a664d39d5821ac47f7cba60f414c7d4e52ccef0"
     },
     {
-      "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.js.map",
-      "sha512": "8ef7eed116b491c6f4fa1d01552ee3895f116b0f861e8ddcab58238000335e80bc0958ada960b3814335538fc823d0ab6c9a1539351a8e032ad53aecf0c047f7"
-    },
-    {
-      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.d.ts",
-      "sha512": "832b0b33642c3048c19b964c4eddecd91b178681a630c44edb68d90a4fcf80a90c3ad8b78beae09518a5942d0a201037047c716a6c2ccb8181e5f4270a75a065"
-    },
-    {
       "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js",
-      "sha512": "9c7e82cc07ee6edb966c07e748fabbe2ada6243d5f05572c3f5bb3ba1c241c4b530aa588384af0fd2318a557612c436a3a16ac74d3afd7820d20a6bab4297711"
-    },
-    {
-      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js.map",
-      "sha512": "54fde08169f21338aa25f4deff39ee4d394d337e57a28bac903d0b979789400b9910312808e77464a95e8902ee41d91e1b97fd34384bbd5d0b20836079c7702a"
-    },
-    {
-      "path": "build/test/metrics/reporter/logger-reporter-test.d.ts",
-      "sha512": "022295a9b8db7e5bbc85a850ab87051a45e83e2a0ec6f6707bb8de27e32948c8f2d5f51054f781604e0a48f940b0fd172d0ee26bd33ffde41e1016628bed4e0c"
+      "sha512": "e8a6f1e64ef4b6cb1cb7d5f8da548ee1948c61648e508fd161c86c1216dea0dbe16b7fe734cd456e9080ec10d61a4f0439342594de3a121066fd8878fb85272a"
     },
     {
       "path": "build/test/metrics/reporter/logger-reporter-test.js",
       "sha512": "49a300541e1cd8f490186629aa5aa844bccf7411aea67498fecb5356f6aa5c51c798eac42ddf50c4ab746da63b2cdcf8c657ca7bcab7b1448b0610e785078f6d"
     },
     {
-      "path": "build/test/metrics/reporter/logger-reporter-test.js.map",
-      "sha512": "a44d03984032e6e980cc3274e690e6d049932d678600d9f75172052a093f7a70a3cc6bed42428d8874ce6eb742da379b261363ea61d5374b243a4b2ec86c6c2f"
-    },
-    {
-      "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.d.ts",
-      "sha512": "6956d3cea9960a03f4617d5ec9121595dd8ab19974482d95c333830c671d7947ba7592889c0291ca611ab2ce90c013b980dbf52c3ffda1d72590a4de601fdbce"
-    },
-    {
       "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.js",
       "sha512": "ae752559a373aed1508054ecea8e5bae3f78a5b6a75b22c75ca9390480492e4529154ef1ad9c6bc97f1b8d15915acae2a8fa791422b027f9141872e8f9565a1f"
     },
     {
-      "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.js.map",
-      "sha512": "23707e04d711720aa903877a8e6d8d5bd2d4ffc48de085b7e34e64f757269e6a5a2f0c377f274fbc08bcaea20f9d227d00badec99d3e4da59b7cdb433291f5ea"
+      "path": "build/lib/metrics/reporter/logger-reporter.js",
+      "sha512": "4e7fbda252997f6dc75947138c9ffa1f0abe0bb79862f67d7c6b141d5566e0d918d37ce92882aabae5fc57d3b8e8f993547f7f2a1c62860bf3ea974edffad3e1"
     },
     {
-      "path": "build/test/metrics/size-gauge-test.d.ts",
-      "sha512": "47a2f614a0f378cd7e3eb600d4eb630fb7fd3f83f9e347870f0cf617bf2938a7f909e7eba4b30944134572f0894b0a2aa90c5a472c8edc54f758a6d336e6c18d"
+      "path": "build/lib/metrics/reporter/logger.js",
+      "sha512": "90146334f71be047c9d38a7b2442bc630bc7c14df9154ff7468c59c5cafa7a498f960b983bec59494c4af45c82a88af06fdfcf8ea0539e1ad53a1167a376f9b0"
+    },
+    {
+      "path": "build/test/metrics/model/metadata-container-test.js",
+      "sha512": "204aa199b50ee15c2898e19ec41d43de8e4e6b1e39e9346d37bb206d396672a673ea0fa432ccfdbcbb63f4f8178f137ca0423685757d3f7174616e3bb144e01e"
+    },
+    {
+      "path": "build/lib/metrics/model/metadata-container.js",
+      "sha512": "7e3acf2c58476622343c0674ee6a374cdbf334b33e1b356e83496bd8fa9e9416ee329e81a81625c55651e833453ec908c87447408e5afb584767c73d3fc3848d"
+    },
+    {
+      "path": "build/test/metrics/meter-test.js",
+      "sha512": "caaa6a9b9eea09507b3c44d025ec85a626fb8eb5736c7e73b950d09182cba453db82d831fd51d5df6219141002aafad4dab88a392a676b5a702e528dacd54f3e"
+    },
+    {
+      "path": "build/lib/metrics/meter.js",
+      "sha512": "71c563aa7d7f0f83c091568bc9fc3778865f55be171efeb44358159f5c702bb9dda58bda72c06d07b07414021d72c4ef404561fd300b1d06c75c697b8fb8704f"
+    },
+    {
+      "path": "build/lib/metrics/model/metered.js",
+      "sha512": "14849b4ce7ef76d9dbf351a103fb9a3a7bbceaa1a69711790b9b8145224ab8b12e6f25af73f17fa60a274cd8702ef53e2b4afb11e2246484cfb5fb27388089d7"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-entry.js",
+      "sha512": "96b35e27e5d3a488b7090fcd1cfceaa045dce4d6f9f59aa88f68c0b202d99600d2df27086d3b3f9336a64b72c78aa8f4e3e73c8c1071ce19ee0744c2d8dcef15"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry-listener.js",
+      "sha512": "15717e46904dbea6b75ee7549e14e0aaeac780680b983fa122aaded25214151c267354ed56bab5a033541b4cba30728fd3136dc2bc0a74f11df9df6201812d15"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-test.js",
+      "sha512": "ba841d1a297c6ef4e3750d6c0667c3fc2157d52ca6378a4e6021b0c452f1d02d2b2d5640f6a7fa7d24dccd94d3ba671dc6c8db7f3edd13e922d120fd5481260e"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-v1.3-test.js",
+      "sha512": "467e40b2da69339176d5eec3bd3d9d3e219942ab7d797d54ee39fd75cf1d072b1795956cafee8b70f979fe05cc7443f98151772900e824200923b1ea9d703d33"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry.js",
+      "sha512": "b34baef121b75e6223957871b62e397105334b7b4294e9db5f4674e96546f5987e48466e078c611bc37ee6d9008f69e8df8b1020ad1aba8bc1dddf1984a1cb07"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter-options.js",
+      "sha512": "4b774f3388e7317efa9c84edc09959e43ce1e30672075dfd0a533df776aee0c1966c83d2f30abdc4e114ef26064745c6382c4b0e97f8b79b16beb1cf3618ae16"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter.js",
+      "sha512": "c2f1b2b81bd0e7c90b8a83597b36780fd1fdff24840dab68c8efb148dee7a5ccfda0e116eb019fe5b1766433de1bda58a8fb76050ca1128635932cc688980665"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-set-report-context.js",
+      "sha512": "33592104da7688d18851c70533280ba354bc4d62e932f52788867290646d54862cbec8f34255ace13b7162f15c2deb96260d16baacbc1eb34e14aeb60215e4c4"
+    },
+    {
+      "path": "build/lib/metrics/metric-set.js",
+      "sha512": "1e96aa855f7897c5f804255b4407a144dcb8eee647334bd3c77a531f677b1b5474023b1891e200e62fdd2bcf7b354deebc7ed0a675b644fbf7216e1af0999a9e"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-type.js",
+      "sha512": "06917e61e9719036dc57bed166233d0c6e60f4ed75373ddd61e9f1b60a8c1ebff2129db2c6f6cdc450ad065a12dcf1558e474d9f306a15f07853ec48719aac62"
+    },
+    {
+      "path": "build/lib/metrics/model/metric.js",
+      "sha512": "c364d4a0163097168564a8d0e38a3c02e3626d5f41da120efdd3e94d5df067338b10a500cb7d117bc757504b56f9c8657b515e80e4f7ad19467761391f42e7b6"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.js",
+      "sha512": "f76c8f6f15a15592b3c147f57eb05e871194f525fbdeb09ebf03a11cd77056b946a546984351be7272c77a37b09e273606feed44e042bb45d2baabbd0fe5d104"
+    },
+    {
+      "path": "build/lib/metrics/model/moving-average.js",
+      "sha512": "8fbefbf7aaa38577482ea3b24b05f2f52d3eeee0ca43bb09b1f73591a451c3d611442631d36ca39893912e9a49bd52453a368f3ec0a4af8c002c0300421e2d37"
+    },
+    {
+      "path": "build/lib/metrics/reporter/overall-report-context.js",
+      "sha512": "89f628b60113928161474ad6a1e254596c96120d9272aa53f9d535849a1f827df03584823a5c8e6a7af05227ab67b0ca58ac5f7662afed9a6d6c5e2c4ef56ac3"
+    },
+    {
+      "path": "build/lib/metrics/reporter/report-message-receiver.js",
+      "sha512": "99a0a5a80f3c7eea55382f52068703f51566c0b094f1ee5442286aa0dbc2d67bc9c2f2ba2352f47be5005085a0325be06fb4db711b3cb839fdcc0561484c2c65"
+    },
+    {
+      "path": "build/lib/metrics/reporter/reporting-result.js",
+      "sha512": "a6da2b6ae45d90888dd3d2cb7c6add11d7da5f2162444b6eb54b262a306d68531ec14a03649dd7559e30e06ec2f5dfc46f7d1e29f0fa72e3c5d5ca52437a67ad"
+    },
+    {
+      "path": "build/test/metrics/model/reservoir-test.js",
+      "sha512": "05424aef52ec434d9bedf02740184ba5c5c20d0a4d411e2894d8c9667b33c88d1bbfb5f6fdf85508f76c9c63cf6c801b56b52d8455d96eebef6e9427f737d13e"
+    },
+    {
+      "path": "build/lib/metrics/model/reservoir.js",
+      "sha512": "7874cb07448337e1f83c5d4e83ddf820f578decf08c57eba82ec78af12cf5a4f7cfe0e5dc1927cc7936a4fa5869fa7158c57cfd12296f71d399f875389780578"
+    },
+    {
+      "path": "build/lib/metrics/model/sampling.js",
+      "sha512": "aebc611a2d696ec9c7824f2904b7cca5fda51ba390cc6dcf51385b0907fff569ab10b2909c0e31ccc67546b8b7090d8b2572eecf703acf3178ae5a86b2345522"
+    },
+    {
+      "path": "build/lib/metrics/reporter/scheduled-reporter.js",
+      "sha512": "6c3f175b153395eeb20eafda61a8f7535447c2086cc4687450cceea2338ac2da56f23228a82cf52d9e4180d97d8a10d5e479ed311291fc0f2aaa29863c5f5095"
     },
     {
       "path": "build/test/metrics/size-gauge-test.js",
       "sha512": "14cc586cbeaf3e13b4ac2f28552d2807d72313174783d420add77c290062cc7bfec103ed712f8a329ae442d1e45c94e24ed034723c536601e51416152d17dc76"
     },
     {
-      "path": "build/test/metrics/size-gauge-test.js.map",
-      "sha512": "8c01667a95d086541b513701e38e431253015a33c6c471798e57f61361676b52f6508d1a0060ea668db5ad9cfc8ca4eba102e376b243407688168060684f57a5"
+      "path": "build/lib/metrics/size-gauge.js",
+      "sha512": "afb9bf3a0da91058fd3553330865234113aa7084ece83217cdf92a801b9c9f4ae5dca6348ed0cd5393d7b9ed31ec67b9bf297258d7aa69188dd9bc2e70f6a62a"
     },
     {
-      "path": "build/test/metrics/timer-test.d.ts",
-      "sha512": "118a20b3da23e140f9a158d603e62f04e2fa8976cea272be28574059e703cb39e88161404bce495802f759000c8820eee1791b905a29a3e876c08efff3334b99"
+      "path": "build/test/metrics/model/snapshot-test.js",
+      "sha512": "6b9ca2d474842754f5995173b2e229e51a1bef996f8b4d2572beeaa988c0eedf7d253693fa1201933b95afbdcc98482cba0a919c6e4cd5491d867d692784734c"
+    },
+    {
+      "path": "build/lib/metrics/model/snapshot.js",
+      "sha512": "52b8e4a2b90fdb26db831b173b2a2d07bc989cfbf355e8c155cacf7827467d2f865bb43de0d093a3f1c55fefdcef4e08fb78f73154b0f22441219507cec24f84"
+    },
+    {
+      "path": "build/lib/metrics/model/summarizing.js",
+      "sha512": "08dfb1412c4f8d5e42a15b47c6aabde3fab5137b3f63ae6593c0e8caaf21075ef569f269b7be47431abfa58835e058add0cd847a3dcbc4c8d78a87c7641a769c"
+    },
+    {
+      "path": "build/test/metrics/model/taggable-test.js",
+      "sha512": "907092adf19f88568eac7f8b1172377bb8568481a34aa1608f1473a0620b7f4c42be6d611450261363e5ab846c5a5022b0dbd02a1fa580a35d9cc8cf1299a082"
+    },
+    {
+      "path": "build/lib/metrics/model/taggable.js",
+      "sha512": "e738a6655c214830efd47be70fca99f4a11661b83d760255bdac7695902a75bb1e9fd81d46f26adf2add1b14019d5282b1c4d4018a96064e9246e416f4481092"
+    },
+    {
+      "path": "build/test/metrics/model/time-unit-test.js",
+      "sha512": "10b2539c144700d21ecbe8ab601a65e148fe4d00fba38bf9062d6e9f18e90f650c1fbc6385f99c7fb5069329e184040cb033576fb1884081a6be5d04d3f272c4"
+    },
+    {
+      "path": "build/lib/metrics/model/time-unit.js",
+      "sha512": "f96a5ae036a1145a9628a97021d84f3d6e90599dede21d790eb48e1c3aff9ac338f6e576478254f5913855c5c32cf5b7ac94ba17fbb1750a4268c1817dbfd107"
     },
     {
       "path": "build/test/metrics/timer-test.js",
       "sha512": "4af5195c81bfd0c76501c622b8de98d502e046c38a9848f2a362858d274ee7ecc8a992205a3662db5340f990887c37e48f9ebcd3f5078c5e6dc91751eca52bb0"
     },
     {
+      "path": "build/lib/metrics/timer.js",
+      "sha512": "729f0b227759b5cd0376bcf073ed6d058b7689183b7e832c08b4bc19234c994b60e3c2ca81fb55c1893bd489a18d9f1ab97f8a2c6bad0a68f432ac5de02b300a"
+    },
+    {
+      "path": "package.json",
+      "sha512": "4c00ed5d0f80f81ca9739569d58198ba09b24bf562dbad32eb44abc6241eb6bac511f737ab533ebbff11656f44bdae29edee54364fdd110d98a75758e5084950"
+    },
+    {
+      "path": "build/test/metrics/model/base-metric-test.js.map",
+      "sha512": "f1e7e494209dd8923616db257810a4ce8749993858bdb2ab9517d10ea1fde683ddb1d8742f9ac19982f4bcfaa049cae4facec6f722e1fb0ac785da3fadd5ea6c"
+    },
+    {
+      "path": "build/test/metrics/model/buckets-test.js.map",
+      "sha512": "60e870550ebd5ee651c506e0c91a9ca1e182df9fca0649ca26e10c63b4d414cdd9881a4920d128291fbe25f6af8d8ea67e4c0bc07d739abd669b25aeec258949"
+    },
+    {
+      "path": "build/test/metrics/clock-test.js.map",
+      "sha512": "98c1ef8fbe0b700a010423454f067a3b5e3d54a261d937f519733f1b7c1f66a06d63061934c554c64730d9281439d5f2aaf62d2b7543d55fd25c891679d2eed9"
+    },
+    {
+      "path": "build/lib/metrics/clock.js.map",
+      "sha512": "f6db0bebef7780243402fa16c7c49f679a57f3383c1e9c8c1a94ba2335658eabda2873d461f68ba306b65024503999cd56706a17475771f8463b2a8271fbc096"
+    },
+    {
+      "path": "build/test/metrics/counter-test.js.map",
+      "sha512": "7a90ebabbeded4c9af313dcdf1d7ad0c15fa4c4eddb934ead920853194f875a3e2e174f5bd41953d06b1e6d3acc987195653c12597856093b8e8c698f2d8c807"
+    },
+    {
+      "path": "build/lib/metrics/counter.js.map",
+      "sha512": "a785d12bab7ac1cc8e3a399ee53399715231ce939f9b5ff42208e53084a07bb3c75229d1fcd5e6099b4ff06e55347b3f156e01836e8bc32569bef49df1c3fd4e"
+    },
+    {
+      "path": "build/lib/metrics/model/counting.js.map",
+      "sha512": "7c7a5ac21b01a3548674d2803b2a3bc1dae55deebca077c4372922bc9fae94c819b72ca2042dbdbf16bc7c3cd4fec579196408d4cb5c5cf9c273309ac5a7cfeb"
+    },
+    {
+      "path": "build/lib/metrics/event.js.map",
+      "sha512": "6fed59fa1338b74287202578e5311d33806821973d0f2d55723d7dc40b12cadec838a153a46937960a1023a3e48d108edbbd5347877212d08beab39d6b4187d2"
+    },
+    {
+      "path": "build/test/metrics/model/exponentially-weighted-moving-average-test.js.map",
+      "sha512": "22b86c01fe3474e18a9387688c7191e0ef5b987b6794d31f921d4c7777f69b3db09015bf5ff9e4d2e87d45517f279c180f652c9eb6c72c790137392473d18ead"
+    },
+    {
+      "path": "build/test/metrics/gauge-test.js.map",
+      "sha512": "cb1ff5931542dfb08947911fe4c2a8feb796956a68a7fea067ccb9bede8750015556af972be731a2e8426019278aee4aedceb12cfbd98a58aa0225f1eeecc348"
+    },
+    {
+      "path": "build/lib/metrics/gauge.js.map",
+      "sha512": "021bee6425368e276396536a74253ce706b45b0ac214f52917208c07dfe815c15040d4be1094742919e9306094eeda4e5549c3832ae95aa6ccdde0a9d96337ed"
+    },
+    {
+      "path": "build/lib/metrics/model/groupable.js.map",
+      "sha512": "26172abc4d6ed413766d63d8938e2d01eb680462ff9daf24cf7ea4a0f746035c04ed21ad182bd85d97adc0384b92cddffe8dfe5ed850205a14d1c2b6e9e807b9"
+    },
+    {
+      "path": "build/test/metrics/hdr-histogram-test.js.map",
+      "sha512": "0555dd7d4ddab6297e75fb320a6d0eaacf6e0919505206f62aaaa7cee97a99103e5ebfda7712b9c65c761b5cc94da1402245ce5cf87164e6507882efc89e35e1"
+    },
+    {
+      "path": "build/lib/metrics/hdr-histogram.js.map",
+      "sha512": "9572a642de360d51fc67ac539a9f54d7a230439a6eadd6e4e2ee5ab493f40d0006e05c8ad43f03562164b159b0f8cd61295242c5d3a6e0daed91792bfdf74aeb"
+    },
+    {
+      "path": "build/test/metrics/histogram-test.js.map",
+      "sha512": "6e39643b1d45e54cb85b7444239ac07f3ee7f86d966c92b4f4ebfda5c3b7f76104b79d2ed053872c63d449b9f532c59fb0ee1494f41339a263a51a3bbb55802a"
+    },
+    {
+      "path": "build/lib/metrics/histogram.js.map",
+      "sha512": "94fa4bcc21bebae9e1ae7e1bc764ccd558d81e8d04fd5b57a7f3d4a86d70ef329dbbe29d427ae37316a0073339be051daf4f8ac67e4f152702123dbd2216303d"
+    },
+    {
+      "path": "build/lib/metrics/index.js.map",
+      "sha512": "81718716c233f804d15a7b2d0a357d81f55375f7a1422861d43352a7ab557d8bfded85f30c692d48514e566945db50f59c557003858029d56917bd1c14b9b679"
+    },
+    {
+      "path": "build/lib/metrics/model/int64.js.map",
+      "sha512": "667dc806da5dd87e818c4c0dc7a4b08cee074b31cf296a067e43be5cf6de8375e07c6ef6cda64af4af48ab311ee0cc94693b90cd346db0db3010a028a192e986"
+    },
+    {
+      "path": "build/lib/metrics/reporter/interprocess-message.js.map",
+      "sha512": "8a1313800a264e208953c8cfbeb6257a566143a095ef79dea03bec74fc88ece5d1bd34e75b05729fff07d62cdd87d0af76787627fa3579ac87495cee4963e9f6"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.js.map",
+      "sha512": "8ef7eed116b491c6f4fa1d01552ee3895f116b0f861e8ddcab58238000335e80bc0958ada960b3814335538fc823d0ab6c9a1539351a8e032ad53aecf0c047f7"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.js.map",
+      "sha512": "6d77321f3f5b04762c0cc2119a7835c97502d36e2eb8b66cc3ff66e2ea9055f35873c61c06d1b4fbe8dc37e36595e920abde6ca1268d6f30267ca86403996e09"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-test.js.map",
+      "sha512": "a44d03984032e6e980cc3274e690e6d049932d678600d9f75172052a093f7a70a3cc6bed42428d8874ce6eb742da379b261363ea61d5374b243a4b2ec86c6c2f"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.js.map",
+      "sha512": "23707e04d711720aa903877a8e6d8d5bd2d4ffc48de085b7e34e64f757269e6a5a2f0c377f274fbc08bcaea20f9d227d00badec99d3e4da59b7cdb433291f5ea"
+    },
+    {
+      "path": "build/lib/metrics/reporter/logger-reporter.js.map",
+      "sha512": "6549280430ef790c120e1f28c7cce22330114c2f5c3fb11b11272f066391987f73dbcee14584df73cfe6e945f124d8d49f0f8d073e175f4b9dd97d3f2ed0281e"
+    },
+    {
+      "path": "build/lib/metrics/reporter/logger.js.map",
+      "sha512": "e9d80dfbf82392647594078d38264cf1e5dfc6ff6e64fb322e7072a80a6ad9e2b1abce457779399a7bd00e8c35646d509444abf3165bbea497b87338cbf092fd"
+    },
+    {
+      "path": "build/test/metrics/model/metadata-container-test.js.map",
+      "sha512": "d7ff6d48d1c6cb3ef658cebafce0d332f0735a517cff8d6f92d7532f709c3ea324b7509d494998190d41ecaaa81f3065c376dfa92375c55ea6c2c7f5f30d8293"
+    },
+    {
+      "path": "build/lib/metrics/model/metadata-container.js.map",
+      "sha512": "7c69ac1d6792c342d9210a14d7941f93b3198af65b9a1298565b0407d8dfe32b92683e0741d7d73f628e3fb2b7961da6d717750d368054e7c9f2f983b7fde768"
+    },
+    {
+      "path": "build/test/metrics/meter-test.js.map",
+      "sha512": "21f5b8a8747d4ab279a63011ba04186f169dad59b8d24dfc832ab097e357d1883dcd755a925194d62e6c58b416f8dc76f97c3d375e01a0cd86f82cc3fb1640e9"
+    },
+    {
+      "path": "build/lib/metrics/meter.js.map",
+      "sha512": "caff1ce358dac26bddcaaa45aff15586467d885033f47120676b2177e04fd556055471950f64eaf4ec3032a71572a2b1dbf33c6433dcc8af39873970502d728a"
+    },
+    {
+      "path": "build/lib/metrics/model/metered.js.map",
+      "sha512": "d601fae5ee4b928eaf9b4fedab8cfbbce1e8eb231d070fea561f438b4dba3fceecd4355c3ebb69b20f4300a504695e514e2d5a4aed24a669cffbd3875a539cfb"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-entry.js.map",
+      "sha512": "3ecbb6db6f2b503335e247ebb8315f775c44fa70911f8c4ccfd3e906947b425a6da882081706156554dda87ec81909f7523f42db9607d201888cf8395519bea3"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry-listener.js.map",
+      "sha512": "a841eb7dbc55ffe8c31240c205d8b0b370b9eb9d204d95b47cd5b49e2b7b2cb6cfd06c50caa4de8ed404d594c4b8e9120b346934d11e62a92b952e7589247992"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-test.js.map",
+      "sha512": "46f57fd1326f60fb7a149089d7ca39daa45e1d5c9adc7103beb901389b10d908ec27684e9e1ddbf34a38c9a34b32a841f0a4dce1daae774f196cd9d897beaee5"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-v1.3-test.js.map",
+      "sha512": "f79c8ddbd76fdc91c75a4a8bb74f9f11e65d7e58882ab531cc83ac13e9fa830c064aec616b66783ee714fba87302c6dd24d299e1a8db0d4e70bbc0124ff4fba8"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry.js.map",
+      "sha512": "fc725a951838acc5470c3332092571f83f8c015d8df48de31c9eb0012415e6205c574c81dbca6f055530df4e3e6c5a6218561f8f1ff0dd10f0eb87c3b9fc70f5"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter-options.js.map",
+      "sha512": "3d326848e0cefd76544ed9d6b4b93d662585746c4493ba9cbbb2ec636a56388ee6b935f4ffd04967e8633666e55d63699f76289f18e880cb2647cd32b06e3986"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter.js.map",
+      "sha512": "31a7503b740688c15ec5a8ee57b0a372239b6804cca8505a741714ee721d42cfc63ecac78e61f533df1bfc98c821cc4c9e4f0beee44f71636e418062fff1ff29"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-set-report-context.js.map",
+      "sha512": "2336f0fbe905585e5eba1e20db21970c89daae0410de8f57675644b3c557183f0eedce33eb25ec515cacd5f47e56e0d6b7c586054470431f7de5a9815dbb0c24"
+    },
+    {
+      "path": "build/lib/metrics/metric-set.js.map",
+      "sha512": "d0c1fc48ac49fc19288c20379e1bee12849fc0e612f7c10e848d969de7133fe7a3df4c123c3f252903094315e20281d2f98aee8693d79c08ab335cbe0903b930"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-type.js.map",
+      "sha512": "92bf16e08bdc35801937c35d4122f14a0972da33547d8d70e4f2c346e535b37c093b3e379e865a28c577bc1dc946dc789c5646dc7bc42c498ba396b6614f4a84"
+    },
+    {
+      "path": "build/lib/metrics/model/metric.js.map",
+      "sha512": "ac792f0e86862b3e21a81ffdc9d12c4239cfc3b90a07114fd2e1cf0f5b62a01907533ed80f292fd1d590ac4c669310906f5c1d1dea616e4003a3cd0630fc92f5"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.js.map",
+      "sha512": "a0274a791006eac7ecaed3694fc7dff08b8610f460e5410d3dc5e654cdd6e3affcfc517cb46e7aebe858e4c79d70be1c8e96d1183971da1ecf470f94f4f3e9e5"
+    },
+    {
+      "path": "build/lib/metrics/model/moving-average.js.map",
+      "sha512": "a88ce0eadfe29705589ba3daf71fa00ba9117f48db1ae0df005b103be606adc925aa4b3eef47255fd93a0c3962174ffea1d0094f47ca9a609020e4c30262a084"
+    },
+    {
+      "path": "build/lib/metrics/reporter/overall-report-context.js.map",
+      "sha512": "b2a901b1b7082068bbadc56412a97ef4c3c39f84d6432b1c383dceba140da1f47dc300fbf44359d2786117a6e0fba2df51a44fa5c5ed608b75d9bfc70dca14c8"
+    },
+    {
+      "path": "build/lib/metrics/reporter/report-message-receiver.js.map",
+      "sha512": "57e758082901044d7bab349f838cb0673ced202b180a78aeae83198fa9b81b0dd7ad1ce50444010b3a08e48d53ccf17b77776c383ae3a2c6b9e330f0c47e90b0"
+    },
+    {
+      "path": "build/lib/metrics/reporter/reporting-result.js.map",
+      "sha512": "393d68c5afcfc6ef9e10778e2989de8aa90be68b5954c45a78fc3557e4684e9b6e6123ae2d80fc50b7c21d32323bb1fb432602815f2803effd9c268632a71af0"
+    },
+    {
+      "path": "build/test/metrics/model/reservoir-test.js.map",
+      "sha512": "fd8c53d9a3d5a247d82d75b7f6ad4b5431026fe832682b4deaea0591a0d81df2e7ed3bf5f1c574fbf0bb82a1a3bc959dfcbb425ebc88ceaba973648fc14ad5f3"
+    },
+    {
+      "path": "build/lib/metrics/model/reservoir.js.map",
+      "sha512": "b59aafa05110b3b896e97b40f1b974a5d65311b5610dcc8ef4b39df00885b84e51983e1a9cc8ce6a0d6883048f0fff0914b6ae5d148bdc3e39588b8f1e47ff8f"
+    },
+    {
+      "path": "build/lib/metrics/model/sampling.js.map",
+      "sha512": "29117bb7dfb688a26542c78850267536fd62d3bf8ccb5be25763be6fed74e3d6767dc024db8715b083f8678fc0929d57f022cbc8b696611c2ce8e52cc40351f8"
+    },
+    {
+      "path": "build/lib/metrics/reporter/scheduled-reporter.js.map",
+      "sha512": "0df01a0d876dde4b081480155cd45104ffcea0298c42766306f719a36c7b7336039b5a070d43b855899777e0567e6c7c0ff3b93a1be7db6b4fafb101db36eff1"
+    },
+    {
+      "path": "build/test/metrics/size-gauge-test.js.map",
+      "sha512": "8c01667a95d086541b513701e38e431253015a33c6c471798e57f61361676b52f6508d1a0060ea668db5ad9cfc8ca4eba102e376b243407688168060684f57a5"
+    },
+    {
+      "path": "build/lib/metrics/size-gauge.js.map",
+      "sha512": "70c8ea566f1409be0456bcf64dd78d0f08a9f3dda7679244ab412ada858f055e60be43b8b7dbb0adcc68b03cc0c13ce9b9c33e4abbd2b78a2e90bae86bdf4d82"
+    },
+    {
+      "path": "build/test/metrics/model/snapshot-test.js.map",
+      "sha512": "d5a2784370acd76b191e513a0d690f25b2d7f4d31f37814468074294e61d85b663693aabce7190bbdefe117e31680cea33415c1cb9b4eb8cb2643d8fa86416ec"
+    },
+    {
+      "path": "build/lib/metrics/model/snapshot.js.map",
+      "sha512": "94da5031fb7e58aa58f905acbd9a6b1c5ce769278b7cf72d8d5de8757140bd6d3af0a5ce29d8f088b5cc17bef23d929a8dc141b27c5b97b352434cea3f6f23bf"
+    },
+    {
+      "path": "build/lib/metrics/model/summarizing.js.map",
+      "sha512": "3e1f986c7d99b75ff5ccba6c01f0956132373515c64af51827326f92e6b54ee281672b8685979e56b439997bfdbe5182b8670a9b50aacd0a819cb794ab51eafc"
+    },
+    {
+      "path": "build/test/metrics/model/taggable-test.js.map",
+      "sha512": "5a082ddfcceeaceee53eb8d7a4b6e682997f30bfb8dfc5fc437e9e72885fdf8c995e75bd5401ee8731e682802a3cd57d19e270c564cc8f2f743605894cf8f438"
+    },
+    {
+      "path": "build/lib/metrics/model/taggable.js.map",
+      "sha512": "56be53dbf611dcf7e5ab6b1a43afd81d6533adc0b57c4852b597613afbadeab7edfd09e6dae0e40893279282eda7a99aaf70ba34f481e806c1420cdefc864ca6"
+    },
+    {
+      "path": "build/test/metrics/model/time-unit-test.js.map",
+      "sha512": "96fdc9a21d5b47c14937162be3ad0ba74e13094ec64d5cf93948df5f364664c4ef7252e336dfc409f5de301cf50d5e17177535c702d8fce394e91facba092b71"
+    },
+    {
+      "path": "build/lib/metrics/model/time-unit.js.map",
+      "sha512": "7d5581cf65bb3ebf98e84979b6807f676b769fd6cdb517e3dbf093d6037bf25ec4ba05a65fe76409260d1390905f53d3ae3c501d801b5488c00d931375da20af"
+    },
+    {
       "path": "build/test/metrics/timer-test.js.map",
       "sha512": "b3dcf10ac48c80c8635df601fb4ca1454fa3b50f20dd212c1be3282a499fd7c66cf03b5d2f1b18ff89b4b50df358b97f82d4eb0196fb413ff360ecfab52ba4d1"
     },
     {
-      "path": "build/tsconfig.tsbuildinfo",
-      "sha512": "910ed373d777f7af8400a23aa63fad133044abee8bb713653d35fe086c9838ff908241f2b0f35b15704aec9adf5dff19906c06b3f3b13f5c61cd3cf294a19f00"
+      "path": "build/lib/metrics/timer.js.map",
+      "sha512": "9f6a07b91e64d31b4b925aa2fa3080f51831471cf9fe4eecd02c150cb133c9880a7ebb7131882f7bf2354509ea056f44ffe93528d126e3caa357f5e9127cdf8d"
+    },
+    {
+      "path": "README.md",
+      "sha512": "d87d09ab3382d00e9665900024a0987df9ff185133543d9ef9b7bd610fb06b3535e563c873021dab4c208a02dafb97863d0d98e8bdbd91f92aedc83042c499db"
+    },
+    {
+      "path": "build/test/metrics/model/base-metric-test.d.ts",
+      "sha512": "2b79b1cba1c7e24cd9916cb4f2a3c2cf0f90255574ba89163fb94b612fc07fe12faa448ea55c351175f82641423de246c4544f8262b28aa6b2252567972a0f23"
+    },
+    {
+      "path": "build/test/metrics/model/buckets-test.d.ts",
+      "sha512": "272924f6548e1c6b5abc6980448ee963b39caeb09757d220c6bc3a7fea2c0ce4b820d5d97c48d4b01fb82fe7b0f0fafcacd2cac4e66ed0dd97a9c781443b6981"
+    },
+    {
+      "path": "build/test/metrics/clock-test.d.ts",
+      "sha512": "77d430465cfd8f6083d8fc20624cbcb355de503a1ba69393836cc596c63ee83860e76a317ba1fa2c1595f132e3ad296e1973bff4e1cfebcd7ddb64055d0c66e6"
+    },
+    {
+      "path": "build/lib/metrics/clock.d.ts",
+      "sha512": "cd6bdf24add964fcc596132a4fb0d3e320b0468194cb0567fa8d769ef23db95f23c2e1e8e7001d0e41fa85f5cceb97f72c271cdd96c3617715e3dc852d8fabea"
+    },
+    {
+      "path": "build/test/metrics/counter-test.d.ts",
+      "sha512": "55bcbf62eda0b0e9374d225d1002af2854721fbf653d1ce85f2fbeec8549a230341cb339ff1e5ab22dc8e70acb98dcd363517fc6878dd5f9f5a5e590c09f60e4"
+    },
+    {
+      "path": "build/lib/metrics/counter.d.ts",
+      "sha512": "60f54f15a54546e4c058e697547d164d05e35ef928614abe75c624b1bb7f2331025f93ec19646ef40b6fa087e93a6708d11d054e93f5edc2da3a8ba8fbfc6fb4"
+    },
+    {
+      "path": "build/lib/metrics/model/counting.d.ts",
+      "sha512": "ba074d0e84ab84fb857bc219461c02ec123835fa2742a99991fec61653d9eae3a1ed26eabf67e4a63f621a10da3c398194b83a8aaa02b9e1fdd19681833208aa"
+    },
+    {
+      "path": "build/lib/metrics/event.d.ts",
+      "sha512": "4e31db36ebfaa1d72098f9d472d149159ed0ada85ab470966e92334226252a06bb1e5bd097c9264e82b21a544310ca46dd64bddf64615822dfc8d7a5e80835fe"
+    },
+    {
+      "path": "build/test/metrics/model/exponentially-weighted-moving-average-test.d.ts",
+      "sha512": "2f8d3556c899a5a574669f2fa0a0cf5160b901eb422349a04d3c0efac70612d20ff8254bee5b80d3ccd7d6189a157720ce793a36d9d89f4d912072b8fae4c0ca"
+    },
+    {
+      "path": "build/test/metrics/gauge-test.d.ts",
+      "sha512": "7ffc109223f25e4cc8eb67afe73566df133402d2cde6fdc3628c4f0f2bf606bc7ffee78ab1ccb84b3cb5bf6616a6ea5854d65e521e51738c13fb89c45f02ae48"
+    },
+    {
+      "path": "build/lib/metrics/gauge.d.ts",
+      "sha512": "76afea522a90b9c7886a706c8cdd49851f3832bc826b64692b35a2bbca47d7a7f4bc05e378d53f2114252fd8474b4fa5e12e40a96d7627895b7a6ff1f16765f6"
+    },
+    {
+      "path": "build/lib/metrics/model/groupable.d.ts",
+      "sha512": "e232aa9b78968ff1f1bcbd0ec86213d56a81ae336e609cd96a336a9b852c342fd419391a1b426231f3e0b1bae9739ac409e5a7cb913acd80894645ad47d02adb"
+    },
+    {
+      "path": "build/test/metrics/hdr-histogram-test.d.ts",
+      "sha512": "08f5f38354f6636016be2b2b54eed781a84b0e5ce8e5da145ce16f97aaeaf94aeec2bcb168ee053e4e0705fe8dfc66073d23090df1d73d4bf31f0f20a1f63ccc"
+    },
+    {
+      "path": "build/lib/metrics/hdr-histogram.d.ts",
+      "sha512": "1c272b46fdc6f66550036ebd10b96809b391b2f4a429622e25406306da4dea6f2adc1aaa42196abab66a33a95f18a1ef2bb4436a913edb2f078d2021e93be344"
+    },
+    {
+      "path": "build/test/metrics/histogram-test.d.ts",
+      "sha512": "93e16ae78f50c450974f672c1679f5dc38fa3ae518e9a2fd9bef6057a87e2f28b03c118c7e3574631cec346c01d6f1c8aaa92349a9f07982ccb3dd74e0d01251"
+    },
+    {
+      "path": "build/lib/metrics/histogram.d.ts",
+      "sha512": "dd401c4e97fe98b0df46c9f0ad0170cbcb6ecea4110af5fd55a7893db1e82ef91cc4baafd7edaaaf14cb53587802123ea9a5547e545dbabbd581c9a45572870d"
+    },
+    {
+      "path": "build/lib/metrics/index.d.ts",
+      "sha512": "a554a890bd60a862f2a4667da1a977f65fb140e3da6f36a27548c05d16b6ed2c2b5c1d09c0c90634f6e638043a1a42746ad36e44ed2c9cd8235b09d14112ec12"
+    },
+    {
+      "path": "build/lib/metrics/model/int64.d.ts",
+      "sha512": "1f94bf3a098588c4a3f3bb168a6b5fb250b1569b2321d9433341c667cf4e58a494eae8fafaf1a3a235724f8bb427afba16302208a2669c4384191017c0348e5f"
+    },
+    {
+      "path": "build/lib/metrics/reporter/interprocess-message.d.ts",
+      "sha512": "2af0f520a3941cfbcce42f44de0b71359957310f153e8b9d2c780a09d782b9aa8a2425b8bb9e55b752a996999eec98859a4cd79a7352ee5eff330e524f578053"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-master-test.d.ts",
+      "sha512": "82f3d6bb53aa857488eb8686a5e45ac53cd5d780d285f994a9c6e6851d63f63a7691fd7e37c80673a61a2ed2a350430aa2f1d167e4d500116123e62f50764a3a"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-cluster-worker-test.d.ts",
+      "sha512": "832b0b33642c3048c19b964c4eddecd91b178681a630c44edb68d90a4fcf80a90c3ad8b78beae09518a5942d0a201037047c716a6c2ccb8181e5f4270a75a065"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-test.d.ts",
+      "sha512": "022295a9b8db7e5bbc85a850ab87051a45e83e2a0ec6f6707bb8de27e32948c8f2d5f51054f781604e0a48f940b0fd172d0ee26bd33ffde41e1016628bed4e0c"
+    },
+    {
+      "path": "build/test/metrics/reporter/logger-reporter-v1.3-test.d.ts",
+      "sha512": "6956d3cea9960a03f4617d5ec9121595dd8ab19974482d95c333830c671d7947ba7592889c0291ca611ab2ce90c013b980dbf52c3ffda1d72590a4de601fdbce"
+    },
+    {
+      "path": "build/lib/metrics/reporter/logger-reporter.d.ts",
+      "sha512": "89ee45c52e5a7a1cd4b1410024896fb1929759370e2cbde0a9dbafafe5f6cd1b0e3a1fae5e5735cb6178c5e5e4254913344fdb473dc48d5775407066a4c00294"
+    },
+    {
+      "path": "build/lib/metrics/reporter/logger.d.ts",
+      "sha512": "05012fdd342b1521386b0821af4e8e60b96acc9460a229d95c2df0e5245496f8e74ba64f63fd847c38bfe577c697448cd72dca8aa01d99fa51e95fe27ecf6709"
+    },
+    {
+      "path": "build/test/metrics/model/metadata-container-test.d.ts",
+      "sha512": "3c1016b814a3e3da5050f6362bff77e516940bec953ecafd155ea695f67b68988b5a95a91b00c2b5be7ca4f8d9a37854ccec28ff7442b950382105b908f75db1"
+    },
+    {
+      "path": "build/lib/metrics/model/metadata-container.d.ts",
+      "sha512": "b62df26466e57d767ded45df663e3630902b16a1d6ba2e728be8b17758a4093a755cd9fe784449bb4196bd020f4d75edbab224096f8a86bd4de2efa6a9e88bde"
+    },
+    {
+      "path": "build/test/metrics/meter-test.d.ts",
+      "sha512": "73dad943ef1fdee4d36c62e8163bbc4991700c0450d6402ac81ddbc30df1d5f549910f5a35f45b3653d97a069c973a9ad9cd692a0d97b1e3e412f18216387186"
+    },
+    {
+      "path": "build/lib/metrics/meter.d.ts",
+      "sha512": "5ec16c36ee44145905d40f00e3bea1809f49d7793ecd3f387688d6b0ba8d4917a11224352b22a391b70e982dbaf38fe8891a3d12af7e74b506d35e0599f43127"
+    },
+    {
+      "path": "build/lib/metrics/model/metered.d.ts",
+      "sha512": "e2c506526b8436a614071580e92d6915db06f5b004d91c965c373bbf74731c034c1f432a50eb84af2da3fb33d8d80f6409876f30788c1ce8cf7506b7292a201e"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-entry.d.ts",
+      "sha512": "a19151e5d423d287430f4c07fe88e348c0bd9e3fbd97ce7564a89f62e33581314f9c90bca9c6cbad087d4141bdd41ef8bd65f975a9b7ed0588eceea3a6b0a669"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry-listener.d.ts",
+      "sha512": "c705a4d80646e28d6e47e50e237c998e0c5be5f442d833755a0d16536e90310894655bec9b233fefa5a3fc201aea9d52c6925f1e450af727697b2ed1f744a6e3"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-test.d.ts",
+      "sha512": "5446002c1094ff0a73671ceba2eae9781ad257f586522d5c20d9867d81edce37b9012c5bdfe43afcef9ed440d4de88093f4418988a021bb79db800fd76e93b06"
+    },
+    {
+      "path": "build/test/metrics/metric-registry-v1.3-test.d.ts",
+      "sha512": "4734e4d4b2ab469f1e812fac89ff04ef3eab198b25ff01af9e56cd3563dc13e5e948a31aa6b91b21db369386c1dfc3d8a916d83cc3806aa4737dcfabfb37dae9"
+    },
+    {
+      "path": "build/lib/metrics/metric-registry.d.ts",
+      "sha512": "65eb4afbb830a46e7b56efd30c90ab643151f021f995d0fe2415e2887d1fb7fcc444bdd308b5d57d24852c5dcb1e2e5fb795bff38fc9c2c3d1e350dd7730c80b"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter-options.d.ts",
+      "sha512": "73c963ac94a040090c99d67ab36ba6b5fe61115784f1e5ceb006410484f2c3cb59c8b04ac2dfa82f5020633c79c341b8ff3d67c24d1d3e2a33e96bc0eb5c05b0"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-reporter.d.ts",
+      "sha512": "19df9cb0e615290e67d5058e18526f35c71cc4a85f9ed26b2b44877dcd188a8e46a5ed1772d015e736e23c7033df97e69b4613ccc4ce69b2e7b7783c611fd851"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-set-report-context.d.ts",
+      "sha512": "223df454f21eb15fc21f86dce42b718ded50d615ae2893d2f500ed7089a993bcc7c3cd24d1741a7b56620f87ea5cbfe8235f022527700aba2525856466f50f4e"
+    },
+    {
+      "path": "build/lib/metrics/metric-set.d.ts",
+      "sha512": "be3643e13698ee3f9801c716b87bc24ae24d40ad2f22aca8cb6d11d7aa5ed7ea22c8ab4b5ecf455b23eb6301aa760a95fcab8c26ee3a0e5d8b022df0499f16e6"
+    },
+    {
+      "path": "build/lib/metrics/reporter/metric-type.d.ts",
+      "sha512": "05387802722cf5c523b9d4424f4164260b2e76e8bfff131d8621cc50928a4a8bf11057f6a89259993a3e9be9ffcebaef5e480e07f03cd4147283a48e46ec3595"
+    },
+    {
+      "path": "build/lib/metrics/model/metric.d.ts",
+      "sha512": "8ccbae9219957dfa65e8b357efd225433f8008c5152ec27c2fae59740795ca8f2a91233f2cf6add69c04bde098a181da04db08e43113b0fb05c8ebd69d96e63d"
+    },
+    {
+      "path": "build/test/metrics/mocked-clock.d.ts",
+      "sha512": "d44e405415f20a3da542fee974414a82b7bfe812b3e103d1e8f2ad9341fe649d8a7740365fd0f249ec2af666f025bd567e1aafbb23ba34e2c8b03316080330ab"
+    },
+    {
+      "path": "build/lib/metrics/model/moving-average.d.ts",
+      "sha512": "e4ac5ed3c574c6d06f04447e8f240cbc28c2515b1f91a4039309b5f9970967d0448ba2836d4e108aac881687420a69d603fef818b7716d5ccf9749b561c8a9a4"
+    },
+    {
+      "path": "build/lib/metrics/reporter/overall-report-context.d.ts",
+      "sha512": "933794516b9a3984b2c77219199bd98dc500be1bdd15cd03d822c92b3c6f17c7c0cb2da3f8413cb1859db57fd05831da058b59918b09abe9e76c4f909bba570c"
+    },
+    {
+      "path": "build/lib/metrics/reporter/report-message-receiver.d.ts",
+      "sha512": "9d649e0ba994834d3eb9cba273f1145611a0a9556edb1f84b926d8fe07cff2bff9713c351376ca3068ce15330b4978da7f2bb3c2d73fad5099c2f9de6470ee56"
+    },
+    {
+      "path": "build/lib/metrics/reporter/reporting-result.d.ts",
+      "sha512": "5ed246b82e7e6c3a4ad36ec47e060ef361da52c8118aaec307df8f59413a0084c718d4a884a734d77ac370d5b6594469dd217169e56835f618cef1bb8ad63427"
+    },
+    {
+      "path": "build/test/metrics/model/reservoir-test.d.ts",
+      "sha512": "1802c3e8a804c9712ba99222d3bfe61aa20b6e8a5a283e52d7e9267761d223de48c4d84e6f3fc33f9fddb125c59a01b25e5a1c893a43db8d13c5ee38aed2459f"
+    },
+    {
+      "path": "build/lib/metrics/model/reservoir.d.ts",
+      "sha512": "4e52acdd625192b3ebfb3bb470d62c8e843145652e3080db08a991b26e78a2fab7dea7a6f004aaa30a27a5448abcbfe2fe02147349e0a9f7391296427a298462"
+    },
+    {
+      "path": "build/lib/metrics/model/sampling.d.ts",
+      "sha512": "ad66b8aaba419d011b989202d763a8e286f835869319c85971f5ddbde796076ac71f33dca0aa272e11eda82991c1d21076de8a31a3933f7950ea7148f60226c1"
+    },
+    {
+      "path": "build/lib/metrics/reporter/scheduled-reporter.d.ts",
+      "sha512": "b715378215778353789e6cb9584b0af2ede4d0525021996aab131474bc49b54d5817674186f12732353845dac3007b661c4809aa97fd3848e4e934715e7fddc1"
+    },
+    {
+      "path": "build/test/metrics/size-gauge-test.d.ts",
+      "sha512": "47a2f614a0f378cd7e3eb600d4eb630fb7fd3f83f9e347870f0cf617bf2938a7f909e7eba4b30944134572f0894b0a2aa90c5a472c8edc54f758a6d336e6c18d"
+    },
+    {
+      "path": "build/lib/metrics/size-gauge.d.ts",
+      "sha512": "8f671a6b5050e73a5ee02c55946bcd25df71062d7c1793b3dc4390866afbf3c55657d15c34d70617dcfdbe5414648efe16f43f69be0dc8da60d64185ed96f6fe"
+    },
+    {
+      "path": "build/test/metrics/model/snapshot-test.d.ts",
+      "sha512": "9333ac667581bb45164a957990a3c10bb88ad44bd0b5ad3104ca3064a4dd700f34288b7863c20e597c9c56fda7fcef16706893f628375c4d0067214dd1a0145f"
+    },
+    {
+      "path": "build/lib/metrics/model/snapshot.d.ts",
+      "sha512": "77a14a17df9e77107db612f2b423e8a0670ebabc3763edfd25351a3cc6688a2e36ff736f0c198a91d5814b95e3e5f0091545e0397d7f0fe61e41145ffeb65498"
+    },
+    {
+      "path": "build/lib/metrics/model/summarizing.d.ts",
+      "sha512": "9955ea0dd4e22deb4c601fce7173cf96cf5595119b222184e97f9d06b6f41e75fe07a374d9990035c97fc94da024649955cf6d8d18740ee39a963a65567f590a"
+    },
+    {
+      "path": "build/test/metrics/model/taggable-test.d.ts",
+      "sha512": "195dc1b75232f613e2088404d9822be8549914c09042a5497a4e4df004a4d1886a818f90a63f369f2d27400b449616605861b7692bbc46448ca13984a6f4debe"
+    },
+    {
+      "path": "build/lib/metrics/model/taggable.d.ts",
+      "sha512": "6620406643bf8b12ba90918c8ef8a17538753c30d7f0ca0819d07d35169134f7fbdc0f0e41859d8cce320864dec1770a31c604ec094fb0351e56f2f38669e157"
+    },
+    {
+      "path": "build/test/metrics/model/time-unit-test.d.ts",
+      "sha512": "ee17ffe9f948eb6259f975785127f8e4c958960843858bb3b2381937a58516e229155e33303dc67ea9b0b8c440efe26ed0a3a27cb4c5e0c9b235ce8d6dc688a8"
+    },
+    {
+      "path": "build/lib/metrics/model/time-unit.d.ts",
+      "sha512": "6925de3d7bb6892edbf2869424e27ad134dd01eb0b76cc2dece5b005e43906239646362491cd9d29edb540924d898c477443fcfee99d78d427e272b339cf6c2b"
+    },
+    {
+      "path": "build/test/metrics/timer-test.d.ts",
+      "sha512": "118a20b3da23e140f9a158d603e62f04e2fa8976cea272be28574059e703cb39e88161404bce495802f759000c8820eee1791b905a29a3e876c08efff3334b99"
+    },
+    {
+      "path": "build/lib/metrics/timer.d.ts",
+      "sha512": "5578761eb571afed3739d652ee7a4946fcc0e7ef0d920bac98c22a6b2181f6a1649120d76c774a38f8c5dcf0bebf7b17ff17496cf5be6eaf8b894f6791de4a5f"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+tjTCRDCMfXrQKYV5wAAnV0QAEXn8AuslWqfopT0UFX7g5DY\njGT8WnAhGWMU92iTjLCIYgzxgpYPXj42M4abF0aZCUA3OPnwklh0mi0slWuU1vkV\nLmrPL4MgHq9WA2vNE+siZS7i+5lasUXNY1MMbPzCwUoFs0DGns4zoajnKPzjLMjt\nMcweIrIXPzaqa5wih2FoFp8UBHoZjIb1ty8sGbD6Z6oTl/TZJB4GkvLudfGmUjce\nbr7MG2d2GyZpf7mkML5IQHTAXeW84Vz5CIhmO+4pz0gdiup9Pf5YujAXZW3qGKGo\nmNSxN8wrUj/IfolTyvU/KKm1tLDc+2mR5h//5RhY8ioanoX8ABpd+afKaPUhBZRn\nJYE/jAID0+HqTL7dFxPXygqdrFimJ1WhRkHn/7UxOXLd2qcZM6UGxgipw8jLhqHt\n5VvXlRgLou+rUMJyt5FMmVylFMhDWWgG/VRCDHBnvKayVnD/KwJ0ihWTVHuRL1fH\npdbaYLmIac2aqQ4JK4Fsi78zKmjIoyxHjU42/w1K1Q7hKhTrg5QwexLnOt5F1wNk\ng2eIp/ejLqBuZ24Vg1Zc7x/tbm8hESBmfq0+CHcABYfEn7YHVwpXYt4JJlEgzIXV\nsi+ca3fnr7T0Uyr2P+xWuruwrHdEpyq2DOXVUd3IRDrFfPNacK6MstKbkmFF36uj\nIwF4Fu9EoffZFtO2VI6g\n=n0cZ\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdJ2FWCRDCMfXrQKYV5wAAtSIQADJXI+RdZX8el26c1ZhhzORd\nag5lnnCHTv+8ZqtgFQ8kmkAoHlqWz8DPM8lDT42AdYRYHuuG9uYMmbSYGKpd9CgR\nfAnWpUR+sy84QrhjES+R0mBOhMmFQd4ah9LIccQhEbkvFRyHj7voniShzFfS9yu4\nnuAag1m6geiLKukVHlO/nT7VSncozTB6N2hGOPZEZIuen7hKMonp12Wkmx+7hYBQ\nHdkPcUgWLizQ6GpYbbaOop7/C/10GhwzHBF+r/vgqWW7HsgeGWufwAw8A305gNqi\n+0btNEueLC1ALug071jSciZfGiT50ZEbHi+DZM4L2R7lK+BZVoaK+cR/qpdl3W2f\npR0znLUgYj9pWNaIddWNkhmDt57l8ZVCB2V829e3iKgUbO2oCIQoJdrJszk6GpqP\nWUa7CAuDsdHGPIfdD1t/3qRdHG2FCCVDknA/+orHUcLslJ2HIh+AzSYTorQH8wzI\n0VuP7CDJaDYSgZL4yM6WljxVTUk7sUGF5hscihaqskn/OcELDpWA/6JQ/c1g+bRZ\n35BsMbGoc6COwJWHFYQ3RrA4ggfALq7b2T14HQA8pnCk7VcP1TwQ+1C27qSbg68q\n4uHg/sHrGEFZZVhCYDmj5AVsRdKFKg7mlFCEDhP5m9uZOcThNAOFCxIGZsJwHaNt\nevOlXDXe7F8SP/A7dVgw\n=p6EC\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }

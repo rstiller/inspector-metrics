@@ -2,16 +2,40 @@
   "version": "v1alpha",
   "files": [
     {
-      "path": "package.json",
-      "sha512": "b6edad515c82acba9a6403755c2e093b3ba6a78560df9d0e51454c06c42152ffee667a53c05c7be59d82f1fb37f1d7c52e95c1ad0b56a07015d77e605bab7724"
-    },
-    {
       "path": "CHANGELOG",
       "sha512": "6ddb62ae3cd5a42d343614ca949be05f175c9ae917734151992169297a8ab923a1611a3f34950aeeb667b6c75c07ee9609dee7569e51ecb0ef07c036ed133461"
     },
     {
       "path": "LICENSE",
       "sha512": "315dd0b0b9d3e310c1a78a0b451a4374f1caa9397027a4c0474d7f6e8ba2ac9199132ab82a285dccf6da3f4dd2689da383649cb8c7f4c4e387e9cc6cb13441cd"
+    },
+    {
+      "path": "build/lib/metrics/CarbonMetricReporter.js",
+      "sha512": "40f2ad8bed1e9fc8d50f2ad4b02c3c7fdaf48adf3303ffa357a9d988ad5b0da02166ae6192ea74522ce8f72409bf7423af8e032af376096809cf26fb54ce87e3"
+    },
+    {
+      "path": "build/test/metrics/CarbonMetricReporterTest.js",
+      "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
+    },
+    {
+      "path": "build/lib/metrics/index.js",
+      "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
+    },
+    {
+      "path": "package.json",
+      "sha512": "b6edad515c82acba9a6403755c2e093b3ba6a78560df9d0e51454c06c42152ffee667a53c05c7be59d82f1fb37f1d7c52e95c1ad0b56a07015d77e605bab7724"
+    },
+    {
+      "path": "build/lib/metrics/CarbonMetricReporter.js.map",
+      "sha512": "73e9d507bced94897feffa90edd4c5981d32ac32a3b732a7ac059a825c08f5851357c0ee775e3b8a8afbbadaf59df38375bf6d595a824d48d1cc20c06064ec8a"
+    },
+    {
+      "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
+      "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
+    },
+    {
+      "path": "build/lib/metrics/index.js.map",
+      "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
     },
     {
       "path": "README.md",
@@ -22,43 +46,15 @@
       "sha512": "1545876e5be20f96f6589cf5354252ba1723fc53660b6a01c5f5d2287de3670c6e4a660dd35bf3c9407d3fc0bec7e6627b98a0ffa62075d8947bf8074506ff10"
     },
     {
-      "path": "build/lib/metrics/CarbonMetricReporter.js",
-      "sha512": "40f2ad8bed1e9fc8d50f2ad4b02c3c7fdaf48adf3303ffa357a9d988ad5b0da02166ae6192ea74522ce8f72409bf7423af8e032af376096809cf26fb54ce87e3"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.js.map",
-      "sha512": "73e9d507bced94897feffa90edd4c5981d32ac32a3b732a7ac059a825c08f5851357c0ee775e3b8a8afbbadaf59df38375bf6d595a824d48d1cc20c06064ec8a"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
-    },
-    {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
-    },
-    {
       "path": "build/test/metrics/CarbonMetricReporterTest.d.ts",
       "sha512": "bfc2e2310dfc7a31907d0434d07eb7ef48de941610ce8e0e07ac02a6a510008d99b1b05f62a0d3b69826930e0dfaae449b1139622d6fd86e2e42090c15795543"
     },
     {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js",
-      "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
-      "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
-    },
-    {
-      "path": "build/tsconfig.tsbuildinfo",
-      "sha512": "e8626b0e1e07746628d1a50728fb9663d48116395b5c61858c66b006d9a41082d4cbdc65efd2eb987922c757e16da9cf2cb286ca66f33f01040d68249a4a7b20"
+      "path": "build/lib/metrics/index.d.ts",
+      "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJc+tjWCRDCMfXrQKYV5wAAhn4QAIL2A4JdUauokkfsehvB5l93\nTmAEcTl/CGx51gE14eR9grGE3uoFCTI0G4tMqjQTqLV5Axxmtp1yYEHzU7yUz+g+\nTbbVXItAACUQ+nyq9ZM6+LD8Atx1aQBOcNp8RrMx/JIjdxq7Sno2F9r1Gr9G8t9t\n7DBAYaCmp6vQGwa49TLkk5sOYFsgIZBR5lhC5X2kldvv3J+DIcXCSGcN0VXsegUn\nJ9FH+U/ihCw0QoBTSpAJYV1yOxRYPHhYexxyDsjCrAvHGCrNFox9DlgsSDZg0eIM\n3ArNhzsfdHFwaWd3y8f2cnFW4TJbe3qVHo1WDVUPPZ5h72GPUV4QwG2hOHDVbn+P\nn4iaX0zmyLIOg4KrlZ8TQ6K7qp2JxV5Vy8Vu7JDTJr85xOuYx5f5eYZWeSvgc6qo\nv2356MGPHFp9LlyDmjiGPwPzXCHb7HroSEG6J2NahFAlTbwtQSJ1MjsDZficGkQX\nS2m/saSXBRVkUHeK9atETqmGDC1uJuu1q1yhahTjNhmQMB44+61z4IJxICVK9uSd\nlHQwig3vS1Ka5QXrcDd2jpL1nWzOzPdkcH1v7RFbpF5DPiC0I7euoqI7qT8D/dfk\nBkyOnvHK8E14xa/NRpFMfxPbyePEcTU/LfaN2dzpffhlJcFKa46Waos+cZasxlgQ\nT4eVZRfD20JCIkvcxOhJ\n=Oo3C\n-----END PGP SIGNATURE-----\n",
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdJ2FYCRDCMfXrQKYV5wAANFYQABX47wfGCvy0ykoKPuKBb7yF\nNdOMQcM1Prh4dpz2lOV2aSjhzrEx7hZMwfxd8HrbnmIRuAA5pICAdOB3QpukGjjV\nEfbMNuw1GqI1wwy/+Am4+ddIR2A/RL0qw1M4X5erjpgdjWcAWCLXvEehP7FZBpll\nW1xpGx8Y3c7RL1m123usAISOSyEZ8u6iEsr5P4gIYOYp6GY6qe6FNsw5tjfBMmAH\nbkOlkjJEHxSlUwF+Ee+yOdBTyVE5VzoiLyHbWmeMOcrSphbl9bSV2h3/rX2bOWlW\n85ZKJq62VzcgrtxTTxttsXZvd8Rv4RQgQSe/y48uOuS+TN0oACZlUlBgQKkyaKMH\nL39AN5PpJsAqIvlI6axT9bc7vBBzjwcW2BplcDzy00tGKrfzSNkXNfiBkWOBb7jt\ncC93NeJh+N2UFxMNmlN0BL8J02ZKBKpj/obyEXMBZd1W0c631M7LfYW7fDQoJczm\nKcMkbR1kbck2TxiLDbc50ZPaWhtnJ9ywDXBsgT8wtrYMDcQeDEBky7ammvqQkuYi\nEi8KJhymCI9E9Hh42TSZrcZ+uU2vTKVxuU3k/2g5oU/d/+Ii9oh61HbL1d1mrf2P\nFPB+CfPY8ff29rjHle3zqlOh/5gxPOZDJV8PAEDWHSzTFKAv/OevrvuImupRv0A+\nFuIdOdx6AJw/X34aSQcj\n=YSIq\n-----END PGP SIGNATURE-----\n",
   "identity": {
     "keybaseUser": "rstiller"
   }
