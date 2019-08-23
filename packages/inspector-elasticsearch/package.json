@@ -33,8 +33,8 @@
   "dependencies": {
     "@elastic/elasticsearch": ">=5.6.0",
     "inspector-metrics": "^1.20.0",
-    "lodash": "^4.17.14",
-    "source-map-support": "^0.5.12"
+    "lodash": "^4.17.15",
+    "source-map-support": "^0.5.13"
   },
   "files": [
     "build"

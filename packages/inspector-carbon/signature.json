@@ -1,61 +1,176 @@
 {
-  "version": "v1alpha",
-  "files": [
+  "entries": [
     {
-      "path": "CHANGELOG",
-      "sha512": "6ddb62ae3cd5a42d343614ca949be05f175c9ae917734151992169297a8ab923a1611a3f34950aeeb667b6c75c07ee9609dee7569e51ecb0ef07c036ed133461"
+      "entry": "files/v1alpha2",
+      "value": {
+        "files": [
+          {
+            "path": "CHANGELOG",
+            "sha512": "6ddb62ae3cd5a42d343614ca949be05f175c9ae917734151992169297a8ab923a1611a3f34950aeeb667b6c75c07ee9609dee7569e51ecb0ef07c036ed133461"
+          },
+          {
+            "path": "LICENSE",
+            "sha512": "315dd0b0b9d3e310c1a78a0b451a4374f1caa9397027a4c0474d7f6e8ba2ac9199132ab82a285dccf6da3f4dd2689da383649cb8c7f4c4e387e9cc6cb13441cd"
+          },
+          {
+            "path": "build/lib/metrics/CarbonMetricReporter.js",
+            "sha512": "40f2ad8bed1e9fc8d50f2ad4b02c3c7fdaf48adf3303ffa357a9d988ad5b0da02166ae6192ea74522ce8f72409bf7423af8e032af376096809cf26fb54ce87e3"
+          },
+          {
+            "path": "build/test/metrics/CarbonMetricReporterTest.js",
+            "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
+          },
+          {
+            "path": "build/lib/metrics/index.js",
+            "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
+          },
+          {
+            "path": "build/lib/metrics/CarbonMetricReporter.js.map",
+            "sha512": "73e9d507bced94897feffa90edd4c5981d32ac32a3b732a7ac059a825c08f5851357c0ee775e3b8a8afbbadaf59df38375bf6d595a824d48d1cc20c06064ec8a"
+          },
+          {
+            "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
+            "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
+          },
+          {
+            "path": "build/lib/metrics/index.js.map",
+            "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
+          },
+          {
+            "path": "README.md",
+            "sha512": "1a917f9fd7823106e9b8c825f93c3d4eaadb3e2047465f1278a0a75ea94ccbadcd341345727d61913052a1f9a9adbba527ff0a85241a6fa19c1af964d28d5f55"
+          },
+          {
+            "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
+            "sha512": "1545876e5be20f96f6589cf5354252ba1723fc53660b6a01c5f5d2287de3670c6e4a660dd35bf3c9407d3fc0bec7e6627b98a0ffa62075d8947bf8074506ff10"
+          },
+          {
+            "path": "build/test/metrics/CarbonMetricReporterTest.d.ts",
+            "sha512": "bfc2e2310dfc7a31907d0434d07eb7ef48de941610ce8e0e07ac02a6a510008d99b1b05f62a0d3b69826930e0dfaae449b1139622d6fd86e2e42090c15795543"
+          },
+          {
+            "path": "build/lib/metrics/index.d.ts",
+            "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
+          }
+        ]
+      }
     },
     {
-      "path": "LICENSE",
-      "sha512": "315dd0b0b9d3e310c1a78a0b451a4374f1caa9397027a4c0474d7f6e8ba2ac9199132ab82a285dccf6da3f4dd2689da383649cb8c7f4c4e387e9cc6cb13441cd"
+      "entry": "identity/v1alpha2",
+      "value": {
+        "identity": {
+          "keybaseUser": "rstiller"
+        }
+      }
     },
     {
-      "path": "build/lib/metrics/CarbonMetricReporter.js",
-      "sha512": "40f2ad8bed1e9fc8d50f2ad4b02c3c7fdaf48adf3303ffa357a9d988ad5b0da02166ae6192ea74522ce8f72409bf7423af8e032af376096809cf26fb54ce87e3"
+      "entry": "npmCompatiblePackageJson/v1alpha2",
+      "value": {
+        "packageJsonProperties": [
+          "compodoc",
+          "dependencies",
+          "description",
+          "engines",
+          "files",
+          "homepage",
+          "keywords",
+          "license",
+          "licenses",
+          "main",
+          "name",
+          "nyc",
+          "peerDependencies",
+          "repository",
+          "scripts",
+          "typings",
+          "version"
+        ],
+        "sha512": "cee985aafbfaf5c458bd104e66c2bf6d5cbb2d0fff8c84a249bfb4eaa1f13f5106f904c0db409549170ef37acf7adcea22068b20f40b219bb8c783a449f2ccf9"
+      }
     },
     {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js",
-      "sha512": "0cff8e83f8704298ab576c91779a77f86d44fc9649b44c4727870ad2afad832fb5d6f349cbdda736737bfb3194001189975587462a7bfa137d6237f783516892"
-    },
-    {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
-    },
-    {
-      "path": "package.json",
-      "sha512": "b6edad515c82acba9a6403755c2e093b3ba6a78560df9d0e51454c06c42152ffee667a53c05c7be59d82f1fb37f1d7c52e95c1ad0b56a07015d77e605bab7724"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.js.map",
-      "sha512": "73e9d507bced94897feffa90edd4c5981d32ac32a3b732a7ac059a825c08f5851357c0ee775e3b8a8afbbadaf59df38375bf6d595a824d48d1cc20c06064ec8a"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.js.map",
-      "sha512": "142a9242e7dff9ac3d41ed243005eca5d24b8be641275b249044af0998a4f020b8a9071f5cde6840316d1516be53ab4a8bee9accaa1b10c25743dec476397423"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "131a549d25ac9e83bf864898b42106391797e35484db5e448298cfe38c7c458711698a73aa1bfd1be0b08f03985e33608f5acf80e942dd11a41c255ad04f33d6"
-    },
-    {
-      "path": "README.md",
-      "sha512": "1a917f9fd7823106e9b8c825f93c3d4eaadb3e2047465f1278a0a75ea94ccbadcd341345727d61913052a1f9a9adbba527ff0a85241a6fa19c1af964d28d5f55"
-    },
-    {
-      "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
-      "sha512": "1545876e5be20f96f6589cf5354252ba1723fc53660b6a01c5f5d2287de3670c6e4a660dd35bf3c9407d3fc0bec7e6627b98a0ffa62075d8947bf8074506ff10"
-    },
-    {
-      "path": "build/test/metrics/CarbonMetricReporterTest.d.ts",
-      "sha512": "bfc2e2310dfc7a31907d0434d07eb7ef48de941610ce8e0e07ac02a6a510008d99b1b05f62a0d3b69826930e0dfaae449b1139622d6fd86e2e42090c15795543"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "005674c35f46bc658cc6b715d6d688432f0e92680d3400b5bba81f69fc43ba12add388140cb96622cc94ceaae85219ac3b5c2b479d6376658fa1630848f5f0cf"
+      "entry": "packageJson/v1alpha2",
+      "value": {
+        "packageJson": {
+          "name": "inspector-carbon",
+          "description": "Graphite / carbon metric reporter for nodejs",
+          "homepage": "https://rstiller.github.io/inspector-metrics/",
+          "version": "2.5.0",
+          "main": "./build/lib/metrics/index.js",
+          "typings": "./build/lib/metrics/index.d.ts",
+          "license": "MIT",
+          "licenses": [
+            {
+              "type": "MIT",
+              "url": "https://www.opensource.org/licenses/mit-license.php"
+            }
+          ],
+          "repository": {
+            "type": "git",
+            "url": "https://github.com/rstiller/inspector-metrics"
+          },
+          "keywords": [
+            "metrics",
+            "monitoring",
+            "typescript",
+            "graphite",
+            "carbon"
+          ],
+          "engines": {
+            "node": ">= 8",
+            "npm": ">= 3"
+          },
+          "peerDependencies": {
+            "inspector-metrics": ">=1.16.x"
+          },
+          "dependencies": {
+            "graphite": "^0.1.4",
+            "inspector-metrics": "^1.20.0",
+            "source-map-support": "^0.5.13"
+          },
+          "files": [
+            "build"
+          ],
+          "scripts": {
+            "build": "npm run clean && npm run lint && npm run compile",
+            "sign": "pkgsign sign .",
+            "clean": "rimraf build coverage docs",
+            "compile": "tsc --incremental -p .",
+            "compodoc": "compodoc lib",
+            "coverage": "nyc npm run test",
+            "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+            "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
+            "precompodoc": "npm run coverage",
+            "prepublishOnly": "npm run build",
+            "test": "mocha --opts mocha.opts"
+          },
+          "compodoc": {
+            "tsconfig": "./tsconfig.json",
+            "output": "./docs",
+            "disableGraph": true,
+            "assetsFolder": "assets",
+            "unitTestCoverage": "./coverage/coverage-summary.json"
+          },
+          "nyc": {
+            "include": [
+              "lib/*.ts",
+              "lib/**/*.ts"
+            ],
+            "exclude": [
+              "test/*"
+            ],
+            "extension": [
+              ".ts"
+            ],
+            "require": [],
+            "reporter": [
+              "json-summary"
+            ],
+            "all": true
+          }
+        }
+      }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdJ2FYCRDCMfXrQKYV5wAANFYQABX47wfGCvy0ykoKPuKBb7yF\nNdOMQcM1Prh4dpz2lOV2aSjhzrEx7hZMwfxd8HrbnmIRuAA5pICAdOB3QpukGjjV\nEfbMNuw1GqI1wwy/+Am4+ddIR2A/RL0qw1M4X5erjpgdjWcAWCLXvEehP7FZBpll\nW1xpGx8Y3c7RL1m123usAISOSyEZ8u6iEsr5P4gIYOYp6GY6qe6FNsw5tjfBMmAH\nbkOlkjJEHxSlUwF+Ee+yOdBTyVE5VzoiLyHbWmeMOcrSphbl9bSV2h3/rX2bOWlW\n85ZKJq62VzcgrtxTTxttsXZvd8Rv4RQgQSe/y48uOuS+TN0oACZlUlBgQKkyaKMH\nL39AN5PpJsAqIvlI6axT9bc7vBBzjwcW2BplcDzy00tGKrfzSNkXNfiBkWOBb7jt\ncC93NeJh+N2UFxMNmlN0BL8J02ZKBKpj/obyEXMBZd1W0c631M7LfYW7fDQoJczm\nKcMkbR1kbck2TxiLDbc50ZPaWhtnJ9ywDXBsgT8wtrYMDcQeDEBky7ammvqQkuYi\nEi8KJhymCI9E9Hh42TSZrcZ+uU2vTKVxuU3k/2g5oU/d/+Ii9oh61HbL1d1mrf2P\nFPB+CfPY8ff29rjHle3zqlOh/5gxPOZDJV8PAEDWHSzTFKAv/OevrvuImupRv0A+\nFuIdOdx6AJw/X34aSQcj\n=YSIq\n-----END PGP SIGNATURE-----\n",
-  "identity": {
-    "keybaseUser": "rstiller"
-  }
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdYGEzCRDCMfXrQKYV5wAAo0YQACOmFM2z9D0T9wSXMPrSb45r\nzj4bB6W4BFpuOQx5QwqRIoENBfxDL7HNCsK/ceCaDntM09vSTyRuXzbYInTRDtfx\nOw0d1qzV/AxtkDhhJ7o4i/WNu3cVA1Ttg9u3YNX0alIkqKNza/CGogJ1IFbpidYb\nzB6wZuqhN9Z9ahDSG9yEbLgWKZM6EbIS0UH9KGjB4z/CtPOWIU8jOmDSZqvKOr1t\nPkVBKi1G74HKTcW+pxzk5Mk9zMmQN6o49+R7WUvZ9pwMGFPu5KNJpJMsS0M7i+qN\n63c34PrEzUt4ZX/DuEM+1UwSPrbCAzRlrI/mQuQ+PSSRp/pFw6iyBC86Qv47a5/J\n5WfgXBuQpIq6rsF6yt/d6noGE/XbQoodS0WNSV84pebKE9pPV/uHtgWRJcQ8r1Wj\nD9zPqcWpAtHdy++/HyrekNrMY/I2CumGjrtEfCjVHD9Dc6AXnpNtF2nvV7UbphNh\n9JpPR8+3MhXZFDdVJbf6ail1zqjYLjQtlCTkVslmjn5Rwsdvc7zAIgIvTkD/V7Ub\nJQx7SzEwyqE9d/AQBDF1S/3+XPnqXOBf0fAqM390C69GNt+GTE3uwnPFr1y86wzp\nUAylP9mmNjzJBoJsZHR7FWqHlsngyyOrL0zmUY8rfAXgGdUH2VtF1eCwrZSaFFP9\npm0MRe53APPRk/lh1qDA\n=RPHj\n-----END PGP SIGNATURE-----\n"
 }

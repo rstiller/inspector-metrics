@@ -1,105 +1,219 @@
 {
-  "version": "v1alpha",
-  "files": [
+  "entries": [
     {
-      "path": "LICENSE",
-      "sha512": "1489ff64267bcf357ff9734a52f0637b09486161c6b43d32d3c439372648e04e3281f2d9ef0449a54d8a68ffb0d046232ecee9a9818baa96a0087acac663f708"
+      "entry": "files/v1alpha2",
+      "value": {
+        "files": [
+          {
+            "path": "LICENSE",
+            "sha512": "1489ff64267bcf357ff9734a52f0637b09486161c6b43d32d3c439372648e04e3281f2d9ef0449a54d8a68ffb0d046232ecee9a9818baa96a0087acac663f708"
+          },
+          {
+            "path": "build/lib/metrics/index.js",
+            "sha512": "8093fe685835954bed6135785bc24193b7964758aebe85cc340767276b0e6f6ab876b0f2c52285d478d9f0baaa9c5143cbb281f8a34342fa6159a543bc613f21"
+          },
+          {
+            "path": "build/lib/metrics/V8EventLoop.js",
+            "sha512": "a0e5ec94fdbde90af924d95e8bc68ce2f957f344ad1885240884a739282c3b7e30ffd694f689cba106ad586ed838b4036ca13d1cf423cb4006a2e8fc5f912766"
+          },
+          {
+            "path": "build/lib/metrics/V8GCMetrics.js",
+            "sha512": "0c7e6371e2565154c8d24dc0e9bcefe88e913233bc7f27796deb64651ccae25a4a2fd60bd99e9962a292df17ffb8ca158611a38aca8e5707251ef925ee0916dc"
+          },
+          {
+            "path": "build/test/metrics/V8GCMetricsTest.js",
+            "sha512": "b515ef43f2d4a9237fc470632e945f8cf2162705096c7ed14b4ef6eeb5e91679d3f30b6774f7acf407fa28efec89321320d83d046469905f6137822f9dd365e0"
+          },
+          {
+            "path": "build/lib/metrics/V8MemoryMetrics.js",
+            "sha512": "fd9e08d9c5d79fa7e492d27a95d6a26239ce3c8e968bf60c3ee1748501e8e3da285cd28e4b4d29a048ba6567e65fd140a70eacde953624d83775d8dd7284f44b"
+          },
+          {
+            "path": "build/test/metrics/V8MemoryMetricsTest.js",
+            "sha512": "5356269c63145294dbc6492a767f5714b5745748269f9e21bf67f9f0739d3fd67be1a05dd94c187743c2e7695bbbd6c6dced203890b85163c0a06099985064e7"
+          },
+          {
+            "path": "build/lib/metrics/V8ProcessMetrics.js",
+            "sha512": "4a724404b281e38611e1e0d6528e71260728b8e23d8faf0e406f38dd910eed39f5dc539e916f6316b0ee1f8b02b988f6371a2cd9f3c9d553c77e3dbd74027e9c"
+          },
+          {
+            "path": "build/lib/metrics/index.js.map",
+            "sha512": "74cfd1ad0a635043158bb8d30c4e4f66149538c3a09b3b196c0eeaf00d98e2f76d29dba628c56b37c140cb0826d7cc0501ff3f3ab6aa24e6dfd8f99b96449299"
+          },
+          {
+            "path": "build/lib/metrics/V8EventLoop.js.map",
+            "sha512": "1fba7dec44a825437db64230cc201bfeb10bb712ecd54352f03100a8da3b99e618852e4ffede0aed460de428c431f45148ccac1b5d591e5dcb53573ba198ad89"
+          },
+          {
+            "path": "build/lib/metrics/V8GCMetrics.js.map",
+            "sha512": "6bb7c980de468d7b6819dd00769c7a1c25f24f7961ada995ac23062872cf5da2ea0ecc91512fb906aa96e4018a3c7a222a50a2f7467233d1a47281f94880c419"
+          },
+          {
+            "path": "build/test/metrics/V8GCMetricsTest.js.map",
+            "sha512": "5e8a0348a963fcb47029805c76f72a5f4512d0e84e52a8a6116829e8fe65d84f9f8a8c683f731c781891ffbb69411ef9f302e549d16df5bd31a32254a62cddf7"
+          },
+          {
+            "path": "build/lib/metrics/V8MemoryMetrics.js.map",
+            "sha512": "8b507b9a3d2fb2f1874c4a4963181c57686a392d9369c3a33ec3bfd99a00f62e219a3895cb64d53f84c583f55cca83265fa928c2791c865de1f7abe0f052b3a8"
+          },
+          {
+            "path": "build/test/metrics/V8MemoryMetricsTest.js.map",
+            "sha512": "cc8232dbc6f326432213d3d90f3e577874c375e428e19bb6d8de3ae73df423c5995f204a6f65127fb6f940aaa9ce28ca5d110593f04ed996aa8924df221441a1"
+          },
+          {
+            "path": "build/lib/metrics/V8ProcessMetrics.js.map",
+            "sha512": "66953fce22b552038b06d65cc866fc03d793557d62ae49e30d4f5c449f7bb0c043d155c8141d32ed2d7d186c385c062b2a1644ca921bb42eadf6e040e48039e1"
+          },
+          {
+            "path": "README.md",
+            "sha512": "9459cb3e00d3bb5be78fe5f8e9e0c00fd227be318812445f072881e8df50b006f00f28bfbe7528782937bde3493c0aa5fab047acd39e2cfbd811186db47aeae6"
+          },
+          {
+            "path": "build/lib/metrics/index.d.ts",
+            "sha512": "2019b5ce7cce351d85a9a460ada769a0ce734436446e2d6e0a0ab8e8dfeb23d10b357bd27626a942a83e5ae3c5c11fd02baac7e30f46b329a3d9c01d97483d10"
+          },
+          {
+            "path": "build/lib/metrics/V8EventLoop.d.ts",
+            "sha512": "b21f46c597934f3ca2c540c6abd54da67cb21f4b327fa4a93e52aa79be522861f0fb0dcb149aa4eba86bccad327e2bdbd9413400dae11e92d9ad50f3b0d16988"
+          },
+          {
+            "path": "build/lib/metrics/V8GCMetrics.d.ts",
+            "sha512": "0b2ab46e22fef14d0f0882199c80664eb4a02667189919ac1e119074e89af9f226c450354a634c764d8085179bfece4cd0d7f1fe1a02dff828299e0cad85dabe"
+          },
+          {
+            "path": "build/test/metrics/V8GCMetricsTest.d.ts",
+            "sha512": "e5bff6bc6931933a7f4fb4bc54cac5cbd104f37d51955328a0d098b2e512412d863e28e98e9edd65a358e5d05b4d071ca4406e3c232be8df465f13b5366cf133"
+          },
+          {
+            "path": "build/lib/metrics/V8MemoryMetrics.d.ts",
+            "sha512": "a54f7fea9077bceb8fc17d310b0e359d2098531d84610cd996776710d6b107fe2994d063f237ced0ffc8838d011a80f2eb3ce5a64afcbb11e4229b53b88fce2f"
+          },
+          {
+            "path": "build/test/metrics/V8MemoryMetricsTest.d.ts",
+            "sha512": "ba9fd086906ee3c0177b6bd6db8fab61a84c1b5c2db2c15a59439411b1823b7476656ec21ff28387bf268a5d11be896074b92854f68054fe7a2ff1aeaaf58daf"
+          },
+          {
+            "path": "build/lib/metrics/V8ProcessMetrics.d.ts",
+            "sha512": "cc16a6f96dae5c6e981d0c73b217cb640a2c4ee945a3b7788ab21360e10f5a1ab478d97a2e81ed1c280bcb928815c464757cd59a75f1d2155a406ad987465145"
+          }
+        ]
+      }
     },
     {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "8093fe685835954bed6135785bc24193b7964758aebe85cc340767276b0e6f6ab876b0f2c52285d478d9f0baaa9c5143cbb281f8a34342fa6159a543bc613f21"
+      "entry": "identity/v1alpha2",
+      "value": {
+        "identity": {
+          "keybaseUser": "rstiller"
+        }
+      }
     },
     {
-      "path": "build/lib/metrics/V8EventLoop.js",
-      "sha512": "a0e5ec94fdbde90af924d95e8bc68ce2f957f344ad1885240884a739282c3b7e30ffd694f689cba106ad586ed838b4036ca13d1cf423cb4006a2e8fc5f912766"
+      "entry": "npmCompatiblePackageJson/v1alpha2",
+      "value": {
+        "packageJsonProperties": [
+          "compodoc",
+          "dependencies",
+          "description",
+          "engines",
+          "files",
+          "homepage",
+          "keywords",
+          "license",
+          "licenses",
+          "main",
+          "name",
+          "nyc",
+          "peerDependencies",
+          "repository",
+          "scripts",
+          "typings",
+          "version"
+        ],
+        "sha512": "76c251d2b02f5e2ba0a6888e92ad666a06691ea87dd01c82dbc84fdf55fd0a12ec0ce36f649f41189bc849fe55ab1d6ab87b47700ab6428fcd7b794c6174b78e"
+      }
     },
     {
-      "path": "build/lib/metrics/V8GCMetrics.js",
-      "sha512": "0c7e6371e2565154c8d24dc0e9bcefe88e913233bc7f27796deb64651ccae25a4a2fd60bd99e9962a292df17ffb8ca158611a38aca8e5707251ef925ee0916dc"
-    },
-    {
-      "path": "build/test/metrics/V8GCMetricsTest.js",
-      "sha512": "b515ef43f2d4a9237fc470632e945f8cf2162705096c7ed14b4ef6eeb5e91679d3f30b6774f7acf407fa28efec89321320d83d046469905f6137822f9dd365e0"
-    },
-    {
-      "path": "build/lib/metrics/V8MemoryMetrics.js",
-      "sha512": "fd9e08d9c5d79fa7e492d27a95d6a26239ce3c8e968bf60c3ee1748501e8e3da285cd28e4b4d29a048ba6567e65fd140a70eacde953624d83775d8dd7284f44b"
-    },
-    {
-      "path": "build/test/metrics/V8MemoryMetricsTest.js",
-      "sha512": "5356269c63145294dbc6492a767f5714b5745748269f9e21bf67f9f0739d3fd67be1a05dd94c187743c2e7695bbbd6c6dced203890b85163c0a06099985064e7"
-    },
-    {
-      "path": "build/lib/metrics/V8ProcessMetrics.js",
-      "sha512": "4a724404b281e38611e1e0d6528e71260728b8e23d8faf0e406f38dd910eed39f5dc539e916f6316b0ee1f8b02b988f6371a2cd9f3c9d553c77e3dbd74027e9c"
-    },
-    {
-      "path": "package.json",
-      "sha512": "af420283a6a43474586ae0af00ea47fdc322ab38a9ec1ac1dfc926ca356247ce0b360ae2a53be84574185b2a4fd7566c1e20b356f1db83f413523bd2d57f69c0"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "74cfd1ad0a635043158bb8d30c4e4f66149538c3a09b3b196c0eeaf00d98e2f76d29dba628c56b37c140cb0826d7cc0501ff3f3ab6aa24e6dfd8f99b96449299"
-    },
-    {
-      "path": "build/lib/metrics/V8EventLoop.js.map",
-      "sha512": "1fba7dec44a825437db64230cc201bfeb10bb712ecd54352f03100a8da3b99e618852e4ffede0aed460de428c431f45148ccac1b5d591e5dcb53573ba198ad89"
-    },
-    {
-      "path": "build/lib/metrics/V8GCMetrics.js.map",
-      "sha512": "6bb7c980de468d7b6819dd00769c7a1c25f24f7961ada995ac23062872cf5da2ea0ecc91512fb906aa96e4018a3c7a222a50a2f7467233d1a47281f94880c419"
-    },
-    {
-      "path": "build/test/metrics/V8GCMetricsTest.js.map",
-      "sha512": "5e8a0348a963fcb47029805c76f72a5f4512d0e84e52a8a6116829e8fe65d84f9f8a8c683f731c781891ffbb69411ef9f302e549d16df5bd31a32254a62cddf7"
-    },
-    {
-      "path": "build/lib/metrics/V8MemoryMetrics.js.map",
-      "sha512": "8b507b9a3d2fb2f1874c4a4963181c57686a392d9369c3a33ec3bfd99a00f62e219a3895cb64d53f84c583f55cca83265fa928c2791c865de1f7abe0f052b3a8"
-    },
-    {
-      "path": "build/test/metrics/V8MemoryMetricsTest.js.map",
-      "sha512": "cc8232dbc6f326432213d3d90f3e577874c375e428e19bb6d8de3ae73df423c5995f204a6f65127fb6f940aaa9ce28ca5d110593f04ed996aa8924df221441a1"
-    },
-    {
-      "path": "build/lib/metrics/V8ProcessMetrics.js.map",
-      "sha512": "66953fce22b552038b06d65cc866fc03d793557d62ae49e30d4f5c449f7bb0c043d155c8141d32ed2d7d186c385c062b2a1644ca921bb42eadf6e040e48039e1"
-    },
-    {
-      "path": "README.md",
-      "sha512": "9459cb3e00d3bb5be78fe5f8e9e0c00fd227be318812445f072881e8df50b006f00f28bfbe7528782937bde3493c0aa5fab047acd39e2cfbd811186db47aeae6"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "2019b5ce7cce351d85a9a460ada769a0ce734436446e2d6e0a0ab8e8dfeb23d10b357bd27626a942a83e5ae3c5c11fd02baac7e30f46b329a3d9c01d97483d10"
-    },
-    {
-      "path": "build/lib/metrics/V8EventLoop.d.ts",
-      "sha512": "b21f46c597934f3ca2c540c6abd54da67cb21f4b327fa4a93e52aa79be522861f0fb0dcb149aa4eba86bccad327e2bdbd9413400dae11e92d9ad50f3b0d16988"
-    },
-    {
-      "path": "build/lib/metrics/V8GCMetrics.d.ts",
-      "sha512": "0b2ab46e22fef14d0f0882199c80664eb4a02667189919ac1e119074e89af9f226c450354a634c764d8085179bfece4cd0d7f1fe1a02dff828299e0cad85dabe"
-    },
-    {
-      "path": "build/test/metrics/V8GCMetricsTest.d.ts",
-      "sha512": "e5bff6bc6931933a7f4fb4bc54cac5cbd104f37d51955328a0d098b2e512412d863e28e98e9edd65a358e5d05b4d071ca4406e3c232be8df465f13b5366cf133"
-    },
-    {
-      "path": "build/lib/metrics/V8MemoryMetrics.d.ts",
-      "sha512": "a54f7fea9077bceb8fc17d310b0e359d2098531d84610cd996776710d6b107fe2994d063f237ced0ffc8838d011a80f2eb3ce5a64afcbb11e4229b53b88fce2f"
-    },
-    {
-      "path": "build/test/metrics/V8MemoryMetricsTest.d.ts",
-      "sha512": "ba9fd086906ee3c0177b6bd6db8fab61a84c1b5c2db2c15a59439411b1823b7476656ec21ff28387bf268a5d11be896074b92854f68054fe7a2ff1aeaaf58daf"
-    },
-    {
-      "path": "build/lib/metrics/V8ProcessMetrics.d.ts",
-      "sha512": "cc16a6f96dae5c6e981d0c73b217cb640a2c4ee945a3b7788ab21360e10f5a1ab478d97a2e81ed1c280bcb928815c464757cd59a75f1d2155a406ad987465145"
+      "entry": "packageJson/v1alpha2",
+      "value": {
+        "packageJson": {
+          "name": "inspector-vm",
+          "description": "VM metric collector for nodejs",
+          "homepage": "https://rstiller.github.io/inspector-metrics/",
+          "version": "3.4.0",
+          "main": "./build/lib/metrics/index.js",
+          "typings": "./build/lib/metrics/index.d.ts",
+          "license": "MIT",
+          "licenses": [
+            {
+              "type": "MIT",
+              "url": "https://www.opensource.org/licenses/mit-license.php"
+            }
+          ],
+          "repository": {
+            "type": "git",
+            "url": "https://github.com/rstiller/inspector-metrics"
+          },
+          "keywords": [
+            "metrics",
+            "monitoring",
+            "typescript",
+            "vm",
+            "v8"
+          ],
+          "engines": {
+            "node": ">= 8",
+            "npm": ">= 5"
+          },
+          "peerDependencies": {
+            "inspector-metrics": ">=1.16.x"
+          },
+          "dependencies": {
+            "gc-stats": "^1.4.0",
+            "inspector-metrics": "^1.20.0",
+            "source-map-support": "^0.5.13"
+          },
+          "files": [
+            "build"
+          ],
+          "scripts": {
+            "build": "npm run clean && npm run lint && npm run compile",
+            "sign": "pkgsign sign .",
+            "clean": "rimraf build coverage docs",
+            "compile": "tsc --incremental -p .",
+            "compodoc": "compodoc lib",
+            "coverage": "nyc npm run test",
+            "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+            "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
+            "precompodoc": "npm run coverage",
+            "prepublishOnly": "npm run build",
+            "test": "mocha --opts mocha.opts"
+          },
+          "compodoc": {
+            "tsconfig": "./tsconfig.json",
+            "output": "./docs",
+            "disableGraph": true,
+            "unitTestCoverage": "./coverage/coverage-summary.json"
+          },
+          "nyc": {
+            "include": [
+              "lib/*.ts",
+              "lib/**/*.ts"
+            ],
+            "exclude": [
+              "test/*"
+            ],
+            "extension": [
+              ".ts"
+            ],
+            "require": [],
+            "reporter": [
+              "json-summary"
+            ],
+            "all": true
+          }
+        }
+      }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdJ2FYCRDCMfXrQKYV5wAAb4YQAFNKv6G9JR1uxPNHUuyozKsS\n9m/IH6NEy3xEZzNz9KR2ilpJwbJ1VQs5pl/U0J3fgyM4p0Cra+cNXGw5qkePamwb\nva470ffuqpHQpgxnBJHJg6CXwu0ofMqkeRmgiue0lPes6217eE+wOPs+Vs9id5eE\nXn+ryoHSFSiUYCywolv6ey6Q31hhFD+jf+0UOK/d5vJvRHs4KS3WcBocIBFoeOcI\n1AQYN/z5cj/8u0Sf5iW6u5JzuwN4A8F5KoVjNxLlBcKYEx8r9znX8QR4mjfZp1Qh\nyf/vfnAV3c4NKvPXS7cstJd+i777voYaRC9fQ/At97unKsy2otipK5PlFqryQcrf\n5GdwZ50EPhIY6RPixRepeI3n6QrYxcCqYUn7s+fToPbWUBbV3w4foY98DEW6bqRF\ng9pFKtQCef/MOGW2CJ8vFOk8VEmsGS5dl4HZb+KigEx49zomnu58B7jqwxmwAHyo\nOQwDcgtU+Nl8iJRXWIfcsHBm2Le0eYIn7zWg83Yo5ZMxYzNsnTlLetq7Oekvl8T9\nRWZGlwgkeq+hswm9gcSF+D4RwefWnzC51JxrI0VG4bsSeYx6XpKeiV1ppsMcs67S\n7gktvl80yd+G7wotIbxXnvPLlnXfsODONfV4o3xSkPuwYoogMVy9VKxe/MYaAU8t\nVDs9U8/GYuVFI2DCWrJk\n=uiYu\n-----END PGP SIGNATURE-----\n",
-  "identity": {
-    "keybaseUser": "rstiller"
-  }
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdYGE0CRDCMfXrQKYV5wAA4wMQAKjU6/26jY5x5ZkuoiYQv6Ny\nTDi3jPRwL7zxhyWHX1/7qRjTvDX8gAGLg9Ey6WBW9JqfA4HZty1MFITvQnUJ2NBb\nD39bDX02T+FdN/Blv3NnWckLOPvLiY5LSXD76Xq0Lbf/BnzYfTVyOSfMzihJP6Ie\n4IZkl4bJ+/X+xTcfczG/IAHHYcRnHGEUzz5m8BKkjP125NQ7KX+i1zk72GIN3+bj\npVUosb45X4S+IcUerSv1J6wExNynA0DWmIFo6/qJLHqluca85y55GW1q2k0l4X4b\nFEWrE1GqbXEWFMLBsjMpOsTvFmEJESsew0mpoxq9u/yK/gg3B9wlQa32P9ztAK/M\nYi1BIXjeI6aadJo1oCCRlro+8gJInVLzUoWH3z/1wUQfK6EIFivURtU2UfJIVYW1\nwpvEyHm1sUOSAaRToJQwl+2BLtqHXI1RZ3HQPEjsJ3j4JQtrNqHQmIjy59q+Onh3\nBO3pBh4qJL36491hGZLb0T57umu3mtR92SGRG5rBs5NjBI3EFu3161aR/PVkJ5Zs\nzabRNSVoP1U7Dm4kIW2NDrtl5vs+FEUPCX9FQghZu8PR4i+GKyYN3ptRoGQXQAdG\nE7wNtSkqM9xpOne1DRBmWwXwnE7W/IBV/S/GtHrAwyFFfMxrKO/vM3mxHT/LKR5O\nWiHQdVYhre8BsaVzxUhq\n=B9LW\n-----END PGP SIGNATURE-----\n"
 }

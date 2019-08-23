@@ -1,73 +1,187 @@
 {
-  "version": "v1alpha",
-  "files": [
+  "entries": [
     {
-      "path": "CHANGELOG",
-      "sha512": "ff157d560eaba778187887c833a7726edd8c5c135d4b1ba3350088d6b1d915d01839e8cf95d52c2ad2defb800009654c00bb1c62c79b3af97cae9c1e697e3b7c"
+      "entry": "files/v1alpha2",
+      "value": {
+        "files": [
+          {
+            "path": "CHANGELOG",
+            "sha512": "ff157d560eaba778187887c833a7726edd8c5c135d4b1ba3350088d6b1d915d01839e8cf95d52c2ad2defb800009654c00bb1c62c79b3af97cae9c1e697e3b7c"
+          },
+          {
+            "path": "LICENSE",
+            "sha512": "1489ff64267bcf357ff9734a52f0637b09486161c6b43d32d3c439372648e04e3281f2d9ef0449a54d8a68ffb0d046232ecee9a9818baa96a0087acac663f708"
+          },
+          {
+            "path": "build/lib/metrics/DefaultSender.js",
+            "sha512": "b12d2e46f4c43a407954a01694e2da84edb1dea5d8f3655a0938e93f03389c4553b2e15ec25c9da5b463b48719697f28aca1c01e46764c6ffc333d7bc9bab6e0"
+          },
+          {
+            "path": "build/lib/metrics/index.js",
+            "sha512": "b5c91e6ee56299995f7ff41d93dcfe73fac6e699bfeabae2e01b59a5f80ba37f4419384b72c0070ab74ff4dfafbb0e8954ebe7844b1b87b186ff84eb9d2d6205"
+          },
+          {
+            "path": "build/lib/metrics/InfluxMetricReporter.js",
+            "sha512": "77aced35198478a8c0147ab8ac37296eea6baa659c9b87661d35841c90b7217aa1299e7f1b8c231f540fd62d71752f8ce008480d5b91f14c87c9487077ee5f22"
+          },
+          {
+            "path": "build/test/metrics/InfluxMetricReporterTest.js",
+            "sha512": "60c39fda09bf09b0ae699837ef0d8fc38afc68f66d775c37568a51c931202a50bbc5b5fb1324be63b10ea0066cb0bcccb3d44a6f9ef25f35ddeae1cabe551049"
+          },
+          {
+            "path": "build/lib/metrics/DefaultSender.js.map",
+            "sha512": "0f9a87ac742d36b27e8a66f65c5e6924c77ff6eaf338c1829acb8d5e0af4ae11f555d2a7ab9f0813c999cf9627b39a8b81164936decb98341d4ed7ceb7aea055"
+          },
+          {
+            "path": "build/lib/metrics/index.js.map",
+            "sha512": "e720cdd5abdccd78ab1aae8940634b3678ffdc96ae38389ab52819cd5125ba11d7fa733d9f82769c0e90c40b86bbe21d343de0da4dd2c4952f82dbe323d72527"
+          },
+          {
+            "path": "build/lib/metrics/InfluxMetricReporter.js.map",
+            "sha512": "dac4af4f31d67204fd537fa729ae5f06479b0f0b184011177171a2f0386f1852a4111f95d2628b859174d05cc2cf34fc801c68653c2ed1d5c40836d929265198"
+          },
+          {
+            "path": "build/test/metrics/InfluxMetricReporterTest.js.map",
+            "sha512": "eabf5183d3fe99ff1084c16e8c7185933f52c97e05b5d501da38486d791565c17eee5ba078168c5fd4735a755f269b3fa8da22ac80e8beaba75941c69a247ddb"
+          },
+          {
+            "path": "README.md",
+            "sha512": "b9ebf061bb1e1598b16f20e3cdf59f71c532886e4d0adfb873d77a8d69ce5e632b739691685c2fd773de2d89ad563191939fe15315ed281b3be9c3ae8630bfac"
+          },
+          {
+            "path": "build/lib/metrics/DefaultSender.d.ts",
+            "sha512": "2ca3337fd9122a6e3ea73d41ba62e216d318c52e202347d4fb05aaebb00fa063ac1fe0026238d0dd8d5a6ea495042449557487ff2a7b3b32f55d7efb3a0a29de"
+          },
+          {
+            "path": "build/lib/metrics/index.d.ts",
+            "sha512": "1ec292199b33b0ab1b7a466e1980a0b0d0455ec36246ac3c6eb48e162bca6db7442a0ca5fceccb0871cc62b64bd31171280c9c834164c2edf23a39bf8853b78d"
+          },
+          {
+            "path": "build/lib/metrics/InfluxMetricReporter.d.ts",
+            "sha512": "d1b3c97f68bd02ad0455df17f6d93e9ee9866d47376b21aa13316d81a406f19e8de712b6b989489d033d4d3c19ddb804d61eae7ab9cccc5da4e7ba55ca82adf9"
+          },
+          {
+            "path": "build/test/metrics/InfluxMetricReporterTest.d.ts",
+            "sha512": "61344f201d64e1341ffa79081ae989fb49e4b10fd4f21848362c309c6618571990be5cf9ceb43533f7d4f3675c72a33540bee3df756d4692e8a688ec2b55e1c7"
+          }
+        ]
+      }
     },
     {
-      "path": "LICENSE",
-      "sha512": "1489ff64267bcf357ff9734a52f0637b09486161c6b43d32d3c439372648e04e3281f2d9ef0449a54d8a68ffb0d046232ecee9a9818baa96a0087acac663f708"
+      "entry": "identity/v1alpha2",
+      "value": {
+        "identity": {
+          "keybaseUser": "rstiller"
+        }
+      }
     },
     {
-      "path": "build/lib/metrics/DefaultSender.js",
-      "sha512": "b12d2e46f4c43a407954a01694e2da84edb1dea5d8f3655a0938e93f03389c4553b2e15ec25c9da5b463b48719697f28aca1c01e46764c6ffc333d7bc9bab6e0"
+      "entry": "npmCompatiblePackageJson/v1alpha2",
+      "value": {
+        "packageJsonProperties": [
+          "compodoc",
+          "dependencies",
+          "description",
+          "engines",
+          "files",
+          "homepage",
+          "keywords",
+          "license",
+          "licenses",
+          "main",
+          "name",
+          "nyc",
+          "peerDependencies",
+          "repository",
+          "scripts",
+          "typings",
+          "version"
+        ],
+        "sha512": "bb63dd319819fc629f1a2f81622ea0d0865f0bb7d3012a3e3ae6d743c00796d0104c3358f88bcae08b3864e92b45cd0104c94fb69333c715f8a3602678ac2040"
+      }
     },
     {
-      "path": "build/lib/metrics/index.js",
-      "sha512": "b5c91e6ee56299995f7ff41d93dcfe73fac6e699bfeabae2e01b59a5f80ba37f4419384b72c0070ab74ff4dfafbb0e8954ebe7844b1b87b186ff84eb9d2d6205"
-    },
-    {
-      "path": "build/lib/metrics/InfluxMetricReporter.js",
-      "sha512": "77aced35198478a8c0147ab8ac37296eea6baa659c9b87661d35841c90b7217aa1299e7f1b8c231f540fd62d71752f8ce008480d5b91f14c87c9487077ee5f22"
-    },
-    {
-      "path": "build/test/metrics/InfluxMetricReporterTest.js",
-      "sha512": "60c39fda09bf09b0ae699837ef0d8fc38afc68f66d775c37568a51c931202a50bbc5b5fb1324be63b10ea0066cb0bcccb3d44a6f9ef25f35ddeae1cabe551049"
-    },
-    {
-      "path": "package.json",
-      "sha512": "b0fda932eac62743a8212b435b784d71591a00c1a3b9b60088ed9c1fb984a3e778820bfe1e15902ae6c26712b2070767b47b2a90a6492e4b8b915ae9740aaa03"
-    },
-    {
-      "path": "build/lib/metrics/DefaultSender.js.map",
-      "sha512": "0f9a87ac742d36b27e8a66f65c5e6924c77ff6eaf338c1829acb8d5e0af4ae11f555d2a7ab9f0813c999cf9627b39a8b81164936decb98341d4ed7ceb7aea055"
-    },
-    {
-      "path": "build/lib/metrics/index.js.map",
-      "sha512": "e720cdd5abdccd78ab1aae8940634b3678ffdc96ae38389ab52819cd5125ba11d7fa733d9f82769c0e90c40b86bbe21d343de0da4dd2c4952f82dbe323d72527"
-    },
-    {
-      "path": "build/lib/metrics/InfluxMetricReporter.js.map",
-      "sha512": "dac4af4f31d67204fd537fa729ae5f06479b0f0b184011177171a2f0386f1852a4111f95d2628b859174d05cc2cf34fc801c68653c2ed1d5c40836d929265198"
-    },
-    {
-      "path": "build/test/metrics/InfluxMetricReporterTest.js.map",
-      "sha512": "eabf5183d3fe99ff1084c16e8c7185933f52c97e05b5d501da38486d791565c17eee5ba078168c5fd4735a755f269b3fa8da22ac80e8beaba75941c69a247ddb"
-    },
-    {
-      "path": "README.md",
-      "sha512": "b9ebf061bb1e1598b16f20e3cdf59f71c532886e4d0adfb873d77a8d69ce5e632b739691685c2fd773de2d89ad563191939fe15315ed281b3be9c3ae8630bfac"
-    },
-    {
-      "path": "build/lib/metrics/DefaultSender.d.ts",
-      "sha512": "2ca3337fd9122a6e3ea73d41ba62e216d318c52e202347d4fb05aaebb00fa063ac1fe0026238d0dd8d5a6ea495042449557487ff2a7b3b32f55d7efb3a0a29de"
-    },
-    {
-      "path": "build/lib/metrics/index.d.ts",
-      "sha512": "1ec292199b33b0ab1b7a466e1980a0b0d0455ec36246ac3c6eb48e162bca6db7442a0ca5fceccb0871cc62b64bd31171280c9c834164c2edf23a39bf8853b78d"
-    },
-    {
-      "path": "build/lib/metrics/InfluxMetricReporter.d.ts",
-      "sha512": "d1b3c97f68bd02ad0455df17f6d93e9ee9866d47376b21aa13316d81a406f19e8de712b6b989489d033d4d3c19ddb804d61eae7ab9cccc5da4e7ba55ca82adf9"
-    },
-    {
-      "path": "build/test/metrics/InfluxMetricReporterTest.d.ts",
-      "sha512": "61344f201d64e1341ffa79081ae989fb49e4b10fd4f21848362c309c6618571990be5cf9ceb43533f7d4f3675c72a33540bee3df756d4692e8a688ec2b55e1c7"
+      "entry": "packageJson/v1alpha2",
+      "value": {
+        "packageJson": {
+          "name": "inspector-influx",
+          "description": "InfluxDB metric reporter for nodejs",
+          "homepage": "https://rstiller.github.io/inspector-metrics/",
+          "version": "2.6.0",
+          "main": "./build/lib/metrics/index.js",
+          "typings": "./build/lib/metrics/index.d.ts",
+          "license": "MIT",
+          "licenses": [
+            {
+              "type": "MIT",
+              "url": "https://www.opensource.org/licenses/mit-license.php"
+            }
+          ],
+          "repository": {
+            "type": "git",
+            "url": "https://github.com/rstiller/inspector-metrics"
+          },
+          "keywords": [
+            "metrics",
+            "monitoring",
+            "typescript",
+            "influxdb"
+          ],
+          "engines": {
+            "node": ">= 8",
+            "npm": ">= 3"
+          },
+          "peerDependencies": {
+            "inspector-metrics": ">=1.16.x"
+          },
+          "dependencies": {
+            "influx": "^5.4.0",
+            "inspector-metrics": "^1.20.0",
+            "source-map-support": "^0.5.13"
+          },
+          "files": [
+            "build"
+          ],
+          "scripts": {
+            "build": "npm run clean && npm run lint && npm run compile",
+            "sign": "pkgsign sign .",
+            "clean": "rimraf build coverage docs",
+            "compile": "tsc --incremental -p .",
+            "compodoc": "compodoc lib",
+            "coverage": "nyc npm run test",
+            "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
+            "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
+            "precompodoc": "npm run coverage",
+            "prepublishOnly": "npm run build",
+            "test": "mocha --opts mocha.opts"
+          },
+          "compodoc": {
+            "tsconfig": "./tsconfig.json",
+            "output": "./docs",
+            "disableGraph": true,
+            "assetsFolder": "assets",
+            "unitTestCoverage": "./coverage/coverage-summary.json"
+          },
+          "nyc": {
+            "include": [
+              "lib/*.ts",
+              "lib/**/*.ts"
+            ],
+            "exclude": [
+              "test/*"
+            ],
+            "extension": [
+              ".ts"
+            ],
+            "require": [],
+            "reporter": [
+              "json-summary"
+            ],
+            "all": true
+          }
+        }
+      }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdJ2FYCRDCMfXrQKYV5wAAyecQAC7mSWWjVff+a8XFYzsBoRjg\nF/sp6sWvT/dwjAaSIVk7oLGDq9mWEsV1T7W+YAnPub3i0E8MeXffO+GAfuL0ioji\n7yO1IeJXkmxY1/91oZ6Tb3koS3sa8nHtUOJHEI9FFSX//n+VyV+xpEW+V2xXP1ZA\nsW+RLJzl0ObCrp73sS1cmfM4ll4+zj8OmJXefXwH0FD9nrGNBFX/FCr9AY5C2QTe\neOJMm9qTBh+oCwONmQ2nQ66Nfa/KzvusW/GvOOndxzkl3hzm2rKwJ7v1uqlILKz5\nCqqyts9ObTiRE9ZxdyzNmRe4bXWEbUFgTUnx48ugFoDl85OSuT2n2WX81c4C8Pfh\ney/w2NjlfPcToggfvzLEtl9ZyjDhbaR5w6hziMbXbWoOuC+jV76Lb+BjPPT2ZPrs\nwcuSsYgVXPpW9taPWEwLyA325JTi0jUTwW+5LWN4Y3czVN4fF+IH9GIHz7ahoSea\nNnq9ZDDc3fdGq5RmZncB7dVBEFmwnVfB/BXtf/pKpydoNC6Api73czLUfkwSBzsj\nwHlJCtR5hKFHX59gQJkgeR03brT01s806Eqm3mAJjbM/h1l/JQCcr95kg6eTTCVy\nQXm3yjKylY6GjN6w5LNGwuLK9vWHUiKqtukrmvSksuloeYgqW0ayO82+w9i0agO+\n6JLzeXOaQWEBQ/Y72D4F\n=p//w\n-----END PGP SIGNATURE-----\n",
-  "identity": {
-    "keybaseUser": "rstiller"
-  }
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJdYGE0CRDCMfXrQKYV5wAA2tMQAAZmeaVQhQZCQlV1mjavb/qS\n2v8SHBNq/Om0145FN05iaG2pwsMC+Lg1UQ91JSpAJORFVwvBk82v5DPEn8ZQXJKu\nmgIznCfFKbFNREmETscFZoEdFE1k1sf3duXyM5si0dLUA3nMpDZgotMfFkJgR2ab\nSQt+8ZPHiDKzmo33VXarFL98ePO+z1MG5DYeDUncfiMnG4i0oOM0zWS1CDHOZT9W\nWX3nfG4l2m68BpyySF5HP3nf0bQlo1FGutyxy0a+F6dks1pxJEAnLyPxe+gLqEnJ\nJU7+agugcUBMOCaPK5aWMfDVLDVP4E2pdZ8jlXasKVOAQuVJX7bMnc13K5LS4W07\nv85TDfUcVlCE7Y/1KZyPe1uw9Kxpa4QcmTqmMH7srzuBUf3GvSRbqhndStIZQMGQ\nr5Yuztdamh1U1hjhKTuF1budrm+ptksHKjOp6cnlM3v6dogOQixoGh+kKKreTFQI\n5Dm2DZZgr5qySHFZHlPLVPl0qbE76GmvvAuNLSJfn7WN+aVYc21wHiUtdaqeQbiQ\nkgWBOvORt+8Z9BsEc3yyUXHI3WaGujYFjoL9AV1RS5hLPKzw4jx958oKwP3zFsQ8\nypIyOv2opgJE+KGCD6o7Ny1nEBKuKPT/if1siyjNONQpXy0YBgYBE8ocHJ2OhXyn\nRqrfH7A4Zx7O6gd5Bdss\n=rCWf\n-----END PGP SIGNATURE-----\n"
 }
