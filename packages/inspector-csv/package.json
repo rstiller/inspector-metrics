@@ -33,8 +33,8 @@
     "async": "^3.1.0",
     "inspector-metrics": "^1.20.0",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.26",
-    "source-map-support": "^0.5.13"
+    "moment-timezone": "^0.5.27",
+    "source-map-support": "^0.5.16"
   },
   "files": [
     "build"

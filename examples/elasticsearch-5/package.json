@@ -13,6 +13,9 @@
       "url": "https://www.opensource.org/licenses/mit-license.php"
     }
   ],
+  "peerDependencies": {
+    "@elastic/elasticsearch": ">=5.6.0 && <6.0.0"
+  },
   "dependencies": {
     "@elastic/elasticsearch": "^5.6.16",
     "inspector-elasticsearch": "^2.6.0",

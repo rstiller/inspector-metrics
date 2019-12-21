@@ -3,36 +3,33 @@
     "version": "0.0.0",
     "private": true,
     "devDependencies": {
-        "@types/async": "3.0.1",
-        "@types/chai": "4.2.0",
-        "@types/hapi": "18.0.2",
-        "@types/lodash": "4.14.137",
+        "@hapi/hapi": "18.4.0",
+        "@types/async": "3.0.3",
+        "@types/chai": "4.2.7",
+        "@types/hapi": "18.0.3",
+        "@types/lodash": "4.14.149",
         "@types/mocha": "5.2.7",
         "@types/moment-timezone": "0.5.12",
-        "@types/nock": "10.0.3",
-        "@types/node": "12.7.2",
-        "@types/sinon": "7.0.13",
+        "@types/node": "12.12.21",
+        "@types/sinon": "7.5.1",
         "@types/sinon-chai": "3.2.3",
         "chai": "4.2.0",
-        "event-stream": "3.3.4",
-        "handlebars": "4.1.2",
-        "hapi": "18.1.0",
+        "husky": "3.1.0",
         "js-yaml": "3.13.1",
-        "lerna": "3.16.4",
-        "mocha": "6.2.0",
+        "lerna": "3.19.0",
+        "mocha": "6.2.2",
         "mocha-typescript": "1.1.17",
-        "nock": "10.0.6",
+        "nock": "11.7.0",
         "nyc": "14.1.1",
         "pkgsign": "0.2.0",
-        "pre-commit": "1.2.2",
         "reflect-metadata": "0.1.13",
         "rimraf": "3.0.0",
-        "sinon": "7.4.1",
+        "sinon": "7.5.0",
         "sinon-chai": "3.3.0",
-        "standard": "14.0.2",
-        "ts-node": "8.3.0",
-        "tslint": "5.19.0",
-        "typescript": "3.5.3"
+        "standard": "14.3.1",
+        "ts-node": "8.5.4",
+        "tslint": "5.20.1",
+        "typescript": "3.7.4"
     },
     "scripts": {
         "bootstrap": "lerna bootstrap",
@@ -50,5 +47,9 @@
         "prepublishDocs": "docker-compose run --rm docs",
         "test": "lerna run test"
     },
-    "precommit": "sign"
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm sign"
+        }
+    }
 }
