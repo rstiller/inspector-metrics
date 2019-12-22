@@ -1,6 +1,6 @@
 import "source-map-support/register";
 
-import { Client, ClientOptions } from "@elastic/elasticsearch";
+import { Client } from "@elastic/elasticsearch";
 import {
     Counter,
     DefaultClusterOptions,
@@ -52,10 +52,9 @@ export interface ElasticsearchMetricReporterOption extends ScheduledMetricReport
     /**
      * Elasticsearch client options.
      *
-     * @type {ClientOptions}
      * @memberof ElasticsearchMetricReporterOption
      */
-    readonly clientOptions: ClientOptions;
+    readonly clientOptions: {};
     /**
      * Logger instance used to report errors.
      *
