@@ -10,7 +10,7 @@
         "@types/lodash": "4.14.149",
         "@types/mocha": "7.0.2",
         "@types/moment-timezone": "0.5.12",
-        "@types/node": "13.9.1",
+        "@types/node": "13.9.2",
         "@types/sinon": "7.5.2",
         "@types/sinon-chai": "3.2.3",
         "chai": "4.2.0",
