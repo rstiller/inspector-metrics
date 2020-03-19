@@ -19,7 +19,7 @@
         "lerna": "3.20.2",
         "mocha": "7.1.1",
         "mocha-typescript": "1.1.17",
-        "nock": "12.0.2",
+        "nock": "12.0.3",
         "nyc": "15.0.0",
         "pkgsign": "0.2.0",
         "reflect-metadata": "0.1.13",
