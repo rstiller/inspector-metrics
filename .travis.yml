@@ -9,7 +9,7 @@ node_js:
 os:
   - windows
   - linux
-  - osx
+  # - osx
 cache:
   directories:
     - "node_modules"
