@@ -1,6 +1,6 @@
-import "source-map-support";
+import 'source-map-support'
 
-import { InterprocessMessage } from "inspector-metrics";
+import { InterprocessMessage } from 'inspector-metrics'
 
 /**
  * A message send from master process to forked processes in order
@@ -11,11 +11,11 @@ import { InterprocessMessage } from "inspector-metrics";
  * @extends {InterprocessMessage}
  */
 export interface InterprocessReportRequest extends InterprocessMessage {
-    /**
-     * A unique id used to identify responses send back from forked processes.
-     *
-     * @type {string}
-     * @memberof InterprocessReportRequest
-     */
-    readonly id: string;
+  /**
+   * A unique id used to identify responses send back from forked processes.
+   *
+   * @type {string}
+   * @memberof InterprocessReportRequest
+   */
+  readonly id: string
 }

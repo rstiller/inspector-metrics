@@ -21,6 +21,8 @@ This library is made for [inspector-metrics](https://github.com/rstiller/inspect
 is meant to be used with `typescript` / `nodejs`.  
 It uses the [official elasticsearch js client](https://www.npmjs.com/package/@elastic/elasticsearch).
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 `npm install --save inspector-elasticsearch`

@@ -21,6 +21,8 @@ This library is made for [inspector-metrics](https://github.com/rstiller/inspect
 is meant to be used with `nodejs`.  
 It uses [node-influx](https://github.com/node-influx/node-influx) as influxdb client.
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 `npm install --save inspector-influx`

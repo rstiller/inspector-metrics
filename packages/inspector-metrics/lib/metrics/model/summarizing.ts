@@ -10,13 +10,13 @@ import { Int64Wrapper } from "./int64";
  */
 export interface Summarizing {
 
-    /**
-     * Gets the sum of values.
-     *
-     * @returns {Int64Wrapper}
-     * @memberof Summarizing
-     */
-    getSum(): Int64Wrapper;
+  /**
+   * Gets the sum of values.
+   *
+   * @returns {Int64Wrapper}
+   * @memberof Summarizing
+   */
+  getSum(): Int64Wrapper;
 
 }
 
@@ -28,12 +28,12 @@ export interface Summarizing {
  */
 export interface SerializableSummarizing {
 
-    /**
-     * int64 number in it's string representation.
-     *
-     * @type {string}
-     * @memberof SerializableSummarizing
-     */
-    sum: string;
+  /**
+   * int64 number in it's string representation.
+   *
+   * @type {string}
+   * @memberof SerializableSummarizing
+   */
+  sum: string;
 
 }

@@ -1,10 +1,10 @@
-/* tslint:disable:no-unused-expression */
+/* eslint-env mocha */
 
-import "reflect-metadata";
-import "source-map-support/register";
+import 'reflect-metadata'
+import 'source-map-support/register'
 
 // import * as chai from "chai";
-import { suite, test } from "mocha-typescript";
+import { suite, test } from 'mocha-typescript'
 
 // import { InfluxMetricReporter } from "../../lib/metrics/influx-metric-reporter";
 
@@ -12,9 +12,7 @@ import { suite, test } from "mocha-typescript";
 
 @suite
 export class InfluxMetricReporterTest {
-
-    @test
-    public checkNothing(): void {
-    }
-
+  @test
+  public checkNothing (): void {
+  }
 }

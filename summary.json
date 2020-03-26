@@ -1,0 +1,22 @@
+[{
+    "title": "inspector-metrics",
+    "file": "packages/inspector-metrics/README.md"
+}, {
+    "title": "inspector-carbon",
+    "file": "packages/inspector-carbon/README.md"
+}, {
+    "title": "inspector-csv",
+    "file": "packages/inspector-csv/README.md"
+}, {
+    "title": "inspector-elasticsearch",
+    "file": "packages/inspector-elasticsearch/README.md"
+}, {
+    "title": "inspector-influx",
+    "file": "packages/inspector-influx/README.md"
+}, {
+    "title": "inspector-prometheus",
+    "file": "packages/inspector-prometheus/README.md"
+}, {
+    "title": "inspector-vm",
+    "file": "packages/inspector-vm/README.md"
+}]

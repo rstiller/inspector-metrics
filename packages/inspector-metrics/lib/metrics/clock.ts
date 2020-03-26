@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Represents a point in time.
@@ -7,8 +7,8 @@ import "source-map-support/register";
  * @interface Time
  */
 export interface Time {
-    milliseconds: number;
-    nanoseconds: number;
+  milliseconds: number
+  nanoseconds: number
 }
 
 /**
@@ -21,13 +21,13 @@ export interface Time {
  * @param {Time} two time sample
  * @returns {number} a duration in nanoseconds
  */
-export function diff(one: Time, two: Time): number {
-    if (!one || !two) {
-        return 0;
-    }
-    const oneValue: number = one.nanoseconds + one.milliseconds * 1000000;
-    const twoValue: number = two.nanoseconds + two.milliseconds * 1000000;
-    return twoValue - oneValue;
+export function diff (one: Time, two: Time): number {
+  if (!one || !two) {
+    return 0
+  }
+  const oneValue: number = one.nanoseconds + one.milliseconds * 1000000
+  const twoValue: number = two.nanoseconds + two.milliseconds * 1000000
+  return twoValue - oneValue
 }
 
 /**
@@ -38,16 +38,14 @@ export function diff(one: Time, two: Time): number {
  * @class Clock
  */
 export abstract class Clock {
-
-    /**
-     * Gets the current point in time according to the logic of the clock implementation.
-     *
-     * @abstract
-     * @returns {Time}
-     * @memberof Clock
-     */
-    public abstract time(): Time;
-
+  /**
+   * Gets the current point in time according to the logic of the clock implementation.
+   *
+   * @abstract
+   * @returns {Time}
+   * @memberof Clock
+   */
+  public abstract time(): Time;
 }
 
 /**
@@ -58,19 +56,17 @@ export abstract class Clock {
  * @extends {Clock}
  */
 export class StdClock extends Clock {
-
-    /**
-     * Returns a Time object who's nanoseconds component is always zero.
-     *
-     * @returns {Time}
-     * @memberof StdClock
-     */
-    public time(): Time {
-        const time = {
-            milliseconds: Date.now(),
-            nanoseconds: 0,
-        };
-        return time;
+  /**
+   * Returns a Time object who's nanoseconds component is always zero.
+   *
+   * @returns {Time}
+   * @memberof StdClock
+   */
+  public time (): Time {
+    const time = {
+      milliseconds: Date.now(),
+      nanoseconds: 0
     }
-
+    return time
+  }
 }

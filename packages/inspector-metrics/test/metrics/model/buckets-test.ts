@@ -1,4 +1,4 @@
-/* tslint:disable:no-unused-expression */
+/* eslint-env mocha */
 
 import "reflect-metadata";
 import "source-map-support/register";

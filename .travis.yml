@@ -7,13 +7,17 @@ node_js:
   - 9
   - 8
 os:
-  - windows
+  # - windows
   - linux
   # - osx
 cache:
+  npm: false
   directories:
-    - "node_modules"
-before_script:
-  - "npm run bootstrap"
+    - "~/.pnpm-store"
+before_install:
+  - curl -L https://unpkg.com/@pnpm/self-installer | node
+  - npm config set store-dir ~/.pnpm-store
+install:
+  - pnpm install
 env:
   - TZ=Europe/Berlin

@@ -22,6 +22,8 @@ node module and is meant to be used with `nodejs`.
 All metrics from the [inspector-metrics](https://github.com/rstiller/inspector-metrics) library
 can exported into CSV files.
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 `npm install --save inspector-csv`

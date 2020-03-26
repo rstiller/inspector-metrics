@@ -14,18 +14,18 @@ import "source-map-support/register";
  * @interface MetricEntry
  */
 export interface MetricEntry {
-    /**
-     * timestamp of the latest report.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastReport: number;
-    /**
-     * value that got reported as latest.
-     *
-     * @type {number}
-     * @memberof MetricEntry
-     */
-    lastValue: number;
+  /**
+   * timestamp of the latest report.
+   *
+   * @type {number}
+   * @memberof MetricEntry
+   */
+  lastReport: number;
+  /**
+   * value that got reported as latest.
+   *
+   * @type {number}
+   * @memberof MetricEntry
+   */
+  lastValue: number;
 }
