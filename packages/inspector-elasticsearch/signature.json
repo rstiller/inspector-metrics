@@ -6,15 +6,39 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "e6ac08d97c441a554e731e0c32f236dadbe63fa925542a16c72a750afae81bf2fcba4544a41bc2b32a5402ca048717e39ba38260b4a205d2e46c0fc77c932385"
+            "sha512": "2273d348074b7c4bc33bdab79bd21a0a85aec606ef39b90d22c7649bdbfc25dad9dcb4f72b91979183281e901d4a587b3a2c6870aa36270ac0d2009d6c7ca33e"
           },
           {
             "path": "LICENSE",
             "sha512": "0e40176003a9833d036a69bcff9e6e16b9f274117bb9815bbb7cfdcac746dfbaf3700205917a576170a9d9b3d502927b578147d49a85f7cd1af8177457ffde94"
           },
           {
+            "path": "build/lib/metrics/ElasticsearchMetricReporter.js",
+            "sha512": "02d4209c4ebb5531a34f87b620f9538150d737ab34e467d12bdf1562a73971976f692c66f4f1bbe6434e040c5c9f7450758b0668ff834df5bc8c001733da1a5f"
+          },
+          {
+            "path": "build/lib/metrics/index.js",
+            "sha512": "886904b5210c1705247e6e993f541c1dcde05cb2bcc29e2c01a5619c1385b0609324c26dbc0841fcc0d4440aa247c003b1f654964fad49e5de3f33da8ea0e313"
+          },
+          {
+            "path": "build/lib/metrics/ElasticsearchMetricReporter.js.map",
+            "sha512": "f301056548d4003bf702c615c38f41541bfce3fa830dacd715b7944b9cd7fcf4e844aa61cd8fec3c6f0939bb969243065b2998c48f99f91f852d020f25f133b0"
+          },
+          {
+            "path": "build/lib/metrics/index.js.map",
+            "sha512": "e03b0020b50995679a47f2d4a9dd2e1e3ef88079cc9ad2a12d1fcda1ac0d46b2ede03c6cc468814baabff991f067c2654fcfcc4214020d0bd1c6c0aedf4da8c1"
+          },
+          {
             "path": "README.md",
-            "sha512": "165daf71ccff8acd4de1af0675b389eff5447bae8030eee37403bfc28f422d269acb8a09cad367fd7b7833ba6cfed023c1a3c39f5e97db2b948a31f168163eb8"
+            "sha512": "088ee3ac61773e0381aaf6642580bfd6f184c0c2dfe35eab7a64089fa0ad878241f4c696e2586ea7b8fa1adc50e93ba8da12b477c55759537ce55a48d1b4d6df"
+          },
+          {
+            "path": "build/lib/metrics/ElasticsearchMetricReporter.d.ts",
+            "sha512": "9bb81aac507ae9ef364cee9c69926740fd7ee6f3780868639a4861f3bbea07f0da8b09b2255edfa7254b67e0a24c07eaef26285c5667edf8ceb757fc1f45cc0e"
+          },
+          {
+            "path": "build/lib/metrics/index.d.ts",
+            "sha512": "ee050961d348d0c24515105691a30f2ac9f383b52260e0843aca8767b39eaad7084062e3af6960809cea5ca525464f1c80e67e4c7e000f04291b22bfb843055c"
           }
         ]
       }
@@ -31,9 +55,9 @@
       "entry": "npmCompatiblePackageJson/v1alpha2",
       "value": {
         "packageJsonProperties": [
-          "compodoc",
           "dependencies",
           "description",
+          "devDependencies",
           "engines",
           "files",
           "homepage",
@@ -41,15 +65,15 @@
           "license",
           "licenses",
           "main",
+          "mocha",
           "name",
-          "nyc",
           "peerDependencies",
           "repository",
           "scripts",
           "typings",
           "version"
         ],
-        "sha512": "8ec6c8713e88f40ebe546499f41308741a8edd6f2f95b394ba588abea2641a9a8532797430e59b54bd8af71bc38cafbcf263e27da113346b87d20a7beb14843a"
+        "sha512": "c9483296d11b7b93aecd2c05e2ca20624200ffdc79c2e0f5846a98074090ae5fed6b8c2c904ddd4f3d108891a17d19ecc38f7a0f6ccf475abe4f0e3d3d079ed1"
       }
     },
     {
@@ -93,49 +117,56 @@
             "lodash": "^4.17.15",
             "source-map-support": "^0.5.16"
           },
+          "devDependencies": {
+            "@types/chai": "4.2.11",
+            "@types/mocha": "7.0.2",
+            "@types/node": "13.7.7",
+            "@typescript-eslint/eslint-plugin": "2.25.0",
+            "@typescript-eslint/parser": "2.25.0",
+            "chai": "4.2.0",
+            "eslint": "6.8.0",
+            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint-import-resolver-node": "0.3.3",
+            "eslint-plugin-import": "2.20.1",
+            "eslint-plugin-node": "11.0.0",
+            "eslint-plugin-promise": "4.2.1",
+            "eslint-plugin-standard": "4.0.1",
+            "mocha": "7.1.1",
+            "mocha-typescript": "1.1.17",
+            "pkgsign": "0.2.0",
+            "reflect-metadata": "0.1.13",
+            "rimraf": "3.0.2",
+            "ts-node": "8.8.1",
+            "typescript": "3.8.3"
+          },
           "files": [
-            "build"
+            "build/lib/**/*"
           ],
           "scripts": {
             "build": "npm run clean && npm run lint && npm run compile",
             "sign": "pkgsign sign .",
-            "clean": "rimraf build coverage docs",
+            "clean": "rimraf build",
             "compile": "tsc --incremental -p .",
-            "compodoc": "compodoc lib",
-            "coverage": "nyc npm run test",
             "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
-            "lint": "tslint -c ../../tslint.json lib/**/*.ts test/**/*.ts",
-            "precompodoc": "npm run coverage",
+            "lint": "eslint ./lib/**/*.ts ./test/**/*.ts",
             "prepublishOnly": "npm run build",
-            "test": "mocha --opts mocha.opts"
+            "test": "mocha test/**/*Test.ts"
           },
-          "compodoc": {
-            "tsconfig": "./tsconfig.json",
-            "output": "./docs",
-            "disableGraph": true,
-            "assetsFolder": "assets",
-            "unitTestCoverage": "./coverage/coverage-summary.json"
-          },
-          "nyc": {
-            "include": [
-              "lib/*.ts",
-              "lib/**/*.ts"
+          "mocha": {
+            "require": [
+              "source-map-support/register",
+              "ts-node/register"
             ],
-            "exclude": [
-              "test/*"
-            ],
-            "extension": [
-              ".ts"
-            ],
-            "require": [],
-            "reporter": [
-              "json-summary"
-            ],
-            "all": true
+            "reporter": "dot",
+            "extension": "ts",
+            "bail": true,
+            "full-trace": true,
+            "check-leaks": true,
+            "retries": 1
           }
         }
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJec8/WCRDCMfXrQKYV5wAAmtgQAEXPKUASlaTeUKlvy2Bo1eOT\nTD/e/A3TVzkNKcW3OTSKLiS5zAnfuPK/OshSbfR3B81z4lwFvPAbxhAR8U/D6PrL\nf2f1bqJf8qrHORN4Vy795fuaiKoeLFG0dkRCTpwP+T6g2kQDa2ZOVOb63P21Hqt1\n8rUvId/N3Zydb7mxpiCkICk3KLq+rd10TAfDVpRELCQQjGx+Z65cnERz88pjpjlt\nzSQfcLp0A3oBAjRDslrmK4V5Xo0r5rgjtGmHDWdq3h4ulsrI3IQwPxVLUdEAlwqU\nu3zNlQzgWQLGKN7Th02eN42n+w/m0zcPg60wh4FF0R2SrzXhroNj/uKJDQVuRchn\n9zB0cTDkgaocaAqDQoz1zD8B+TNPtrtRGMvuTk+N2m8wBE49o5sHb/Ww7vqMkUzJ\n4pqjg1YCRTYOx8Ivk+NXt967Vwhf11IS4gqyoIxFgUtmYyOXZ02On1OPm1qOwXcd\nu8MVy2n0+zHhQlBUoBkXnMBzhXsekFWU5hTRTPjFfnQAJmaOATrseSJDy9qy6ND3\neU8ACD0dmmuB8dnOTo2RUG2LFkC1FbbztOGGDk0WQ1hibjEa4sFbCUWictst2Bcs\nAAofLvSVAvZrp4NufI5X0J9kQApC9tsWGHcNKw1cTlq9MFe9D2skNU/jRXbB0BgV\n+hoUHDkwLL8poOtIOje4\n=unjk\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiLSyCRDCMfXrQKYV5wAAL5MQAJ2kple6mzK9L/lYcb/xSmFx\n4Ji60+hXLuIGGPFb5nZyDb4dZBGgOpOe/TGqr8X4Oq6HPnarNgR9m9MTwA7OM5PJ\nzgnnQy2v1euY8zGO0SZ2dzscq16gDYdErWukUQrp0zWVBsFlPpv5o/igj5CSAXMG\n3olqsXZ0AG4lhdI/Rt8PvSp2e1yP7fnZg6rzfrd6ZGV68iBmaNx0V8A6cfr4Eo0G\nuzhGgwmNTDAnEcij+YmnhA9YMaKVir3ql+g/AxG7jw0tTu0HFUizPGdmhORFdzwW\nMLDAUpadkUCCJMPrIF+SyBrwsExZMEYpWLXRhMKts/UvEXUciYw+ieBITMDkqx7y\nkH3w6YKln71wfc9cy+63nl8DyOqPJf5MLenxynvEsffi9GSysVNcmXgUUb/lK3fj\nUA9vej2yV77i/f8lBmAHhmsjVN73i/7bsHTtFLupJPLPh99yS4iK/JiBSMJglnaR\nubFkF6tsS4/26+faYUvOZxSdOqddCB+EGkEtv5+POODQcBqNMSqML4cDchjq1PPy\ni8fS02ymzGCsH9dw1xMuVVd0DdiDvl1rbvrMFN9QXRMe8hiyoHw1qBedzsUU66fk\nYaU4bTYzcVBLBuiGCoD/HprhTpWFgkfTBkMvmuETBKj/kvZE9XhYtTb0i762HurZ\n8s+cBoH28Zdtzc2r95yN\n=gNMl\n-----END PGP SIGNATURE-----\n"
 }

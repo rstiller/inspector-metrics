@@ -23,6 +23,8 @@ All metrics from the [inspector-metrics](https://github.com/rstiller/inspector-m
 can be pushed to a [pushgateway](https://github.com/prometheus/pushgateway) or be exposed with
 a custom `/metrics` endpoint in your application.
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 `npm install --save inspector-prometheus`

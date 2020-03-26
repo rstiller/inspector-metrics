@@ -10,13 +10,13 @@ import { SerializedSnapshot, SimpleSnapshot, Snapshot } from "./snapshot";
  */
 export interface Sampling {
 
-    /**
-     * Gets the snapshot of values.
-     *
-     * @returns {Snapshot}
-     * @memberof Sampling
-     */
-    getSnapshot(): Snapshot;
+  /**
+   * Gets the snapshot of values.
+   *
+   * @returns {Snapshot}
+   * @memberof Sampling
+   */
+  getSnapshot(): Snapshot;
 
 }
 
@@ -28,13 +28,13 @@ export interface Sampling {
  */
 export interface SerializableSampling {
 
-    /**
-     * Gets the serialized, sorted collection of samples.
-     *
-     * @returns {SerializedSnapshot}
-     * @memberof SerializableSampling
-     */
-    snapshot: SerializedSnapshot;
+  /**
+   * Gets the serialized, sorted collection of samples.
+   *
+   * @returns {SerializedSnapshot}
+   * @memberof SerializableSampling
+   */
+  snapshot: SerializedSnapshot;
 
 }
 
@@ -46,11 +46,11 @@ export interface SerializableSampling {
  * @returns {metric is SerializableSampling}
  */
 export function isSerializableSampling(metric: Sampling | SerializableSampling): metric is SerializableSampling {
-    const anyMetric: any = metric as any;
-    if ((anyMetric.getSnapshot && typeof anyMetric.getSnapshot === "function")) {
-        return false;
-    }
-    return anyMetric.hasOwnProperty("snapshot");
+  const anyMetric: any = metric as any;
+  if ((anyMetric.getSnapshot && typeof anyMetric.getSnapshot === "function")) {
+    return false;
+  }
+  return anyMetric.hasOwnProperty("snapshot");
 }
 
 /**
@@ -61,9 +61,9 @@ export function isSerializableSampling(metric: Sampling | SerializableSampling):
  * @returns {Snapshot}
  */
 export function getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
-    if (isSerializableSampling(metric)) {
-        return new SimpleSnapshot(metric.snapshot.values);
-    } else {
-        return metric.getSnapshot();
-    }
+  if (isSerializableSampling(metric)) {
+    return new SimpleSnapshot(metric.snapshot.values);
+  } else {
+    return metric.getSnapshot();
+  }
 }

@@ -6,8 +6,6 @@ rsync -avh --exclude *.sh \
     test \
     package.json \
     tsconfig.json \
-    tslint.json \
-    mocha.opts \
     /opt/inspector-metrics/.tmp/$NODE_VERSION/ \
     --delete
 cd /opt/inspector-metrics/.tmp/$NODE_VERSION/

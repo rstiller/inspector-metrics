@@ -9,21 +9,21 @@ import "source-map-support/register";
  */
 export interface Groupable {
 
-    /**
-     * Gets the group name.
-     *
-     * @returns {string}
-     * @memberof Groupable
-     */
-    getGroup(): string;
+  /**
+   * Gets the group name.
+   *
+   * @returns {string}
+   * @memberof Groupable
+   */
+  getGroup(): string;
 
-    /**
-     * Sets the group name.
-     *
-     * @param {string} group the new group name
-     * @returns {this}
-     * @memberof Groupable
-     */
-    setGroup(group: string): this;
+  /**
+   * Sets the group name.
+   *
+   * @param {string} group the new group name
+   * @returns {this}
+   * @memberof Groupable
+   */
+  setGroup(group: string): this;
 
 }

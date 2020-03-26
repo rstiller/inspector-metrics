@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-export * from "./DefaultSender";
-export * from "./InfluxMetricReporter";
+export * from './DefaultSender'
+export * from './InfluxMetricReporter'

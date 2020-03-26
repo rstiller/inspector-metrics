@@ -72,6 +72,20 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=12
 
+  node13:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node13
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=13
+
   grafana:
     build:
       context: ./test-env/grafana
@@ -216,14 +230,14 @@ services:
       context: ./test-env/node-dev
       args:
         TZ: Europe/Berlin
-    user: "node"
     entrypoint: bash
     command:
-      - "-c"
-      - "npm rebuild && lerna run compodoc --scope inspector-metrics && cp -r packages/inspector-metrics/docs ."
+      - "build-docs.sh"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
+      - ./test-env/node-dev/build-docs.sh:/usr/bin/build-docs.sh
+      - pnpm-store:/root/.pnpm-store
     working_dir: "/opt/inspector-metrics"
 
   deps:
@@ -231,14 +245,14 @@ services:
       context: ./test-env/node-dev
       args:
         TZ: Europe/Berlin
-    user: "node"
     entrypoint: bash
     command:
       - "-c"
-      - "lerna run deps"
+      - "npm run deps"
     restart: "no"
     volumes:
       - .:/opt/inspector-metrics/
+      - pnpm-store:/root/.pnpm-store
     working_dir: "/opt/inspector-metrics"
 
 volumes:
@@ -247,3 +261,4 @@ volumes:
   influx-data:
   influx-logs:
   prometheus-data:
+  pnpm-store:

@@ -1,6 +1,6 @@
-import "source-map-support";
+import 'source-map-support'
 
-import { InterprocessMessage } from "inspector-metrics";
+import { InterprocessMessage } from 'inspector-metrics'
 
 /**
  * A message send from forked processes to the master process as response
@@ -11,18 +11,18 @@ import { InterprocessMessage } from "inspector-metrics";
  * @extends {InterprocessMessage}
  */
 export interface InterprocessReportResponse extends InterprocessMessage {
-    /**
-     * Copy of the id from the request message.
-     *
-     * @type {string}
-     * @memberof InterprocessReportResponse
-     */
-    readonly id: string;
-    /**
-     * The rendered metrics-string.
-     *
-     * @type {string}
-     * @memberof InterprocessReportResponse
-     */
-    readonly metricsStr: string;
+  /**
+   * Copy of the id from the request message.
+   *
+   * @type {string}
+   * @memberof InterprocessReportResponse
+   */
+  readonly id: string
+  /**
+   * The rendered metrics-string.
+   *
+   * @type {string}
+   * @memberof InterprocessReportResponse
+   */
+  readonly metricsStr: string
 }

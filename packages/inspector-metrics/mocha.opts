@@ -1,9 +1,0 @@
---require source-map-support/register
---require ts-node/register
---reporter dot
---watch-extensions ts
---bail
---full-trace
---check-leaks
---retries 1
-test/**/*-test.ts

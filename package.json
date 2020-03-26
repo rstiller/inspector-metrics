@@ -1,56 +1,53 @@
 {
-    "name": "inspector-monorepo",
+    "name": "monorepo",
     "version": "0.0.0",
     "private": true,
     "devDependencies": {
-        "@hapi/hapi": "19.1.1",
-        "@types/async": "3.2.0",
-        "@types/chai": "4.2.11",
-        "@types/hapi": "18.0.3",
-        "@types/lodash": "4.14.149",
-        "@types/mocha": "7.0.2",
-        "@types/moment-timezone": "0.5.13",
-        "@types/node": "13.11.0",
-        "@types/sinon": "9.0.0",
-        "@types/sinon-chai": "3.2.4",
-        "chai": "4.2.0",
         "husky": "4.2.3",
-        "js-yaml": "3.13.1",
-        "lerna": "3.20.2",
-        "minimist": "^1.2.5",
-        "mocha": "7.1.1",
-        "mocha-typescript": "1.1.17",
-        "nock": "12.0.3",
         "nyc": "15.0.0",
-        "pkgsign": "0.2.0",
-        "reflect-metadata": "0.1.13",
-        "rimraf": "3.0.2",
-        "sinon": "9.0.1",
-        "sinon-chai": "3.5.0",
-        "standard": "14.3.3",
-        "ts-node": "8.8.1",
-        "tslint": "6.1.1",
-        "typescript": "3.8.3"
+        "rimraf": "3.0.2"
     },
     "scripts": {
-        "bootstrap": "lerna bootstrap",
-        "build": "lerna run build",
-        "sign": "lerna run sign && git add packages/*/signature.json",
-        "clean": "lerna run clean",
-        "compile": "lerna run compile",
-        "coverage": "lerna run coverage",
-        "deps": "lerna run deps",
-        "lint": "lerna run lint",
-        "publish": "lerna publish",
-        "publish-dry-run": "lerna publish --skip-npm --no-git-tag-version --no-push",
-        "pretest": "lerna run compile --scope inspector-metrics",
+        "build": "pnpm run --recursive build",
+        "sign": "pnpm run --recursive sign && git add packages/*/signature.json",
+        "clean": "pnpm run --recursive clean && rimraf coverage docs .pnpm-store",
+        "compile": "pnpm run --recursive compile",
+        "coverage": "nyc pnpm run --recursive test",
+        "deps": "pnpm run --recursive deps",
+        "lint": "pnpm run --recursive lint",
+        "pretest": "pnpm run --recursive --filter inspector-metrics compile",
         "publishDocs": "cd docs && git add --all . && git commit -nm 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
         "prepublishDocs": "docker-compose run --rm docs",
-        "test": "lerna run test"
+        "test": "pnpm run --recursive test"
     },
     "husky": {
         "hooks": {
             "pre-commit": "npm run sign"
         }
+    },
+    "compodoc": {
+        "tsconfig": "./tsconfig.docs.json",
+        "output": "./docs",
+        "disableGraph": true,
+        "includes": "./",
+        "includeNames": "READMEs",
+        "unitTestCoverage": "./coverage/coverage-summary.json"
+    },
+    "nyc": {
+        "include": [
+            "packages/*/lib/*.ts",
+            "packages/*/lib/**/*.ts"
+        ],
+        "exclude": [
+            "packages/*/test/*"
+        ],
+        "extension": [
+            ".ts"
+        ],
+        "require": [],
+        "reporter": [
+            "json-summary"
+        ],
+        "all": true
     }
 }

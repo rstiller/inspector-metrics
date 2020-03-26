@@ -21,6 +21,8 @@ This library is made for [inspector-metrics](https://github.com/rstiller/inspect
 is meant to be used with `nodejs`.  
 It uses [node-graphite](https://github.com/felixge/node-graphite) as graphite/carbon client.
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 `npm install --save inspector-carbon`

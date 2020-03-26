@@ -1,5 +1,5 @@
 {
-  "name": "express-multi-process-js",
+  "name": "examples-express-multi-process-js",
   "private": true,
   "description": "Example project in pure javascript showing the usage of inspector-metrics in a multi-process express application",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
@@ -22,15 +22,12 @@
     "inspector-prometheus": "^2.5.0",
     "inspector-vm": "^3.4.0"
   },
+  "devDependencies": {
+    "standard": "14.3.3"
+  },
   "scripts": {
     "build": "npm run lint",
-    "sign": "exit 0",
-    "clean": "exit 0",
-    "compile": "exit 0",
-    "compodoc": "exit 0",
-    "coverage": "exit 0",
     "deps": "npm-check --no-spinner --no-emoji --no-color",
-    "lint": "standard src/**/*.js",
-    "test": "exit 0"
+    "lint": "standard src/**/*.js"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "name": "elasticsearch-6",
+  "name": "examples-elasticsearch-6",
   "private": true,
   "description": "Example project showing the usage of inspector-metrics and inspector-elasticsearch 6.x.x",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
@@ -22,15 +22,27 @@
     "inspector-metrics": "^1.20.0",
     "inspector-vm": "^3.4.0"
   },
+  "devDependencies": {
+    "@types/chai": "4.2.11",
+    "@types/mocha": "7.0.2",
+    "@types/node": "13.7.7",
+    "@typescript-eslint/eslint-plugin": "2.25.0",
+    "@typescript-eslint/parser": "2.25.0",
+    "eslint": "6.8.0",
+    "eslint-config-standard-with-typescript": "15.0.1",
+    "eslint-import-resolver-node": "0.3.3",
+    "eslint-plugin-import": "2.20.1",
+    "eslint-plugin-node": "11.0.0",
+    "eslint-plugin-promise": "4.2.1",
+    "eslint-plugin-standard": "4.0.1",
+    "rimraf": "3.0.2",
+    "typescript": "3.8.3"
+  },
   "scripts": {
     "build": "npm run clean && npm run lint && npm run compile",
-    "sign": "exit 0",
     "clean": "rimraf build",
     "compile": "tsc --incremental -p .",
-    "compodoc": "exit 0",
-    "coverage": "exit 0",
     "deps": "npm-check --no-spinner --no-emoji --no-color",
-    "lint": "tslint -c ../../tslint.json src/**/*.ts",
-    "test": "exit 0"
+    "lint": "eslint ./src/**/*.ts"
   }
 }

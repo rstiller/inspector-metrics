@@ -1,4 +1,4 @@
-/* tslint:disable:no-unused-expression */
+/* eslint-env mocha */
 
 import "reflect-metadata";
 import "source-map-support/register";
@@ -88,7 +88,6 @@ export class LoggerReporterClusterMasterTest {
             try {
                 expect(this.loggerSpy).to.have.been.called;
             } catch (err) {
-                // tslint:disable-next-line:no-console
                 console.log(err);
             }
 

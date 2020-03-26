@@ -1,4 +1,4 @@
-import "source-map-support";
+import 'source-map-support'
 
-export * from "./DefaultCsvFileWriter";
-export * from "./CsvMetricReporter";
+export * from './DefaultCsvFileWriter'
+export * from './CsvMetricReporter'

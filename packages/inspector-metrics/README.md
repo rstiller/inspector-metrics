@@ -75,7 +75,6 @@ setInterval(() => {
     // should report a few milliseconds
     requests.time(() => {
         let a = 0;
-        // tslint:disable-next-line:prefer-const
         let b = 1;
         for (let i = 0; i < 1e6; i++) {
             a = b + i + a;
