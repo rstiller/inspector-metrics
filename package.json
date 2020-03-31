@@ -4,7 +4,7 @@
     "private": true,
     "devDependencies": {
         "@hapi/hapi": "19.1.1",
-        "@types/async": "3.0.8",
+        "@types/async": "3.2.0",
         "@types/chai": "4.2.11",
         "@types/hapi": "18.0.3",
         "@types/lodash": "4.14.149",
