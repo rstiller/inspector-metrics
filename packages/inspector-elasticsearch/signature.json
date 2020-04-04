@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "2273d348074b7c4bc33bdab79bd21a0a85aec606ef39b90d22c7649bdbfc25dad9dcb4f72b91979183281e901d4a587b3a2c6870aa36270ac0d2009d6c7ca33e"
+            "sha512": "a89ee26eca803542cd5aa015cbb26788d06652a6a04677628b611f2f659b50e86b5866a369be2dd58917c3045ed6de721bd76ef780dae9e81cbdadc7ffe417a1"
           },
           {
             "path": "LICENSE",
@@ -73,7 +73,7 @@
           "typings",
           "version"
         ],
-        "sha512": "4ddbb3b5d83127605d77c77683dbe2d45dd5e00b1ceda6316bc928f1e4a8168ffcdf833db81110c12f971e219769379ee4dd785e47c5d83b69f201e92fb12839"
+        "sha512": "65031393444507c7c0ab915b25603af06bf5fb7be7a6844c963efac7127d1f160ca21739a3631b49a55e5f447345600c1ae26fb572df8984555a472b42eecc8a"
       }
     },
     {
@@ -83,7 +83,7 @@
           "name": "inspector-elasticsearch",
           "description": "Elasticsearch metric reporter for nodejs",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "2.6.0",
+          "version": "2.7.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "license": "MIT",
@@ -168,5 +168,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiL8SCRDCMfXrQKYV5wAA6h4QADkkL9+4hV+bz0l2pXpGiT8l\nY5uKBnn6Z9z9jcqjGc6X7z3RYYdUIh+Q0Ndnymxxs9qf4JLQ+r//jXG6z39N9PPE\nGWqbKcg1NGJHAAdk1ZmuDKoMkld2pVAf1M72RrKnDACNnIz1d1GrzpJ4WLZWX/Gg\npDWIzP1+zRL+T7LT90tdBP4FFmRjtsdoGAerMQqfUqqgZRcUHrWwUJSbH1o9r1ih\nY+DeXrVRlxjrDVTtUzhgiWBeDPt16g726s/wf3ufjzn19wCTuXjwOcs2vmnmHulE\nTMhgVWuciN6DoNmsD+63YBqjBkpEfTEA5Bk9+yy3KpngjMMAASNMoo5fvljf7+L5\n/LFvXlL2INVaScDRhRWztdwc8Zz6fAQXETmmm6tcQalxG0dXKK8ko75i+UdkOGB9\naezt3qXhFd9pIjB0w1pbN9gnlZD8kUJWgs0Lbg8eQBeUtoa8PNXvqGPtYIHW5Sdh\nBI03PwdGMROc6qxTJFe3QNX4IrtkMiofJta9VRf6140MBEUivmTReVZ7kcaMT7lE\n9XkHVsR+g4ocxjJuZwk+AhGvHuu9/eO4baox3HJeev7Rb1tAKj7jupB2M3WvECb0\njljb6xSjBS2TiuNR3d0EYYg1SBbcB090FKDiXVkQHKQmpiX2EKnlIUom+hqt4Exj\n4YmIDt57qCuqe7SyPNaT\n=VYrM\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiL+8CRDCMfXrQKYV5wAAyn0QAAXi18hOYZKgPq7xMOdiNzs4\nXkQ7qPjocVkuX5Bw66ip6q6hnO5oyRB32e6PTACtNhu0KRbTrly/qbZ7qOw5u1++\nyBI2BIs/f51UUqiCxFhWVG+jou/cZn7SbhFzzUc133aif6bOd7EbvUhIJj4ee4bY\nBzdwsMFmS+GrTjzpBSIfpf7pRp8bMP8Elrvm9PB+yJQSZ0ffTPXuG1svF21TcWic\nwpINc1RWlV4kbA18DQznfm2vAN9Zl0qeyi6AEQ8T9m7KF17OQ+qgrsaBcXuIXvGh\n+kbsO1maN/9ZwsRAiJ94LG23XwZ4xxPBu0b9EjDB9t0sdNG3Glyrl2s+Dd0mh8+u\nzMsIQjSn9ZoDJu0BtZBPBjVlXj+ncMsEwuNmvBZ+LckXFDTcYS3/z2eeCzMtXzEO\n0YzXW+BImpgHB26cQWSthScXdZyh7idMGskMu4QYQImwysy1RcP6xKfN2PX8QuHj\n/xAdFTApv5h2CJjTN17Z5QWXwe7sFMahczGUIMF4/BvSXsPIuLzc+pBFX67ym0wJ\nz2aECOe5HhunHuvS1zc+2R+ds9Xiy0Hx5t0+zi2zg/CAjN60eJ4WjGIXD1XwMhus\nvWvMTTnlE/411+GtAb2lGLGIHfPK2l1ydhpnAcjXDTSv1sny3Hrhet9tONlRXnLV\nc1sQvxSVQIDI0Elz5lzb\n=8yNU\n-----END PGP SIGNATURE-----\n"
 }
