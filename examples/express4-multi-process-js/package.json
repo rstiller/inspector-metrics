@@ -17,7 +17,7 @@
     "inspector-carbon": "^2.5.0",
     "inspector-csv": "^2.5.0",
     "inspector-elasticsearch": "^2.7.0",
-    "inspector-influx": "^2.6.0",
+    "inspector-influx": "^2.7.0",
     "inspector-metrics": "^1.21.0",
     "inspector-prometheus": "^2.5.0",
     "inspector-vm": "^3.4.0"
