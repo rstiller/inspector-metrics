@@ -19,7 +19,7 @@
   "dependencies": {
     "@elastic/elasticsearch": "^5.6.16",
     "inspector-elasticsearch": "^2.6.0",
-    "inspector-metrics": "^1.20.0",
+    "inspector-metrics": "^1.21.0",
     "inspector-vm": "^3.4.0"
   },
   "devDependencies": {

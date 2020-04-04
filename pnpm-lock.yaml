@@ -44,7 +44,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       inspector-elasticsearch: ^2.6.0
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       inspector-vm: ^3.4.0
       rimraf: 3.0.2
       typescript: 3.8.3
@@ -84,7 +84,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       inspector-elasticsearch: ^2.6.0
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       inspector-vm: ^3.4.0
       rimraf: 3.0.2
       typescript: 3.8.3
@@ -124,7 +124,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       inspector-elasticsearch: ^2.6.0
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       inspector-vm: ^3.4.0
       rimraf: 3.0.2
       typescript: 3.8.3
@@ -146,7 +146,7 @@ importers:
       inspector-csv: ^2.4.0
       inspector-elasticsearch: ^2.6.0
       inspector-influx: ^2.6.0
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       inspector-prometheus: ^2.5.0
       inspector-vm: ^3.4.0
       standard: 14.3.3
@@ -191,7 +191,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       graphite: ^0.1.4
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       mocha: 7.1.1
       mocha-typescript: 1.1.17
       pkgsign: 0.2.0
@@ -253,7 +253,7 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       mocha: 7.1.1
       mocha-typescript: 1.1.17
       moment: ^2.24.0
@@ -308,7 +308,7 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       lodash: ^4.17.15
       mocha: 7.1.1
       mocha-typescript: 1.1.17
@@ -359,7 +359,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       influx: ^5.5.1
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       mocha: 7.1.1
       mocha-typescript: 1.1.17
       pkgsign: 0.2.0
@@ -474,7 +474,7 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       mocha: 7.1.1
       mocha-typescript: 1.1.17
       moment: 2.24.0
@@ -528,7 +528,7 @@ importers:
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
       gc-stats: ^1.4.0
-      inspector-metrics: ^1.20.0
+      inspector-metrics: ^1.21.0
       mocha: 7.1.1
       mocha-typescript: 1.1.17
       pkgsign: 0.2.0

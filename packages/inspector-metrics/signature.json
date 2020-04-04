@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "0766ded447e6f9162ba6155c8ba4a55ba266d808f8fa513f428316f53396238c245accc5a51ab729b5be67ffc1507fa7f77691b49fb08a5a0fa781c086143751"
+            "sha512": "f6608107a9c0ea938f6f111224df572388a0561f22f87560dc3b66b01122f5807cc404329bd0ac64c492d8dc460a683c212ef137377658fe197bd451867c91d6"
           },
           {
             "path": "LICENSE",
@@ -506,7 +506,7 @@
           "typings",
           "version"
         ],
-        "sha512": "152639fa56de410f63ecf234c7df1109081ab2938d1176267cba84cee7a5901c6785b61c962d48c858ee3026c92b3b84e95be680c9c3fcc907d6bf37f5109b67"
+        "sha512": "b7af1d10007285379884172ce485df8fbbb443f06d4f5dd70e7ba6fdc3695551ff42cc054d37f707a4fe06103f327e2958c4e4f144d8a1bf582ca8882938a24a"
       }
     },
     {
@@ -516,7 +516,7 @@
           "name": "inspector-metrics",
           "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "1.20.0",
+          "version": "1.21.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "bugs": {
@@ -604,5 +604,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiLSxCRDCMfXrQKYV5wAA4aYQADAxzp3QBSPYIf7iODzu46f0\njRzuKm2WPlLLgCnHWPJF7giyFKY3Y5vpbmjv9L2yMDYOlu00HZbh4qPd8zx14fl7\nPAk3asaAbsMKupSGCFv1+3nRm54HY7fmGNrWAvDLaxUWQ9QDy+OedSFTWfIqnjJE\nyacK/K1cKSW4TBh98L2s3LJhVfOUnT5bCw/P7kFwN2a0gA4lZ60eePhytZfwcPO5\nMB75P0AcswatsmzifjJgJeSCWbl1Dvh0edZryfSNb5R7RQLPEKhA2XKF95jp1rbQ\nadHtNQ6p7FuHIMllZiuYj/YV9ivz4zmHVfsAQeeM3tgtNHC/4JJMtgwRXx+hO0+m\nD6M3/jsE9+oFA2y/BEWtlh+KWjqWq7+oSEw+y95hRBZ1C/jFaedG48yS96QnotNF\nm3Emhk4BnyWwa/QOZcrB3LY8kGGQ7ZSEKJfVon6+fhYr3pkDhixqio/u8SchD+93\nNputX2fC7EpqxZw1nSkIpi5pzsV7SJiaXHeEzU2vCVmzAP7Vb8dl1Q3lBrJSxeNh\nKI2477sM74/jbro+ab/jUvLhtuFoz0PHB4Ckm+hIQR9hTT4kdSiY/JWX7UY3NOV2\nbpzoyPVli/TA3NEjIIMXFcfDks520b49/bmjESc/Ph/zxzZQuZydkAV0lLsuSrOf\nCM7/wUojXlt+ejpoVy9f\n=YBA/\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiL1HCRDCMfXrQKYV5wAAXHUQAGghYO0Qfir+icoyOdNri1/K\nUlq8IMJX2sLO/U9r5De/SrDdssXDmLFR5V0UH9kkuAO8Imn835QX3XOUn+w4xh6i\n1QIaT061d1hhS2tdtqpqjHqhoqRPIfSwM910uLnPuhNmFM3GUlYj6aWeHxTaN3E2\n+qgxExgzHLzmDxDiJlBrKBLMBVVEalnuq5HMYkZ8S3y6XX4COTgS5QUD+ujdIEKi\nVFeYkqtQlCeaSshswGrW0mAksKMgG8IidwOcCjUow4zHVrZ2jXU0onBcXguHXg0o\nIwGScBErbI7kA7qWi2z7rQxeks3vKUHY1uQLBm6Hy/idiNlRUCgj/kKXeYPlnHE6\n2mTwNKo97xDyhKcLL1wx6g1Fw612MPX4nNT4Czsrm7lrfYft77tVR+4d9110vdr5\nORK+MMU/qkk5TMKaygI5wt2beQkjnaHiU55Ex4Pr0jqurjXuQeg9d3UX3hIwO9VX\n/jhUyR4mQG4g0kOW0dEFKrzBHiPhtjfnR17h9PtHOfFFYUMSePjuz/Y25YWFEV/H\nMrhXYoMiC4egFzMaD9mbC/UVTUuiJTvVcTyDXckm3Huvl1a5bYz8ec2bF2/4/kix\nPiwMDJt7cmSc0T8YEhQX7woR2UckVV7I+PaAqlt9VgxhDVemJW1GyMBOwKT+zlRI\nLdRcaxi9iyAJEwZeQatt\n=D+0+\n-----END PGP SIGNATURE-----\n"
 }
