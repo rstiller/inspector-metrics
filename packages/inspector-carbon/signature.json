@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "67b0e6d7606a19e21dba6ba5ad04aea1f78fc8200f93724a5c2e23c672e160e05fcf1ed6516e8e8712ca4fd625ddb4b775babcaa3f1844f306333096bdddd3c0"
+            "sha512": "7d5442afa33edf8e6918b680a19e7e97e574e359e44a1b80c7b001831066a7df4acc0baebe323ae8c4c3adbf5d66607c7fed4e0db564b02c928a8169674dbfd2"
           },
           {
             "path": "LICENSE",
@@ -73,7 +73,7 @@
           "typings",
           "version"
         ],
-        "sha512": "0dc7ad2e2fcc140a75a8d93e00d28cccefc5d65222471c0e9c3c63bc3252e7447299bbe96337f04f5891591f0500600722c0ecdcddccdfdd896f972e47aa0f35"
+        "sha512": "a6dd934bdb6d8e0d98b8b4267ad698aec364daf726472da79cb771ca696c2e8375de4a38c25ecc7e3d8286100bff96e79d722f8737b834b418560dfdf0475412"
       }
     },
     {
@@ -83,7 +83,7 @@
           "name": "inspector-carbon",
           "description": "Graphite / carbon metric reporter for nodejs",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "2.5.0",
+          "version": "2.6.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "license": "MIT",
@@ -167,5 +167,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiL1ICRDCMfXrQKYV5wAAwlwQAHQQfXUO/vep4sA7apHGVmW9\n8lmMpHSxxYZhQVz/c4xvzId/e/2OsE/bj57CdXFjOB5VQnpd5tSPinjntm3Quhh3\n0QVx/+yLZ0OtV075ye2tvo+uR7WsVP66ydeflHEKkk03jByM+yO8LwaaCCbSXFIH\nvoGinc7zbBMsZ8KIpmtmqq/lxVAn7xElMEhJ+rvDbnLcw2qgksDbLgFZjag8Rf+C\nWgj8h6JZr8RawEPym+136RuMlXdCWq3MIR/Hu0EBOLf5l6ClryzQ2Y+blXJzMOk1\ngRrCFIRNSHNhG2UhCjhVhNclrZKrvbQHulmQeGDN6vW1Ka5cVvvf68CnJua6RLj6\nKGXLtY53/Biw5Ru0KzUNNfV++MDwrLW9nWPYdm0RfNVDociPIHEdkUg4HRpP+wvg\nYob02UDWOpITZ6QwlLRnov+2USpTpKu6Jy4CjZ4E8dbNUa3FbyvOV8TWUUwWupiO\n1iTREg59UyCXqaio6qV7Yp3BO6bh3fp4/dBkgLh2TbV1QK45wzCyCifGPPKW8HUv\nBirhDHWV5uwYleHxZVG0Uffmts6OraehVpgaIKauhGw6jquKcVGuN0fWnSfKaJC6\njItYSsUbCJcpHbInrxvdpFbpKMMPQqG/24dR15CpzcF5wRwJBUXbHQYahgm9UBHs\nzsjVhJNr7XJxWvgu054B\n=awCX\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiL4/CRDCMfXrQKYV5wAAe5QQACw+MuWSCVHDJU5bOP2G7ZyD\nZ/vhcuQRAupSn1JPaTeUP8Yy+TDwJD/IcbReb7vkvdESTRVo0GeqL7ESY95Wg+1Q\nt+Mpzm0lMccYeuxxmAjMiYk4mHZnHkwSR+zeKzFXqSP5I+oxEeP3PhM4Hs0vgb9e\nRRPmquIxuf+9S/foQJuxhCZrev6QrmFWavGCdB/W881ND/f23Dcux3DdITe8vs7w\nkbuAdmjeg8hwObPhYvqCalz0vgjPQxrD5m+kXWp3ybqaEMONFrAUkoDPdsCkYnVw\nN0c7ee/QVT2B1RLOgbhFzjB0acm+/JSse3eDNAJ6s4wU7O+G3eiQtOVpL/uZqqfK\nGDpuLIqEi+85neNrWCIPi0zayD2EbwZ2EskJ+V42zp1B00SskjhUcV1SZM9kB+6P\nd/SweO5xjRyPy5GNtbzIR+FMVk2GB1ef+lGPDQ52HtGnwULCqIyGI6Ap7ULAfQZ7\nLSvg0Z+RBh50aHlD9AqTWqD4dUkuGH63dKejacQBVPU4yb8A9TPzyqGZksEkI4g+\ndOxwuCm13kjz7LzBfl/gCsmmWh9JoLqJmC0YoyLlEzRTY7DouYhormS1yklFYPGv\nNx2ZLjs21Q/tc9sTJwroS6MfNRVIZK+mlriDXhPqU0gOD+NLdq3m7zIT6roR0cAm\nmxH+3PZgZ225Ld0MJ4eK\n=s8gO\n-----END PGP SIGNATURE-----\n"
 }
