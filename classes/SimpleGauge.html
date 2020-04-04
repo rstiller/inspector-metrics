@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/gauge.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/gauge.ts</code>
         </p>
 
             <p class="comment">
@@ -261,7 +261,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">lib/metrics/gauge.ts:43</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">packages/inspector-metrics/lib/metrics/gauge.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -353,7 +353,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">lib/metrics/gauge.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">packages/inspector-metrics/lib/metrics/gauge.ts:42</a></div>
                             </td>
                         </tr>
 
@@ -707,8 +707,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="64"
-                            class="link-to-prism">lib/metrics/gauge.ts:64</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="63"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/gauge.ts:63</a></div>
                 </td>
             </tr>
 
@@ -755,8 +755,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">lib/metrics/gauge.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/gauge.ts:74</a></div>
                 </td>
             </tr>
 
@@ -822,8 +822,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="86"
-                            class="link-to-prism">lib/metrics/gauge.ts:86</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="85"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/gauge.ts:85</a></div>
                 </td>
             </tr>
 
@@ -2113,9 +2113,9 @@ This counter is only unique per process, forked processes start from 0.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
-import { BaseMetric, Metric, SerializableMetric } from &quot;./model/metric&quot;;
+import { BaseMetric, Metric, SerializableMetric } from &#x27;./model/metric&#x27;
 
 /**
  * A gauge can represent any value - regardless of the type.
@@ -2128,13 +2128,13 @@ import { BaseMetric, Metric, SerializableMetric } from &quot;./model/metric&quot
  */
 export interface Gauge&lt;T&gt; extends Metric, SerializableMetric {
 
-    /**
-     * Gets the current value of the gauge.
-     *
-     * @returns {T}
-     * @memberof Gauge
-     */
-    getValue(): T;
+  /**
+   * Gets the current value of the gauge.
+   *
+   * @returns {T}
+   * @memberof Gauge
+   */
+  getValue(): T
 
 }
 
@@ -2147,63 +2147,61 @@ export interface Gauge&lt;T&gt; extends Metric, SerializableMetric {
  * @implements {Gauge&lt;number&gt;}
  */
 export class SimpleGauge extends BaseMetric implements Gauge&lt;number&gt; {
+  /**
+   * The value - initially set to 0.
+   *
+   * @private
+   * @type {number}
+   * @memberof SimpleGauge
+   */
+  private value: number &#x3D; 0;
 
-    /**
-     * The value - initially set to 0.
-     *
-     * @private
-     * @type {number}
-     * @memberof SimpleGauge
-     */
-    private value: number &#x3D; 0;
+  /**
+   * Creates an instance of SimpleGauge with an optional name.
+   *
+   * @param {string} [name] optional metric name.
+   * @param {string} [description] optional metric description.
+   * @memberof SimpleGauge
+   */
+  public constructor (name?: string, description?: string) {
+    super()
+    this.name &#x3D; name
+    this.description &#x3D; description
+  }
 
-    /**
-     * Creates an instance of SimpleGauge with an optional name.
-     *
-     * @param {string} [name] optional metric name.
-     * @param {string} [description] optional metric description.
-     * @memberof SimpleGauge
-     */
-    public constructor(name?: string, description?: string) {
-        super();
-        this.name &#x3D; name;
-        this.description &#x3D; description;
-    }
+  /**
+   * Gets the current value.
+   *
+   * @returns {number}
+   * @memberof SimpleGauge
+   */
+  public getValue (): number {
+    return this.value
+  }
 
-    /**
-     * Gets the current value.
-     *
-     * @returns {number}
-     * @memberof SimpleGauge
-     */
-    public getValue(): number {
-        return this.value;
-    }
+  /**
+   * Sets the current value.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof SimpleGauge
+   */
+  public setValue (value: number): this {
+    this.value &#x3D; value
+    return this
+  }
 
-    /**
-     * Sets the current value.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof SimpleGauge
-     */
-    public setValue(value: number): this {
-        this.value &#x3D; value;
-        return this;
-    }
-
-    /**
-     * Same as {@link BaseMetric#toJSON()}, also adding value property.
-     *
-     * @returns {*}
-     * @memberof SimpleGauge
-     */
-    public toJSON(): any {
-        const json &#x3D; super.toJSON();
-        json.value &#x3D; this.value;
-        return json;
-    }
-
+  /**
+   * Same as {@link BaseMetric#toJSON()}, also adding value property.
+   *
+   * @returns {*}
+   * @memberof SimpleGauge
+   */
+  public toJSON (): any {
+    const json &#x3D; super.toJSON()
+    json.value &#x3D; this.value
+    return json
+  }
 }
 </code></pre>
     </div>
@@ -2211,6 +2209,7 @@ export class SimpleGauge extends BaseMetric implements Gauge&lt;number&gt; {
 
 
 
+                   
 
 
 
@@ -2233,6 +2232,7 @@ export class SimpleGauge extends BaseMetric implements Gauge&lt;number&gt; {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'SimpleGauge.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

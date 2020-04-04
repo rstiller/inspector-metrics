@@ -16,7 +16,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
         <nav>
             <ul class="list">
                 <li class="title">
-                    <a href="index.html" data-type="index-link">inspector-metrics documentation</a>
+                    <a href="index.html" data-type="index-link">monorepo documentation</a>
                 </li>
 
                 <li class="divider"></li>
@@ -35,22 +35,43 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </a>
                         </li>
                         <li class="link">
-                            <a href="changelog.html"  data-type="chapter-link">
-                                <span class="icon ion-ios-paper"></span>CHANGELOG
-                            </a>
-                        </li>
-                        <li class="link">
                             <a href="license.html"  data-type="chapter-link">
                                 <span class="icon ion-ios-paper"></span>LICENSE
                             </a>
                         </li>
-                        <li class="link">
-                            <a href="dependencies.html" data-type="chapter-link">
-                                <span class="icon ion-ios-list"></span>Dependencies
-                            </a>
-                        </li>
                     </ul>
                 </li>
+                    <li class="chapter additional">
+                        <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#additional-pages"'
+                            : 'data-target="#xs-additional-pages"' }>
+                            <span class="icon ion-ios-book"></span>
+                            <span>Additional documentation</span>
+                            <span class="icon ion-ios-arrow-down"></span>
+                        </div>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="additional-pages"' : 'id="xs-additional-pages"' }>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-metrics.html" data-type="entity-link" data-context-id="additional">inspector-metrics</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-carbon.html" data-type="entity-link" data-context-id="additional">inspector-carbon</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-csv.html" data-type="entity-link" data-context-id="additional">inspector-csv</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-elasticsearch.html" data-type="entity-link" data-context-id="additional">inspector-elasticsearch</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-influx.html" data-type="entity-link" data-context-id="additional">inspector-influx</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-prometheus.html" data-type="entity-link" data-context-id="additional">inspector-prometheus</a>
+                                    </li>
+                                    <li class="link ">
+                                        <a href="additional-documentation/inspector-vm.html" data-type="entity-link" data-context-id="additional">inspector-vm</a>
+                                    </li>
+                        </ul>
+                    </li>
                     <li class="chapter">
                         <div class="simple menu-toggler" data-toggle="collapse" ${ isNormalMode ? 'data-target="#classes-links"' :
                             'data-target="#xs-classes-links"' }>
@@ -58,12 +79,15 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span>Classes</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
                                 <a href="classes/BaseMetric.html" data-type="entity-link">BaseMetric</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Buckets.html" data-type="entity-link">Buckets</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/CarbonMetricReporter.html" data-type="entity-link">CarbonMetricReporter</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Clock.html" data-type="entity-link">Clock</a>
@@ -72,13 +96,28 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/Counter.html" data-type="entity-link">Counter</a>
                             </li>
                             <li class="link">
+                                <a href="classes/CsvMetricReporter.html" data-type="entity-link">CsvMetricReporter</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/DefaultClusterOptions.html" data-type="entity-link">DefaultClusterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DefaultCsvFileWriter.html" data-type="entity-link">DefaultCsvFileWriter</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/DefaultPrometheusClusterOptions.html" data-type="entity-link">DefaultPrometheusClusterOptions</a>
                             </li>
                             <li class="link">
                                 <a href="classes/DefaultReservoir.html" data-type="entity-link">DefaultReservoir</a>
                             </li>
                             <li class="link">
+                                <a href="classes/DefaultSender.html" data-type="entity-link">DefaultSender</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/DisabledClusterOptions.html" data-type="entity-link">DisabledClusterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/ElasticsearchMetricReporter.html" data-type="entity-link">ElasticsearchMetricReporter</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Event.html" data-type="entity-link">Event</a>
@@ -94,6 +133,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/Histogram.html" data-type="entity-link">Histogram</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/InfluxMetricReporter.html" data-type="entity-link">InfluxMetricReporter</a>
                             </li>
                             <li class="link">
                                 <a href="classes/Int64Wrapper.html" data-type="entity-link">Int64Wrapper</a>
@@ -120,6 +162,15 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/MonotoneCounter.html" data-type="entity-link">MonotoneCounter</a>
                             </li>
                             <li class="link">
+                                <a href="classes/Percentiles.html" data-type="entity-link">Percentiles</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/PrometheusMetricReporter.html" data-type="entity-link">PrometheusMetricReporter</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/PushgatewayMetricReporter.html" data-type="entity-link">PushgatewayMetricReporter</a>
+                            </li>
+                            <li class="link">
                                 <a href="classes/ScheduledMetricReporter.html" data-type="entity-link">ScheduledMetricReporter</a>
                             </li>
                             <li class="link">
@@ -133,6 +184,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/SlidingWindowReservoir.html" data-type="entity-link">SlidingWindowReservoir</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/SpaceHistory.html" data-type="entity-link">SpaceHistory</a>
                             </li>
                             <li class="link">
                                 <a href="classes/StdClock.html" data-type="entity-link">StdClock</a>
@@ -149,6 +203,18 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <li class="link">
                                 <a href="classes/TimeUnit.html" data-type="entity-link">TimeUnit</a>
                             </li>
+                            <li class="link">
+                                <a href="classes/V8EventLoop.html" data-type="entity-link">V8EventLoop</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/V8GCMetrics.html" data-type="entity-link">V8GCMetrics</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/V8MemoryMetrics.html" data-type="entity-link">V8MemoryMetrics</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/V8ProcessMetrics.html" data-type="entity-link">V8ProcessMetrics</a>
+                            </li>
                         </ul>
                     </li>
                     <li class="chapter">
@@ -158,7 +224,7 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span>Interfaces</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
+                        <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
                                 <a href="interfaces/BucketCounting.html" data-type="entity-link">BucketCounting</a>
                             </li>
@@ -166,10 +232,31 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/BucketToCountMap.html" data-type="entity-link">BucketToCountMap</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/CarbonData.html" data-type="entity-link">CarbonData</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CarbonMetricReporterOptions.html" data-type="entity-link">CarbonMetricReporterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ClusterOptions.html" data-type="entity-link">ClusterOptions</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Counting.html" data-type="entity-link">Counting</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CsvFileWriter.html" data-type="entity-link">CsvFileWriter</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/CsvMetricReporterOptions.html" data-type="entity-link">CsvMetricReporterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/DefaultCsvFileWriterOptions.html" data-type="entity-link">DefaultCsvFileWriterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/ElasticsearchMetricReporterOption.html" data-type="entity-link">ElasticsearchMetricReporterOption</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Fields.html" data-type="entity-link">Fields</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Gauge.html" data-type="entity-link">Gauge</a>
@@ -181,10 +268,19 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/IMetricReporter.html" data-type="entity-link">IMetricReporter</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/InfluxMetricReporterOptions.html" data-type="entity-link">InfluxMetricReporterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/InterprocessMessage.html" data-type="entity-link">InterprocessMessage</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/InterprocessReportMessage.html" data-type="entity-link">InterprocessReportMessage</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InterprocessReportRequest.html" data-type="entity-link">InterprocessReportRequest</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/InterprocessReportResponse.html" data-type="entity-link">InterprocessReportResponse</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/LengthAttributeInterface.html" data-type="entity-link">LengthAttributeInterface</a>
@@ -241,6 +337,21 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="interfaces/OverallReportContext.html" data-type="entity-link">OverallReportContext</a>
                             </li>
                             <li class="link">
+                                <a href="interfaces/PrometheusClusterOptions.html" data-type="entity-link">PrometheusClusterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PrometheusFields.html" data-type="entity-link">PrometheusFields</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PrometheusMetricResult.html" data-type="entity-link">PrometheusMetricResult</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PrometheusReporterOptions.html" data-type="entity-link">PrometheusReporterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/PushgatewayReporterOptions.html" data-type="entity-link">PushgatewayReporterOptions</a>
+                            </li>
+                            <li class="link">
                                 <a href="interfaces/ReportingResult.html" data-type="entity-link">ReportingResult</a>
                             </li>
                             <li class="link">
@@ -254,6 +365,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/ScheduledMetricReporterOptions.html" data-type="entity-link">ScheduledMetricReporterOptions</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/Sender.html" data-type="entity-link">Sender</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/SerializableBucketCounting.html" data-type="entity-link">SerializableBucketCounting</a>
@@ -303,7 +417,10 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             <span>Miscellaneous</span>
                             <span class="icon ion-ios-arrow-down"></span>
                         </div>
-                        <ul class="links collapse" ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                        <ul class="links collapse " ${ isNormalMode ? 'id="miscellaneous-links"' : 'id="xs-miscellaneous-links"' }>
+                            <li class="link">
+                                <a href="miscellaneous/enumerations.html" data-type="entity-link">Enums</a>
+                            </li>
                             <li class="link">
                                 <a href="miscellaneous/functions.html" data-type="entity-link">Functions</a>
                             </li>

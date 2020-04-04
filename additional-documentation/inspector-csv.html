@@ -1,0 +1,649 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content additional-page">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+<h1 id="inspector-csv">inspector-csv</h1>
+<p>Typescript metric reporter for CSV files.</p>
+<p align="center">
+    <a href="https://www.npmjs.org/package/inspector-csv">
+        <img src="https://img.shields.io/npm/v/inspector-csv.svg" alt="NPM Version">
+    </a>
+    <a href="https://www.npmjs.org/package/inspector-csv">
+        <img src="https://img.shields.io/npm/l/inspector-csv.svg" alt="License">
+    </a>
+    <a href="https://travis-ci.org/rstiller/inspector-csv">
+        <img src="http://img.shields.io/travis/rstiller/inspector-csv/master.svg" alt="Build Status">
+    </a>
+    <a href="https://david-dm.org/rstiller/inspector-csv">
+        <img src="https://img.shields.io/david/rstiller/inspector-csv.svg" alt="Dependencies Status">
+    </a>
+</p>
+
+<p>This library is made for <a href="https://github.com/rstiller/inspector-metrics">inspector-metrics</a>
+node module and is meant to be used with <code>nodejs</code>.  </p>
+<p>All metrics from the <a href="https://github.com/rstiller/inspector-metrics">inspector-metrics</a> library
+can exported into CSV files.</p>
+<p>Take a look at the <a href="https://rstiller.github.io/inspector-metrics/">Documentation</a>.</p>
+<h2 id="install">install</h2>
+<p><code>npm install --save inspector-csv</code></p>
+<h2 id="basic-usage">basic usage</h2>
+<p><code>example.ts</code></p>
+<div><pre class="line-numbers"><code class="language-typescript">import {
+    CsvMetricReporter,
+    DefaultCsvFileWriter,
+} from &quot;inspector-csv&quot;;
+import { MetricRegistry, Timer } from &quot;inspector-metrics&quot;;
+
+// metric registry is used in the application code to measure durations, error codes, etc...
+const registry: MetricRegistry = new MetricRegistry();
+
+// some timers for this example
+const requests1: Timer = registry.newTimer(&quot;requests1&quot;);
+const requests2: Timer = registry.newTimer(&quot;requests2&quot;);
+const requests3: Timer = registry.newTimer(&quot;requests3&quot;);
+
+requests1.setGroup(&quot;requests&quot;);
+requests2.setGroup(&quot;requests&quot;);
+
+requests1.setTag(&quot;host&quot;, &quot;127.0.0.1&quot;);
+requests2.setTag(&quot;host&quot;, &quot;127.0.0.2&quot;);
+requests3.setTag(&quot;host&quot;, &quot;127.0.0.3&quot;);
+
+// default csv file writer
+const writer = new DefaultCsvFileWriter({});
+
+// configure CSV metric reporter instance
+const reporter = new CsvMetricReporter({
+    columns: [&quot;date&quot;, &quot;group&quot;, &quot;name&quot;, &quot;field&quot;, &quot;value&quot;],
+    writer,
+});
+
+// register registry in the reporter
+reporter.addMetricRegistry(registry);
+// start reporting
+reporter.start();
+
+// simulate a running application which produces some custom measures
+setInterval(() =&gt; requests1.time(() =&gt; { ... }), 100);
+setInterval(() =&gt; requests2.time(() =&gt; { ... }), 50);
+setInterval(() =&gt; requests3.time(() =&gt; { ... }), 25);</code></pre></div><p><code>201810201900_metrics.csv</code> (example output file)</p>
+<div><pre class="line-numbers"><code class="language-csv">date,group,name,field,value
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.005&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.01&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.025&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.05&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.1&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.25&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.5&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_1&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_2.5&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_5&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_10&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_inf&quot;,10
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;count&quot;,10
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m15_rate&quot;,9
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m1_rate&quot;,9
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m5_rate&quot;,9
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;max&quot;,2999808
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean&quot;,1399961.6
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean_rate&quot;,6.622515994912551
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;min&quot;,999936
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p50&quot;,999936
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p75&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p95&quot;,2999808
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p98&quot;,2999808
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p99&quot;,2999808
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p999&quot;,2999808
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;stddev&quot;,699209.9735144262
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;sum&quot;,13999616
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.005&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.01&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.025&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.05&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.1&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.25&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.5&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_1&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_2.5&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_5&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_10&quot;,5
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_inf&quot;,20
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;count&quot;,20
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m15_rate&quot;,19
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m1_rate&quot;,19
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m5_rate&quot;,19
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;max&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean&quot;,850022.4
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean_rate&quot;,13.227513227513228
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;min&quot;,0
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p50&quot;,999936
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p75&quot;,1000192
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p95&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p98&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p99&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p999&quot;,2000128
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;stddev&quot;,587171.928872124
+20181020191953.380+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;sum&quot;,17000448
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.005&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.01&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.025&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.05&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.1&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.25&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.5&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_1&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_2.5&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_5&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_10&quot;,14
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_inf&quot;,40
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;count&quot;,40
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m15_rate&quot;,38
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m1_rate&quot;,38
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m5_rate&quot;,38
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;max&quot;,2000128
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean&quot;,700012.8
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean_rate&quot;,26.455026455026456
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;min&quot;,0
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p50&quot;,999936
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p75&quot;,1000192
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p95&quot;,2000115.2
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p98&quot;,2000128
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p99&quot;,2000128
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p999&quot;,2000128
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;stddev&quot;,563876.4091414141
+20181020191953.380+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;sum&quot;,28000512</code></pre></div><h2 id="csv-reporter-options">CSV reporter options</h2>
+<ul>
+<li><code>writer</code><ul>
+<li>The writer used to store the rows.</li>
+</ul>
+</li>
+<li><code>reportInterval</code><ul>
+<li>Reporting interval in TimeUnit</li>
+<li>default value <strong>1000</strong></li>
+</ul>
+</li>
+<li><code>unit</code><ul>
+<li>TimeUnit of the reporting interval</li>
+<li>default value <strong>MILLISECOND</strong></li>
+</ul>
+</li>
+<li><code>scheduler</code><ul>
+<li>function used to schedule reporting tasks</li>
+<li>default value <strong>setInterval</strong></li>
+</ul>
+</li>
+<li><code>clock</code><ul>
+<li>Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature</li>
+<li>default value <strong>new StdClock()</strong></li>
+</ul>
+</li>
+<li><code>minReportingTimeout</code><ul>
+<li>Timeout in minutes a metric need to be included in the report without having changed</li>
+<li>default value <strong>1</strong></li>
+</ul>
+</li>
+<li><code>tags</code><ul>
+<li>Tags for this reporter instance - to be combined with the tags of each metric while reporting</li>
+<li>default value <strong>new Map()</strong></li>
+</ul>
+</li>
+<li><code>useSingleQuotes</code><ul>
+<li>Indicates that single quotes are used instead of double quotes.</li>
+<li>default value <strong>false</strong></li>
+</ul>
+</li>
+<li><code>tagExportMode</code><ul>
+<li>ExportMode for tags</li>
+<li>default value <strong>ExportMode.ALL_IN_ONE_COLUMN</strong></li>
+</ul>
+</li>
+<li><code>metadataExportMode</code><ul>
+<li>ExportMode for metadata</li>
+<li>default value <strong>ExportMode.ALL_IN_ONE_COLUMN</strong></li>
+</ul>
+</li>
+<li><code>tagColumnPrefix</code><ul>
+<li>Prefix for tag columns if exported separately</li>
+<li>default value <strong><code>&quot;tag_&quot;</code></strong></li>
+</ul>
+</li>
+<li><code>tagDelimiter</code><ul>
+<li>Delimiter between the tags if exported in one column</li>
+<li>default value <strong>&quot;;&quot;</strong></li>
+</ul>
+</li>
+<li><code>metadataColumnPrefix</code><ul>
+<li>Prefix for metadata columns if exported separately</li>
+<li>default value <strong><code>&quot;meta_&quot;</code></strong></li>
+</ul>
+</li>
+<li><code>metadataDelimiter</code><ul>
+<li>Delimiter between the metadata if exported in one column</li>
+<li>default value <strong>&quot;;&quot;</strong></li>
+</ul>
+</li>
+<li><code>columns</code><ul>
+<li>The columns to export</li>
+<li>default value <strong>[]</strong></li>
+<li>possible values for each element<ul>
+<li>&quot;date&quot; - the date of the current reporting run</li>
+<li>&quot;name&quot; - name of the metric</li>
+<li>&quot;field&quot; - field identifier (depends on the metric type)</li>
+<li>&quot;group&quot; - group of the metric</li>
+<li>&quot;description&quot; - description of the metric</li>
+<li>&quot;value&quot; - numeric value of the field of the metric</li>
+<li>&quot;tags&quot; - either one column with all tags or all tag columns</li>
+<li>&quot;type&quot; - type of the metric, one of &quot;counter&quot;, &quot;gauge&quot;, &quot;histogram&quot;, &quot;meter&quot;, &quot;timer&quot;</li>
+<li>&quot;metadata&quot; - either one column with all metadata or all metadata columns</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>dateFormat</code><ul>
+<li>The format for the date column</li>
+<li>default value <strong>&quot;YYYYMMDDHHmmss.SSSZ&quot;</strong></li>
+</ul>
+</li>
+<li><code>timezone</code><ul>
+<li>The timezone used to determine the date</li>
+<li>default value <strong>&quot;UTC&quot;</strong></li>
+</ul>
+</li>
+<li><code>tagFilter</code><ul>
+<li>An async filter function used to filter out unwanted tags</li>
+<li>default value <strong>async () =&gt; true</strong></li>
+</ul>
+</li>
+<li><code>metadataFilter</code><ul>
+<li>An async filter function used to filter out unwanted metadata</li>
+<li>default value <strong>async () =&gt; true</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="default-csv-writer-options">default CSV writer options</h2>
+<ul>
+<li><code>filename</code><ul>
+<li>An async function determining the filename of the metrics</li>
+<li>default value <strong>async () =&gt; ${moment().format(&quot;YYYYMMDDHH00&quot;)}_metrics.csv</strong></li>
+</ul>
+</li>
+<li><code>dir</code><ul>
+<li>An async function determining the directory of the metricsfile</li>
+<li>default value <strong>async () =&gt; &quot;./metrics&quot;</strong></li>
+</ul>
+</li>
+<li><code>writeHeaders</code><ul>
+<li>Determines if the column headers should be written at the top of each file</li>
+<li>default value <strong>true</strong></li>
+</ul>
+</li>
+<li><code>createDir</code><ul>
+<li>Determines if the dir for the metrics reporting should be created if it doesn&#39;t exist</li>
+<li>default value <strong>true</strong></li>
+</ul>
+</li>
+<li><code>delimiter</code><ul>
+<li>The delimiter between the fields</li>
+<li>default value <strong>&quot;,&quot;</strong></li>
+</ul>
+</li>
+<li><code>encoding</code><ul>
+<li>The encoding of the file</li>
+<li>default value <strong>&quot;utf8&quot;</strong></li>
+</ul>
+</li>
+<li><code>lineEnding</code><ul>
+<li>The line endings in the file</li>
+<li>default value <strong>&quot;\n&quot;</strong></li>
+</ul>
+</li>
+</ul>
+<h2 id="exporting-tags">exporting tags</h2>
+<p><code>example.ts</code></p>
+<div><pre class="line-numbers"><code class="language-typescript">import {
+    CsvMetricReporter,
+    DefaultCsvFileWriter,
+} from &quot;inspector-csv&quot;;
+import { MetricRegistry, Timer } from &quot;inspector-metrics&quot;;
+
+// metric registry is used in the application code to measure durations, error codes, etc...
+const registry: MetricRegistry = new MetricRegistry();
+
+// some timers for this example
+const requests1: Timer = registry.newTimer(&quot;requests1&quot;);
+const requests2: Timer = registry.newTimer(&quot;requests2&quot;);
+const requests3: Timer = registry.newTimer(&quot;requests3&quot;);
+
+requests1.setGroup(&quot;requests&quot;);
+requests2.setGroup(&quot;requests&quot;);
+
+requests1.setTag(&quot;host&quot;, &quot;127.0.0.1&quot;);
+requests2.setTag(&quot;host&quot;, &quot;127.0.0.2&quot;);
+// override common tag from reporter
+requests2.setTag(&quot;type&quot;, &quot;override_tag&quot;);
+requests3.setTag(&quot;host&quot;, &quot;127.0.0.3&quot;);
+requests3.setTag(&quot;special_tag&quot;, &quot;test_abc&quot;);
+
+// default csv file writer
+const writer = new DefaultCsvFileWriter({});
+
+// configure CSV metric reporter instance
+const reporter = new CsvMetricReporter({
+    columns: [&quot;date&quot;, &quot;group&quot;, &quot;name&quot;, &quot;field&quot;, &quot;value&quot;, &quot;type&quot;, &quot;tags&quot;],
+    tagExportMode: ExportMode.ALL_IN_ONE_COLUMN,
+    writer,
+});
+
+// common tags for all metrics
+const tags = new Map();
+tags.set(&quot;type&quot;, &quot;metric&quot;);
+reporter.setTags(tags);
+
+// register registry in the reporter
+reporter.addMetricRegistry(registry);
+// start reporting
+reporter.start();
+
+// simulate a running application which produces some custom measures
+setInterval(() =&gt; requests1.time(() =&gt; { ... }), 100);
+setInterval(() =&gt; requests2.time(() =&gt; { ... }), 50);
+setInterval(() =&gt; requests3.time(() =&gt; { ... }), 25);</code></pre></div><p><code>201810201900_metrics.csv</code> (example output file)</p>
+<div><pre class="line-numbers"><code class="language-csv">date,group,name,field,value,type,tags
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.005&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.01&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.025&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.05&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.1&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.25&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.5&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_1&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_2.5&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_5&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_10&quot;,1,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_inf&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;count&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m15_rate&quot;,9,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m1_rate&quot;,9,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m5_rate&quot;,9,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;max&quot;,1999872,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean&quot;,1000012.8,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean_rate&quot;,6.565989008975633,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;min&quot;,0,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p50&quot;,1000064,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p75&quot;,1000192,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p95&quot;,1999872,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p98&quot;,1999872,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p99&quot;,1999872,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p999&quot;,1999872,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;stddev&quot;,471374.3671220714,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;sum&quot;,10000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.1&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.005&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.01&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.025&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.05&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.1&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.25&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.5&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_1&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_2.5&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_5&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_10&quot;,5,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_inf&quot;,20,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;count&quot;,20,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m15_rate&quot;,19,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m1_rate&quot;,19,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m5_rate&quot;,19,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;max&quot;,3999744,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean&quot;,900006.4,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean_rate&quot;,13.106160994487947,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;min&quot;,0,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p50&quot;,999936,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p75&quot;,1000192,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p95&quot;,3999744,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p98&quot;,3999744,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p99&quot;,3999744,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p999&quot;,3999744,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;stddev&quot;,852194.9951649873,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;sum&quot;,18000128,&quot;timer&quot;,type=&quot;override_tag&quot;;host=&quot;127.0.0.2&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.005&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.01&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.025&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.05&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.1&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.25&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.5&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_1&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_2.5&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_5&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_10&quot;,10,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_inf&quot;,40,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;count&quot;,40,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m15_rate&quot;,38,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m1_rate&quot;,38,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m5_rate&quot;,38,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;max&quot;,2000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean&quot;,800006.4,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean_rate&quot;,26.19515279863145,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;min&quot;,0,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p50&quot;,999936,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p75&quot;,1000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p95&quot;,2000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p98&quot;,2000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p99&quot;,2000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p999&quot;,2000128,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;stddev&quot;,516413.0421795807,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;
+20181020194618.877+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;sum&quot;,32000256,&quot;timer&quot;,type=&quot;metric&quot;;host=&quot;127.0.0.3&quot;;special_tag=&quot;test_abc&quot;</code></pre></div><p><code>example-with-separate-columns.ts</code></p>
+<div><pre class="line-numbers"><code class="language-typescript">// same as in the example above ...
+
+// configure CSV metric reporter instance
+const reporter = new CsvMetricReporter({
+    columns: [&quot;date&quot;, &quot;group&quot;, &quot;name&quot;, &quot;field&quot;, &quot;value&quot;, &quot;type&quot;, &quot;tags&quot;],
+    tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
+    ...
+});</code></pre></div><p><code>201810201900_metrics.csv</code> (example output file)</p>
+<div><pre class="line-numbers"><code class="language-csv">date,group,name,field,value,type,tag_type,tag_host,tag_special_tag
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.005&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.01&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.025&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.05&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.1&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.25&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_0.5&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_1&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_2.5&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_5&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_10&quot;,3,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;bucket_inf&quot;,10,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;count&quot;,10,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m15_rate&quot;,9,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m1_rate&quot;,9,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;m5_rate&quot;,9,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;max&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean&quot;,999987.2,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;mean_rate&quot;,6.578947368421053,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;min&quot;,0,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p50&quot;,999936,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p75&quot;,1250112,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p95&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p98&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p99&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;p999&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;stddev&quot;,942809.0458299838,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests1&quot;,&quot;sum&quot;,9999872,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.1&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.005&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.01&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.025&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.05&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.1&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.25&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_0.5&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_1&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_2.5&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_5&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_10&quot;,3,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;bucket_inf&quot;,20,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;count&quot;,20,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m15_rate&quot;,19,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m1_rate&quot;,19,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;m5_rate&quot;,19,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;max&quot;,2000128,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean&quot;,1049996.8,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;mean_rate&quot;,13.1319758106064,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;min&quot;,0,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p50&quot;,999936,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p75&quot;,1749952,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p95&quot;,2000128,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p98&quot;,2000128,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p99&quot;,2000128,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;p999&quot;,2000128,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;stddev&quot;,604805.6067375874,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;requests&quot;,&quot;requests2&quot;,&quot;sum&quot;,20999936,&quot;timer&quot;,&quot;override_tag&quot;,&quot;127.0.0.2&quot;,&quot;&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.005&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.01&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.025&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.05&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.1&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.25&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_0.5&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_1&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_2.5&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_5&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_10&quot;,7,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;bucket_inf&quot;,40,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;count&quot;,40,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m15_rate&quot;,38,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m1_rate&quot;,38,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;m5_rate&quot;,38,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;max&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean&quot;,899987.2,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;mean_rate&quot;,26.2639516212128,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;min&quot;,0,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p50&quot;,999936,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p75&quot;,999936,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p95&quot;,2950067.1999999955,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p98&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p99&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;p999&quot;,3000064,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;stddev&quot;,545386.4756426474,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;
+20181020195009.787+00:00,&quot;&quot;,&quot;requests3&quot;,&quot;sum&quot;,35999488,&quot;timer&quot;,&quot;metric&quot;,&quot;127.0.0.3&quot;,&quot;test_abc&quot;</code></pre></div><h2 id="multi-process-support-nodejs-cluster">multi process support (nodejs cluster)</h2>
+<p>By default forked processes are sending the metrics as inter-process message<br>to the master process. The <code>CsvMetricReporter</code> is listening for those messages<br>and writes the metrics from the other processes into the CSV file.  </p>
+<p>Only the master process writes the header of the CSV file.<br>Also each write-operation is handled by the master process.  </p>
+<p>To disable this behavior set the <code>DisabledClusterOptions</code> when creating an instance.  </p>
+<p>In each case you should set the <code>pid</code> as reporter tag.<br>And in case of disabling cluster support the <code>pid</code> should be part of the filename.  </p>
+<div><pre class="line-numbers"><code class="language-typescript">import { tagsToMap, DisabledClusterOptions } from &quot;inspector-metrics&quot;;
+import { CsvMetricReporter } from &quot;inspector-csv&quot;;
+
+const writer = new DefaultCsvFileWriter({
+    filename: async () =&gt; `${moment().format(&quot;YYYYMMDDHH00&quot;)}_${process.pid}_metrics.csv`
+});
+
+// configure CSV metric reporter instance
+const reporter = new CsvMetricReporter({
+    clusterOptions: new DisabledClusterOptions(),
+    columns: [&quot;date&quot;, &quot;group&quot;, &quot;name&quot;, &quot;field&quot;, &quot;value&quot;, &quot;type&quot;, &quot;tags&quot;],
+    writer,
+    ...
+});
+
+// set &quot;pid&quot; to process id
+reporter.setTags(tagsToMap({
+    pid: `${process.pid}`,
+}));</code></pre></div><h2 id="license">License</h2>
+<p><a href="https://www.opensource.org/licenses/mit-license.php">MIT</a></p>
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'additional-page';
+            var COMPODOC_CURRENT_PAGE_URL = 'inspector-csv.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

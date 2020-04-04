@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/metered.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/metered.ts</code>
         </p>
 
             <p class="comment">
@@ -234,45 +234,45 @@ import { Metric, SerializableMetric } from &quot;./metric&quot;;
  */
 export interface Metered extends Metric {
 
-    /**
-     * Gets the total number of events.
-     *
-     * @returns {number}
-     * @memberof Metered
-     */
-    getCount(): number;
+  /**
+   * Gets the total number of events.
+   *
+   * @returns {number}
+   * @memberof Metered
+   */
+  getCount(): number;
 
-    /**
-     * Gets the rate of the last 15 minutes.
-     *
-     * @returns {number}
-     * @memberof Metered
-     */
-    get15MinuteRate(): number;
+  /**
+   * Gets the rate of the last 15 minutes.
+   *
+   * @returns {number}
+   * @memberof Metered
+   */
+  get15MinuteRate(): number;
 
-    /**
-     * Gets the rate of the last 5 minutes.
-     *
-     * @returns {number}
-     * @memberof Metered
-     */
-    get5MinuteRate(): number;
+  /**
+   * Gets the rate of the last 5 minutes.
+   *
+   * @returns {number}
+   * @memberof Metered
+   */
+  get5MinuteRate(): number;
 
-    /**
-     * Gets the rate of the last minute.
-     *
-     * @returns {number}
-     * @memberof Metered
-     */
-    get1MinuteRate(): number;
+  /**
+   * Gets the rate of the last minute.
+   *
+   * @returns {number}
+   * @memberof Metered
+   */
+  get1MinuteRate(): number;
 
-    /**
-     * Gets the mean rate - the meaning of the mean-rate depends on the actual implementation.
-     *
-     * @returns {number}
-     * @memberof Metered
-     */
-    getMeanRate(): number;
+  /**
+   * Gets the mean rate - the meaning of the mean-rate depends on the actual implementation.
+   *
+   * @returns {number}
+   * @memberof Metered
+   */
+  getMeanRate(): number;
 
 }
 
@@ -283,7 +283,7 @@ export interface Metered extends Metric {
  * @interface MeteredRates
  */
 export interface MeteredRates {
-    [rate: number]: number;
+  [rate: number]: number;
 }
 
 /**
@@ -294,33 +294,34 @@ export interface MeteredRates {
  * @extends {SerializableMetric}
  */
 export interface SerializableMetered extends SerializableMetric {
-    /**
-     * Total count of events reported.
-     *
-     * @type {number}
-     * @memberof SerializableMetered
-     */
-    count: number;
-    /**
-     * mean rate - the meaning of the mean-rate depends on the actual implementation.
-     *
-     * @type {number}
-     * @memberof SerializableMetered
-     */
-    meanRate: number;
-    /**
-     * Mapping of time-frame to rate values - time-unit and meaning depend on the actual implementation.
-     *
-     * @type {MeteredRates}
-     * @memberof SerializableMetered
-     */
-    rates: MeteredRates;
+  /**
+   * Total count of events reported.
+   *
+   * @type {number}
+   * @memberof SerializableMetered
+   */
+  count: number;
+  /**
+   * mean rate - the meaning of the mean-rate depends on the actual implementation.
+   *
+   * @type {number}
+   * @memberof SerializableMetered
+   */
+  meanRate: number;
+  /**
+   * Mapping of time-frame to rate values - time-unit and meaning depend on the actual implementation.
+   *
+   * @type {MeteredRates}
+   * @memberof SerializableMetered
+   */
+  rates: MeteredRates;
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -343,6 +344,7 @@ export interface SerializableMetered extends SerializableMetric {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'SerializableMetered.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

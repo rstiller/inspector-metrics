@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -43,6 +43,7 @@
 
 
 
+                   
 
 <ol class="breadcrumb">
   <li>Miscellaneous</li>
@@ -57,31 +58,37 @@
                 <td class="col-md-4">
                     <ul class="index-list">
                         <li>
-                            <a href="#DAY" title="lib/metrics/model/time-unit.ts"><b>DAY</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#DAY" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>DAY</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                         <li>
-                            <a href="#HOUR" title="lib/metrics/model/time-unit.ts"><b>HOUR</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#GC" title="packages/inspector-vm/lib/metrics/V8GCMetrics.ts"><b>GC</b>&nbsp;&nbsp;&nbsp;(packages/.../V8GCMetrics.ts)</a>
                         </li>
                         <li>
-                            <a href="#Int64" title="lib/metrics/model/int64.ts"><b>Int64</b>&nbsp;&nbsp;&nbsp;(lib/.../int64.ts)</a>
+                            <a href="#graphite" title="packages/inspector-carbon/lib/metrics/CarbonMetricReporter.ts"><b>graphite</b>&nbsp;&nbsp;&nbsp;(packages/.../CarbonMetricReporter.ts)</a>
                         </li>
                         <li>
-                            <a href="#MICROSECOND" title="lib/metrics/model/time-unit.ts"><b>MICROSECOND</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#HOUR" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>HOUR</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                         <li>
-                            <a href="#MILLISECOND" title="lib/metrics/model/time-unit.ts"><b>MILLISECOND</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#Int64" title="packages/inspector-metrics/lib/metrics/model/int64.ts"><b>Int64</b>&nbsp;&nbsp;&nbsp;(packages/.../int64.ts)</a>
                         </li>
                         <li>
-                            <a href="#MINUTE" title="lib/metrics/model/time-unit.ts"><b>MINUTE</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#MICROSECOND" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>MICROSECOND</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                         <li>
-                            <a href="#NANOSECOND" title="lib/metrics/model/time-unit.ts"><b>NANOSECOND</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#MILLISECOND" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>MILLISECOND</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                         <li>
-                            <a href="#NativeHistogram" title="lib/metrics/hdr-histogram.ts"><b>NativeHistogram</b>&nbsp;&nbsp;&nbsp;(lib/.../hdr-histogram.ts)</a>
+                            <a href="#MINUTE" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>MINUTE</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                         <li>
-                            <a href="#SECOND" title="lib/metrics/model/time-unit.ts"><b>SECOND</b>&nbsp;&nbsp;&nbsp;(lib/.../time-unit.ts)</a>
+                            <a href="#NANOSECOND" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>NANOSECOND</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NativeHistogram" title="packages/inspector-metrics/lib/metrics/hdr-histogram.ts"><b>NativeHistogram</b>&nbsp;&nbsp;&nbsp;(packages/.../hdr-histogram.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SECOND" title="packages/inspector-metrics/lib/metrics/model/time-unit.ts"><b>SECOND</b>&nbsp;&nbsp;&nbsp;(packages/.../time-unit.ts)</a>
                         </li>
                     </ul>
                 </td>
@@ -90,7 +97,7 @@
     </table>
 </section>
 
-    <h3>lib/metrics/model/time-unit.ts</h3>
+    <h3>packages/inspector-metrics/lib/metrics/model/time-unit.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -288,7 +295,67 @@
             </tbody>
         </table>
 </section>
-    <h3>lib/metrics/model/int64.ts</h3>
+    <h3>packages/inspector-vm/lib/metrics/V8GCMetrics.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="GC"></a>
+                        <span class="name">
+                            <b>
+                            GC</b>
+                            <a href="#GC"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>require(&#x27;gc-stats&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Event emitter for GC event within nodejs.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>packages/inspector-carbon/lib/metrics/CarbonMetricReporter.ts</h3>
+    <section>
+    <h3></h3>        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="graphite"></a>
+                        <span class="name">
+                            <b>
+                            graphite</b>
+                            <a href="#graphite"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>require(&#x27;graphite&#x27;)</code>
+                        </td>
+                    </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Graphite / carbon client module.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+    <h3>packages/inspector-metrics/lib/metrics/model/int64.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -318,7 +385,7 @@
             </tbody>
         </table>
 </section>
-    <h3>lib/metrics/hdr-histogram.ts</h3>
+    <h3>packages/inspector-metrics/lib/metrics/hdr-histogram.ts</h3>
     <section>
     <h3></h3>        <table class="table table-sm table-bordered">
             <tbody>
@@ -375,6 +442,7 @@
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
             var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

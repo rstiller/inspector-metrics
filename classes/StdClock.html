@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/clock.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/clock.ts</code>
         </p>
 
             <p class="comment">
@@ -150,8 +150,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="68"
-                            class="link-to-prism">lib/metrics/clock.ts:68</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/clock.ts:65</a></div>
                 </td>
             </tr>
 
@@ -205,7 +205,7 @@
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../classes/Clock.html#source" target="_self" >Clock:49</a></code>
+                        <div class="io-line">Defined in         <code><a href="../classes/Clock.html#source" target="_self" >Clock:48</a></code>
 </div>
                 </td>
             </tr>
@@ -239,7 +239,7 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
 /**
  * Represents a point in time.
@@ -248,8 +248,8 @@
  * @interface Time
  */
 export interface Time {
-    milliseconds: number;
-    nanoseconds: number;
+  milliseconds: number
+  nanoseconds: number
 }
 
 /**
@@ -262,13 +262,13 @@ export interface Time {
  * @param {Time} two time sample
  * @returns {number} a duration in nanoseconds
  */
-export function diff(one: Time, two: Time): number {
-    if (!one || !two) {
-        return 0;
-    }
-    const oneValue: number &#x3D; one.nanoseconds + one.milliseconds * 1000000;
-    const twoValue: number &#x3D; two.nanoseconds + two.milliseconds * 1000000;
-    return twoValue - oneValue;
+export function diff (one: Time, two: Time): number {
+  if (!one || !two) {
+    return 0
+  }
+  const oneValue: number &#x3D; one.nanoseconds + one.milliseconds * 1000000
+  const twoValue: number &#x3D; two.nanoseconds + two.milliseconds * 1000000
+  return twoValue - oneValue
 }
 
 /**
@@ -279,16 +279,14 @@ export function diff(one: Time, two: Time): number {
  * @class Clock
  */
 export abstract class Clock {
-
-    /**
-     * Gets the current point in time according to the logic of the clock implementation.
-     *
-     * @abstract
-     * @returns {Time}
-     * @memberof Clock
-     */
-    public abstract time(): Time;
-
+  /**
+   * Gets the current point in time according to the logic of the clock implementation.
+   *
+   * @abstract
+   * @returns {Time}
+   * @memberof Clock
+   */
+  public abstract time(): Time;
 }
 
 /**
@@ -299,21 +297,19 @@ export abstract class Clock {
  * @extends {Clock}
  */
 export class StdClock extends Clock {
-
-    /**
-     * Returns a Time object who&#x27;s nanoseconds component is always zero.
-     *
-     * @returns {Time}
-     * @memberof StdClock
-     */
-    public time(): Time {
-        const time &#x3D; {
-            milliseconds: Date.now(),
-            nanoseconds: 0,
-        };
-        return time;
+  /**
+   * Returns a Time object who&#x27;s nanoseconds component is always zero.
+   *
+   * @returns {Time}
+   * @memberof StdClock
+   */
+  public time (): Time {
+    const time &#x3D; {
+      milliseconds: Date.now(),
+      nanoseconds: 0
     }
-
+    return time
+  }
 }
 </code></pre>
     </div>
@@ -321,6 +317,7 @@ export class StdClock extends Clock {
 
 
 
+                   
 
 
 
@@ -343,6 +340,7 @@ export class StdClock extends Clock {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'StdClock.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

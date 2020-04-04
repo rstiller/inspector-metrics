@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/sampling.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/sampling.ts</code>
         </p>
 
             <p class="comment">
@@ -123,7 +123,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">lib/metrics/model/sampling.ts:19</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/sampling.ts:19</a></div>
                 </td>
             </tr>
 
@@ -164,13 +164,13 @@ import { SerializedSnapshot, SimpleSnapshot, Snapshot } from &quot;./snapshot&qu
  */
 export interface Sampling {
 
-    /**
-     * Gets the snapshot of values.
-     *
-     * @returns {Snapshot}
-     * @memberof Sampling
-     */
-    getSnapshot(): Snapshot;
+  /**
+   * Gets the snapshot of values.
+   *
+   * @returns {Snapshot}
+   * @memberof Sampling
+   */
+  getSnapshot(): Snapshot;
 
 }
 
@@ -182,13 +182,13 @@ export interface Sampling {
  */
 export interface SerializableSampling {
 
-    /**
-     * Gets the serialized, sorted collection of samples.
-     *
-     * @returns {SerializedSnapshot}
-     * @memberof SerializableSampling
-     */
-    snapshot: SerializedSnapshot;
+  /**
+   * Gets the serialized, sorted collection of samples.
+   *
+   * @returns {SerializedSnapshot}
+   * @memberof SerializableSampling
+   */
+  snapshot: SerializedSnapshot;
 
 }
 
@@ -200,11 +200,11 @@ export interface SerializableSampling {
  * @returns {metric is SerializableSampling}
  */
 export function isSerializableSampling(metric: Sampling | SerializableSampling): metric is SerializableSampling {
-    const anyMetric: any &#x3D; metric as any;
-    if ((anyMetric.getSnapshot &amp;&amp; typeof anyMetric.getSnapshot &#x3D;&#x3D;&#x3D; &quot;function&quot;)) {
-        return false;
-    }
-    return anyMetric.hasOwnProperty(&quot;snapshot&quot;);
+  const anyMetric: any &#x3D; metric as any;
+  if ((anyMetric.getSnapshot &amp;&amp; typeof anyMetric.getSnapshot &#x3D;&#x3D;&#x3D; &quot;function&quot;)) {
+    return false;
+  }
+  return anyMetric.hasOwnProperty(&quot;snapshot&quot;);
 }
 
 /**
@@ -215,17 +215,18 @@ export function isSerializableSampling(metric: Sampling | SerializableSampling):
  * @returns {Snapshot}
  */
 export function getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
-    if (isSerializableSampling(metric)) {
-        return new SimpleSnapshot(metric.snapshot.values);
-    } else {
-        return metric.getSnapshot();
-    }
+  if (isSerializableSampling(metric)) {
+    return new SimpleSnapshot(metric.snapshot.values);
+  } else {
+    return metric.getSnapshot();
+  }
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -248,6 +249,7 @@ export function getSnapshot(metric: Sampling | SerializableSampling): Snapshot {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'Sampling.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="./" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="./" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -31,268 +31,142 @@
                    <div class="content-data">
 
 <h1 id="inspector-metrics">inspector-metrics</h1>
-<p>Monitoring / metric library similar to http://metrics.dropwizard.io</p>
+<p>Monitoring / metric library similar to <a href="http://metrics.dropwizard.io">http://metrics.dropwizard.io</a></p>
 <p align="center">
-    <a href="https://www.npmjs.org/package/inspector-metrics">
-        <img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version">
-    </a>
-    <a href="https://www.npmjs.org/package/inspector-metrics">
-        <img src="https://img.shields.io/npm/dm/inspector-metrics.svg" alt="Downloads per Month">
-    </a>
-    <a href="https://www.npmjs.org/package/inspector-metrics">
-        <img src="https://img.shields.io/npm/l/inspector-metrics.svg" alt="License">
-    </a>
     <a href="https://travis-ci.org/rstiller/inspector-metrics">
         <img src="http://img.shields.io/travis/rstiller/inspector-metrics/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-metrics">
-        <img src="https://img.shields.io/david/rstiller/inspector-metrics.svg" alt="Dependencies Status">
-    </a>
 </p>
 
-<h2 id="install">install</h2>
-<p>This library is meant to be used with <code>typescript</code> / <code>nodejs</code>.</p>
-<p><code>npm install --save inspector-metrics</code></p>
-<h2 id="basic-usage">basic usage</h2>
-<p>At least a <code>MetricRegistry</code>, a <code>Metric</code> and a <code>MetricReporter</code> is necessary
-to use the library.</p>
-<p>Supported metric types:
-* Counter - measures an integer value (e.g. &quot;how many time was my function called, number of bookings in a sales system&quot;)
-* MonotoneCounter - a monotonically increasing integer value (e.g. &quot;error count&quot;)
-* Event - ad-hoc event to report events (e.g. &quot;application start / deployment&quot;, &quot;batch import started / ended&quot;)
-* Gauge - measurement of a value (e.g. &quot;number of waiting threads on a resource&quot;)
-* HdrHistogram - recording and analyzing sampled data value counts across a configurable integer value range with configurable value precision
-* Histogram - measures the statistical distribution of all values
-* Meter - measures the rate of events over time (e.g. &quot;requests per second&quot;)
-* Timer - measures call-rate of a function and the distribution of the duration of all calls</p>
-<p>There are libraries which collect some metrics:</p>
+<p>This is the mono repository for the <code>inspector-metrics</code> modules.<br><code>inspector-metrics</code> modules are a collection of modules around application metrics and monitoring for nodejs.  </p>
+<p>Take a look at the <a href="https://rstiller.github.io/inspector-metrics/">Documentation</a>.</p>
+<h2 id="features">Features</h2>
 <ul>
-<li><a href="https://github.com/rstiller/inspector-vm">node VM</a> - collects memory &amp; garbage collection metric for node VM</li>
+<li>metric model independent from time-series DB</li>
+<li>multiple reporter modules</li>
+<li>multi process support (<a href="https://nodejs.org/api/cluster.html">nodejs cluster</a>)</li>
+<li>business friendly license (<a href="https://www.opensource.org/licenses/mit-license.php">MIT</a> License)</li>
 </ul>
-<p>The library ships with a default <code>console</code> <code>MetricReporter</code>.</p>
-<p>Some other reporter:
-* <a href="https://github.com/ttous/inspector-amqp">AMQP</a>
-* <a href="https://github.com/rstiller/inspector-carbon">Carbon / Graphite</a>
-* <a href="https://github.com/rstiller/inspector-csv">CSV</a>
-* <a href="https://github.com/rstiller/inspector-elasticsearch">Elasticsearch</a>
-* <a href="https://github.com/rstiller/inspector-influx">Influx</a>
-* <a href="https://github.com/ttous/inspector-nats">NATS</a>
-* <a href="https://github.com/rstiller/inspector-prometheus">Prometheus / Pushgateway</a></p>
-<p>```typescript
-import { LoggerReporter, MetricRegistry, Timer } from &quot;inspector-metrics&quot;;</p>
-<p>// a registry is a collection of metric objects
-const registry = new MetricRegistry();
-// the reporter prints the stats
-const reporter = new LoggerReporter({
-    log: global.console,
-});
-// a new timer instance
-const requests: Timer = registry.newTimer(&quot;requests&quot;);</p>
-<p>reporter.addMetricRegistry(registry);
-reporter.start();</p>
-<p>// example usage
-setInterval(() =&gt; {
-    // should report a few milliseconds
-    requests.time(() =&gt; {
-        let a = 0;
-        // tslint:disable-next-line:prefer-const
-        let b = 1;
-        for (let i = 0; i &lt; 1e6; i++) {
-            a = b + i + a;
-        }
-    });
-}, 100);
-```</p>
-<h3 id="counter">Counter</h3>
-<p>```typescript
-import { Counter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-const requestCount: Counter = registry.newCounter(&quot;requestCount&quot;);</p>
-<p>// +1
-requestCount.increment(1);</p>
-<p>// -1
-requestCount.decrement(1);</p>
-<p>// =0
-requestCount.getCount();</p>
-<p>requestCount.reset();
-```</p>
-<h3 id="monotonecounter">MonotoneCounter</h3>
-<p>```typescript
-import { MonotoneCounter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-const errorCount: MonotoneCounter = registry.newMonotoneCounter(&quot;errorCount&quot;);</p>
-<p>// +1
-errorCount.increment(1);</p>
-<p>// causes error
-errorCount.increment(-1);</p>
-<p>// =1
-errorCount.getCount();</p>
-<p>errorCount.reset();
-```</p>
-<h3 id="event">Event</h3>
-<p>```typescript
-import { BaseMetric, Event, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
-<p>// common application tags - applied to each metric / event
-const tags: Map&lt;string, string&gt; = new Map();
-tags.set(&quot;application&quot;, &quot;project-name&quot;);
-tags.set(&quot;hostname&quot;, &quot;127.0.0.4&quot;);</p>
-<p>// the reporter prints the stats
-const reporter = new LoggerReporter({
-    log: global.console,
-    tags,
-});</p>
-<p>// not connected to a MetricRegistry like the other metrics
-const event = new Event<string>(&quot;application_started&quot;, &quot;signals an application start&quot;)
-    .setValue(&quot;started&quot;)
-    .setTag(&quot;mode&quot;, &quot;test&quot;)
-    .setTag(&quot;component&quot;, &quot;main&quot;);</p>
-<p>// directly send to time-series DB
-await reporter.reportEvent(event);
-```</p>
-<h3 id="gauge">Gauge</h3>
-<p>```typescript
-import { BaseMetric, Gauge, MetricRegistry, SimpleGauge } from &quot;inspector-metrics&quot;;</p>
-<p>class ArrayLengthGauge extends BaseMetric implements Gauge<number> {</p>
-<div><pre class="line-numbers"><code class="language-none">public constructor(name: string, private a: Array&lt;any&gt;) {
-    super();
-    this.name = name;
-}
+<h2 id="modules">Modules</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th align="left">Module</th>
+<th align="left">Description</th>
+<th align="left">Link</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="packages/inspector-metrics">inspector-metrics</a></td>
+<td align="left">API / interface module</td>
+<td align="left"></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-metrics.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-metrics.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-metrics.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><em>Reporter</em></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-carbon">inspector-carbon</a></td>
+<td align="left">reporter for graphite / carbon</td>
+<td align="left"><a href="https://www.npmjs.com/package/graphite">graphite</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-carbon.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-carbon.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-carbon.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-csv">inspector-csv</a></td>
+<td align="left">reporter for CSV files</td>
+<td align="left"></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-csv.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-csv.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-csv.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-elasticsearch">inspector-elasticsearch</a></td>
+<td align="left">reporter for elasticsearch</td>
+<td align="left"><a href="https://github.com/elastic/elasticsearch-js">elasticsearch</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-elasticsearch.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-elasticsearch.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-elasticsearch.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-influx">inspector-influx</a></td>
+<td align="left">reporter for influxdb</td>
+<td align="left"><a href="https://github.com/node-influx/node-influx">influxdb</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-influx.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-influx.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-influx.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-prometheus">inspector-prometheus</a></td>
+<td align="left">reporter for prometheus / pushgateway</td>
+<td align="left"><a href="https://prometheus.io/docs/introduction/overview/">prometheus</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-prometheus.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-prometheus.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-prometheus.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><em>Metric Collectors</em></td>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><a href="packages/inspector-vm">inspector-vm</a></td>
+<td align="left">metric collection for nodejs VM</td>
+<td align="left"></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-vm.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-vm.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/rstiller/inspector-vm.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="3rd-party-modules">3rd party modules</h2>
+<table class="table table-bordered compodoc-table">
+<thead>
+<tr>
+<th align="left">Module</th>
+<th align="left">Description</th>
+<th align="left">Link</th>
+<th align="left"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://github.com/ttous/inspector-amqp">inspector-amqp</a></td>
+<td align="left">reporter for AMQP</td>
+<td align="left"><a href="https://github.com/abreits/amqp-ts">amqp-ts</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-amqp.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-amqp.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/ttous/inspector-amqp.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+<tr>
+<td align="left"><a href="https://github.com/ttous/inspector-nats">inspector-nats</a></td>
+<td align="left">reporter for <a href="https://nats.io/">NATS</a></td>
+<td align="left"><a href="https://github.com/nats-io/node-nats">node-nats</a></td>
+<td align="left"><img src="https://img.shields.io/npm/v/inspector-nats.svg" alt="NPM Version" class="img-responsive"> <img src="https://img.shields.io/npm/l/inspector-nats.svg" alt="License" class="img-responsive"> <img src="https://img.shields.io/david/ttous/inspector-nats.svg" alt="Dependencies Status" class="img-responsive"></td>
+</tr>
+</tbody>
+</table>
+<h2 id="examples">Examples</h2>
+<p>Code examples for <code>javascript</code> and <code>typescript</code> are in the <code>examples</code> folder.</p>
+<h2 id="development">development</h2>
+<h3 id="local-setup--prerequisites">local setup / prerequisites</h3>
+<p>You should have <a href="https://nodejs.org/en/">nodejs</a>, <a href="https://www.docker.com/">docker</a> and <a href="https://docs.docker.com/compose/">docker-compose</a> installed.</p>
+<p>boot test environment:<br><code>./test-env/boot.sh</code></p>
+<p>shutdown test environment:<br><code>./test-env/reset.sh</code></p>
+<p>execute compatibility tests:<br><code>docker-compose run --rm nodeX</code><br><em>X = nodejs version (available: 8, 9, 10, 11, 12, 13)</em></p>
+<p>init / update project (if a new dependency is introduced or an existing is updated):  </p>
+<div><pre class="line-numbers"><code class="language-bash">npm i
+npm run bootstrap</code></pre></div><p>generate dependency report:  </p>
+<div><pre class="line-numbers"><code class="language-bash"># run &#39;npm run build&#39; before checking dependencies
+docker-compose run --rm deps</code></pre></div><p>release packages / publish docs:  </p>
+<div><pre class="line-numbers"><code class="language-bash"># check functionality
+npm i
+npm run bootstrap
+npm run build
 
-public getValue(): number {
-    return this.a.length;
-}</code></pre></div><p>}</p>
-<p>const registry = new MetricRegistry();
-const queueSize: Gauge<number> = new SimpleGauge(&quot;requestCount&quot;);
-let myArray: number[] = [];
-const arrayLength: Gauge<number> = new ArrayLengthGauge(&quot;arrayLength&quot;, myArray);</p>
-<p>registry.registerMetric(queueSize);
-registry.registerMetric(arrayLength);</p>
-<p>queueSize.setValue(12345);</p>
-<p>// 12345
-queueSize.getValue();</p>
-<p>myArray.push(1);
-myArray.push(2);
-myArray.push(3);</p>
-<p>// 3
-arrayLength.getValue();
-```</p>
-<h3 id="histogram">Histogram</h3>
-<p>```typescript
-import { Histogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-// measures a duration / latency
-const requestLatency: Histogram = registry.newHistogram(&quot;requestLatency&quot;);</p>
-<p>requestLatency.update(12345);
-requestLatency.update(23456);
-requestLatency.update(34567);</p>
-<p>// a copy of the current values
-const snapshot: Snapshot = requestLatency.getSnapshot();</p>
-<p>// mean count
-const mean: number = snapshot.getMean();
-```</p>
-<h3 id="hdrhistogram">HdrHistogram</h3>
-<p>```typescript
-import { HdrHistogram, MetricRegistry, Snapshot } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-// measures a duration / latency between 1 and 1000000000 nanoseconds
-const requestLatency: HdrHistogram = registry.newHdrHistogram(&quot;requestLatency&quot;, 1, 1000000000);</p>
-<p>// 102 microseconds in nanoseconds
-requestLatency.update(102000);
-// 4.390 milliseconds in nanoseconds
-requestLatency.update(4390000);</p>
-<p>// only snapshot interface - always uses the current values
-// since the native-hdr-histogram is used as a reference
-const snapshot: Snapshot = requestLatency.getSnapshot();</p>
-<p>// mean count
-const mean: number = snapshot.getMean();
-```</p>
-<h3 id="meter">Meter</h3>
-<p>```typescript
-import { Meter, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-const callCount: Meter = registry.newMeter(&quot;callCount&quot;);</p>
-<p>callCount.mark(1);</p>
-<p>const count: number = callCount.getCount();
-const m15: number = callCount.get15MinuteRate();
-const m5: number = callCount.get5MinuteRate();
-const m1: number = callCount.get1MinuteRate();
-const mean: number = callCount.getMeanRate();
-```</p>
-<h3 id="timer">Timer</h3>
-<p>```typescript
-import { MetricRegistry, MILLISECOND, Snapshot, StopWatch, Timer } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-const callStats: Timer = registry.newTimer(&quot;callStats&quot;);</p>
-<p>callStats.addDuration(100, MILLISECOND);</p>
-<p>// 1
-const count: number = callStats.getCount();
-// ~1
-const m15: number = callStats.get15MinuteRate();
-// ~1
-const m5: number = callStats.get5MinuteRate();
-// ~1
-const m1: number = callStats.get1MinuteRate();
-// ~1
-const mean: number = callStats.getMeanRate();</p>
-<p>let snapshot: Snapshot = callStats.getSnapshot();</p>
-<p>// some value around 100000000 (100ms in nanoseconds)
-const mean: number = snapshot.getMean();</p>
-<p>const timer: StopWatch = callStats.newStopWatch();</p>
-<p>timer.start();
-// 100ms has passed
-timer.stop();</p>
-<p>snapshot = callStats.getSnapshot();
-// snapshot gets updated through stop-watch ...
-snapshot.getMean();</p>
-<p>callStats.time(() =&gt; {
-    // some time has passed
-});</p>
-<p>// works with promise too
-await callStats.timeAsync(async () =&gt; {
-    // some time has passed
-});</p>
-<p>snapshot = callStats.getSnapshot();
-// snapshot gets updated through time function ...
-snapshot.getMean();
-```</p>
-<h3 id="metriclisteners">MetricListeners</h3>
-<p>```typescript
-import { Metric, MetricRegistry, MetricRegistryListener, MetricRegistryListenerRegistration } from &quot;inspector-metrics&quot;;</p>
-<p>class Listener implements MetricRegistryListener {</p>
-<div><pre class="line-numbers"><code class="language-none">public metricAdded(name: string, metric: Metric): void {
-    console.log(`added metric ${name}: ${metric}`);
-}
+# publish docs
+rm -fr docs/
+git branch -D gh-pages
+git worktree prune
+git worktree list
+git worktree add -b gh-pages docs origin/gh-pages
+npm run publishDocs
 
-public metricRemoved(name: string, metric: Metric): void {
-    console.log(`removed metric ${name}: ${metric}`);
-}</code></pre></div><p>}</p>
-<p>const registry = new MetricRegistry();
-const registration: MetricRegistryListenerRegistration = registry.addListener(new Listener());</p>
-<p>// prints &quot;added metric requests: Counter...&quot; via console
-registry.newCounter(&quot;requests&quot;);</p>
-<p>// removes the listener
-registration.remove();
-```</p>
-<h3 id="metric-groups">Metric Groups</h3>
-<p>Each metric can have a group, which is used to gather different metrics
-within metric reporter instances. E.g. if only gauges are used
-to gather metrics data a group can be used to report them all as one
-measure point with different fields.</p>
-<p>```typescript
-import { Gauge, MetricRegistry } from &quot;inspector-metrics&quot;;</p>
-<p>const registry = new MetricRegistry();
-// reports the internal storage capacity of a queue
-const capacity: Gauge<number> = ...;
-// reports the element count in the queue
-const queueSize: Gauge<number> = ...;</p>
-<p>// all values grouped as buffer
-registry.registerMetric(queueSize, &quot;buffer&quot;);
-registry.registerMetric(capacity, &quot;buffer&quot;);
-// counts the number of allocations during the execution of the application
-registry.newCounter(&quot;newAllocations&quot;, &quot;buffer&quot;);</p>
-<p>// the reporter can now report the values as a single measurement point if supported ...
-```</p>
-<h2 id="license">License</h2>
+# publish package (using lerna)
+npm publish</code></pre></div><h2 id="license">License</h2>
 <p><a href="https://www.opensource.org/licenses/mit-license.php">MIT</a></p>
 
 
@@ -308,6 +182,7 @@ registry.newCounter(&quot;newAllocations&quot;, &quot;buffer&quot;);</p>
 
 
 
+                   
 
 
 
@@ -330,6 +205,7 @@ registry.newCounter(&quot;newAllocations&quot;, &quot;buffer&quot;);</p>
             var COMPODOC_CURRENT_PAGE_DEPTH = 0;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
             var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="./js/libs/custom-elements.min.js"></script>

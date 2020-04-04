@@ -1,0 +1,719 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>InfluxMetricReporterOptions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>packages/inspector-influx/lib/metrics/InfluxMetricReporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Options for <a href="../classes/InfluxMetricReporter.html">InfluxMetricReporter</a>.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/ScheduledMetricReporterOptions.html" target="_self" >ScheduledMetricReporterOptions</a></code>
+            </p>
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#log">log</a>
+                                </li>
+                                <li>
+                                        <a href="#sender">sender</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="log"></a>
+                                        <span class="name"><b>log</b><a href="#log"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>log:         <code><a href="../interfaces/Logger.html" target="_self" >Logger | null</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Logger.html" target="_self" >Logger | null</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>A logger instance used to report errors.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="sender"></a>
+                                        <span class="name"><b>sender</b><a href="#sender"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>sender:         <code><a href="../interfaces/Sender.html" target="_self" >Sender</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Sender.html" target="_self" >Sender</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>A sender implementation used to send metrics to influx DB server.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
+
+import { IPoint } from &#x27;influx&#x27;
+import {
+  Counter,
+  DefaultClusterOptions,
+  Event,
+  Gauge,
+  Histogram,
+  Logger,
+  Meter,
+  Metric,
+  MetricRegistry,
+  MetricSetReportContext,
+  MetricType,
+  MILLISECOND,
+  MonotoneCounter,
+  OverallReportContext,
+  ReportingResult,
+  ScheduledMetricReporter,
+  ScheduledMetricReporterOptions,
+  StdClock,
+  Timer
+} from &#x27;inspector-metrics&#x27;
+
+/**
+ * Sender interface for influxdb client abstraction.
+ *
+ * @export
+ * @interface Sender
+ */
+export interface Sender {
+
+  /**
+   * Indicates if the sender is ready to send data.
+   *
+   * @returns {Promise&lt;boolean&gt;}
+   * @memberof Sender
+   */
+  isReady(): Promise&lt;boolean&gt;
+
+  /**
+   * Triggers the initialization process.
+   *
+   * @returns {Promise&lt;any&gt;}
+   * @memberof Sender
+   */
+  init(): Promise&lt;any&gt;
+
+  /**
+   * Sends the given data points to influxdb.
+   *
+   * @param {IPoint[]} points
+   * @returns {Promise&lt;any&gt;}
+   * @memberof Sender
+   */
+  send(points: IPoint[]): Promise&lt;void&gt;
+
+}
+
+/**
+ * Options for {@link InfluxMetricReporter}.
+ *
+ * @export
+ * @interface InfluxMetricReporterOptions
+ * @extends {ScheduledMetricReporterOptions}
+ */
+export interface InfluxMetricReporterOptions extends ScheduledMetricReporterOptions {
+  /**
+   * A logger instance used to report errors.
+   *
+   * @type {(Logger | null)}
+   * @memberof InfluxMetricReporterOptions
+   */
+  log: Logger | null
+  /**
+   * A sender implementation used to send metrics to influx DB server.
+   *
+   * @type {Sender}
+   * @memberof InfluxMetricReporterOptions
+   */
+  readonly sender: Sender
+}
+
+/**
+ * InfluxDB reporter implementation.
+ *
+ * @export
+ * @class InfluxMetricReporter
+ * @extends {ScheduledMetricReporter}
+ */
+export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetricReporterOptions, IPoint&gt; {
+  /**
+   * Metadata for the logger.
+   *
+   * @private
+   * @type {*}
+   * @memberof InfluxMetricReporter
+   */
+  private readonly logMetadata: any;
+
+  /**
+   * Creates an instance of InfluxMetricReporter.
+   *
+   * @param {string} [reporterType] the type of the reporter implementation - for internal use
+   * @memberof InfluxMetricReporter
+   */
+  public constructor ({
+    sender,
+    log &#x3D; console,
+    reportInterval &#x3D; 1000,
+    unit &#x3D; MILLISECOND,
+    clock &#x3D; new StdClock(),
+    scheduler &#x3D; setInterval,
+    minReportingTimeout &#x3D; 1,
+    clusterOptions &#x3D; new DefaultClusterOptions(),
+    tags &#x3D; new Map()
+  }: InfluxMetricReporterOptions,
+  reporterType?: string) {
+    super({
+      clock,
+      clusterOptions,
+      log,
+      minReportingTimeout,
+      reportInterval,
+      scheduler,
+      sender,
+      tags,
+      unit
+    }, reporterType)
+
+    this.logMetadata &#x3D; {
+      reportInterval,
+      tags,
+      unit
+    }
+  }
+
+  /**
+   * Gets the logger instance.
+   *
+   * @returns {Logger}
+   * @memberof InfluxMetricReporter
+   */
+  public getLog (): Logger {
+    return this.options.log
+  }
+
+  /**
+   * Sets the logger instance.
+   *
+   * @param {(Logger | null)} log
+   * @memberof InfluxMetricReporter
+   */
+  public setLog (log: Logger | null): void {
+    this.options.log &#x3D; log
+  }
+
+  /**
+   * Starts the sender and calls the super method to start scheduling.
+   *
+   * @returns {Promise&lt;this&gt;}
+   * @memberof ScheduledMetricReporter
+   */
+  public async start (): Promise&lt;this&gt; {
+    await this.options.sender.init()
+    return await super.start()
+  }
+
+  /**
+   * Sends an event directly to influxdb.
+   *
+   * @param {TEvent} event
+   * @returns {Promise&lt;TEvent&gt;}
+   * @memberof InfluxMetricReporter
+   */
+  public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
+    if (!(await this.options.sender.isReady())) {
+      throw new Error(&quot;Sender is not ready. Wait for the &#x27;start&#x27; method to complete.&quot;)
+    }
+
+    const value &#x3D; event.getValue()
+    if (!value) {
+      return await Promise.reject(new Error(&#x27;Invalid event value&#x27;))
+    }
+
+    const point &#x3D; this.reportGauge(event, {
+      date: event.getTime(),
+      metrics: [],
+      overallCtx: {},
+      registry: null,
+      type: &#x27;gauge&#x27;
+    })
+    point.timestamp &#x3D; event.getTime()
+
+    try {
+      await this.handleResults({}, null, null, &#x27;gauge&#x27;, [{
+        metric: event,
+        result: point
+      }])
+
+      if (this.options.log) {
+        this.options.log.debug(&#x27;wrote event&#x27;, this.logMetadata)
+      }
+      return event
+    } catch (reason) {
+      if (this.options.log) {
+        const message &#x3D; reason.message as string
+        this.options.log
+          .error(&#x60;error writing event - reason: ${message}&#x60;, reason, this.logMetadata)
+      }
+      throw reason
+    }
+  }
+
+  /**
+   * Reports the data points for each registered {@link MetricRegistry}.
+   *
+   * @protected
+   * @memberof InfluxMetricReporter
+   */
+  protected async report (): Promise&lt;OverallReportContext&gt; {
+    const senderReady &#x3D; await this.options.sender.isReady()
+    if (senderReady) {
+      return await super.report()
+    }
+    return {}
+  }
+
+  /**
+   * Uses the sender to report the given data points.
+   *
+   * @protected
+   * @param {OverallReportContext} ctx
+   * @param {MetricRegistry | null} registry
+   * @param {Date} date
+   * @param {MetricType} type
+   * @param {Array&lt;ReportingResult&lt;any, IPoint&gt;&gt;} results
+   * @returns {Promise&lt;any&gt;}
+   * @memberof InfluxMetricReporter
+   */
+  protected async handleResults (
+    ctx: OverallReportContext,
+    registry: MetricRegistry | null,
+    date: Date,
+    type: MetricType,
+    results: Array&lt;ReportingResult&lt;any, IPoint&gt;&gt;): Promise&lt;any&gt; {
+    const points &#x3D; results.map((result) &#x3D;&gt; result.result)
+    if (points.length &#x3D;&#x3D;&#x3D; 0) {
+      return
+    }
+
+    try {
+      points.forEach((point) &#x3D;&gt; {
+        if (!(point.timestamp instanceof Date)) {
+          point.timestamp &#x3D; new Date(point.timestamp)
+        }
+      })
+
+      await this.options.sender.send(points)
+      if (this.options.log) {
+        this.options.log.debug(&#x60;wrote ${type} metrics&#x60;, this.logMetadata)
+      }
+    } catch (reason) {
+      if (this.options.log) {
+        const message &#x3D; reason.message as string
+        this.options.log
+          .error(&#x60;error writing ${type} metrics - reason: ${message}&#x60;, reason, this.logMetadata)
+      }
+    }
+  }
+
+  /**
+   * Builds an IPoint instance for the given {@link Counter} or  {@link MonotoneCounter}.
+   *
+   * @protected
+   * @param {(MonotoneCounter | Counter)} counter
+   * @param {(MetricSetReportContext&lt;MonotoneCounter | Counter&gt;)} ctx
+   * @returns {IPoint}
+   * @memberof InfluxMetricReporter
+   */
+  protected reportCounter (
+    counter: MonotoneCounter | Counter,
+    ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): IPoint {
+    const value &#x3D; counter.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const fields: any &#x3D; {}
+    const fieldNamePrefix &#x3D; this.getFieldNamePrefix(counter)
+    const measurement &#x3D; this.getMeasurementName(counter)
+
+    fields[&#x60;${fieldNamePrefix}count&#x60;] &#x3D; counter.getCount() || 0
+
+    return {
+      fields,
+      measurement,
+      tags: this.buildTags(ctx.registry, counter),
+      timestamp: ctx.date
+    }
+  }
+
+  /**
+   * Builds an IPoint instance for the given {@link Gauge}.
+   *
+   * @protected
+   * @param {Gauge&lt;any&gt;} gauge
+   * @param {MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;} ctx
+   * @returns {IPoint}
+   * @memberof InfluxMetricReporter
+   */
+  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): IPoint {
+    const value &#x3D; gauge.getValue()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const fields: any &#x3D; {}
+    const fieldNamePrefix &#x3D; this.getFieldNamePrefix(gauge)
+    const measurement &#x3D; this.getMeasurementName(gauge)
+
+    fields[&#x60;${fieldNamePrefix}value&#x60;] &#x3D; gauge.getValue() || 0
+
+    return {
+      fields,
+      measurement,
+      tags: this.buildTags(ctx ? ctx.registry : null, gauge),
+      timestamp: ctx.date
+    }
+  }
+
+  /**
+   * Builds an IPoint instance for the given {@link Histogram}.
+   *
+   * @protected
+   * @param {Histogram} histogram
+   * @param {MetricSetReportContext&lt;Histogram&gt;} ctx
+   * @returns {IPoint}
+   * @memberof InfluxMetricReporter
+   */
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): IPoint {
+    const value &#x3D; histogram.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; histogram.getSnapshot()
+    const fields: any &#x3D; {}
+    const fieldNamePrefix &#x3D; this.getFieldNamePrefix(histogram)
+    const measurement &#x3D; this.getMeasurementName(histogram)
+
+    fields[&#x60;${fieldNamePrefix}count&#x60;] &#x3D; histogram.getCount() || 0
+    fields[&#x60;${fieldNamePrefix}max&#x60;] &#x3D; this.getNumber(snapshot.getMax())
+    fields[&#x60;${fieldNamePrefix}mean&#x60;] &#x3D; this.getNumber(snapshot.getMean())
+    fields[&#x60;${fieldNamePrefix}min&#x60;] &#x3D; this.getNumber(snapshot.getMin())
+    fields[&#x60;${fieldNamePrefix}p50&#x60;] &#x3D; this.getNumber(snapshot.getMedian())
+    fields[&#x60;${fieldNamePrefix}p75&#x60;] &#x3D; this.getNumber(snapshot.get75thPercentile())
+    fields[&#x60;${fieldNamePrefix}p95&#x60;] &#x3D; this.getNumber(snapshot.get95thPercentile())
+    fields[&#x60;${fieldNamePrefix}p98&#x60;] &#x3D; this.getNumber(snapshot.get98thPercentile())
+    fields[&#x60;${fieldNamePrefix}p99&#x60;] &#x3D; this.getNumber(snapshot.get99thPercentile())
+    fields[&#x60;${fieldNamePrefix}p999&#x60;] &#x3D; this.getNumber(snapshot.get999thPercentile())
+    fields[&#x60;${fieldNamePrefix}stddev&#x60;] &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return {
+      fields,
+      measurement,
+      tags: this.buildTags(ctx.registry, histogram),
+      timestamp: ctx.date
+    }
+  }
+
+  /**
+   * Builds an IPoint instance for the given {@link Meter}.
+   *
+   * @protected
+   * @param {Meter} meter
+   * @param {MetricSetReportContext&lt;Meter&gt;} ctx
+   * @returns {IPoint}
+   * @memberof InfluxMetricReporter
+   */
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): IPoint {
+    const value &#x3D; meter.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const fields: any &#x3D; {}
+    const fieldNamePrefix &#x3D; this.getFieldNamePrefix(meter)
+    const measurement &#x3D; this.getMeasurementName(meter)
+
+    fields[&#x60;${fieldNamePrefix}count&#x60;] &#x3D; meter.getCount() || 0
+    fields[&#x60;${fieldNamePrefix}m15_rate&#x60;] &#x3D; this.getNumber(meter.get15MinuteRate())
+    fields[&#x60;${fieldNamePrefix}m1_rate&#x60;] &#x3D; this.getNumber(meter.get1MinuteRate())
+    fields[&#x60;${fieldNamePrefix}m5_rate&#x60;] &#x3D; this.getNumber(meter.get5MinuteRate())
+    fields[&#x60;${fieldNamePrefix}mean_rate&#x60;] &#x3D; this.getNumber(meter.getMeanRate())
+
+    return {
+      fields,
+      measurement,
+      tags: this.buildTags(ctx.registry, meter),
+      timestamp: ctx.date
+    }
+  }
+
+  /**
+   * Builds an IPoint instance for the given {@link Timer}.
+   *
+   * @protected
+   * @param {Timer} timer
+   * @param {MetricSetReportContext&lt;Timer&gt;} ctx
+   * @returns {IPoint}
+   * @memberof InfluxMetricReporter
+   */
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): IPoint {
+    const value &#x3D; timer.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; timer.getSnapshot()
+    const fields: any &#x3D; {}
+    const fieldNamePrefix &#x3D; this.getFieldNamePrefix(timer)
+    const measurement &#x3D; this.getMeasurementName(timer)
+
+    fields[&#x60;${fieldNamePrefix}count&#x60;] &#x3D; timer.getCount() || 0
+    fields[&#x60;${fieldNamePrefix}m15_rate&#x60;] &#x3D; this.getNumber(timer.get15MinuteRate())
+    fields[&#x60;${fieldNamePrefix}m1_rate&#x60;] &#x3D; this.getNumber(timer.get1MinuteRate())
+    fields[&#x60;${fieldNamePrefix}m5_rate&#x60;] &#x3D; this.getNumber(timer.get5MinuteRate())
+    fields[&#x60;${fieldNamePrefix}max&#x60;] &#x3D; this.getNumber(snapshot.getMax())
+    fields[&#x60;${fieldNamePrefix}mean&#x60;] &#x3D; this.getNumber(snapshot.getMean())
+    fields[&#x60;${fieldNamePrefix}mean_rate&#x60;] &#x3D; this.getNumber(timer.getMeanRate())
+    fields[&#x60;${fieldNamePrefix}min&#x60;] &#x3D; this.getNumber(snapshot.getMin())
+    fields[&#x60;${fieldNamePrefix}p50&#x60;] &#x3D; this.getNumber(snapshot.getMedian())
+    fields[&#x60;${fieldNamePrefix}p75&#x60;] &#x3D; this.getNumber(snapshot.get75thPercentile())
+    fields[&#x60;${fieldNamePrefix}p95&#x60;] &#x3D; this.getNumber(snapshot.get95thPercentile())
+    fields[&#x60;${fieldNamePrefix}p98&#x60;] &#x3D; this.getNumber(snapshot.get98thPercentile())
+    fields[&#x60;${fieldNamePrefix}p99&#x60;] &#x3D; this.getNumber(snapshot.get99thPercentile())
+    fields[&#x60;${fieldNamePrefix}p999&#x60;] &#x3D; this.getNumber(snapshot.get999thPercentile())
+    fields[&#x60;${fieldNamePrefix}stddev&#x60;] &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return {
+      fields,
+      measurement,
+      tags: this.buildTags(ctx.registry, timer),
+      timestamp: ctx.date
+    }
+  }
+
+  /**
+   * Builds the prefix for a field name.
+   *
+   * @private
+   * @param {Metric} metric
+   * @returns {string}
+   * @memberof InfluxMetricReporter
+   */
+  private getFieldNamePrefix (metric: Metric): string {
+    if (metric.getGroup()) {
+      return &#x60;${metric.getName()}.&#x60;
+    }
+    return &#x27;&#x27;
+  }
+
+  /**
+   * Builds the prefix for the metric name.
+   *
+   * @private
+   * @param {Metric} metric
+   * @returns {string}
+   * @memberof InfluxMetricReporter
+   */
+  private getMeasurementName (metric: Metric): string {
+    if (metric.getGroup()) {
+      return metric.getGroup()
+    }
+    return metric.getName()
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'InfluxMetricReporterOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

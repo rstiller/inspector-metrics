@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/reporter/interprocess-message.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/reporter/interprocess-message.ts</code>
         </p>
 
             <p class="comment">
@@ -273,20 +273,20 @@ import { ReportingResult } from &quot;./reporting-result&quot;;
  * @interface InterprocessMessage
  */
 export interface InterprocessMessage {
-    /**
-     * Type of the reported which sent the metrics to the master process.
-     *
-     * @type {string}
-     * @memberof InterprocessReportMessage
-     */
-    targetReporterType: string;
-    /**
-     * The type property of the message sent to the master process.
-     *
-     * @type {string}
-     * @memberof InterprocessReportMessage
-     */
-    type: string;
+  /**
+   * Type of the reported which sent the metrics to the master process.
+   *
+   * @type {string}
+   * @memberof InterprocessReportMessage
+   */
+  targetReporterType: string;
+  /**
+   * The type property of the message sent to the master process.
+   *
+   * @type {string}
+   * @memberof InterprocessReportMessage
+   */
+  type: string;
 }
 
 /**
@@ -297,54 +297,55 @@ export interface InterprocessMessage {
  * @template T
  */
 export interface InterprocessReportMessage&lt;T&gt; extends InterprocessMessage {
-    /**
-     * Reporting context from forked process.
-     *
-     * @type {OverallReportContext}
-     * @memberof InterprocessReportMessage
-     */
-    ctx: OverallReportContext;
-    /**
-     * Date from report function in forked process.
-     *
-     * @type {Date}
-     * @memberof InterprocessReportMessage
-     */
-    date: Date;
-    /**
-     * Tags from originating {@link MetricRegistry}.
-     *
-     * @type {Tags}
-     * @memberof InterprocessReportMessage
-     */
-    tags: Tags;
-    /**
-     * Collection of metric reporting results from forked process.
-     *
-     * @type {{
-     *         counters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *         gauges: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *         histograms: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *         meters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *         monotoneCounters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *         timers: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-     *     }}
-     * @memberof InterprocessReportMessage
-     */
-    metrics: {
-        counters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-        gauges: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-        histograms: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-        meters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-        monotoneCounters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-        timers: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
-    };
+  /**
+   * Reporting context from forked process.
+   *
+   * @type {OverallReportContext}
+   * @memberof InterprocessReportMessage
+   */
+  ctx: OverallReportContext;
+  /**
+   * Date from report function in forked process.
+   *
+   * @type {Date}
+   * @memberof InterprocessReportMessage
+   */
+  date: Date;
+  /**
+   * Tags from originating {@link MetricRegistry}.
+   *
+   * @type {Tags}
+   * @memberof InterprocessReportMessage
+   */
+  tags: Tags;
+  /**
+   * Collection of metric reporting results from forked process.
+   *
+   * @type {{
+   *         counters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *         gauges: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *         histograms: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *         meters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *         monotoneCounters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *         timers: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+   *     }}
+   * @memberof InterprocessReportMessage
+   */
+  metrics: {
+      counters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+      gauges: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+      histograms: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+      meters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+      monotoneCounters: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+      timers: Array&lt;ReportingResult&lt;SerializableMetric, T&gt;&gt;;
+  };
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -367,6 +368,7 @@ export interface InterprocessReportMessage&lt;T&gt; extends InterprocessMessage 
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'InterprocessReportMessage.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

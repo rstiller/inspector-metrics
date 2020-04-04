@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/size-gauge.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/size-gauge.ts</code>
         </p>
 
             <p class="comment">
@@ -133,10 +133,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
-import { Gauge } from &quot;./gauge&quot;;
-import { BaseMetric } from &quot;./model/metric&quot;;
+import { Gauge } from &#x27;./gauge&#x27;
+import { BaseMetric } from &#x27;./model/metric&#x27;
 
 /**
  * Accessor-interface for objects with &quot;length()&quot; method.
@@ -145,7 +145,7 @@ import { BaseMetric } from &quot;./model/metric&quot;;
  * @interface LengthMethodInterface
  */
 export interface LengthMethodInterface {
-    length(): number;
+  length(): number
 }
 
 /**
@@ -155,7 +155,7 @@ export interface LengthMethodInterface {
  * @interface LengthAttributeInterface
  */
 export interface LengthAttributeInterface {
-    length: number;
+  length: number
 }
 
 /**
@@ -165,7 +165,7 @@ export interface LengthAttributeInterface {
  * @interface SizeMethodInterface
  */
 export interface SizeMethodInterface {
-    size(): number;
+  size(): number
 }
 
 /**
@@ -175,7 +175,7 @@ export interface SizeMethodInterface {
  * @interface SizeAttributeInterface
  */
 export interface SizeAttributeInterface {
-    size: number;
+  size: number
 }
 
 type ValueExtractor &#x3D; () &#x3D;&gt; number;
@@ -189,126 +189,124 @@ type ValueExtractor &#x3D; () &#x3D;&gt; number;
  * @implements {Gauge&lt;number&gt;}
  */
 export class SizeGauge extends BaseMetric implements Gauge&lt;number&gt; {
+  /**
+   * Checks if the specified collection is a {link LengthAttributeInterface}.
+   *
+   * @protected
+   * @static
+   * @param {*} collection
+   * @returns {collection is LengthAttributeInterface}
+   * @memberof SizeGauge
+   */
+  protected static isLengthAttributeInterface (collection: any): collection is LengthAttributeInterface {
+    return collection &amp;&amp; typeof collection.length &#x3D;&#x3D;&#x3D; &#x27;number&#x27;
+  }
 
-    /**
-     * Checks if the specified collection is a {link LengthAttributeInterface}.
-     *
-     * @protected
-     * @static
-     * @param {*} collection
-     * @returns {collection is LengthAttributeInterface}
-     * @memberof SizeGauge
-     */
-    protected static isLengthAttributeInterface(collection: any): collection is LengthAttributeInterface {
-        return collection &amp;&amp; typeof collection.length &#x3D;&#x3D;&#x3D; &quot;number&quot;;
+  /**
+   * Checks if the specified collection is a {link LengthMethodInterface}.
+   *
+   * @protected
+   * @static
+   * @param {*} collection
+   * @returns {collection is LengthMethodInterface}
+   * @memberof SizeGauge
+   */
+  protected static isLengthMethodInterface (collection: any): collection is LengthMethodInterface {
+    return collection &amp;&amp; typeof collection.length &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+  }
+
+  /**
+   * Checks if the specified collection is a {link SizeAttributeInterface}.
+   *
+   * @protected
+   * @static
+   * @param {*} collection
+   * @returns {collection is SizeAttributeInterface}
+   * @memberof SizeGauge
+   */
+  protected static isSizeAttributeInterface (collection: any): collection is SizeAttributeInterface {
+    return collection &amp;&amp; typeof collection.size &#x3D;&#x3D;&#x3D; &#x27;number&#x27;
+  }
+
+  /**
+   * Checks if the specified collection is a {link SizeMethodInterface}.
+   *
+   * @protected
+   * @static
+   * @param {*} collection
+   * @returns {collection is SizeMethodInterface}
+   * @memberof SizeGauge
+   */
+  protected static isSizeMethodInterface (collection: any): collection is SizeMethodInterface {
+    return collection &amp;&amp; typeof collection.size &#x3D;&#x3D;&#x3D; &#x27;function&#x27;
+  }
+
+  /**
+   * Gets the actual value for the collection passed to the constructor.
+   *
+   * @private
+   * @type {ValueExtractor}
+   * @memberof SizeGauge
+   */
+  private readonly extractor: ValueExtractor;
+
+  /**
+   * Creates an instance of SizeGauge.
+   *
+   * @param {string} name The name of the metric
+   * @param collection The collection to get the size / length from.
+   * @param {string} [description] The description of the metric
+   * @memberof SizeGauge
+   */
+  public constructor (
+    name: string,
+    collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface,
+    description?: string) {
+    super()
+    this.setName(name)
+    this.setDescription(description)
+
+    if (SizeGauge.isLengthAttributeInterface(collection)) {
+      this.extractor &#x3D; () &#x3D;&gt; collection.length
+    } else if (SizeGauge.isLengthMethodInterface(collection)) {
+      this.extractor &#x3D; () &#x3D;&gt; collection.length()
+    } else if (SizeGauge.isSizeAttributeInterface(collection)) {
+      this.extractor &#x3D; () &#x3D;&gt; collection.size
+    } else if (SizeGauge.isSizeMethodInterface(collection)) {
+      this.extractor &#x3D; () &#x3D;&gt; collection.size()
+    } else {
+      this.extractor &#x3D; () &#x3D;&gt; -1
     }
+  }
 
-    /**
-     * Checks if the specified collection is a {link LengthMethodInterface}.
-     *
-     * @protected
-     * @static
-     * @param {*} collection
-     * @returns {collection is LengthMethodInterface}
-     * @memberof SizeGauge
-     */
-    protected static isLengthMethodInterface(collection: any): collection is LengthMethodInterface {
-        return collection &amp;&amp; typeof collection.length &#x3D;&#x3D;&#x3D; &quot;function&quot;;
-    }
+  /**
+   * Reports the size / length of the collection.
+   *
+   * @returns {number} Returns the current size of the collection or -1.
+   * @memberof SizeGauge
+   */
+  public getValue (): number {
+    return this.extractor()
+  }
 
-    /**
-     * Checks if the specified collection is a {link SizeAttributeInterface}.
-     *
-     * @protected
-     * @static
-     * @param {*} collection
-     * @returns {collection is SizeAttributeInterface}
-     * @memberof SizeGauge
-     */
-    protected static isSizeAttributeInterface(collection: any): collection is SizeAttributeInterface {
-        return collection &amp;&amp; typeof collection.size &#x3D;&#x3D;&#x3D; &quot;number&quot;;
-    }
-
-    /**
-     * Checks if the specified collection is a {link SizeMethodInterface}.
-     *
-     * @protected
-     * @static
-     * @param {*} collection
-     * @returns {collection is SizeMethodInterface}
-     * @memberof SizeGauge
-     */
-    protected static isSizeMethodInterface(collection: any): collection is SizeMethodInterface {
-        return collection &amp;&amp; typeof collection.size &#x3D;&#x3D;&#x3D; &quot;function&quot;;
-    }
-
-    /**
-     * Gets the actual value for the collection passed to the constructor.
-     *
-     * @private
-     * @type {ValueExtractor}
-     * @memberof SizeGauge
-     */
-    private extractor: ValueExtractor;
-
-    /**
-     * Creates an instance of SizeGauge.
-     *
-     * @param {string} name The name of the metric
-     * @param collection The collection to get the size / length from.
-     * @param {string} [description] The description of the metric
-     * @memberof SizeGauge
-     */
-    public constructor(
-        name: string,
-        collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface,
-        description?: string) {
-
-        super();
-        this.setName(name);
-        this.setDescription(description);
-
-        if (SizeGauge.isLengthAttributeInterface(collection)) {
-            this.extractor &#x3D; () &#x3D;&gt; collection.length;
-        } else if (SizeGauge.isLengthMethodInterface(collection)) {
-            this.extractor &#x3D; () &#x3D;&gt; collection.length();
-        } else if (SizeGauge.isSizeAttributeInterface(collection)) {
-            this.extractor &#x3D; () &#x3D;&gt; collection.size;
-        } else if (SizeGauge.isSizeMethodInterface(collection)) {
-            this.extractor &#x3D; () &#x3D;&gt; collection.size();
-        } else {
-            this.extractor &#x3D; () &#x3D;&gt; -1;
-        }
-    }
-
-    /**
-     * Reports the size / length of the collection.
-     *
-     * @returns {number} Returns the current size of the collection or -1.
-     * @memberof SizeGauge
-     */
-    public getValue(): number {
-        return this.extractor();
-    }
-
-    /**
-     * Same as {@link BaseMetric#toJSON()}, also adding value property.
-     *
-     * @returns {*}
-     * @memberof SizeGauge
-     */
-    public toJSON(): any {
-        const json &#x3D; super.toJSON();
-        json.value &#x3D; this.extractor();
-        return json;
-    }
-
+  /**
+   * Same as {@link BaseMetric#toJSON()}, also adding value property.
+   *
+   * @returns {*}
+   * @memberof SizeGauge
+   */
+  public toJSON (): any {
+    const json &#x3D; super.toJSON()
+    json.value &#x3D; this.extractor()
+    return json
+  }
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -331,6 +329,7 @@ export class SizeGauge extends BaseMetric implements Gauge&lt;number&gt; {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'SizeAttributeInterface.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

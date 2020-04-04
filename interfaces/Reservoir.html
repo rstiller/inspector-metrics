@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/reservoir.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/reservoir.ts</code>
         </p>
 
             <p class="comment">
@@ -129,7 +129,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">lib/metrics/model/reservoir.ts:19</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/reservoir.ts:19</a></div>
                 </td>
             </tr>
 
@@ -175,7 +175,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">lib/metrics/model/reservoir.ts:36</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/reservoir.ts:36</a></div>
                 </td>
             </tr>
 
@@ -221,7 +221,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="28"
-                            class="link-to-prism">lib/metrics/model/reservoir.ts:28</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/reservoir.ts:28</a></div>
                 </td>
             </tr>
 
@@ -281,30 +281,30 @@ import { SimpleSnapshot, Snapshot } from &quot;./snapshot&quot;;
  */
 export interface Reservoir {
 
-    /**
-     * Gets the capacity of this reservoir.
-     *
-     * @returns {number}
-     * @memberof Reservoir
-     */
-    size(): number;
+  /**
+   * Gets the capacity of this reservoir.
+   *
+   * @returns {number}
+   * @memberof Reservoir
+   */
+  size(): number;
 
-    /**
-     * Adds a value to the reservoir.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof Reservoir
-     */
-    update(value: number): this;
+  /**
+   * Adds a value to the reservoir.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof Reservoir
+   */
+  update(value: number): this;
 
-    /**
-     * Creates a new snapshot of this reservoir.
-     *
-     * @returns {Snapshot}
-     * @memberof Reservoir
-     */
-    snapshot(): Snapshot;
+  /**
+   * Creates a new snapshot of this reservoir.
+   *
+   * @returns {Snapshot}
+   * @memberof Reservoir
+   */
+  snapshot(): Snapshot;
 
 }
 
@@ -319,71 +319,71 @@ export interface Reservoir {
  */
 export class DefaultReservoir implements Reservoir {
 
-    /**
-     * The values.
-     *
-     * @private
-     * @type {number[]}
-     * @memberof DefaultReservoir
-     */
-    private values: number[] &#x3D; [];
-    /**
-     * The capacity of this reservoir.
-     *
-     * @private
-     * @type {number}
-     * @memberof DefaultReservoir
-     */
-    private maxSize: number;
+  /**
+   * The values.
+   *
+   * @private
+   * @type {number[]}
+   * @memberof DefaultReservoir
+   */
+  private values: number[] &#x3D; [];
+  /**
+   * The capacity of this reservoir.
+   *
+   * @private
+   * @type {number}
+   * @memberof DefaultReservoir
+   */
+  private maxSize: number;
 
-    /**
-     * Creates an instance of DefaultReservoir.
-     *
-     * @param {number} maxSize
-     * @memberof DefaultReservoir
-     */
-    public constructor(maxSize: number) {
-        this.maxSize &#x3D; maxSize;
-    }
+  /**
+   * Creates an instance of DefaultReservoir.
+   *
+   * @param {number} maxSize
+   * @memberof DefaultReservoir
+   */
+  public constructor(maxSize: number) {
+    this.maxSize &#x3D; maxSize;
+  }
 
-    /**
-     * Gets the actual number of value, but at max the specified maximum.
-     *
-     * @returns {number}
-     * @memberof DefaultReservoir
-     */
-    public size(): number {
-        return this.values.length;
-    }
+  /**
+   * Gets the actual number of value, but at max the specified maximum.
+   *
+   * @returns {number}
+   * @memberof DefaultReservoir
+   */
+  public size(): number {
+    return this.values.length;
+  }
 
-    /**
-     * Adds the value to the array of numbers until the maximum number of
-     * values is reached. If the maximum number of values is reached
-     * an old value at a random position is replaced with the specified value.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof DefaultReservoir
-     */
-    public update(value: number): this {
-        if (this.values.length &lt; this.maxSize) {
-            this.values.push(value);
-        } else {
-            const randomIndex: number &#x3D; Math.round(Math.random() * this.values.length);
-            this.values[randomIndex % this.values.length] &#x3D; value;
-        }
-        return this;
+  /**
+   * Adds the value to the array of numbers until the maximum number of
+   * values is reached. If the maximum number of values is reached
+   * an old value at a random position is replaced with the specified value.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof DefaultReservoir
+   */
+  public update(value: number): this {
+    if (this.values.length &lt; this.maxSize) {
+      this.values.push(value);
+    } else {
+      const randomIndex: number &#x3D; Math.round(Math.random() * this.values.length);
+      this.values[randomIndex % this.values.length] &#x3D; value;
     }
+    return this;
+  }
 
-    /**
-     * Creates a new snapshot instance.
-     *
-     * @returns {Snapshot}
-     * @memberof DefaultReservoir
-     */
-    public snapshot(): Snapshot {
-        return new SimpleSnapshot(this.values);
-    }
+  /**
+   * Creates a new snapshot instance.
+   *
+   * @returns {Snapshot}
+   * @memberof DefaultReservoir
+   */
+  public snapshot(): Snapshot {
+    return new SimpleSnapshot(this.values);
+  }
 
 }
 
@@ -397,78 +397,78 @@ export class DefaultReservoir implements Reservoir {
  */
 export class SlidingWindowReservoir implements Reservoir {
 
-    /**
-     * The values.
-     *
-     * @private
-     * @type {number[]}
-     * @memberof SlidingWindowReservoir
-     */
-    private values: number[] &#x3D; [];
-    /**
-     * The capacity of the reservoir.
-     *
-     * @private
-     * @type {number}
-     * @memberof SlidingWindowReservoir
-     */
-    private maxSize: number;
-    /**
-     * The current index in the value array.
-     *
-     * @private
-     * @type {number}
-     * @memberof SlidingWindowReservoir
-     */
-    private index: number &#x3D; 0;
+  /**
+   * The values.
+   *
+   * @private
+   * @type {number[]}
+   * @memberof SlidingWindowReservoir
+   */
+  private values: number[] &#x3D; [];
+  /**
+   * The capacity of the reservoir.
+   *
+   * @private
+   * @type {number}
+   * @memberof SlidingWindowReservoir
+   */
+  private maxSize: number;
+  /**
+   * The current index in the value array.
+   *
+   * @private
+   * @type {number}
+   * @memberof SlidingWindowReservoir
+   */
+  private index: number &#x3D; 0;
 
-    /**
-     * Creates an instance of SlidingWindowReservoir.
-     *
-     * @param {number} maxSize
-     * @memberof SlidingWindowReservoir
-     */
-    public constructor(maxSize: number) {
-        this.maxSize &#x3D; maxSize;
-    }
+  /**
+   * Creates an instance of SlidingWindowReservoir.
+   *
+   * @param {number} maxSize
+   * @memberof SlidingWindowReservoir
+   */
+  public constructor(maxSize: number) {
+    this.maxSize &#x3D; maxSize;
+  }
 
-    /**
-     * Gets the number of values, but at may the capacity of the reservoir.
-     *
-     * @returns {number}
-     * @memberof SlidingWindowReservoir
-     */
-    public size(): number {
-        return this.values.length;
-    }
+  /**
+   * Gets the number of values, but at may the capacity of the reservoir.
+   *
+   * @returns {number}
+   * @memberof SlidingWindowReservoir
+   */
+  public size(): number {
+    return this.values.length;
+  }
 
-    /**
-     * Adds the value to the array of values until the capacity
-     * of the reservoir is reached. If the maximum number of
-     * values is reached, the insertion restarts at the beginning.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof SlidingWindowReservoir
-     */
-    public update(value: number): this {
-        if (this.values.length &lt; this.maxSize) {
-            this.values.push(value);
-        } else {
-            this.values[this.index++ % this.values.length] &#x3D; value;
-        }
-        return this;
+  /**
+   * Adds the value to the array of values until the capacity
+   * of the reservoir is reached. If the maximum number of
+   * values is reached, the insertion restarts at the beginning.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof SlidingWindowReservoir
+   */
+  public update(value: number): this {
+    if (this.values.length &lt; this.maxSize) {
+      this.values.push(value);
+    } else {
+      this.values[this.index++ % this.values.length] &#x3D; value;
     }
+    return this;
+  }
 
-    /**
-     * Creates a new snapshot using the values array.
-     *
-     * @returns {Snapshot}
-     * @memberof SlidingWindowReservoir
-     */
-    public snapshot(): Snapshot {
-        return new SimpleSnapshot(this.values);
-    }
+  /**
+   * Creates a new snapshot using the values array.
+   *
+   * @returns {Snapshot}
+   * @memberof SlidingWindowReservoir
+   */
+  public snapshot(): Snapshot {
+    return new SimpleSnapshot(this.values);
+  }
 
 }
 </code></pre>
@@ -476,6 +476,7 @@ export class SlidingWindowReservoir implements Reservoir {
 </div>
 
 
+                   
 
 
 
@@ -498,6 +499,7 @@ export class SlidingWindowReservoir implements Reservoir {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'Reservoir.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/reporter/metric-reporter-options.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts</code>
         </p>
 
             <p class="comment">
@@ -173,7 +173,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:165</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:165</a></div>
                             </td>
                         </tr>
 
@@ -213,7 +213,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:172</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:172</a></div>
                             </td>
                         </tr>
 
@@ -253,7 +253,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:178</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="178" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:178</a></div>
                             </td>
                         </tr>
 
@@ -293,7 +293,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:185</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="185" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:185</a></div>
                             </td>
                         </tr>
 
@@ -333,7 +333,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:197</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:197</a></div>
                             </td>
                         </tr>
 
@@ -373,7 +373,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">lib/metrics/reporter/metric-reporter-options.ts:191</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">packages/inspector-metrics/lib/metrics/reporter/metric-reporter-options.ts:191</a></div>
                             </td>
                         </tr>
 
@@ -413,52 +413,52 @@ import { ReportMessageReceiver } from &quot;./report-message-receiver&quot;;
  * @template Worker worker type placeholder
  */
 export interface ClusterOptions&lt;Worker&gt; {
-    /**
-     * Indicates if clustering-support is enabled or not.
-     *
-     * @type {boolean}
-     * @memberof ClusterOptions
-     */
-    readonly enabled: boolean;
-    /**
-     * Indicates if the {@link #sendToMaster} function should be used to send messages to the master process.
-     *
-     * @type {boolean}
-     * @memberof ClusterOptions
-     */
-    readonly sendMetricsToMaster: boolean;
-    /**
-     * EventReceiver to get messages from master on forked processes or from forked processes on master.
-     * Compatible with &#x27;cluster&#x27;.
-     *
-     * @type {ReportMessageReceiver}
-     * @memberof ClusterOptions
-     */
-    readonly eventReceiver: ReportMessageReceiver;
-    /**
-     * Function to send messages to the master-process.
-     *
-     * @param {*} message
-     * @returns {Promise&lt;any&gt;}
-     * @memberof ClusterOptions
-     */
-    sendToMaster(message: any): Promise&lt;any&gt;;
-    /**
-     * Function for sending message to a worker instance.
-     *
-     * @param {Worker} worker
-     * @param {*} message
-     * @returns {Promise&lt;any&gt;}
-     * @memberof ClusterOptions
-     */
-    sendToWorker(worker: Worker, message: any): Promise&lt;any&gt;;
-    /**
-     * Gets a list of all workers.
-     *
-     * @returns {Promise&lt;Worker[]&gt;}
-     * @memberof ClusterOptions
-     */
-    getWorkers(): Promise&lt;Worker[]&gt;;
+  /**
+   * Indicates if clustering-support is enabled or not.
+   *
+   * @type {boolean}
+   * @memberof ClusterOptions
+   */
+  readonly enabled: boolean;
+  /**
+   * Indicates if the {@link #sendToMaster} function should be used to send messages to the master process.
+   *
+   * @type {boolean}
+   * @memberof ClusterOptions
+   */
+  readonly sendMetricsToMaster: boolean;
+  /**
+   * EventReceiver to get messages from master on forked processes or from forked processes on master.
+   * Compatible with &#x27;cluster&#x27;.
+   *
+   * @type {ReportMessageReceiver}
+   * @memberof ClusterOptions
+   */
+  readonly eventReceiver: ReportMessageReceiver;
+  /**
+   * Function to send messages to the master-process.
+   *
+   * @param {*} message
+   * @returns {Promise&lt;any&gt;}
+   * @memberof ClusterOptions
+   */
+  sendToMaster(message: any): Promise&lt;any&gt;;
+  /**
+   * Function for sending message to a worker instance.
+   *
+   * @param {Worker} worker
+   * @param {*} message
+   * @returns {Promise&lt;any&gt;}
+   * @memberof ClusterOptions
+   */
+  sendToWorker(worker: Worker, message: any): Promise&lt;any&gt;;
+  /**
+   * Gets a list of all workers.
+   *
+   * @returns {Promise&lt;Worker[]&gt;}
+   * @memberof ClusterOptions
+   */
+  getWorkers(): Promise&lt;Worker[]&gt;;
 }
 
 /**
@@ -468,34 +468,34 @@ export interface ClusterOptions&lt;Worker&gt; {
  * @interface MetricReporterOptions
  */
 export interface MetricReporterOptions {
-    /**
-     * Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature.
-     *
-     * @type {Clock}
-     * @memberof MetricReporterOptions
-     */
-    readonly clock?: Clock;
-    /**
-     * Timeout in minutes a metric need to be included in the report without having changed.
-     *
-     * @type {number}
-     * @memberof MetricReporterOptions
-     */
-    minReportingTimeout?: number;
-    /**
-     * Options for clustering support.
-     *
-     * @type {ClusterOptions&lt;any&gt;}
-     * @memberof MetricReporterOptions
-     */
-    clusterOptions?: ClusterOptions&lt;any&gt;;
-    /**
-     * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
-     *
-     * @type {Map&lt;string, string&gt;}
-     * @memberof MetricReporterOptions
-     */
-    tags?: Map&lt;string, string&gt;;
+  /**
+   * Clock used to determine the date for the reporting as well as the minimum-reporting timeout feature.
+   *
+   * @type {Clock}
+   * @memberof MetricReporterOptions
+   */
+  readonly clock?: Clock;
+  /**
+   * Timeout in minutes a metric need to be included in the report without having changed.
+   *
+   * @type {number}
+   * @memberof MetricReporterOptions
+   */
+  minReportingTimeout?: number;
+  /**
+   * Options for clustering support.
+   *
+   * @type {ClusterOptions&lt;any&gt;}
+   * @memberof MetricReporterOptions
+   */
+  clusterOptions?: ClusterOptions&lt;any&gt;;
+  /**
+   * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
+   *
+   * @type {Map&lt;string, string&gt;}
+   * @memberof MetricReporterOptions
+   */
+  tags?: Map&lt;string, string&gt;;
 }
 
 /**
@@ -507,45 +507,45 @@ export interface MetricReporterOptions {
  * @implements {ClusterOptions&lt;cluster.Worker&gt;}
  */
 export class DefaultClusterOptions implements ClusterOptions&lt;cluster.Worker&gt; {
-    /**
-     * Set to true.
-     *
-     * @type {boolean}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly enabled: boolean &#x3D; true;
-    /**
-     * Set to cluster module.
-     *
-     * @type {ReportMessageReceiver}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly eventReceiver: ReportMessageReceiver &#x3D; cluster;
-    /**
-     * Set to null.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public readonly getWorkers: () &#x3D;&gt; Promise&lt;cluster.Worker[]&gt; &#x3D; null;
-    /**
-     * True for forked processes.
-     *
-     * @type {boolean}
-     * @memberof DefaultClusterOptions
-     */
-    public readonly sendMetricsToMaster: boolean &#x3D; !!cluster.worker;
-    /**
-     * Set to null.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public readonly sendToWorker: (worker: cluster.Worker, message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
-    /**
-     * Uses &#x27;cluster.worker.send&#x27; to send messages.
-     *
-     * @memberof DefaultClusterOptions
-     */
-    public readonly sendToMaster: (message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; async (message: any) &#x3D;&gt; cluster.worker.send(message);
+  /**
+   * Set to true.
+   *
+   * @type {boolean}
+   * @memberof DefaultClusterOptions
+   */
+  public readonly enabled: boolean &#x3D; true;
+  /**
+   * Set to cluster module.
+   *
+   * @type {ReportMessageReceiver}
+   * @memberof DefaultClusterOptions
+   */
+  public readonly eventReceiver: ReportMessageReceiver &#x3D; cluster;
+  /**
+   * Set to null.
+   *
+   * @memberof DefaultClusterOptions
+   */
+  public readonly getWorkers: () &#x3D;&gt; Promise&lt;cluster.Worker[]&gt; &#x3D; null;
+  /**
+   * True for forked processes.
+   *
+   * @type {boolean}
+   * @memberof DefaultClusterOptions
+   */
+  public readonly sendMetricsToMaster: boolean &#x3D; !!cluster.worker;
+  /**
+   * Set to null.
+   *
+   * @memberof DefaultClusterOptions
+   */
+  public readonly sendToWorker: (worker: cluster.Worker, message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
+  /**
+   * Uses &#x27;cluster.worker.send&#x27; to send messages.
+   *
+   * @memberof DefaultClusterOptions
+   */
+  public readonly sendToMaster: (message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; async (message: any) &#x3D;&gt; cluster.worker.send(message);
 }
 
 /**
@@ -556,45 +556,45 @@ export class DefaultClusterOptions implements ClusterOptions&lt;cluster.Worker&g
  * @implements {ClusterOptions&lt;cluster.Worker&gt;}
  */
 export class DisabledClusterOptions implements ClusterOptions&lt;cluster.Worker&gt; {
-    /**
-     * Set to false.
-     *
-     * @type {boolean}
-     * @memberof DisabledClusterOptions
-     */
-    public readonly enabled: boolean &#x3D; false;
-    /**
-     * Set to null.
-     *
-     * @type {ReportMessageReceiver}
-     * @memberof DisabledClusterOptions
-     */
-    public readonly eventReceiver: ReportMessageReceiver &#x3D; null;
-    /**
-     * Set to null.
-     *
-     * @memberof DisabledClusterOptions
-     */
-    public readonly getWorkers: () &#x3D;&gt; Promise&lt;cluster.Worker[]&gt; &#x3D; null;
-    /**
-     * Set to false.
-     *
-     * @type {boolean}
-     * @memberof DisabledClusterOptions
-     */
-    public readonly sendMetricsToMaster: boolean &#x3D; false;
-    /**
-     * Set to null.
-     *
-     * @memberof DisabledClusterOptions
-     */
-    public readonly sendToWorker: (worker: cluster.Worker, message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
-    /**
-     * Set to null.
-     *
-     * @memberof DisabledClusterOptions
-     */
-    public readonly sendToMaster: (message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
+  /**
+   * Set to false.
+   *
+   * @type {boolean}
+   * @memberof DisabledClusterOptions
+   */
+  public readonly enabled: boolean &#x3D; false;
+  /**
+   * Set to null.
+   *
+   * @type {ReportMessageReceiver}
+   * @memberof DisabledClusterOptions
+   */
+  public readonly eventReceiver: ReportMessageReceiver &#x3D; null;
+  /**
+   * Set to null.
+   *
+   * @memberof DisabledClusterOptions
+   */
+  public readonly getWorkers: () &#x3D;&gt; Promise&lt;cluster.Worker[]&gt; &#x3D; null;
+  /**
+   * Set to false.
+   *
+   * @type {boolean}
+   * @memberof DisabledClusterOptions
+   */
+  public readonly sendMetricsToMaster: boolean &#x3D; false;
+  /**
+   * Set to null.
+   *
+   * @memberof DisabledClusterOptions
+   */
+  public readonly sendToWorker: (worker: cluster.Worker, message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
+  /**
+   * Set to null.
+   *
+   * @memberof DisabledClusterOptions
+   */
+  public readonly sendToMaster: (message: any) &#x3D;&gt; Promise&lt;any&gt; &#x3D; null;
 }
 </code></pre>
     </div>
@@ -602,6 +602,7 @@ export class DisabledClusterOptions implements ClusterOptions&lt;cluster.Worker&
 
 
 
+                   
 
 
 
@@ -624,6 +625,7 @@ export class DisabledClusterOptions implements ClusterOptions&lt;cluster.Worker&
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'DisabledClusterOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/moving-average.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/moving-average.ts</code>
         </p>
 
             <p class="comment">
@@ -132,7 +132,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">lib/metrics/model/moving-average.ts:19</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/moving-average.ts:19</a></div>
                 </td>
             </tr>
 
@@ -178,7 +178,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">lib/metrics/model/moving-average.ts:29</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/moving-average.ts:29</a></div>
                 </td>
             </tr>
 
@@ -251,7 +251,7 @@ e.g. 500 per second or 0.5 per millisecond or 30.000 per minute.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">lib/metrics/model/moving-average.ts:47</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/moving-average.ts:47</a></div>
                 </td>
             </tr>
 
@@ -291,7 +291,7 @@ A tick represents an update event.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="38"
-                            class="link-to-prism">lib/metrics/model/moving-average.ts:38</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/moving-average.ts:38</a></div>
                 </td>
             </tr>
 
@@ -351,41 +351,41 @@ import { NANOSECOND, TimeUnit } from &quot;./time-unit&quot;;
  */
 export interface MovingAverage {
 
-    /**
-     * Gets the alpha value.
-     *
-     * @returns {number}
-     * @memberof MovingAverage
-     */
-    getAlpha(): number;
+  /**
+   * Gets the alpha value.
+   *
+   * @returns {number}
+   * @memberof MovingAverage
+   */
+  getAlpha(): number;
 
-    /**
-     * Gets the average for the specified time unit -
-     * e.g. 500 per second or 0.5 per millisecond or 30.000 per minute.
-     *
-     * @param {TimeUnit} unit
-     * @returns {number}
-     * @memberof MovingAverage
-     */
-    getAverage(unit: TimeUnit): number;
+  /**
+   * Gets the average for the specified time unit -
+   * e.g. 500 per second or 0.5 per millisecond or 30.000 per minute.
+   *
+   * @param {TimeUnit} unit
+   * @returns {number}
+   * @memberof MovingAverage
+   */
+  getAverage(unit: TimeUnit): number;
 
-    /**
-     * Adds the given value to the logic of the implementation.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof MovingAverage
-     */
-    update(value: number): this;
+  /**
+   * Adds the given value to the logic of the implementation.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof MovingAverage
+   */
+  update(value: number): this;
 
-    /**
-     * Triggers the actual average to be updated.
-     * A tick represents an update event.
-     *
-     * @returns {this}
-     * @memberof MovingAverage
-     */
-    tick(): this;
+  /**
+   * Triggers the actual average to be updated.
+   * A tick represents an update event.
+   *
+   * @returns {this}
+   * @memberof MovingAverage
+   */
+  tick(): this;
 }
 
 /**
@@ -397,152 +397,153 @@ export interface MovingAverage {
  */
 export class ExponentiallyWeightedMovingAverage implements MovingAverage {
 
-    public static ALPHA_1_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / 60));
-    public static ALPHA_1_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / 60));
-    public static ALPHA_5_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / (60 * 5)));
-    public static ALPHA_5_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / (60 * 5)));
-    public static ALPHA_15_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / (60 * 15)));
-    public static ALPHA_15_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / (60 * 15)));
+  public static ALPHA_1_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / 60));
+  public static ALPHA_1_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / 60));
+  public static ALPHA_5_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / (60 * 5)));
+  public static ALPHA_5_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / (60 * 5)));
+  public static ALPHA_15_MINUTE_1_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(1 / (60 * 15)));
+  public static ALPHA_15_MINUTE_5_SECOND_SAMPLERATE: number &#x3D; 1 - Math.exp(-(5 / (60 * 15)));
 
-    /**
-     * Alpha component (weight) of the moving average.
-     *
-     * @private
-     * @type {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private alpha: number;
-    /**
-     * The sampling interval.
-     *
-     * @private
-     * @type {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private interval: number;
-    /**
-     * The sum of all values passed to the update function.
-     *
-     * @private
-     * @type {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private sum: number &#x3D; 0;
-    /**
-     * The current average.
-     *
-     * @private
-     * @type {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private avg: number &#x3D; -1.0;
-    /**
-     * Multiplier of the time unit specified in the constructor in nanoseconds.
-     *
-     * @private
-     * @type {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private timeUnitInNanoseconds: number;
-    /**
-     * The time unit of the sampling rate.
-     *
-     * @private
-     * @type {TimeUnit}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    private unit: TimeUnit;
+  /**
+   * Alpha component (weight) of the moving average.
+   *
+   * @private
+   * @type {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private alpha: number;
+  /**
+   * The sampling interval.
+   *
+   * @private
+   * @type {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private interval: number;
+  /**
+   * The sum of all values passed to the update function.
+   *
+   * @private
+   * @type {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private sum: number &#x3D; 0;
+  /**
+   * The current average.
+   *
+   * @private
+   * @type {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private avg: number &#x3D; -1.0;
+  /**
+   * Multiplier of the time unit specified in the constructor in nanoseconds.
+   *
+   * @private
+   * @type {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private timeUnitInNanoseconds: number;
+  /**
+   * The time unit of the sampling rate.
+   *
+   * @private
+   * @type {TimeUnit}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  private unit: TimeUnit;
 
-    /**
-     * Creates an instance of ExponentiallyWeightedMovingAverage.
-     *
-     * @param {number} alpha
-     * @param {number} interval
-     * @param {TimeUnit} unit
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public constructor(alpha: number, interval: number, unit: TimeUnit) {
-        this.alpha &#x3D; alpha;
-        this.interval &#x3D; interval;
-        this.unit &#x3D; unit;
-        this.timeUnitInNanoseconds &#x3D; unit.convertTo(interval, NANOSECOND);
+  /**
+   * Creates an instance of ExponentiallyWeightedMovingAverage.
+   *
+   * @param {number} alpha
+   * @param {number} interval
+   * @param {TimeUnit} unit
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public constructor(alpha: number, interval: number, unit: TimeUnit) {
+    this.alpha &#x3D; alpha;
+    this.interval &#x3D; interval;
+    this.unit &#x3D; unit;
+    this.timeUnitInNanoseconds &#x3D; unit.convertTo(interval, NANOSECOND);
+  }
+
+  /**
+   * Gets the alpha value.
+   *
+   * @returns {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public getAlpha(): number {
+    return this.alpha;
+  }
+
+  /**
+   * Gets the time unit.
+   *
+   * @returns {TimeUnit}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public getUnit(): TimeUnit {
+    return this.unit;
+  }
+
+  /**
+   * Gets the average in the specified time unit.
+   *
+   * @param {TimeUnit} unit
+   * @returns {number}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public getAverage(unit: TimeUnit): number {
+    if (this.avg &#x3D;&#x3D;&#x3D; -1.0) {
+      return 0;
     }
+    return this.avg * NANOSECOND.convertTo(this.timeUnitInNanoseconds, unit);
+  }
 
-    /**
-     * Gets the alpha value.
-     *
-     * @returns {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public getAlpha(): number {
-        return this.alpha;
+  /**
+   * Adds the value to the current sum.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public update(value: number): this {
+    this.sum +&#x3D; value;
+    return this;
+  }
+
+  /**
+   * Updates the current average by multiplying the alpha value with the difference
+   * of the last average and the current average.
+   *
+   * Averages are calculated by dividing the sum through the sampling interval.
+   *
+   * If the alpha value is high the last average has more weight and vice versa.
+   *
+   * @returns {this}
+   * @memberof ExponentiallyWeightedMovingAverage
+   */
+  public tick(): this {
+    const sum &#x3D; this.sum;
+    const avg &#x3D; sum / this.interval;
+    this.sum -&#x3D; sum;
+
+    if (this.avg &#x3D;&#x3D;&#x3D; -1.0) {
+      this.avg &#x3D; avg;
+    } else {
+      this.avg +&#x3D; this.alpha * (avg - this.avg);
     }
-
-    /**
-     * Gets the time unit.
-     *
-     * @returns {TimeUnit}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public getUnit(): TimeUnit {
-        return this.unit;
-    }
-
-    /**
-     * Gets the average in the specified time unit.
-     *
-     * @param {TimeUnit} unit
-     * @returns {number}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public getAverage(unit: TimeUnit): number {
-        if (this.avg &#x3D;&#x3D;&#x3D; -1.0) {
-            return 0;
-        }
-        return this.avg * NANOSECOND.convertTo(this.timeUnitInNanoseconds, unit);
-    }
-
-    /**
-     * Adds the value to the current sum.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public update(value: number): this {
-        this.sum +&#x3D; value;
-        return this;
-    }
-
-    /**
-     * Updates the current average by multiplying the alpha value with the difference
-     * of the last average and the current average.
-     *
-     * Averages are calculated by dividing the sum through the sampling interval.
-     *
-     * If the alpha value is high the last average has more weight and vice versa.
-     *
-     * @returns {this}
-     * @memberof ExponentiallyWeightedMovingAverage
-     */
-    public tick(): this {
-        const sum &#x3D; this.sum;
-        const avg &#x3D; sum / this.interval;
-        this.sum -&#x3D; sum;
-
-        if (this.avg &#x3D;&#x3D;&#x3D; -1.0) {
-            this.avg &#x3D; avg;
-        } else {
-            this.avg +&#x3D; this.alpha * (avg - this.avg);
-        }
-        return this;
-    }
+    return this;
+  }
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -565,6 +566,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'MovingAverage.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

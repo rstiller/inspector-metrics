@@ -1,0 +1,738 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content class">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Classes</li>
+  <li>SpaceHistory</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>A collection of <a href="../classes/SimpleGauge.html">SimpleGauge</a> values for space metrics.</p>
+
+            </p>
+
+
+
+            <p class="comment">
+                <h3>Example</h3>
+            </p>
+            <div class="io-description">
+            </div>
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#availableSize">availableSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#physicalSize">physicalSize</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#size">size</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#usedSize">usedSize</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                                <span class="modifier">Public</span>
+                        <code>constructor(spaceName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, metrics: <a href="../interfaces/Metric.html">Metric[]</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:45</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div class="io-description"><p>Creates an instance of SpaceHistory.</p>
+</div>
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>spaceName</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>metrics</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../interfaces/Metric.html" target="_self" >Metric[]</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="availableSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            availableSize</b>
+                            <a href="#availableSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:38</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Available size.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="physicalSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            physicalSize</b>
+                            <a href="#physicalSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:45</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Physical size.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="size"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            size</b>
+                            <a href="#size"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:24</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Total size.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="usedSize"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            usedSize</b>
+                            <a href="#usedSize"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Used size.</p>
+</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
+
+import {
+  BaseMetric,
+  Metric,
+  MetricSet,
+  SimpleGauge
+} from &#x27;inspector-metrics&#x27;
+import * as v8 from &#x27;v8&#x27;
+
+/**
+ * A collection of {@link SimpleGauge} values for space metrics.
+ *
+ * @export
+ * @class SpaceHistory
+ */
+export class SpaceHistory {
+  /**
+   * Total size.
+   *
+   * @type {SimpleGauge}
+   * @memberof SpaceHistory
+   */
+  public size: SimpleGauge;
+  /**
+   * Used size.
+   *
+   * @type {SimpleGauge}
+   * @memberof SpaceHistory
+   */
+  public usedSize: SimpleGauge;
+  /**
+   * Available size.
+   *
+   * @type {SimpleGauge}
+   * @memberof SpaceHistory
+   */
+  public availableSize: SimpleGauge;
+  /**
+   * Physical size.
+   *
+   * @type {SimpleGauge}
+   * @memberof SpaceHistory
+   */
+  public physicalSize: SimpleGauge;
+
+  /**
+   * Creates an instance of SpaceHistory.
+   *
+   * @param {string} spaceName
+   * @param {Metric[]} metrics
+   * @memberof SpaceHistory
+   */
+  public constructor (spaceName: string, metrics: Metric[]) {
+    this.size &#x3D; new SimpleGauge(&#x27;spaceSize&#x27;)
+    this.usedSize &#x3D; new SimpleGauge(&#x27;spaceUsedSize&#x27;)
+    this.availableSize &#x3D; new SimpleGauge(&#x27;spaceAvailableSize&#x27;)
+    this.physicalSize &#x3D; new SimpleGauge(&#x27;spacePhysicalSize&#x27;)
+
+    this.size.setTag(&#x27;space&#x27;, spaceName)
+    this.usedSize.setTag(&#x27;space&#x27;, spaceName)
+    this.availableSize.setTag(&#x27;space&#x27;, spaceName)
+    this.physicalSize.setTag(&#x27;space&#x27;, spaceName)
+
+    metrics.push(this.size)
+    metrics.push(this.usedSize)
+    metrics.push(this.availableSize)
+    metrics.push(this.physicalSize)
+  }
+}
+
+/**
+ * Metric set with values related to the memory nodejs uses.
+ *
+ * @export
+ * @class V8MemoryMetrics
+ * @extends {BaseMetric}
+ * @implements {MetricSet}
+ */
+export class V8MemoryMetrics extends BaseMetric implements MetricSet {
+  /**
+   * Contains all the metrics in this metric-set.
+   *
+   * @private
+   * @type {Metric[]}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly metrics: Metric[] &#x3D; [];
+  /**
+   * Stores the size gauges for different specs.
+   *
+   * @private
+   * @type {Map&lt;string, SpaceHistory&gt;}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly spaces: Map&lt;string, SpaceHistory&gt; &#x3D; new Map();
+  /**
+   * Total heap size.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly totalHeapSize: SimpleGauge &#x3D; new SimpleGauge(&#x27;totalHeapSize&#x27;);
+  /**
+   * Total available size.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly totalAvailableSize: SimpleGauge &#x3D; new SimpleGauge(&#x27;totalAvailableSize&#x27;);
+  /**
+   * Total physical size.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly totalPhysicalSize: SimpleGauge &#x3D; new SimpleGauge(&#x27;totalPhysicalSize&#x27;);
+  /**
+   * Total heap size for executable code.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly totalHeapSizeExecutable: SimpleGauge &#x3D; new SimpleGauge(&#x27;totalHeapSizeExecutable&#x27;);
+  /**
+   * Used heap size.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly usedHeapSize: SimpleGauge &#x3D; new SimpleGauge(&#x27;usedHeapSize&#x27;);
+  /**
+   * Maximum heap size.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly heapSizeLimit: SimpleGauge &#x3D; new SimpleGauge(&#x27;heapSizeLimit&#x27;);
+  /**
+   * Allocated memory.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly mallocedMemory: SimpleGauge &#x3D; new SimpleGauge(&#x27;mallocedMemory&#x27;);
+  /**
+   * Maximum allocated memory.
+   *
+   * @private
+   * @type {SimpleGauge}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly peakMallocedMemory: SimpleGauge &#x3D; new SimpleGauge(&#x27;peakMallocedMemory&#x27;);
+  /**
+   * The timer reference from the scheduler.
+   *
+   * @private
+   * @type {NodeJS.Timer}
+   * @memberof V8MemoryMetrics
+   */
+  private readonly intervalRef: NodeJS.Timer;
+
+  /**
+   * Creates an instance of V8MemoryMetrics.
+   *
+   * @param {string} name
+   * @param {number} [sampleRate&#x3D;1000]
+   * @memberof V8MemoryMetrics
+   */
+  public constructor (name: string, sampleRate &#x3D; 1000) {
+    super()
+    this.name &#x3D; name
+
+    this.metrics.push(this.totalHeapSize)
+    this.metrics.push(this.totalPhysicalSize)
+    this.metrics.push(this.totalAvailableSize)
+    this.metrics.push(this.totalHeapSizeExecutable)
+    this.metrics.push(this.usedHeapSize)
+    this.metrics.push(this.heapSizeLimit)
+    this.metrics.push(this.mallocedMemory)
+    this.metrics.push(this.peakMallocedMemory)
+
+    this.spaces.set(&#x27;new_space&#x27;, new SpaceHistory(&#x27;new_space&#x27;, this.metrics))
+    this.spaces.set(&#x27;old_space&#x27;, new SpaceHistory(&#x27;old_space&#x27;, this.metrics))
+    this.spaces.set(&#x27;code_space&#x27;, new SpaceHistory(&#x27;code_space&#x27;, this.metrics))
+    this.spaces.set(&#x27;map_space&#x27;, new SpaceHistory(&#x27;map_space&#x27;, this.metrics))
+    this.spaces.set(&#x27;large_object_space&#x27;, new SpaceHistory(&#x27;large_object_space&#x27;, this.metrics))
+
+    this.intervalRef &#x3D; global.setInterval(() &#x3D;&gt; {
+      const heapSpaceStatistics &#x3D; v8.getHeapSpaceStatistics()
+      const heapStatistics &#x3D; v8.getHeapStatistics()
+
+      this.totalHeapSize.setValue(heapStatistics.total_heap_size)
+      this.totalPhysicalSize.setValue(heapStatistics.total_physical_size)
+      this.totalAvailableSize.setValue(heapStatistics.total_available_size)
+      this.totalHeapSizeExecutable.setValue(heapStatistics.total_heap_size_executable)
+      this.usedHeapSize.setValue(heapStatistics.used_heap_size)
+      this.heapSizeLimit.setValue(heapStatistics.heap_size_limit)
+      this.mallocedMemory.setValue(heapStatistics.heap_size_limit)
+      this.peakMallocedMemory.setValue(heapStatistics.heap_size_limit)
+
+      heapSpaceStatistics.forEach((heapSpaceStatistic) &#x3D;&gt; {
+        if (this.spaces.has(heapSpaceStatistic.space_name)) {
+          const history &#x3D; this.spaces.get(heapSpaceStatistic.space_name)
+          history.availableSize.setValue(heapSpaceStatistic.space_available_size)
+          history.physicalSize.setValue(heapSpaceStatistic.physical_space_size)
+          history.size.setValue(heapSpaceStatistic.space_size)
+          history.usedSize.setValue(heapSpaceStatistic.space_used_size)
+        }
+      })
+    }, sampleRate)
+  }
+
+  /**
+   * Stops the recording of memory metrics.
+   *
+   * @memberof V8MemoryMetrics
+   */
+  public stop (): void {
+    this.intervalRef.unref()
+  }
+
+  /**
+   * Gets all metrics.
+   *
+   * @returns {Map&lt;string, Metric&gt;}
+   * @memberof V8MemoryMetrics
+   */
+  public getMetrics (): Map&lt;string, Metric&gt; {
+    const map: Map&lt;string, Metric&gt; &#x3D; new Map()
+    this.metrics.forEach((metric) &#x3D;&gt; map.set(metric.getName(), metric))
+    return map
+  }
+
+  /**
+   * Gets all metrics.
+   *
+   * @returns {Metric[]}
+   * @memberof V8MemoryMetrics
+   */
+  public getMetricList (): Metric[] {
+    return this.metrics
+  }
+
+  /**
+   * Sets the group of this metric-set as well as all contained metrics.
+   *
+   * @param {string} group
+   * @returns {this}
+   * @memberof V8MemoryMetrics
+   */
+  public setGroup (group: string): this {
+    this.group &#x3D; group
+
+    this.totalHeapSize.setGroup(group)
+    this.totalAvailableSize.setGroup(group)
+    this.totalPhysicalSize.setGroup(group)
+    this.totalHeapSizeExecutable.setGroup(group)
+    this.usedHeapSize.setGroup(group)
+    this.heapSizeLimit.setGroup(group)
+    this.mallocedMemory.setGroup(group)
+    this.peakMallocedMemory.setGroup(group)
+
+    this.spaces.forEach((history) &#x3D;&gt; {
+      history.availableSize.setGroup(group)
+      history.physicalSize.setGroup(group)
+      history.size.setGroup(group)
+      history.usedSize.setGroup(group)
+    })
+
+    return this
+  }
+
+  /**
+   * Sets the tags of this metric-set all contained metrics accordingly.
+   *
+   * @param {string} name
+   * @param {string} value
+   * @returns {this}
+   * @memberof V8MemoryMetrics
+   */
+  public setTag (name: string, value: string): this {
+    this.tagMap.set(name, value)
+
+    this.totalHeapSize.setTag(name, value)
+    this.totalAvailableSize.setTag(name, value)
+    this.totalPhysicalSize.setTag(name, value)
+    this.totalHeapSizeExecutable.setTag(name, value)
+    this.usedHeapSize.setTag(name, value)
+    this.heapSizeLimit.setTag(name, value)
+    this.mallocedMemory.setTag(name, value)
+    this.peakMallocedMemory.setTag(name, value)
+
+    this.spaces.forEach((history) &#x3D;&gt; {
+      history.availableSize.setTag(name, value)
+      history.physicalSize.setTag(name, value)
+      history.size.setTag(name, value)
+      history.usedSize.setTag(name, value)
+    })
+
+    return this
+  }
+
+  /**
+   * Removes the specified tag from this metric-set and all contained metrics accordingly.
+   *
+   * @param {string} name
+   * @memberof V8MemoryMetrics
+   */
+  public removeTag (name: string): this {
+    this.tagMap.delete(name)
+
+    this.totalHeapSize.removeTag(name)
+    this.totalAvailableSize.removeTag(name)
+    this.totalPhysicalSize.removeTag(name)
+    this.totalHeapSizeExecutable.removeTag(name)
+    this.usedHeapSize.removeTag(name)
+    this.heapSizeLimit.removeTag(name)
+    this.mallocedMemory.removeTag(name)
+    this.peakMallocedMemory.removeTag(name)
+
+    this.spaces.forEach((history) &#x3D;&gt; {
+      history.availableSize.removeTag(name)
+      history.physicalSize.removeTag(name)
+      history.size.removeTag(name)
+      history.usedSize.removeTag(name)
+    })
+
+    return this
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
+            var COMPODOC_CURRENT_PAGE_URL = 'SpaceHistory.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

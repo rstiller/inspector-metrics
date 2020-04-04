@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/counter.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/counter.ts</code>
         </p>
 
             <p class="comment">
@@ -267,7 +267,7 @@ The initial value is 0.</p>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">lib/metrics/counter.ts:25</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -359,7 +359,7 @@ The initial value is 0.</p>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">lib/metrics/counter.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:24</a></div>
                             </td>
                         </tr>
 
@@ -713,8 +713,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="61"
-                            class="link-to-prism">lib/metrics/counter.ts:61</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:60</a></div>
                 </td>
             </tr>
 
@@ -761,8 +761,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">lib/metrics/counter.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:46</a></div>
                 </td>
             </tr>
 
@@ -828,8 +828,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">lib/metrics/counter.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="70"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:70</a></div>
                 </td>
             </tr>
 
@@ -869,8 +869,8 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="82"
-                            class="link-to-prism">lib/metrics/counter.ts:82</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="81"
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/counter.ts:81</a></div>
                 </td>
             </tr>
 
@@ -2160,10 +2160,10 @@ This counter is only unique per process, forked processes start from 0.</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
-import { Counting } from &quot;./model/counting&quot;;
-import { BaseMetric, Metric } from &quot;./model/metric&quot;;
+import { Counting } from &#x27;./model/counting&#x27;
+import { BaseMetric, Metric } from &#x27;./model/metric&#x27;
 
 /**
  * A monotonically increasing number.
@@ -2176,77 +2176,75 @@ import { BaseMetric, Metric } from &quot;./model/metric&quot;;
  * @implements {Metric}
  */
 export class MonotoneCounter extends BaseMetric implements Counting, Metric {
+  /**
+   * Holds the current value.
+   *
+   * @private
+   * @type {number}
+   * @memberof MonotoneCounter
+   */
+  protected count: number &#x3D; 0;
 
-    /**
-     * Holds the current value.
-     *
-     * @private
-     * @type {number}
-     * @memberof MonotoneCounter
-     */
-    protected count: number &#x3D; 0;
+  /**
+   * Creates an instance of MonotoneCounter.
+   *
+   * @param {string} [name] optional name of the counter
+   * @param {string} [description] optional description of the counter
+   * @memberof MonotoneCounter
+   */
+  public constructor (name?: string, description?: string) {
+    super()
+    this.name &#x3D; name
+    this.description &#x3D; description
+  }
 
-    /**
-     * Creates an instance of MonotoneCounter.
-     *
-     * @param {string} [name] optional name of the counter
-     * @param {string} [description] optional description of the counter
-     * @memberof MonotoneCounter
-     */
-    public constructor(name?: string, description?: string) {
-        super();
-        this.name &#x3D; name;
-        this.description &#x3D; description;
+  /**
+   * Increases the current count by the given value - a negative value is causing an error.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof MonotoneCounter
+   */
+  public increment (value: number): this {
+    if (value &lt; 0) {
+      throw new Error(&#x27;MonotoneCounter must not be increased by a negative value&#x27;)
     }
+    this.count +&#x3D; value
+    return this
+  }
 
-    /**
-     * Increases the current count by the given value - a negative value is causing an error.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof MonotoneCounter
-     */
-    public increment(value: number): this {
-        if (value &lt; 0) {
-            throw new Error(&quot;MonotoneCounter must not be increased by a negative value&quot;);
-        }
-        this.count +&#x3D; value;
-        return this;
-    }
+  /**
+   * Gets the current count.
+   *
+   * @returns {number}
+   * @memberof MonotoneCounter
+   */
+  public getCount (): number {
+    return this.count
+  }
 
-    /**
-     * Gets the current count.
-     *
-     * @returns {number}
-     * @memberof MonotoneCounter
-     */
-    public getCount(): number {
-        return this.count;
-    }
+  /**
+   * Sets the current count to 0.
+   *
+   * @returns {this}
+   * @memberof MonotoneCounter
+   */
+  public reset (): this {
+    this.count &#x3D; 0
+    return this
+  }
 
-    /**
-     * Sets the current count to 0.
-     *
-     * @returns {this}
-     * @memberof MonotoneCounter
-     */
-    public reset(): this {
-        this.count &#x3D; 0;
-        return this;
-    }
-
-    /**
-     * Same as {@link BaseMetric#toJSON()}, also adding count property.
-     *
-     * @returns {*}
-     * @memberof MonotoneCounter
-     */
-    public toJSON(): any {
-        const json &#x3D; super.toJSON();
-        json.count &#x3D; this.count;
-        return json;
-    }
-
+  /**
+   * Same as {@link BaseMetric#toJSON()}, also adding count property.
+   *
+   * @returns {*}
+   * @memberof MonotoneCounter
+   */
+  public toJSON (): any {
+    const json &#x3D; super.toJSON()
+    json.count &#x3D; this.count
+    return json
+  }
 }
 
 /**
@@ -2260,42 +2258,40 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
  * @implements {Metric}
  */
 export class Counter extends MonotoneCounter implements Counting, Metric {
+  /**
+   * Creates an instance of Counter.
+   *
+   * @param {string} [name] optional name of the counter
+   * @param {string} [description] optional description of the counter
+   * @memberof Counter
+   */
+  public constructor (name?: string, description?: string) {
+    super(name, description)
+  }
 
-    /**
-     * Creates an instance of Counter.
-     *
-     * @param {string} [name] optional name of the counter
-     * @param {string} [description] optional description of the counter
-     * @memberof Counter
-     */
-    public constructor(name?: string, description?: string) {
-        super(name, description);
-    }
+  /**
+   * Increases the current count by the given value - a negative value is decreasing the current count.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof MonotoneCounter
+   */
+  public increment (value: number): this {
+    this.count +&#x3D; value
+    return this
+  }
 
-    /**
-     * Increases the current count by the given value - a negative value is decreasing the current count.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof MonotoneCounter
-     */
-    public increment(value: number): this {
-        this.count +&#x3D; value;
-        return this;
-    }
-
-    /**
-     * Decreases the current count by the given value - a negative value is increasing the current count.
-     *
-     * @param {number} value
-     * @returns {this}
-     * @memberof Counter
-     */
-    public decrement(value: number): this {
-        this.count -&#x3D; value;
-        return this;
-    }
-
+  /**
+   * Decreases the current count by the given value - a negative value is increasing the current count.
+   *
+   * @param {number} value
+   * @returns {this}
+   * @memberof Counter
+   */
+  public decrement (value: number): this {
+    this.count -&#x3D; value
+    return this
+  }
 }
 </code></pre>
     </div>
@@ -2303,6 +2299,7 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
 
 
 
+                   
 
 
 
@@ -2325,6 +2322,7 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'MonotoneCounter.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

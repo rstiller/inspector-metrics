@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/metadata-container.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/metadata-container.ts</code>
         </p>
 
             <p class="comment">
@@ -132,7 +132,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">lib/metrics/model/metadata-container.ts:29</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/metadata-container.ts:29</a></div>
                 </td>
             </tr>
 
@@ -217,7 +217,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="19"
-                            class="link-to-prism">lib/metrics/model/metadata-container.ts:19</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/metadata-container.ts:19</a></div>
                 </td>
             </tr>
 
@@ -265,7 +265,7 @@ not be reflected in the map returned here.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="39"
-                            class="link-to-prism">lib/metrics/model/metadata-container.ts:39</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/metadata-container.ts:39</a></div>
                 </td>
             </tr>
 
@@ -350,7 +350,7 @@ not be reflected in the map returned here.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="50"
-                            class="link-to-prism">lib/metrics/model/metadata-container.ts:50</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/metadata-container.ts:50</a></div>
                 </td>
             </tr>
 
@@ -437,53 +437,53 @@ not be reflected in the map returned here.</p>
  */
 export interface MetadataContainer {
 
-    /**
-     * Gets all the metadata associated with an instance.
-     * Future changes to the metadata of this instance may
-     * not be reflected in the map returned here.
-     *
-     * @returns {Map&lt;string, any&gt;}
-     * @memberof MetadataContainer
-     */
-    getMetadataMap(): Map&lt;string, any&gt;;
+  /**
+   * Gets all the metadata associated with an instance.
+   * Future changes to the metadata of this instance may
+   * not be reflected in the map returned here.
+   *
+   * @returns {Map&lt;string, any&gt;}
+   * @memberof MetadataContainer
+   */
+  getMetadataMap(): Map&lt;string, any&gt;;
 
-    /**
-     * Gets the metadata associated with the specified name.
-     *
-     * @template T
-     * @param {string} name The metadata key
-     * @returns {T}
-     * @memberof MetadataContainer
-     */
-    getMetadata&lt;T&gt;(name: string): T;
+  /**
+   * Gets the metadata associated with the specified name.
+   *
+   * @template T
+   * @param {string} name The metadata key
+   * @returns {T}
+   * @memberof MetadataContainer
+   */
+  getMetadata&lt;T&gt;(name: string): T;
 
-    /**
-     * Removes the metadata associated with the specified name and returns it finally.
-     *
-     * @template T
-     * @param {string} name The metadata key
-     * @returns {T}
-     * @memberof MetadataContainer
-     */
-    removeMetadata&lt;T&gt;(name: string): T;
+  /**
+   * Removes the metadata associated with the specified name and returns it finally.
+   *
+   * @template T
+   * @param {string} name The metadata key
+   * @returns {T}
+   * @memberof MetadataContainer
+   */
+  removeMetadata&lt;T&gt;(name: string): T;
 
-    /**
-     * Sets the metadata object to the name.
-     *
-     * @template T
-     * @param {string} name The key of the metadata
-     * @param {T} value any value
-     * @returns {this}
-     * @memberof MetadataContainer
-     */
-    setMetadata&lt;T&gt;(name: string, value: T): this;
+  /**
+   * Sets the metadata object to the name.
+   *
+   * @template T
+   * @param {string} name The key of the metadata
+   * @param {T} value any value
+   * @returns {this}
+   * @memberof MetadataContainer
+   */
+  setMetadata&lt;T&gt;(name: string, value: T): this;
 }
 
 /**
  * Helper interface for handling metadata.
  */
 export interface Metadata {
-    [key: string]: any;
+  [key: string]: any;
 }
 
 /**
@@ -494,11 +494,11 @@ export interface Metadata {
  * @returns {Map&lt;string, any&gt;}
  */
 export function metadataToMap(metadata: Metadata): Map&lt;string, any&gt; {
-    const metadataMap: Map&lt;string, any&gt; &#x3D; new Map();
-    if (metadata) {
-        Object.keys(metadata).forEach((key) &#x3D;&gt; metadataMap.set(key, metadata[key]));
-    }
-    return metadataMap;
+  const metadataMap: Map&lt;string, any&gt; &#x3D; new Map();
+  if (metadata) {
+    Object.keys(metadata).forEach((key) &#x3D;&gt; metadataMap.set(key, metadata[key]));
+  }
+  return metadataMap;
 }
 
 /**
@@ -509,17 +509,18 @@ export function metadataToMap(metadata: Metadata): Map&lt;string, any&gt; {
  * @returns {Metadata}
  */
 export function mapToMetadata(metadataMap: Map&lt;string, any&gt;): Metadata {
-    const metadata: Metadata &#x3D; {};
-    if (metadataMap) {
-        metadataMap.forEach((value, name) &#x3D;&gt; metadata[name] &#x3D; value);
-    }
-    return metadata;
+  const metadata: Metadata &#x3D; {};
+  if (metadataMap) {
+    metadataMap.forEach((value, name) &#x3D;&gt; metadata[name] &#x3D; value);
+  }
+  return metadata;
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -542,6 +543,7 @@ export function mapToMetadata(metadataMap: Map&lt;string, any&gt;): Metadata {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'MetadataContainer.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

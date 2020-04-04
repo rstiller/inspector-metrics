@@ -1,0 +1,1100 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>PrometheusMetricResult</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>packages/inspector-prometheus/lib/metrics/PrometheusMetricReporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Helper interface for a report result.</p>
+
+            </p>
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#canBeReported">canBeReported</a>
+                                </li>
+                                <li>
+                                        <a href="#fields">fields</a>
+                                </li>
+                                <li>
+                                        <a href="#type">type</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="canBeReported"></a>
+                                        <span class="name"><b>canBeReported</b><a href="#canBeReported"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>canBeReported:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Indicates if this result can be handle by the reporter.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="fields"></a>
+                                        <span class="name"><b>fields</b><a href="#fields"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>fields:         <code><a href="../interfaces/PrometheusFields.html" target="_self" >PrometheusFields</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/PrometheusFields.html" target="_self" >PrometheusFields</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Contains field-name to value mapping of this metric-result.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="type"></a>
+                                        <span class="name"><b>type</b><a href="#type"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>type:         <code><a href="../interfaces/Metric.html" target="_self" >PrometheusMetricType</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >PrometheusMetricType</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Type of the metrics in fields property.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support&#x27;
+
+import * as cluster from &#x27;cluster&#x27;
+import { randomBytes } from &#x27;crypto&#x27;
+import { EventEmitter } from &#x27;events&#x27;
+import {
+  BucketCounting,
+  Buckets,
+  BucketToCountMap,
+  Counter,
+  Event,
+  Gauge,
+  getMetricBuckets,
+  getMetricCounts,
+  getMetricDescription,
+  getMetricGroup,
+  getMetricMetadata,
+  getMetricName,
+  getMetricTags,
+  getSnapshot,
+  Histogram,
+  mapToTags,
+  Metadata,
+  Meter,
+  Metric,
+  MetricRegistry,
+  MetricReporter,
+  MetricSetReportContext,
+  MetricType,
+  MonotoneCounter,
+  OverallReportContext,
+  ReportingResult,
+  Sampling,
+  SerializableBucketCounting,
+  SerializableMetric,
+  SerializableSampling,
+  StdClock,
+  Taggable,
+  Tags,
+  Timer
+} from &#x27;inspector-metrics&#x27;
+import { DefaultPrometheusClusterOptions } from &#x27;./DefaultPrometheusClusterOptions&#x27;
+import { InterprocessReportRequest } from &#x27;./InterprocessReportRequest&#x27;
+import { InterprocessReportResponse } from &#x27;./InterprocessReportResponse&#x27;
+import { Percentiles } from &#x27;./Percentiles&#x27;
+import { PrometheusReporterOptions } from &#x27;./PrometheusReporterOptions&#x27;
+
+/**
+ * Enumeration used to determine valid metric types of prometheus.
+ */
+type PrometheusMetricType &#x3D; &#x27;counter&#x27; | &#x27;gauge&#x27; | &#x27;histogram&#x27; | &#x27;summary&#x27; | &#x27;untyped&#x27;;
+
+/**
+ * Helper interface for reported fields.
+ *
+ * @interface PrometheusFields
+ */
+interface PrometheusFields { [key: string]: number | string }
+
+/**
+ * Helper interface for a report result.
+ *
+ * @interface PrometheusMetricResult
+ */
+interface PrometheusMetricResult {
+  /**
+   * Type of the metrics in fields property.
+   *
+   * @type {PrometheusMetricType}
+   * @memberof PrometheusMetricResult
+   */
+  readonly type: PrometheusMetricType
+  /**
+   * Contains field-name to value mapping of this metric-result.
+   *
+   * @type {PrometheusFields}
+   * @memberof PrometheusMetricResult
+   */
+  readonly fields: PrometheusFields
+  /**
+   * Indicates if this result can be handle by the reporter.
+   *
+   * @type {boolean}
+   * @memberof PrometheusMetricResult
+   */
+  readonly canBeReported: boolean
+}
+
+/**
+ * Metric reporter for prometheus.
+ * This reporter only support the text format of prometheus / open-metrics.
+ *
+ * To get the metric report call the {@link PrometheusMetricReporter#getMetricsString} method.
+ *
+ * @see https://prometheus.io/docs/concepts/
+ * @see https://prometheus.io/docs/instrumenting/exposition_formats/#text-based-format
+ * @export
+ * @class PrometheusMetricReporter
+ * @extends {MetricReporter}
+ */
+export class PrometheusMetricReporter extends MetricReporter&lt;PrometheusReporterOptions, PrometheusMetricResult&gt; {
+  /**
+   * Constant for the &quot;type&quot; variable of process-level message identifying report-request-messages
+   * from master process.
+   *
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  public static readonly MESSAGE_TYPE_REQUEST &#x3D; &#x27;inspector-prometheus:metric-reporter:request-metrics&#x27;;
+  /**
+   * Constant for the &quot;type&quot; variable of process-level message identifying report-response-messages
+   * from forked processes.
+   *
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  public static readonly MESSAGE_TYPE_RESPONSE &#x3D; &#x27;inspector-prometheus:metric-reporter:response-metrics&#x27;;
+  /**
+   * Used to replace unsupported characters from label name.
+   *
+   * @private
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  private static readonly LABEL_NAME_REPLACEMENT_REGEXP &#x3D; new RegExp(&#x27;[^a-zA-Z0-9_]&#x27;, &#x27;g&#x27;);
+
+  /**
+   * used to replace the first character of a label name if needed.
+   *
+   * @private
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  private static readonly LABEL_NAME_START_EXCLUSION &#x3D; [&#x27;_&#x27;, &#x27;0&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;].sort(
+    (a: string, b: string) &#x3D;&gt; a.localeCompare(b)
+  );
+
+  /**
+   * Used to replace unsupported characters from metric name.
+   *
+   * @private
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  private static readonly METRIC_NAME_REPLACEMENT_REGEXP &#x3D; new RegExp(&#x27;[^a-zA-Z0-9_:]&#x27;, &#x27;g&#x27;);
+
+  /**
+   * used to replace the first character of a metric name if needed.
+   *
+   * @private
+   * @static
+   * @memberof PrometheusMetricReporter
+   */
+  private static readonly METRIC_NAME_START_EXCLUSION &#x3D; [&#x27;0&#x27;, &#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;, &#x27;4&#x27;, &#x27;5&#x27;, &#x27;6&#x27;, &#x27;7&#x27;, &#x27;8&#x27;, &#x27;9&#x27;].sort(
+    (a: string, b: string) &#x3D;&gt; a.localeCompare(b)
+  );
+
+  /**
+   * Checks if a given string is empty.
+   *
+   * @private
+   * @static
+   * @param {string} value
+   * @returns {boolean}
+   * @memberof PrometheusMetricReporter
+   */
+  private static isEmpty (value: string): boolean {
+    return !value || value.trim() &#x3D;&#x3D;&#x3D; &#x27;&#x27;
+  }
+
+  /**
+   * Checks if a given value is a number.
+   *
+   * @private
+   * @static
+   * @param {*} value
+   * @returns {value is number}
+   * @memberof PrometheusMetricReporter
+   */
+  private static isNumber (value: any): value is number {
+    return typeof (value) &#x3D;&#x3D;&#x3D; &#x27;number&#x27;
+  }
+
+  /**
+   * The prometheus counter type string.
+   *
+   * @private
+   * @type {PrometheusMetricType}
+   * @memberof PrometheusMetricReporter
+   */
+  private readonly counterType: PrometheusMetricType &#x3D; &#x27;counter&#x27;;
+  /**
+   * The prometheus gauge type string.
+   *
+   * @private
+   * @type {PrometheusMetricType}
+   * @memberof PrometheusMetricReporter
+   */
+  private readonly gaugeType: PrometheusMetricType &#x3D; &#x27;gauge&#x27;;
+  /**
+   * The prometheus histogram type string.
+   *
+   * @private
+   * @type {PrometheusMetricType}
+   * @memberof PrometheusMetricReporter
+   */
+  private readonly histogramType: PrometheusMetricType &#x3D; &#x27;histogram&#x27;;
+  /**
+   * The prometheus summary type string.
+   *
+   * @private
+   * @type {PrometheusMetricType}
+   * @memberof PrometheusMetricReporter
+   */
+  private readonly summaryType: PrometheusMetricType &#x3D; &#x27;summary&#x27;;
+  /**
+   * Internal eventbus used to forward received messages from forked metric reporters.
+   *
+   * @private
+   * @type {EventEmitter}
+   * @memberof PrometheusMetricReporter
+   */
+  private readonly internalEventbus: EventEmitter;
+
+  /**
+   * Creates an instance of PrometheusMetricReporter.
+   *
+   * @param {string} [reporterType] the type of the reporter implementation - for internal use
+   * @memberof PrometheusMetricReporter
+   */
+  public constructor ({
+    clock &#x3D; new StdClock(),
+    emitComments &#x3D; true,
+    includeTimestamp &#x3D; false,
+    log &#x3D; console,
+    minReportingTimeout &#x3D; 1,
+    tags &#x3D; new Map(),
+    useUntyped &#x3D; false,
+    clusterOptions &#x3D; new DefaultPrometheusClusterOptions()
+  }: PrometheusReporterOptions,
+  reporterType?: string) {
+    super({
+      clock,
+      clusterOptions,
+      emitComments,
+      includeTimestamp,
+      log,
+      minReportingTimeout,
+      tags,
+      useUntyped
+    }, reporterType)
+    const co &#x3D; this.options.clusterOptions
+    if (co?.enabled) {
+      this.internalEventbus &#x3D; new EventEmitter()
+      if (co.sendMetricsToMaster) {
+        co.eventReceiver.on(&#x27;message&#x27;, async (worker, message, handle) &#x3D;&gt; {
+          await this.handleReportRequest(message)
+        })
+      } else {
+        co.eventReceiver.on(&#x27;message&#x27;, async (worker, message, handle) &#x3D;&gt; {
+          await this.handleReportResponse(message)
+        })
+      }
+    }
+  }
+
+  /**
+   * Build the metric reporting string for all registered {@link MetricRegistry} instances.
+   *
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  public async getMetricsString (): Promise&lt;string&gt; {
+    const workerPromises: Array&lt;Promise&lt;string&gt;&gt; &#x3D; []
+    const clusterOptions &#x3D; this.options.clusterOptions
+    if (this.canSendMessagesToWorkers()) {
+      const workers &#x3D; await clusterOptions.getWorkers()
+      for (const worker of workers) {
+        const message: InterprocessReportRequest &#x3D; {
+          id: this.generateRandomId(),
+          targetReporterType: this.reporterType,
+          type: PrometheusMetricReporter.MESSAGE_TYPE_REQUEST
+        }
+        const workerPromise: Promise&lt;string&gt; &#x3D; new Promise((resolve) &#x3D;&gt; {
+          this.internalEventbus.once(message.id, (response: InterprocessReportResponse) &#x3D;&gt; {
+            resolve(response.metricsStr)
+          })
+        })
+        const workerTimeout: Promise&lt;string&gt; &#x3D; new Promise((resolve) &#x3D;&gt; setTimeout(() &#x3D;&gt; {
+          resolve(&#x27;&#x27;)
+          this.internalEventbus.removeAllListeners(message.id)
+        }, clusterOptions.workerResponseTimeout))
+        clusterOptions
+          .sendToWorker(worker, message)
+          .catch((error) &#x3D;&gt; console.log(error))
+        workerPromises.push(Promise.race([workerPromise, workerTimeout]))
+      }
+    }
+    const workerResponses &#x3D; await Promise.all(workerPromises)
+    if (this.metricRegistries &amp;&amp; this.metricRegistries.length &gt; 0) {
+      const ctx &#x3D; await this.report()
+      return &#x60;${ctx.result}${workerResponses.join(&#x27;\n&#x27;)}&#x60;
+    }
+    return workerResponses.join(&#x27;\n&#x27;) + &#x27;\n&#x27;
+  }
+
+  /**
+   * Builds the text representation of the event specified.
+   *
+   * @param {MetricRegistry} event
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  public async getEventString&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;string&gt; {
+    const overallCtx: OverallReportContext &#x3D; {
+      result: &#x27;&#x27;
+    }
+
+    const result &#x3D; this.reportGauge(event, {
+      date: null,
+      metrics: [],
+      overallCtx,
+      registry: null,
+      type: &#x27;gauge&#x27;
+    })
+
+    await this.handleResults(
+      overallCtx,
+      null,
+      event.getTime(),
+      &#x27;gauge&#x27;,
+      [{
+        metric: event,
+        result
+      }]
+    )
+
+    return overallCtx.result
+  }
+
+  /**
+   * Use {@link #getEventString} instead.
+   *
+   * @param {TEvent} event
+   * @returns {Promise&lt;TEvent&gt;}
+   * @memberof PrometheusMetricReporter
+   */
+  public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
+    return event
+  }
+
+  /**
+   * Does nothing.
+   *
+   * @returns {Promise&lt;void&gt;}
+   * @memberof PrometheusMetricReporter
+   */
+  public async flushEvents (): Promise&lt;void&gt; {
+  }
+
+  /**
+   * Does nothing.
+   *
+   * @memberof PrometheusMetricReporter
+   */
+  public async start (): Promise&lt;this&gt; {
+    return this
+  }
+
+  /**
+   * Does nothing.
+   *
+   * @memberof PrometheusMetricReporter
+   */
+  public async stop (): Promise&lt;this&gt; {
+    return this
+  }
+
+  /**
+   * Always returns false, since the Prometheus reporter implements it&#x27;s own messaging mechanism.
+   *
+   * @protected
+   * @returns {boolean}
+   * @memberof PrometheusMetricReporter
+   */
+  protected sendMetricsToMaster (): boolean {
+    return false
+  }
+
+  /**
+   * Checks if the clustering support is enabled and the &#x27;getWorkers&#x27; and &#x27;sendToWorker&#x27;
+   * method is not null.
+   *
+   * @protected
+   * @returns {boolean}
+   * @memberof PrometheusMetricReporter
+   */
+  protected canSendMessagesToWorkers (): boolean {
+    const clusterOptions &#x3D; this.options.clusterOptions
+    return clusterOptions.enabled &amp;&amp;
+      !!clusterOptions.getWorkers &amp;&amp;
+      !!clusterOptions.sendToWorker
+  }
+
+  /**
+   * Generates a randomId used to identify worker report responses.
+   *
+   * @protected
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  protected generateRandomId (): string {
+    return randomBytes(32).toString(&#x27;hex&#x27;)
+  }
+
+  /**
+   * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_REQUEST},
+   * generates a response using {@link #getMetricsString} and sends it back to the master process
+   * with the id given through the request.
+   *
+   * @protected
+   * @param {*} message
+   * @memberof PrometheusMetricReporter
+   */
+  protected async handleReportRequest (message: any): Promise&lt;void&gt; {
+    if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_REQUEST)) {
+      const request: InterprocessReportRequest &#x3D; message
+      const metricsStr &#x3D; await this.getMetricsString()
+      const response: InterprocessReportResponse &#x3D; {
+        id: request.id,
+        metricsStr,
+        targetReporterType: request.targetReporterType,
+        type: PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE
+      }
+      if (this.options.clusterOptions.sendToMaster) {
+        this.options.clusterOptions.sendToMaster(response)
+          .catch((cause) &#x3D;&gt; this.options.log?.error(
+            &#x27;could not send metrics to master process&#x27;,
+            cause
+          ))
+      }
+    }
+  }
+
+  /**
+   * Checks if the specified message is of type {@link PrometheusMetricReporter#MESSAGE_TYPE_RESPONSE}
+   * and forwards the message to the internal eventbus using the messages id as message and the message
+   * object as argument.
+   *
+   * @protected
+   * @param {*} message
+   * @memberof PrometheusMetricReporter
+   */
+  protected async handleReportResponse (message: any): Promise&lt;void&gt; {
+    if (this.canHandleMessage(message, PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE)) {
+      const response: InterprocessReportResponse &#x3D; message
+      this.internalEventbus.emit(response.id, response)
+    }
+  }
+
+  /**
+   * Ignores common report-messages.
+   *
+   * @protected
+   * @param {cluster.Worker} worker
+   * @param {*} message
+   * @param {*} handle
+   * @returns {Promise&lt;void&gt;}
+   * @memberof PrometheusMetricReporter
+   */
+  protected async handleReportMessage (worker: cluster.Worker, message: any, handle: any): Promise&lt;void&gt; {
+  }
+
+  /**
+   * Called before each reporting run.
+   *
+   * @protected
+   * @memberof MetricReporter
+   */
+  protected async beforeReport (ctx: OverallReportContext): Promise&lt;void&gt; {
+    ctx.result &#x3D; &#x27;&#x27;
+  }
+
+  protected async handleResults (
+    overallCtx: OverallReportContext,
+    registry: MetricRegistry | null,
+    date: Date,
+    type: MetricType,
+    results: Array&lt;ReportingResult&lt;any, PrometheusMetricResult&gt;&gt;): Promise&lt;void&gt; {
+    const lines: string[] &#x3D; []
+    const registryTags &#x3D; registry ? mapToTags(registry.getTags()) : null
+    for (const result of results) {
+      const metric &#x3D; result.metric
+      const ctx &#x3D; result.result
+      const line &#x3D; this.getMetricString(date, metric, ctx.type, ctx.canBeReported, ctx.fields, registryTags)
+      lines.push(line)
+    }
+    overallCtx.result &#x3D; &#x60;${overallCtx.result}${lines.join(&#x27;\n&#x27;)}&#x60;
+  }
+
+  protected reportCounter (
+    counter: MonotoneCounter | Counter,
+    ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): PrometheusMetricResult {
+    if (counter instanceof Counter) {
+      return {
+        canBeReported: true,
+        fields: {
+          &#x27;&#x27;: counter.getCount() || 0
+        },
+        type: this.gaugeType
+      }
+    }
+    return {
+      canBeReported: true,
+      fields: {
+        &#x27;&#x27;: counter.getCount() || 0
+      },
+      type: this.counterType
+    }
+  }
+
+  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): PrometheusMetricResult {
+    return {
+      canBeReported: true,
+      fields: {
+        &#x27;&#x27;: gauge.getValue()
+      },
+      type: this.gaugeType
+    }
+  }
+
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): PrometheusMetricResult {
+    return {
+      canBeReported: !isNaN(histogram.getCount()),
+      fields: {
+        count: histogram.getCount() || 0,
+        sum: histogram.getSum().toString() || 0
+      },
+      type: this.histogramType
+    }
+  }
+
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): PrometheusMetricResult {
+    return {
+      canBeReported: !isNaN(meter.getCount()),
+      fields: {
+        &#x27;&#x27;: meter.getCount() || 0
+      },
+      type: this.gaugeType
+    }
+  }
+
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): PrometheusMetricResult {
+    return {
+      canBeReported: !isNaN(timer.getCount()),
+      fields: {
+        count: timer.getCount() || 0,
+        sum: timer.getSum().toString() || 0
+      },
+      type: this.summaryType
+    }
+  }
+
+  /**
+   * Gets the mapping of tags with normalized names and filtered for reserved tags.
+   *
+   * @protected
+   * @param {Taggable | SerializableMetric} taggable
+   * @param {string[]} exclude
+   * @param {Tags} [registryTags]
+   * @returns {Tags}
+   * @memberof PrometheusMetricReporter
+   */
+  protected buildPrometheusTags (
+    taggable: Taggable | SerializableMetric,
+    exclude: string[],
+    registryTags?: Tags
+  ): Tags {
+    exclude.sort((a: string, b: string) &#x3D;&gt; a.localeCompare(b))
+
+    const tags: { [x: string]: string } &#x3D; {}
+    this.options.tags.forEach((value, key) &#x3D;&gt; {
+      const normalizedKey &#x3D; key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, &#x27;_&#x27;)
+      if (!exclude.includes(normalizedKey) &amp;&amp;
+        !PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.includes(normalizedKey.charAt(0))) {
+        tags[normalizedKey] &#x3D; value
+      }
+    })
+    if (registryTags) {
+      Object.keys(registryTags).forEach((key) &#x3D;&gt; {
+        const value &#x3D; registryTags[key]
+        const normalizedKey &#x3D; key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, &#x27;_&#x27;)
+        if (!exclude.includes(normalizedKey) &amp;&amp;
+          !PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.includes(normalizedKey.charAt(0))) {
+          tags[normalizedKey] &#x3D; value
+        }
+      })
+    }
+    const customTags &#x3D; getMetricTags(taggable)
+    Object.keys(customTags).forEach((key) &#x3D;&gt; {
+      const value &#x3D; customTags[key]
+      const normalizedKey &#x3D; key.replace(PrometheusMetricReporter.LABEL_NAME_REPLACEMENT_REGEXP, &#x27;_&#x27;)
+      if (!exclude.includes(normalizedKey) &amp;&amp;
+        !PrometheusMetricReporter.LABEL_NAME_START_EXCLUSION.includes(normalizedKey.charAt(0))) {
+        tags[normalizedKey] &#x3D; value
+      }
+    })
+    return tags
+  }
+
+  /**
+   * Builds the metric string based on the specified type of the metric instance.
+   * Returns an empty string if the metric can&#x27;t be reported - determined with the
+   * specified function.
+   *
+   * @private
+   * @template T
+   * @param {Date} now
+   * @param {T} metric
+   * @param {PrometheusMetricType} metricType
+   * @param {boolean} canReport
+   * @param {PrometheusFields} fields
+   * @param {Tags} [registryTags]
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getMetricString&lt;T extends Metric | SerializableMetric&gt;(
+    now: Date,
+    metric: T,
+    metricType: PrometheusMetricType,
+    canReport: boolean,
+    fields: PrometheusFields,
+    registryTags?: Tags
+  ): string {
+    if (!canReport) {
+      return &#x27;&#x27;
+    }
+
+    const metricName &#x3D; this.getMetricName(metric)
+    const description &#x3D; this.getDescription(metric, metricName)
+    const timestamp &#x3D; this.getTimestamp(now)
+    const tags &#x3D; this.buildPrometheusTags(metric, [&#x27;le&#x27;, &#x27;quantile&#x27;], registryTags)
+    const tagStr &#x3D; Object
+      .keys(tags)
+      .map((tag) &#x3D;&gt; &#x60;${tag}&#x3D;&quot;${tags[tag]}&quot;&#x60;)
+      .join(&#x27;,&#x27;)
+    let additionalFields &#x3D; &#x27;&#x27;
+
+    if (metricType &#x3D;&#x3D;&#x3D; &#x27;histogram&#x27;) {
+      additionalFields &#x3D; this.getBuckets(metric as any, metricName, fields.count as number, tagStr, timestamp)
+    } else if (metricType &#x3D;&#x3D;&#x3D; &#x27;summary&#x27;) {
+      additionalFields &#x3D; this.getQuantiles(metric as any, metricName, tagStr, timestamp)
+    }
+
+    if (this.options.useUntyped) {
+      metricType &#x3D; &#x27;untyped&#x27;
+    }
+
+    let comments &#x3D; &#x27;&#x27;
+    if (this.options.emitComments) {
+      comments &#x3D; &#x60;# HELP ${metricName} ${description}\n&#x60; +
+        &#x60;# TYPE ${metricName} ${metricType}\n&#x60;
+    }
+
+    return comments + additionalFields + Object
+      .keys(fields)
+      .map((field) &#x3D;&gt; {
+        const fieldStr &#x3D; PrometheusMetricReporter.isEmpty(field) ? &#x27;&#x27; : &#x60;_${field}&#x60;
+        const valueStr &#x3D; this.getValue(fields[field])
+
+        return &#x60;${metricName}${fieldStr}{${tagStr}} ${valueStr}${timestamp}\n&#x60;
+      })
+      .join(&#x27;&#x27;)
+  }
+
+  /**
+   * Builds the description for a metric instance based on the description property.
+   * If no description was specified this function returns &#x27;&lt;metric_name&gt; description&#x27;.
+   *
+   * @private
+   * @template T
+   * @param {T} metric
+   * @param {string} metricName
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getDescription&lt;T extends Metric | SerializableMetric&gt;(metric: T, metricName: string): string {
+    let description &#x3D; getMetricDescription(metric)
+    if (PrometheusMetricReporter.isEmpty(description)) {
+      description &#x3D; &#x60;${metricName} description&#x60;
+    }
+    return description
+  }
+
+  /**
+   * Gets a numeric value in the correct format (mainly used to format +Inf and -Inf)
+   *
+   * @private
+   * @param {*} value
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getValue (value: any): string {
+    let valueStr &#x3D; &#x60;${value}&#x60;
+
+    if (PrometheusMetricReporter.isNumber(value) &amp;&amp; !Number.isFinite(value)) {
+      if (value &#x3D;&#x3D;&#x3D; -Infinity) {
+        valueStr &#x3D; &#x27;-Inf&#x27;
+      } else if (value &#x3D;&#x3D;&#x3D; Infinity) {
+        valueStr &#x3D; &#x27;+Inf&#x27;
+      }
+    }
+
+    return valueStr
+  }
+
+  /**
+   * Gets the UTC timestamp.
+   *
+   * @private
+   * @param {Date} now
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getTimestamp (now: Date): string {
+    return this.options.includeTimestamp ? &#x60; ${now.getUTCMilliseconds()}&#x60; : &#x27;&#x27;
+  }
+
+  /**
+   * Builds the string for bucket data lines.
+   *
+   * @private
+   * @template T
+   * @param {T} metric
+   * @param {string} metricName
+   * @param {number} count
+   * @param {string} tagStr
+   * @param {string} timestamp
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getBuckets&lt;T extends (Metric | SerializableMetric) &amp; (BucketCounting | SerializableBucketCounting)&gt;(
+    metric: T,
+    metricName: string,
+    count: number,
+    tagStr: string,
+    timestamp: string): string {
+    const buckets: Buckets &#x3D; getMetricBuckets(metric)
+    if (buckets) {
+      const tagPrefix &#x3D; !PrometheusMetricReporter.isEmpty(tagStr) ? &#x27;,&#x27; : &#x27;&#x27;
+      const bucketStrings: string[] &#x3D; []
+      const counts: BucketToCountMap &#x3D; getMetricCounts(metric)
+
+      for (const boundary of Object.keys(counts)) {
+        const bucketCount: number &#x3D; counts[boundary as any]
+        bucketStrings.push(
+          &#x60;${metricName}_bucket{${tagStr}${tagPrefix}le&#x3D;&quot;${boundary}&quot;} ${bucketCount}${timestamp}&#x60;
+        )
+      }
+
+      return bucketStrings.join(&#x27;\n&#x27;) +
+        &#x60;\n${metricName}_bucket{${tagStr}${tagPrefix}le&#x3D;&quot;+Inf&quot;} ${count}${timestamp}\n&#x60;
+    }
+
+    return &#x27;&#x27;
+  }
+
+  /**
+   * Builds the string for percentile data lines.
+   *
+   * @private
+   * @template T
+   * @param {T} metric
+   * @param {string} metricName
+   * @param {string} tagStr
+   * @param {string} timestamp
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getQuantiles&lt;T extends (Metric | SerializableMetric) &amp; (Sampling | SerializableSampling)&gt;(
+    metric: T,
+    metricName: string,
+    tagStr: string,
+    timestamp: string): string {
+    const metadata: Metadata &#x3D; getMetricMetadata(metric)
+    let quantiles: Percentiles | null &#x3D; metadata[Percentiles.METADATA_NAME]
+    if (!quantiles) {
+      quantiles &#x3D; new Percentiles()
+    }
+    const tagPrefix &#x3D; !PrometheusMetricReporter.isEmpty(tagStr) ? &#x27;,&#x27; : &#x27;&#x27;
+    const snapshot &#x3D; getSnapshot(metric)
+
+    return quantiles
+      .boundaries
+      .map((boundary) &#x3D;&gt; {
+        const value &#x3D; snapshot.getValue(boundary)
+        return &#x60;${metricName}{${tagStr}${tagPrefix}quantile&#x3D;&quot;${boundary}&quot;} ${value}${timestamp}&#x60;
+      })
+      .join(&#x27;\n&#x27;) + &#x27;\n&#x27;
+  }
+
+  /**
+   * Gets the normalized metric name.
+   *
+   * @private
+   * @param {Metric | SerializableMetric} metric
+   * @returns {string}
+   * @memberof PrometheusMetricReporter
+   */
+  private getMetricName (metric: Metric | SerializableMetric): string {
+    let name &#x3D; getMetricName(metric)
+    const group &#x3D; getMetricGroup(metric)
+    if (group) {
+      name &#x3D; &#x60;${group}:${name}&#x60;
+    }
+
+    name &#x3D; name.replace(PrometheusMetricReporter.METRIC_NAME_REPLACEMENT_REGEXP, &#x27;_&#x27;)
+    if (PrometheusMetricReporter.METRIC_NAME_START_EXCLUSION.includes(name.charAt(0))) {
+      name &#x3D; &#x27;_&#x27; + name.slice(1)
+    }
+    return name
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'PrometheusMetricResult.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

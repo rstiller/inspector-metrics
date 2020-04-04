@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/metric-set.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/metric-set.ts</code>
         </p>
 
             <p class="comment">
@@ -132,7 +132,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="29"
-                            class="link-to-prism">lib/metrics/metric-set.ts:29</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/metric-set.ts:29</a></div>
                 </td>
             </tr>
 
@@ -178,7 +178,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="21"
-                            class="link-to-prism">lib/metrics/metric-set.ts:21</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/metric-set.ts:21</a></div>
                 </td>
             </tr>
 
@@ -207,9 +207,9 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &quot;source-map-support/register&quot;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
-import { Metric } from &quot;./model/metric&quot;;
+import { Metric } from &#x27;./model/metric&#x27;
 
 /**
  * Represents a collection of metric instances as a single metric.
@@ -220,28 +220,29 @@ import { Metric } from &quot;./model/metric&quot;;
  */
 export interface MetricSet extends Metric {
 
-    /**
-     * Gets a mapping from names to metric instances.
-     *
-     * @deprecated since version 1.3 - use {@link getMetricList} instead
-     * @returns {Map&lt;string, Metric&gt;}
-     * @memberof MetricSet
-     */
-    getMetrics(): Map&lt;string, Metric&gt;;
+  /**
+   * Gets a mapping from names to metric instances.
+   *
+   * @deprecated since version 1.3 - use {@link getMetricList} instead
+   * @returns {Map&lt;string, Metric&gt;}
+   * @memberof MetricSet
+   */
+  getMetrics(): Map&lt;string, Metric&gt;
 
-    /**
-     * Gets a list of all {@link Metric} instances.
-     *
-     * @returns {Metric[]}
-     * @memberof MetricSet
-     */
-    getMetricList(): Metric[];
+  /**
+   * Gets a list of all {@link Metric} instances.
+   *
+   * @returns {Metric[]}
+   * @memberof MetricSet
+   */
+  getMetricList(): Metric[]
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -264,6 +265,7 @@ export interface MetricSet extends Metric {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'MetricSet.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

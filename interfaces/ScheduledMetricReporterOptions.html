@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/reporter/scheduled-reporter.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/reporter/scheduled-reporter.ts</code>
         </p>
 
             <p class="comment">
@@ -258,27 +258,27 @@ export type Scheduler &#x3D; (prog: () &#x3D;&gt; Promise&lt;any&gt;, interval: 
  * @extends {MetricReporterOptions}
  */
 export interface ScheduledMetricReporterOptions extends MetricReporterOptions {
-    /**
-     * The reporting interval in the time-unit specified in {@link #unit}.
-     *
-     * @type {number}
-     * @memberof ScheduledMetricReporterOptions
-     */
-    readonly reportInterval?: number;
-    /**
-     * Time unit for the reporting interval.
-     *
-     * @type {TimeUnit}
-     * @memberof ScheduledMetricReporterOptions
-     */
-    readonly unit?: TimeUnit;
-    /**
-     * The scheduler function used to trigger reporting runs.
-     *
-     * @type {Scheduler}
-     * @memberof ScheduledMetricReporterOptions
-     */
-    readonly scheduler?: Scheduler;
+  /**
+   * The reporting interval in the time-unit specified in {@link #unit}.
+   *
+   * @type {number}
+   * @memberof ScheduledMetricReporterOptions
+   */
+  readonly reportInterval?: number;
+  /**
+   * Time unit for the reporting interval.
+   *
+   * @type {TimeUnit}
+   * @memberof ScheduledMetricReporterOptions
+   */
+  readonly unit?: TimeUnit;
+  /**
+   * The scheduler function used to trigger reporting runs.
+   *
+   * @type {Scheduler}
+   * @memberof ScheduledMetricReporterOptions
+   */
+  readonly scheduler?: Scheduler;
 }
 
 /**
@@ -289,59 +289,60 @@ export interface ScheduledMetricReporterOptions extends MetricReporterOptions {
  * @class ScheduledMetricReporter
  */
 export abstract class ScheduledMetricReporter&lt;O extends ScheduledMetricReporterOptions, T&gt;
-    extends MetricReporter&lt;O, T&gt; {
+  extends MetricReporter&lt;O, T&gt; {
 
-    /**
-     * Timer instance returned by the scheduler function.
-     *
-     * @private
-     * @type {NodeJS.Timer}
-     * @memberof ScheduledMetricReporter
-     */
-    private timer: NodeJS.Timer;
+  /**
+   * Timer instance returned by the scheduler function.
+   *
+   * @private
+   * @type {NodeJS.Timer}
+   * @memberof ScheduledMetricReporter
+   */
+  private timer: NodeJS.Timer;
 
-    /**
-     * Creates an instance of ScheduledMetricReporter.
-     *
-     * @param {O} options
-     * @param {string} [reporterType] the type of the reporter implementation - for internal use
-     * @memberof ScheduledMetricReporter
-     */
-    public constructor(options: O, reporterType?: string) {
-        super(options, reporterType);
+  /**
+   * Creates an instance of ScheduledMetricReporter.
+   *
+   * @param {O} options
+   * @param {string} [reporterType] the type of the reporter implementation - for internal use
+   * @memberof ScheduledMetricReporter
+   */
+  public constructor(options: O, reporterType?: string) {
+    super(options, reporterType);
+  }
+
+  /**
+   * Uses the scheduler function to call the {@link #report} function
+   * in the interval specified. The interval is converted into {@link MILLISECOND}s.
+   *
+   * @returns {Promise&lt;this&gt;}
+   * @memberof ScheduledMetricReporter
+   */
+  public async start(): Promise&lt;this&gt; {
+    const interval: number &#x3D; this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
+    this.timer &#x3D; this.options.scheduler(async () &#x3D;&gt; this.report(), interval);
+    return this;
+  }
+
+  /**
+   * Stops reporting metrics.
+   *
+   * @returns {Promise&lt;this&gt;}
+   * @memberof ScheduledMetricReporter
+   */
+  public async stop(): Promise&lt;this&gt; {
+    if (this.timer) {
+        this.timer.unref();
     }
-
-    /**
-     * Uses the scheduler function to call the {@link #report} function
-     * in the interval specified. The interval is converted into {@link MILLISECOND}s.
-     *
-     * @returns {Promise&lt;this&gt;}
-     * @memberof ScheduledMetricReporter
-     */
-    public async start(): Promise&lt;this&gt; {
-        const interval: number &#x3D; this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
-        this.timer &#x3D; this.options.scheduler(async () &#x3D;&gt; this.report(), interval);
-        return this;
-    }
-
-    /**
-     * Stops reporting metrics.
-     *
-     * @returns {Promise&lt;this&gt;}
-     * @memberof ScheduledMetricReporter
-     */
-    public async stop(): Promise&lt;this&gt; {
-        if (this.timer) {
-            this.timer.unref();
-        }
-        return this;
-    }
+    return this;
+  }
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -364,6 +365,7 @@ export abstract class ScheduledMetricReporter&lt;O extends ScheduledMetricReport
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'ScheduledMetricReporterOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

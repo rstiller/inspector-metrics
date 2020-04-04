@@ -1,0 +1,972 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>ElasticsearchMetricReporterOption</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>packages/inspector-elasticsearch/lib/metrics/ElasticsearchMetricReporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Options for <a href="../classes/ElasticsearchMetricReporter.html">ElasticsearchMetricReporter</a>.</p>
+
+            </p>
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="../interfaces/ScheduledMetricReporterOptions.html" target="_self" >ScheduledMetricReporterOptions</a></code>
+            </p>
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#clientOptions">clientOptions</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#indexnameDeterminator">indexnameDeterminator</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#log">log</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#metricDocumentBuilder">metricDocumentBuilder</a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#typeDeterminator">typeDeterminator</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="clientOptions"></a>
+                                        <span class="name"><b>clientOptions</b><a href="#clientOptions"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>clientOptions:     <code>literal type</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>literal type</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Elasticsearch client options.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="indexnameDeterminator"></a>
+                                        <span class="name"><b>indexnameDeterminator</b><a href="#indexnameDeterminator"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>indexnameDeterminator:         <code><a href="../interfaces/Metric.html" target="_self" >MetricInfoDeterminator</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >MetricInfoDeterminator</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Used to get the name of the index.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="log"></a>
+                                        <span class="name"><b>log</b><a href="#log"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>log:         <code><a href="../interfaces/Logger.html" target="_self" >Logger</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Logger.html" target="_self" >Logger</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Logger instance used to report errors.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="metricDocumentBuilder"></a>
+                                        <span class="name"><b>metricDocumentBuilder</b><a href="#metricDocumentBuilder"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>metricDocumentBuilder:         <code><a href="../interfaces/Metric.html" target="_self" >MetricDocumentBuilder</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >MetricDocumentBuilder</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Used to build the document for a metric.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="typeDeterminator"></a>
+                                        <span class="name"><b>typeDeterminator</b><a href="#typeDeterminator"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>typeDeterminator:         <code><a href="../interfaces/Metric.html" target="_self" >MetricInfoDeterminator</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >MetricInfoDeterminator</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Used to get the type of the metric instance.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
+
+import { Client } from &#x27;@elastic/elasticsearch&#x27;
+import {
+  Counter,
+  DefaultClusterOptions,
+  Event,
+  Gauge,
+  Histogram,
+  Logger,
+  Meter,
+  Metric,
+  MetricRegistry,
+  MetricSetReportContext,
+  MetricType,
+  MILLISECOND,
+  MonotoneCounter,
+  OverallReportContext,
+  ReportingResult,
+  ScheduledMetricReporter,
+  ScheduledMetricReporterOptions,
+  StdClock,
+  Tags,
+  Timer
+} from &#x27;inspector-metrics&#x27;
+
+/**
+ * Interface for getting a certain information using the specified metric metadata -
+ * e.g. name of the index, metric type, etc.
+ */
+export type MetricInfoDeterminator &#x3D;
+  (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) &#x3D;&gt; string;
+
+/**
+ * Interface for building a document for a metric.
+ */
+export type MetricDocumentBuilder &#x3D; (
+  registry: MetricRegistry,
+  metric: Metric,
+  type: MetricType,
+  date: Date,
+  tags: Tags) &#x3D;&gt; {};
+
+/**
+ * Options for {@link ElasticsearchMetricReporter}.
+ *
+ * @export
+ * @interface ElasticsearchMetricReporterOption
+ * @extends {ScheduledMetricReporterOptions}
+ */
+export interface ElasticsearchMetricReporterOption extends ScheduledMetricReporterOptions {
+  /**
+   * Elasticsearch client options.
+   *
+   * @memberof ElasticsearchMetricReporterOption
+   */
+  readonly clientOptions: {}
+  /**
+   * Logger instance used to report errors.
+   *
+   * @type {Logger}
+   * @memberof ElasticsearchMetricReporterOption
+   */
+  log?: Logger
+  /**
+   * Used to get the name of the index.
+   *
+   * @type {MetricInfoDeterminator}
+   * @memberof ElasticsearchMetricReporterOption
+   */
+  readonly indexnameDeterminator?: MetricInfoDeterminator
+  /**
+   * Used to get the type of the metric instance.
+   *
+   * @type {MetricInfoDeterminator}
+   * @memberof ElasticsearchMetricReporterOption
+   */
+  readonly typeDeterminator?: MetricInfoDeterminator
+  /**
+   * Used to build the document for a metric.
+   *
+   * @type {MetricDocumentBuilder}
+   * @memberof ElasticsearchMetricReporterOption
+   */
+  readonly metricDocumentBuilder?: MetricDocumentBuilder
+}
+
+/**
+ * A MetricReporter extension used to publish metric values to elasticsearch.
+ *
+ * @export
+ * @class ElasticsearchMetricReporter
+ * @extends {MetricReporter}
+ */
+export class ElasticsearchMetricReporter extends ScheduledMetricReporter&lt;ElasticsearchMetricReporterOption, Array&lt;{}&gt;&gt; {
+  /**
+   * Returns a {@link MetricInfoDeterminator} that returns &#x27;metric&#x27; as type.
+   *
+   * @static
+   * @returns {MetricInfoDeterminator}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static defaultTypeDeterminator (): MetricInfoDeterminator {
+    return (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) &#x3D;&gt; &#x27;metric&#x27;
+  }
+
+  /**
+   * Returns a {@link MetricInfoDeterminator} that returns an indexname like &#x27;&lt;baseName&gt;-yyyy-mm-dd&#x27;.
+   *
+   * @static
+   * @param {string} baseName The
+   * @returns {MetricInfoDeterminator}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static dailyIndex (baseName: string): MetricInfoDeterminator {
+    return (registry: MetricRegistry, metric: Metric, type: MetricType, date: Date) &#x3D;&gt; {
+      const day &#x3D; date.getDate()
+      const dayPrefix: string &#x3D; (day &gt;&#x3D; 10) ? &#x27;&#x27; : &#x27;0&#x27;
+      const month &#x3D; date.getMonth() + 1
+      const monthPrefix: string &#x3D; (month &gt;&#x3D; 10) ? &#x27;&#x27; : &#x27;0&#x27;
+      return &#x60;${baseName}-${date.getFullYear()}-${monthPrefix}${month}-${dayPrefix}${day}&#x60;
+    }
+  }
+
+  /**
+   * Returns a {@link MetricDocumentBuilder} that builds an object for a metric like this:
+   *
+   * {
+   *
+   *  name: ..., // name of metric
+   *
+   *  group: ..., // group of metric
+   *
+   *  timestamp: ..., // timestamp from parameter
+   *
+   *  tags: ..., // combined tags from this reporter and the metric
+   *
+   *  values..., // metric specific values
+   *
+   *  type..., // metric type
+   *
+   * }
+   *
+   * @static
+   * @returns {MetricDocumentBuilder}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static defaultDocumentBuilder (): MetricDocumentBuilder {
+    return (
+      registry: MetricRegistry,
+      metric: Metric,
+      type: MetricType,
+      timestamp: Date,
+      tags: Tags) &#x3D;&gt; {
+      let values &#x3D; null
+
+      if (metric instanceof MonotoneCounter) {
+        values &#x3D; ElasticsearchMetricReporter.getMonotoneCounterValues(metric)
+      } else if (metric instanceof Counter) {
+        values &#x3D; ElasticsearchMetricReporter.getCounterValues(metric)
+      } else if (metric instanceof Histogram) {
+        values &#x3D; ElasticsearchMetricReporter.getHistogramValues(metric)
+      } else if (metric instanceof Meter) {
+        values &#x3D; ElasticsearchMetricReporter.getMeterValues(metric)
+      } else if (metric instanceof Timer) {
+        values &#x3D; ElasticsearchMetricReporter.getTimerValues(metric)
+      } else {
+        values &#x3D; ElasticsearchMetricReporter.getGaugeValue(metric as Gauge&lt;any&gt;)
+      }
+
+      if (values &#x3D;&#x3D;&#x3D; null) {
+        return null
+      }
+
+      const name &#x3D; metric.getName()
+      const group &#x3D; metric.getGroup()
+      return { name, group, tags, timestamp, values, type }
+    }
+  }
+
+  /**
+   * Gets the values for the specified monotone counter metric.
+   *
+   * @static
+   * @param {MonotoneCounter} counter
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getMonotoneCounterValues (counter: MonotoneCounter): {} {
+    const count &#x3D; counter.getCount()
+    if (!count || isNaN(count)) {
+      return null
+    }
+    return { count }
+  }
+
+  /**
+   * Gets the values for the specified counter metric.
+   *
+   * @static
+   * @param {Counter} counter
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getCounterValues (counter: Counter): {} {
+    const count &#x3D; counter.getCount()
+    if (!count || isNaN(count)) {
+      return null
+    }
+    return { count }
+  }
+
+  /**
+   * Gets the values for the specified {Gauge} metric.
+   *
+   * @static
+   * @param {Gauge&lt;any&gt;} gauge
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getGaugeValue (gauge: Gauge&lt;any&gt;): {} {
+    const value &#x3D; gauge.getValue()
+    if ((!value &amp;&amp; value !&#x3D;&#x3D; 0) || Number.isNaN(value)) {
+      return null
+    }
+    if (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27;) {
+      return value
+    }
+    return { value }
+  }
+
+  /**
+   * Gets the values for the specified {Histogram} metric.
+   *
+   * @static
+   * @param {Histogram} histogram
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getHistogramValues (histogram: Histogram): {} {
+    const value &#x3D; histogram.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; histogram.getSnapshot()
+    const values: any &#x3D; {}
+
+    values.count &#x3D; value
+    values.max &#x3D; this.getNumber(snapshot.getMax())
+    values.mean &#x3D; this.getNumber(snapshot.getMean())
+    values.min &#x3D; this.getNumber(snapshot.getMin())
+    values.p50 &#x3D; this.getNumber(snapshot.getMedian())
+    values.p75 &#x3D; this.getNumber(snapshot.get75thPercentile())
+    values.p95 &#x3D; this.getNumber(snapshot.get95thPercentile())
+    values.p98 &#x3D; this.getNumber(snapshot.get98thPercentile())
+    values.p99 &#x3D; this.getNumber(snapshot.get99thPercentile())
+    values.p999 &#x3D; this.getNumber(snapshot.get999thPercentile())
+    values.stddev &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return values
+  }
+
+  /**
+   * Gets the values for the specified {Meter} metric.
+   *
+   * @static
+   * @param {Meter} meter
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getMeterValues (meter: Meter): {} {
+    const value &#x3D; meter.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const values: any &#x3D; {}
+
+    values.count &#x3D; value
+    values.m15_rate &#x3D; this.getNumber(meter.get15MinuteRate())
+    values.m1_rate &#x3D; this.getNumber(meter.get1MinuteRate())
+    values.m5_rate &#x3D; this.getNumber(meter.get5MinuteRate())
+    values.mean_rate &#x3D; this.getNumber(meter.getMeanRate())
+
+    return values
+  }
+
+  /**
+   * Gets the values for the specified {Timer} metric.
+   *
+   * @static
+   * @param {Timer} timer
+   * @returns {{}}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public static getTimerValues (timer: Timer): {} {
+    const value &#x3D; timer.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; timer.getSnapshot()
+    const values: any &#x3D; {}
+
+    values.count &#x3D; value
+    values.m15_rate &#x3D; this.getNumber(timer.get15MinuteRate())
+    values.m1_rate &#x3D; this.getNumber(timer.get1MinuteRate())
+    values.m5_rate &#x3D; this.getNumber(timer.get5MinuteRate())
+    values.max &#x3D; this.getNumber(snapshot.getMax())
+    values.mean &#x3D; this.getNumber(snapshot.getMean())
+    values.mean_rate &#x3D; this.getNumber(timer.getMeanRate())
+    values.min &#x3D; this.getNumber(snapshot.getMin())
+    values.p50 &#x3D; this.getNumber(snapshot.getMedian())
+    values.p75 &#x3D; this.getNumber(snapshot.get75thPercentile())
+    values.p95 &#x3D; this.getNumber(snapshot.get95thPercentile())
+    values.p98 &#x3D; this.getNumber(snapshot.get98thPercentile())
+    values.p99 &#x3D; this.getNumber(snapshot.get99thPercentile())
+    values.p999 &#x3D; this.getNumber(snapshot.get999thPercentile())
+    values.stddev &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return values
+  }
+
+  /**
+   * Either gets 0 or the specified value.
+   *
+   * @private
+   * @param {number} value
+   * @returns {number}
+   * @memberof ElasticsearchMetricReporter
+   */
+  private static getNumber (value: number): number {
+    if (isNaN(value)) {
+      return 0
+    }
+    return value
+  }
+
+  /**
+   * Metadata for the logger.
+   *
+   * @private
+   * @type {*}
+   * @memberof ElasticsearchMetricReporter
+   */
+  private readonly logMetadata: any;
+  /**
+   * Elasticsearch client used to do reporting.
+   *
+   * @private
+   * @type {Client}
+   * @memberof ElasticsearchMetricReporter
+   */
+  private readonly client: Client;
+
+  /**
+   * Creates an instance of ElasticsearchMetricReporter.
+   *
+   * @param {string} [reporterType] the type of the reporter implementation - for internal use
+   */
+  public constructor (
+    {
+      clientOptions,
+      metricDocumentBuilder &#x3D; ElasticsearchMetricReporter.defaultDocumentBuilder(),
+      indexnameDeterminator &#x3D; ElasticsearchMetricReporter.dailyIndex(&#x27;metric&#x27;),
+      typeDeterminator &#x3D; ElasticsearchMetricReporter.defaultTypeDeterminator(),
+      log &#x3D; console,
+      reportInterval &#x3D; 1000,
+      unit &#x3D; MILLISECOND,
+      clock &#x3D; new StdClock(),
+      scheduler &#x3D; setInterval,
+      minReportingTimeout &#x3D; 1,
+      tags &#x3D; new Map(),
+      clusterOptions &#x3D; new DefaultClusterOptions()
+    }: ElasticsearchMetricReporterOption,
+    reporterType?: string) {
+    super({
+      clientOptions,
+      clock,
+      clusterOptions,
+      indexnameDeterminator,
+      log,
+      metricDocumentBuilder,
+      minReportingTimeout,
+      reportInterval,
+      scheduler,
+      tags,
+      typeDeterminator,
+      unit
+    }, reporterType)
+
+    this.logMetadata &#x3D; {
+      reportInterval,
+      tags,
+      unit
+    }
+
+    this.client &#x3D; new Client(clientOptions)
+  }
+
+  /**
+   * Gets the logger instance.
+   *
+   * @returns {Logger}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public getLog (): Logger {
+    return this.options.log
+  }
+
+  /**
+   * Sets the logger instance.
+   *
+   * @param {Logger} log
+   * @memberof ElasticsearchMetricReporter
+   */
+  public setLog (log: Logger): void {
+    this.options.log &#x3D; log
+  }
+
+  /**
+   * Reports an {@link Event}.
+   *
+   * @param {TEvent} event
+   * @returns {Promise&lt;TEvent&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
+    const result &#x3D; this.reportGauge(event, {
+      date: event.getTime(),
+      metrics: [],
+      overallCtx: null,
+      registry: null,
+      type: &#x27;gauge&#x27;
+    })
+
+    if (result) {
+      await this.handleResults(null, null, event.getTime(), &#x27;gauge&#x27;, [{
+        metric: event,
+        result
+      }])
+    }
+
+    return event
+  }
+
+  /**
+   * Does nothing
+   *
+   * @returns {Promise&lt;void&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  public async flushEvents (): Promise&lt;void&gt; {
+  }
+
+  /**
+   * Send the combinations of index and document to the elasticsearch cluster
+   * using the bulk method of the elasticsearch client.
+   *
+   * @protected
+   * @param {MetricRegistry | null} registry
+   * @param {Date} date
+   * @param {MetricType} type
+   * @param {Array&lt;ReportingResult&lt;any, any[]&gt;&gt;} results
+   * @returns {Promise&lt;void&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected async handleResults (
+    ctx: OverallReportContext,
+    registry: MetricRegistry | null,
+    date: Date,
+    type: MetricType,
+    results: Array&lt;ReportingResult&lt;any, any[]&gt;&gt;): Promise&lt;void&gt; {
+    const body &#x3D; results
+      .map((result) &#x3D;&gt; result.result)
+      .reduce((p, c) &#x3D;&gt; p.concat(c), [])
+
+    if (!body || body.length &#x3D;&#x3D;&#x3D; 0) {
+      return await Promise.resolve()
+    }
+
+    try {
+      const response &#x3D; await this.client.bulk({ body })
+      if (this.options.log) {
+        const warnings &#x3D; response.warnings
+        this.options.log.debug(
+          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+          &#x60;wrote ${type} metrics - warnings ${warnings}&#x60;,
+          this.logMetadata
+        )
+      }
+    } catch (reason) {
+      if (this.options.log) {
+        const message &#x3D; reason.message as string
+        this.options.log
+          .error(&#x60;error writing ${type} metrics - reason: ${message}&#x60;, reason, this.logMetadata)
+      }
+    }
+  }
+
+  /**
+   * Generalized reporting method of all types of metric instances.
+   * Builds the index configuration document and the metric document.
+   *
+   * @protected
+   * @param {Metric} metric
+   * @param {ReportingContext&lt;Metric&gt;} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportMetric (
+    metric: Metric, ctx: MetricSetReportContext&lt;Metric&gt;): Array&lt;{}&gt; {
+    const document &#x3D; this.options.metricDocumentBuilder(
+      ctx.registry, metric, ctx.type, ctx.date, this.buildTags(ctx.registry, metric))
+    if (document) {
+      const _index &#x3D; this.options.indexnameDeterminator(ctx.registry, metric, ctx.type, ctx.date)
+      const _type &#x3D; this.options.typeDeterminator(ctx.registry, metric, ctx.type, ctx.date)
+      return [
+        { index: { _index, _type } },
+        document
+      ]
+    }
+    return []
+  }
+
+  /**
+   * Calls {@link #reportMetric} with the specified arguments.
+   *
+   * @protected
+   * @param {(MonotoneCounter | Counter)} counter
+   * @param {(ReportingContext&lt;MonotoneCounter | Counter&gt;)} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportCounter (
+    counter: MonotoneCounter | Counter, ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): Array&lt;{}&gt; {
+    return this.reportMetric(counter, ctx)
+  }
+
+  /**
+   * Calls {@link #reportMetric} with the specified arguments.
+   *
+   * @protected
+   * @param {Gauge&lt;any&gt;} gauge
+   * @param {ReportingContext&lt;Gauge&lt;any&gt;&gt;} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): Array&lt;{}&gt; {
+    return this.reportMetric(gauge, ctx)
+  }
+
+  /**
+   * Calls {@link #reportMetric} with the specified arguments.
+   *
+   * @protected
+   * @param {Histogram} histogram
+   * @param {ReportingContext&lt;Histogram&gt;} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): Array&lt;{}&gt; {
+    return this.reportMetric(histogram, ctx)
+  }
+
+  /**
+   * Calls {@link #reportMetric} with the specified arguments.
+   *
+   * @protected
+   * @param {Meter} meter
+   * @param {ReportingContext&lt;Meter&gt;} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): Array&lt;{}&gt; {
+    return this.reportMetric(meter, ctx)
+  }
+
+  /**
+   * Calls {@link #reportMetric} with the specified arguments.
+   *
+   * @protected
+   * @param {Timer} timer
+   * @param {ReportingContext&lt;Timer&gt;} ctx
+   * @returns {Array&lt;{}&gt;}
+   * @memberof ElasticsearchMetricReporter
+   */
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): Array&lt;{}&gt; {
+    return this.reportMetric(timer, ctx)
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ElasticsearchMetricReporterOption.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

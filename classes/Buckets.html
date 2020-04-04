@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/counting.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/counting.ts</code>
         </p>
 
             <p class="comment">
@@ -139,7 +139,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">lib/metrics/model/counting.ts:88</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">packages/inspector-metrics/lib/metrics/model/counting.ts:88</a></div>
                             </td>
                         </tr>
 
@@ -211,7 +211,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">lib/metrics/model/counting.ts:97</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">packages/inspector-metrics/lib/metrics/model/counting.ts:97</a></div>
                             </td>
                         </tr>
 
@@ -250,7 +250,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="67"
-                            class="link-to-prism">lib/metrics/model/counting.ts:67</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/counting.ts:67</a></div>
                 </td>
             </tr>
 
@@ -370,7 +370,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">lib/metrics/model/counting.ts:43</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/counting.ts:43</a></div>
                 </td>
             </tr>
 
@@ -488,13 +488,13 @@ import { Metric, SerializableMetric } from &quot;./metric&quot;;
  */
 export interface Counting extends Metric {
 
-    /**
-     * Gets the current count - e.g. the number of samples in Histogram or the value of a counter.
-     *
-     * @returns {number}
-     * @memberof Counting
-     */
-    getCount(): number;
+  /**
+   * Gets the current count - e.g. the number of samples in Histogram or the value of a counter.
+   *
+   * @returns {number}
+   * @memberof Counting
+   */
+  getCount(): number;
 
 }
 
@@ -506,75 +506,75 @@ export interface Counting extends Metric {
  */
 export class Buckets {
 
-    /**
-     * Creates a new Buckets object with linear-distributed values.
-     *
-     * @static
-     * @param {number} start
-     * @param {number} bucketWidth
-     * @param {number} count
-     * @param {number} [precision&#x3D;10000]
-     * @returns {Buckets}
-     * @memberof Buckets
-     */
-    public static linear(start: number, bucketWidth: number, count: number, precision &#x3D; 10000): Buckets {
-        const boundaries &#x3D; new Array(count);
-        const buckets &#x3D; new Buckets(boundaries);
-        for (let i &#x3D; 0; i &lt; count; i++) {
-            buckets.boundaries[i] &#x3D; start;
-            buckets.boundaries[i] *&#x3D; precision;
-            buckets.boundaries[i] &#x3D; Math.floor(buckets.boundaries[i]);
-            buckets.boundaries[i] /&#x3D; precision;
-            start +&#x3D; bucketWidth;
-        }
-        return buckets;
+  /**
+   * Creates a new Buckets object with linear-distributed values.
+   *
+   * @static
+   * @param {number} start
+   * @param {number} bucketWidth
+   * @param {number} count
+   * @param {number} [precision&#x3D;10000]
+   * @returns {Buckets}
+   * @memberof Buckets
+   */
+  public static linear(start: number, bucketWidth: number, count: number, precision &#x3D; 10000): Buckets {
+    const boundaries &#x3D; new Array(count);
+    const buckets &#x3D; new Buckets(boundaries);
+    for (let i &#x3D; 0; i &lt; count; i++) {
+      buckets.boundaries[i] &#x3D; start;
+      buckets.boundaries[i] *&#x3D; precision;
+      buckets.boundaries[i] &#x3D; Math.floor(buckets.boundaries[i]);
+      buckets.boundaries[i] /&#x3D; precision;
+      start +&#x3D; bucketWidth;
+    }
+    return buckets;
+  }
+
+  /**
+   * Creates a new Buckets object with exponentially distributed values.
+   *
+   * @static
+   * @param {number} initial
+   * @param {number} factor
+   * @param {number} count
+   * @param {number} [precision&#x3D;10000]
+   * @returns {Buckets}
+   * @memberof Buckets
+   */
+  public static exponential(initial: number, factor: number, count: number, precision &#x3D; 10000): Buckets {
+    if (initial &lt;&#x3D; 0.0) {
+      throw new Error(&quot;initial values needs to be greater than 0.0&quot;);
+    }
+    if (count &lt; 1.0) {
+      throw new Error(&quot;count needs to be at least 1&quot;);
+    }
+    if (factor &lt;&#x3D; 1.0) {
+      throw new Error(&quot;factor needs to be greater than 1.0&quot;);
     }
 
-    /**
-     * Creates a new Buckets object with exponentially distributed values.
-     *
-     * @static
-     * @param {number} initial
-     * @param {number} factor
-     * @param {number} count
-     * @param {number} [precision&#x3D;10000]
-     * @returns {Buckets}
-     * @memberof Buckets
-     */
-    public static exponential(initial: number, factor: number, count: number, precision &#x3D; 10000): Buckets {
-        if (initial &lt;&#x3D; 0.0) {
-            throw new Error(&quot;initial values needs to be greater than 0.0&quot;);
-        }
-        if (count &lt; 1.0) {
-            throw new Error(&quot;count needs to be at least 1&quot;);
-        }
-        if (factor &lt;&#x3D; 1.0) {
-            throw new Error(&quot;factor needs to be greater than 1.0&quot;);
-        }
-
-        const boundaries &#x3D; new Array(count);
-        const buckets &#x3D; new Buckets(boundaries);
-        buckets.boundaries[0] &#x3D; initial;
-        for (let i &#x3D; 1; i &lt; count; i++) {
-            buckets.boundaries[i] &#x3D; buckets.boundaries[i - 1] * factor;
-            buckets.boundaries[i] *&#x3D; precision;
-            buckets.boundaries[i] &#x3D; Math.floor(buckets.boundaries[i]);
-            buckets.boundaries[i] /&#x3D; precision;
-        }
-        return buckets;
+    const boundaries &#x3D; new Array(count);
+    const buckets &#x3D; new Buckets(boundaries);
+    buckets.boundaries[0] &#x3D; initial;
+    for (let i &#x3D; 1; i &lt; count; i++) {
+      buckets.boundaries[i] &#x3D; buckets.boundaries[i - 1] * factor;
+      buckets.boundaries[i] *&#x3D; precision;
+      buckets.boundaries[i] &#x3D; Math.floor(buckets.boundaries[i]);
+      buckets.boundaries[i] /&#x3D; precision;
     }
+    return buckets;
+  }
 
-    /**
-     * Creates an instance of Buckets.
-     *
-     * @param {number[]} [boundaries&#x3D;[0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]]
-     * @memberof Buckets
-     */
-    constructor(
-        public readonly boundaries: number[] &#x3D; [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
-    ) {
-        boundaries.sort((a: number, b: number) &#x3D;&gt; a - b);
-    }
+  /**
+   * Creates an instance of Buckets.
+   *
+   * @param {number[]} [boundaries&#x3D;[0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10]]
+   * @memberof Buckets
+   */
+  constructor(
+    public readonly boundaries: number[] &#x3D; [0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1, 2.5, 5, 10],
+  ) {
+    boundaries.sort((a: number, b: number) &#x3D;&gt; a - b);
+  }
 
 }
 
@@ -588,23 +588,23 @@ export class Buckets {
  */
 export interface BucketCounting extends Metric {
 
-    /**
-     * Gets the current Buckets object used to do the counting.
-     *
-     * @returns {Buckets}
-     * @memberof BucketCounting
-     */
-    getBuckets(): Buckets;
+  /**
+   * Gets the current Buckets object used to do the counting.
+   *
+   * @returns {Buckets}
+   * @memberof BucketCounting
+   */
+  getBuckets(): Buckets;
 
-    /**
-     * Gets a mapping from the boundary to the count of events
-     * within the corresponding boundary.
-     * The meaning of the count is implementation specific.
-     *
-     * @returns {Map&lt;number, number&gt;}
-     * @memberof BucketCounting
-     */
-    getCounts(): Map&lt;number, number&gt;;
+  /**
+   * Gets a mapping from the boundary to the count of events
+   * within the corresponding boundary.
+   * The meaning of the count is implementation specific.
+   *
+   * @returns {Map&lt;number, number&gt;}
+   * @memberof BucketCounting
+   */
+  getCounts(): Map&lt;number, number&gt;;
 
 }
 
@@ -612,7 +612,7 @@ export interface BucketCounting extends Metric {
  * Helper interface for serialized bucket counts.
  */
 export interface BucketToCountMap {
-    [bucket: number]: number;
+  [bucket: number]: number;
 }
 
 /**
@@ -624,22 +624,22 @@ export interface BucketToCountMap {
  */
 export interface SerializableBucketCounting extends SerializableMetric {
 
-    /**
-     * The boundaries used to do the counting.
-     *
-     * @returns {number[]}
-     * @memberof SerializableBucketCounting
-     */
-    buckets: number[];
+  /**
+   * The boundaries used to do the counting.
+   *
+   * @returns {number[]}
+   * @memberof SerializableBucketCounting
+   */
+  buckets: number[];
 
-    /**
-     * Mapping: boundary to the count of events within boundary.
-     * The meaning of the count is implementation specific.
-     *
-     * @returns {BucketToCountMap}
-     * @memberof SerializableBucketCounting
-     */
-    counts: BucketToCountMap;
+  /**
+   * Mapping: boundary to the count of events within boundary.
+   * The meaning of the count is implementation specific.
+   *
+   * @returns {BucketToCountMap}
+   * @memberof SerializableBucketCounting
+   */
+  counts: BucketToCountMap;
 
 }
 
@@ -651,13 +651,13 @@ export interface SerializableBucketCounting extends SerializableMetric {
  * @returns {metric is SerializableBucketCounting}
  */
 export function isSerializableBucketCounting(
-    metric: BucketCounting | SerializableBucketCounting): metric is SerializableBucketCounting {
-    const anyMetric: any &#x3D; metric as any;
-    if ((anyMetric.getBuckets &amp;&amp; typeof anyMetric.getBuckets &#x3D;&#x3D;&#x3D; &quot;function&quot;) ||
-        (anyMetric.getCounts &amp;&amp; typeof anyMetric.getCounts &#x3D;&#x3D;&#x3D; &quot;function&quot;)) {
-        return false;
-    }
-    return Array.isArray(anyMetric.buckets);
+  metric: BucketCounting | SerializableBucketCounting): metric is SerializableBucketCounting {
+  const anyMetric: any &#x3D; metric as any;
+  if ((anyMetric.getBuckets &amp;&amp; typeof anyMetric.getBuckets &#x3D;&#x3D;&#x3D; &quot;function&quot;) ||
+    (anyMetric.getCounts &amp;&amp; typeof anyMetric.getCounts &#x3D;&#x3D;&#x3D; &quot;function&quot;)) {
+    return false;
+  }
+  return Array.isArray(anyMetric.buckets);
 }
 
 /**
@@ -669,11 +669,11 @@ export function isSerializableBucketCounting(
  * @returns {Buckets}
  */
 export function getMetricBuckets(metric: BucketCounting | SerializableBucketCounting): Buckets {
-    if (isSerializableBucketCounting(metric)) {
-        return new Buckets(metric.buckets);
-    } else {
-        return metric.getBuckets();
-    }
+  if (isSerializableBucketCounting(metric)) {
+    return new Buckets(metric.buckets);
+  } else {
+    return metric.getBuckets();
+  }
 }
 
 /**
@@ -685,15 +685,15 @@ export function getMetricBuckets(metric: BucketCounting | SerializableBucketCoun
  * @returns {BucketToCountMap}
  */
 export function getMetricCounts(metric: BucketCounting | SerializableBucketCounting): BucketToCountMap {
-    if (isSerializableBucketCounting(metric)) {
-        return metric.counts;
-    } else {
-        const counts: BucketToCountMap &#x3D; {};
-        for (const [bucket, count] of metric.getCounts()) {
-            counts[bucket] &#x3D; count;
-        }
-        return counts;
+  if (isSerializableBucketCounting(metric)) {
+    return metric.counts;
+  } else {
+    const counts: BucketToCountMap &#x3D; {};
+    for (const [bucket, count] of metric.getCounts()) {
+      counts[bucket] &#x3D; count;
     }
+    return counts;
+  }
 }
 </code></pre>
     </div>
@@ -701,6 +701,7 @@ export function getMetricCounts(metric: BucketCounting | SerializableBucketCount
 
 
 
+                   
 
 
 
@@ -723,6 +724,7 @@ export function getMetricCounts(metric: BucketCounting | SerializableBucketCount
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'Buckets.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

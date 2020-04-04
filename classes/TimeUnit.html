@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -60,7 +60,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/time-unit.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/time-unit.ts</code>
         </p>
 
             <p class="comment">
@@ -139,7 +139,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">lib/metrics/model/time-unit.ts:18</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">packages/inspector-metrics/lib/metrics/model/time-unit.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -205,7 +205,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">lib/metrics/model/time-unit.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">packages/inspector-metrics/lib/metrics/model/time-unit.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -250,7 +250,7 @@
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="53"
-                            class="link-to-prism">lib/metrics/model/time-unit.ts:53</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/time-unit.ts:53</a></div>
                 </td>
             </tr>
 
@@ -339,7 +339,7 @@ MICROSECOND.convertTo(1000, NANOSECOND) equals 1000000 nanoseconds.</p>
             <tr>
                 <td class="col-md-4">
                     <div class="io-line">Defined in <a href="" data-line="36"
-                            class="link-to-prism">lib/metrics/model/time-unit.ts:36</a></div>
+                            class="link-to-prism">packages/inspector-metrics/lib/metrics/model/time-unit.ts:36</a></div>
                 </td>
             </tr>
 
@@ -382,51 +382,51 @@ MICROSECOND.convertTo(1000, NANOSECOND) equals 1000000 nanoseconds.</p>
  */
 export class TimeUnit {
 
-    /**
-     * The nanoseconds for one unit of this time unit.
-     *
-     * @private
-     * @type {number}
-     * @memberof TimeUnit
-     */
-    private nanosecondsPerUnit: number;
+  /**
+   * The nanoseconds for one unit of this time unit.
+   *
+   * @private
+   * @type {number}
+   * @memberof TimeUnit
+   */
+  private nanosecondsPerUnit: number;
 
-    /**
-     * Creates an instance of TimeUnit.
-     *
-     * @param {number} nanosecondsPerUnit
-     * @memberof TimeUnit
-     */
-    public constructor(nanosecondsPerUnit: number) {
-        this.nanosecondsPerUnit &#x3D; nanosecondsPerUnit;
-    }
+  /**
+   * Creates an instance of TimeUnit.
+   *
+   * @param {number} nanosecondsPerUnit
+   * @memberof TimeUnit
+   */
+  public constructor(nanosecondsPerUnit: number) {
+    this.nanosecondsPerUnit &#x3D; nanosecondsPerUnit;
+  }
 
-    /**
-     * Gets the nanoseconds in one unit of this time unit.
-     *
-     * @returns {number}
-     * @memberof TimeUnit
-     */
-    public getNanosecondsPerUnit(): number {
-        return this.nanosecondsPerUnit;
-    }
+  /**
+   * Gets the nanoseconds in one unit of this time unit.
+   *
+   * @returns {number}
+   * @memberof TimeUnit
+   */
+  public getNanosecondsPerUnit(): number {
+    return this.nanosecondsPerUnit;
+  }
 
-    /**
-     * Converts the given value to the time unit specified.
-     *
-     * E.g.:
-     *
-     * NANOSECOND.convertTo(1000, MICROSECOND) equals 1 microsecond.
-     * MICROSECOND.convertTo(1000, NANOSECOND) equals 1000000 nanoseconds.
-     *
-     * @param {number} value
-     * @param {TimeUnit} unit
-     * @returns {number}
-     * @memberof TimeUnit
-     */
-    public convertTo(value: number, unit: TimeUnit): number {
-        return (value * this.nanosecondsPerUnit) / unit.nanosecondsPerUnit;
-    }
+  /**
+   * Converts the given value to the time unit specified.
+   *
+   * E.g.:
+   *
+   * NANOSECOND.convertTo(1000, MICROSECOND) equals 1 microsecond.
+   * MICROSECOND.convertTo(1000, NANOSECOND) equals 1000000 nanoseconds.
+   *
+   * @param {number} value
+   * @param {TimeUnit} unit
+   * @returns {number}
+   * @memberof TimeUnit
+   */
+  public convertTo(value: number, unit: TimeUnit): number {
+    return (value * this.nanosecondsPerUnit) / unit.nanosecondsPerUnit;
+  }
 
 }
 
@@ -464,6 +464,7 @@ export const DAY &#x3D; new TimeUnit(86400000000000);
 
 
 
+                   
 
 
 
@@ -486,6 +487,7 @@ export const DAY &#x3D; new TimeUnit(86400000000000);
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
             var COMPODOC_CURRENT_PAGE_URL = 'TimeUnit.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

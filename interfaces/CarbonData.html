@@ -1,0 +1,696 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>monorepo documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">monorepo documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>CarbonData</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>packages/inspector-carbon/lib/metrics/CarbonMetricReporter.ts</code>
+        </p>
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Helper interface for representing the result of a metric report.</p>
+
+            </p>
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#measurement">measurement</a>
+                                </li>
+                                <li>
+                                        <a href="#tags">tags</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="measurement"></a>
+                                        <span class="name"><b>measurement</b><a href="#measurement"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>measurement:         <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Document that is getting sent to the carbon / graphite server.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="tags"></a>
+                                        <span class="name"><b>tags</b><a href="#tags"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>tags:         <code><a href="../interfaces/Tags.html" target="_self" >Tags</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../interfaces/Tags.html" target="_self" >Tags</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Combined tags for the metric.</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
+
+import {
+  Counter,
+  DefaultClusterOptions,
+  Event,
+  Gauge,
+  Histogram,
+  Logger,
+  Meter,
+  Metric,
+  MetricRegistry,
+  MetricSetReportContext,
+  MetricType,
+  MILLISECOND,
+  MonotoneCounter,
+  OverallReportContext,
+  ReportingResult,
+  ScheduledMetricReporter,
+  ScheduledMetricReporterOptions,
+  StdClock,
+  Tags,
+  Timer
+} from &#x27;inspector-metrics&#x27;
+
+/**
+ * Graphite / carbon client module.
+ */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const graphite &#x3D; require(&#x27;graphite&#x27;)
+
+/**
+ * Extending standard options with &#x60;host&#x60; and &#x60;log&#x60; properties.
+ *
+ * @export
+ * @interface CarbonMetricReporterOptions
+ * @extends {ScheduledMetricReporterOptions}
+ */
+export interface CarbonMetricReporterOptions extends ScheduledMetricReporterOptions {
+  /**
+   * The graphite / carbon host.
+   *
+   * @type {string}
+   * @memberof CarbonMetricReporterOptions
+   */
+  readonly host: string
+  /**
+   * Minimal logger interface to report failures.
+   *
+   * @type {Logger}
+   * @memberof CarbonMetricReporterOptions
+   */
+  log: Logger
+}
+
+/**
+ * Helper interface for representing the result of a metric report.
+ *
+ * @export
+ * @interface CarbonData
+ */
+export interface CarbonData {
+  /**
+   * Document that is getting sent to the carbon / graphite server.
+   *
+   * @type {*}
+   * @memberof CarbonData
+   */
+  measurement: any
+  /**
+   * Combined tags for the metric.
+   *
+   * @type {Tags}
+   * @memberof CarbonData
+   */
+  tags: Tags
+}
+
+/**
+ * Metric reporter for graphite / carbon.
+ *
+ * @export
+ * @class CarbonMetricReporter
+ * @extends {ScheduledMetricReporter&lt;CarbonMetricReporterOptions, CarbonData&gt;}
+ */
+export class CarbonMetricReporter extends ScheduledMetricReporter&lt;CarbonMetricReporterOptions, CarbonData&gt; {
+  /**
+   * Metadata for the logger.
+   *
+   * @private
+   * @type {*}
+   * @memberof CarbonMetricReporter
+   */
+  private readonly logMetadata: any;
+  /**
+   * Graphite / carbon client instance.
+   *
+   * @private
+   * @type {*}
+   * @memberof CarbonMetricReporter
+   */
+  private client: any;
+
+  /**
+   * Creates an instance of CarbonMetricReporter.
+   *
+   * @param {string} [reporterType] the type of the reporter implementation - for internal use
+   * @memberof CarbonMetricReporter
+   */
+  public constructor ({
+    host,
+    log &#x3D; console,
+    reportInterval &#x3D; 1000,
+    unit &#x3D; MILLISECOND,
+    clock &#x3D; new StdClock(),
+    scheduler &#x3D; setInterval,
+    minReportingTimeout &#x3D; 1,
+    tags &#x3D; new Map(),
+    clusterOptions &#x3D; new DefaultClusterOptions()
+  }: CarbonMetricReporterOptions,
+  reporterType?: string) {
+    super({
+      clock,
+      clusterOptions,
+      host,
+      log,
+      minReportingTimeout,
+      reportInterval,
+      scheduler,
+      tags,
+      unit
+    }, reporterType)
+
+    this.logMetadata &#x3D; {
+      reportInterval,
+      tags,
+      unit
+    }
+  }
+
+  /**
+   * Gets the logger instance.
+   *
+   * @returns {Logger}
+   * @memberof CarbonMetricReporter
+   */
+  public getLog (): Logger {
+    return this.options.log
+  }
+
+  /**
+   * Sets the logger instance.
+   *
+   * @param {Logger} log
+   * @memberof CarbonMetricReporter
+   */
+  public setLog (log: Logger): void {
+    this.options.log &#x3D; log
+  }
+
+  /**
+   * Reports an {@link Event}.
+   *
+   * @template TEventData
+   * @template TEvent
+   * @param {TEvent} event
+   * @returns {Promise&lt;TEvent&gt;}
+   * @memberof CarbonMetricReporter
+   */
+  public async reportEvent&lt;TEventData, TEvent extends Event&lt;TEventData&gt;&gt;(event: TEvent): Promise&lt;TEvent&gt; {
+    const result &#x3D; this.reportGauge(event, {
+      date: event.getTime(),
+      metrics: [],
+      overallCtx: null,
+      registry: null,
+      type: &#x27;gauge&#x27;
+    })
+
+    if (result) {
+      await this.handleResults(
+        this.createOverallReportContext(),
+        null,
+        event.getTime(),
+        &#x27;gauge&#x27;,
+        [{
+          metric: event,
+          result
+        }]
+      )
+    }
+
+    return event
+  }
+
+  /**
+   * Does nothing
+   *
+   * @returns {Promise&lt;void&gt;}
+   * @memberof CarbonMetricReporter
+   */
+  public async flushEvents (): Promise&lt;void&gt; {
+  }
+
+  /**
+   * Uses the scheduler function to trigger periodical reporting.
+   *
+   * @returns {Promise&lt;this&gt;}
+   * @memberof CarbonMetricReporter
+   */
+  public async start (): Promise&lt;this&gt; {
+    this.client &#x3D; graphite.createClient(this.options.host)
+    return await super.start()
+  }
+
+  /**
+   * Stops the timer reference returned by the scheduler function.
+   *
+   * @returns {Promise&lt;this&gt;}
+   * @memberof CarbonMetricReporter
+   */
+  public async stop (): Promise&lt;this&gt; {
+    await super.stop()
+    if (this.client) {
+      await this.client.end()
+    }
+    return this
+  }
+
+  /**
+   * Uses the client instance to report the given metric results.
+   *
+   * @protected
+   * @param {OverallReportContext} ctx
+   * @param {MetricRegistry | null} registry
+   * @param {Date} timestamp
+   * @param {MetricType} type
+   * @param {ReportingResult&lt;any, CarbonData&gt;[]} results
+   * @returns {Promise&lt;any&gt;}
+   * @memberof CarbonMetricReporter
+   */
+  protected async handleResults (
+    ctx: OverallReportContext,
+    registry: MetricRegistry | null,
+    timestamp: Date,
+    type: MetricType,
+    results: Array&lt;ReportingResult&lt;any, CarbonData&gt;&gt;): Promise&lt;void&gt; {
+    await Promise.all(results
+      .map((result) &#x3D;&gt; result.result)
+      .map(async (carbonData) &#x3D;&gt; await new Promise((resolve, reject) &#x3D;&gt; {
+        // can happen during serialization
+        if (!(timestamp instanceof Date)) {
+          timestamp &#x3D; new Date(timestamp)
+        }
+        this.client.writeTagged(carbonData.measurement, carbonData.tags, timestamp, (err: any) &#x3D;&gt; {
+          if (err !&#x3D; null) {
+            if (this.options.log) {
+              this.options.log.error(err, this.logMetadata)
+            }
+            reject(err)
+            return
+          }
+          resolve()
+        })
+      }).catch((err) &#x3D;&gt; {
+        if (this.options.log) {
+          this.options.log.error(err, this.logMetadata)
+        }
+      })))
+  }
+
+  /**
+   * Builds the {@link CarbonData} for the specified {@link Counter} or {@link MonotoneCounter}.
+   *
+   * @protected
+   * @param {(MonotoneCounter | Counter)} counter
+   * @param {(MetricSetReportContext&lt;MonotoneCounter | Counter&gt;)} ctx
+   * @returns {CarbonData}
+   * @memberof CarbonMetricReporter
+   */
+  protected reportCounter (
+    counter: MonotoneCounter | Counter,
+    ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): CarbonData {
+    const value &#x3D; counter.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const tags &#x3D; this.buildTags(ctx.registry, counter)
+    tags.group &#x3D; counter.getGroup()
+    tags.name &#x3D; counter.getName()
+
+    const prefix &#x3D; this.getMetricName(counter)
+    const measurement: any &#x3D; {}
+    measurement[&#x60;${prefix}.count&#x60;] &#x3D; counter.getCount() || 0
+
+    return {
+      measurement,
+      tags
+    }
+  }
+
+  /**
+   * Builds the {@link CarbonData} for the specified {@link Gauge}.
+   *
+   * @protected
+   * @param {Gauge&lt;any&gt;} gauge
+   * @param {MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;} ctx
+   * @returns {CarbonData}
+   * @memberof CarbonMetricReporter
+   */
+  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): CarbonData {
+    const value &#x3D; gauge.getValue()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const tags &#x3D; this.buildTags(ctx.registry, gauge)
+    tags.group &#x3D; gauge.getGroup()
+    tags.name &#x3D; gauge.getName()
+
+    const prefix &#x3D; this.getMetricName(gauge)
+    const measurement: any &#x3D; {}
+    measurement[&#x60;${prefix}.value&#x60;] &#x3D; gauge.getValue() || 0
+
+    return {
+      measurement,
+      tags
+    }
+  }
+
+  /**
+   * Builds the {@link CarbonData} for the specified {@link Histogram}.
+   *
+   * @protected
+   * @param {Histogram} histogram
+   * @param {MetricSetReportContext&lt;Histogram&gt;} ctx
+   * @returns {CarbonData}
+   * @memberof CarbonMetricReporter
+   */
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): CarbonData {
+    const value &#x3D; histogram.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; histogram.getSnapshot()
+    const tags &#x3D; this.buildTags(ctx.registry, histogram)
+    tags.group &#x3D; histogram.getGroup()
+    tags.name &#x3D; histogram.getName()
+
+    const prefix &#x3D; this.getMetricName(histogram)
+    const measurement: any &#x3D; {}
+    measurement[&#x60;${prefix}.count&#x60;] &#x3D; histogram.getCount() || 0
+    measurement[&#x60;${prefix}.max&#x60;] &#x3D; this.getNumber(snapshot.getMax())
+    measurement[&#x60;${prefix}.mean&#x60;] &#x3D; this.getNumber(snapshot.getMean())
+    measurement[&#x60;${prefix}.min&#x60;] &#x3D; this.getNumber(snapshot.getMin())
+    measurement[&#x60;${prefix}.p50&#x60;] &#x3D; this.getNumber(snapshot.getMedian())
+    measurement[&#x60;${prefix}.p75&#x60;] &#x3D; this.getNumber(snapshot.get75thPercentile())
+    measurement[&#x60;${prefix}.p95&#x60;] &#x3D; this.getNumber(snapshot.get95thPercentile())
+    measurement[&#x60;${prefix}.p98&#x60;] &#x3D; this.getNumber(snapshot.get98thPercentile())
+    measurement[&#x60;${prefix}.p99&#x60;] &#x3D; this.getNumber(snapshot.get99thPercentile())
+    measurement[&#x60;${prefix}.p999&#x60;] &#x3D; this.getNumber(snapshot.get999thPercentile())
+    measurement[&#x60;${prefix}.stddev&#x60;] &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return {
+      measurement,
+      tags
+    }
+  }
+
+  /**
+   * Builds the {@link CarbonData} for the specified {@link Meter}.
+   *
+   * @protected
+   * @param {Meter} meter
+   * @param {MetricSetReportContext&lt;Meter&gt;} ctx
+   * @returns {CarbonData}
+   * @memberof CarbonMetricReporter
+   */
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): CarbonData {
+    const value &#x3D; meter.getCount()
+    if (value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; null || isNaN(value)) {
+      return null
+    }
+    const tags &#x3D; this.buildTags(ctx.registry, meter)
+    tags.group &#x3D; meter.getGroup()
+    tags.name &#x3D; meter.getName()
+
+    const prefix &#x3D; this.getMetricName(meter)
+    const measurement: any &#x3D; {}
+    measurement[&#x60;${prefix}.count&#x60;] &#x3D; meter.getCount() || 0
+    measurement[&#x60;${prefix}.m15_rate&#x60;] &#x3D; this.getNumber(meter.get15MinuteRate())
+    measurement[&#x60;${prefix}.m1_rate&#x60;] &#x3D; this.getNumber(meter.get1MinuteRate())
+    measurement[&#x60;${prefix}.m5_rate&#x60;] &#x3D; this.getNumber(meter.get5MinuteRate())
+    measurement[&#x60;${prefix}.mean_rate&#x60;] &#x3D; this.getNumber(meter.getMeanRate())
+
+    return {
+      measurement,
+      tags: this.buildTags(ctx.registry, meter)
+    }
+  }
+
+  /**
+   * Builds the {@link CarbonData} for the specified {@link Timer}.
+   *
+   * @protected
+   * @param {Timer} timer
+   * @param {MetricSetReportContext&lt;Timer&gt;} ctx
+   * @returns {CarbonData}
+   * @memberof CarbonMetricReporter
+   */
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): CarbonData {
+    const value &#x3D; timer.getCount()
+    if (!value || isNaN(value)) {
+      return null
+    }
+    const snapshot &#x3D; timer.getSnapshot()
+    const tags &#x3D; this.buildTags(ctx.registry, timer)
+    tags.group &#x3D; timer.getGroup()
+    tags.name &#x3D; timer.getName()
+
+    const prefix &#x3D; this.getMetricName(timer)
+    const measurement: any &#x3D; {}
+    measurement[&#x60;${prefix}.count&#x60;] &#x3D; timer.getCount() || 0
+    measurement[&#x60;${prefix}.m15_rate&#x60;] &#x3D; this.getNumber(timer.get15MinuteRate())
+    measurement[&#x60;${prefix}.m1_rate&#x60;] &#x3D; this.getNumber(timer.get1MinuteRate())
+    measurement[&#x60;${prefix}.m5_rate&#x60;] &#x3D; this.getNumber(timer.get5MinuteRate())
+    measurement[&#x60;${prefix}.max&#x60;] &#x3D; this.getNumber(snapshot.getMax())
+    measurement[&#x60;${prefix}.mean&#x60;] &#x3D; this.getNumber(snapshot.getMean())
+    measurement[&#x60;${prefix}.mean_rate&#x60;] &#x3D; this.getNumber(timer.getMeanRate())
+    measurement[&#x60;${prefix}.min&#x60;] &#x3D; this.getNumber(snapshot.getMin())
+    measurement[&#x60;${prefix}.p50&#x60;] &#x3D; this.getNumber(snapshot.getMedian())
+    measurement[&#x60;${prefix}.p75&#x60;] &#x3D; this.getNumber(snapshot.get75thPercentile())
+    measurement[&#x60;${prefix}.p95&#x60;] &#x3D; this.getNumber(snapshot.get95thPercentile())
+    measurement[&#x60;${prefix}.p98&#x60;] &#x3D; this.getNumber(snapshot.get98thPercentile())
+    measurement[&#x60;${prefix}.p99&#x60;] &#x3D; this.getNumber(snapshot.get99thPercentile())
+    measurement[&#x60;${prefix}.p999&#x60;] &#x3D; this.getNumber(snapshot.get999thPercentile())
+    measurement[&#x60;${prefix}.stddev&#x60;] &#x3D; this.getNumber(snapshot.getStdDev())
+
+    return {
+      measurement,
+      tags: this.buildTags(ctx.registry, timer)
+    }
+  }
+
+  /**
+   * Builds a name for the metric.
+   *
+   * @protected
+   * @param {Metric} metric
+   * @returns {string}
+   * @memberof CarbonMetricReporter
+   */
+  protected getMetricName (metric: Metric): string {
+    if (metric.getGroup()) {
+      return &#x60;${metric.getGroup()}.${metric.getName()}&#x60;
+    }
+    return metric.getName()
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'CarbonData.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

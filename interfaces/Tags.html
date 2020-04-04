@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/model/taggable.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/model/taggable.ts</code>
         </p>
 
             <p class="comment">
@@ -87,7 +87,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">lib/metrics/model/taggable.ts:6</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="6" class="link-to-prism">packages/inspector-metrics/lib/metrics/model/taggable.ts:6</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -104,7 +104,7 @@
  * Helper interface for handling tags.
  */
 export interface Tags {
-    [key: string]: string;
+  [key: string]: string;
 }
 
 /**
@@ -115,68 +115,68 @@ export interface Tags {
  */
 export interface Taggable {
 
-    /**
-     * Gets all tags.
-     *
-     * @returns {Map&lt;string, string&gt;}
-     * @memberof Taggable
-     */
-    getTags(): Map&lt;string, string&gt;;
+  /**
+   * Gets all tags.
+   *
+   * @returns {Map&lt;string, string&gt;}
+   * @memberof Taggable
+   */
+  getTags(): Map&lt;string, string&gt;;
 
-    /**
-     * Gets the specified tag or {@code null}.
-     *
-     * @param {string} name
-     * @returns {string}
-     * @memberof Taggable
-     */
-    getTag(name: string): string;
+  /**
+   * Gets the specified tag or {@code null}.
+   *
+   * @param {string} name
+   * @returns {string}
+   * @memberof Taggable
+   */
+  getTag(name: string): string;
 
-    /**
-     * Sets the specified tag.
-     *
-     * @param {string} name
-     * @param {string} value
-     * @returns {this}
-     * @memberof Taggable
-     */
-    setTag(name: string, value: string): this;
+  /**
+   * Sets the specified tag.
+   *
+   * @param {string} name
+   * @param {string} value
+   * @returns {this}
+   * @memberof Taggable
+   */
+  setTag(name: string, value: string): this;
 
-    /**
-     * Sets tags set.
-     *
-     * @param {Map&lt;string, string&gt;} name
-     * @returns {this}
-     * @memberof Taggable
-     */
-    setTags(tags: Map&lt;string, string&gt;): this;
+  /**
+   * Sets tags set.
+   *
+   * @param {Map&lt;string, string&gt;} name
+   * @returns {this}
+   * @memberof Taggable
+   */
+  setTags(tags: Map&lt;string, string&gt;): this;
 
-    /**
-     * Adds the specified tags to metric&#x27;s tags.
-     *
-     * @param {Map&lt;string, string&gt;} name
-     * @returns {this}
-     * @memberof Taggable
-     */
-    addTags(tags: Map&lt;string, string&gt;): this;
+  /**
+   * Adds the specified tags to metric&#x27;s tags.
+   *
+   * @param {Map&lt;string, string&gt;} name
+   * @returns {this}
+   * @memberof Taggable
+   */
+  addTags(tags: Map&lt;string, string&gt;): this;
 
-    /**
-     * Removes the specified tag.
-     *
-     * @param {string} name
-     * @returns {this}
-     * @memberof Taggable
-     */
-    removeTag(name: string): this;
+  /**
+   * Removes the specified tag.
+   *
+   * @param {string} name
+   * @returns {this}
+   * @memberof Taggable
+   */
+  removeTag(name: string): this;
 
-    /**
-     * Removes the specified tag names.
-     *
-     * @param {string[]} names
-     * @returns {this}
-     * @memberof Taggable
-     */
-    removeTags(...names: string[]): this;
+  /**
+   * Removes the specified tag names.
+   *
+   * @param {string[]} names
+   * @returns {this}
+   * @memberof Taggable
+   */
+  removeTags(...names: string[]): this;
 
 }
 
@@ -188,11 +188,11 @@ export interface Taggable {
  * @returns {Map&lt;string, string&gt;}
  */
 export function tagsToMap(tags: Tags): Map&lt;string, string&gt; {
-    const tagMap: Map&lt;string, string&gt; &#x3D; new Map();
-    if (tags) {
-        Object.keys(tags).forEach((key) &#x3D;&gt; tagMap.set(key, tags[key]));
-    }
-    return tagMap;
+  const tagMap: Map&lt;string, string&gt; &#x3D; new Map();
+  if (tags) {
+    Object.keys(tags).forEach((key) &#x3D;&gt; tagMap.set(key, tags[key]));
+  }
+  return tagMap;
 }
 
 /**
@@ -203,17 +203,18 @@ export function tagsToMap(tags: Tags): Map&lt;string, string&gt; {
  * @returns {Tags}
  */
 export function mapToTags(tagMap: Map&lt;string, string&gt;): Tags {
-    const tags: Tags &#x3D; {};
-    if (tagMap) {
-        tagMap.forEach((tag, name) &#x3D;&gt; tags[name] &#x3D; tag);
-    }
-    return tags;
+  const tags: Tags &#x3D; {};
+  if (tagMap) {
+    tagMap.forEach((tag, name) &#x3D;&gt; tags[name] &#x3D; tag);
+  }
+  return tags;
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -236,6 +237,7 @@ export function mapToTags(tagMap: Map&lt;string, string&gt;): Tags {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'Tags.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>

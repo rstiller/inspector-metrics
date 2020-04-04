@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>inspector-metrics documentation</title>
+        <title>monorepo documentation</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +13,7 @@
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
-            <a href="../" class="navbar-brand">inspector-metrics documentation</a>
+            <a href="../" class="navbar-brand">monorepo documentation</a>
             <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>lib/metrics/reporter/logger.ts</code>
+            <code>packages/inspector-metrics/lib/metrics/reporter/logger.ts</code>
         </p>
 
             <p class="comment">
@@ -140,10 +140,12 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Logs at &quot;debug&quot; level:
-- the first argument passed is usually the log message
-- usually logs to stdout stream
-- available since node 8</p>
+                                    <div class="io-description"><p>Logs at &quot;debug&quot; level:</p>
+<ul>
+<li>the first argument passed is usually the log message</li>
+<li>usually logs to stdout stream</li>
+<li>available since node 8</li>
+</ul>
 </div>
                                 </td>
                             </tr>
@@ -178,9 +180,11 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Logs at &quot;error&quot; level:
-- the first argument passed is usually the log message
-- usually logs to stderr stream</p>
+                                    <div class="io-description"><p>Logs at &quot;error&quot; level:</p>
+<ul>
+<li>the first argument passed is usually the log message</li>
+<li>usually logs to stderr stream</li>
+</ul>
 </div>
                                 </td>
                             </tr>
@@ -215,9 +219,11 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Logs at &quot;info&quot; level:
-- the first argument passed is usually the log message
-- usually logs to stdout stream</p>
+                                    <div class="io-description"><p>Logs at &quot;info&quot; level:</p>
+<ul>
+<li>the first argument passed is usually the log message</li>
+<li>usually logs to stdout stream</li>
+</ul>
 </div>
                                 </td>
                             </tr>
@@ -252,9 +258,11 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Logs at &quot;trace&quot; level:
-- the first argument passed is usually the log message
-- usually logs to stdout stream</p>
+                                    <div class="io-description"><p>Logs at &quot;trace&quot; level:</p>
+<ul>
+<li>the first argument passed is usually the log message</li>
+<li>usually logs to stdout stream</li>
+</ul>
 </div>
                                 </td>
                             </tr>
@@ -289,9 +297,11 @@
 
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-description"><p>Logs at &quot;warn&quot; level:
-- the first argument passed is usually the log message
-- usually logs to stdout stream</p>
+                                    <div class="io-description"><p>Logs at &quot;warn&quot; level:</p>
+<ul>
+<li>the first argument passed is usually the log message</li>
+<li>usually logs to stdout stream</li>
+</ul>
 </div>
                                 </td>
                             </tr>
@@ -311,43 +321,44 @@
  * @interface Logger
  */
 export interface Logger {
-    /**
-     * Logs at &quot;error&quot; level:
-     * - the first argument passed is usually the log message
-     * - usually logs to stderr stream
-     */
-    error: (...args: any[]) &#x3D;&gt; any;
-    /**
-     * Logs at &quot;warn&quot; level:
-     * - the first argument passed is usually the log message
-     * - usually logs to stdout stream
-     */
-    warn: (...args: any[]) &#x3D;&gt; any;
-    /**
-     * Logs at &quot;info&quot; level:
-     * - the first argument passed is usually the log message
-     * - usually logs to stdout stream
-     */
-    info: (...args: any[]) &#x3D;&gt; any;
-    /**
-     * Logs at &quot;debug&quot; level:
-     * - the first argument passed is usually the log message
-     * - usually logs to stdout stream
-     * - available since node 8
-     */
-    debug: (...args: any[]) &#x3D;&gt; any;
-    /**
-     * Logs at &quot;trace&quot; level:
-     * - the first argument passed is usually the log message
-     * - usually logs to stdout stream
-     */
-    trace: (...args: any[]) &#x3D;&gt; any;
+  /**
+   * Logs at &quot;error&quot; level:
+   * - the first argument passed is usually the log message
+   * - usually logs to stderr stream
+   */
+  error: (...args: any[]) &#x3D;&gt; any;
+  /**
+   * Logs at &quot;warn&quot; level:
+   * - the first argument passed is usually the log message
+   * - usually logs to stdout stream
+   */
+  warn: (...args: any[]) &#x3D;&gt; any;
+  /**
+   * Logs at &quot;info&quot; level:
+   * - the first argument passed is usually the log message
+   * - usually logs to stdout stream
+   */
+  info: (...args: any[]) &#x3D;&gt; any;
+  /**
+   * Logs at &quot;debug&quot; level:
+   * - the first argument passed is usually the log message
+   * - usually logs to stdout stream
+   * - available since node 8
+   */
+  debug: (...args: any[]) &#x3D;&gt; any;
+  /**
+   * Logs at &quot;trace&quot; level:
+   * - the first argument passed is usually the log message
+   * - usually logs to stdout stream
+   */
+  trace: (...args: any[]) &#x3D;&gt; any;
 }
 </code></pre>
     </div>
 </div>
 
 
+                   
 
 
 
@@ -370,6 +381,7 @@ export interface Logger {
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
             var COMPODOC_CURRENT_PAGE_URL = 'Logger.html';
+            var MAX_SEARCH_RESULTS = 15;
        </script>
 
        <script src="../js/libs/custom-elements.min.js"></script>
