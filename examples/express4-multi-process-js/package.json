@@ -20,7 +20,7 @@
     "inspector-influx": "^2.7.0",
     "inspector-metrics": "^1.21.0",
     "inspector-prometheus": "^2.6.0",
-    "inspector-vm": "^3.4.0"
+    "inspector-vm": "^3.5.0"
   },
   "devDependencies": {
     "standard": "14.3.3"
