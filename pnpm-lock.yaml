@@ -43,9 +43,9 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-elasticsearch: ^2.6.0
+      inspector-elasticsearch: ^2.7.0
       inspector-metrics: ^1.21.0
-      inspector-vm: ^3.4.0
+      inspector-vm: ^3.5.0
       rimraf: 3.0.2
       typescript: 3.8.3
   examples/elasticsearch-6:
@@ -83,9 +83,9 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-elasticsearch: ^2.6.0
+      inspector-elasticsearch: ^2.7.0
       inspector-metrics: ^1.21.0
-      inspector-vm: ^3.4.0
+      inspector-vm: ^3.5.0
       rimraf: 3.0.2
       typescript: 3.8.3
   examples/elasticsearch-7:
@@ -123,9 +123,9 @@ importers:
       eslint-plugin-node: 11.0.0
       eslint-plugin-promise: 4.2.1
       eslint-plugin-standard: 4.0.1
-      inspector-elasticsearch: ^2.6.0
+      inspector-elasticsearch: ^2.7.0
       inspector-metrics: ^1.21.0
-      inspector-vm: ^3.4.0
+      inspector-vm: ^3.5.0
       rimraf: 3.0.2
       typescript: 3.8.3
   examples/express4-multi-process-js:
@@ -143,12 +143,12 @@ importers:
     specifiers:
       express: ^4.17.1
       inspector-carbon: ^2.5.0
-      inspector-csv: ^2.4.0
-      inspector-elasticsearch: ^2.6.0
-      inspector-influx: ^2.6.0
+      inspector-csv: ^2.5.0
+      inspector-elasticsearch: ^2.7.0
+      inspector-influx: ^2.7.0
       inspector-metrics: ^1.21.0
-      inspector-prometheus: ^2.5.0
-      inspector-vm: ^3.4.0
+      inspector-prometheus: ^2.6.0
+      inspector-vm: ^3.5.0
       standard: 14.3.3
   packages/inspector-carbon:
     dependencies:
