@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "5e285af59293b64461fbf3f3f352271adb43d76c5ebb59a77426032e0649e92e4d94b6203edc188d3a38afcdb33d06a942b974c53dc7bd833cfba513732f93dc"
+            "sha512": "6a6caa9f731e93f3249c97cafc4157a9909903639ddaade2948088cee6fa55b89713f7d0f9ac539397d11eecf9378610e2907a30fe1776735840d7c6e94852b4"
           },
           {
             "path": "LICENSE",
@@ -157,7 +157,7 @@
           "typings",
           "version"
         ],
-        "sha512": "1aff194899d1094f7208d70ee4c0e38f67cc45adf944261f42d30137173e313814ba415302928e48574ea10eb3f25ca0692f7a09c663be227a0d034dba009b06"
+        "sha512": "2bbf2c84bb1d4148ef73efa8ae2e5d2f01b0f184f7ae5765bfc30fd1892c09dfe87a519eb08e2eda65b9aac7526e44716bb219e3d78f9c0e5deef0cab3a861af"
       }
     },
     {
@@ -167,7 +167,7 @@
           "name": "inspector-prometheus",
           "description": "Prometheus / Pushgateway metric reporter for nodejs",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "2.5.0",
+          "version": "2.6.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "license": "MIT",
@@ -256,5 +256,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiMBGCRDCMfXrQKYV5wAALgEQAALxvkDJKjv33rVQAEze1ut7\n/BbvLmZYlhLyv6c625t+vJuJKbl1+229AMrYltgLggsz5XBDJZpwEnvd+klQUnec\nBmrtldxvPeBm/5l9kWGEEYxuYeAtpSSdWHo+CGPKtQ0F5bcFATiy2CIPVAOvKzRz\nG9uFUmJcLYUFpYdRhrc3ugNT3kanuueDUd4FVossgbcKgVQiYVFt4QQ156G79GPb\n0v9mLTH42+sdeJYRZwQctRKwQyZbk1qfqdHfbPmljPYSeUu8X6CmK1JErFiE7jOO\nfW6epCuUpC4zTeGyPzQ4uQz6SUM43OsHTV6XiJdLly484qif2jvrPJTu0TRsnrlu\nH3X61ajnUNINeWN3BLqp8RZCHiAUWL7grWcyNhKwRgpY3NozAKgp6YOn7o0iFtrj\nZKp6vOrF9JTsTsbQ0br9Z83Pp9fT5C/HHDOnc2XwUrA1lWk0Ov7DY7CDOEeRMH7F\nzrq3wv1q6DlI+PdYiiL5PSe3NBP495txtZNkttfV6QkG8iCjGfPZLiq0h1Ds7rpH\nllHiddrV8sqErMUWHm38s0F05hLM8xCKnNxHDvP2AQ6WPxGglTP7pfGzU+CpiV9y\nJuUhqQaabnd4pQXWxSMjRoqrsUDOTawuW2d9aYImdet96LGUL8G5QS8At5xoEQbZ\n+59j9wquUZ5hwYLtWApU\n=JElR\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiMDjCRDCMfXrQKYV5wAAWpMQABWf44l1opsDQsihYstpU3OT\nenGlvPdguTUipSvRz4sGR/D7pYGtlAqn9WMFMRqQUVlg7ExR1kdnPBMqsrt1JuTU\nsm7gaPQp1+FQvcBCsfWAjF6fMu3kjAl+BZS2q/uQ/p4gpDwqNIbAq/d59su5cprh\nWnt8wvQQ7XxDfSvZlpDjWVFPRBSWU0qbRz0hzsd53Kc0Hi4U2C8ORYuKvA11uvSA\nZ1Mm3Ls6Se42DG+Wb6G29noW+5xW9dLA5uD2R3c0wCfyIYEafxoqd/vC+RxAZ6Fs\nbhvHpn05Zs6HUv//Qx8UKYrztu+Tfxo1cJnYouKlGl4s//ptEQTnoyd7YQODPuJ9\nF8vy0DlaW/idp8Wdiaok+mtoYhIfslaAHTY2k4Zb3cgXH6FRYM2As7TmZiqJEasY\nhAZLpH7LauUKdvbnWJPedqxxrojPqwGv73/LaCDGcP2HuO/niM+nk7b8Osw/76vv\nWQfMZ2+PO3x7+PHYdnlzMYeQPijoLZmz3sow7nssg8llgWy72uoiQ9uSL6INLE1K\nB2AVO9uTTo9XyyIFAb7QVHpnv8P7AQ6e10VMqBL63vt2zg1SDso21PBQ6pyZLJz9\nDCacgA8txV7bJmkwvz06ck++8QS6SUImOQziwx09ieTsryj94M0HhLiN/TOtNZXJ\nxK6ZGw5s1WsyRisXXLdI\n=rKhW\n-----END PGP SIGNATURE-----\n"
 }
