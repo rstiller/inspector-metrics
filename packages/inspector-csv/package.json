@@ -2,7 +2,7 @@
   "name": "inspector-csv",
   "description": "CSV metric reporter for nodejs",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "2.4.0",
+  "version": "2.5.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
