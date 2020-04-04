@@ -19,6 +19,8 @@ Monitoring / metric library similar to http://metrics.dropwizard.io
     </a>
 </p>
 
+Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).
+
 ## install
 
 This library is meant to be used with `typescript` / `nodejs`.
