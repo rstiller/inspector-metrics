@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "devDependencies": {
-        "husky": "4.2.3",
+        "husky": "4.2.5",
         "nyc": "15.0.1",
         "rimraf": "3.0.2"
     },
