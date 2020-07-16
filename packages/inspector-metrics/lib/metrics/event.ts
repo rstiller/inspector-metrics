@@ -23,7 +23,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @type {TEventData}
    * @memberof Event
    */
-  private value: TEventData;
+  private value: TEventData
   /**
    * The time the event happened.
    *
@@ -31,7 +31,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @type {Date}
    * @memberof Event
    */
-  private time: Date;
+  private time: Date
 
   /**
    * Creates an instance of Event.

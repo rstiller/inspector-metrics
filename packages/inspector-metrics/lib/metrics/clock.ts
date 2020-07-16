@@ -45,7 +45,7 @@ export abstract class Clock {
    * @returns {Time}
    * @memberof Clock
    */
-  public abstract time(): Time;
+  public abstract time (): Time
 }
 
 /**

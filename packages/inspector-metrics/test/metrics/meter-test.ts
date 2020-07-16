@@ -13,7 +13,7 @@ const expect = chai.expect
 
 @suite
 export class MeterTest {
-  private readonly clock: MockedClock = new MockedClock();
+  private readonly clock: MockedClock = new MockedClock()
 
   @test
   public 'check name and description' (): void {

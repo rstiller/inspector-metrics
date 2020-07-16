@@ -22,7 +22,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @static
    * @memberof Meter
    */
-  private static readonly AVG_1_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_1_MINUTE_1_SECOND_SAMPLERATE;
+  private static readonly AVG_1_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_1_MINUTE_1_SECOND_SAMPLERATE
   /**
    * Alpha value for 5 mins within a {@link ExponentiallyWeightedMovingAverage}.
    *
@@ -30,7 +30,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @static
    * @memberof Meter
    */
-  private static readonly AVG_5_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_5_MINUTE_1_SECOND_SAMPLERATE;
+  private static readonly AVG_5_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_5_MINUTE_1_SECOND_SAMPLERATE
   /**
    * Alpha value for 15 mins within a {@link ExponentiallyWeightedMovingAverage}.
    *
@@ -38,7 +38,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @static
    * @memberof Meter
    */
-  private static readonly AVG_15_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_15_MINUTE_1_SECOND_SAMPLERATE;
+  private static readonly AVG_15_MINUTE = ExponentiallyWeightedMovingAverage.ALPHA_15_MINUTE_1_SECOND_SAMPLERATE
   /**
    * 1 second in nanoseconds.
    *
@@ -46,7 +46,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @static
    * @memberof Meter
    */
-  private static readonly SECOND_1_NANOS = SECOND.convertTo(1, NANOSECOND);
+  private static readonly SECOND_1_NANOS = SECOND.convertTo(1, NANOSECOND)
 
   /**
    * Clock used to determine if a new update of the averages is needed.
@@ -55,7 +55,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {Clock}
    * @memberof Meter
    */
-  private readonly clock: Clock;
+  private readonly clock: Clock
   /**
    * Starttime as a reference for calculating the mean-rate.
    *
@@ -63,7 +63,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {Time}
    * @memberof Meter
    */
-  private readonly startTime: Time;
+  private readonly startTime: Time
   /**
    * Timestamp used to determine when a new update of the 1, 5 and 15 mins averages is needed.
    *
@@ -71,7 +71,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {Time}
    * @memberof Meter
    */
-  private lastTime: Time;
+  private lastTime: Time
   /**
    * Continuous counter incremented in the {@link Meter#mark} method.
    *
@@ -79,7 +79,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {number}
    * @memberof Meter
    */
-  private countInternal: number = 0;
+  private countInternal: number = 0
   /**
    * Number of samples per second.
    *
@@ -87,7 +87,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {number}
    * @memberof Meter
    */
-  private readonly sampleRate: number;
+  private readonly sampleRate: number
   /**
    * Max age of the last update in nanoseconds.
    *
@@ -95,7 +95,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {number}
    * @memberof Meter
    */
-  private readonly interval: number;
+  private readonly interval: number
   /**
    * Moving average for 1 minute.
    *
@@ -103,7 +103,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {MovingAverage}
    * @memberof Meter
    */
-  private readonly avg1Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_1_MINUTE, 1, SECOND);
+  private readonly avg1Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_1_MINUTE, 1, SECOND)
   /**
    * Moving average for 5 minutes.
    *
@@ -111,7 +111,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {MovingAverage}
    * @memberof Meter
    */
-  private readonly avg5Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_5_MINUTE, 1, SECOND);
+  private readonly avg5Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_5_MINUTE, 1, SECOND)
   /**
    * Moving average for 15 minutes.
    *
@@ -119,7 +119,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {MovingAverage}
    * @memberof Meter
    */
-  private readonly avg15Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_15_MINUTE, 1, SECOND);
+  private readonly avg15Minute: MovingAverage = new ExponentiallyWeightedMovingAverage(Meter.AVG_15_MINUTE, 1, SECOND)
 
   /**
    * Creates an instance of Meter.

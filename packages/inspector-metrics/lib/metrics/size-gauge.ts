@@ -43,7 +43,7 @@ export interface SizeAttributeInterface {
   size: number
 }
 
-type ValueExtractor = () => number;
+type ValueExtractor = () => number
 
 /**
  * Gets the current size / length of an object as gauge metric.
@@ -113,7 +113,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @type {ValueExtractor}
    * @memberof SizeGauge
    */
-  private readonly extractor: ValueExtractor;
+  private readonly extractor: ValueExtractor
 
   /**
    * Creates an instance of SizeGauge.

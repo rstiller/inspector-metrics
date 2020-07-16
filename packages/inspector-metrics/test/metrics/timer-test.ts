@@ -17,7 +17,7 @@ const expect = chai.expect
 
 @suite
 export class TimerTest {
-  private readonly clock: MockedClock = new MockedClock();
+  private readonly clock: MockedClock = new MockedClock()
 
   @test
   public 'check name and description' (): void {
@@ -737,7 +737,7 @@ export class TimerTest {
 
 @suite
 export class StopWatchTest {
-  private readonly clock: MockedClock = new MockedClock();
+  private readonly clock: MockedClock = new MockedClock()
 
   @test
   public 'start and stop without time difference' (): void {

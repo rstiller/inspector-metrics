@@ -13,7 +13,7 @@ import { BaseMetric, Metric } from './model/metric'
 import { Reservoir, SlidingWindowReservoir } from './model/reservoir'
 import { Timer } from './timer'
 
-export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string;
+export type NameFactory = (baseName: string, metricName: string, metric: Metric) => string
 
 /**
  * Represents a registration of a {@link MetricRegistryListener}.
@@ -58,14 +58,14 @@ export class MetricRegistration<T extends Metric> {
    * @type {T}
    * @memberof MetricRegistration
    */
-  public metricRef: T;
+  public metricRef: T
   /**
    * The name the metric is registered with.
    *
    * @type {string}
    * @memberof MetricRegistration
    */
-  public name: string;
+  public name: string
 
   /**
    * Creates an instance of MetricRegistration.
@@ -212,7 +212,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {Clock}
    * @memberof MetricRegistry
    */
-  private defaultClock: Clock = new StdClock();
+  private defaultClock: Clock = new StdClock()
   /**
    * A collection metric references.
    *
@@ -220,7 +220,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {Array<MetricRegistration<Metric>>}
    * @memberof MetricRegistry
    */
-  private readonly metrics: Array<MetricRegistration<Metric>> = [];
+  private readonly metrics: Array<MetricRegistration<Metric>> = []
   /**
    * The name factory to build metric names.
    *
@@ -228,7 +228,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {NameFactory}
    * @memberof MetricRegistry
    */
-  private nameFactory: NameFactory = MetricRegistry.defaultNameFactory;
+  private nameFactory: NameFactory = MetricRegistry.defaultNameFactory
   /**
    * A collection of metric listeners.
    *
@@ -236,7 +236,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {MetricRegistryListener[]}
    * @memberof MetricRegistry
    */
-  private readonly listeners: MetricRegistryListener[] = [];
+  private readonly listeners: MetricRegistryListener[] = []
 
   /**
    * Adds the specified listener and returns the corresponding

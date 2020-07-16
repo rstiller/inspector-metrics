@@ -39,7 +39,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
    * @type {number}
    * @memberof SimpleGauge
    */
-  private value: number = 0;
+  private value: number = 0
 
   /**
    * Creates an instance of SimpleGauge with an optional name.

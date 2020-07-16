@@ -27,7 +27,7 @@ export class StopWatch {
    * @type {Clock}
    * @memberof StopWatch
    */
-  private readonly clock: Clock;
+  private readonly clock: Clock
   /**
    * The timer the duration is reported to.
    *
@@ -35,7 +35,7 @@ export class StopWatch {
    * @type {Timer}
    * @memberof StopWatch
    */
-  private readonly timer: Timer;
+  private readonly timer: Timer
   /**
    * Gets set when the start function is invoked using the clock.
    *
@@ -43,7 +43,7 @@ export class StopWatch {
    * @type {Time}
    * @memberof StopWatch
    */
-  private startTime: Time;
+  private startTime: Time
 
   /**
    * Creates an instance of StopWatch.
@@ -102,7 +102,7 @@ export class Timer extends BaseMetric implements
    * @type {Clock}
    * @memberof Timer
    */
-  private readonly clock: Clock;
+  private readonly clock: Clock
   /**
    * Metric to measure the event rate.
    *
@@ -110,7 +110,7 @@ export class Timer extends BaseMetric implements
    * @type {Meter}
    * @memberof Timer
    */
-  private readonly meter: Meter;
+  private readonly meter: Meter
   /**
    * Metric to measure the duration of events.
    *
@@ -118,7 +118,7 @@ export class Timer extends BaseMetric implements
    * @type {Histogram}
    * @memberof Timer
    */
-  private readonly histogram: Histogram;
+  private readonly histogram: Histogram
 
   /**
    * Creates an instance of Timer.

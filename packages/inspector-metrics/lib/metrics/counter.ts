@@ -21,7 +21,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @type {number}
    * @memberof MonotoneCounter
    */
-  protected count: number = 0;
+  protected count: number = 0
 
   /**
    * Creates an instance of MonotoneCounter.

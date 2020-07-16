@@ -204,7 +204,7 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
    * @type {*}
    * @memberof HdrHistogram
    */
-  private readonly histogram: any;
+  private readonly histogram: any
   /**
    * Snapshot instance.
    *
@@ -212,7 +212,7 @@ export class HdrHistogram extends Histogram implements BucketCounting, Counting,
    * @type {HdrSnapshot}
    * @memberof HdrHistogram
    */
-  private readonly hdrSnapshot: HdrSnapshot;
+  private readonly hdrSnapshot: HdrSnapshot
 
   /**
    * Creates an instance of HdrHistogram.
