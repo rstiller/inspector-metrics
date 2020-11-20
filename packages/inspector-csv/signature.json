@@ -85,7 +85,7 @@
           "typings",
           "version"
         ],
-        "sha512": "7f61dba66bb1755c1d9dba0861637b2b1f162f126ed8242e320d5b2004bab78eae4b4bd019f5f74080369d6323faa5ab57006543b085214d0e4ea85471c4f6a5"
+        "sha512": "d17416632659b53ca45390a0cc665276d548b1abc905a3493f4c76500a23bda63a71ae408310eef37965a90b9213f0cbc1e61f8e9de996d45f8d7fdad6072275"
       }
     },
     {
@@ -128,36 +128,36 @@
           "dependencies": {
             "async": "^3.2.0",
             "inspector-metrics": "^1.21.0",
-            "moment": "^2.24.0",
-            "moment-timezone": "^0.5.28",
-            "source-map-support": "^0.5.16"
+            "moment": "^2.27.0",
+            "moment-timezone": "^0.5.31",
+            "source-map-support": "^0.5.19"
           },
           "devDependencies": {
+            "mocha-typescript": "1.1.17",
             "@types/async": "3.2.0",
             "@types/chai": "4.2.11",
             "@types/mocha": "7.0.2",
             "@types/moment-timezone": "0.5.13",
-            "@types/node": "13.7.7",
-            "@types/sinon": "9.0.0",
+            "@types/node": "14.0.23",
+            "@types/sinon": "9.0.4",
             "@types/sinon-chai": "3.2.4",
             "@typescript-eslint/eslint-plugin": "2.25.0",
             "@typescript-eslint/parser": "2.25.0",
             "chai": "4.2.0",
             "eslint": "6.8.0",
             "eslint-config-standard-with-typescript": "15.0.1",
-            "eslint-import-resolver-node": "0.3.3",
-            "eslint-plugin-import": "2.20.1",
-            "eslint-plugin-node": "11.0.0",
+            "eslint-import-resolver-node": "0.3.4",
+            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
             "eslint-plugin-standard": "4.0.1",
             "mocha": "7.1.1",
-            "mocha-typescript": "1.1.17",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "sinon": "9.0.1",
+            "sinon": "9.0.2",
             "sinon-chai": "3.5.0",
-            "ts-node": "8.8.1",
+            "ts-node": "8.10.2",
             "typescript": "3.8.3"
           },
           "files": [
@@ -189,5 +189,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiMWJCRDCMfXrQKYV5wAA9m4QAJF/soKuzzO/jri24nsGylM6\nq7rxcyhlGV6PzTN3M0dxaI3THLlaKBYRC5A2Dc6WhkAUpJ8I6fOCgYVR1nmAqQ1h\n2g74oHl+6ONL3OTecSl4XqwZhNBWvsEV9Xq1P5FUmaqccquSYOBffv6UTnDRJz5/\nHF7zjgJQwbENPcgbN0WWUZ6nI9IVNbU7jYTd0Mb5wsY5dsFQkHeECgch5sZUF/ls\nfwkCAIJDtnWDP1osvJk8echu4KwLTS2Df2VugSRJHQ47iJouAGfo0imsGYdbzNah\ndIvohx90E9XMPZGnzjP4CbRx7Yl5uz6N4EDuKZuh6zWcTD1EKSyq8y6YVVJbraFk\nCO+mKbKwwVUgL6wtcwJLI3XhrL51Gei91PCqdtfecyZKplXTqLtCPrX7HJGxbEcU\n7oGlVsuVSSM1obh+unNMYds28YBw/7213sN6LPzDU7XVWEq/izJHUq2oNoGN4tpd\ncMYzTiWYpjuUnSzQE5f3JIM+18TC7tg3VwJi6Poip8K0YrM0I33X9X8bP7zfNQ/D\n8qb8nGCuRvpZs6xz95YZNjvSecOV9d0GDEhVXBd36qHCFy6/h4tjK0+UTRbiscvA\nHpsLGoz6VLqB8nm4MPSDmBGJQSa+qjwM565b/Ym6KqKkTR/pkdSiNBWC0RZx8KyQ\nk2Yvet96QUzez8kFCcu0\n=STtz\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAiCRDCMfXrQKYV5wAAOB4QAFVKaI0Njuy5M8j/Lna+m2zk\nTn6m9Cd7nGEu7+eaZq2hdyjkFLYB5ybUBeky0gh0opdxuMtx9IqKc7Ebb0RV8Sg2\nHzWwSMg6y4LR7Mp/r80PJFqrl1GXDQzm+9IpdAzofsiG9JnLeMxIiU4/QLCQbpes\nFpBltIlU/cTJy7u31ogVepRRLLnOiaIVSd8L7Bx5cag/IBFo4upePZRqf5TnKkBG\np0qVYVjni6mH6i1RxAFGwxaCRM5Xf/B47RFGQcUWHeszddiVSyJ7PJrZxxq2LIj1\nF5Av4xPFJwgD++ws9LDtdWZE8ZzDCidyCPsWhn/68v6L/svfA9vWLpN/19EKzaDq\ngJy3vPjGh7uLt6TMvbXup1nrkPKXwdn1DFxmVjUNul5y6eVkOyPBqMG6Nb9zJtAV\n7HS+0D6LHrUqNyIjcW0FqKivGU/voZVpj2KEHtNAIhhMr8Ci250Pk8s3itoBJs3W\nHwPLw0FQhE9+caapUnlNvUjT4dFhn4kusLG8gvzZLZGc+0Ij1yCnYnWJXXpKlFTQ\n6KvQZlYi559BLCzf9wRnZM5eZ/OvtfqEqZnCYkG7WDXp/Qd+0qvj7Wn+mTzHnqcV\npSAArC+FB5zua4WBT3cRLkKFa2t5uWsGe4wtDBxlbagf/F6Ue5xxjilcbwqUqF8J\naSH71IU1S8nBgG27ETk0\n=y9jc\n-----END PGP SIGNATURE-----\n"
 }

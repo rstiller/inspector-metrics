@@ -157,7 +157,7 @@
           "typings",
           "version"
         ],
-        "sha512": "2bbf2c84bb1d4148ef73efa8ae2e5d2f01b0f184f7ae5765bfc30fd1892c09dfe87a519eb08e2eda65b9aac7526e44716bb219e3d78f9c0e5deef0cab3a861af"
+        "sha512": "75d6afdcb715962e4911dc0068f9af459a572e8d225095a7cbc9260b7cc2dfd8804104a6d3cfb8f342704958e153e3a065bc06ac4a345e8ae270f024cf22594c"
       }
     },
     {
@@ -197,34 +197,34 @@
           },
           "dependencies": {
             "inspector-metrics": "^1.21.0",
-            "source-map-support": "^0.5.16"
+            "source-map-support": "^0.5.19"
           },
           "devDependencies": {
+            "mocha-typescript": "1.1.17",
             "@types/chai": "4.2.11",
             "@types/mocha": "7.0.2",
-            "@types/node": "13.7.7",
-            "@types/sinon": "9.0.0",
+            "@types/node": "14.0.23",
+            "@types/sinon": "9.0.4",
             "@types/sinon-chai": "3.2.4",
             "@typescript-eslint/eslint-plugin": "2.25.0",
             "@typescript-eslint/parser": "2.25.0",
             "chai": "4.2.0",
             "eslint": "6.8.0",
             "eslint-config-standard-with-typescript": "15.0.1",
-            "eslint-import-resolver-node": "0.3.3",
-            "eslint-plugin-import": "2.20.1",
-            "eslint-plugin-node": "11.0.0",
+            "eslint-import-resolver-node": "0.3.4",
+            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
             "eslint-plugin-standard": "4.0.1",
             "mocha": "7.1.1",
-            "mocha-typescript": "1.1.17",
-            "moment": "2.24.0",
-            "nock": "12.0.3",
+            "moment": "2.27.0",
+            "nock": "13.0.2",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "sinon": "9.0.1",
+            "sinon": "9.0.2",
             "sinon-chai": "3.5.0",
-            "ts-node": "8.8.1",
+            "ts-node": "8.10.2",
             "typescript": "3.8.3"
           },
           "files": [
@@ -256,5 +256,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJeiMWKCRDCMfXrQKYV5wAAFwAQADpOhMSEQXpLhb20MEEQdnq9\nBeJafofvQlkCtl3QPt2Q3Yvj7DhRJN3C9zV6qKeUSViAkWN6HPxBxbSBsEQOLUW3\n/OJfA3Sx47lBojkVARCvnUuh/L1jed+JX175Dhqn7dGbgRnlUTGtNQMJrdhx4aNe\nxFC9AsM26g8uCbTbNNlZ30BxBXA0jzsvcZwt5UitS0clXbo44gAi7vzEoT18/cV1\nrU9UZ/ke3+1PHulDfCGSU6WicFQoQ0HmJ3hzW9aRgVRLT6giSS8RQv2qb3GgjU8i\n1CYiI5p9XylOxv8lBgMew9WX+0zQM7bdv/jR4ARdvp73vKskzrdtp2HNScbyFXhu\n/8Cq4nMbc6Haw5qRkzLnkvO+cvHKoShBGUBPnfSjayVatUVcyihk2ls4ib6pzzD/\ntAaon9IGUhxQaJGRa8fahVG9DQY2ONHH3teypEr55e1UUAeEEQDQFLiDXqHFZ/3U\nMn0IbJTMpNaNvFrxmJumHbfV60p6FapeOeH3+X99ETzUPAlmb+5BrXE1pMzSN4LP\nUht+TTp1bLijcEIyEeo75m086CreKfVoD3pJ+/sUmQ4TPDjdEBPF0vf7IS67+6EQ\nU2yzpKuLl7mr4m7TysW28vrkePxr2wgB8dcJVc5rDhlilDUdhYpzirSxAhAFea+Z\nL1i1+5nVzYMxHWjhnxOC\n=bFb1\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAjCRDCMfXrQKYV5wAA1g4QAEWIaZcu7DhiMESbefTRLn9D\nHqqbAdEb1TKzSHwEPD4BM3I9dksOgvKd38Uko2PlXn3jwZT6lp1WqGZqg/v/kpCW\nkd/66yl3V9whJtEuPVIa/IHQti2KbP26+dZVgMhoDMUahL+sPZ8MrWm5Qa15hi89\ngb2x7aGh4JWd9gK9IgFmNmHVWlEoju5/34Z1XJ4c4fPt9a+VGOnqNFVcXdnHF8Xh\nn2FxZt5STsr4xlE9wBchsOZhZ+z1WdxYSuKMSuxCnhAeV5gchPWUvyBEWNpoFObp\n832/TE1h4saA1FGns02+nTLcxRUb4WSxZESvxuaLcDM583kVOJ2q3/dmh9E7zr/T\nTMQ7p5rf3q6qzupHdLdOI2MdoN+9aPZPnsTE/Gd5dqX0fYc1rOurw1iWsRtC541K\n5l8BKD3DQfxZq/H1q/YDbOSBydqtNAHFJZEkoxp+HszuNvP5H2zMc94K3jCkdP37\nHaKsk5iv4OMF2LIi/JNHV3coStTZXM5MDnpnchrZkam6DtjxRDQJvxqvOGbnK0Qo\nYcVXHnNKlLVugHIqTmdyA8GD6Om4OVIVPMg4MnOxqO8T52ftQ5A9H8oEFAG9Vba/\nOAzG+xqIuLx6c/sERLhBaxsJPS6aLazGBHLSDraWlIhtnZqRy6wVGlIWHThN4k3h\nkU3a++xiDFgnMOQaLJUR\n=5os8\n-----END PGP SIGNATURE-----\n"
 }

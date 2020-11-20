@@ -86,6 +86,34 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=13
 
+  node14:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node14
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=14
+
+  node15:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node15
+    user: "node"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=15
+
   grafana:
     build:
       context: ./test-env/grafana
