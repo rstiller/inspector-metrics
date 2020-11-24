@@ -8,7 +8,6 @@ import * as sinonChai from 'sinon-chai'
 
 import { Event, ReportingResult } from 'inspector-metrics'
 import { suite, test } from 'mocha-typescript'
-import { SinonSpy, spy } from 'sinon'
 import { CsvMetricReporter } from '../../lib/metrics'
 import { AbstractReportTest } from './AbstractReporterTest'
 import { TestClusterOptions } from './TestClusterOptions'
@@ -20,7 +19,6 @@ const expect = chai.expect
 @suite
 export class CsvReporterClusterWorkerTest extends AbstractReportTest {
   private clusterOptions: TestClusterOptions;
-  private handleResultSpy: SinonSpy;
 
   public before (): void {
     super.before()
@@ -31,10 +29,6 @@ export class CsvReporterClusterWorkerTest extends AbstractReportTest {
       writer: this.writer
     })
     this.reporter.addMetricRegistry(this.registry)
-    // eslint-disable-next-line @typescript-eslint/func-call-spacing
-    this.handleResultSpy = spy((this.reporter as any).handleResults)
-    // eslint-disable-next-line no-unexpected-multiline
-    (this.reporter as any).handleResults = this.handleResultSpy
   }
 
   @test
