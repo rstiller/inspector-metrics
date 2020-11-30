@@ -8,7 +8,6 @@ module.exports = {
       "@typescript-eslint",
   ],
   extends: [
-      "standard-with-typescript"
   ],
   rules: {
       "@typescript-eslint/no-extraneous-class": "off",
