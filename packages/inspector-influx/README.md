@@ -12,9 +12,6 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
     <a href="https://travis-ci.org/rstiller/inspector-influx">
         <img src="http://img.shields.io/travis/rstiller/inspector-influx/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-influx">
-        <img src="https://img.shields.io/david/rstiller/inspector-influx.svg" alt="Dependencies Status">
-    </a>
 </p>
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and

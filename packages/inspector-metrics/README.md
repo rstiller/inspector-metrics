@@ -14,9 +14,6 @@ Monitoring / metric library similar to http://metrics.dropwizard.io
     <a href="https://travis-ci.org/rstiller/inspector-metrics">
         <img src="http://img.shields.io/travis/rstiller/inspector-metrics/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-metrics">
-        <img src="https://img.shields.io/david/rstiller/inspector-metrics.svg" alt="Dependencies Status">
-    </a>
 </p>
 
 Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).

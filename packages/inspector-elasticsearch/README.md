@@ -12,9 +12,6 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
     <a href="https://travis-ci.org/rstiller/inspector-elasticsearch">
         <img src="http://img.shields.io/travis/rstiller/inspector-elasticsearch/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-elasticsearch">
-        <img src="https://img.shields.io/david/rstiller/inspector-elasticsearch.svg" alt="Dependencies Status">
-    </a>
 </p>
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics) node module and

@@ -12,9 +12,6 @@ NodeJS VM Metric Collector
     <a href="https://travis-ci.org/rstiller/inspector-vm">
         <img src="http://img.shields.io/travis/rstiller/inspector-vm/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-vm">
-        <img src="https://img.shields.io/david/rstiller/inspector-vm.svg" alt="Dependencies Status">
-    </a>
 </p>
 
 Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/).

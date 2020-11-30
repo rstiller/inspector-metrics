@@ -11,9 +11,6 @@ Typescript metric reporter for [prometheus](https://prometheus.io).
     <a href="https://travis-ci.org/rstiller/inspector-prometheus">
         <img src="http://img.shields.io/travis/rstiller/inspector-prometheus/master.svg" alt="Build Status">
     </a>
-    <a href="https://david-dm.org/rstiller/inspector-prometheus">
-        <img src="https://img.shields.io/david/rstiller/inspector-prometheus.svg" alt="Dependencies Status">
-    </a>
 </p>
 
 This library is made for [inspector-metrics](https://github.com/rstiller/inspector-metrics)
