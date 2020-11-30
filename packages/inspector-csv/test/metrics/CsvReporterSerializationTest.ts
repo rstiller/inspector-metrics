@@ -20,7 +20,7 @@ import {
   Tags,
   Timer
 } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import { SinonSpy, spy } from 'sinon'
 import { AbstractReportTest } from './AbstractReporterTest'
 import { TestClusterOptions } from './TestClusterOptions'

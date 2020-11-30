@@ -4,7 +4,7 @@ import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { MetricRegistry, StdClock } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import { V8GCMetrics } from '../../lib/metrics/V8GCMetrics'
 
 const expect = chai.expect

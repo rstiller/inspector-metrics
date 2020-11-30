@@ -5,7 +5,7 @@ import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { Buckets, Event, NANOSECOND, SimpleGauge } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import * as sinonChai from 'sinon-chai'
 import { AbstractReportTest } from './AbstractReporterTest'
 

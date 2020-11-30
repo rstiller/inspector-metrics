@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import 'source-map-support/register'
 
 // import * as chai from "chai";
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 
 // import { InfluxMetricReporter } from "../../lib/metrics/influx-metric-reporter";
 

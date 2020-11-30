@@ -233,11 +233,11 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    *
    * @private
    * @param {string} dir
-   * @returns {Promise<Stats>}
+   * @returns {Promise<void>}
    * @memberof DefaultCsvFileWriter
    */
-  private async mkdir (dir: string): Promise<Stats> {
-    return await new Promise<Stats>((resolve, reject) => {
+  private async mkdir (dir: string): Promise<void> {
+    return await new Promise<void>((resolve, reject) => {
       mkdir(dir, (err) => {
         if (err) {
           reject(err)

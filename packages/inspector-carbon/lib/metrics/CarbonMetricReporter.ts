@@ -246,7 +246,7 @@ export class CarbonMetricReporter extends ScheduledMetricReporter<CarbonMetricRe
     results: Array<ReportingResult<any, CarbonData>>): Promise<void> {
     await Promise.all(results
       .map((result) => result.result)
-      .map(async (carbonData) => await new Promise((resolve, reject) => {
+      .map(async (carbonData) => await new Promise<void>((resolve, reject) => {
         // can happen during serialization
         if (!(timestamp instanceof Date)) {
           timestamp = new Date(timestamp)

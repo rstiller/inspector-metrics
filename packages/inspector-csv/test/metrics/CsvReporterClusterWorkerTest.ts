@@ -7,7 +7,7 @@ import * as chai from 'chai'
 import * as sinonChai from 'sinon-chai'
 
 import { Event, ReportingResult } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import { CsvMetricReporter } from '../../lib/metrics'
 import { AbstractReportTest } from './AbstractReporterTest'
 import { TestClusterOptions } from './TestClusterOptions'

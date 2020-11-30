@@ -9,7 +9,7 @@ import * as sinonChai from 'sinon-chai'
 import {
   InterprocessMessage, MetricRegistry, MetricReporter
 } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import { SinonSpy, spy } from 'sinon'
 import { InterprocessReportRequest, InterprocessReportResponse, PrometheusMetricReporter } from '../../lib/metrics'
 import { MockedClock } from './mocked-clock'
