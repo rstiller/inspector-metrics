@@ -3,7 +3,7 @@
 import 'reflect-metadata'
 import 'source-map-support/register'
 
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 
 @suite
 export class ElasticsearchMetricReporterTest {

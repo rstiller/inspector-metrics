@@ -13,7 +13,7 @@ import {
   SlidingWindowReservoir,
   Taggable
 } from 'inspector-metrics'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 import { Percentiles, PrometheusMetricReporter } from '../../lib/metrics'
 import { MockedClock } from './mocked-clock'
 

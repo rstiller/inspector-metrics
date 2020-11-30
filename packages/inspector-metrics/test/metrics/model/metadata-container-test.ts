@@ -5,7 +5,7 @@ import "source-map-support/register";
 
 import * as chai from "chai";
 
-import { suite, test } from "mocha-typescript";
+import { suite, test } from "@testdeck/mocha";
 import { mapToMetadata, Metadata, metadataToMap } from "../../../lib/metrics";
 
 const expect = chai.expect;

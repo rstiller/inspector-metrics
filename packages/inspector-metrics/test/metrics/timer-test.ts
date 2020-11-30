@@ -4,7 +4,7 @@ import 'reflect-metadata'
 import 'source-map-support/register'
 
 import * as chai from 'chai'
-import { suite, test } from 'mocha-typescript'
+import { suite, test } from '@testdeck/mocha'
 
 import { Buckets } from '../../lib/metrics'
 import { SlidingWindowReservoir } from '../../lib/metrics/model/reservoir'
@@ -541,7 +541,7 @@ export class TimerTest {
     expect(snapshot.getStdDev()).to.equal(0)
 
     timer.timeAsync(async () => {
-      return await new Promise((resolve) => {
+      return await new Promise<void>((resolve) => {
         this.clock.setCurrentTime({
           milliseconds: 10,
           nanoseconds: 0
