@@ -9,8 +9,8 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
     <a href="https://www.npmjs.org/package/inspector-carbon">
         <img src="https://img.shields.io/npm/l/inspector-carbon.svg" alt="License">
     </a>
-    <a href="https://travis-ci.org/rstiller/inspector-carbon">
-        <img src="http://img.shields.io/travis/rstiller/inspector-carbon/master.svg" alt="Build Status">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-carbon">
+        <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>
 
