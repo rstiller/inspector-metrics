@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "6a6caa9f731e93f3249c97cafc4157a9909903639ddaade2948088cee6fa55b89713f7d0f9ac539397d11eecf9378610e2907a30fe1776735840d7c6e94852b4"
+            "sha512": "66aaae4f826079f3465e12e7128834cb1b9a6c65b9cec9d7ee761847f2fab3d16f7773852add374eac57742481c01e41bc6731ceb22146ec3c7f8638c7c6d29b"
           },
           {
             "path": "LICENSE",
@@ -14,11 +14,11 @@
           },
           {
             "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js",
-            "sha512": "3a2acf3fe44d296b8e78dd812e198b0d6c6cb71662289b64d1f3a5a660186f0d6e07a839c7662d020fd11e71464117c6ec0c97db4d44414e7b4f1c6aed7bdb38"
+            "sha512": "aec45ea48e2747cb16f561ce4ef85e1ca20f8739577338563406bc3e7c85aec62e721667afec15a27cb48b88fc0c10317410b2a2d86730b8c196800fe9388b1e"
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "2a128d368c332ead4a77f86ea0c076e1c4384eb9b594454b1ed46fba384e5576a747347603e38310120db78235dcc2e40d57bd5b42058b0c4e37afb5aacf3fe7"
+            "sha512": "d1ab625ca1755179d1e1f5751aa7d0b4dcc617420cfd1ae1f08271e9d41b92f6408a401618648473509ed484359df527d424aab5a727ec912bfefe92b2e59d27"
           },
           {
             "path": "build/lib/metrics/InterprocessReportRequest.js",
@@ -30,7 +30,7 @@
           },
           {
             "path": "build/lib/metrics/Percentiles.js",
-            "sha512": "f4844feaed4355e4764cfa89d267853db24e8010b69becea95c36e5599aa4b34fb136c3863f85359afb25b334ec77e277e0aea077e20197d703f612c4528ada4"
+            "sha512": "17ed0dffee7e2983e349ce6c4af8b39435c54180b4093958fbc66407c8e54eed5d174ebb77008747e89fdee378cac769fa86ae1bb49657b3e78aed55d967b639"
           },
           {
             "path": "build/lib/metrics/PrometheusClusterOptions.js",
@@ -38,7 +38,7 @@
           },
           {
             "path": "build/lib/metrics/PrometheusMetricReporter.js",
-            "sha512": "0696652bd2cfe92dd425ae08f870b5fc4472f2c75340dd3af4ec4ec75836afd586cc8f4d9bb99c4a3d3c806672b96c9e6582b9d4b23c32b849850e9ca25c125e"
+            "sha512": "4416d9bc4fb4379bb93d1c27c9aeb638b4e0e6ff25123f0126315ee60f80b2acbbcdac492aea19ab56f4a6256324164bec902937e5be63935d1d69b442bd18e4"
           },
           {
             "path": "build/lib/metrics/PrometheusReporterOptions.js",
@@ -46,15 +46,15 @@
           },
           {
             "path": "build/lib/metrics/PushgatewayMetricReporter.js",
-            "sha512": "f7b3636655cabfeb477ac72ffd423dcb0dcb6375a2a925c54a2d64a951918f6700eed5c494fc40467d1637f63adf81974773f9a7958e721a470222f78d2986fb"
+            "sha512": "4ccf38e5d4777648585b0c2e93b83111af7fe40f344a14a8d32f48e0488847e29516a359d405f0facc55f1e7d84b3e0c33eb5d406b3adc423ab86ea67867bbbc"
           },
           {
             "path": "build/lib/metrics/DefaultPrometheusClusterOptions.js.map",
-            "sha512": "b9a61b15054f868ea3e42199726406478182c051f4919f6165d29f1f16799bae483e36db65852f7b245d783725fc0ac5e7e739865d60070bf11ceb9cb25bd92c"
+            "sha512": "b3a374056b1acce5a2c98817870d2612e99b22ca539683cfb410c320564eabd22c3762e26c24553c02092a33e0c81a12c20d05e11fd7aa77a7d37d8f60c23806"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "9a680345ab997cc4a04e6c98defc3d9cff4f1c5d12933491aff6b8c3bb2fbde7d7ba6ffc34b14f3abb4ac1dce5d95c94e5af07bae0bc99a3c27a881ceb4dbead"
+            "sha512": "38a5b4c9d7583ca5979bb229b374650ef7c2cea9e1d24e9284ceb9cb015f519df119e1b6667100b8199bd574783d7b39e0056a632d6980150c342cec702af052"
           },
           {
             "path": "build/lib/metrics/InterprocessReportRequest.js.map",
@@ -66,7 +66,7 @@
           },
           {
             "path": "build/lib/metrics/Percentiles.js.map",
-            "sha512": "91e7c054819610012e1d349313923b8205ff01cfbcb5e931faddcb57886e1d2244a96c10c27557434eb83b1631350900fdd664013b363270feac4d7d76366c85"
+            "sha512": "1f6c71d25c9daab6bb525a8ec1561242824fa87d9d1f18ee76b00ba4289e2357c350ee63b725bf3f5b2bc243ac5916755b81c5299529b05c708f7cf076aca13e"
           },
           {
             "path": "build/lib/metrics/PrometheusClusterOptions.js.map",
@@ -74,7 +74,7 @@
           },
           {
             "path": "build/lib/metrics/PrometheusMetricReporter.js.map",
-            "sha512": "091d4ccb1d933b8a9764e0b72350ad41f63e40e77fdd24d620759e156107adc82ab045e44ed534ddccdadc28510c8e98e500b33f01d1bf1e15ed22cce1bcfd7f"
+            "sha512": "93e748d8bd7d98e84c1dc7886cd104fee2c06f3a1b863e3e5f4ca9d5471d97945cda9d50b040215dfc747f535e7ddfdcb76b296113a7a2a69e1a0c9513e4ba15"
           },
           {
             "path": "build/lib/metrics/PrometheusReporterOptions.js.map",
@@ -82,11 +82,11 @@
           },
           {
             "path": "build/lib/metrics/PushgatewayMetricReporter.js.map",
-            "sha512": "42145cc7ef3892670ede5ccb66d6114d4902601437ff000fb5ac89e28f59c1bd16477cfc0e2fcf405e1a815163b0d2bb22aef5d33241624624fce7c263c97a4b"
+            "sha512": "1b2476c3e3d1e20883c738141d0eb765e00348f32e91943d3dc264f15938bb0d9bd36c80b5044a0d5606f1f98015b5b0f5d331dbf4ba7c8e357b46c2883f6b69"
           },
           {
             "path": "README.md",
-            "sha512": "d1709fd94eb9944a6cce5cf3f9d3c7ac01a38c88d6b127a39b2a514d8772918c6de6bad4e5b9f2cccb9deba0ec680d8ee944b173368a1b1472be40bab9914352"
+            "sha512": "6e493ab928f53a3fb52fc5488221f1d60dd5cd4efb7dbd0c70b0e132112b133e7d11401c131caadeecc7fa16cc8fa5bc157742b799e14db6acacc9bd9df71552"
           },
           {
             "path": "build/lib/metrics/DefaultPrometheusClusterOptions.d.ts",
@@ -157,7 +157,7 @@
           "typings",
           "version"
         ],
-        "sha512": "75d6afdcb715962e4911dc0068f9af459a572e8d225095a7cbc9260b7cc2dfd8804104a6d3cfb8f342704958e153e3a065bc06ac4a345e8ae270f024cf22594c"
+        "sha512": "7176c7827f9d45164b58408055c1603aec39a372e6e22133ed27934c0a7d5e9e8b4b30f93944048fe4464439e2168a243f0faf1d7e96aba436229606375065db"
       }
     },
     {
@@ -200,32 +200,31 @@
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/node": "14.0.23",
-            "@types/sinon": "9.0.4",
-            "@types/sinon-chai": "3.2.4",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@types/sinon": "9.0.9",
+            "@types/sinon-chai": "3.2.5",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
-            "moment": "2.27.0",
-            "nock": "13.0.2",
+            "mocha": "8.2.1",
+            "moment": "2.29.1",
+            "nock": "13.0.5",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "sinon": "9.0.2",
+            "sinon": "9.2.1",
             "sinon-chai": "3.5.0",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -256,5 +255,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAjCRDCMfXrQKYV5wAA1g4QAEWIaZcu7DhiMESbefTRLn9D\nHqqbAdEb1TKzSHwEPD4BM3I9dksOgvKd38Uko2PlXn3jwZT6lp1WqGZqg/v/kpCW\nkd/66yl3V9whJtEuPVIa/IHQti2KbP26+dZVgMhoDMUahL+sPZ8MrWm5Qa15hi89\ngb2x7aGh4JWd9gK9IgFmNmHVWlEoju5/34Z1XJ4c4fPt9a+VGOnqNFVcXdnHF8Xh\nn2FxZt5STsr4xlE9wBchsOZhZ+z1WdxYSuKMSuxCnhAeV5gchPWUvyBEWNpoFObp\n832/TE1h4saA1FGns02+nTLcxRUb4WSxZESvxuaLcDM583kVOJ2q3/dmh9E7zr/T\nTMQ7p5rf3q6qzupHdLdOI2MdoN+9aPZPnsTE/Gd5dqX0fYc1rOurw1iWsRtC541K\n5l8BKD3DQfxZq/H1q/YDbOSBydqtNAHFJZEkoxp+HszuNvP5H2zMc94K3jCkdP37\nHaKsk5iv4OMF2LIi/JNHV3coStTZXM5MDnpnchrZkam6DtjxRDQJvxqvOGbnK0Qo\nYcVXHnNKlLVugHIqTmdyA8GD6Om4OVIVPMg4MnOxqO8T52ftQ5A9H8oEFAG9Vba/\nOAzG+xqIuLx6c/sERLhBaxsJPS6aLazGBHLSDraWlIhtnZqRy6wVGlIWHThN4k3h\nkU3a++xiDFgnMOQaLJUR\n=5os8\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/iCRDCMfXrQKYV5wAAT+gQAGOcpGJ401AGNNnfalsyS5rQ\nTN8tl55Zxzb2OMpzAlv/hHU5UT8z1EpDT4RneP8aaBjicXqAw+CCbWpA+/0qMbS8\ndntLqUmhhpDC8dG73/7UxU7i6QRoZiK9EQIrikcXho0HttAQ6E02K25843kYy9Da\nPMgPZUqx6wqgjjdpHBbNdngixvlK6a6AiSjSGnvSIS74mDTYghBN2g35frYxhHv0\n9Ejj0qjiKI6cIzy6GwvelaaryCwWTPMLVjqSBx7HvIAL7pc7DZw4Gec6MpIuv04R\nEj+YmppyZHXdmdSDUuahoD4I7VlF1BpYY79UoinYvEjKfZdtPd4i+0uhVMDaTbaI\nHejrfuvoSYaoyqSMlKMgFoSleIFmYZdv94tdEknj486c/laTvIFHxKbB58Et7s1N\nC6KVrDfDFxYd63g4r/pkH7yQFXmzqWUn85BtIBrJ5LHGB3YsShuV3iQ+wtvvDsPv\nJwJPpym/XVzlh39TAP/r5AiF8DgYUa0WQdKq601qgMvh6VSF9Au0dGIbbUAJ04ls\nKQrUVxHkmN78mD3SlOH0tckMKIeWMR1GEVO0w3n9iH2aJVLieofW4qKykkiEQYvH\ng0ANb5m+xt/P3UEc4ESoyVyeWkl+FqWw65+4BG028ls5b4RjeXXbHZR9JCMmQP9g\n7PuV+YkmR+iVmMWCHYLw\n=Ij9q\n-----END PGP SIGNATURE-----\n"
 }

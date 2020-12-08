@@ -10,47 +10,47 @@
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "8093fe685835954bed6135785bc24193b7964758aebe85cc340767276b0e6f6ab876b0f2c52285d478d9f0baaa9c5143cbb281f8a34342fa6159a543bc613f21"
+            "sha512": "7c143e44e07238927908964e9249235bd0dbf0b62aa713273fe2fd15e7a5cb7b261b9960c1637b8e91fd40456662ec2d7c9f406cf9482264239e8d161d5df37a"
           },
           {
             "path": "build/lib/metrics/V8EventLoop.js",
-            "sha512": "69c8dfc7533fbb2bde02aa49b6746e01cdb2547035753c74dce3be36f900d0af3a42f76d785c9709aaae7b1037f2f3830a22be05575adc2ae9310cb06a2af434"
+            "sha512": "670481f0ee69cd3037e589333504bc547a390684797e2768bb6835f6ff8c634fe487116c162ae17dafa06a979ee77eb4f661b16c929bc51efd47f5b25432acce"
           },
           {
             "path": "build/lib/metrics/V8GCMetrics.js",
-            "sha512": "18d69ea48678f9818a9858c6b0c2d0333e634bf4a3581d0506bd2bbd133ce0e56a83c01a41f50857a1f1c7a897aa44014d632178e21e258b64cf2fa41be94fb3"
+            "sha512": "7749326b684530ed87c66020e0490fb42545a12ee5b6cff07be6589e7e3cb05ae57a484102c0e8b6f579f7319ba9da85823adaabb98a35e9c795fa81cef79a4d"
           },
           {
             "path": "build/lib/metrics/V8MemoryMetrics.js",
-            "sha512": "0e93ef6b248728c85155e60382b87f7196343184e5663e423a3b73f6c74b6e5a2cee6db152b666e1582faa533f9f200fe81075c35e12187252e475a0b5941554"
+            "sha512": "04226f1dfc6bf4206cf8684865a9ceb943b199dd83c94107d1b9933ba344277d4ecd1029889434893b4e8b6c0a0e929162472538160186cf14234c6e49de3614"
           },
           {
             "path": "build/lib/metrics/V8ProcessMetrics.js",
-            "sha512": "4c6820af948d91994494b249d67497ab7d26bbf493b0be5a55e82853b99db04ad7852d67cc3a15b07ee2df691c35a94588dae9ca634fa82e456dd2904afdcb38"
+            "sha512": "56a694749cdab2c3c7745d48b43d7742c7d3d9d95b8f912e0d3944d4e0b7bb513cdbc5c86ad97a639d43cd43a549b6c2d6d1acc54f191e55393b0b598e062f96"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "e194f418d2cbe7020962b9028a58add04b76bd04a1963e1efc336bbfdfeff581a40aba7a9f437371c7a3310ee06aabbf56249c7956337d9d81b2935fb193f446"
+            "sha512": "d5da5dbf9715a0db91c903e27969ad276b35af85edb20daf21fd8b85df3b39813164b68f60a9f8fd03ad849375d14aad7daac0d9a2d9f51255a040141a37b365"
           },
           {
             "path": "build/lib/metrics/V8EventLoop.js.map",
-            "sha512": "ddf6454a3fcf5cef3d8207ccb930528a353d364f59975ee1320af659ebf69b3ba71c2af4266de83d39fb0174f4434abcfc15e5ada7a65f3bd87103c4b050183f"
+            "sha512": "4841dd733089cc3f0eeeca594573ef0a9aac18eef829423a7dfdac7ebb0066a3a9e48cfe7a30c20b4ba67c21ec39a482a07cd6d5b53e1e91e85975396588e54f"
           },
           {
             "path": "build/lib/metrics/V8GCMetrics.js.map",
-            "sha512": "08f1ea76a6b596d11511ca593a68b884cfd4f433885f644c16f01585fc3a631d10d02eb53c7a492b37e27dc4ed8fe820f3e959a91d947e10b68b40b85f4a3ed7"
+            "sha512": "b29c065d2f9be3e21edadf9ab31e0d6082dbc51a108b5ec0562a9dc80d0d2295a47fb48586e8e2fbbbdfeca38d9d4c800959de88aef5344bfc31b657fbcef1f0"
           },
           {
             "path": "build/lib/metrics/V8MemoryMetrics.js.map",
-            "sha512": "957b1167b04f2729d88837d31a0d2566b4bf5f5408e9c22e8439884276d89fcd0bcc1b745c88a4d114839f4ac7799904bc581284fe206060801ad44de4480269"
+            "sha512": "ac9488d4e4531c90b370606c9d750f0c1ff8b1d6f94915394de6489da7d500279050c27fa735d902df14614e46c92840cee2e4029e7cfe0d5294ae7f6fce8a35"
           },
           {
             "path": "build/lib/metrics/V8ProcessMetrics.js.map",
-            "sha512": "fd5ea3aaef01e35956d9c6275cc789d38ae58d85e3bd2f13fa012e64a3f2a158be3786b827fe3b2b1518a261e7d911862fbafde0f099942b8630ffe657fa3754"
+            "sha512": "8b07c42317180b7e36eef064763c94094f7348b54f4eeb415c1708fbeb133b83f8280402fc1bd61ddf9cd65851e55a643bd986f8672c1586ea3f6d3ed4d37040"
           },
           {
             "path": "README.md",
-            "sha512": "9815728be5695926a2b7a144c1bc59b6f9c12ba0413d7ac1eff115f63d2a10be51176abfae2cbae32bfcf23ded06617a070233be3f2bff0b799cac18b50be7d8"
+            "sha512": "e0a02f0732078ae4e24eff40b25156ce952688ea2c850d1b2cc4520c30d35397a4b6f28579c4d6274e561daf369824ecc4ef5d949849f8df6295f7eabc0f5f33"
           },
           {
             "path": "build/lib/metrics/index.d.ts",
@@ -105,7 +105,7 @@
           "typings",
           "version"
         ],
-        "sha512": "c03a347459c074a4afd16cbc6cec28f07ef83e80d867f2f5e98cfa7ce436c1b0b50f1c44d060ca150a334730f4ec413cc8f5e9bc3b019db0349050aa98689cd8"
+        "sha512": "ab82419bcb55130e9b42ef04b7619920c0ddfd47a88ac361714c8113bf488e4b2423c536cb9bb09d90b96efc320e3edded87c89fbb0407d2c20e6f4b9735978b"
       }
     },
     {
@@ -149,26 +149,25 @@
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/node": "14.0.23",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
+            "mocha": "8.2.1",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -199,5 +198,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAjCRDCMfXrQKYV5wAA0zsQAEO54If0kWM+8+Ek4UzyKhrx\nLlvflBRtfGGPAiyMZFcPaCLKQgLxFfJ+INg8E7KceOL9BwXmZT3UzvWBH3Ud3ZlW\npQa43+GrI2W85/EQTI0reHJxRvm1xFKN7Cm959qpIGVz+TdYGdmem1YsqYAxoQ+3\n/bEDEI4ATCfUJF236rpmQ1nn5Y5wxCYUb1mFW5leZ/tSJZxRLmnHd0UDat3PwcI+\nlA0cf8RtCGd4ZwzF8RTrjqOGyPAtj7CwdrWYeY1r+w0ZphO9he9Na8+GSJcsLtCI\nhdDZngvrDi07NljccLa0OMS0KF6YeWPMHtk0NFr+Qbs3MueDKbd9jdwuqHMGYMk+\nFBoJB9wnDcnATjV2IAyCwY5E54u6BgBw2LlkUvifGauFaIIuiOwcdZnKyNVU5ZXf\nUQzkvKNmBztt++7m/g5zOcPmdreSqY/SRwhNQp2q7EDcRf74vY8rknfVPSTZhRCm\nwQ+IMXiXIAWp2bY4Ax0Nxoh49aNcctvT4h/kYiKm+RpNlPpYiXC2FHfhFk8l0zxP\nuF7VpY0LH30myzgyoOfAqK/RVa6UGAaQFIduER0cW2Gm8DeSkwAX9As7JFIPqVAN\n6aG41zqJuli0Skh/6NgmOH163Ikc2J+YPMFdYVojPAH/xYy8DlHj8XzZ1skEYGCH\nOUrCusUjgUO7a3WAFogK\n=bNpY\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/kCRDCMfXrQKYV5wAAeogQADf5QmQBiZDjGezaDLZTiTOv\nc/h7q5P38jy0Ka23HHL5pa1iFj8DO5V/I85EpBAIANC/eMOdRRf3ZE66KTPvyhNL\n/LzNatLFAzBTBT+lBbDeluPhNSHZq7JvdoG6eDjbBAibIQ4l47Bo15n+y8tscFfB\ngZy00IpEpJIvK6nKe08OPjERxg7lPCFR7rxdSglvxsm7Yq9bWWlvZS9g1k6q619m\nRwNvgwPTLCaCKIz2eXs0HXF49QZ1x6bPjFY9qag2Is+9GH/mA3htiAgziBaQ1J+7\nt12YDyTW3hWHOJEkEFjlsdws9wE3HYSOrUpNyATr6nTOb6ar2QIgsoJJEEYGAu7N\nGCYn6oCj85bOXHv99NBveI8igYoTSexNxNv5d3iSZzdpRKUPLObkWBmNlw52aj+N\nNMP2+GsDkhezOZUIOogGVS+XHdd+aSL+X8Dz455UNQlIaLtKmg3Dl6enpUUhJxQt\ntJNzu8zL8RjIxiEE613WqRQy+68IZA9rwQtkfD6VTy1tyvYoyiGLMVy/xfumCu0g\nd/YieSdn92I+RN8qMrIp8L+LD2hKBmbHZ20ZPd3Qh8VrgF6GgbNLwvTDuKiFBHwT\n+yZrpWYqZKKsjkcHGeY3hwTLBXkWxV8GmpLe3Piy70egkmRb/ODE12qW+BIP4vqX\nJNrU2MF7JuJHwKgyVzmu\n=1Xco\n-----END PGP SIGNATURE-----\n"
 }

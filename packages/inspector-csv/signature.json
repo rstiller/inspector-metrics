@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "5506e52c1c31ab1b0b5fbc6c8549f2b204e1844666aee8b27fb3283cef1d657c0c7a1e506862c8191b2337cb7ed0279fdf2cf0ca1717ed8eee0e3e44f983a81e"
+            "sha512": "88bc0ab0f0738fa4d2ee972531d5b5c002a522705bed8be6f31d175ce50a2dae670a75632a74bd19d0bd7e999d346c196d42018b5acad45b8d0a26866360ec22"
           },
           {
             "path": "LICENSE",
@@ -14,31 +14,31 @@
           },
           {
             "path": "build/lib/metrics/CsvMetricReporter.js",
-            "sha512": "295d667bbb8254aa15ef144534169078a647fa7bced56503766f591de745e10c7de2fc431b79afc4d122c4313826156c62e33b3e9439e774a46b4b6f8860ed66"
+            "sha512": "04de30caa40b173db3f035162080036513a4e5c62420b51fad172234d6e92a0be903afd56ac9e440393d95b9c95a1928485d7ee2503dcf629feba29ed6298b24"
           },
           {
             "path": "build/lib/metrics/DefaultCsvFileWriter.js",
-            "sha512": "fb661ea12213676dde824d5085fdca019c6ccec5c673191d47153d6b2154a4e26ce0acf37021c35373ca3f6cb36cab0e13dd03de3ee734831a3ac3cc5d95ffcd"
+            "sha512": "a28ef24893c6f0730de7900382281407d87c2553d5fed5f0903aeb1231f4c70a0b093b18eef9d8354a17fab564f00f01f8dd6c6b15b6fa6ebc73284f025402b0"
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "9b1228117170a734008df1a8346cbd24fd35875226c1cfffc7a97dfcee5a5b65485cf75a4d1eb5132a68314afbbbf75ecc787aca2dc23a7773c07474d6d04c79"
+            "sha512": "ba3a8309c0996381523a3e35f6e014b8a958fce0fd302bf158fbecb10c2be290dac44638ce02785013f8d47631d025a4cb3e46a2eaf1b24657d64b751b61f158"
           },
           {
             "path": "build/lib/metrics/CsvMetricReporter.js.map",
-            "sha512": "8192f82c80f21c6b55b13ad313069134ec81b26254427428ba06e712ad489f5763047440bb8f72a07dd82259ce1bf0c3838b344656696075edc0e67b4cb47256"
+            "sha512": "a2eb054ca90726ec354b067cbedaaab6d898ad394f4d8015b6c1e320b02cad8e343c612767b1b1e08a9695477373c5c65a484c0bf5ddf14ce37fe214e842a26c"
           },
           {
             "path": "build/lib/metrics/DefaultCsvFileWriter.js.map",
-            "sha512": "9216990ce3eb7ccf4833d37876cbfa1eab6f9aff2cb50c84effb1a5cee77af16647566cfb74c0fbb4a47c6a1c5c7268f8d2769b72d543a9debf89c63010634b5"
+            "sha512": "dda0a0e91abcad6bdde57ccfb8fe67443134d9a046e500c09028e068272d10d2fd33c52409fe1342c3440f1852221cbfbb4a31d4c6c317ee4e0f4625892bb2d4"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "cf0ad39b4c641cc599d6fa1d1d0623cce2ee2a356524d121d8807a4322349eabca0ada901ca3e45576df4c75e410308e1324fba26227ce92ed941518105a80b6"
+            "sha512": "59efb0a075c28fb6bd1478efdcf4baf15d1ef2806cdcde1516c98160f8db3f1c0ee17627e4190d379db961d167fe2a7effc91cfb7e9917b36055c0de842dc650"
           },
           {
             "path": "README.md",
-            "sha512": "12ece49c874e5a4a706aaefd225c23545de10c3de22f532ece8849c369b9cbbca2fe25a344cbeb2242100326b999df7a60dbe2a1a8914439c13877d7d8c84789"
+            "sha512": "f1c3842c0f8b98c8006d386b242dcff877a0727d59ebacfeedca156aecee62c5100656f2419b6a81ed8339f5e758ac52fdc37855201d189f16103fe8a9ef86c7"
           },
           {
             "path": "build/lib/metrics/CsvMetricReporter.d.ts",
@@ -85,7 +85,7 @@
           "typings",
           "version"
         ],
-        "sha512": "d17416632659b53ca45390a0cc665276d548b1abc905a3493f4c76500a23bda63a71ae408310eef37965a90b9213f0cbc1e61f8e9de996d45f8d7fdad6072275"
+        "sha512": "3b8825be3a7a5947ba3e13d1f83cc5004c20909a10d91b3ff5ebf4c33f266526c4114b5bc26d2b1931e776f55ac1287a2ff9269e179f287b9e232e544174beac"
       }
     },
     {
@@ -128,37 +128,35 @@
           "dependencies": {
             "async": "^3.2.0",
             "inspector-metrics": "^1.21.0",
-            "moment": "^2.27.0",
-            "moment-timezone": "^0.5.31",
+            "moment": "^2.29.1",
+            "moment-timezone": "^0.5.32",
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/async": "3.2.0",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/moment-timezone": "0.5.13",
-            "@types/node": "14.0.23",
-            "@types/sinon": "9.0.4",
-            "@types/sinon-chai": "3.2.4",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/async": "3.2.5",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@types/sinon": "9.0.9",
+            "@types/sinon-chai": "3.2.5",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
+            "mocha": "8.2.1",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "sinon": "9.0.2",
+            "sinon": "9.2.1",
             "sinon-chai": "3.5.0",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -189,5 +187,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAiCRDCMfXrQKYV5wAAOB4QAFVKaI0Njuy5M8j/Lna+m2zk\nTn6m9Cd7nGEu7+eaZq2hdyjkFLYB5ybUBeky0gh0opdxuMtx9IqKc7Ebb0RV8Sg2\nHzWwSMg6y4LR7Mp/r80PJFqrl1GXDQzm+9IpdAzofsiG9JnLeMxIiU4/QLCQbpes\nFpBltIlU/cTJy7u31ogVepRRLLnOiaIVSd8L7Bx5cag/IBFo4upePZRqf5TnKkBG\np0qVYVjni6mH6i1RxAFGwxaCRM5Xf/B47RFGQcUWHeszddiVSyJ7PJrZxxq2LIj1\nF5Av4xPFJwgD++ws9LDtdWZE8ZzDCidyCPsWhn/68v6L/svfA9vWLpN/19EKzaDq\ngJy3vPjGh7uLt6TMvbXup1nrkPKXwdn1DFxmVjUNul5y6eVkOyPBqMG6Nb9zJtAV\n7HS+0D6LHrUqNyIjcW0FqKivGU/voZVpj2KEHtNAIhhMr8Ci250Pk8s3itoBJs3W\nHwPLw0FQhE9+caapUnlNvUjT4dFhn4kusLG8gvzZLZGc+0Ij1yCnYnWJXXpKlFTQ\n6KvQZlYi559BLCzf9wRnZM5eZ/OvtfqEqZnCYkG7WDXp/Qd+0qvj7Wn+mTzHnqcV\npSAArC+FB5zua4WBT3cRLkKFa2t5uWsGe4wtDBxlbagf/F6Ue5xxjilcbwqUqF8J\naSH71IU1S8nBgG27ETk0\n=y9jc\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/cCRDCMfXrQKYV5wAAtS8QAF8QJrTy2ew23IpmsLlp1o75\ndjDzxZmmWJ5Zt0+MLbk4G9eGCAfegJgN/Xu9n9H5Xkm/iE1n87UKMB1VNtsLXFvF\nJGnWnLMPxQuM+t62PJefgPKnpFWi5gYVvlYbXpBX1LpTQ9kFEXIGiH4r65GbgpDL\n/4aeDl5ZGFNmCLc2IgfRimGGLke6MMeUeig6jZS9k0D5pdrVv00AuI99RBzCFKrl\nubpNL5R3ONCOsX8BqGK+ZhqOrkTZP26G2lNrlFJ+YReymgdfMuRXvvPfa0qW/DHI\nx6NehVit9hje2jhFaw/1MwYPlHnfcFsl0a+7xnUANqpgMkq+8NyDr0ylcWJuS5DX\nBXONMXN+ZfxZckwejxdDDOMaB8UTKCoMTSDNYC0999W61GVo3iJeLGQv9HzL5O/A\npt2BmhuCpEhzda7p3fl+rQRPRbYJzJZbzLvA/wtvQbWrmKT6T7EB7Ml4DKo+dogy\na0aWfuJL2E4W14F7AdhsTnsH2SiZSqoH+I8Ptnl/zJVCCWqragKAGyuRgi/oKpuI\n3epgQIculCNGALDzMLhhdvFfynX6eGaTy+UAP6wwPhDyS4wMsiRin0rVIAZv69qE\nMgWpI66V1haBWRVEfmh+ppEj+ydM8Xi+TxsDmqQCu5iFUN4UzdpJNGvhgIE3AOHO\nato65zEfh62P3eucV8Ok\n=gpuX\n-----END PGP SIGNATURE-----\n"
 }
