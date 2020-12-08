@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "424fee09de9f0bae11ba4f9f3001490ca20118ce3817bd815ed5ae66114b07dc7cebee7c3f17348b13f64171475e852745281e836fdf62085b952258bf6c43c9"
+            "sha512": "d638c9b5d840521850c579bb4d39093a08e40cef3a9396137094da60bf6998e9abd204eb333059559c63c47967432e9d88eed21242a42f2509f495923f2688d1"
           },
           {
             "path": "LICENSE",
@@ -14,31 +14,31 @@
           },
           {
             "path": "build/lib/metrics/DefaultSender.js",
-            "sha512": "e39f93a3f7235f954fec4bf016f1b253712381dd947909c9326da36d2c5191b6188aa9cd4995a8f295577b9ab595b4644ac804ba0c723acdcf5f7ceede16f74c"
+            "sha512": "dfb98cc33a64a0be94d24b9631ee7754653f3a05199e671ae73d378721d9e5552dd9b9675e04068bf6e46ac5a75d578854f1f532fa9555d1ab801b01efd06712"
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "b5c91e6ee56299995f7ff41d93dcfe73fac6e699bfeabae2e01b59a5f80ba37f4419384b72c0070ab74ff4dfafbb0e8954ebe7844b1b87b186ff84eb9d2d6205"
+            "sha512": "1acb914993765ea7df1fff242e5687b7b7f864b0ad50e41c4ba6012163ffa277277a000f6e2fd4c5b5251569b60fac4be70d80fa4bb4073610b7137267bbdcbe"
           },
           {
             "path": "build/lib/metrics/InfluxMetricReporter.js",
-            "sha512": "3c663b3085c4233d9fff4e1aafd2d2abce6cfe425b19b16182fb3e085e57faf2b9731a2be584f07e2d3273656e16f593eea259052023b3dfa313873bf0a44bfe"
+            "sha512": "2e35672692226e17a8f7a2f8dfbd5d39fa6968a9660bdda8d7746741ebc204c6ff9c57d5cef3dfd1503a7be623c0c18842a69613ced3af41a88ebf576d94ca67"
           },
           {
             "path": "build/lib/metrics/DefaultSender.js.map",
-            "sha512": "2fff91752f03f1f3fa28f292c606131ee3ba546decbfa11ab2dd654f151e50640cf596940663a6eb7a662099918a94a4a7bf75f1046b449c404cd8e0f6cf0dfa"
+            "sha512": "0254b4618a57c7ba177a2a064c156ed45fe26a701ec0695cff2fc4fe0abf388c539f4cab72bade17002e1602265dd7016cfd735fb0c180c4a82b5aba52b76cf0"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "4147dbac504410071bc400858ec835d38a15504376797b2dedd5b3db20ceef5a8cb020eae0eae30b357d55db32265c013e7586716f831d918388730be3de1900"
+            "sha512": "51d9ffcfbf859cddd507093e76d53f34ad3073f2db684cc6a54a0b10f5f746e9fa267a3e0f696ebd204f56e726eb58401be2637df96f617568cbd3bfb933bd27"
           },
           {
             "path": "build/lib/metrics/InfluxMetricReporter.js.map",
-            "sha512": "c3ddb6b135e9a0e4e2c0e615a4640c6c5aa4037950b64a91c98addb6cda7120472dc41efa36f4edd73060b7e44ee4b8714ace8e1da3b8b984e4cda8b57b66e1d"
+            "sha512": "538e6668461063dc8a580292bb2bc9751671224535f0a123e28513753d7e98e5d5195c7dec4cf489768fd64f39dfc3ec3e0359ed8abe8a98eb329aefdc7b3518"
           },
           {
             "path": "README.md",
-            "sha512": "afc2141b80c8731e53da32769680cf2326d3b797bc33bb1cfb2a79653d360bd05d6a358c871e7262836b48cbe589fe898c7f1f60ea5c9a4286c082bf518b5608"
+            "sha512": "dbb3e3f62b5c760f977b143c70b808a7b229e3789a343ea6ac42ea9d26f624d7e790e2d9533532836d0b8af50785a2b232a5377f449b0ff2a1c4c9058b5a7d44"
           },
           {
             "path": "build/lib/metrics/DefaultSender.d.ts",
@@ -85,7 +85,7 @@
           "typings",
           "version"
         ],
-        "sha512": "7b36e920eed85a1198e32261573292e360391d4198bb498747d0d6243272cad4c4dede636cee2120aefc504c13b981bd3528ab04bcc36c6a5d188adcb0f5b863"
+        "sha512": "124113ff5b29ccec162718b2aa04ff72b50c168d630c11dcc64a2c29edd5e7b549c3e92a12dda0cf7553bfeeaa11fff5df219a1578d5925a04aa164d00a06c8f"
       }
     },
     {
@@ -123,31 +123,30 @@
             "inspector-metrics": ">=1.16.x"
           },
           "dependencies": {
-            "influx": "^5.5.2",
+            "influx": "^5.6.3",
             "inspector-metrics": "^1.21.0",
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/node": "14.0.23",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
+            "mocha": "8.2.1",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -178,5 +177,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAiCRDCMfXrQKYV5wAAdZkQACxKKwvqtXQYET/83sW8/pGV\n3nLBDVZy9m/vHqEdHOYPb1VPGbkefjMSSa0Ux2OlyQz+s6eniJfcX+jkGgLoiK8x\nsz2OxNXXYmn1v2BsUgeFo08RLdPUXlOwiwzTDKmDIL725gfRD8Xp0zkj8qeM3qGY\nELZvyNogI64IwpmL4RWKo7VqTHbbBWJtiWq/pscfjTgkld1PJj3hodEZ3DPmVq8X\n8V5PelgR0mr6n7WiDKtSaxe9EFzIqOuOtaqTpdzhMOHL9kuwzOO8ywACxmEt+gNJ\nqrS+Mo8jcMGP5WDFXx/WW/xG6gjH2bbogOChBwZMdpXbk7HkyEQyYmQFLXxSIPSq\nEGYNLvEGP/+aSpDxcXRBZa6R/vemKVR6nCxU7CdqdElHYH+0Oxa29NrGxaFVFLxO\nEtJG/MZhfLtCZlOd2UAfd0eafyTCLC2fA7NjinbwUvOXvDFq9dLsOxLUtcdfNy5T\nwKBYOcrmXDZkZP8bkw+MUzRX0n7l+PNbQ7TGLXRbX7WKF/Dl+cvJx55Cr8ZRedIX\ngODfcflknDwQP8c6uJkDRKQb4u4dbUYzoTvI3EkQ3aw3GfE+4G8oXKb2oOjlNGhe\n+cc25v3XCY7EsqV7m5za8j8Y4oe8Hj9OTviNPM0+8g9GGvX7A5g9m1a39N/nrB0O\nIe1N3Qerip1wbNA+mua0\n=x2Gh\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/TCRDCMfXrQKYV5wAALD4QAI7ceQC8xwMr5ID+HvMgjI0s\nbtCXcEghg0TJ3KdPgfrHgOm8dplGxNYNpvrGeHfQQhXvImYkwaUgG8XOQBto6yUz\nFUyrPepwUSmvOAuIYGGYxv6RKORGgSxELPglenlZOMaWxVHv+2MdVzjPp/MhEbFc\nSQAV9TOT8Rn9zSU9mWJtNvGW8OBvywJslQGKwLBtd9Qe0wL1fhfLzF+yFZmv3ZjW\nGLhyO2Eoy+yJcblxUPE6x/ooaO1cpxvMW+jM3x4azeN2zUVqdzn3Ytg9QO1DoAo/\n7ZU0wE/czaYrl06G2ALk2syChP7E3zxVNJ/b1SmFtft9o0FdNicJEdxJGRTHV5EH\ne65q80zO4iyWdCxOvLX+pGlOVd0lLnoSQZAM6g9iEQpGsxjE5/BN/9C75IBm3jjG\naw0c2yY731W0Q944HQPy4PRHW9xdNtPBCwBJXJydPJgFFk+06siic4MduvcRTpr5\nLmcENV2fFOq/32XZk0xfU89mtv0m5o5duAmw5jnMcSeZlhEf3ThzyMP+41Vy0O7w\ncak0eBeGAi2cUsgYHEEf1GfB+FJcrydd5t0WY+Iq5bXhVtH2nmjt7SgdFRFiFydE\nWk9fdoXAiKo68VxQ+dsFNOC6wcY94bdpD65PT0EGGKf/5h7xoYS1A7pndQJgohxT\nlB6ytU8svohtEh9OqXdH\n=e5bp\n-----END PGP SIGNATURE-----\n"
 }

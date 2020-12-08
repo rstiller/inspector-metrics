@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "7d5442afa33edf8e6918b680a19e7e97e574e359e44a1b80c7b001831066a7df4acc0baebe323ae8c4c3adbf5d66607c7fed4e0db564b02c928a8169674dbfd2"
+            "sha512": "b66c825193c45ce6701eeaf6bf81b49b9a0a3bd5830b2f783c102049cf2e459af33b1edd2bbb024d632128211ff92f318cb388ec4788dd6e1601eb179c8f9409"
           },
           {
             "path": "LICENSE",
@@ -14,23 +14,23 @@
           },
           {
             "path": "build/lib/metrics/CarbonMetricReporter.js",
-            "sha512": "a655a81669470d7499348cbf8fdbcf4447fa4d2a7e6b3cb2dc064ee339801f834fc3a4d9f2002b8d39e20ae7668d2eaac29a758010af316dd435434471e67cee"
+            "sha512": "fa6812a7cd41a6cda4310f98d45437855ec832a0700c7f92799b86e114fe7883878ce5ec62d6dd6b7298633dea27a5207220b69edc0cb38721161e1c5639569a"
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "a5c8ad9d48ec91d586648143835625e3e23ee77a5d34f8e34497f052f1dc3b23625938c0287f76683c0d71b5e1db57d72d046c1ea610c41a15671ad11fdda65d"
+            "sha512": "b9b5375f05d207f0bd9dd2591d4bdcf3dd4f9fddf0c57656c037effeb6432ded8946d1bfad0c9aa7583237e543068bdb1d3326be0d16de0bc085507be7adb32b"
           },
           {
             "path": "build/lib/metrics/CarbonMetricReporter.js.map",
-            "sha512": "caa9d2ffbec3189d82bd06e57d3e19fd0a62a8a2fc25f8f036c100b4633635866528e8470abfacd8eaa90bf9c7b2fc2f717e9db7b5f85aac829ab3ab27a35716"
+            "sha512": "ccf1bbcd387a5cf4987613ffbd64f4ca9f19b26b354bf898b2b4fb5ec5da31efaeaab98c6bda99a85f5cf977a6b2c37270b11c18556b635f5a2ab398d8be1cb8"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "536e8342fd15f0d9c1a10bdec23ec6a9a304581bbedac4a6b3ccb1372341314241b4851a2c7eda7c73062f2082fca83b8ad9f88949feadb53c974ccc450f5ec2"
+            "sha512": "8dc0a783874927d1d6fc0cd79a83d2e4f0e13c622846ca09050cee1ebcd168b9436eeec600f02e6d479f65ff86289abac768546c4473ec410bcf6283868496c0"
           },
           {
             "path": "README.md",
-            "sha512": "1aed93bcd4f9273f61e3a54ea9d65791b0885d223baddae0a9f109d660aff6e15efc864bab0bfaff069645d481d4beb7ed27042078733a4e17e22b754ee81f6f"
+            "sha512": "19825791f92e5df0dcaf36444af1037675eb9f8bede5b4693200b330d3221efe2219aef1d74200b267692def089b4b009b81278f5c15b991c451419ad3092659"
           },
           {
             "path": "build/lib/metrics/CarbonMetricReporter.d.ts",
@@ -73,7 +73,7 @@
           "typings",
           "version"
         ],
-        "sha512": "a79e69536c35cf1703f536751f63ae3a63ba289ef83a6df334db8a0bded9aac7e62412142473e95b5a8475e447685b34cb20fc0f26d7341a02d6fd3d1f239415"
+        "sha512": "ba74bce0b8b4e9303ef98ce375fd79ce134b7a939f8cf1018a06cd90420269e8838aacfd85c9634c9fcacbf3a6f33e01e12569cc833aaf28e79184d8b51ff95d"
       }
     },
     {
@@ -117,26 +117,25 @@
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/node": "14.0.23",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
+            "mocha": "8.2.1",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -167,5 +166,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAjCRDCMfXrQKYV5wAAnpcQAFHqr9FZzTC48cEvtTxrVQM/\nlNMG9hWSR1QBw7E14i8sTz1hUDrwsM2VWTJls3oW7GfWyla8LNGyZNLq29E+Ze03\n2mmY/RTqE+Y2HPG4uHHbm0K8LqcNb4o4IrKzaSVG7ik/bfkyGK0iXVn7PUKpWmU0\nDqjpXHNOgWSkTOf/gXq+b70aocL5jbGMaJLI82F6hjxTyuHvmQndwfnDKyeFxti6\nWzv9oi6hKYnnBxUDxXwXeQO7W5Ky+bA3MRuhdiv11aeO3cqgE7wd2briloiRHysK\nM/IPZyNrZpmgSKIi9Jg5z87sJUhyfe0sNbbKAwBCKlXBb9hMaHwdlgl4YvHnU9YW\nspa+CJtg/jonU19+gD199BjX545DMR/30aAt9qTYlXTG0hTWM55ifz/1BBpf1abI\nz4Cs0e9cqqW0oxxa37Neh9qZujQ4+5yf+jvOwnH+tq4Wx98C8zwr8s9vdnPbakvo\nysPXFtktRihtjaj+wIIVTSdWKMh6xpDIIqZkOOR89z1FYQZNJEnP3ZL2S12iOUMd\n2aufmYFBINKAKsVLJv6OOLSmpNK+HEAXxX/RFcDph+JdiAuWmVUYlEIW6obMhcyO\nnNKd53ihbGn7D1rEEysjef+VF8/xhr1sjW4vtb8RL1PTh/b7V6QXautV9Yp8qeME\nI2Rn//DC3hcA9ALWDu1w\n=+2fT\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/GCRDCMfXrQKYV5wAAdOoQAKxgKqUm4xpZeDd1xleATL4l\nApzwc2DePFTvqPnccR76fbmm+Wnqmm1XsKqZyremjLPCrWfMLMr7TvcLQWvJ7nkA\n6UD03EP/JIjyd2qpiWX75E+kb3tOVdkUKzUIuE/HJW9y2C+vtdvloGVSRkn3qxot\nidSLGxzm3b5+yQ4HgmS94R42c2m5lppE9VOI08Lwsg+t3XQpRErxPbuzxbADS+eV\n+UwC6dQniIyn01bc5s8oYxF0Osab8L+7uVT3n5HI02D7XRr8iavLWqsZ8IuTv0Ur\nljZFSoMStQrssm2K23C2++p2dHRNAEoEa7p0/M8DDeHkimgBFwL9VCVmOQHRl40D\npjAYn0+dbl0aDNRlc5Fmd78pqPDcGJTMlhiTnB0oEyAoNw24+APxT7x1a3YL11u2\nKy9J9JtVKxZS+kK92wgYd6eeI0lBjskjVxiqIkycBcpNtiQJsY4exlNnkKo1rsTg\nN50JwzAQDuba5CbZfeud0J13vj5h8NCreQlZIv8jFl5B0D1Zbt+GFY3Q5fBKtCw0\nZ28K0LHrkThKEPs3vpSG1ufY/OFxEudbP/lg4W/ivgk2ZRrOWFr5OHzajGyYMqaA\naLm/RJz1diphkLTo+JDBZymqtUpThFWsb3ZBxv6K20UV0C0xFesxA1BA069mEAVr\nQyiFHzNR/Ns5bk67r4Bo\n=PK/D\n-----END PGP SIGNATURE-----\n"
 }

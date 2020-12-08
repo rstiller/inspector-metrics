@@ -63,22 +63,21 @@ _X = nodejs version (available: 8, 9, 10, 11, 12, 13, 14, 15)_
 
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
-npm i
-npm run bootstrap
+pnpm i
+pnpm run bootstrap
 ```
 
 generate dependency report:  
 ```bash
-# run 'npm run build' before checking dependencies
+# run 'pnpm run build' before checking dependencies
 docker-compose run --rm deps
 ```
 
 release packages / publish docs:  
 ```bash
 # check functionality
-npm i
-npm run bootstrap
-npm run build
+pnpm i
+pnpm run build
 
 # publish docs
 rm -fr docs/
@@ -86,10 +85,10 @@ git branch -D gh-pages
 git worktree prune
 git worktree list
 git worktree add -b gh-pages docs origin/gh-pages
-npm run publishDocs
+pnpm run publishDocs
 
-# publish package (using lerna)
-npm publish
+# publish package
+pnpm publish
 ```
 
 ## License

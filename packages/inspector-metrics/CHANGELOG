@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Removed
 
+## [1.22.0] - <date-here>
+### Changed
+- updated dependencies
+- updated docs (badges)
+
+### Removed
+- travis-ci build pipeline (replaced by github actions)
+- removed nodejs 8 & 9 from build pipeline
+
 ## [1.21.0] - 2020-04-04
 ### Added
 - added nodejs 13 to test matrix

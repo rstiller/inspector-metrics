@@ -6,7 +6,7 @@
         "files": [
           {
             "path": "CHANGELOG",
-            "sha512": "a89ee26eca803542cd5aa015cbb26788d06652a6a04677628b611f2f659b50e86b5866a369be2dd58917c3045ed6de721bd76ef780dae9e81cbdadc7ffe417a1"
+            "sha512": "74e2118094c7f21970ba243f0e77097375d95ade6d85199d79be7ce85256e46b53977f50443935e0de344bda5729f661b3a7d82cfb6b3e29963f2c6cda09bc29"
           },
           {
             "path": "LICENSE",
@@ -14,23 +14,23 @@
           },
           {
             "path": "build/lib/metrics/ElasticsearchMetricReporter.js",
-            "sha512": "02d4209c4ebb5531a34f87b620f9538150d737ab34e467d12bdf1562a73971976f692c66f4f1bbe6434e040c5c9f7450758b0668ff834df5bc8c001733da1a5f"
+            "sha512": "92a01c200dc1160b3a72e2d83806184da2a8aa919683da0a3d932a33e6ae9fe0d66fa51b36134a30e7d29b5d489ce25dc5d38c0a395d3242a4d66256c1fdd6fa"
           },
           {
             "path": "build/lib/metrics/index.js",
-            "sha512": "886904b5210c1705247e6e993f541c1dcde05cb2bcc29e2c01a5619c1385b0609324c26dbc0841fcc0d4440aa247c003b1f654964fad49e5de3f33da8ea0e313"
+            "sha512": "bc40ea9281d1de124277eab682c4aeb5eb3e0f95749a1dd890367887d6155acec7bf8fbd754b87ea9822dc53d32bc9ea960f105e0dd94e633c36fee8ef7c29c7"
           },
           {
             "path": "build/lib/metrics/ElasticsearchMetricReporter.js.map",
-            "sha512": "f301056548d4003bf702c615c38f41541bfce3fa830dacd715b7944b9cd7fcf4e844aa61cd8fec3c6f0939bb969243065b2998c48f99f91f852d020f25f133b0"
+            "sha512": "0f77644e4d4d3045a67e6e86baa51921980dccc27c193e11530a7ffafc3a91af433e0d5743272582ffde51b65f9db87cb7a5fbfbfe302c136ee7201c82877ac2"
           },
           {
             "path": "build/lib/metrics/index.js.map",
-            "sha512": "e03b0020b50995679a47f2d4a9dd2e1e3ef88079cc9ad2a12d1fcda1ac0d46b2ede03c6cc468814baabff991f067c2654fcfcc4214020d0bd1c6c0aedf4da8c1"
+            "sha512": "e43fccede9d60f99a87c743d93a0aeaaeb86923fda4939177129c98889fbd8d8a58692eb5c966dcfb8570da6b358944ba4ae3fb79c39036d6fa62bf2309f587d"
           },
           {
             "path": "README.md",
-            "sha512": "088ee3ac61773e0381aaf6642580bfd6f184c0c2dfe35eab7a64089fa0ad878241f4c696e2586ea7b8fa1adc50e93ba8da12b477c55759537ce55a48d1b4d6df"
+            "sha512": "a84e29c2db6f752bf71d2fea9973b1db33bfe6c4fd8341037735ed2a83d2b2898d4d7c1c06ec57b8722bbd940de2685f30a5dad5f1877be4f4bc43de69793dc4"
           },
           {
             "path": "build/lib/metrics/ElasticsearchMetricReporter.d.ts",
@@ -73,7 +73,7 @@
           "typings",
           "version"
         ],
-        "sha512": "48f56d337b66f86daadc809cf248ad83acdef0b0bb90bf03202f2e446d6509a5e423a9ddd309d044b8792aace2e3e1fb44563a21c5434a234586fed23fd81a73"
+        "sha512": "08586453e191b5e314728be471cde1e12e01f58b96062fb45fec066df1f5dcdd52a2639d7a1e146140ad15653c527c703d14ddbf05e6634c2ba8efd869aff86c"
       }
     },
     {
@@ -114,30 +114,29 @@
           "dependencies": {
             "@elastic/elasticsearch": ">=5.6.0",
             "inspector-metrics": "^1.21.0",
-            "lodash": "^4.17.19",
+            "lodash": "^4.17.20",
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
-            "mocha-typescript": "1.1.17",
-            "@types/chai": "4.2.11",
-            "@types/mocha": "7.0.2",
-            "@types/node": "14.0.23",
-            "@typescript-eslint/eslint-plugin": "2.25.0",
-            "@typescript-eslint/parser": "2.25.0",
+            "@testdeck/mocha": "0.1.2",
+            "@types/chai": "4.2.14",
+            "@types/mocha": "8.0.4",
+            "@types/node": "14.14.10",
+            "@typescript-eslint/eslint-plugin": "4.9.0",
+            "@typescript-eslint/parser": "4.9.0",
             "chai": "4.2.0",
-            "eslint": "6.8.0",
-            "eslint-config-standard-with-typescript": "15.0.1",
+            "eslint": "7.14.0",
+            "eslint-config-standard-with-typescript": "19.0.1",
             "eslint-import-resolver-node": "0.3.4",
-            "eslint-plugin-import": "2.22.0",
+            "eslint-plugin-import": "2.22.1",
             "eslint-plugin-node": "11.1.0",
             "eslint-plugin-promise": "4.2.1",
-            "eslint-plugin-standard": "4.0.1",
-            "mocha": "7.1.1",
+            "mocha": "8.2.1",
             "pkgsign": "0.2.0",
             "reflect-metadata": "0.1.13",
             "rimraf": "3.0.2",
-            "ts-node": "8.10.2",
-            "typescript": "3.8.3"
+            "ts-node": "9.0.0",
+            "typescript": "4.1.2"
           },
           "files": [
             "build/lib/**/*"
@@ -168,5 +167,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJfuDAjCRDCMfXrQKYV5wAAalwQACHXTQUBH9t4yy4DND8XbCaF\n+jCuopRl3+s2xSzi6OjetctLK6GpN0K7cDnpoyiZcIas4tns5jGBbn7GzFGQgq9i\ng/z0eMJ+D1DifazwlIwlv2tQTwx+PchZCuzvZgq5aJXRCqCQFM/WHjhais1zzn6P\nqbhPTHPMSdIrePMztMCARHbJSv4SIZ63T3+LiSh1Jxzs8+WuZiJHhvEIbyOQXtVV\neb8hvY71NF6aPuOXxt5xDzHKNUJGiHjD8+WcCsncZQ6xv1IUMT8drx++u6vmUxbQ\nNRIkJ6VvJ2ZG8ZAajdXiumZ6AJOeAnm4fwkaBLPbdGxGY3n1jDnilSXQeO29i+my\ndo9NFJXIgmN4o+Zq7Bqbu1O3gjiBo6VAPMGrwgmmTlutNVkBSoyd/aH2ZCLNYq5P\nQ4Z6XJKiHpyplQWDsmHw8CH976U/wozot8MOpyxofjRM8lzaO9BEm3lZMJTF56kS\npLJSGGfbTC41BGPQSE6Iz2jX21UhD4+rgJzubSk18PTrH0bNNTh6HHHVVZ3hUp3d\nsZQA2lSQqRrKMhy1JNlDmbgIUD4QM2KyLSAVQBfhV6KUcUVV4SVR9lT05Jfycdat\nJcTF0mgMlVLGsRDUOq+8WbpNp/oFoBDsXXi1cToT2FN8LOMBdfvGBptkrWOTen+0\n44jbDjv29yCLWYkVB6Tj\n=rGo5\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l/KCRDCMfXrQKYV5wAAo4AQAF0kVThxUQGUbgvr3xAyHVGs\n05vW1WDy8gL9bqYH+ipyoiifLJOLq6I3mBvglE6hdoDDNYx1bY6BrAwhD1fqejDq\nCVm4qcsD0DCZLsC53e00QCFya4POYvKeIeEvqvdeyC6UMMjW+rBa2Oz8RmCsr71Z\nwOrMT0BRhiRAGpTURFjpzjFxaioqcN3Gc04H2r3I3NsT2c1vA+xIIRFX4tvUd206\nXjIzf4/X7KWFWWDkJ/qMbIYf9I78toFdYePoqSDWMt3DCZDocn1tcbHbHaZHfDhn\nICiY8Gcsg7DRQ+jc8EtFR8NpO8J6X8f9BPfOxSOII3+mqAwHgaepz1RuTwMlS/Vi\npyuQ0IOmdGHvJ2AeN4g+Ld/bvLMt+l9i6ANMatp8q9ZHbiNqy+n/YvlixTvF7ATF\nozmy8KxD1KgWcUK4sfApc4L44sEwvwuO0n2PheTWzlxkF+2AJBtN0DB2XkmqhjWq\nvvHBvVGu3hdQZihKHnG3bjiKMqClgBWGi/+2ECs+aJkBz4BsBoWIlrB41ZxlQaXs\nsa/TGAxIAov3IWqbeSlZ3Jw/p65saWXBmChMh45OREM/ldNoiH0bv0Un/yX4HyxJ\nyftsJtA9BzTrLq+l4LSEjbTaGQHxjJEQXznLcN+oz8NK5q7eMEYstxCDTWZCd6tP\nWyfYvenvR+To8M/lFipd\n=e/Qr\n-----END PGP SIGNATURE-----\n"
 }
