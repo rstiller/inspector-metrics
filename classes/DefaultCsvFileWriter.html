@@ -509,7 +509,7 @@ with respect to the given options.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;Stats&gt;</code>
+                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
 
                     </div>
                     <div class="io-description">
@@ -1013,11 +1013,11 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    *
    * @private
    * @param {string} dir
-   * @returns {Promise&lt;Stats&gt;}
+   * @returns {Promise&lt;void&gt;}
    * @memberof DefaultCsvFileWriter
    */
-  private async mkdir (dir: string): Promise&lt;Stats&gt; {
-    return await new Promise&lt;Stats&gt;((resolve, reject) &#x3D;&gt; {
+  private async mkdir (dir: string): Promise&lt;void&gt; {
+    return await new Promise&lt;void&gt;((resolve, reject) &#x3D;&gt; {
       mkdir(dir, (err) &#x3D;&gt; {
         if (err) {
           reject(err)

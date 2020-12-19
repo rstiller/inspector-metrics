@@ -245,7 +245,7 @@ import { BaseMetric, Metric } from &#x27;./model/metric&#x27;
 import { Reservoir, SlidingWindowReservoir } from &#x27;./model/reservoir&#x27;
 import { Timer } from &#x27;./timer&#x27;
 
-export type NameFactory &#x3D; (baseName: string, metricName: string, metric: Metric) &#x3D;&gt; string;
+export type NameFactory &#x3D; (baseName: string, metricName: string, metric: Metric) &#x3D;&gt; string
 
 /**
  * Represents a registration of a {@link MetricRegistryListener}.
@@ -290,14 +290,14 @@ export class MetricRegistration&lt;T extends Metric&gt; {
    * @type {T}
    * @memberof MetricRegistration
    */
-  public metricRef: T;
+  public metricRef: T
   /**
    * The name the metric is registered with.
    *
    * @type {string}
    * @memberof MetricRegistration
    */
-  public name: string;
+  public name: string
 
   /**
    * Creates an instance of MetricRegistration.
@@ -444,7 +444,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {Clock}
    * @memberof MetricRegistry
    */
-  private defaultClock: Clock &#x3D; new StdClock();
+  private defaultClock: Clock &#x3D; new StdClock()
   /**
    * A collection metric references.
    *
@@ -452,7 +452,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {Array&lt;MetricRegistration&lt;Metric&gt;&gt;}
    * @memberof MetricRegistry
    */
-  private readonly metrics: Array&lt;MetricRegistration&lt;Metric&gt;&gt; &#x3D; [];
+  private readonly metrics: Array&lt;MetricRegistration&lt;Metric&gt;&gt; &#x3D; []
   /**
    * The name factory to build metric names.
    *
@@ -460,7 +460,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {NameFactory}
    * @memberof MetricRegistry
    */
-  private nameFactory: NameFactory &#x3D; MetricRegistry.defaultNameFactory;
+  private nameFactory: NameFactory &#x3D; MetricRegistry.defaultNameFactory
   /**
    * A collection of metric listeners.
    *
@@ -468,7 +468,7 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
    * @type {MetricRegistryListener[]}
    * @memberof MetricRegistry
    */
-  private readonly listeners: MetricRegistryListener[] &#x3D; [];
+  private readonly listeners: MetricRegistryListener[] &#x3D; []
 
   /**
    * Adds the specified listener and returns the corresponding

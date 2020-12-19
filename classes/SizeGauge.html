@@ -2425,7 +2425,7 @@ export interface SizeAttributeInterface {
   size: number
 }
 
-type ValueExtractor &#x3D; () &#x3D;&gt; number;
+type ValueExtractor &#x3D; () &#x3D;&gt; number
 
 /**
  * Gets the current size / length of an object as gauge metric.
@@ -2495,7 +2495,7 @@ export class SizeGauge extends BaseMetric implements Gauge&lt;number&gt; {
    * @type {ValueExtractor}
    * @memberof SizeGauge
    */
-  private readonly extractor: ValueExtractor;
+  private readonly extractor: ValueExtractor
 
   /**
    * Creates an instance of SizeGauge.
