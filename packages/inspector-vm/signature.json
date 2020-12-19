@@ -105,7 +105,7 @@
           "typings",
           "version"
         ],
-        "sha512": "ab82419bcb55130e9b42ef04b7619920c0ddfd47a88ac361714c8113bf488e4b2423c536cb9bb09d90b96efc320e3edded87c89fbb0407d2c20e6f4b9735978b"
+        "sha512": "4adaf94b45accf284603a175bcc983237bb1cf732643642147ac018a6b6753eaabbdf799978b56f39b54e3fe7b23cbb5df2dfd7ddc38b949047ee76d827029c2"
       }
     },
     {
@@ -115,7 +115,7 @@
           "name": "inspector-vm",
           "description": "VM metric collector for nodejs",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "3.5.0",
+          "version": "3.6.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "license": "MIT",
@@ -145,7 +145,7 @@
           },
           "dependencies": {
             "gc-stats": "^1.4.0",
-            "inspector-metrics": "^1.21.0",
+            "inspector-metrics": "^1.22.0",
             "source-map-support": "^0.5.19"
           },
           "devDependencies": {
@@ -198,5 +198,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3mdwCRDCMfXrQKYV5wAAM1UQAF7aZVTkbtY+A5+zgffa/b7O\nbtIY/OyaYvnv5SERhzyYDcNj2aoXIq8jKrWHLESIyIaC0xaGJyJQra2SF1HqOlcr\nFfjExboXbMgD3DZa0qfQfFKtoz0Uq0VdoE9EzzxgrcdaLi7piUSdAWPftNaZ+HEL\nFIDOrkuqNq1IT0NFCg3ng1l9fDdg8xu72rehg+9zTfDqtiYuvOQ52+4rqYC/KL2d\nxZ26OKL+uje1aVNMqPjqRjXfolH2Zxyf9yag06f8LBRirU83Op0lLo8+/oVhGR4U\nG5KS+zj+slCwVxLsG0l1D1/Q2fyd+/zYOFzar543/0tASdaZJQJog00E+MPqdU3N\nnC+6KjideOExW/W8QrOceehclI3tFeXC62wYq4Sx2hpNrA2i0+QPuV2qtSlHVdu5\nGhDY00bm5NK8nQadbkgdsevP0jjeMHURLfSkc9C/D71LB8aAfvhhePpPxGuEV7p1\n/co32s9/bfFkcEED3v66Gxf0B9+BSeW1T1daW56dDjXkz9E/sEaS3hoQ8kOZ7/ED\n5IPXU0pgdLIPEP46XI6SKYct963d6PvperMylE71fFpztfylzdvm1VpcW23IRMFd\nld/iwH9la8kupf1kKLe4VryTv4OBjqI9u+JurgY/t9gqXzISRBuXnfJy2dPVKuQT\nt83Cz9B7WR03s4egXqv+\n=r1SS\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3mf0CRDCMfXrQKYV5wAADycQADy47yCBhcVckSM3eE5Gfym4\nFb8cikQiXHeTUgRC2Y4qL8QTgzrerNZlKG9bshCmCyIHrgEEoEyFGxgbsLwTH82n\nchHq8SQvzgniiPiHIQIoupzfPOimCH2QxCpkfCA23fdVEzmX0xANdzrrI7mt/NKp\nEss75wRMOyzJwPx3w6UdU0sKV5PqHllqN8MjfBmt+4n1STfCbYMQ7N33rmRK66zS\nY1fnNGiOuOMxSVFTiXHbhCXo7UHEPjk2VmYjVUAF2R/PUA1zsXbVVhXLa2E2Q3dA\nNRKHOnPw4grtj3ElbWqvJ+7cPQYO/EjxKZpaf1JLHfRNP9UnBCJVFWGwr+nwpkmj\nyBe9oY0vJMjx0O2PJuB7LNglvezS+bbv4/rftRvM4fEvsq1854WdIvUiwa4FAzFK\nHINN0mYcjjRZxXl3CeLMFcqA6wWd+26+JQHiJrhQwUIPFxWSQEKi//WHjPLr03Of\nXraWBJEmlJ8ALph11ohcF0l/WkrBjvbapXMLvs6saqCCoZSzonAR98JjrZ3M4D0S\nmXz5Dy7k6qhdIW7hNPKP6wPLEhEIM7XK/LJsGXqXvMJYZaJNgIyoK8ke2CIPHCKa\n84ahkJYXrF+/8rEFH9DSdFNA1lYBe4fsu7Vwsxlr5zxPoAMnM8/ZOHoQ5Ap9O7VO\nPz9q5kw7x7TAwsOciYGp\n=bvGL\n-----END PGP SIGNATURE-----\n"
 }

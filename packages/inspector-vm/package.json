@@ -2,7 +2,7 @@
   "name": "inspector-vm",
   "description": "VM metric collector for nodejs",
   "homepage": "https://rstiller.github.io/inspector-metrics/",
-  "version": "3.5.0",
+  "version": "3.6.0",
   "main": "./build/lib/metrics/index.js",
   "typings": "./build/lib/metrics/index.d.ts",
   "license": "MIT",
@@ -32,7 +32,7 @@
   },
   "dependencies": {
     "gc-stats": "^1.4.0",
-    "inspector-metrics": "^1.21.0",
+    "inspector-metrics": "^1.22.0",
     "source-map-support": "^0.5.19"
   },
   "devDependencies": {
