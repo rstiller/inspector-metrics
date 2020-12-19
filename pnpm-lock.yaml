@@ -175,7 +175,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
       graphite: ^0.1.4
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       mocha: 8.2.1
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13
@@ -233,7 +233,7 @@ importers:
       eslint-plugin-import: 2.22.1
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       mocha: 8.2.1
       moment: ^2.29.1
       moment-timezone: ^0.5.32
@@ -286,7 +286,7 @@ importers:
       eslint-plugin-import: 2.22.1
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       lodash: ^4.17.20
       mocha: 8.2.1
       pkgsign: 0.2.0
@@ -335,7 +335,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
       influx: ^5.6.3
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       mocha: 8.2.1
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13
@@ -446,7 +446,7 @@ importers:
       eslint-plugin-import: 2.22.1
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       mocha: 8.2.1
       moment: 2.29.1
       nock: 13.0.5
@@ -498,7 +498,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 4.2.1
       gc-stats: ^1.4.0
-      inspector-metrics: ^1.21.0
+      inspector-metrics: ^1.22.0
       mocha: 8.2.1
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13

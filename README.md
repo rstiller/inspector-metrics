@@ -64,7 +64,6 @@ _X = nodejs version (available: 8, 9, 10, 11, 12, 13, 14, 15)_
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
 pnpm i
-pnpm run bootstrap
 ```
 
 generate dependency report:  
