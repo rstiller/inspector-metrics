@@ -506,7 +506,7 @@
           "typings",
           "version"
         ],
-        "sha512": "25c31a3667cf5606aed5faeb3e5b7da20765f33dbb3f39bd6e06f4232815d900d4dd4e305d5dcc819d9815bb29547a46d7f5c804c1f10c20bd53ae3cbd2bfa8a"
+        "sha512": "31da468a5e1854a74649dcb49cf991d8f012dc2ff3bc3a02e23bca1112c98ad8346925c50c15d87272c5334fe286b00012f4283fceee3142a0df2c8f5e09eaaf"
       }
     },
     {
@@ -516,7 +516,7 @@
           "name": "inspector-metrics",
           "description": "monitoring / metric library similar to http://metrics.dropwizard.io",
           "homepage": "https://rstiller.github.io/inspector-metrics/",
-          "version": "1.21.0",
+          "version": "1.22.0",
           "main": "./build/lib/metrics/index.js",
           "typings": "./build/lib/metrics/index.d.ts",
           "bugs": {
@@ -603,5 +603,5 @@
       }
     }
   ],
-  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3l++CRDCMfXrQKYV5wAANwgQAI3gnSdGgwjjz5+PF3if0b30\ncuScUtBZaLQ2cqWbTP14QTl/5d8Ci2RXhvFplDX43OrnzEeaPdRtnqDI7BjRii20\nhOJcArCIcELe0I3VGAa+SW4BCDij4UPwAgNfqXf2UgiKrnc1C7dXudYUtWfUFCeo\n29f/bPvjxoKhTSU2swmr+lrco8NW9DUk3IM1Q6577L85z688on0ygDueKRsGh8/2\nVEcCLv/WhT5g8Jcjrb/cUBZ3znfreRFadTx0YVLW4pxP07R0F1VT2utbv2XYCTjn\ndMdnS1eaYsT0xeyae6k+EBQeHOYFpztNBqPGqLPeecxyLAli3+qUVrT3W15SYle/\n5hqlRbKwR+zl/eeS03aKzQuxqF4ceFaJ/gK3u7FhhPkj/Y9Sx6/svC9QwLVXqug8\nW+EL+vCV4KbWhoV/kgsslbpOpQBl1Wr8Il0+y3qbJSA3Cq64WnH4dIYeTsgbkJ6q\nrfmQ2I0YTa8WIjCL3nyT0dLworBToyT+8cQ+KghG1HMJ9KggrNlaLy1p2kp2Sbvi\ndFj+i+FccbO0myrL4jmUUCNAg7RvacggC+eNjxrS8xNH14CsbnEb2l9jLxsZIw5j\n0Nc5j2yQRoqY2+roBvdwopeyjVulIUGaWCiFR5d434L/rMZuGl2vOjMs8nmwwlR6\nabo/aOzBcmeGMVOVLS1w\n=OroI\n-----END PGP SIGNATURE-----\n"
+  "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJf3mRTCRDCMfXrQKYV5wAA50gQABeuk/n9dkDl7m1Gd4xvm8v6\n6EEqAz6vDtnliTBL5eFmsmMjjfwKnWsdcmhtCS9SaYmf+fh5hkJCNIwm6y/dvRic\nogOyh6/0+bXxcLh6MhE34W/mFrboecalVPa5ICRYVychAymqYcdOiARYqvYNkyMN\njMlKVoACiXzdzZo93A9G9i1RCoqzq8n5JUEDT6u4FgzrJFyJSUA+A8yhgwiB2ylN\ny2fZjbEUO7D9Xtr7SXV8HNCCcJpBUlPIS6XfTijIvKW26HYmWe82KMH4Dz1HwFht\ndcjGErB1muPgVzMChUDirJVudpOA/GEjTFULCP0gnVhRUDw1tZ20QhdVOc2KE8on\nnMEdgQhILcmo6yd0fdOk1Af46MrcE6xGYTYb7iDtnyvPchyrdN/rSPafE+zFFUGL\nIvn1fnqYh/y0zjuy9sq3TMImHnSaFL47FwNbfjyUjaYj4cfWaCm9NRmTwvTL9bpg\ngCRdkh9vjNnfn/TRen4l4YXk8CbIrEOTrmW48bS/r3IpXKubIpRBVg8WbfMINc7Z\nxkDXcom2Do0RXtEk7JPCbiTG0tm+80bXHjZ05TJORtop0GqE4BN/Fo1ycFO3h9Jn\nAfDKI4jB7kleBExv6MaMZEHYU8YZaGhL+DxwTddwdVvXSabsQNMQznk8ESQeAE2w\nkuayvsx5C10dXrmhP5SU\n=Bu6k\n-----END PGP SIGNATURE-----\n"
 }
