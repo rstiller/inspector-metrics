@@ -25,6 +25,26 @@ datasources:
   database: express-multi-process-js
   user: admin
   password: admin
+- name: influxdb-v1-example
+  type: influxdb
+  access: proxy
+  url: http://influx:8086
+  isDefault: false
+  editable: false
+  database: influx-v1-example
+  user: admin
+  password: admin
+- name: influxdb-v2-example
+  access: "proxy"
+  jsonData:
+    defaultBucket: "test-bucket"
+    httpMode: "POST"
+    organization: "testing"
+    version: "Flux"
+  secureJsonData:
+    token: "che2u4kqsajBirtunseKpCOX0Z4sebMB6JEzibbc3prOyyAkzdMCfFLgQhVqRUgQRlAlyKz8PlWq-Z2NhAVkNw=="
+  type: influxdb
+  url: "http://influx-v2:8087"
 - name: elasticsearch-express-multi-process-js
   type: elasticsearch
   access: proxy

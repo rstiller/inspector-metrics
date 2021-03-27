@@ -18,12 +18,8 @@
         "pretest": "pnpm run --recursive --filter inspector-metrics compile",
         "publishDocs": "cd docs && git add --all . && git commit -nm 'Deploy to gh-pages' && git push origin gh-pages && cd ..",
         "prepublishDocs": "docker-compose run --rm docs",
+        "prepare": "husky install",
         "test": "pnpm run --recursive test"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run sign"
-        }
     },
     "compodoc": {
         "tsconfig": "./tsconfig.docs.json",

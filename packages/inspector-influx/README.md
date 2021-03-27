@@ -26,6 +26,7 @@ Take a look at the [Documentation](https://rstiller.github.io/inspector-metrics/
 
 ## basic usage
 
+For influxDB v1:  
 ```typescript
 import { DefaultSender, InfluxMetricReporter } from "inspector-influx";
 import { MetricRegistry, Timer } from "inspector-metrics";
@@ -44,6 +45,55 @@ const sender = new DefaultSender(dbConfig);
 const reporter: InfluxMetricReporter = new InfluxMetricReporter({
     sender,
 });
+const registry: MetricRegistry = new MetricRegistry();
+const requests: Timer = registry.newTimer("requests");
+
+reporter.setLog(global.console);
+reporter.addMetricRegistry(registry);
+
+// need ot wait for the reporter to start
+await reporter.start();
+
+// example usage
+setInterval(() => {
+    // should report a few milliseconds
+    requests.time(() => {
+        let a = 0;
+        let b = 1;
+        for (let i = 0; i < 1e6; i++) {
+            a = b + i;
+        }
+    });
+}, 100);
+```
+
+For influxDB v2:  
+```typescript
+import { ClientOptions } from "@influxdata/influxdb-client";
+import { Influxdb2Sender, InfluxMetricReporter } from "inspector-influx";
+import { MetricRegistry, Timer } from "inspector-metrics";
+
+const clientOptions: ClientOptions = {
+    url: 'http://localhost:8087',
+    token: '<my-secret-token>' // have a look at the examples (/examples/influxdb-2x)
+}
+const reporter = new InfluxMetricReporter({
+    sender: new Influxdb2Sender(clientOptions, 'testing', 'test-bucket', [], 'ms', {
+    batchSize: 10,
+    defaultTags: {},
+    flushInterval: 0,
+    maxBufferLines: 10_000,
+    maxRetries: 3,
+    maxRetryDelay: 3000,
+    minRetryDelay: 1000,
+    retryJitter: 1000,
+    writeFailed: function(error, lines, failedAttempts) { console.log(error, lines, failedAttempts)},
+    }),
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000
+})
+
 const registry: MetricRegistry = new MetricRegistry();
 const requests: Timer = registry.newTimer("requests");
 

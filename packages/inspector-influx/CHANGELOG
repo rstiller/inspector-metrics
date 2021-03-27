@@ -9,7 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 ### Removed
 
-## [2.8.0] - <date-here>
+## [2.9.0] - 2021-06-08
+### Added
+- support for influxdb 2x
+- `@influxdata/influxdb-client` and `@influxdata/influxdb-client-apis` are now optional dependencies
+
+### Changed
+- updated dependencies
+- updated docs (examples)
+- `influx` is now an optional dependency (possible breaking change)
+
+## [2.8.0] - 2020-12-19
 ### Changed
 - updated dependencies
 - updated docs (badges)

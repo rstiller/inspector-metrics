@@ -1,6 +1,5 @@
 import 'source-map-support/register'
 
-import { IPoint } from 'influx'
 import {
   Counter,
   DefaultClusterOptions,
@@ -22,6 +21,34 @@ import {
   StdClock,
   Timer
 } from 'inspector-metrics'
+
+/**
+ * measurement point definition
+ */
+export interface MeasurementPoint {
+  /**
+   * Measurement is the Influx measurement name.
+   */
+  measurement: string;
+  /**
+   * Tags is the list of tag values to insert.
+   */
+  tags: {
+      [name: string]: string;
+  };
+  /**
+   * Fields is the list of field values to insert.
+   */
+  fields: {
+      [name: string]: any;
+  };
+  /**
+   * Timestamp tags this measurement with a date. This can be a Date object,
+   * in which case we'll adjust it to the desired precision, or a numeric
+   * string or number, in which case it gets passed directly to Influx.
+   */
+  timestamp: Date | string | number;
+}
 
 /**
  * Sender interface for influxdb client abstraction.
@@ -50,11 +77,11 @@ export interface Sender {
   /**
    * Sends the given data points to influxdb.
    *
-   * @param {IPoint[]} points
+   * @param {T[]} points
    * @returns {Promise<any>}
    * @memberof Sender
    */
-  send(points: IPoint[]): Promise<void>
+  send(points: MeasurementPoint[]): Promise<void>
 
 }
 
@@ -89,7 +116,7 @@ export interface InfluxMetricReporterOptions extends ScheduledMetricReporterOpti
  * @class InfluxMetricReporter
  * @extends {ScheduledMetricReporter}
  */
-export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricReporterOptions, IPoint> {
+export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricReporterOptions, MeasurementPoint> {
   /**
    * Metadata for the logger.
    *
@@ -235,7 +262,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
    * @param {MetricRegistry | null} registry
    * @param {Date} date
    * @param {MetricType} type
-   * @param {Array<ReportingResult<any, IPoint>>} results
+   * @param {Array<ReportingResult<any, T>>} results
    * @returns {Promise<any>}
    * @memberof InfluxMetricReporter
    */
@@ -244,7 +271,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
     registry: MetricRegistry | null,
     date: Date,
     type: MetricType,
-    results: Array<ReportingResult<any, IPoint>>): Promise<any> {
+    results: Array<ReportingResult<any, MeasurementPoint>>): Promise<any> {
     const points = results.map((result) => result.result)
     if (points.length === 0) {
       return
@@ -271,17 +298,17 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Counter} or  {@link MonotoneCounter}.
+   * Builds a measure point (type T) instance for the given {@link Counter} or  {@link MonotoneCounter}.
    *
    * @protected
    * @param {(MonotoneCounter | Counter)} counter
    * @param {(MetricSetReportContext<MonotoneCounter | Counter>)} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
   protected reportCounter (
     counter: MonotoneCounter | Counter,
-    ctx: MetricSetReportContext<MonotoneCounter | Counter>): IPoint {
+    ctx: MetricSetReportContext<MonotoneCounter | Counter>): MeasurementPoint {
     const value = counter.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -301,15 +328,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Gauge}.
+   * Builds a measure point (type T) instance for the given {@link Gauge}.
    *
    * @protected
    * @param {Gauge<any>} gauge
    * @param {MetricSetReportContext<Gauge<any>>} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportGauge (gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): IPoint {
+  protected reportGauge (gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): MeasurementPoint {
     const value = gauge.getValue()
     if (!value || isNaN(value)) {
       return null
@@ -329,15 +356,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Histogram}.
+   * Builds a measure point (type T) instance for the given {@link Histogram}.
    *
    * @protected
    * @param {Histogram} histogram
    * @param {MetricSetReportContext<Histogram>} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext<Histogram>): IPoint {
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext<Histogram>): MeasurementPoint {
     const value = histogram.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -368,15 +395,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Meter}.
+   * Builds a measure point (type T) instance for the given {@link Meter}.
    *
    * @protected
    * @param {Meter} meter
    * @param {MetricSetReportContext<Meter>} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportMeter (meter: Meter, ctx: MetricSetReportContext<Meter>): IPoint {
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext<Meter>): MeasurementPoint {
     const value = meter.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -400,15 +427,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter<InfluxMetricRe
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Timer}.
+   * Builds a measure point (type T) instance for the given {@link Timer}.
    *
    * @protected
    * @param {Timer} timer
    * @param {MetricSetReportContext<Timer>} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportTimer (timer: Timer, ctx: MetricSetReportContext<Timer>): IPoint {
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext<Timer>): MeasurementPoint {
     const value = timer.getCount()
     if (!value || isNaN(value)) {
       return null
