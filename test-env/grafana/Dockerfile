@@ -1,16 +1,14 @@
-FROM grafana/grafana:6.1.4
+FROM grafana/grafana:7.5.6
 
 ARG TZ
 ENV TZ=$TZ
 
 USER root
 
-RUN echo $TZ | tee /etc/timezone
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+RUN apk add tzdata && cp /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && apk del tzdata
 
 ADD grafana.ini /etc/grafana/grafana.ini
 
-RUN mkdir -p /var/log/grafana/
-RUN chown grafana:grafana /var/log/grafana/
+RUN mkdir -p /var/log/grafana/ && chown grafana:root /var/log/grafana/
 
 USER grafana

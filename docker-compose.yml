@@ -218,6 +218,31 @@ services:
          - influx
     hostname: influx
 
+  influx-v2:
+    build:
+      context: ./test-env/influx-v2
+      args:
+        TZ: Europe/Berlin
+    command: ["--reporting-disabled"]
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=admin123
+      - DOCKER_INFLUXDB_INIT_ORG=testing
+      - DOCKER_INFLUXDB_INIT_BUCKET=test-bucket
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=che2u4kqsajBirtunseKpCOX0Z4sebMB6JEzibbc3prOyyAkzdMCfFLgQhVqRUgQRlAlyKz8PlWq-Z2NhAVkNw==
+    volumes:
+      - influx-v2-data:/var/lib/influxdb2
+      - influx-v2-logs:/var/log/influxdb2
+    ports:
+      - "8087:8087"
+    restart: "no"
+    networks:
+      default:
+        aliases:
+         - influx-v2
+    hostname: influx-v2
+
   pushgateway:
     build:
       context: ./test-env/pushgateway
@@ -288,5 +313,7 @@ volumes:
   grafana-logs:
   influx-data:
   influx-logs:
+  influx-v2-data:
+  influx-v2-logs:
   prometheus-data:
   pnpm-store:

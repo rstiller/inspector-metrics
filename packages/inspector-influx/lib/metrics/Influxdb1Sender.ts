@@ -7,16 +7,16 @@ import { Sender } from './InfluxMetricReporter'
  * Default implementation for an influxdb sender.
  *
  * @export
- * @class DefaultSender
+ * @class Influxdb1Sender
  * @implements {Sender}
  */
-export class DefaultSender implements Sender {
+export class Influxdb1Sender implements Sender {
   /**
    * The influxdb client instance.
    *
    * @private
    * @type {InfluxDB}
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   private readonly db: InfluxDB;
   /**
@@ -24,7 +24,7 @@ export class DefaultSender implements Sender {
    *
    * @private
    * @type {IClusterConfig}
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   private readonly config: IClusterConfig;
   /**
@@ -32,7 +32,7 @@ export class DefaultSender implements Sender {
    *
    * @private
    * @type {boolean}
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   private ready: boolean = false;
   /**
@@ -40,16 +40,16 @@ export class DefaultSender implements Sender {
    *
    * @private
    * @type {TimePrecision}
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   private readonly precision: TimePrecision;
 
   /**
-   * Creates an instance of DefaultSender.
+   * Creates an instance of Influxdb1Sender.
    *
    * @param {IClusterConfig} config
    * @param {TimePrecision} [precision="s"] will be passed to write-options
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   public constructor (config: IClusterConfig, precision: TimePrecision = 's') {
     this.config = config
@@ -60,7 +60,7 @@ export class DefaultSender implements Sender {
   /**
    * Ensures that a database is existing before sending data.
    *
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   public async init (): Promise<any> {
     const database = this.config.database
@@ -78,7 +78,7 @@ export class DefaultSender implements Sender {
    * Gets the ready state.
    *
    * @returns {Promise<boolean>}
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   public async isReady (): Promise<boolean> {
     return this.ready
@@ -88,7 +88,7 @@ export class DefaultSender implements Sender {
    * Sends the specified data points to the DB.
    *
    * @param {IPoint[]} points
-   * @memberof DefaultSender
+   * @memberof Influxdb1Sender
    */
   public async send (points: IPoint[]): Promise<void> {
     await this.db.writePoints(points, { precision: this.precision })

@@ -30,3 +30,17 @@ providers:
   updateIntervalSeconds: 10
   options:
     path: /examples/elasticsearch-7/dashboards
+- name: 'examples-influxdb-1x'
+  folder: 'examples-influxdb-1x'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10
+  options:
+    path: /examples/influxdb-1x/dashboards
+- name: 'examples-influxdb-2x'
+  folder: 'examples-influxdb-2x'
+  type: file
+  disableDeletion: false
+  updateIntervalSeconds: 10
+  options:
+    path: /examples/influxdb-2x/dashboards
