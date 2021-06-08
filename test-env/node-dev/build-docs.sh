@@ -6,12 +6,13 @@ mkdir -p ~/inspector-metrics
 pushd ~/inspector-metrics
 
 rsync -ar /opt/inspector-metrics/ ~/inspector-metrics/
+chown -R root:root ~/inspector-metrics/
 
 rm -fr node_modules .pnpm-store
 pnpm i --filter monorepo
 pnpm i
-npm run build
-npm run coverage
+/usr/local/bin/npm run build
+/usr/local/bin/npm run coverage
 compodoc
 
 rm -fr /opt/inspector-metrics/docs/*
