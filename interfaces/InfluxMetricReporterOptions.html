@@ -185,7 +185,6 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import &#x27;source-map-support/register&#x27;
 
-import { IPoint } from &#x27;influx&#x27;
 import {
   Counter,
   DefaultClusterOptions,
@@ -207,6 +206,34 @@ import {
   StdClock,
   Timer
 } from &#x27;inspector-metrics&#x27;
+
+/**
+ * measurement point definition
+ */
+export interface MeasurementPoint {
+  /**
+   * Measurement is the Influx measurement name.
+   */
+  measurement: string;
+  /**
+   * Tags is the list of tag values to insert.
+   */
+  tags: {
+      [name: string]: string;
+  };
+  /**
+   * Fields is the list of field values to insert.
+   */
+  fields: {
+      [name: string]: any;
+  };
+  /**
+   * Timestamp tags this measurement with a date. This can be a Date object,
+   * in which case we&#x27;ll adjust it to the desired precision, or a numeric
+   * string or number, in which case it gets passed directly to Influx.
+   */
+  timestamp: Date | string | number;
+}
 
 /**
  * Sender interface for influxdb client abstraction.
@@ -235,11 +262,11 @@ export interface Sender {
   /**
    * Sends the given data points to influxdb.
    *
-   * @param {IPoint[]} points
+   * @param {T[]} points
    * @returns {Promise&lt;any&gt;}
    * @memberof Sender
    */
-  send(points: IPoint[]): Promise&lt;void&gt;
+  send(points: MeasurementPoint[]): Promise&lt;void&gt;
 
 }
 
@@ -274,7 +301,7 @@ export interface InfluxMetricReporterOptions extends ScheduledMetricReporterOpti
  * @class InfluxMetricReporter
  * @extends {ScheduledMetricReporter}
  */
-export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetricReporterOptions, IPoint&gt; {
+export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetricReporterOptions, MeasurementPoint&gt; {
   /**
    * Metadata for the logger.
    *
@@ -420,7 +447,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
    * @param {MetricRegistry | null} registry
    * @param {Date} date
    * @param {MetricType} type
-   * @param {Array&lt;ReportingResult&lt;any, IPoint&gt;&gt;} results
+   * @param {Array&lt;ReportingResult&lt;any, T&gt;&gt;} results
    * @returns {Promise&lt;any&gt;}
    * @memberof InfluxMetricReporter
    */
@@ -429,7 +456,7 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
     registry: MetricRegistry | null,
     date: Date,
     type: MetricType,
-    results: Array&lt;ReportingResult&lt;any, IPoint&gt;&gt;): Promise&lt;any&gt; {
+    results: Array&lt;ReportingResult&lt;any, MeasurementPoint&gt;&gt;): Promise&lt;any&gt; {
     const points &#x3D; results.map((result) &#x3D;&gt; result.result)
     if (points.length &#x3D;&#x3D;&#x3D; 0) {
       return
@@ -456,17 +483,17 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Counter} or  {@link MonotoneCounter}.
+   * Builds a measure point (type T) instance for the given {@link Counter} or  {@link MonotoneCounter}.
    *
    * @protected
    * @param {(MonotoneCounter | Counter)} counter
    * @param {(MetricSetReportContext&lt;MonotoneCounter | Counter&gt;)} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
   protected reportCounter (
     counter: MonotoneCounter | Counter,
-    ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): IPoint {
+    ctx: MetricSetReportContext&lt;MonotoneCounter | Counter&gt;): MeasurementPoint {
     const value &#x3D; counter.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -486,15 +513,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Gauge}.
+   * Builds a measure point (type T) instance for the given {@link Gauge}.
    *
    * @protected
    * @param {Gauge&lt;any&gt;} gauge
    * @param {MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): IPoint {
+  protected reportGauge (gauge: Gauge&lt;any&gt;, ctx: MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;): MeasurementPoint {
     const value &#x3D; gauge.getValue()
     if (!value || isNaN(value)) {
       return null
@@ -514,15 +541,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Histogram}.
+   * Builds a measure point (type T) instance for the given {@link Histogram}.
    *
    * @protected
    * @param {Histogram} histogram
    * @param {MetricSetReportContext&lt;Histogram&gt;} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): IPoint {
+  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext&lt;Histogram&gt;): MeasurementPoint {
     const value &#x3D; histogram.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -553,15 +580,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Meter}.
+   * Builds a measure point (type T) instance for the given {@link Meter}.
    *
    * @protected
    * @param {Meter} meter
    * @param {MetricSetReportContext&lt;Meter&gt;} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): IPoint {
+  protected reportMeter (meter: Meter, ctx: MetricSetReportContext&lt;Meter&gt;): MeasurementPoint {
     const value &#x3D; meter.getCount()
     if (!value || isNaN(value)) {
       return null
@@ -585,15 +612,15 @@ export class InfluxMetricReporter extends ScheduledMetricReporter&lt;InfluxMetri
   }
 
   /**
-   * Builds an IPoint instance for the given {@link Timer}.
+   * Builds a measure point (type T) instance for the given {@link Timer}.
    *
    * @protected
    * @param {Timer} timer
    * @param {MetricSetReportContext&lt;Timer&gt;} ctx
-   * @returns {IPoint}
+   * @returns {T}
    * @memberof InfluxMetricReporter
    */
-  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): IPoint {
+  protected reportTimer (timer: Timer, ctx: MetricSetReportContext&lt;Timer&gt;): MeasurementPoint {
     const value &#x3D; timer.getCount()
     if (!value || isNaN(value)) {
       return null

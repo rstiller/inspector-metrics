@@ -111,9 +111,6 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <a href="classes/DefaultReservoir.html" data-type="entity-link">DefaultReservoir</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DefaultSender.html" data-type="entity-link">DefaultSender</a>
-                            </li>
-                            <li class="link">
                                 <a href="classes/DisabledClusterOptions.html" data-type="entity-link">DisabledClusterOptions</a>
                             </li>
                             <li class="link">
@@ -133,6 +130,12 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="classes/Histogram.html" data-type="entity-link">Histogram</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Influxdb1Sender.html" data-type="entity-link">Influxdb1Sender</a>
+                            </li>
+                            <li class="link">
+                                <a href="classes/Influxdb2Sender.html" data-type="entity-link">Influxdb2Sender</a>
                             </li>
                             <li class="link">
                                 <a href="classes/InfluxMetricReporter.html" data-type="entity-link">InfluxMetricReporter</a>
@@ -299,6 +302,9 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                             </li>
                             <li class="link">
                                 <a href="interfaces/LogLine.html" data-type="entity-link">LogLine</a>
+                            </li>
+                            <li class="link">
+                                <a href="interfaces/MeasurementPoint.html" data-type="entity-link">MeasurementPoint</a>
                             </li>
                             <li class="link">
                                 <a href="interfaces/Metadata.html" data-type="entity-link">Metadata</a>

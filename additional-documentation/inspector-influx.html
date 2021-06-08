@@ -70,6 +70,7 @@ It uses <a href="https://github.com/node-influx/node-influx">node-influx</a> as 
 <h2 id="install">install</h2>
 <p><code>npm install --save inspector-influx</code></p>
 <h2 id="basic-usage">basic usage</h2>
+<p>For influxDB v1:  </p>
 <div><pre class="line-numbers"><code class="language-typescript">import { DefaultSender, InfluxMetricReporter } from &quot;inspector-influx&quot;;
 import { MetricRegistry, Timer } from &quot;inspector-metrics&quot;;
 
@@ -87,6 +88,51 @@ const sender = new DefaultSender(dbConfig);
 const reporter: InfluxMetricReporter = new InfluxMetricReporter({
     sender,
 });
+const registry: MetricRegistry = new MetricRegistry();
+const requests: Timer = registry.newTimer(&quot;requests&quot;);
+
+reporter.setLog(global.console);
+reporter.addMetricRegistry(registry);
+
+// need ot wait for the reporter to start
+await reporter.start();
+
+// example usage
+setInterval(() =&gt; {
+    // should report a few milliseconds
+    requests.time(() =&gt; {
+        let a = 0;
+        let b = 1;
+        for (let i = 0; i &lt; 1e6; i++) {
+            a = b + i;
+        }
+    });
+}, 100);</code></pre></div><p>For influxDB v2:  </p>
+<div><pre class="line-numbers"><code class="language-typescript">import { ClientOptions } from &quot;&#64;influxdata/influxdb-client&quot;;
+import { Influxdb2Sender, InfluxMetricReporter } from &quot;inspector-influx&quot;;
+import { MetricRegistry, Timer } from &quot;inspector-metrics&quot;;
+
+const clientOptions: ClientOptions = {
+    url: &#39;http://localhost:8087&#39;,
+    token: &#39;&lt;my-secret-token&gt;&#39; // have a look at the examples (/examples/influxdb-2x)
+}
+const reporter = new InfluxMetricReporter({
+    sender: new Influxdb2Sender(clientOptions, &#39;testing&#39;, &#39;test-bucket&#39;, [], &#39;ms&#39;, {
+    batchSize: 10,
+    defaultTags: {},
+    flushInterval: 0,
+    maxBufferLines: 10_000,
+    maxRetries: 3,
+    maxRetryDelay: 3000,
+    minRetryDelay: 1000,
+    retryJitter: 1000,
+    writeFailed: function(error, lines, failedAttempts) { console.log(error, lines, failedAttempts)},
+    }),
+    log: null,
+    minReportingTimeout: 30,
+    reportInterval: 5000
+})
+
 const registry: MetricRegistry = new MetricRegistry();
 const requests: Timer = registry.newTimer(&quot;requests&quot;);
 
