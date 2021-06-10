@@ -1,4 +1,4 @@
-FROM docker.elastic.co/elasticsearch/elasticsearch-oss:7.0.0
+FROM docker.elastic.co/elasticsearch/elasticsearch-oss:7.10.2
 
 ARG TZ
 ENV TZ=$TZ
