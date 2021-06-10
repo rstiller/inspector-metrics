@@ -1,4 +1,4 @@
-FROM grafana/grafana:7.5.6
+FROM grafana/grafana:7.5.7
 
 ARG TZ
 ENV TZ=$TZ
