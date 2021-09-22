@@ -2,6 +2,8 @@
 
 mkdir -p /opt/inspector-metrics/.tmp/$NODE_VERSION/
 rsync -avh --exclude *.sh \
+    .git \
+    .husky \
     lib \
     test \
     package.json \
@@ -9,6 +11,6 @@ rsync -avh --exclude *.sh \
     /opt/inspector-metrics/.tmp/$NODE_VERSION/ \
     --delete
 cd /opt/inspector-metrics/.tmp/$NODE_VERSION/
-npm i
-npm run bootstrap
-npm run build
+pnpm i
+pnpm run build
+pnpm run test

@@ -2,39 +2,11 @@ version: "3"
 
 services:
 
-  node8:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node8
-    user: "node"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=8
-
-  node9:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node9
-    user: "node"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=9
-
   node10:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node10
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -48,7 +20,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node11
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -62,7 +34,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node12
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -76,7 +48,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node13
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -90,7 +62,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node14
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -104,7 +76,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node15
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:
@@ -118,7 +90,7 @@ services:
     build:
       context: ./test-env
       dockerfile: Dockerfile-node16
-    user: "node"
+    user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
     volumes:

@@ -12,10 +12,9 @@ on:
 
 jobs:
   build:
-
     strategy:
       matrix:
-        node-version: [10.x, 11.x, 12.x, 13.x, 14.x, 15.x]
+        node-version: [10.x, 11.x, 12.x, 13.x, 14.x, 15.x, 16.x]
         os: [windows-latest, macos-latest, ubuntu-latest]
 
     runs-on: ${{ matrix.os }}
@@ -40,9 +39,9 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - uses: pnpm/action-setup@v1.2.1
+      - uses: pnpm/action-setup@v2.0.1
         with:
-          version: 4.11.1
+          version: 4.14.4
           dest: ~/.pnpm-store
           run_install: |
             - recursive: true
