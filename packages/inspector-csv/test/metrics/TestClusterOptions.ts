@@ -3,29 +3,31 @@
 import 'reflect-metadata'
 import 'source-map-support/register'
 
-import * as cluster from 'cluster'
+import {
+  Worker
+} from 'cluster'
 
 import { EventEmitter } from 'events'
 import { ClusterOptions } from 'inspector-metrics'
 import { SinonSpy, spy } from 'sinon'
 
-export class TestClusterOptions implements ClusterOptions<cluster.Worker> {
+export class TestClusterOptions implements ClusterOptions<Worker> {
   public enabled: boolean;
   public sendMetricsToMaster: boolean;
   public eventReceiver: EventEmitter;
-  public getWorkers: () => Promise<cluster.Worker[]>;
+  public getWorkers: () => Promise<Worker[]>;
   public sendToMaster: (message: any) => Promise<any>;
-  public sendToWorker: (worker: cluster.Worker, message: any) => Promise<any>;
+  public sendToWorker: (worker: Worker, message: any) => Promise<any>;
   public eventReceiverOnSpy: SinonSpy;
   public getWorkersSpy: SinonSpy;
   public sendToMasterSpy: SinonSpy;
   public sendToWorkerSpy: SinonSpy;
-  public workers: cluster.Worker[];
+  public workers: Worker[];
 
   public constructor (
     enabled: boolean,
     sendMetricsToMaster: boolean,
-    workers: cluster.Worker[]
+    workers: Worker[]
   ) {
     this.enabled = enabled
     this.sendMetricsToMaster = sendMetricsToMaster

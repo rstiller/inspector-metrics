@@ -1,18 +1,23 @@
 import 'source-map-support'
 
 import * as cluster from 'cluster'
+import {
+  Worker
+} from 'cluster'
 
 import { ReportMessageReceiver } from 'inspector-metrics'
 import { PrometheusClusterOptions } from './PrometheusClusterOptions'
+
+const defaultCluster = (cluster.default || cluster) as any
 
 /**
  * Default configuration for clustering support for the {@link PrometheusMetricReporter}.
  *
  * @export
  * @class DefaultPrometheusClusterOptions
- * @implements {PrometheusClusterOptions<cluster.Worker>}
+ * @implements {PrometheusClusterOptions<Worker>}
  */
-export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions<cluster.Worker> {
+export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions<Worker> {
   /**
    * Sets the timeout in which a forked process can respond to metric report requests.
    *
@@ -40,19 +45,19 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    * @type {boolean}
    * @memberof DefaultClusterOptions
    */
-  public readonly sendMetricsToMaster: boolean = cluster.isWorker;
+  public readonly sendMetricsToMaster: boolean = defaultCluster.isWorker;
 
   public constructor () {
-    if (cluster.isWorker) {
+    if (defaultCluster.isWorker) {
       this.eventReceiver = {
         on: (
           messageType: any,
-          callback: (worker: cluster.Worker, message: any, handle: any) => void) => {
+          callback: (worker: Worker, message: any, handle: any) => void) => {
           process.on(messageType, (message) => callback(null, message, null))
         }
       }
     } else {
-      this.eventReceiver = cluster
+      this.eventReceiver = defaultCluster
     }
   }
 
@@ -61,22 +66,22 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    *
    * @memberof DefaultClusterOptions
    */
-  public async sendToWorker (worker: cluster.Worker, message: any): Promise<any> {
+  public async sendToWorker (worker: Worker, message: any): Promise<any> {
     if (worker) {
       worker.send(message)
     }
   }
 
   /**
-   * Returns the values of 'cluster.workers'.
+   * Returns the values of 'workers'.
    *
    * @memberof DefaultClusterOptions
    */
-  public async getWorkers (): Promise<cluster.Worker[]> {
-    const workers: cluster.Worker[] = []
-    if (cluster.workers) {
-      for (const key of Object.keys(cluster.workers)) {
-        workers.push(cluster.workers[key])
+  public async getWorkers (): Promise<Worker[]> {
+    const workers: Worker[] = []
+    if (workers) {
+      for (const key of Object.keys(workers)) {
+        workers.push(workers[key as any])
       }
     }
     return workers

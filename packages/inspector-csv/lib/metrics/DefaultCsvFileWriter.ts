@@ -216,7 +216,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
       appendFile(
         filename,
         data,
-        this.options.encoding,
+        this.options.encoding as any,
         (err) => {
           if (err) {
             reject(err)
