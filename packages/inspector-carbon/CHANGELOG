@@ -5,11 +5,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
-### Added
 ### Changed
-### Removed
+- minimum node version 10 (was 8) 
+- updated dependencies
 
-## [2.7.0] - <date-here>
+## [2.7.0] - 2020-12-19
 ### Changed
 - updated dependencies
 - updated docs (badges)
