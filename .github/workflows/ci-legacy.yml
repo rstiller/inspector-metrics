@@ -1,0 +1,55 @@
+name: CI-Legacy
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        node-version: [10.x, 11.x]
+        os: [windows-2019, macos-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ runner.node-version }}-build-${{ env.cache-name }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ runner.node-version }}-build-${{ env.cache-name }}-
+
+      - uses: pnpm/action-setup@v2.1.0
+        with:
+          version: 4.14.4
+          dest: ~/.pnpm-store
+          run_install: |
+            - recursive: true
+            - args: [--global, rimraf]
+
+      - name: build
+        run: pnpm run build
+
+      - name: test
+        run: pnpm run test
+        env:
+          CI: true
+          TZ: Europe/Berlin
