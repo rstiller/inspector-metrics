@@ -4,11 +4,11 @@ importers:
 
   .:
     specifiers:
-      husky: 7.0.2
+      husky: 7.0.4
       nyc: 15.1.0
       rimraf: 3.0.2
     devDependencies:
-      husky: 7.0.2
+      husky: 7.0.4
       nyc: 15.1.0
       rimraf: 3.0.2
 
@@ -3159,8 +3159,8 @@ packages:
       toidentifier: 1.0.0
     dev: false
 
-  /husky/7.0.2:
-    resolution: {integrity: sha512-8yKEWNX4z2YsofXAMT7KvA1g8p+GxtB1ffV8XtpAEGuXNAbCV5wdNKH+qTpw8SM9fh4aMPDR+yQuKfgnreyZlg==}
+  /husky/7.0.4:
+    resolution: {integrity: sha512-vbaCKN2QLtP/vD4yvs6iz6hBEo6wkSzs8HpRah1Z6aGmF2KW5PdYuAd7uX5a+OyBZHBhd+TFLqgjUgytQr4RvQ==}
     engines: {node: '>=12'}
     hasBin: true
     dev: true
