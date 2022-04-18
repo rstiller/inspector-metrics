@@ -13,7 +13,7 @@
     }
   ],
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "inspector-carbon": "^2.7.0",
     "inspector-csv": "^2.6.0",
     "inspector-elasticsearch": "^2.8.0",
@@ -23,7 +23,7 @@
     "inspector-vm": "^3.6.0"
   },
   "devDependencies": {
-    "standard": "16.0.3"
+    "standard": "16.0.4"
   },
   "scripts": {
     "build": "npm run lint",
