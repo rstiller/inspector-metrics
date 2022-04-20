@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>V8MemoryMetrics</li>
+  <li >V8MemoryMetrics</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -62,6 +64,7 @@
         <p class="comment">
             <code>packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts</code>
         </p>
+
 
             <p class="comment">
                 <h3>Description</h3>
@@ -85,11 +88,6 @@
                             <code><a href="../interfaces/MetricSet.html" target="_self" >MetricSet</a></code>
             </p>
 
-            <p class="comment">
-                <h3>Example</h3>
-            </p>
-            <div class="io-description">
-            </div>
 
             <section>
     <h3 id="index">Index</h3>
@@ -106,87 +104,87 @@
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#heapSizeLimit">heapSizeLimit</a>
+                                <a href="#heapSizeLimit" >heapSizeLimit</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#intervalRef">intervalRef</a>
+                                <a href="#intervalRef" >intervalRef</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#mallocedMemory">mallocedMemory</a>
+                                <a href="#mallocedMemory" >mallocedMemory</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#metrics">metrics</a>
+                                <a href="#metrics" >metrics</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#peakMallocedMemory">peakMallocedMemory</a>
+                                <a href="#peakMallocedMemory" >peakMallocedMemory</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#spaces">spaces</a>
+                                <a href="#spaces" >spaces</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#totalAvailableSize">totalAvailableSize</a>
+                                <a href="#totalAvailableSize" >totalAvailableSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#totalHeapSize">totalHeapSize</a>
+                                <a href="#totalHeapSize" >totalHeapSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#totalHeapSizeExecutable">totalHeapSizeExecutable</a>
+                                <a href="#totalHeapSizeExecutable" >totalHeapSizeExecutable</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#totalPhysicalSize">totalPhysicalSize</a>
+                                <a href="#totalPhysicalSize" >totalPhysicalSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#usedHeapSize">usedHeapSize</a>
+                                <a href="#usedHeapSize" >usedHeapSize</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Static</span>
-                                <a href="#COUNTER">COUNTER</a>
+                                <a href="#COUNTER" >COUNTER</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#description">description</a>
+                                <a href="#description" >description</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#group">group</a>
+                                <a href="#group" >group</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#id">id</a>
+                                <a href="#id" >id</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#metadataMap">metadataMap</a>
+                                <a href="#metadataMap" >metadataMap</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#name">name</a>
+                                <a href="#name" >name</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#tagMap">tagMap</a>
+                                <a href="#tagMap" >tagMap</a>
                             </li>
                         </ul>
                     </td>
@@ -202,103 +200,91 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMetricList">getMetricList</a>
+                                <a href="#getMetricList" >getMetricList</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMetrics">getMetrics</a>
+                                <a href="#getMetrics" >getMetrics</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#removeTag">removeTag</a>
+                                <a href="#removeTag" >removeTag</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setGroup">setGroup</a>
+                                <a href="#setGroup" >setGroup</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setTag">setTag</a>
+                                <a href="#setTag" >setTag</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#stop">stop</a>
+                                <a href="#stop" >stop</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#addTags">addTags</a>
+                                <a href="#addTags" >addTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getDescription">getDescription</a>
+                                <a href="#getDescription" >getDescription</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getGroup">getGroup</a>
+                                <a href="#getGroup" >getGroup</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMetadata">getMetadata</a>
+                                <a href="#getMetadata" >getMetadata</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getMetadataMap">getMetadataMap</a>
+                                <a href="#getMetadataMap" >getMetadataMap</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getName">getName</a>
+                                <a href="#getName" >getName</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getTag">getTag</a>
+                                <a href="#getTag" >getTag</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#getTags">getTags</a>
+                                <a href="#getTags" >getTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#removeMetadata">removeMetadata</a>
+                                <a href="#removeMetadata" >removeMetadata</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#removeTag">removeTag</a>
+                                <a href="#removeTags" >removeTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#removeTags">removeTags</a>
+                                <a href="#setDescription" >setDescription</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setDescription">setDescription</a>
+                                <a href="#setMetadata" >setMetadata</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setGroup">setGroup</a>
+                                <a href="#setName" >setName</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setMetadata">setMetadata</a>
+                                <a href="#setTags" >setTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setName">setName</a>
+                                <a href="#toJSON" >toJSON</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setTag">setTag</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#setTags">setTags</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#toJSON">toJSON</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#toString">toString</a>
+                                <a href="#toString" >toString</a>
                             </li>
                         </ul>
                     </td>
@@ -378,754 +364,736 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="heapSizeLimit"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>heapSizeLimit</b></span>
+                        <a href="#heapSizeLimit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="heapSizeLimit"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            heapSizeLimit</b>
-                            <a href="#heapSizeLimit"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;heapSizeLimit&#x27;)</code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:144</a></div>
                         </td>
                     </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maximum heap size.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="intervalRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>intervalRef</b></span>
+                        <a href="#intervalRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Time.html" target="_self" >NodeJS.Timer</a></code>
+
+                    </td>
+                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;heapSizeLimit&#x27;)</code>
+                                <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:168</a></div>
                         </td>
                     </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The timer reference from the scheduler.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="mallocedMemory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>mallocedMemory</b></span>
+                        <a href="#mallocedMemory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;mallocedMemory&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:152</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Allocated memory.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metrics"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>metrics</b></span>
+                        <a href="#metrics"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >Metric[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:88</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Contains all the metrics in this metric-set.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="peakMallocedMemory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>peakMallocedMemory</b></span>
+                        <a href="#peakMallocedMemory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;peakMallocedMemory&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:160</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maximum allocated memory.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="spaces"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>spaces</b></span>
+                        <a href="#spaces"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../classes/SpaceHistory.html" target="_self" >Map&lt;string | SpaceHistory&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:96</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Stores the size gauges for different specs.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalAvailableSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalAvailableSize</b></span>
+                        <a href="#totalAvailableSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;totalAvailableSize&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:112</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total available size.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalHeapSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalHeapSize</b></span>
+                        <a href="#totalHeapSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;totalHeapSize&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:104</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total heap size.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalHeapSizeExecutable"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalHeapSizeExecutable</b></span>
+                        <a href="#totalHeapSizeExecutable"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;totalHeapSizeExecutable&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:128</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total heap size for executable code.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="totalPhysicalSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>totalPhysicalSize</b></span>
+                        <a href="#totalPhysicalSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;totalPhysicalSize&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:120</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Total physical size.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="usedHeapSize"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>usedHeapSize</b></span>
+                        <a href="#usedHeapSize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new SimpleGauge(&#x27;usedHeapSize&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:136</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Used heap size.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="COUNTER"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Static</span>
+                        <span ><b>COUNTER</b></span>
+                        <a href="#COUNTER"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="144" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:144</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Maximum heap size.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="intervalRef"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            intervalRef</b>
-                            <a href="#intervalRef"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Time.html" target="_self" >NodeJS.Timer</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:168</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The timer reference from the scheduler.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="mallocedMemory"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            mallocedMemory</b>
-                            <a href="#mallocedMemory"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;mallocedMemory&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:152</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Allocated memory.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="metrics"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            metrics</b>
-                            <a href="#metrics"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >Metric[]</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="88" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:88</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Contains all the metrics in this metric-set.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="peakMallocedMemory"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            peakMallocedMemory</b>
-                            <a href="#peakMallocedMemory"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;peakMallocedMemory&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:160</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Maximum allocated memory.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="spaces"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            spaces</b>
-                            <a href="#spaces"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../classes/SpaceHistory.html" target="_self" >Map&lt;string | SpaceHistory&gt;</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Map()</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:96</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Stores the size gauges for different specs.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="totalAvailableSize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            totalAvailableSize</b>
-                            <a href="#totalAvailableSize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;totalAvailableSize&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:112</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Total available size.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="totalHeapSize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            totalHeapSize</b>
-                            <a href="#totalHeapSize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;totalHeapSize&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:104</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Total heap size.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="totalHeapSizeExecutable"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            totalHeapSizeExecutable</b>
-                            <a href="#totalHeapSizeExecutable"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;totalHeapSizeExecutable&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="128" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:128</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Total heap size for executable code.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="totalPhysicalSize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            totalPhysicalSize</b>
-                            <a href="#totalPhysicalSize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;totalPhysicalSize&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:120</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Total physical size.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="usedHeapSize"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            usedHeapSize</b>
-                            <a href="#usedHeapSize"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Gauge.html" target="_self" >SimpleGauge</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new SimpleGauge(&#x27;usedHeapSize&#x27;)</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:136</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Used heap size.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="COUNTER"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Static</span>
-                            COUNTER</b>
-                            <a href="#COUNTER"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>0</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
-</div>
-                                </td>
-                            </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:217</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:217</a></code>
+</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>A static number instance to give an unique id within an application instance.
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>A static number instance to give an unique id within an application instance.
 This counter is only unique per process, forked processes start from 0.</p>
 </div>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="description"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>description</b></span>
+                        <a href="#description"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="description"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            description</b>
-                            <a href="#description"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
-</div>
-                                </td>
-                            </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:249</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The description of this metric.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="group"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            group</b>
-                            <a href="#group"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:249</a></code>
+</div>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The description of this metric.</p>
 </div>
-                                </td>
-                            </tr>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="group"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>group</b></span>
+                        <a href="#group"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:233</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The group set to this metric.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="id"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                                <span class="modifier">Readonly</span>
-                            id</b>
-                            <a href="#id"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>BaseMetric.COUNTER++</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:233</a></code>
 </div>
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The group set to this metric.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="id"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>id</b></span>
+                        <a href="#id"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>BaseMetric.COUNTER++</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:225</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The unique id of this metric instance.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="metadataMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                            metadataMap</b>
-                            <a href="#metadataMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Map&lt;string | any&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Map()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:225</a></code>
 </div>
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The unique id of this metric instance.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metadataMap"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>metadataMap</b></span>
+                        <a href="#metadataMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Map&lt;string | any&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map()</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:257</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The metadata associated with an instance of class.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="name"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Public</span>
-                            name</b>
-                            <a href="#name"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:257</a></code>
+</div>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The metadata associated with an instance of class.</p>
 </div>
-                                </td>
-                            </tr>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="name"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>name</b></span>
+                        <a href="#name"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:241</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The name of this metric.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="tagMap"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                            tagMap</b>
-                            <a href="#tagMap"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Map&lt;string | string&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Map()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:241</a></code>
 </div>
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The name of this metric.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tagMap"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                        <span ><b>tagMap</b></span>
+                        <a href="#tagMap"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Map&lt;string | string&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map()</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:265</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Maps of tags for this metric.</p>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:265</a></code>
 </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-            </tbody>
-        </table>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maps of tags for this metric.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -1139,10 +1107,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getMetricList"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMetricList
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMetricList</b></span>
                         <a href="#getMetricList"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1187,10 +1153,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getMetrics"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMetrics
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMetrics</b></span>
                         <a href="#getMetrics"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1235,10 +1199,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="removeTag"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeTag
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>removeTag</b></span>
                         <a href="#removeTag"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1253,8 +1215,14 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="317"
-                            class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:317</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:317</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1266,6 +1234,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1302,10 +1271,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="setGroup"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setGroup
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setGroup</b></span>
                         <a href="#setGroup"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1320,8 +1287,14 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="259"
-                            class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:259</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:259</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1333,6 +1306,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1369,10 +1343,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="setTag"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setTag
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setTag</b></span>
                         <a href="#setTag"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1387,8 +1359,14 @@ This counter is only unique per process, forked processes start from 0.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="289"
-                            class="link-to-prism">packages/inspector-vm/lib/metrics/V8MemoryMetrics.ts:289</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:289</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1400,6 +1378,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1448,10 +1427,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="stop"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            stop
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>stop</b></span>
                         <a href="#stop"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1491,10 +1468,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="addTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            addTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>addTags</b></span>
                         <a href="#addTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1526,6 +1501,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1562,10 +1538,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getDescription"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getDescription
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getDescription</b></span>
                         <a href="#getDescription"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1609,10 +1583,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getGroup"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getGroup
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getGroup</b></span>
                         <a href="#getGroup"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1656,10 +1628,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getMetadata"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMetadata
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMetadata</b></span>
                         <a href="#getMetadata"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1699,6 +1669,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1742,10 +1713,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getMetadataMap"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getMetadataMap
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getMetadataMap</b></span>
                         <a href="#getMetadataMap"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1789,10 +1758,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getName"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getName
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getName</b></span>
                         <a href="#getName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1836,10 +1803,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getTag"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getTag
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getTag</b></span>
                         <a href="#getTag"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1871,6 +1836,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1914,10 +1880,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="getTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getTags</b></span>
                         <a href="#getTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1961,10 +1925,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="removeMetadata"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeMetadata
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>removeMetadata</b></span>
                         <a href="#removeMetadata"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2004,6 +1966,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2045,83 +2008,10 @@ This counter is only unique per process, forked processes start from 0.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="removeTag"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeTag
-                        </b>
-                        <a href="#removeTag"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>removeTag(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:344</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="removeTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>removeTags</b></span>
                         <a href="#removeTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2153,6 +2043,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2189,10 +2080,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="setDescription"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setDescription
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setDescription</b></span>
                         <a href="#setDescription"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2224,6 +2113,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2258,83 +2148,10 @@ This counter is only unique per process, forked processes start from 0.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="setGroup"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setGroup
-                        </b>
-                        <a href="#setGroup"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setGroup(group: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:316</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>group</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="setMetadata"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setMetadata
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setMetadata</b></span>
                         <a href="#setMetadata"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2374,6 +2191,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2422,10 +2240,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="setName"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setName
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setName</b></span>
                         <a href="#setName"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2457,6 +2273,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2468,89 +2285,6 @@ This counter is only unique per process, forked processes start from 0.</p>
                             <tbody>
                                 <tr>
                                     <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="setTag"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setTag
-                        </b>
-                        <a href="#setTag"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>setTag(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >BaseMetric</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >BaseMetric:329</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>value</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
                                     </td>
@@ -2576,10 +2310,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="setTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setTags</b></span>
                         <a href="#setTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2611,6 +2343,7 @@ This counter is only unique per process, forked processes start from 0.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2647,10 +2380,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="toJSON"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toJSON
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>toJSON</b></span>
                         <a href="#toJSON"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2701,10 +2432,8 @@ This counter is only unique per process, forked processes start from 0.</p>
                 <td class="col-md-4">
                     <a name="toString"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            toString
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>toString</b></span>
                         <a href="#toString"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3096,14 +2825,15 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
 
 
 
-                   
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -3115,6 +2845,15 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -3124,9 +2863,9 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 

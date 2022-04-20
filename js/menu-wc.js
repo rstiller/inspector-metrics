@@ -1,6 +1,5 @@
 'use strict';
 
-
 customElements.define('compodoc-menu', class extends HTMLElement {
     constructor() {
         super();
@@ -39,6 +38,11 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                                 <span class="icon ion-ios-paper"></span>LICENSE
                             </a>
                         </li>
+                                <li class="link">
+                                    <a href="properties.html" data-type="chapter-link">
+                                        <span class="icon ion-ios-apps"></span>Properties
+                                    </a>
+                                </li>
                     </ul>
                 </li>
                     <li class="chapter additional">
@@ -81,142 +85,142 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? 'id="classes-links"' : 'id="xs-classes-links"' }>
                             <li class="link">
-                                <a href="classes/BaseMetric.html" data-type="entity-link">BaseMetric</a>
+                                <a href="classes/BaseMetric.html" data-type="entity-link" >BaseMetric</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Buckets.html" data-type="entity-link">Buckets</a>
+                                <a href="classes/Buckets.html" data-type="entity-link" >Buckets</a>
                             </li>
                             <li class="link">
-                                <a href="classes/CarbonMetricReporter.html" data-type="entity-link">CarbonMetricReporter</a>
+                                <a href="classes/CarbonMetricReporter.html" data-type="entity-link" >CarbonMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Clock.html" data-type="entity-link">Clock</a>
+                                <a href="classes/Clock.html" data-type="entity-link" >Clock</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Counter.html" data-type="entity-link">Counter</a>
+                                <a href="classes/Counter.html" data-type="entity-link" >Counter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/CsvMetricReporter.html" data-type="entity-link">CsvMetricReporter</a>
+                                <a href="classes/CsvMetricReporter.html" data-type="entity-link" >CsvMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DefaultClusterOptions.html" data-type="entity-link">DefaultClusterOptions</a>
+                                <a href="classes/DefaultClusterOptions.html" data-type="entity-link" >DefaultClusterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DefaultCsvFileWriter.html" data-type="entity-link">DefaultCsvFileWriter</a>
+                                <a href="classes/DefaultCsvFileWriter.html" data-type="entity-link" >DefaultCsvFileWriter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DefaultPrometheusClusterOptions.html" data-type="entity-link">DefaultPrometheusClusterOptions</a>
+                                <a href="classes/DefaultPrometheusClusterOptions.html" data-type="entity-link" >DefaultPrometheusClusterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DefaultReservoir.html" data-type="entity-link">DefaultReservoir</a>
+                                <a href="classes/DefaultReservoir.html" data-type="entity-link" >DefaultReservoir</a>
                             </li>
                             <li class="link">
-                                <a href="classes/DisabledClusterOptions.html" data-type="entity-link">DisabledClusterOptions</a>
+                                <a href="classes/DisabledClusterOptions.html" data-type="entity-link" >DisabledClusterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="classes/ElasticsearchMetricReporter.html" data-type="entity-link">ElasticsearchMetricReporter</a>
+                                <a href="classes/ElasticsearchMetricReporter.html" data-type="entity-link" >ElasticsearchMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Event.html" data-type="entity-link">Event</a>
+                                <a href="classes/Event.html" data-type="entity-link" >Event</a>
                             </li>
                             <li class="link">
-                                <a href="classes/ExponentiallyWeightedMovingAverage.html" data-type="entity-link">ExponentiallyWeightedMovingAverage</a>
+                                <a href="classes/ExponentiallyWeightedMovingAverage.html" data-type="entity-link" >ExponentiallyWeightedMovingAverage</a>
                             </li>
                             <li class="link">
-                                <a href="classes/HdrHistogram.html" data-type="entity-link">HdrHistogram</a>
+                                <a href="classes/HdrHistogram.html" data-type="entity-link" >HdrHistogram</a>
                             </li>
                             <li class="link">
-                                <a href="classes/HdrSnapshot.html" data-type="entity-link">HdrSnapshot</a>
+                                <a href="classes/HdrSnapshot.html" data-type="entity-link" >HdrSnapshot</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Histogram.html" data-type="entity-link">Histogram</a>
+                                <a href="classes/Histogram.html" data-type="entity-link" >Histogram</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Influxdb1Sender.html" data-type="entity-link">Influxdb1Sender</a>
+                                <a href="classes/Influxdb1Sender.html" data-type="entity-link" >Influxdb1Sender</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Influxdb2Sender.html" data-type="entity-link">Influxdb2Sender</a>
+                                <a href="classes/Influxdb2Sender.html" data-type="entity-link" >Influxdb2Sender</a>
                             </li>
                             <li class="link">
-                                <a href="classes/InfluxMetricReporter.html" data-type="entity-link">InfluxMetricReporter</a>
+                                <a href="classes/InfluxMetricReporter.html" data-type="entity-link" >InfluxMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Int64Wrapper.html" data-type="entity-link">Int64Wrapper</a>
+                                <a href="classes/Int64Wrapper.html" data-type="entity-link" >Int64Wrapper</a>
                             </li>
                             <li class="link">
-                                <a href="classes/LoggerReporter.html" data-type="entity-link">LoggerReporter</a>
+                                <a href="classes/LoggerReporter.html" data-type="entity-link" >LoggerReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Meter.html" data-type="entity-link">Meter</a>
+                                <a href="classes/Meter.html" data-type="entity-link" >Meter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MetricRegistration.html" data-type="entity-link">MetricRegistration</a>
+                                <a href="classes/MetricRegistration.html" data-type="entity-link" >MetricRegistration</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MetricRegistry.html" data-type="entity-link">MetricRegistry</a>
+                                <a href="classes/MetricRegistry.html" data-type="entity-link" >MetricRegistry</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MetricRegistryListenerRegistration.html" data-type="entity-link">MetricRegistryListenerRegistration</a>
+                                <a href="classes/MetricRegistryListenerRegistration.html" data-type="entity-link" >MetricRegistryListenerRegistration</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MetricReporter.html" data-type="entity-link">MetricReporter</a>
+                                <a href="classes/MetricReporter.html" data-type="entity-link" >MetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/MonotoneCounter.html" data-type="entity-link">MonotoneCounter</a>
+                                <a href="classes/MonotoneCounter.html" data-type="entity-link" >MonotoneCounter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Percentiles.html" data-type="entity-link">Percentiles</a>
+                                <a href="classes/Percentiles.html" data-type="entity-link" >Percentiles</a>
                             </li>
                             <li class="link">
-                                <a href="classes/PrometheusMetricReporter.html" data-type="entity-link">PrometheusMetricReporter</a>
+                                <a href="classes/PrometheusMetricReporter.html" data-type="entity-link" >PrometheusMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/PushgatewayMetricReporter.html" data-type="entity-link">PushgatewayMetricReporter</a>
+                                <a href="classes/PushgatewayMetricReporter.html" data-type="entity-link" >PushgatewayMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/ScheduledMetricReporter.html" data-type="entity-link">ScheduledMetricReporter</a>
+                                <a href="classes/ScheduledMetricReporter.html" data-type="entity-link" >ScheduledMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SimpleGauge.html" data-type="entity-link">SimpleGauge</a>
+                                <a href="classes/SimpleGauge.html" data-type="entity-link" >SimpleGauge</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SimpleSnapshot.html" data-type="entity-link">SimpleSnapshot</a>
+                                <a href="classes/SimpleSnapshot.html" data-type="entity-link" >SimpleSnapshot</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SizeGauge.html" data-type="entity-link">SizeGauge</a>
+                                <a href="classes/SizeGauge.html" data-type="entity-link" >SizeGauge</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SlidingWindowReservoir.html" data-type="entity-link">SlidingWindowReservoir</a>
+                                <a href="classes/SlidingWindowReservoir.html" data-type="entity-link" >SlidingWindowReservoir</a>
                             </li>
                             <li class="link">
-                                <a href="classes/SpaceHistory.html" data-type="entity-link">SpaceHistory</a>
+                                <a href="classes/SpaceHistory.html" data-type="entity-link" >SpaceHistory</a>
                             </li>
                             <li class="link">
-                                <a href="classes/StdClock.html" data-type="entity-link">StdClock</a>
+                                <a href="classes/StdClock.html" data-type="entity-link" >StdClock</a>
                             </li>
                             <li class="link">
-                                <a href="classes/StopWatch.html" data-type="entity-link">StopWatch</a>
+                                <a href="classes/StopWatch.html" data-type="entity-link" >StopWatch</a>
                             </li>
                             <li class="link">
-                                <a href="classes/TagsOnlyMetricRegistry.html" data-type="entity-link">TagsOnlyMetricRegistry</a>
+                                <a href="classes/TagsOnlyMetricRegistry.html" data-type="entity-link" >TagsOnlyMetricRegistry</a>
                             </li>
                             <li class="link">
-                                <a href="classes/Timer.html" data-type="entity-link">Timer</a>
+                                <a href="classes/Timer.html" data-type="entity-link" >Timer</a>
                             </li>
                             <li class="link">
-                                <a href="classes/TimeUnit.html" data-type="entity-link">TimeUnit</a>
+                                <a href="classes/TimeUnit.html" data-type="entity-link" >TimeUnit</a>
                             </li>
                             <li class="link">
-                                <a href="classes/V8EventLoop.html" data-type="entity-link">V8EventLoop</a>
+                                <a href="classes/V8EventLoop.html" data-type="entity-link" >V8EventLoop</a>
                             </li>
                             <li class="link">
-                                <a href="classes/V8GCMetrics.html" data-type="entity-link">V8GCMetrics</a>
+                                <a href="classes/V8GCMetrics.html" data-type="entity-link" >V8GCMetrics</a>
                             </li>
                             <li class="link">
-                                <a href="classes/V8MemoryMetrics.html" data-type="entity-link">V8MemoryMetrics</a>
+                                <a href="classes/V8MemoryMetrics.html" data-type="entity-link" >V8MemoryMetrics</a>
                             </li>
                             <li class="link">
-                                <a href="classes/V8ProcessMetrics.html" data-type="entity-link">V8ProcessMetrics</a>
+                                <a href="classes/V8ProcessMetrics.html" data-type="entity-link" >V8ProcessMetrics</a>
                             </li>
                         </ul>
                     </li>
@@ -229,190 +233,190 @@ customElements.define('compodoc-menu', class extends HTMLElement {
                         </div>
                         <ul class="links collapse " ${ isNormalMode ? ' id="interfaces-links"' : 'id="xs-interfaces-links"' }>
                             <li class="link">
-                                <a href="interfaces/BucketCounting.html" data-type="entity-link">BucketCounting</a>
+                                <a href="interfaces/BucketCounting.html" data-type="entity-link" >BucketCounting</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/BucketToCountMap.html" data-type="entity-link">BucketToCountMap</a>
+                                <a href="interfaces/BucketToCountMap.html" data-type="entity-link" >BucketToCountMap</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CarbonData.html" data-type="entity-link">CarbonData</a>
+                                <a href="interfaces/CarbonData.html" data-type="entity-link" >CarbonData</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CarbonMetricReporterOptions.html" data-type="entity-link">CarbonMetricReporterOptions</a>
+                                <a href="interfaces/CarbonMetricReporterOptions.html" data-type="entity-link" >CarbonMetricReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ClusterOptions.html" data-type="entity-link">ClusterOptions</a>
+                                <a href="interfaces/ClusterOptions.html" data-type="entity-link" >ClusterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Counting.html" data-type="entity-link">Counting</a>
+                                <a href="interfaces/Counting.html" data-type="entity-link" >Counting</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CsvFileWriter.html" data-type="entity-link">CsvFileWriter</a>
+                                <a href="interfaces/CsvFileWriter.html" data-type="entity-link" >CsvFileWriter</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/CsvMetricReporterOptions.html" data-type="entity-link">CsvMetricReporterOptions</a>
+                                <a href="interfaces/CsvMetricReporterOptions.html" data-type="entity-link" >CsvMetricReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/DefaultCsvFileWriterOptions.html" data-type="entity-link">DefaultCsvFileWriterOptions</a>
+                                <a href="interfaces/DefaultCsvFileWriterOptions.html" data-type="entity-link" >DefaultCsvFileWriterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ElasticsearchMetricReporterOption.html" data-type="entity-link">ElasticsearchMetricReporterOption</a>
+                                <a href="interfaces/ElasticsearchMetricReporterOption.html" data-type="entity-link" >ElasticsearchMetricReporterOption</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Fields.html" data-type="entity-link">Fields</a>
+                                <a href="interfaces/Fields.html" data-type="entity-link" >Fields</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Gauge.html" data-type="entity-link">Gauge</a>
+                                <a href="interfaces/Gauge.html" data-type="entity-link" >Gauge</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Groupable.html" data-type="entity-link">Groupable</a>
+                                <a href="interfaces/Groupable.html" data-type="entity-link" >Groupable</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/IMetricReporter.html" data-type="entity-link">IMetricReporter</a>
+                                <a href="interfaces/IMetricReporter.html" data-type="entity-link" >IMetricReporter</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/InfluxMetricReporterOptions.html" data-type="entity-link">InfluxMetricReporterOptions</a>
+                                <a href="interfaces/InfluxMetricReporterOptions.html" data-type="entity-link" >InfluxMetricReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/InterprocessMessage.html" data-type="entity-link">InterprocessMessage</a>
+                                <a href="interfaces/InterprocessMessage.html" data-type="entity-link" >InterprocessMessage</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/InterprocessReportMessage.html" data-type="entity-link">InterprocessReportMessage</a>
+                                <a href="interfaces/InterprocessReportMessage.html" data-type="entity-link" >InterprocessReportMessage</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/InterprocessReportRequest.html" data-type="entity-link">InterprocessReportRequest</a>
+                                <a href="interfaces/InterprocessReportRequest.html" data-type="entity-link" >InterprocessReportRequest</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/InterprocessReportResponse.html" data-type="entity-link">InterprocessReportResponse</a>
+                                <a href="interfaces/InterprocessReportResponse.html" data-type="entity-link" >InterprocessReportResponse</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LengthAttributeInterface.html" data-type="entity-link">LengthAttributeInterface</a>
+                                <a href="interfaces/LengthAttributeInterface.html" data-type="entity-link" >LengthAttributeInterface</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LengthMethodInterface.html" data-type="entity-link">LengthMethodInterface</a>
+                                <a href="interfaces/LengthMethodInterface.html" data-type="entity-link" >LengthMethodInterface</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Logger.html" data-type="entity-link">Logger</a>
+                                <a href="interfaces/Logger.html" data-type="entity-link" >Logger</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LoggerReporterOptions.html" data-type="entity-link">LoggerReporterOptions</a>
+                                <a href="interfaces/LoggerReporterOptions.html" data-type="entity-link" >LoggerReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LoggerReportingContext.html" data-type="entity-link">LoggerReportingContext</a>
+                                <a href="interfaces/LoggerReportingContext.html" data-type="entity-link" >LoggerReportingContext</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/LogLine.html" data-type="entity-link">LogLine</a>
+                                <a href="interfaces/LogLine.html" data-type="entity-link" >LogLine</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MeasurementPoint.html" data-type="entity-link">MeasurementPoint</a>
+                                <a href="interfaces/MeasurementPoint.html" data-type="entity-link" >MeasurementPoint</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Metadata.html" data-type="entity-link">Metadata</a>
+                                <a href="interfaces/Metadata.html" data-type="entity-link" >Metadata</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetadataContainer.html" data-type="entity-link">MetadataContainer</a>
+                                <a href="interfaces/MetadataContainer.html" data-type="entity-link" >MetadataContainer</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Metered.html" data-type="entity-link">Metered</a>
+                                <a href="interfaces/Metered.html" data-type="entity-link" >Metered</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MeteredRates.html" data-type="entity-link">MeteredRates</a>
+                                <a href="interfaces/MeteredRates.html" data-type="entity-link" >MeteredRates</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Metric.html" data-type="entity-link">Metric</a>
+                                <a href="interfaces/Metric.html" data-type="entity-link" >Metric</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetricEntry.html" data-type="entity-link">MetricEntry</a>
+                                <a href="interfaces/MetricEntry.html" data-type="entity-link" >MetricEntry</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetricRegistryListener.html" data-type="entity-link">MetricRegistryListener</a>
+                                <a href="interfaces/MetricRegistryListener.html" data-type="entity-link" >MetricRegistryListener</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetricReporterOptions.html" data-type="entity-link">MetricReporterOptions</a>
+                                <a href="interfaces/MetricReporterOptions.html" data-type="entity-link" >MetricReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetricSet.html" data-type="entity-link">MetricSet</a>
+                                <a href="interfaces/MetricSet.html" data-type="entity-link" >MetricSet</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MetricSetReportContext.html" data-type="entity-link">MetricSetReportContext</a>
+                                <a href="interfaces/MetricSetReportContext.html" data-type="entity-link" >MetricSetReportContext</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/MovingAverage.html" data-type="entity-link">MovingAverage</a>
+                                <a href="interfaces/MovingAverage.html" data-type="entity-link" >MovingAverage</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/OverallReportContext.html" data-type="entity-link">OverallReportContext</a>
+                                <a href="interfaces/OverallReportContext.html" data-type="entity-link" >OverallReportContext</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/PrometheusClusterOptions.html" data-type="entity-link">PrometheusClusterOptions</a>
+                                <a href="interfaces/PrometheusClusterOptions.html" data-type="entity-link" >PrometheusClusterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/PrometheusFields.html" data-type="entity-link">PrometheusFields</a>
+                                <a href="interfaces/PrometheusFields.html" data-type="entity-link" >PrometheusFields</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/PrometheusMetricResult.html" data-type="entity-link">PrometheusMetricResult</a>
+                                <a href="interfaces/PrometheusMetricResult.html" data-type="entity-link" >PrometheusMetricResult</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/PrometheusReporterOptions.html" data-type="entity-link">PrometheusReporterOptions</a>
+                                <a href="interfaces/PrometheusReporterOptions.html" data-type="entity-link" >PrometheusReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/PushgatewayReporterOptions.html" data-type="entity-link">PushgatewayReporterOptions</a>
+                                <a href="interfaces/PushgatewayReporterOptions.html" data-type="entity-link" >PushgatewayReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ReportingResult.html" data-type="entity-link">ReportingResult</a>
+                                <a href="interfaces/ReportingResult.html" data-type="entity-link" >ReportingResult</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ReportMessageReceiver.html" data-type="entity-link">ReportMessageReceiver</a>
+                                <a href="interfaces/ReportMessageReceiver.html" data-type="entity-link" >ReportMessageReceiver</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Reservoir.html" data-type="entity-link">Reservoir</a>
+                                <a href="interfaces/Reservoir.html" data-type="entity-link" >Reservoir</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Sampling.html" data-type="entity-link">Sampling</a>
+                                <a href="interfaces/Sampling.html" data-type="entity-link" >Sampling</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/ScheduledMetricReporterOptions.html" data-type="entity-link">ScheduledMetricReporterOptions</a>
+                                <a href="interfaces/ScheduledMetricReporterOptions.html" data-type="entity-link" >ScheduledMetricReporterOptions</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Sender.html" data-type="entity-link">Sender</a>
+                                <a href="interfaces/Sender.html" data-type="entity-link" >Sender</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializableBucketCounting.html" data-type="entity-link">SerializableBucketCounting</a>
+                                <a href="interfaces/SerializableBucketCounting.html" data-type="entity-link" >SerializableBucketCounting</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializableMetered.html" data-type="entity-link">SerializableMetered</a>
+                                <a href="interfaces/SerializableMetered.html" data-type="entity-link" >SerializableMetered</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializableMetric.html" data-type="entity-link">SerializableMetric</a>
+                                <a href="interfaces/SerializableMetric.html" data-type="entity-link" >SerializableMetric</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializableSampling.html" data-type="entity-link">SerializableSampling</a>
+                                <a href="interfaces/SerializableSampling.html" data-type="entity-link" >SerializableSampling</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializableSummarizing.html" data-type="entity-link">SerializableSummarizing</a>
+                                <a href="interfaces/SerializableSummarizing.html" data-type="entity-link" >SerializableSummarizing</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SerializedSnapshot.html" data-type="entity-link">SerializedSnapshot</a>
+                                <a href="interfaces/SerializedSnapshot.html" data-type="entity-link" >SerializedSnapshot</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SizeAttributeInterface.html" data-type="entity-link">SizeAttributeInterface</a>
+                                <a href="interfaces/SizeAttributeInterface.html" data-type="entity-link" >SizeAttributeInterface</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/SizeMethodInterface.html" data-type="entity-link">SizeMethodInterface</a>
+                                <a href="interfaces/SizeMethodInterface.html" data-type="entity-link" >SizeMethodInterface</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Snapshot.html" data-type="entity-link">Snapshot</a>
+                                <a href="interfaces/Snapshot.html" data-type="entity-link" >Snapshot</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Summarizing.html" data-type="entity-link">Summarizing</a>
+                                <a href="interfaces/Summarizing.html" data-type="entity-link" >Summarizing</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Taggable.html" data-type="entity-link">Taggable</a>
+                                <a href="interfaces/Taggable.html" data-type="entity-link" >Taggable</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Tags.html" data-type="entity-link">Tags</a>
+                                <a href="interfaces/Tags.html" data-type="entity-link" >Tags</a>
                             </li>
                             <li class="link">
-                                <a href="interfaces/Time.html" data-type="entity-link">Time</a>
+                                <a href="interfaces/Time.html" data-type="entity-link" >Time</a>
                             </li>
                         </ul>
                     </li>

@@ -8,7 +8,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	      <link rel="stylesheet" href="../styles/style.css">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
     </head>
     <body>
 
@@ -40,9 +41,10 @@
 
 
 
+
 <ol class="breadcrumb">
   <li>Classes</li>
-  <li>CsvMetricReporter</li>
+  <li >CsvMetricReporter</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -63,6 +65,7 @@
             <code>packages/inspector-csv/lib/metrics/CsvMetricReporter.ts</code>
         </p>
 
+
             <p class="comment">
                 <h3>Description</h3>
             </p>
@@ -79,11 +82,6 @@
             </p>
 
 
-            <p class="comment">
-                <h3>Example</h3>
-            </p>
-            <div class="io-description">
-            </div>
 
             <section>
     <h3 id="index">Index</h3>
@@ -99,46 +97,46 @@
                         <ul class="index-list">
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#header">header</a>
+                                <a href="#header" >header</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#metadataNames">metadataNames</a>
+                                <a href="#metadataNames" >metadataNames</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#tagsNames">tagsNames</a>
+                                <a href="#tagsNames" >tagsNames</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#timer">timer</a>
+                                <a href="#timer" >timer</a>
                             </li>
                             <li>
                                     <span class="modifier">Static</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#MESSAGE_TYPE">MESSAGE_TYPE</a>
+                                <a href="#MESSAGE_TYPE" >MESSAGE_TYPE</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#metricRegistries">metricRegistries</a>
+                                <a href="#metricRegistries" >metricRegistries</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#metricStates">metricStates</a>
+                                <a href="#metricStates" >metricStates</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#options">options</a>
+                                <a href="#options" >options</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Readonly</span>
-                                <a href="#reporterType">reporterType</a>
+                                <a href="#reporterType" >reporterType</a>
                             </li>
                         </ul>
                     </td>
@@ -155,216 +153,151 @@
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Async</span>
-                                <a href="#beforeReport">beforeReport</a>
+                                <a href="#beforeReport" >beforeReport</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#buildHeaders">buildHeaders</a>
+                                <a href="#buildHeaders" >buildHeaders</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#buildRow">buildRow</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#filterKeys">filterKeys</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#flushEvents">flushEvents</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#getAllMetadataKeys">getAllMetadataKeys</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Private</span>
-                                <a href="#getAllTagKeys">getAllTagKeys</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#handleReportMessage">handleReportMessage</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#handleResults">handleResults</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#reportCounter">reportCounter</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#reportEvent">reportEvent</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#reportGauge">reportGauge</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#reportHistogram">reportHistogram</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#reportMeter">reportMeter</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#reportTimer">reportTimer</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#shouldCallInit">shouldCallInit</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#start">start</a>
+                                <a href="#buildRow" >buildRow</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                     <span class="modifier">Async</span>
-                                <a href="#writeRows">writeRows</a>
+                                <a href="#filterKeys" >filterKeys</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#start">start</a>
+                                <a href="#flushEvents" >flushEvents</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#stop">stop</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#getAllMetadataKeys" >getAllMetadataKeys</a>
                             </li>
                             <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#addMetricRegistry">addMetricRegistry</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#afterReport">afterReport</a>
+                                    <span class="modifier">Private</span>
+                                <a href="#getAllTagKeys" >getAllTagKeys</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Async</span>
-                                <a href="#beforeReport">beforeReport</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#buildTags">buildTags</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#canHandleMessage">canHandleMessage</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#createMetricSetReportContext">createMetricSetReportContext</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#createOverallReportContext">createOverallReportContext</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#flushEvents">flushEvents</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#getNumber">getNumber</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#getTags">getTags</a>
+                                <a href="#handleReportMessage" >handleReportMessage</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Async</span>
-                                <a href="#handleReportMessage">handleReportMessage</a>
+                                <a href="#handleResults" >handleResults</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#handleResults">handleResults</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                <a href="#hasChanged">hasChanged</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Public</span>
-                                <a href="#removeMetricRegistry">removeMetricRegistry</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Async</span>
-                                <a href="#report">report</a>
-                            </li>
-                            <li>
-                                    <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#reportCounter">reportCounter</a>
+                                <a href="#reportCounter" >reportCounter</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
                                     <span class="modifier">Async</span>
-                                <a href="#reportEvent">reportEvent</a>
+                                <a href="#reportEvent" >reportEvent</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#reportGauge">reportGauge</a>
+                                <a href="#reportGauge" >reportGauge</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#reportHistogram">reportHistogram</a>
+                                <a href="#reportHistogram" >reportHistogram</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#reportMeter">reportMeter</a>
+                                <a href="#reportMeter" >reportMeter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#reportTimer" >reportTimer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#shouldCallInit" >shouldCallInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#start" >start</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#writeRows" >writeRows</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#stop" >stop</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#addMetricRegistry" >addMetricRegistry</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
                                     <span class="modifier">Async</span>
-                                <a href="#reportMetricRegistry">reportMetricRegistry</a>
+                                <a href="#afterReport" >afterReport</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#reportMetrics">reportMetrics</a>
+                                <a href="#buildTags" >buildTags</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#reportTimer">reportTimer</a>
+                                <a href="#canHandleMessage" >canHandleMessage</a>
                             </li>
                             <li>
                                     <span class="modifier">Protected</span>
-                                <a href="#sendMetricsToMaster">sendMetricsToMaster</a>
+                                <a href="#createMetricSetReportContext" >createMetricSetReportContext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#createOverallReportContext" >createOverallReportContext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#getNumber" >getNumber</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                <a href="#setTags">setTags</a>
+                                <a href="#getTags" >getTags</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#hasChanged" >hasChanged</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#start">start</a>
+                                <a href="#removeMetricRegistry" >removeMetricRegistry</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#report" >report</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                    <span class="modifier">Async</span>
+                                <a href="#reportMetricRegistry" >reportMetricRegistry</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#reportMetrics" >reportMetrics</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Protected</span>
+                                <a href="#sendMetricsToMaster" >sendMetricsToMaster</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
-                                    <span class="modifier">Abstract</span>
-                                <a href="#stop">stop</a>
+                                <a href="#setTags" >setTags</a>
                             </li>
                         </ul>
                     </td>
@@ -385,7 +318,7 @@
                 <tr>
                     <td class="col-md-4">
                                 <span class="modifier">Public</span>
-                        <code>constructor(undefined: <a href="../interfaces/CsvMetricReporterOptions.html">CsvMetricReporterOptions</a>, reporterType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                        <code>constructor(undefined: <a href="../interfaces/CsvMetricReporterOptions.html" target="_self">CsvMetricReporterOptions</a>, reporterType?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                     </td>
                 </tr>
                         <tr>
@@ -435,8 +368,8 @@
                                                     </td>
                                                     
                                                         <td>
-                                                                <code><p>the type of the reporter implementation - for internal use</p>
-</code>
+                                                                <p>the type of the reporter implementation - for internal use</p>
+
                                                         </td>
                                                 </tr>
                                         </tbody>
@@ -450,390 +383,381 @@
 
             <section>
     
-        <h3 id="inputs">
-            Properties
-        </h3>
-        <table class="table table-sm table-bordered">
-            <tbody>
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="header"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>header</b></span>
+                        <a href="#header"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="header"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            header</b>
-                            <a href="#header"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Row" target="_self" >Row</a></code>
+
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Row" target="_self" >Row</a></code>
-
+                                <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:216</a></div>
                         </td>
                     </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Header row.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metadataNames"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>metadataNames</b></span>
+                        <a href="#metadataNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:224</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>All metadata names</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="tagsNames"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>tagsNames</b></span>
+                        <a href="#tagsNames"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="232" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:232</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>All tags names.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timer"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>timer</b></span>
+                        <a href="#timer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Time.html" target="_self" >NodeJS.Timer</a></code>
+
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="216" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:216</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Header row.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="metadataNames"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            metadataNames</b>
-                            <a href="#metadataNames"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>string[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:224</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>All metadata names</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="tagsNames"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                                <span class="modifier">Readonly</span>
-                            tagsNames</b>
-                            <a href="#tagsNames"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code>string[]</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="232" class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:232</a></div>
-                            </td>
-                        </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>All tags names.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="timer"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Private</span>
-                            timer</b>
-                            <a href="#timer"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Time.html" target="_self" >NodeJS.Timer</a></code>
-
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >ScheduledMetricReporter</a></code>
-</div>
-                                </td>
-                            </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >ScheduledMetricReporter:60</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >ScheduledMetricReporter</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Timer instance returned by the scheduler function.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="MESSAGE_TYPE"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Static</span>
-                                <span class="modifier">Readonly</span>
-                            MESSAGE_TYPE</b>
-                            <a href="#MESSAGE_TYPE"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>&quot;inspector-metrics:metric-reporter:report&quot;</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >ScheduledMetricReporter:60</a></code>
 </div>
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Timer instance returned by the scheduler function.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MESSAGE_TYPE"></a>
+                    <span class="name">
+                            <span class="modifier">Static</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>MESSAGE_TYPE</b></span>
+                        <a href="#MESSAGE_TYPE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&quot;inspector-metrics:metric-reporter:report&quot;</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:163</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                             </td>
                         </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:163</a></code>
+</div>
+                        </td>
+                    </tr>
 
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Constant for the &quot;type&quot; variable of process-level message identifying report-messages
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Constant for the &quot;type&quot; variable of process-level message identifying report-messages
 from reporter of forked processes.</p>
 </div>
-                    </td>
-                </tr>
+                </td>
+            </tr>
 
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metricRegistries"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>metricRegistries</b></span>
+                        <a href="#metricRegistries"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
                 <tr>
                     <td class="col-md-4">
-                        <a name="metricRegistries"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                                <span class="modifier">Readonly</span>
-                            metricRegistries</b>
-                            <a href="#metricRegistries"><span class="icon ion-ios-link"></span></a>
-                        </span>
+                        <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >MetricRegistry[]</a></code>
+
                     </td>
                 </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="../interfaces/Metric.html" target="_self" >MetricRegistry[]</a></code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>[]</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                                </td>
-                            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:173</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p><a href="../classes/MetricRegistry.html">MetricRegistry</a> instances.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="metricStates"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                                <span class="modifier">Readonly</span>
-                            metricStates</b>
-                            <a href="#metricStates"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Map&lt;number | MetricEntry&gt;</code>
-
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Default value : </i><code>new Map()</code>
-                        </td>
-                    </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:173</a></code>
 </div>
-                                </td>
-                            </tr>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p><a href="../classes/MetricRegistry.html">MetricRegistry</a> instances.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="metricStates"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>metricStates</b></span>
+                        <a href="#metricStates"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Map&lt;number | MetricEntry&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map()</code>
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:191</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>Keeps track of the reporting states for each metric.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="options"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                                <span class="modifier">Readonly</span>
-                            options</b>
-                            <a href="#options"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>O</code>
-
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:191</a></code>
+</div>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Keeps track of the reporting states for each metric.</p>
 </div>
-                                </td>
-                            </tr>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="options"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>options</b></span>
+                        <a href="#options"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>O</code>
+
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:182</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>options for this reporter instance.</p>
-</div>
-                    </td>
-                </tr>
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="reporterType"></a>
-                        <span class="name">
-                            <b>
-                                <span class="modifier">Protected</span>
-                                <span class="modifier">Readonly</span>
-                            reporterType</b>
-                            <a href="#reporterType"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:182</a></code>
+</div>
                         </td>
                     </tr>
-                            <tr>
-                                <td class="col-md-4">
-                                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>options for this reporter instance.</p>
 </div>
-                                </td>
-                            </tr>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reporterType"></a>
+                    <span class="name">
+                            <span class="modifier">Protected</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>reporterType</b></span>
+                        <a href="#reporterType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:200</a></code>
+                                <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                             </td>
                         </tr>
-
-                <tr>
-                    <td class="col-md-4">
-                        <div class="io-description"><p>The type of the reporter implementation - for internal use.</p>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:200</a></code>
 </div>
-                    </td>
-                </tr>
+                        </td>
+                    </tr>
 
-            </tbody>
-        </table>
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>The type of the reporter implementation - for internal use.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
 </section>
 
             <section>
@@ -847,11 +771,9 @@ from reporter of forked processes.</p>
                 <td class="col-md-4">
                     <a name="beforeReport"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            beforeReport
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>beforeReport</b></span>
                         <a href="#beforeReport"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -859,15 +781,21 @@ from reporter of forked processes.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>beforeReport(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>)</code>
+                    <code>beforeReport(ctx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="413"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:413</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:413</a></code>
+</div>
                 </td>
             </tr>
 
@@ -881,6 +809,7 @@ the metrics are not send to the master process
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -924,11 +853,9 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="buildHeaders"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                            buildHeaders
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>buildHeaders</b></span>
                         <a href="#buildHeaders"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -973,10 +900,8 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="buildRow"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            buildRow
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span ><b>buildRow</b></span>
                         <a href="#buildRow"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -984,7 +909,7 @@ the metrics are not send to the master process
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildRow(registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>, dateStr: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, metric: T, type: <a href="../interfaces/Metric.html">MetricType</a>, field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>buildRow(registry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry | null</a>, dateStr: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, metric: T, type: <a href="../interfaces/Metric.html" target="_self">MetricType</a>, field: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -1012,6 +937,7 @@ the metrics are not send to the master process
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1115,11 +1041,9 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="filterKeys"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                            filterKeys
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>filterKeys</b></span>
                         <a href="#filterKeys"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1127,7 +1051,7 @@ the metrics are not send to the master process
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>filterKeys(keys: Set<string>, filter: <a href="../undefineds/Filter.html">Filter</a>)</code>
+                    <code>filterKeys(keys: Set<string>, filter: <a href="../undefineds/Filter.html" target="_self">Filter</a>)</code>
                 </td>
             </tr>
 
@@ -1147,6 +1071,7 @@ the metrics are not send to the master process
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1202,11 +1127,9 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="flushEvents"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            flushEvents
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>flushEvents</b></span>
                         <a href="#flushEvents"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1221,8 +1144,14 @@ the metrics are not send to the master process
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="369"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:369</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:369</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1251,10 +1180,8 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="getAllMetadataKeys"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            getAllMetadataKeys
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span ><b>getAllMetadataKeys</b></span>
                         <a href="#getAllMetadataKeys"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1299,10 +1226,8 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="getAllTagKeys"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            getAllTagKeys
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span ><b>getAllTagKeys</b></span>
                         <a href="#getAllTagKeys"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1347,11 +1272,9 @@ the metrics are not send to the master process
                 <td class="col-md-4">
                     <a name="handleReportMessage"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            handleReportMessage
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>handleReportMessage</b></span>
                         <a href="#handleReportMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1366,8 +1289,14 @@ the metrics are not send to the master process
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="395"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:395</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:395</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1380,6 +1309,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1447,11 +1377,9 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="handleResults"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            handleResults
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>handleResults</b></span>
                         <a href="#handleResults"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1459,15 +1387,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleResults(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, type: <a href="../interfaces/Metric.html">MetricType</a>, results: Array<ReportingResult<any, Fields>>)</code>
+                    <code>handleResults(ctx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry | null</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, type: <a href="../interfaces/Metric.html" target="_self">MetricType</a>, results: Array<ReportingResult<any, Fields>>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="429"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:429</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:429</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1479,6 +1413,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1570,10 +1505,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportCounter"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportCounter
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportCounter</b></span>
                         <a href="#reportCounter"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1588,8 +1521,14 @@ call the parent class&#39;s implementation of this method.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="461"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:461</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:461</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1601,6 +1540,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1656,11 +1596,9 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportEvent"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            reportEvent
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>reportEvent</b></span>
                         <a href="#reportEvent"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1668,15 +1606,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportEvent(event: <a href="../classes/Event.html">TEvent</a>)</code>
+                    <code>reportEvent(event: <a href="../classess/Event.html" target="_self">TEvent</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="316"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:316</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:316</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1697,6 +1641,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1709,7 +1654,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>event</td>
                                     <td>
-                                                <code><a href="../classes/Event.html" target="_self" >TEvent</a></code>
+                                                <code><a href="../classess/Event.html" target="_self" >TEvent</a></code>
                                     </td>
 
                                     <td>
@@ -1724,7 +1669,7 @@ call the parent class&#39;s implementation of this method.</p>
                     <div>
                     </div>
                     <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../classes/Event.html" target="_self" >Promise&lt;TEvent&gt;</a></code>
+                        <b>Returns : </b>        <code><a href="../classess/Event.html" target="_self" >Promise&lt;TEvent&gt;</a></code>
 
                     </div>
                     <div class="io-description">
@@ -1740,10 +1685,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportGauge"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportGauge
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportGauge</b></span>
                         <a href="#reportGauge"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1751,15 +1694,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportGauge(gauge: <a href="../interfaces/Gauge.html">Gauge<any></a>, ctx: MetricSetReportContext<Gauge<any>>)</code>
+                    <code>reportGauge(gauge: <a href="../interfaces/Gauge.html" target="_self">Gauge&lt;any&gt;</a>, ctx: MetricSetReportContext<Gauge<any>>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="477"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:477</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:477</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1771,6 +1720,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1826,10 +1776,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportHistogram"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportHistogram
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportHistogram</b></span>
                         <a href="#reportHistogram"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1837,15 +1785,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportHistogram(histogram: <a href="../classes/Histogram.html">Histogram</a>, ctx: <a href="../classes/Histogram.html">MetricSetReportContext<Histogram></a>)</code>
+                    <code>reportHistogram(histogram: <a href="../classess/Histogram.html" target="_self">Histogram</a>, ctx: <a href="../classess/Histogram.html" target="_self">MetricSetReportContext&lt;Histogram&gt;</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="492"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:492</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:492</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1857,6 +1811,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1869,7 +1824,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>histogram</td>
                                     <td>
-                                                <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
+                                                <code><a href="../classess/Histogram.html" target="_self" >Histogram</a></code>
                                     </td>
 
                                     <td>
@@ -1881,7 +1836,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>ctx</td>
                                     <td>
-                                                <code><a href="../classes/Histogram.html" target="_self" >MetricSetReportContext&lt;Histogram&gt;</a></code>
+                                                <code><a href="../classess/Histogram.html" target="_self" >MetricSetReportContext&lt;Histogram&gt;</a></code>
                                     </td>
 
                                     <td>
@@ -1912,10 +1867,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportMeter"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportMeter
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportMeter</b></span>
                         <a href="#reportMeter"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -1923,15 +1876,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportMeter(meter: <a href="../classes/Meter.html">Meter</a>, ctx: <a href="../classes/Meter.html">MetricSetReportContext<Meter></a>)</code>
+                    <code>reportMeter(meter: <a href="../classess/Meter.html" target="_self">Meter</a>, ctx: <a href="../classess/Meter.html" target="_self">MetricSetReportContext&lt;Meter&gt;</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="527"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:527</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:527</a></code>
+</div>
                 </td>
             </tr>
 
@@ -1943,6 +1902,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -1955,7 +1915,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>meter</td>
                                     <td>
-                                                <code><a href="../classes/Meter.html" target="_self" >Meter</a></code>
+                                                <code><a href="../classess/Meter.html" target="_self" >Meter</a></code>
                                     </td>
 
                                     <td>
@@ -1967,7 +1927,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>ctx</td>
                                     <td>
-                                                <code><a href="../classes/Meter.html" target="_self" >MetricSetReportContext&lt;Meter&gt;</a></code>
+                                                <code><a href="../classess/Meter.html" target="_self" >MetricSetReportContext&lt;Meter&gt;</a></code>
                                     </td>
 
                                     <td>
@@ -1998,10 +1958,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="reportTimer"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportTimer
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportTimer</b></span>
                         <a href="#reportTimer"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2009,15 +1967,21 @@ call the parent class&#39;s implementation of this method.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportTimer(timer: <a href="../interfaces/Time.html">Timer</a>, ctx: <a href="../classes/Timer.html">MetricSetReportContext<Timer></a>)</code>
+                    <code>reportTimer(timer: <a href="../interfaces/Time.html" target="_self">Timer</a>, ctx: <a href="../classess/Timer.html" target="_self">MetricSetReportContext&lt;Timer&gt;</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="546"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:546</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:546</a></code>
+</div>
                 </td>
             </tr>
 
@@ -2029,6 +1993,7 @@ call the parent class&#39;s implementation of this method.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2053,7 +2018,7 @@ call the parent class&#39;s implementation of this method.</p>
                                 <tr>
                                     <td>ctx</td>
                                     <td>
-                                                <code><a href="../classes/Timer.html" target="_self" >MetricSetReportContext&lt;Timer&gt;</a></code>
+                                                <code><a href="../classess/Timer.html" target="_self" >MetricSetReportContext&lt;Timer&gt;</a></code>
                                     </td>
 
                                     <td>
@@ -2084,10 +2049,8 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="shouldCallInit"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            shouldCallInit
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>shouldCallInit</b></span>
                         <a href="#shouldCallInit"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2132,11 +2095,9 @@ call the parent class&#39;s implementation of this method.</p>
                 <td class="col-md-4">
                     <a name="start"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            start
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>start</b></span>
                         <a href="#start"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2151,8 +2112,14 @@ call the parent class&#39;s implementation of this method.</p>
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="296"
-                            class="link-to-prism">packages/inspector-csv/lib/metrics/CsvMetricReporter.ts:296</a></div>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
+</div>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:296</a></code>
+</div>
                 </td>
             </tr>
 
@@ -2184,11 +2151,9 @@ reported.</p>
                 <td class="col-md-4">
                     <a name="writeRows"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Private</span>
-                            <span class="modifier">Async</span>
-                            writeRows
-                        </b>
+                        <span class="modifier">Private</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>writeRows</b></span>
                         <a href="#writeRows"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2196,7 +2161,7 @@ reported.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>writeRows(metric: T, rows: <a href="../undefineds/Rows.html">Rows</a>, type: <a href="../interfaces/Metric.html">MetricType</a>)</code>
+                    <code>writeRows(metric: T, rows: <a href="../undefineds/Rows.html" target="_self">Rows</a>, type: <a href="../interfaces/Metric.html" target="_self">MetricType</a>)</code>
                 </td>
             </tr>
 
@@ -2224,6 +2189,7 @@ reported.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2289,69 +2255,11 @@ reported.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="start"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            start
-                        </b>
-                        <a href="#start"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>start()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >ScheduledMetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >ScheduledMetricReporter:80</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Uses the scheduler function to call the <a href="#report">#report</a> function
-in the interval specified. The interval is converted into <a href="../miscellaneous/variables.html#MILLISECOND">MILLISECOND</a>s.</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="stop"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            stop
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>stop</b></span>
                         <a href="#stop"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2366,13 +2274,13 @@ in the interval specified. The interval is converted into <a href="../miscellane
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >ScheduledMetricReporter</a></code>
+                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
 </div>
                 </td>
             </tr>
             <tr>
                 <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >ScheduledMetricReporter:92</a></code>
+                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:92</a></code>
 </div>
                 </td>
             </tr>
@@ -2402,10 +2310,8 @@ in the interval specified. The interval is converted into <a href="../miscellane
                 <td class="col-md-4">
                     <a name="addMetricRegistry"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            addMetricRegistry
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>addMetricRegistry</b></span>
                         <a href="#addMetricRegistry"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2413,7 +2319,7 @@ in the interval specified. The interval is converted into <a href="../miscellane
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>addMetricRegistry(metricRegistry: <a href="../interfaces/Metric.html">MetricRegistry</a>)</code>
+                    <code>addMetricRegistry(metricRegistry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry</a>)</code>
                 </td>
             </tr>
 
@@ -2439,6 +2345,7 @@ in the interval specified. The interval is converted into <a href="../miscellane
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2475,11 +2382,9 @@ in the interval specified. The interval is converted into <a href="../miscellane
                 <td class="col-md-4">
                     <a name="afterReport"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            afterReport
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>afterReport</b></span>
                         <a href="#afterReport"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2487,7 +2392,7 @@ in the interval specified. The interval is converted into <a href="../miscellane
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>afterReport(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>)</code>
+                    <code>afterReport(ctx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>)</code>
                 </td>
             </tr>
 
@@ -2513,87 +2418,7 @@ in the interval specified. The interval is converted into <a href="../miscellane
 
                     <div class="io-description">
                         <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                                <code><a href="../interfaces/OverallReportContext.html" target="_self" >OverallReportContext</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
                         
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="beforeReport"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            beforeReport
-                        </b>
-                        <a href="#beforeReport"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>beforeReport(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:362</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Called before each reporting run.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2637,10 +2462,8 @@ in the interval specified. The interval is converted into <a href="../miscellane
                 <td class="col-md-4">
                     <a name="buildTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            buildTags
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>buildTags</b></span>
                         <a href="#buildTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2648,7 +2471,7 @@ in the interval specified. The interval is converted into <a href="../miscellane
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>buildTags(registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>, taggable: <a href="../interfaces/Taggable.html">Taggable</a>)</code>
+                    <code>buildTags(registry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry | null</a>, taggable: <a href="../interfaces/Taggable.html" target="_self">Taggable</a>)</code>
                 </td>
             </tr>
 
@@ -2675,6 +2498,7 @@ and the specified taggable metric (in this order).</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2730,10 +2554,8 @@ and the specified taggable metric (in this order).</p>
                 <td class="col-md-4">
                     <a name="canHandleMessage"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            canHandleMessage
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>canHandleMessage</b></span>
                         <a href="#canHandleMessage"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2741,7 +2563,7 @@ and the specified taggable metric (in this order).</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>canHandleMessage(message: <a href="../interfaces/InterprocessMessage.html">InterprocessMessage</a>, targetType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                    <code>canHandleMessage(message: <a href="../interfaces/InterprocessMessage.html" target="_self">InterprocessMessage</a>, targetType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
                 </td>
             </tr>
 
@@ -2767,6 +2589,7 @@ and the specified taggable metric (in this order).</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2828,10 +2651,8 @@ and the specified taggable metric (in this order).</p>
                 <td class="col-md-4">
                     <a name="createMetricSetReportContext"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            createMetricSetReportContext
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>createMetricSetReportContext</b></span>
                         <a href="#createMetricSetReportContext"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2839,7 +2660,7 @@ and the specified taggable metric (in this order).</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>createMetricSetReportContext(overallCtx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, type: <a href="../interfaces/Metric.html">MetricType</a>)</code>
+                    <code>createMetricSetReportContext(overallCtx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry | null</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, type: <a href="../interfaces/Metric.html" target="_self">MetricType</a>)</code>
                 </td>
             </tr>
 
@@ -2865,6 +2686,7 @@ and the specified taggable metric (in this order).</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -2944,10 +2766,8 @@ and the specified taggable metric (in this order).</p>
                 <td class="col-md-4">
                     <a name="createOverallReportContext"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            createOverallReportContext
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>createOverallReportContext</b></span>
                         <a href="#createOverallReportContext"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -2996,67 +2816,10 @@ and the specified taggable metric (in this order).</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="flushEvents"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            flushEvents
-                        </b>
-                        <a href="#flushEvents"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>flushEvents()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:314</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Sends events remaining in the queue (if a queue is used in the implementation).</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="getNumber"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            getNumber
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>getNumber</b></span>
                         <a href="#getNumber"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3090,6 +2853,7 @@ and the specified taggable metric (in this order).</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -3133,10 +2897,8 @@ and the specified taggable metric (in this order).</p>
                 <td class="col-md-4">
                     <a name="getTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            getTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>getTags</b></span>
                         <a href="#getTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3185,246 +2947,10 @@ and the specified taggable metric (in this order).</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="handleReportMessage"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            handleReportMessage
-                        </b>
-                        <a href="#handleReportMessage"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleReportMessage(worker: cluster.Worker, message: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>, handle: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:343</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Handles messages from forked processes.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>worker</td>
-                                    <td>
-                                            <code>cluster.Worker</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>message</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>handle</td>
-                                    <td>
-                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="handleResults"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            handleResults
-                        </b>
-                        <a href="#handleResults"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>handleResults(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>, date: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>, type: <a href="../interfaces/Metric.html">MetricType</a>, results: <a href="../interfaces/ReportingResult.html">Array<ReportingResult<any, T>></a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:574</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Handles the reporting result for a group of metric instances.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                                <code><a href="../interfaces/OverallReportContext.html" target="_self" >OverallReportContext</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>registry</td>
-                                    <td>
-                                                <code><a href="../interfaces/Metric.html" target="_self" >MetricRegistry | null</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>date</td>
-                                    <td>
-                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>type</td>
-                                    <td>
-                                                <code><a href="../interfaces/Metric.html" target="_self" >MetricType</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>results</td>
-                                    <td>
-                                                <code><a href="../interfaces/ReportingResult.html" target="_self" >Array&lt;ReportingResult&lt;any, T&gt;&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="hasChanged"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            hasChanged
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>hasChanged</b></span>
                         <a href="#hasChanged"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3459,6 +2985,7 @@ This is always true if the minimal-reporting timeout was reached.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -3526,10 +3053,8 @@ This is always true if the minimal-reporting timeout was reached.</p>
                 <td class="col-md-4">
                     <a name="removeMetricRegistry"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            removeMetricRegistry
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>removeMetricRegistry</b></span>
                         <a href="#removeMetricRegistry"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3537,7 +3062,7 @@ This is always true if the minimal-reporting timeout was reached.</p>
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>removeMetricRegistry(metricRegistry: <a href="../interfaces/Metric.html">MetricRegistry</a>)</code>
+                    <code>removeMetricRegistry(metricRegistry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry</a>)</code>
                 </td>
             </tr>
 
@@ -3563,6 +3088,7 @@ This is always true if the minimal-reporting timeout was reached.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -3599,11 +3125,9 @@ This is always true if the minimal-reporting timeout was reached.</p>
                 <td class="col-md-4">
                     <a name="report"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            report
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>report</b></span>
                         <a href="#report"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -3649,481 +3173,11 @@ afterwards.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="reportCounter"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            reportCounter
-                        </b>
-                        <a href="#reportCounter"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportCounter(counter: MonotoneCounter | Counter, ctx: MetricSetReportContext<MonotoneCounter | Counter>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:591</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Does the reporting for a counter or monotone counter.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>counter</td>
-                                    <td>
-                                            <code>MonotoneCounter | Counter</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                            <code>MetricSetReportContext&lt;MonotoneCounter | Counter&gt;</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>T</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reportEvent"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Async</span>
-                            reportEvent
-                        </b>
-                        <a href="#reportEvent"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportEvent(event: <a href="../classes/Event.html">TEvent</a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:304</a></code>
-</div>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <b>Type parameters :</b>
-                    <ul class="type-parameters">
-                        <li>TEventData</li>
-                        <li>TEvent</li>
-                    </ul>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Reports an <a href="../classes/Event.html">Event</a>.</p>
-<p>Implementations can choose how to process ad-hoc events, wether it&#39;s
-queuing the events to the next call to report or sending events
-immediately.</p>
-<p>Also the usual reporting process of calling <a href="#beforeReport">#beforeReport</a>, do the reporting
-and call <a href="#afterReport">#afterReport</a> may not be applied for ad-hoc events.</p>
-<p>This implementation does nothing and always resolved the specified event.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>event</td>
-                                    <td>
-                                                <code><a href="../classes/Event.html" target="_self" >TEvent</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>        <code><a href="../classes/Event.html" target="_self" >Promise&lt;TEvent&gt;</a></code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reportGauge"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            reportGauge
-                        </b>
-                        <a href="#reportGauge"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportGauge(gauge: <a href="../interfaces/Gauge.html">Gauge<any></a>, ctx: MetricSetReportContext<Gauge<any>>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:604</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Does the reporting for a gauge.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>gauge</td>
-                                    <td>
-                                                <code><a href="../interfaces/Gauge.html" target="_self" >Gauge&lt;any&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                            <code>MetricSetReportContext&lt;Gauge&lt;any&gt;&gt;</code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>T</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reportHistogram"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            reportHistogram
-                        </b>
-                        <a href="#reportHistogram"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportHistogram(histogram: <a href="../classes/Histogram.html">Histogram</a>, ctx: <a href="../classes/Histogram.html">MetricSetReportContext<Histogram></a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:616</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Does the reporting for a histogram.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>histogram</td>
-                                    <td>
-                                                <code><a href="../classes/Histogram.html" target="_self" >Histogram</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                                <code><a href="../classes/Histogram.html" target="_self" >MetricSetReportContext&lt;Histogram&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>T</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="reportMeter"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            reportMeter
-                        </b>
-                        <a href="#reportMeter"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportMeter(meter: <a href="../classes/Meter.html">Meter</a>, ctx: <a href="../classes/Meter.html">MetricSetReportContext<Meter></a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:628</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Does the reporting for a meter.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>meter</td>
-                                    <td>
-                                                <code><a href="../classes/Meter.html" target="_self" >Meter</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                                <code><a href="../classes/Meter.html" target="_self" >MetricSetReportContext&lt;Meter&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>T</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="reportMetricRegistry"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Async</span>
-                            reportMetricRegistry
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span class="modifier">Async</span>
+                        <span ><b>reportMetricRegistry</b></span>
                         <a href="#reportMetricRegistry"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -4131,7 +3185,7 @@ and call <a href="#afterReport">#afterReport</a> may not be applied for ad-hoc e
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportMetricRegistry(ctx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html">MetricRegistry | null</a>)</code>
+                    <code>reportMetricRegistry(ctx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>, registry: <a href="../interfaces/Metric.html" target="_self">MetricRegistry | null</a>)</code>
                 </td>
             </tr>
 
@@ -4161,6 +3215,7 @@ And finally calls <a href="#handleResults">#handleResults</a> for each of the re
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -4216,10 +3271,8 @@ And finally calls <a href="#handleResults">#handleResults</a> for each of the re
                 <td class="col-md-4">
                     <a name="reportMetrics"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            reportMetrics
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>reportMetrics</b></span>
                         <a href="#reportMetrics"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -4227,7 +3280,7 @@ And finally calls <a href="#handleResults">#handleResults</a> for each of the re
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportMetrics(overallCtx: <a href="../interfaces/OverallReportContext.html">OverallReportContext</a>, ctx: C, reportFunction: (metric: M,ctx: C) => void, lastModifiedFunction: (metric: M,ctx: C) => void)</code>
+                    <code>reportMetrics(overallCtx: <a href="../interfaces/OverallReportContext.html" target="_self">OverallReportContext</a>, ctx: C, reportFunction: (metric: M,ctx: C) => void, lastModifiedFunction: (metric: M,ctx: C) => void)</code>
                 </td>
             </tr>
 
@@ -4263,6 +3316,7 @@ and calls the specified reporting function for the remaining.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -4340,105 +3394,10 @@ and calls the specified reporting function for the remaining.</p>
         <tbody>
             <tr>
                 <td class="col-md-4">
-                    <a name="reportTimer"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            <span class="modifier">Abstract</span>
-                            reportTimer
-                        </b>
-                        <a href="#reportTimer"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>reportTimer(timer: <a href="../interfaces/Time.html">Timer</a>, ctx: <a href="../classes/Timer.html">MetricSetReportContext<Timer></a>)</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:640</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Does the reporting for a timer.</p>
-</div>
-
-                    <div class="io-description">
-                        <b>Parameters :</b>
-                        <table class="params">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Type</td>
-                                    <td>Optional</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>timer</td>
-                                    <td>
-                                                <code><a href="../interfaces/Time.html" target="_self" >Timer</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                                <tr>
-                                    <td>ctx</td>
-                                    <td>
-                                                <code><a href="../classes/Timer.html" target="_self" >MetricSetReportContext&lt;Timer&gt;</a></code>
-                                    </td>
-
-                                    <td>
-                                        No
-                                    </td>
-
-
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>T</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
                     <a name="sendMetricsToMaster"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Protected</span>
-                            sendMetricsToMaster
-                        </b>
+                        <span class="modifier">Protected</span>
+                        <span ><b>sendMetricsToMaster</b></span>
                         <a href="#sendMetricsToMaster"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -4489,10 +3448,8 @@ and calls the specified reporting function for the remaining.</p>
                 <td class="col-md-4">
                     <a name="setTags"></a>
                     <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            setTags
-                        </b>
+                        <span class="modifier">Public</span>
+                        <span ><b>setTags</b></span>
                         <a href="#setTags"><span class="icon ion-ios-link"></span></a>
                     </span>
                 </td>
@@ -4526,6 +3483,7 @@ and calls the specified reporting function for the remaining.</p>
 
                     <div class="io-description">
                         <b>Parameters :</b>
+                        
                         <table class="params">
                             <thead>
                                 <tr>
@@ -4551,116 +3509,6 @@ and calls the specified reporting function for the remaining.</p>
                         </table>
                     </div>
                     <div>
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="start"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Abstract</span>
-                            start
-                        </b>
-                        <a href="#start"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>start()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:250</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Implementations start reporting metrics when called.</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
-                    </div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-sm table-bordered">
-        <tbody>
-            <tr>
-                <td class="col-md-4">
-                    <a name="stop"></a>
-                    <span class="name">
-                        <b>
-                            <span class="modifier">Public</span>
-                            <span class="modifier">Abstract</span>
-                            stop
-                        </b>
-                        <a href="#stop"><span class="icon ion-ios-link"></span></a>
-                    </span>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                    <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>stop()</code>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-line">Inherited from         <code><a href="../interfaces/Metric.html" target="_self" >MetricReporter</a></code>
-</div>
-                </td>
-            </tr>
-            <tr>
-                <td class="col-md-4">
-                        <div class="io-line">Defined in         <code><a href="../interfaces/Metric.html#source" target="_self" >MetricReporter:259</a></code>
-</div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="col-md-4">
-                    <div class="io-description"><p>Implementations stop reporting metrics when called.</p>
-</div>
-
-                    <div>
-                    </div>
-                    <div class="io-description">
-                        <b>Returns : </b>    <code>Promise&lt;&gt;</code>
-
-                    </div>
-                    <div class="io-description">
-                        
                     </div>
                 </td>
             </tr>
@@ -5475,14 +4323,15 @@ export class CsvMetricReporter extends ScheduledMetricReporter&lt;CsvMetricRepor
 
 
 
-                   
+
+
 
 
 
 
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -5494,6 +4343,15 @@ export class CsvMetricReporter extends ScheduledMetricReporter&lt;CsvMetricRepor
            </div>
        </div>
 
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
        <script>
             var COMPODOC_CURRENT_PAGE_DEPTH = 1;
             var COMPODOC_CURRENT_PAGE_CONTEXT = 'class';
@@ -5503,9 +4361,9 @@ export class CsvMetricReporter extends ScheduledMetricReporter&lt;CsvMetricRepor
 
        <script src="../js/libs/custom-elements.min.js"></script>
        <script src="../js/libs/lit-html.js"></script>
-       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
-       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+
        <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
