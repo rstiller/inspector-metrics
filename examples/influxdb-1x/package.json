@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "influx": "^5.9.3",
-    "inspector-influx": "^2.9.0",
-    "inspector-metrics": "^1.22.0",
-    "inspector-vm": "^3.6.0"
+    "inspector-influx": "^2.10.0",
+    "inspector-metrics": "^1.23.0",
+    "inspector-vm": "^3.7.0"
   },
   "devDependencies": {
     "@types/chai": "4.3.1",

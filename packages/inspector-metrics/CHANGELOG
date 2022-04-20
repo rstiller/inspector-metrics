@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
-- minimum node version 10 (was 8) 
+
+## [1.23.0] - 2022-04-20
+### Changed
+- minimum node version 10 (was 8)
 - updated dependencies
 
 ## [1.22.0] - 2020-12-19

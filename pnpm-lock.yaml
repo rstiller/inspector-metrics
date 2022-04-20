@@ -26,9 +26,9 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-elasticsearch: ^2.8.0
-      inspector-metrics: ^1.22.0
-      inspector-vm: ^3.6.0
+      inspector-elasticsearch: ^2.9.0
+      inspector-metrics: ^1.23.0
+      inspector-vm: ^3.7.0
       rimraf: 3.0.2
       typescript: 4.6.3
     dependencies:
@@ -65,9 +65,9 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-elasticsearch: ^2.8.0
-      inspector-metrics: ^1.22.0
-      inspector-vm: ^3.6.0
+      inspector-elasticsearch: ^2.9.0
+      inspector-metrics: ^1.23.0
+      inspector-vm: ^3.7.0
       rimraf: 3.0.2
       typescript: 4.6.3
     dependencies:
@@ -104,9 +104,9 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-elasticsearch: ^2.8.0
-      inspector-metrics: ^1.22.0
-      inspector-vm: ^3.6.0
+      inspector-elasticsearch: ^2.9.0
+      inspector-metrics: ^1.23.0
+      inspector-vm: ^3.7.0
       rimraf: 3.0.2
       typescript: 4.6.3
     dependencies:
@@ -173,13 +173,13 @@ importers:
   examples/express4-multi-process-js:
     specifiers:
       express: ^4.17.3
-      inspector-carbon: ^2.7.0
-      inspector-csv: ^2.6.0
-      inspector-elasticsearch: ^2.8.0
-      inspector-influx: ^2.9.0
-      inspector-metrics: ^1.22.0
-      inspector-prometheus: ^2.7.0
-      inspector-vm: ^3.6.0
+      inspector-carbon: ^2.8.0
+      inspector-csv: ^2.7.0
+      inspector-elasticsearch: ^2.9.0
+      inspector-influx: ^2.10.0
+      inspector-metrics: ^1.23.0
+      inspector-prometheus: ^2.8.0
+      inspector-vm: ^3.7.0
       standard: 16.0.4
     dependencies:
       express: 4.17.3
@@ -207,9 +207,9 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
       influx: ^5.9.3
-      inspector-influx: ^2.9.0
-      inspector-metrics: ^1.22.0
-      inspector-vm: ^3.6.0
+      inspector-influx: ^2.10.0
+      inspector-metrics: ^1.23.0
+      inspector-vm: ^3.7.0
       rimraf: 3.0.2
       typescript: 4.6.3
     dependencies:
@@ -247,9 +247,9 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-influx: ^2.9.0
-      inspector-metrics: ^1.22.0
-      inspector-vm: ^3.6.0
+      inspector-influx: ^2.10.0
+      inspector-metrics: ^1.23.0
+      inspector-vm: ^3.7.0
       rimraf: 3.0.2
       typescript: 4.6.3
     dependencies:
@@ -289,7 +289,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
       graphite: ^0.1.4
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       mocha: 9.2.2
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13
@@ -341,7 +341,7 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       mocha: 9.2.2
       moment: ^2.29.3
       moment-timezone: ^0.5.34
@@ -401,7 +401,7 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       lodash: ^4.17.21
       mocha: 9.2.2
       pkgsign: 0.2.0
@@ -454,7 +454,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
       influx: ^5.9.3
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       mocha: 9.2.2
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13
@@ -565,7 +565,7 @@ importers:
       eslint-plugin-import: 2.26.0
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       mocha: 9.2.2
       moment: 2.29.3
       nock: 13.2.4
@@ -623,7 +623,7 @@ importers:
       eslint-plugin-node: 11.1.0
       eslint-plugin-promise: 6.0.0
       gc-stats: ^1.4.0
-      inspector-metrics: ^1.22.0
+      inspector-metrics: ^1.23.0
       mocha: 9.2.2
       pkgsign: 0.2.0
       reflect-metadata: 0.1.13

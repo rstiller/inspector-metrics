@@ -18,9 +18,9 @@
   },
   "dependencies": {
     "@elastic/elasticsearch": "^6.8.8",
-    "inspector-elasticsearch": "^2.8.0",
-    "inspector-metrics": "^1.22.0",
-    "inspector-vm": "^3.6.0"
+    "inspector-elasticsearch": "^2.9.0",
+    "inspector-metrics": "^1.23.0",
+    "inspector-vm": "^3.7.0"
   },
   "devDependencies": {
     "@types/chai": "4.3.1",

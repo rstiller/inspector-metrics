@@ -20,9 +20,9 @@
   "dependencies": {
     "@influxdata/influxdb-client": "^1.24.0",
     "@influxdata/influxdb-client-apis": "^1.24.0",
-    "inspector-influx": "^2.9.0",
-    "inspector-metrics": "^1.22.0",
-    "inspector-vm": "^3.6.0"
+    "inspector-influx": "^2.10.0",
+    "inspector-metrics": "^1.23.0",
+    "inspector-vm": "^3.7.0"
   },
   "devDependencies": {
     "@types/chai": "4.3.1",
