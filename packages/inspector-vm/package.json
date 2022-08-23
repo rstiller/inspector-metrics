@@ -31,6 +31,7 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
+    "ansi-regex": "3.0.1",
     "gc-stats": "^1.4.0",
     "inspector-metrics": "workspace:^1.23.0",
     "source-map-support": "^0.5.21"

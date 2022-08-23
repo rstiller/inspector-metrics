@@ -637,6 +637,7 @@ importers:
       '@types/node': 18.7.11
       '@typescript-eslint/eslint-plugin': 5.34.0
       '@typescript-eslint/parser': 5.34.0
+      ansi-regex: 3.0.1
       chai: 4.3.6
       eslint: 8.22.0
       eslint-config-standard-with-typescript: 22.0.0
@@ -655,6 +656,7 @@ importers:
       ts-node: 10.9.1
       typescript: 4.7.4
     dependencies:
+      ansi-regex: 3.0.1
       gc-stats: 1.4.0
       inspector-metrics: link:../inspector-metrics
       source-map-support: 0.5.21
@@ -1617,7 +1619,7 @@ packages:
     dev: true
 
   /ansi-regex/2.1.1:
-    resolution: {integrity: sha1-w7M6te42DYbg5ijwRorn7yfWVN8=}
+    resolution: {integrity: sha512-TIGnTpdo+E3+pCyAluZvtED5p5wCqLdezCyhPZzKPcxvFplEt4i+W7OONCKgeZFT3+y5NZZfOOS/Bdcanm1MYA==}
     engines: {node: '>=0.10.0'}
     dev: false
 
