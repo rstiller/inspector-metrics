@@ -11,6 +11,7 @@ rsync -avh --exclude *.sh \
     /opt/inspector-metrics/.tmp/$NODE_VERSION/ \
     --delete
 cd /opt/inspector-metrics/.tmp/$NODE_VERSION/
+pnpm i -g rimraf
 pnpm i
 pnpm run build
 pnpm run test

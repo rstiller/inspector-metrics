@@ -36,7 +36,7 @@
     "source-map-support": "^0.5.21"
   },
   "devDependencies": {
-    "@testdeck/mocha": "0.2.0",
+    "@testdeck/mocha": "0.3.3",
     "@types/chai": "4.3.3",
     "@types/mocha": "9.1.1",
     "@types/node": "18.7.11",

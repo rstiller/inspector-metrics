@@ -18,16 +18,16 @@
     "@influxdata/influxdb-client-apis": "^1.28.0"
   },
   "dependencies": {
-    "@influxdata/influxdb-client": "^1.28.0",
-    "@influxdata/influxdb-client-apis": "^1.28.0",
+    "@influxdata/influxdb-client": "^1.33.2",
+    "@influxdata/influxdb-client-apis": "^1.33.2",
     "inspector-influx": "workspace:^2.10.0",
     "inspector-metrics": "workspace:^1.23.0",
     "inspector-vm": "workspace:^3.7.0"
   },
   "devDependencies": {
-    "@types/chai": "4.3.3",
-    "@types/mocha": "9.1.1",
-    "@types/node": "18.7.11",
+    "@types/chai": "4.3.4",
+    "@types/mocha": "10.0.1",
+    "@types/node": "18.15.2",
     "@typescript-eslint/eslint-plugin": "5.34.0",
     "@typescript-eslint/parser": "5.34.0",
     "eslint": "8.22.0",
@@ -37,8 +37,8 @@
     "eslint-plugin-n": "15.2.5",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "6.0.0",
-    "rimraf": "3.0.2",
-    "typescript": "4.7.4"
+    "rimraf": "4.4.0",
+    "typescript": "4.9.5"
   },
   "scripts": {
     "build": "npm run clean && npm run lint && npm run compile",

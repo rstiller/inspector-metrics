@@ -13,7 +13,7 @@
     }
   ],
   "dependencies": {
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "inspector-carbon": "workspace:^2.8.0",
     "inspector-csv": "workspace:^2.7.0",
     "inspector-elasticsearch": "workspace:^2.9.0",
