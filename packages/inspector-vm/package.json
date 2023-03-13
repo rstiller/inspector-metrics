@@ -31,7 +31,7 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "gc-stats": "^1.4.0",
+    "@sematext/gc-stats": "^1.5.8",
     "inspector-metrics": "workspace:^1.23.0",
     "source-map-support": "^0.5.21"
   },

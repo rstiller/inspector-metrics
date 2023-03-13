@@ -15,7 +15,7 @@ import {
  * Event emitter for GC event within nodejs.
  */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const GC = require('gc-stats')
+const GC = require('@sematext/gc-stats')
 
 /**
  * Metric set with values related to nodejs GC.
