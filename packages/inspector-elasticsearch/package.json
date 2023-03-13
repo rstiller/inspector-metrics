@@ -23,7 +23,7 @@
     "elasticsearch"
   ],
   "engines": {
-    "node": ">= 10",
+    "node": ">= 14",
     "npm": ">= 3"
   },
   "peerDependencies": {

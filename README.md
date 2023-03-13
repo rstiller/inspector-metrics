@@ -59,7 +59,7 @@ shutdown test environment:
 
 execute compatibility tests:  
 `docker-compose run --rm nodeX`  
-_X = nodejs version (available: 10, 11, 12, 13, 14, 15, 16, 17, 18, 19)_
+_X = nodejs version (available: 14, 15, 16, 17, 18, 19)_
 
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
