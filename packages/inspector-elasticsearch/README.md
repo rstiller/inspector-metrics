@@ -1,5 +1,5 @@
 # inspector-elasticsearch
-Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts) for
+Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob/main/lib/metrics/metric-reporter.ts) for
 [elasticsearch](https://www.elastic.co/de/products/elasticsearch).
 
 <p align="center">
@@ -9,7 +9,7 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
     <a href="https://www.npmjs.org/package/inspector-elasticsearch">
         <img src="https://img.shields.io/npm/l/inspector-elasticsearch.svg" alt="License">
     </a>
-    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-elasticsearch">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-elasticsearch">
         <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>

@@ -8,7 +8,7 @@ Typescript metric reporter for [prometheus](https://prometheus.io).
     <a href="https://www.npmjs.org/package/inspector-prometheus">
         <img src="https://img.shields.io/npm/l/inspector-prometheus.svg" alt="License">
     </a>
-    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-prometheus">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-prometheus">
         <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>

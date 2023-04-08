@@ -8,7 +8,7 @@ Typescript metric reporter for CSV files.
     <a href="https://www.npmjs.org/package/inspector-csv">
         <img src="https://img.shields.io/npm/l/inspector-csv.svg" alt="License">
     </a>
-    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-csv">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-csv">
         <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>

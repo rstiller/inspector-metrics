@@ -1,6 +1,6 @@
 # elasticsearch-7
 
-Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-elasticsearch](https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-elasticsearch) with [elasticsearch client](https://www.npmjs.com/package/@elastic/elasticsearch) version 7.
+Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-elasticsearch](https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-elasticsearch) with [elasticsearch client](https://www.npmjs.com/package/@elastic/elasticsearch) version 7.
 
 This examples demonstrates the basic setup and   
 how to report common nodeVM stats alongside metric events.

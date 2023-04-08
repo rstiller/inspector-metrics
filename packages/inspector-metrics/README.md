@@ -11,7 +11,7 @@ Monitoring / metric library similar to http://metrics.dropwizard.io
     <a href="https://www.npmjs.org/package/inspector-metrics">
         <img src="https://img.shields.io/npm/l/inspector-metrics.svg" alt="License">
     </a>
-    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-metrics">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-metrics">
         <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>

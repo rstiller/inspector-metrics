@@ -1,6 +1,6 @@
 # influxdb-1.x
 
-Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-influx](https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-influx) with [@influxdata/influxdb-client](@influxdata/influxdb-client) version 1.x (influxdb 2.x).
+Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-influx](https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-influx) with [@influxdata/influxdb-client](@influxdata/influxdb-client) version 1.x (influxdb 2.x).
 
 This examples demonstrates the basic setup and   
 how to report common nodeVM stats alongside metric events.

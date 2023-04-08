@@ -1,6 +1,6 @@
 # influxdb-1.x
 
-Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-influx](https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-influx) with [node-influxdb client](https://www.npmjs.com/package/influx) version 5.x (influxdb 1.x).
+Example project showing the usage of [inspector-metrics](https://github.com/rstiller/inspector-metrics) and [inspector-influx](https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-influx) with [node-influxdb client](https://www.npmjs.com/package/influx) version 5.x (influxdb 1.x).
 
 This examples demonstrates the basic setup and   
 how to report common nodeVM stats alongside metric events.

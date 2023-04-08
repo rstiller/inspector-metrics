@@ -1,5 +1,5 @@
 # inspector-influx
-Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob/master/lib/metrics/metric-reporter.ts) for
+Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob/main/lib/metrics/metric-reporter.ts) for
 [InfluxDB](https://docs.influxdata.com/influxdb/).
 
 <p align="center">
@@ -9,7 +9,7 @@ Typescript [Metrics Reporter](https://github.com/rstiller/inspector-metrics/blob
     <a href="https://www.npmjs.org/package/inspector-influx">
         <img src="https://img.shields.io/npm/l/inspector-influx.svg" alt="License">
     </a>
-    <a href="https://github.com/rstiller/inspector-metrics/tree/master/packages/inspector-influx">
+    <a href="https://github.com/rstiller/inspector-metrics/tree/main/packages/inspector-influx">
         <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
     </a>
 </p>
@@ -31,7 +31,7 @@ For influxDB v1:
 import { DefaultSender, InfluxMetricReporter } from "inspector-influx";
 import { MetricRegistry, Timer } from "inspector-metrics";
 
-// influxdb config from https://github.com/node-influx/node-influx/blob/master/src/index.ts#L80
+// influxdb config from https://github.com/node-influx/node-influx/blob/main/src/index.ts#L80
 const dbConfig = {
     "username": "admin",
     "password": "admin",
