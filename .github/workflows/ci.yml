@@ -14,11 +14,14 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [14.x, 15.x, 16.x, 17.x, 18.x]
+        node-version: [14.x, 15.x, 16.x, 17.x, 18.x, 19.x]
         os:
+          #- windows-2022
           #- windows-2019
-          #- macos-latest
-          - ubuntu-latest
+          #- macos-12
+          #- macos-11
+          - ubuntu-22.04
+          - ubuntu-20.04
 
     runs-on: ${{ matrix.os }}
 
@@ -42,7 +45,7 @@ jobs:
 
       - uses: pnpm/action-setup@v2.2.4
         with:
-          version: 4.14.4
+          version: 6
           dest: ~/.pnpm-store
           run_install: |
             - args: [--global, rimraf, node-gyp]
