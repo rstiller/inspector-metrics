@@ -5,7 +5,7 @@
     "devDependencies": {
         "husky": "8.0.3",
         "nyc": "15.1.0",
-        "rimraf": "5.0.0"
+        "rimraf": "5.0.1"
     },
     "scripts": {
         "build": "pnpm run --recursive build",
