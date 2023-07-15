@@ -5,10 +5,10 @@
         "alwaysStrict": true,
         "declaration": true,
         "module": "none",
-        "target": "es6",
+        "target": "es2017",
         "sourceMap": true,
         "newLine": "LF",
-        "moduleResolution": "node",
+        "moduleResolution": "Node",
         "noLib": false,
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -21,16 +21,12 @@
         "types": [
             "mocha", "chai", "node"
         ],
-        "lib": [
-            "dom", "es6"
-        ],
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "forceConsistentCasingInFileNames": true,
         "removeComments": false,
         "sourceRoot": "./packages/*/lib/",
         "rootDir": "./",
-        "charset": "utf-8",
         "outDir": "build/"
     },
     "exclude": [

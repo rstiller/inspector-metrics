@@ -31,32 +31,10 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "@elastic/elasticsearch": ">=5.6.0 && <=7.x",
+    "@elastic/elasticsearch": "^7.17.12",
     "inspector-metrics": "workspace:^1.23.0",
     "lodash": "^4.17.21",
     "source-map-support": "^0.5.21"
-  },
-  "devDependencies": {
-    "@testdeck/mocha": "0.3.3",
-    "@types/chai": "4.3.4",
-    "@types/mocha": "10.0.1",
-    "@types/node": "18.15.2",
-    "@typescript-eslint/eslint-plugin": "5.34.0",
-    "@typescript-eslint/parser": "5.34.0",
-    "chai": "4.3.7",
-    "eslint": "8.22.0",
-    "eslint-config-standard-with-typescript": "22.0.0",
-    "eslint-import-resolver-node": "0.3.6",
-    "eslint-plugin-import": "2.26.0",
-    "eslint-plugin-n": "15.2.5",
-    "eslint-plugin-node": "11.1.0",
-    "eslint-plugin-promise": "6.0.0",
-    "mocha": "10.2.0",
-    "pkgsign": "0.2.0",
-    "reflect-metadata": "0.1.13",
-    "rimraf": "4.4.0",
-    "ts-node": "10.9.1",
-    "typescript": "4.9.5"
   },
   "files": [
     "build/lib/**/*"
