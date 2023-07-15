@@ -2,11 +2,7 @@
 
 Monitoring / metric library similar to http://metrics.dropwizard.io
 
-<p align="center">
-    <a href="https://travis-ci.org/rstiller/inspector-metrics">
-        <img src="https://github.com/rstiller/inspector-metrics/workflows/CI/badge.svg" alt="CI Status">
-    </a>
-</p>
+[![CI](https://github.com/rstiller/inspector-metrics/actions/workflows/ci.yml/badge.svg)](https://github.com/rstiller/inspector-metrics/actions/workflows/ci.yml)
 
 This is the mono repository for the `inspector-metrics` modules.  
 `inspector-metrics` modules are a collection of modules around application metrics and monitoring for nodejs.  
