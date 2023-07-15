@@ -22,9 +22,6 @@
     "inspector-prometheus": "workspace:^2.8.0",
     "inspector-vm": "workspace:^3.7.0"
   },
-  "devDependencies": {
-    "standard": "17.0.0"
-  },
   "scripts": {
     "build": "npm run lint",
     "deps": "npm-check --no-spinner --no-emoji --no-color",

@@ -3,7 +3,6 @@
 mkdir -p /opt/inspector-metrics/.tmp/$NODE_VERSION/
 rsync -avh --exclude *.sh \
     .git \
-    .husky \
     lib \
     test \
     package.json \
