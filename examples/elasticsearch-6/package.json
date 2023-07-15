@@ -17,7 +17,7 @@
     "@elastic/elasticsearch": ">=6.8.8 && <7.0.0"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "6.8.8",
+    "@elastic/elasticsearch": "8.8.1",
     "inspector-elasticsearch": "workspace:^2.9.0",
     "inspector-metrics": "workspace:^1.23.0",
     "inspector-vm": "workspace:^3.7.0"
