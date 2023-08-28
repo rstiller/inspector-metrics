@@ -42,11 +42,11 @@ importers:
         specifier: 5.62.0
         version: 5.62.0(eslint@8.45.0)(typescript@5.1.6)
       chai:
-        specifier: ^4.3.7
-        version: 4.3.7
+        specifier: ^4.3.8
+        version: 4.3.8
       chai-string:
         specifier: ^1.5.0
-        version: 1.5.0(chai@4.3.7)
+        version: 1.5.0(chai@4.3.8)
       eslint:
         specifier: 8.45.0
         version: 8.45.0
@@ -91,7 +91,7 @@ importers:
         version: 15.2.0
       sinon-chai:
         specifier: ^3.7.0
-        version: 3.7.0(chai@4.3.7)(sinon@15.2.0)
+        version: 3.7.0(chai@4.3.8)(sinon@15.2.0)
       standard:
         specifier: 17.1.0
         version: 17.1.0(@typescript-eslint/parser@5.62.0)
@@ -1560,16 +1560,16 @@ packages:
     resolution: {integrity: sha512-Wmec9pCBY8CWbmI4HsjBeQLqDTqV91nFVR83DnZpYyRnPI1wePDsTg0bGLPC5VU/3OIZV1fmxEea1b+tFKe86g==}
     dev: true
 
-  /chai-string@1.5.0(chai@4.3.7):
+  /chai-string@1.5.0(chai@4.3.8):
     resolution: {integrity: sha512-sydDC3S3pNAQMYwJrs6dQX0oBQ6KfIPuOZ78n7rocW0eJJlsHPh2t3kwW7xfwYA/1Bf6/arGtSUo16rxR2JFlw==}
     peerDependencies:
       chai: ^4.1.2
     dependencies:
-      chai: 4.3.7
+      chai: 4.3.8
     dev: true
 
-  /chai@4.3.7:
-    resolution: {integrity: sha512-HLnAzZ2iupm25PlN0xFreAlBA5zaBSv3og0DdeGA4Ar6h6rJ3A0rolRUKJhSF2V10GZKDgWF/VmAEsNWjCRB+A==}
+  /chai@4.3.8:
+    resolution: {integrity: sha512-vX4YvVVtxlfSZ2VecZgFUTU5qPCYsobVI2O9FmwEXBhDigYGQA6jRXCycIs1yJnnWbZ6/+a2zNIF5DfVCcJBFQ==}
     engines: {node: '>=4'}
     dependencies:
       assertion-error: 1.1.0
@@ -3756,6 +3756,7 @@ packages:
 
   /node-addon-api@3.2.1:
     resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -3779,6 +3780,7 @@ packages:
   /node-gyp-build@4.6.0:
     resolution: {integrity: sha512-NTZVKn9IylLwUzaKjkas1e4u2DLNcV4rdYagA4PWdPwW87Bi7z+BznyKSRwS/761tV/lzCGXplWsiaMjLqP2zQ==}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -4488,13 +4490,13 @@ packages:
     engines: {node: '>=14'}
     dev: true
 
-  /sinon-chai@3.7.0(chai@4.3.7)(sinon@15.2.0):
+  /sinon-chai@3.7.0(chai@4.3.8)(sinon@15.2.0):
     resolution: {integrity: sha512-mf5NURdUaSdnatJx3uhoBOrY9dtL19fiOtAdT1Azxg3+lNJFiuN0uzaU3xX1LeAfL17kHQhTAJgpsfhbMJMY2g==}
     peerDependencies:
       chai: ^4.0.0
       sinon: '>=4.0.0'
     dependencies:
-      chai: 4.3.7
+      chai: 4.3.8
       sinon: 15.2.0
     dev: true
 
