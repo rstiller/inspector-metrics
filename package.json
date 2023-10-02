@@ -5,7 +5,7 @@
     "devDependencies": {
         "@testdeck/mocha": "0.3.3",
         "@types/async": "3.2.20",
-        "@types/chai": "^4.3.5",
+        "@types/chai": "^4.3.6",
         "@types/chai-string": "^1.4.2",
         "@types/lodash": "^4.14.195",
         "@types/mocha": "^10.0.1",
@@ -14,7 +14,7 @@
         "@types/sinon-chai": "^3.2.9",
         "@typescript-eslint/eslint-plugin": "5.62.0",
         "@typescript-eslint/parser": "5.62.0",
-        "chai": "^4.3.7",
+        "chai": "^4.3.10",
         "chai-string": "^1.5.0",
         "eslint": "8.45.0",
         "eslint-config-standard-with-typescript": "36.1.0",
