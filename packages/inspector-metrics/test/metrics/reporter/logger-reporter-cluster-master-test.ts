@@ -4,7 +4,7 @@ import 'source-map-support/register'
 import * as chai from 'chai'
 import { suite, test } from '@testdeck/mocha'
 import { SinonSpy, spy } from 'sinon'
-import * as sinonChai from 'sinon-chai'
+import sinonChai from 'sinon-chai'
 
 import { EventEmitter } from 'events'
 import { InterprocessReportMessage, Logger, LoggerReporter, MetricReporter } from '../../../lib/metrics'

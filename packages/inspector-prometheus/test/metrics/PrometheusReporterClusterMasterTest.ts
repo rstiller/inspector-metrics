@@ -2,11 +2,11 @@ import 'reflect-metadata'
 import 'source-map-support/register'
 
 import * as chai from 'chai'
-import * as sinonChai from 'sinon-chai'
+import sinonChai from 'sinon-chai'
 
 import { InterprocessMessage, MetricRegistry, MetricReporter } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'
-import * as moment from 'moment'
+import moment from 'moment'
 import { SinonSpy, spy } from 'sinon'
 import { InterprocessReportResponse, PrometheusMetricReporter } from '../../lib/metrics'
 import { MockedClock } from './mocked-clock'

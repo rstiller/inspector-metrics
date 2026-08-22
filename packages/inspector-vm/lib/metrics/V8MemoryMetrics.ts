@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 
 import { BaseMetric, Metric, MetricSet, SimpleGauge } from 'inspector-metrics'
-import * as v8 from 'v8'
+import v8 = require('v8')
 
 /**
  * A collection of {@link SimpleGauge} values for space metrics.

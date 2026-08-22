@@ -3,7 +3,7 @@ import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { suite, test } from '@testdeck/mocha'
-import * as sinonChai from 'sinon-chai'
+import sinonChai from 'sinon-chai'
 import { ExportMode } from '../../lib/metrics'
 import { AbstractReportTest } from './AbstractReporterTest'
 

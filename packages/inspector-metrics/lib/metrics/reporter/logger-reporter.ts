@@ -78,7 +78,7 @@ export interface LoggerReporterOptions extends ScheduledMetricReporterOptions {
  *
  * @export
  * @class LoggerReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter}
  */
 export class LoggerReporter extends ScheduledMetricReporter<LoggerReporterOptions, LogLine> {
   /**

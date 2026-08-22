@@ -1,6 +1,6 @@
 import 'source-map-support'
 
-import * as cluster from 'cluster'
+import cluster = require('cluster')
 import { Worker } from 'cluster'
 
 import { ReportMessageReceiver } from 'inspector-metrics'

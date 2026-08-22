@@ -3,7 +3,7 @@ import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { suite, test } from '@testdeck/mocha'
-import * as sinonChai from 'sinon-chai'
+import sinonChai from 'sinon-chai'
 
 import { SimpleGauge } from '../../lib/metrics/gauge'
 import { MetricRegistry } from '../../lib/metrics/metric-registry'

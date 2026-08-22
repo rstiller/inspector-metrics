@@ -1,6 +1,6 @@
 import 'source-map-support'
 
-import * as http from 'http'
+import http = require('http')
 import {
   Counter,
   DisabledClusterOptions,
@@ -84,7 +84,7 @@ export interface PushgatewayReporterOptions extends ScheduledMetricReporterOptio
  * @see https://github.com/prometheus/pushgateway
  * @export
  * @class PushgatewayMetricReporter
- * @extends {MetricReporter}
+ * @extends {ScheduledMetricReporter}
  */
 export class PushgatewayMetricReporter extends ScheduledMetricReporter<PushgatewayReporterOptions, any> {
   /**

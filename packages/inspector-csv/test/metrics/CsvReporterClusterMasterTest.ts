@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import 'source-map-support/register'
 
 import * as chai from 'chai'
-import * as sinonChai from 'sinon-chai'
+import sinonChai from 'sinon-chai'
 
 import { Counter, InterprocessMessage, InterprocessReportMessage, MetricReporter } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'

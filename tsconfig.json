@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
-        "baseUrl": ".",
         "allowJs": false,
         "alwaysStrict": true,
+        "esModuleInterop": true,
         "declaration": true,
-        "module": "none",
+        "strict": false,
+        "module": "commonjs",
         "target": "es2017",
         "sourceMap": true,
         "newLine": "LF",
-        "moduleResolution": "Node",
+        "moduleResolution": "bundler",
         "noLib": false,
         "noImplicitAny": true,
         "noImplicitReturns": true,

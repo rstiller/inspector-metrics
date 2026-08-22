@@ -9,6 +9,7 @@ allowBuilds:
   node-cint64: true
   native-hdr-histogram: true
   "@sematext/gc-stats": true
+  esbuild: true
 
 minimumReleaseAgeExclude:
   - '@biomejs/biome@2.5.10'

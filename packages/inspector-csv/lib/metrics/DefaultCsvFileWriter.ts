@@ -1,6 +1,6 @@
 import 'source-map-support'
 
-import * as async from 'async'
+import async = require('async')
 import { appendFile, mkdir, stat, Stats } from 'fs'
 import { join } from 'path'
 

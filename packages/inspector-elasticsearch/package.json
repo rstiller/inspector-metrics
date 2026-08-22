@@ -52,7 +52,7 @@
   "mocha": {
     "require": [
       "source-map-support/register",
-      "ts-node/register"
+      "tsx"
     ],
     "reporter": "dot",
     "extension": "ts",

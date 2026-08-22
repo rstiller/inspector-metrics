@@ -1,6 +1,6 @@
 import 'source-map-support'
 
-import * as cluster from 'cluster'
+import cluster = require('cluster')
 import {
   Counter,
   DefaultClusterOptions,
@@ -28,7 +28,7 @@ import {
   StdClock,
   Timer
 } from 'inspector-metrics'
-import * as moment from 'moment-timezone'
+import moment = require('moment-timezone')
 
 /**
  * Lists all possible column types.

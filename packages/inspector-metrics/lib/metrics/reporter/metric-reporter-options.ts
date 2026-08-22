@@ -1,6 +1,6 @@
 import 'source-map-support/register'
 
-import * as cluster from 'cluster'
+import cluster = require('cluster')
 
 import { Worker } from 'cluster'
 
