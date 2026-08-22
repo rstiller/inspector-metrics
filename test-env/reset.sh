@@ -1,19 +1,11 @@
 #!/bin/bash
 
-# path to this script from the current directory
+# Teardown the local test environment (stop containers + remove volumes).
+# Delegates compose-engine selection (podman/docker) to compose.sh.
+
 SCRIPTFILE="${BASH_SOURCE[0]}"
-# path of this script's folder
 SCRIPTDIR=`dirname "${SCRIPTFILE}"`
-# absolute path of project root folder
-BASEDIR=`cd -P "${SCRIPTDIR}/.."; pwd`
-# docker-compose command
-DC=`which docker-compose || which docker-compose.exe`
+COMPOSE_HELPER="${SCRIPTDIR}/compose.sh"
 
-# goto project root dir
-pushd "${BASEDIR}"
-
-"${DC}" down -v
-"${DC}" ps
-
-# go back to whereever
-popd
+bash "${COMPOSE_HELPER}" down -v
+bash "${COMPOSE_HELPER}" ps

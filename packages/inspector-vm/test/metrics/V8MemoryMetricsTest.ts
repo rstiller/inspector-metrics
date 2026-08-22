@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 import 'source-map-support/register'
 
 import * as chai from 'chai'

@@ -1,20 +1,12 @@
 #!/bin/bash
 
-# path to this script from the current directory
+# Boot the local test environment (build + start the metric backends).
+# Delegates compose-engine selection (podman/docker) to compose.sh.
+
 SCRIPTFILE="${BASH_SOURCE[0]}"
-# path of this script's folder
 SCRIPTDIR=`dirname "${SCRIPTFILE}"`
-# absolute path of project root folder
-BASEDIR=`cd -P "${SCRIPTDIR}/.."; pwd`
-# docker-compose command
-DC=`which docker-compose || which docker-compose.exe`
+COMPOSE_HELPER="${SCRIPTDIR}/compose.sh"
 
-# goto project root dir
-pushd "${BASEDIR}"
-
-"${DC}" build
-"${DC}" up -d grafana graphite elasticsearch kibana influx prometheus pushgateway
-"${DC}" ps
-
-# go back to whereever
-popd
+bash "${COMPOSE_HELPER}" build
+bash "${COMPOSE_HELPER}" up -d grafana graphite elasticsearch kibana influx prometheus pushgateway
+bash "${COMPOSE_HELPER}" ps

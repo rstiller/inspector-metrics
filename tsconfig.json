@@ -26,7 +26,6 @@
         "forceConsistentCasingInFileNames": true,
         "removeComments": false,
         "sourceRoot": "./packages/*/lib/",
-        "rootDir": "./",
         "outDir": "build/"
     },
     "exclude": [

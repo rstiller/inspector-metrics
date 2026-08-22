@@ -1,62 +1,4 @@
-version: "3"
-
 services:
-
-  node14:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node14
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=14
-
-  node15:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node15
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=15
-
-  node16:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node16
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=16
-
-  node17:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node17
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=17
 
   node18:
     build:
@@ -72,10 +14,10 @@ services:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
       - NODE_VERSION=18
 
-  node19:
+  node20:
     build:
       context: ./test-env
-      dockerfile: Dockerfile-node19
+      dockerfile: Dockerfile-node20
     user: "root"
     entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
     restart: "no"
@@ -84,7 +26,21 @@ services:
     working_dir: "/opt/inspector-metrics"
     environment:
       - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=19
+      - NODE_VERSION=20
+
+  node22:
+    build:
+      context: ./test-env
+      dockerfile: Dockerfile-node22
+    user: "root"
+    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
+    restart: "no"
+    volumes:
+      - .:/opt/inspector-metrics/
+    working_dir: "/opt/inspector-metrics"
+    environment:
+      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
+      - NODE_VERSION=22
 
   grafana:
     build:

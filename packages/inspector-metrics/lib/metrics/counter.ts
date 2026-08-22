@@ -37,13 +37,13 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
   }
 
   /**
-   * Increases the current count by the given value - a negative value is causing an error.
+   * Increases the current count by the given value (defaults to 1) - a negative value is causing an error.
    *
-   * @param {number} value
+   * @param {number} [value=1]
    * @returns {this}
    * @memberof MonotoneCounter
    */
-  public increment (value: number): this {
+  public increment (value: number = 1): this {
     if (value < 0) {
       throw new Error('MonotoneCounter must not be increased by a negative value')
     }
@@ -108,25 +108,25 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
   }
 
   /**
-   * Increases the current count by the given value - a negative value is decreasing the current count.
+   * Increases the current count by the given value (defaults to 1) - a negative value is decreasing the current count.
    *
-   * @param {number} value
+   * @param {number} [value=1]
    * @returns {this}
    * @memberof MonotoneCounter
    */
-  public increment (value: number): this {
+  public increment (value: number = 1): this {
     this.count += value
     return this
   }
 
   /**
-   * Decreases the current count by the given value - a negative value is increasing the current count.
+   * Decreases the current count by the given value (defaults to 1) - a negative value is increasing the current count.
    *
-   * @param {number} value
+   * @param {number} [value=1]
    * @returns {this}
    * @memberof Counter
    */
-  public decrement (value: number): this {
+  public decrement (value: number = 1): this {
     this.count -= value
     return this
   }

@@ -1,5 +1,5 @@
-FROM node:19
+FROM node:22
 
 RUN apt-get update
 RUN apt-get install -y rsync
-RUN npm i -g pnpm@6.15.2
+RUN npm i -g pnpm@10

@@ -45,17 +45,23 @@ Code examples for `javascript` and `typescript` are in the `examples` folder.
 
 ### local setup / prerequisites
 
-You should have [nodejs](https://nodejs.org/en/), [docker](https://www.docker.com/) and [docker-compose](https://docs.docker.com/compose/) installed.
+You should have [nodejs](https://nodejs.org/en/) and a container runtime with compose support
+installed ([podman](https://podman.io/) is preferred, plain [docker](https://www.docker.com/) also works).
+The repository is managed with [pnpm 10](https://pnpm.io/) (use [corepack](https://nodejs.org/api/corepack.html)
+or `npm i -g pnpm@10` to get it; the required version is pinned in `packageManager`).
 
-boot test environment:  
+boot test environment (auto-detects podman compose / docker compose):  
 `./test-env/boot.sh`
 
 shutdown test environment:  
 `./test-env/reset.sh`
 
 execute compatibility tests:  
-`docker-compose run --rm nodeX`  
-_X = nodejs version (available: 14, 15, 16, 17, 18, 19)_
+`./test-env/compose.sh run --rm nodeX`  
+_X = nodejs version (available: 18, 20, 22)_
+
+the published packages keep a lower Node.js floor (`>= 14`); CI additionally runs
+a compatibility smoke test on legacy runtimes (see `.github/workflows/ci.yml`).
 
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
@@ -65,7 +71,7 @@ pnpm i
 generate dependency report:  
 ```bash
 # run 'pnpm run build' before checking dependencies
-docker-compose run --rm deps
+./test-env/compose.sh run --rm deps
 ```
 
 release packages / publish docs:  

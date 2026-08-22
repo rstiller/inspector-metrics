@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 import 'reflect-metadata'
 import 'source-map-support/register'
 
@@ -31,6 +29,10 @@ export class CounterTest {
   @test
   public 'check count, reset and get' (): void {
     const counter: Counter = new Counter()
+    expect(counter.getCount()).to.equal(0)
+    counter.increment()
+    expect(counter.getCount()).to.equal(1)
+    counter.decrement()
     expect(counter.getCount()).to.equal(0)
     counter.increment(1)
     expect(counter.getCount()).to.equal(1)
@@ -106,8 +108,10 @@ export class MonotoneCounterTest {
   public 'check count, reset and get' (): void {
     const counter: MonotoneCounter = new MonotoneCounter()
     expect(counter.getCount()).to.equal(0)
-    counter.increment(1)
+    counter.increment()
     expect(counter.getCount()).to.equal(1)
+    counter.increment(1)
+    expect(counter.getCount()).to.equal(2)
     counter.reset()
     expect(counter.getCount()).to.equal(0)
   }

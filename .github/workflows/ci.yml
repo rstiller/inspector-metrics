@@ -14,27 +14,23 @@ jobs:
   build:
     strategy:
       matrix:
-        node-version: [16.x, 17.x, 18.x, 19.x]
+        node-version: [18, 20, 22]
         os:
-          #- windows-2022
-          #- windows-2019
-          #- macos-12
-          #- macos-11
+          - ubuntu-24.04
           - ubuntu-22.04
-          - ubuntu-20.04
 
     runs-on: ${{ matrix.os }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
 
       - name: Cache node modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         env:
           cache-name: cache-node-modules
         with:
@@ -43,13 +39,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-${{ runner.node-version }}-build-${{ env.cache-name }}-
 
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 6
-          dest: ~/.pnpm-store
-          run_install: |
-            - args: [--global, rimraf, node-gyp]
-            - recursive: true
+      - uses: pnpm/action-setup@v4
 
       - name: build
         run: pnpm run build
@@ -59,3 +49,49 @@ jobs:
         env:
           CI: true
           TZ: Europe/Berlin
+
+      # only the 18.x leg publishes artifacts: the build output only depends
+      # on the fixed tsc target (es2017), not on the building node version
+      - name: Upload built packages
+        if: matrix.node-version == 18
+        uses: actions/upload-artifact@v4
+        with:
+          name: compatibility-packages
+          path: |
+            packages/inspector-metrics/build
+            packages/inspector-metrics/package.json
+            packages/inspector-prometheus/build
+            packages/inspector-prometheus/package.json
+
+  # Legacy compatibility check: the published packages must keep working on the
+  # Node.js version floor (the core's engines say node >= 14) even though the
+  # project is developed on modern Node.js. It takes the built workspace
+  # artifacts and re-installs + smoke-tests them on legacy Node runtimes, so a
+  # dependency that drops old-Node support fails CI before release.
+  compat:
+    runs-on: ubuntu-22.04
+    needs: build
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [14, 16]
+    name: compat-node-${{ matrix.node-version }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Download built packages
+        uses: actions/download-artifact@v4
+        with:
+          name: compatibility-packages
+          path: .compat/pkg
+
+      - name: Smoke test on legacy Node.js
+        env:
+          COMPAT_PKG_DIR: ${{ github.workspace }}/.compat/pkg
+        run: bash test-env/compat-smoke.sh

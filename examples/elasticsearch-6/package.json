@@ -14,7 +14,7 @@
     }
   ],
   "peerDependencies": {
-    "@elastic/elasticsearch": ">=6.8.8 && <7.0.0"
+    "@elastic/elasticsearch": ">=6.8.8 <7.0.0"
   },
   "dependencies": {
     "@elastic/elasticsearch": "6.8.8",

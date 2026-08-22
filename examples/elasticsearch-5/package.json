@@ -14,7 +14,7 @@
     }
   ],
   "peerDependencies": {
-    "@elastic/elasticsearch": ">=5.6.0 && <6.0.0"
+    "@elastic/elasticsearch": ">=5.6.0 <6.0.0"
   },
   "dependencies": {
     "@elastic/elasticsearch": "5.6.22",
