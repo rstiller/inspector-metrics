@@ -15,7 +15,7 @@ const expect = chai.expect
 @suite
 export class MetricRegistryTest {
   @test
-  public 'register multiple metrics with same name' (): void {
+  public 'register multiple metrics with same name'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getMetricList()).to.have.length(0)
@@ -41,7 +41,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'register metrics-set within metrics-registry' (): void {
+  public 'register metrics-set within metrics-registry'(): void {
     const registry1: MetricRegistry = new MetricRegistry()
     const registry2: MetricRegistry = new MetricRegistry()
 

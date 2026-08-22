@@ -12,7 +12,7 @@ const expect = chai.expect
 @suite
 export class HdrHistogramTest {
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let histogram: HdrHistogram = new HdrHistogram(1, 1024, 3)
     expect(histogram.getName()).to.be.undefined
     expect(histogram.getDescription()).to.be.undefined
@@ -27,7 +27,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'simple count and get' (): void {
+  public 'simple count and get'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 2, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -43,7 +43,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'simple count and get with fluent interface' (): void {
+  public 'simple count and get with fluent interface'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 2, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -52,17 +52,13 @@ export class HdrHistogramTest {
     expect(histogram.getCount()).to.equal(1)
     expect(histogram.getSum().toNumber()).to.equal(1)
 
-    histogram
-      .update(1)
-      .update(2)
-      .update(3)
-      .update(4)
+    histogram.update(1).update(2).update(3).update(4)
     expect(histogram.getCount()).to.equal(5)
     expect(histogram.getSum().toNumber()).to.equal(11)
   }
 
   @test
-  public 'update negative values' (): void {
+  public 'update negative values'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 33, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -78,7 +74,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from no values' (): void {
+  public 'check snapshot from no values'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 1024, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -98,7 +94,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from one value' (): void {
+  public 'check snapshot from one value'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 2, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -121,7 +117,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from same value twice' (): void {
+  public 'check snapshot from same value twice'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 2, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -147,7 +143,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from different values' (): void {
+  public 'check snapshot from different values'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 3, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -173,7 +169,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from same value more times than capacity' (): void {
+  public 'check snapshot from same value more times than capacity'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 2, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -202,7 +198,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check snapshot from different values overloading capacity' (): void {
+  public 'check snapshot from different values overloading capacity'(): void {
     const histogram: HdrHistogram = new HdrHistogram(1, 5, 3)
     expect(histogram.getCount()).to.equal(0)
     expect(histogram.getSum().toNumber()).to.equal(0)
@@ -246,14 +242,12 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check bucket counting' (): void {
+  public 'check bucket counting'(): void {
     const buckets = Buckets.linear(10, 10, 10)
     const histogram: HdrHistogram = new HdrHistogram(10, 1000, 3, 'name', 'description', buckets)
 
     expect(histogram.getBuckets()).to.be.equal(buckets)
-    expect(histogram.getBuckets().boundaries).to.deep.equal([
-      10, 20, 30, 40, 50, 60, 70, 80, 90, 100
-    ])
+    expect(histogram.getBuckets().boundaries).to.deep.equal([10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
     expect(histogram.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 10)
 
     histogram.update(44)
@@ -297,14 +291,12 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check bucket counting more than reservoir capacity' (): void {
+  public 'check bucket counting more than reservoir capacity'(): void {
     const buckets = Buckets.linear(10, 10, 5)
     const histogram: HdrHistogram = new HdrHistogram(5, 50, 3, 'name', 'description', buckets)
 
     expect(histogram.getBuckets()).to.be.equal(buckets)
-    expect(histogram.getBuckets().boundaries).to.deep.equal([
-      10, 20, 30, 40, 50
-    ])
+    expect(histogram.getBuckets().boundaries).to.deep.equal([10, 20, 30, 40, 50])
     expect(histogram.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5)
 
     histogram.update(5)
@@ -327,7 +319,7 @@ export class HdrHistogramTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     const internalObject = {
       property1: 'value1',
       property2: 2

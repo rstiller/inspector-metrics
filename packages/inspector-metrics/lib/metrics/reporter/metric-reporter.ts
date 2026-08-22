@@ -1,23 +1,23 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import * as cluster from "cluster";
-import { Counter, MonotoneCounter } from "../counter";
-import { Event } from "../event";
-import { Gauge } from "../gauge";
-import { Histogram } from "../histogram";
-import { Meter } from "../meter";
-import { MetricRegistry } from "../metric-registry";
-import { getMetricTags, Metric } from "../model/metric";
-import { Taggable, Tags, tagsToMap } from "../model/taggable";
-import { MILLISECOND, MINUTE } from "../model/time-unit";
-import { Timer } from "../timer";
-import { InterprocessMessage, InterprocessReportMessage } from "./interprocess-message";
-import { MetricEntry } from "./metric-entry";
-import { MetricReporterOptions } from "./metric-reporter-options";
-import { MetricSetReportContext } from "./metric-set-report-context";
-import { MetricType } from "./metric-type";
-import { OverallReportContext } from "./overall-report-context";
-import { ReportingResult } from "./reporting-result";
+import * as cluster from 'cluster'
+import { Counter, MonotoneCounter } from '../counter'
+import { Event } from '../event'
+import { Gauge } from '../gauge'
+import { Histogram } from '../histogram'
+import { Meter } from '../meter'
+import { MetricRegistry } from '../metric-registry'
+import { getMetricTags, Metric } from '../model/metric'
+import { Taggable, Tags, tagsToMap } from '../model/taggable'
+import { MILLISECOND, MINUTE } from '../model/time-unit'
+import { Timer } from '../timer'
+import { InterprocessMessage, InterprocessReportMessage } from './interprocess-message'
+import { MetricEntry } from './metric-entry'
+import { MetricReporterOptions } from './metric-reporter-options'
+import { MetricSetReportContext } from './metric-set-report-context'
+import { MetricType } from './metric-type'
+import { OverallReportContext } from './overall-report-context'
+import { ReportingResult } from './reporting-result'
 
 /**
  * Interface for metric-reporter.
@@ -32,7 +32,7 @@ export interface IMetricReporter {
    * @returns {Map<string, string>}
    * @memberof IMetricReporter
    */
-  getTags(): Map<string, string>;
+  getTags(): Map<string, string>
 
   /**
    * Sets the reporter tags.
@@ -41,7 +41,7 @@ export interface IMetricReporter {
    * @returns {this}
    * @memberof IMetricReporter
    */
-  setTags(tags: Map<string, string>): this;
+  setTags(tags: Map<string, string>): this
 
   /**
    * Implementations start reporting metrics when called.
@@ -50,7 +50,7 @@ export interface IMetricReporter {
    * @returns {Promise<this>}
    * @memberof IMetricReporter
    */
-  start(): Promise<this>;
+  start(): Promise<this>
 
   /**
    * Implementations stop reporting metrics when called.
@@ -59,7 +59,7 @@ export interface IMetricReporter {
    * @returns {Promise<this>}
    * @memberof IMetricReporter
    */
-  stop(): Promise<this>;
+  stop(): Promise<this>
 
   /**
    * Adds a new {@link MetricRegistry} to be reported.
@@ -68,7 +68,7 @@ export interface IMetricReporter {
    * @returns {this}
    * @memberof IMetricReporter
    */
-  addMetricRegistry(metricRegistry: MetricRegistry): this;
+  addMetricRegistry(metricRegistry: MetricRegistry): this
 
   /**
    * Removes the given {@link MetricRegistry} if it was previously added.
@@ -77,7 +77,7 @@ export interface IMetricReporter {
    * @returns {this}
    * @memberof IMetricReporter
    */
-  removeMetricRegistry(metricRegistry: MetricRegistry): this;
+  removeMetricRegistry(metricRegistry: MetricRegistry): this
 
   /**
    * Reports an {@link Event}.
@@ -95,7 +95,7 @@ export interface IMetricReporter {
    * @returns {Promise<TEvent>}
    * @memberof IMetricReporter
    */
-  reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>;
+  reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent>
 
   /**
    * Sends events remaining in the queue (if a queue is used in the implementation).
@@ -103,7 +103,7 @@ export interface IMetricReporter {
    * @returns {Promise<void>}
    * @memberof IMetricReporter
    */
-  flushEvents(): Promise<void>;
+  flushEvents(): Promise<void>
 }
 
 /**
@@ -112,7 +112,6 @@ export interface IMetricReporter {
  * @class TagsOnlyMetricRegistry
  */
 class TagsOnlyMetricRegistry {
-
   /**
    * private tags map.
    *
@@ -120,7 +119,7 @@ class TagsOnlyMetricRegistry {
    * @type {Map<string, string>}
    * @memberof TagsOnlyMetricRegistry
    */
-  private tags: Map<string, string>;
+  private tags: Map<string, string>
 
   /**
    * Creates an instance of TagsOnlyMetricRegistry.
@@ -129,7 +128,7 @@ class TagsOnlyMetricRegistry {
    * @memberof TagsOnlyMetricRegistry
    */
   public constructor(tags: Tags) {
-      this.tags = tagsToMap(tags);
+    this.tags = tagsToMap(tags)
   }
 
   /**
@@ -139,9 +138,8 @@ class TagsOnlyMetricRegistry {
    * @memberof TagsOnlyMetricRegistry
    */
   public getTags(): Map<string, string> {
-      return this.tags;
+    return this.tags
   }
-
 }
 
 /**
@@ -152,7 +150,6 @@ class TagsOnlyMetricRegistry {
  * @class MetricReporter
  */
 export abstract class MetricReporter<O extends MetricReporterOptions, T> implements IMetricReporter {
-
   /**
    * Constant for the "type" variable of process-level message identifying report-messages
    * from reporter of forked processes.
@@ -160,7 +157,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @static
    * @memberof MetricReporter
    */
-  public static readonly MESSAGE_TYPE = "inspector-metrics:metric-reporter:report";
+  public static readonly MESSAGE_TYPE = 'inspector-metrics:metric-reporter:report'
 
   /**
    * {@link MetricRegistry} instances.
@@ -170,7 +167,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @type {MetricRegistry[]}
    * @memberof MetricReporter
    */
-  protected readonly metricRegistries: MetricRegistry[] = [];
+  protected readonly metricRegistries: MetricRegistry[] = []
   /**
    * options for this reporter instance.
    *
@@ -179,7 +176,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @type {O}
    * @memberof MetricReporter
    */
-  protected readonly options: O;
+  protected readonly options: O
   /**
    * Keeps track of the reporting states for each metric.
    *
@@ -188,7 +185,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @type {Map<number, MetricEntry>}
    * @memberof MetricReporter
    */
-  protected readonly metricStates: Map<number, MetricEntry> = new Map();
+  protected readonly metricStates: Map<number, MetricEntry> = new Map()
   /**
    * The type of the reporter implementation - for internal use.
    *
@@ -197,7 +194,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @type {string}
    * @memberof MetricReporter
    */
-  protected readonly reporterType: string;
+  protected readonly reporterType: string
 
   /**
    * Creates an instance of MetricReporter.
@@ -207,15 +204,14 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public constructor(options: O, reporterType?: string) {
-      this.options = options;
-      this.reporterType = reporterType || this.constructor.name;
-      const clusterOptions = this.options.clusterOptions;
-      if (clusterOptions &&
-          clusterOptions.enabled &&
-          !clusterOptions.sendMetricsToMaster) {
-          clusterOptions.eventReceiver.on("message", (worker, message, handle) =>
-              this.handleReportMessage(worker, message, handle));
-      }
+    this.options = options
+    this.reporterType = reporterType || this.constructor.name
+    const clusterOptions = this.options.clusterOptions
+    if (clusterOptions && clusterOptions.enabled && !clusterOptions.sendMetricsToMaster) {
+      clusterOptions.eventReceiver.on('message', (worker, message, handle) =>
+        this.handleReportMessage(worker, message, handle)
+      )
+    }
   }
 
   /**
@@ -225,7 +221,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public getTags(): Map<string, string> {
-      return this.options.tags;
+    return this.options.tags
   }
 
   /**
@@ -236,8 +232,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public setTags(tags: Map<string, string>): this {
-      this.options.tags = tags;
-      return this;
+    this.options.tags = tags
+    return this
   }
 
   /**
@@ -247,7 +243,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {Promise<this>}
    * @memberof MetricReporter
    */
-  public abstract start(): Promise<this>;
+  public abstract start(): Promise<this>
 
   /**
    * Implementations stop reporting metrics when called.
@@ -256,7 +252,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {Promise<this>}
    * @memberof MetricReporter
    */
-  public abstract stop(): Promise<this>;
+  public abstract stop(): Promise<this>
 
   /**
    * Adds a new {@link MetricRegistry} to be reported.
@@ -266,8 +262,8 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public addMetricRegistry(metricRegistry: MetricRegistry): this {
-      this.metricRegistries.push(metricRegistry);
-      return this;
+    this.metricRegistries.push(metricRegistry)
+    return this
   }
 
   /**
@@ -278,11 +274,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public removeMetricRegistry(metricRegistry: MetricRegistry): this {
-      const index: number = this.metricRegistries.indexOf(metricRegistry);
-      if (index > -1) {
-          this.metricRegistries.splice(index, 1);
-      }
-      return this;
+    const index: number = this.metricRegistries.indexOf(metricRegistry)
+    if (index > -1) {
+      this.metricRegistries.splice(index, 1)
+    }
+    return this
   }
 
   /**
@@ -302,7 +298,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   public async reportEvent<TEventData, TEvent extends Event<TEventData>>(event: TEvent): Promise<TEvent> {
-      return event;
+    return event
   }
 
   /**
@@ -311,8 +307,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {Promise<void>}
    * @memberof MetricReporter
    */
-  public async flushEvents(): Promise<void> {
-  }
+  public async flushEvents(): Promise<void> {}
 
   /**
    * Checks if the specified message can be handle by this metric-reporter and is of the desired type.
@@ -323,12 +318,14 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {boolean}
    * @memberof MetricReporter
    */
-  protected canHandleMessage(
-      message: InterprocessMessage,
-      targetType: string = MetricReporter.MESSAGE_TYPE): boolean {
-      return message &&
-          message.type && message.type === targetType &&
-          message.targetReporterType && message.targetReporterType === this.reporterType;
+  protected canHandleMessage(message: InterprocessMessage, targetType: string = MetricReporter.MESSAGE_TYPE): boolean {
+    return (
+      message &&
+      message.type &&
+      message.type === targetType &&
+      message.targetReporterType &&
+      message.targetReporterType === this.reporterType
+    )
   }
 
   /**
@@ -341,16 +338,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any) {
-      if (this.canHandleMessage(message)) {
-          const report: InterprocessReportMessage<T> = message;
-          const reg: MetricRegistry = (new TagsOnlyMetricRegistry(report.tags) as any) as MetricRegistry;
-          await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.monotoneCounters);
-          await this.handleResults(report.ctx, reg, report.date, "counter", report.metrics.counters);
-          await this.handleResults(report.ctx, reg, report.date, "gauge", report.metrics.gauges);
-          await this.handleResults(report.ctx, reg, report.date, "histogram", report.metrics.histograms);
-          await this.handleResults(report.ctx, reg, report.date, "meter", report.metrics.meters);
-          await this.handleResults(report.ctx, reg, report.date, "timer", report.metrics.timers);
-      }
+    if (this.canHandleMessage(message)) {
+      const report: InterprocessReportMessage<T> = message
+      const reg: MetricRegistry = new TagsOnlyMetricRegistry(report.tags) as any as MetricRegistry
+      await this.handleResults(report.ctx, reg, report.date, 'counter', report.metrics.monotoneCounters)
+      await this.handleResults(report.ctx, reg, report.date, 'counter', report.metrics.counters)
+      await this.handleResults(report.ctx, reg, report.date, 'gauge', report.metrics.gauges)
+      await this.handleResults(report.ctx, reg, report.date, 'histogram', report.metrics.histograms)
+      await this.handleResults(report.ctx, reg, report.date, 'meter', report.metrics.meters)
+      await this.handleResults(report.ctx, reg, report.date, 'timer', report.metrics.timers)
+    }
   }
 
   /**
@@ -359,8 +356,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @protected
    * @memberof MetricReporter
    */
-  protected async beforeReport(ctx: OverallReportContext) {
-  }
+  protected async beforeReport(ctx: OverallReportContext) {}
 
   /**
    * Called after each reporting run.
@@ -368,8 +364,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @protected
    * @memberof MetricReporter
    */
-  protected async afterReport(ctx: OverallReportContext) {
-  }
+  protected async afterReport(ctx: OverallReportContext) {}
 
   /**
    * Run the reporting procedures. Calls {@link #beforeReport} before each
@@ -380,16 +375,16 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected async report(): Promise<OverallReportContext> {
-      if (this.metricRegistries && this.metricRegistries.length > 0) {
-          const ctx = this.createOverallReportContext();
-          await this.beforeReport(ctx);
-          for (const registry of this.metricRegistries) {
-              await this.reportMetricRegistry(ctx, registry);
-          }
-          await this.afterReport(ctx);
-          return ctx;
+    if (this.metricRegistries && this.metricRegistries.length > 0) {
+      const ctx = this.createOverallReportContext()
+      await this.beforeReport(ctx)
+      for (const registry of this.metricRegistries) {
+        await this.reportMetricRegistry(ctx, registry)
       }
-      return {};
+      await this.afterReport(ctx)
+      return ctx
+    }
+    return {}
   }
 
   /**
@@ -404,77 +399,97 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @param {MetricRegistry | null} registry
    * @memberof MetricReporter
    */
-  protected async reportMetricRegistry(
-      ctx: OverallReportContext,
-      registry: MetricRegistry | null) {
+  protected async reportMetricRegistry(ctx: OverallReportContext, registry: MetricRegistry | null) {
+    const date: Date = new Date(this.options.clock.time().milliseconds)
+    const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this.createMetricSetReportContext(
+      ctx,
+      registry,
+      date,
+      'counter'
+    )
+    const gaugeCtx: MetricSetReportContext<Gauge<any>> = this.createMetricSetReportContext(ctx, registry, date, 'gauge')
+    const histogramCtx: MetricSetReportContext<Histogram> = this.createMetricSetReportContext(
+      ctx,
+      registry,
+      date,
+      'histogram'
+    )
+    const meterCtx: MetricSetReportContext<Meter> = this.createMetricSetReportContext(ctx, registry, date, 'meter')
+    const timerCtx: MetricSetReportContext<Timer> = this.createMetricSetReportContext(ctx, registry, date, 'timer')
 
-      const date: Date = new Date(this.options.clock.time().milliseconds);
-      const counterCtx: MetricSetReportContext<MonotoneCounter | Counter> = this
-          .createMetricSetReportContext(ctx, registry, date, "counter");
-      const gaugeCtx: MetricSetReportContext<Gauge<any>> = this
-          .createMetricSetReportContext(ctx, registry, date, "gauge");
-      const histogramCtx: MetricSetReportContext<Histogram> = this
-          .createMetricSetReportContext(ctx, registry, date, "histogram");
-      const meterCtx: MetricSetReportContext<Meter> = this
-          .createMetricSetReportContext(ctx, registry, date, "meter");
-      const timerCtx: MetricSetReportContext<Timer> = this
-          .createMetricSetReportContext(ctx, registry, date, "timer");
+    counterCtx.metrics = registry.getMonotoneCounterList()
+    const monotoneCounterResults = this.reportMetrics(
+      ctx,
+      counterCtx,
+      (counter: MonotoneCounter) => this.reportCounter(counter, counterCtx),
+      (counter: MonotoneCounter) => counter.getCount()
+    )
 
-      counterCtx.metrics = registry.getMonotoneCounterList();
-      const monotoneCounterResults = this.reportMetrics(ctx, counterCtx,
-          (counter: MonotoneCounter) => this.reportCounter(counter, counterCtx),
-          (counter: MonotoneCounter) => counter.getCount());
+    counterCtx.metrics = registry.getCounterList()
+    const counterResults = this.reportMetrics(
+      ctx,
+      counterCtx as MetricSetReportContext<Counter>,
+      (counter: Counter) => this.reportCounter(counter, counterCtx),
+      (counter: Counter) => counter.getCount()
+    )
 
-      counterCtx.metrics = registry.getCounterList();
-      const counterResults = this.reportMetrics(ctx, counterCtx as MetricSetReportContext<Counter>,
-          (counter: Counter) => this.reportCounter(counter, counterCtx),
-          (counter: Counter) => counter.getCount());
+    gaugeCtx.metrics = registry.getGaugeList()
+    const gaugeResults = this.reportMetrics(
+      ctx,
+      gaugeCtx,
+      (gauge: Gauge<any>) => this.reportGauge(gauge, gaugeCtx),
+      (gauge: Gauge<any>) => gauge.getValue()
+    )
 
-      gaugeCtx.metrics = registry.getGaugeList();
-      const gaugeResults = this.reportMetrics(ctx, gaugeCtx,
-          (gauge: Gauge<any>) => this.reportGauge(gauge, gaugeCtx),
-          (gauge: Gauge<any>) => gauge.getValue());
+    histogramCtx.metrics = registry.getHistogramList()
+    const histogramResults = this.reportMetrics(
+      ctx,
+      histogramCtx,
+      (histogram: Histogram) => this.reportHistogram(histogram, histogramCtx),
+      (histogram: Histogram) => histogram.getCount()
+    )
 
-      histogramCtx.metrics = registry.getHistogramList();
-      const histogramResults = this.reportMetrics(ctx, histogramCtx,
-          (histogram: Histogram) => this.reportHistogram(histogram, histogramCtx),
-          (histogram: Histogram) => histogram.getCount());
+    meterCtx.metrics = registry.getMeterList()
+    const meterResults = this.reportMetrics(
+      ctx,
+      meterCtx,
+      (meter: Meter) => this.reportMeter(meter, meterCtx),
+      (meter: Meter) => meter.getCount()
+    )
 
-      meterCtx.metrics = registry.getMeterList();
-      const meterResults = this.reportMetrics(ctx, meterCtx,
-          (meter: Meter) => this.reportMeter(meter, meterCtx),
-          (meter: Meter) => meter.getCount());
+    timerCtx.metrics = registry.getTimerList()
+    const timerResults = this.reportMetrics(
+      ctx,
+      timerCtx,
+      (timer: Timer) => this.reportTimer(timer, timerCtx),
+      (timer: Timer) => timer.getCount()
+    )
 
-      timerCtx.metrics = registry.getTimerList();
-      const timerResults = this.reportMetrics(ctx, timerCtx,
-          (timer: Timer) => this.reportTimer(timer, timerCtx),
-          (timer: Timer) => timer.getCount());
-
-      if (this.sendMetricsToMaster()) {
-          const message: InterprocessReportMessage<T> = {
-              ctx,
-              date,
-              metrics: {
-                  counters: counterResults,
-                  gauges: gaugeResults,
-                  histograms: histogramResults,
-                  meters: meterResults,
-                  monotoneCounters: monotoneCounterResults,
-                  timers: timerResults,
-              },
-              tags: this.buildTags(registry, null),
-              targetReporterType: this.reporterType,
-              type: MetricReporter.MESSAGE_TYPE,
-          };
-          this.options.clusterOptions.sendToMaster(message);
-      } else {
-          await this.handleResults(ctx, registry, date, "counter", monotoneCounterResults);
-          await this.handleResults(ctx, registry, date, "counter", counterResults);
-          await this.handleResults(ctx, registry, date, "gauge", gaugeResults);
-          await this.handleResults(ctx, registry, date, "histogram", histogramResults);
-          await this.handleResults(ctx, registry, date, "meter", meterResults);
-          await this.handleResults(ctx, registry, date, "timer", timerResults);
+    if (this.sendMetricsToMaster()) {
+      const message: InterprocessReportMessage<T> = {
+        ctx,
+        date,
+        metrics: {
+          counters: counterResults,
+          gauges: gaugeResults,
+          histograms: histogramResults,
+          meters: meterResults,
+          monotoneCounters: monotoneCounterResults,
+          timers: timerResults
+        },
+        tags: this.buildTags(registry, null),
+        targetReporterType: this.reporterType,
+        type: MetricReporter.MESSAGE_TYPE
       }
+      this.options.clusterOptions.sendToMaster(message)
+    } else {
+      await this.handleResults(ctx, registry, date, 'counter', monotoneCounterResults)
+      await this.handleResults(ctx, registry, date, 'counter', counterResults)
+      await this.handleResults(ctx, registry, date, 'gauge', gaugeResults)
+      await this.handleResults(ctx, registry, date, 'histogram', histogramResults)
+      await this.handleResults(ctx, registry, date, 'meter', meterResults)
+      await this.handleResults(ctx, registry, date, 'timer', timerResults)
+    }
   }
 
   /**
@@ -485,9 +500,11 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected sendMetricsToMaster(): boolean {
-      return  this.options.clusterOptions &&
-              this.options.clusterOptions.enabled &&
-              this.options.clusterOptions.sendMetricsToMaster;
+    return (
+      this.options.clusterOptions &&
+      this.options.clusterOptions.enabled &&
+      this.options.clusterOptions.sendMetricsToMaster
+    )
   }
 
   /**
@@ -498,8 +515,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected createOverallReportContext(): OverallReportContext {
-      return {
-      };
+    return {}
   }
 
   /**
@@ -514,17 +530,18 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected createMetricSetReportContext(
-      overallCtx: OverallReportContext,
-      registry: MetricRegistry | null,
-      date: Date,
-      type: MetricType): MetricSetReportContext<any> {
-      return {
-          date,
-          metrics: [],
-          overallCtx,
-          registry,
-          type,
-      };
+    overallCtx: OverallReportContext,
+    registry: MetricRegistry | null,
+    date: Date,
+    type: MetricType
+  ): MetricSetReportContext<any> {
+    return {
+      date,
+      metrics: [],
+      overallCtx,
+      registry,
+      type
+    }
   }
 
   /**
@@ -541,21 +558,21 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected reportMetrics<M extends Metric, C extends MetricSetReportContext<M>>(
-      overallCtx: OverallReportContext,
-      ctx: C,
-      reportFunction: (metric: M, ctx: C) => T,
-      lastModifiedFunction: (metric: M, ctx: C) => number): Array<ReportingResult<M, T>> {
-
-      return ctx.metrics
-          .filter((metric) => {
-              const metricId = (metric as any).id;
-              return !metricId || this.hasChanged(metricId, lastModifiedFunction(metric, ctx), ctx.date.getTime());
-          })
-          .map((metric) => ({
-              metric,
-              result: reportFunction(metric, ctx),
-          }))
-          .filter((result) => !!result.result);
+    overallCtx: OverallReportContext,
+    ctx: C,
+    reportFunction: (metric: M, ctx: C) => T,
+    lastModifiedFunction: (metric: M, ctx: C) => number
+  ): Array<ReportingResult<M, T>> {
+    return ctx.metrics
+      .filter((metric) => {
+        const metricId = (metric as any).id
+        return !metricId || this.hasChanged(metricId, lastModifiedFunction(metric, ctx), ctx.date.getTime())
+      })
+      .map((metric) => ({
+        metric,
+        result: reportFunction(metric, ctx)
+      }))
+      .filter((result) => !!result.result)
   }
 
   /**
@@ -572,11 +589,12 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected abstract handleResults(
-      ctx: OverallReportContext,
-      registry: MetricRegistry | null,
-      date: Date,
-      type: MetricType,
-      results: Array<ReportingResult<any, T>>): Promise<void>;
+    ctx: OverallReportContext,
+    registry: MetricRegistry | null,
+    date: Date,
+    type: MetricType,
+    results: Array<ReportingResult<any, T>>
+  ): Promise<void>
 
   /**
    * Does the reporting for a counter or monotone counter.
@@ -589,7 +607,9 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected abstract reportCounter(
-      counter: MonotoneCounter | Counter, ctx: MetricSetReportContext<MonotoneCounter | Counter>): T;
+    counter: MonotoneCounter | Counter,
+    ctx: MetricSetReportContext<MonotoneCounter | Counter>
+  ): T
 
   /**
    * Does the reporting for a gauge.
@@ -601,7 +621,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {T}
    * @memberof MetricReporter
    */
-  protected abstract reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): T;
+  protected abstract reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): T
 
   /**
    * Does the reporting for a histogram.
@@ -613,7 +633,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {T}
    * @memberof MetricReporter
    */
-  protected abstract reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): T;
+  protected abstract reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): T
 
   /**
    * Does the reporting for a meter.
@@ -625,7 +645,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {T}
    * @memberof MetricReporter
    */
-  protected abstract reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): T;
+  protected abstract reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): T
 
   /**
    * Does the reporting for a timer.
@@ -637,7 +657,7 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @returns {T}
    * @memberof MetricReporter
    */
-  protected abstract reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): T;
+  protected abstract reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): T
 
   /**
    * Determines if a metric instance has changed it's value since the last check.
@@ -651,25 +671,25 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected hasChanged(metricId: number, lastValue: number, date: number): boolean {
-      let changed = true;
-      let metricEntry = {
-          lastReport: 0,
-          lastValue,
-      };
-      if (this.metricStates.has(metricId)) {
-          metricEntry = this.metricStates.get(metricId);
-          changed = metricEntry.lastValue !== lastValue;
-          if (!changed) {
-              const minReportingTimeout = MINUTE.convertTo(this.options.minReportingTimeout, MILLISECOND);
-              changed = metricEntry.lastReport + minReportingTimeout < date;
-          }
+    let changed = true
+    let metricEntry = {
+      lastReport: 0,
+      lastValue
+    }
+    if (this.metricStates.has(metricId)) {
+      metricEntry = this.metricStates.get(metricId)
+      changed = metricEntry.lastValue !== lastValue
+      if (!changed) {
+        const minReportingTimeout = MINUTE.convertTo(this.options.minReportingTimeout, MILLISECOND)
+        changed = metricEntry.lastReport + minReportingTimeout < date
       }
-      if (changed) {
-          metricEntry.lastReport = date;
-          metricEntry.lastValue = lastValue;
-      }
-      this.metricStates.set(metricId, metricEntry);
-      return changed;
+    }
+    if (changed) {
+      metricEntry.lastReport = date
+      metricEntry.lastValue = lastValue
+    }
+    this.metricStates.set(metricId, metricEntry)
+    return changed
   }
 
   /**
@@ -683,18 +703,18 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected buildTags(registry: MetricRegistry | null, taggable: Taggable): Tags {
-      const tags: Tags = {};
-      if (this.options.tags) {
-          this.options.tags.forEach((tag, key) => tags[key] = tag);
-      }
-      if (registry && registry.getTags()) {
-          registry.getTags().forEach((tag, key) => tags[key] = tag);
-      }
-      if (taggable) {
-          const customTags = getMetricTags(taggable);
-          Object.keys(customTags).forEach((key) => tags[key] = customTags[key]);
-      }
-      return tags;
+    const tags: Tags = {}
+    if (this.options.tags) {
+      this.options.tags.forEach((tag, key) => (tags[key] = tag))
+    }
+    if (registry && registry.getTags()) {
+      registry.getTags().forEach((tag, key) => (tags[key] = tag))
+    }
+    if (taggable) {
+      const customTags = getMetricTags(taggable)
+      Object.keys(customTags).forEach((key) => (tags[key] = customTags[key]))
+    }
+    return tags
   }
 
   /**
@@ -706,10 +726,9 @@ export abstract class MetricReporter<O extends MetricReporterOptions, T> impleme
    * @memberof MetricReporter
    */
   protected getNumber(value: number): number {
-      if (isNaN(value)) {
-          return 0;
-      }
-      return value;
+    if (isNaN(value)) {
+      return 0
+    }
+    return value
   }
-
 }

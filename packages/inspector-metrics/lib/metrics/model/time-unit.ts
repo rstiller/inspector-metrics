@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Represents a time unit like second, minute, hour.
@@ -7,7 +7,6 @@ import "source-map-support/register";
  * @class TimeUnit
  */
 export class TimeUnit {
-
   /**
    * The nanoseconds for one unit of this time unit.
    *
@@ -15,7 +14,7 @@ export class TimeUnit {
    * @type {number}
    * @memberof TimeUnit
    */
-  private nanosecondsPerUnit: number;
+  private nanosecondsPerUnit: number
 
   /**
    * Creates an instance of TimeUnit.
@@ -24,7 +23,7 @@ export class TimeUnit {
    * @memberof TimeUnit
    */
   public constructor(nanosecondsPerUnit: number) {
-    this.nanosecondsPerUnit = nanosecondsPerUnit;
+    this.nanosecondsPerUnit = nanosecondsPerUnit
   }
 
   /**
@@ -34,7 +33,7 @@ export class TimeUnit {
    * @memberof TimeUnit
    */
   public getNanosecondsPerUnit(): number {
-    return this.nanosecondsPerUnit;
+    return this.nanosecondsPerUnit
   }
 
   /**
@@ -51,36 +50,35 @@ export class TimeUnit {
    * @memberof TimeUnit
    */
   public convertTo(value: number, unit: TimeUnit): number {
-    return (value * this.nanosecondsPerUnit) / unit.nanosecondsPerUnit;
+    return (value * this.nanosecondsPerUnit) / unit.nanosecondsPerUnit
   }
-
 }
 
 /**
  * One nanosecond.
  */
-export const NANOSECOND = new TimeUnit(1);
+export const NANOSECOND = new TimeUnit(1)
 /**
  * One microsecond in nanoseconds.
  */
-export const MICROSECOND = new TimeUnit(1000);
+export const MICROSECOND = new TimeUnit(1000)
 /**
  * One millisecond in nanoseconds.
  */
-export const MILLISECOND = new TimeUnit(1000000);
+export const MILLISECOND = new TimeUnit(1000000)
 /**
  * One second in nanoseconds.
  */
-export const SECOND = new TimeUnit(1000000000);
+export const SECOND = new TimeUnit(1000000000)
 /**
  * One minute in nanoseconds.
  */
-export const MINUTE = new TimeUnit(60000000000);
+export const MINUTE = new TimeUnit(60000000000)
 /**
  * One hour in nanoseconds.
  */
-export const HOUR = new TimeUnit(3600000000000);
+export const HOUR = new TimeUnit(3600000000000)
 /**
  * One day in nanoseconds.
  */
-export const DAY = new TimeUnit(86400000000000);
+export const DAY = new TimeUnit(86400000000000)

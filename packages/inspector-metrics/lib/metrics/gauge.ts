@@ -12,7 +12,6 @@ import { BaseMetric, Metric, SerializableMetric } from './model/metric'
  * @template T
  */
 export interface Gauge<T> extends Metric, SerializableMetric {
-
   /**
    * Gets the current value of the gauge.
    *
@@ -20,7 +19,6 @@ export interface Gauge<T> extends Metric, SerializableMetric {
    * @memberof Gauge
    */
   getValue(): T
-
 }
 
 /**
@@ -48,7 +46,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
    * @param {string} [description] optional metric description.
    * @memberof SimpleGauge
    */
-  public constructor (name?: string, description?: string) {
+  public constructor(name?: string, description?: string) {
     super()
     this.name = name
     this.description = description
@@ -60,7 +58,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
    * @returns {number}
    * @memberof SimpleGauge
    */
-  public getValue (): number {
+  public getValue(): number {
     return this.value
   }
 
@@ -71,7 +69,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
    * @returns {this}
    * @memberof SimpleGauge
    */
-  public setValue (value: number): this {
+  public setValue(value: number): this {
     this.value = value
     return this
   }
@@ -82,7 +80,7 @@ export class SimpleGauge extends BaseMetric implements Gauge<number> {
    * @returns {*}
    * @memberof SimpleGauge
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.value = this.value
     return json

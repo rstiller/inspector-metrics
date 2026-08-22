@@ -1,15 +1,7 @@
 import 'source-map-support/register'
 
 import { EventEmitter } from 'events'
-import {
-  BaseMetric,
-  Clock,
-  DefaultReservoir,
-  Metric,
-  MetricSet,
-  NANOSECOND,
-  Timer
-} from 'inspector-metrics'
+import { BaseMetric, Clock, DefaultReservoir, Metric, MetricSet, NANOSECOND, Timer } from 'inspector-metrics'
 
 /**
  * Event emitter for GC event within nodejs.
@@ -33,7 +25,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Metric[]}
    * @memberof V8GCMetrics
    */
-  private readonly metrics: Metric[] = [];
+  private readonly metrics: Metric[] = []
   /**
    * Timer for the gc minor runs.
    *
@@ -41,7 +33,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Timer}
    * @memberof V8GCMetrics
    */
-  private readonly minorRuns: Timer;
+  private readonly minorRuns: Timer
   /**
    * Timer for the gc major runs.
    *
@@ -49,7 +41,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Timer}
    * @memberof V8GCMetrics
    */
-  private readonly majorRuns: Timer;
+  private readonly majorRuns: Timer
   /**
    * Timer for the gc incremental marking runs.
    *
@@ -57,7 +49,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Timer}
    * @memberof V8GCMetrics
    */
-  private readonly incrementalMarkingRuns: Timer;
+  private readonly incrementalMarkingRuns: Timer
   /**
    * Timer for the gc callback processing runs.
    *
@@ -65,7 +57,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Timer}
    * @memberof V8GCMetrics
    */
-  private readonly phantomCallbackProcessingRuns: Timer;
+  private readonly phantomCallbackProcessingRuns: Timer
   /**
    * Timer for all gc runs.
    *
@@ -73,7 +65,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {Timer}
    * @memberof V8GCMetrics
    */
-  private readonly allRuns: Timer;
+  private readonly allRuns: Timer
   /**
    * Garbage collection data emitter.
    *
@@ -81,7 +73,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @type {EventEmitter}
    * @memberof V8GCMetrics
    */
-  private readonly gc: EventEmitter;
+  private readonly gc: EventEmitter
 
   /**
    * Creates an instance of V8GCMetrics.
@@ -90,7 +82,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @param {Clock} clock
    * @memberof V8GCMetrics
    */
-  public constructor (name: string, clock: Clock) {
+  public constructor(name: string, clock: Clock) {
     super()
     this.name = name
 
@@ -146,7 +138,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    *
    * @memberof V8GCMetrics
    */
-  public stop (): void {
+  public stop(): void {
     this.gc.removeAllListeners()
   }
 
@@ -156,7 +148,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @returns {Map<string, Metric>}
    * @memberof V8GCMetrics
    */
-  public getMetrics (): Map<string, Metric> {
+  public getMetrics(): Map<string, Metric> {
     const map: Map<string, Metric> = new Map()
     this.metrics.forEach((metric) => map.set(metric.getName(), metric))
     return map
@@ -168,7 +160,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @returns {Metric[]}
    * @memberof V8GCMetrics
    */
-  public getMetricList (): Metric[] {
+  public getMetricList(): Metric[] {
     return this.metrics
   }
 
@@ -179,7 +171,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8GCMetrics
    */
-  public setGroup (group: string): this {
+  public setGroup(group: string): this {
     this.group = group
     this.allRuns.setGroup(group)
     this.incrementalMarkingRuns.setGroup(group)
@@ -197,7 +189,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8GCMetrics
    */
-  public setTag (name: string, value: string): this {
+  public setTag(name: string, value: string): this {
     this.tagMap.set(name, value)
     this.allRuns.setTag(name, value)
     this.incrementalMarkingRuns.setTag(name, value)
@@ -214,7 +206,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8GCMetrics
    */
-  public removeTag (name: string): this {
+  public removeTag(name: string): this {
     this.tagMap.delete(name)
     this.allRuns.removeTag(name)
     this.incrementalMarkingRuns.removeTag(name)

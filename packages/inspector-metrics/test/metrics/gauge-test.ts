@@ -11,7 +11,7 @@ const expect = chai.expect
 @suite
 export class SimpleGaugeTest {
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let gauge: SimpleGauge = new SimpleGauge()
     expect(gauge.getName()).to.be.undefined
     expect(gauge.getDescription()).to.be.undefined
@@ -26,7 +26,7 @@ export class SimpleGaugeTest {
   }
 
   @test
-  public 'check set and get value' (): void {
+  public 'check set and get value'(): void {
     const gauge: SimpleGauge = new SimpleGauge()
     expect(gauge.getValue()).to.equal(0)
     gauge.setValue(1)
@@ -34,7 +34,7 @@ export class SimpleGaugeTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     const internalObject = {
       property1: 'value1',
       property2: 2

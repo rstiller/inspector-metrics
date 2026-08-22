@@ -14,7 +14,7 @@ export class MeterTest {
   private readonly clock: MockedClock = new MockedClock()
 
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let meter: Meter = new Meter(this.clock, 1)
     expect(meter.getName()).to.be.undefined
     expect(meter.getDescription()).to.be.undefined
@@ -29,7 +29,7 @@ export class MeterTest {
   }
 
   @test
-  public 'single mark and check rates with no tick' (): void {
+  public 'single mark and check rates with no tick'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -51,7 +51,7 @@ export class MeterTest {
   }
 
   @test
-  public 'mark using fluent interface' (): void {
+  public 'mark using fluent interface'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -64,11 +64,7 @@ export class MeterTest {
     expect(meter.get5MinuteRate()).to.equal(0)
     expect(meter.get15MinuteRate()).to.equal(0)
 
-    meter
-      .mark(1)
-      .mark(2)
-      .mark(3)
-      .mark(4)
+    meter.mark(1).mark(2).mark(3).mark(4)
 
     expect(meter.getCount()).to.equal(10)
     expect(meter.getMeanRate()).to.equal(Infinity)
@@ -78,7 +74,7 @@ export class MeterTest {
   }
 
   @test
-  public 'mark and tick and check rates' (): void {
+  public 'mark and tick and check rates'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -105,7 +101,7 @@ export class MeterTest {
   }
 
   @test
-  public 'multi mark and tick and check rates' (): void {
+  public 'multi mark and tick and check rates'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -135,7 +131,7 @@ export class MeterTest {
   }
 
   @test
-  public 'mark and multi tick and check rates withing same rate-interval' (): void {
+  public 'mark and multi tick and check rates withing same rate-interval'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -177,7 +173,7 @@ export class MeterTest {
   }
 
   @test
-  public 'mark and multi tick and check rates within different rate-intervals' (): void {
+  public 'mark and multi tick and check rates within different rate-intervals'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -222,7 +218,7 @@ export class MeterTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0

@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { Metric, SerializableMetric } from "./metric";
+import { Metric, SerializableMetric } from './metric'
 
 /**
  * Represents a metric which measure a rate of events - e.g. function call rate or request rate.
@@ -10,14 +10,13 @@ import { Metric, SerializableMetric } from "./metric";
  * @extends {Metric}
  */
 export interface Metered extends Metric {
-
   /**
    * Gets the total number of events.
    *
    * @returns {number}
    * @memberof Metered
    */
-  getCount(): number;
+  getCount(): number
 
   /**
    * Gets the rate of the last 15 minutes.
@@ -25,7 +24,7 @@ export interface Metered extends Metric {
    * @returns {number}
    * @memberof Metered
    */
-  get15MinuteRate(): number;
+  get15MinuteRate(): number
 
   /**
    * Gets the rate of the last 5 minutes.
@@ -33,7 +32,7 @@ export interface Metered extends Metric {
    * @returns {number}
    * @memberof Metered
    */
-  get5MinuteRate(): number;
+  get5MinuteRate(): number
 
   /**
    * Gets the rate of the last minute.
@@ -41,7 +40,7 @@ export interface Metered extends Metric {
    * @returns {number}
    * @memberof Metered
    */
-  get1MinuteRate(): number;
+  get1MinuteRate(): number
 
   /**
    * Gets the mean rate - the meaning of the mean-rate depends on the actual implementation.
@@ -49,8 +48,7 @@ export interface Metered extends Metric {
    * @returns {number}
    * @memberof Metered
    */
-  getMeanRate(): number;
-
+  getMeanRate(): number
 }
 
 /**
@@ -60,7 +58,7 @@ export interface Metered extends Metric {
  * @interface MeteredRates
  */
 export interface MeteredRates {
-  [rate: number]: number;
+  [rate: number]: number
 }
 
 /**
@@ -77,19 +75,19 @@ export interface SerializableMetered extends SerializableMetric {
    * @type {number}
    * @memberof SerializableMetered
    */
-  count: number;
+  count: number
   /**
    * mean rate - the meaning of the mean-rate depends on the actual implementation.
    *
    * @type {number}
    * @memberof SerializableMetered
    */
-  meanRate: number;
+  meanRate: number
   /**
    * Mapping of time-frame to rate values - time-unit and meaning depend on the actual implementation.
    *
    * @type {MeteredRates}
    * @memberof SerializableMetered
    */
-  rates: MeteredRates;
+  rates: MeteredRates
 }

@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Interface for all classes that can associate metadata with instances.
@@ -7,7 +7,6 @@ import "source-map-support/register";
  * @interface MetadataContainer
  */
 export interface MetadataContainer {
-
   /**
    * Gets all the metadata associated with an instance.
    * Future changes to the metadata of this instance may
@@ -16,7 +15,7 @@ export interface MetadataContainer {
    * @returns {Map<string, any>}
    * @memberof MetadataContainer
    */
-  getMetadataMap(): Map<string, any>;
+  getMetadataMap(): Map<string, any>
 
   /**
    * Gets the metadata associated with the specified name.
@@ -26,7 +25,7 @@ export interface MetadataContainer {
    * @returns {T}
    * @memberof MetadataContainer
    */
-  getMetadata<T>(name: string): T;
+  getMetadata<T>(name: string): T
 
   /**
    * Removes the metadata associated with the specified name and returns it finally.
@@ -36,7 +35,7 @@ export interface MetadataContainer {
    * @returns {T}
    * @memberof MetadataContainer
    */
-  removeMetadata<T>(name: string): T;
+  removeMetadata<T>(name: string): T
 
   /**
    * Sets the metadata object to the name.
@@ -47,14 +46,14 @@ export interface MetadataContainer {
    * @returns {this}
    * @memberof MetadataContainer
    */
-  setMetadata<T>(name: string, value: T): this;
+  setMetadata<T>(name: string, value: T): this
 }
 
 /**
  * Helper interface for handling metadata.
  */
 export interface Metadata {
-  [key: string]: any;
+  [key: string]: any
 }
 
 /**
@@ -65,11 +64,11 @@ export interface Metadata {
  * @returns {Map<string, any>}
  */
 export function metadataToMap(metadata: Metadata): Map<string, any> {
-  const metadataMap: Map<string, any> = new Map();
+  const metadataMap: Map<string, any> = new Map()
   if (metadata) {
-    Object.keys(metadata).forEach((key) => metadataMap.set(key, metadata[key]));
+    Object.keys(metadata).forEach((key) => metadataMap.set(key, metadata[key]))
   }
-  return metadataMap;
+  return metadataMap
 }
 
 /**
@@ -80,9 +79,9 @@ export function metadataToMap(metadata: Metadata): Map<string, any> {
  * @returns {Metadata}
  */
 export function mapToMetadata(metadataMap: Map<string, any>): Metadata {
-  const metadata: Metadata = {};
+  const metadata: Metadata = {}
   if (metadataMap) {
-    metadataMap.forEach((value, name) => metadata[name] = value);
+    metadataMap.forEach((value, name) => (metadata[name] = value))
   }
-  return metadata;
+  return metadata
 }

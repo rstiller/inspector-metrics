@@ -10,7 +10,7 @@ const expect = chai.expect
 @suite
 export class V8GCMetricsTest {
   @test
-  public settingGroup (): void {
+  public settingGroup(): void {
     const metric: V8GCMetrics = new V8GCMetrics('v8', new StdClock())
 
     expect(metric.getGroup()).to.not.exist
@@ -28,7 +28,7 @@ export class V8GCMetricsTest {
   }
 
   @test
-  public settingTag (): void {
+  public settingTag(): void {
     const metric: V8GCMetrics = new V8GCMetrics('v8', new StdClock())
 
     metric.setTag('type', 'value')
@@ -47,7 +47,7 @@ export class V8GCMetricsTest {
   }
 
   @test
-  public checkRegistration (): void {
+  public checkRegistration(): void {
     const registry = new MetricRegistry()
     const metric: V8GCMetrics = new V8GCMetrics('v8', new StdClock())
 

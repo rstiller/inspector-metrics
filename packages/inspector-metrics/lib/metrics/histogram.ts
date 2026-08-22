@@ -18,10 +18,18 @@ import { SerializableSummarizing, Summarizing } from './model/summarizing'
  * @implements {Metric}
  * @implements {Sampling}
  */
-export class Histogram extends BaseMetric implements
-    BucketCounting, Counting, Metric, Sampling, Summarizing,
-    SerializableSummarizing, SerializableBucketCounting,
-    SerializableSampling {
+export class Histogram
+  extends BaseMetric
+  implements
+    BucketCounting,
+    Counting,
+    Metric,
+    Sampling,
+    Summarizing,
+    SerializableSummarizing,
+    SerializableBucketCounting,
+    SerializableSampling
+{
   /**
    * The value reservoir used to do sampling.
    *
@@ -71,7 +79,7 @@ export class Histogram extends BaseMetric implements
    * @param {string} [description] an optional metric description
    * @memberof Histogram
    */
-  public constructor (reservoir: Reservoir, name?: string, description?: string, buckets: Buckets = new Buckets()) {
+  public constructor(reservoir: Reservoir, name?: string, description?: string, buckets: Buckets = new Buckets()) {
     super()
     this.reservoir = reservoir
     this.name = name
@@ -88,7 +96,7 @@ export class Histogram extends BaseMetric implements
    * @returns {number[]}
    * @memberof Histogram
    */
-  public get buckets (): number[] {
+  public get buckets(): number[] {
     return this.bucketsInternal.boundaries
   }
 
@@ -98,7 +106,7 @@ export class Histogram extends BaseMetric implements
    * @returns {BucketToCountMap}
    * @memberof Histogram
    */
-  public get counts (): BucketToCountMap {
+  public get counts(): BucketToCountMap {
     const counts: BucketToCountMap = {}
     for (const [bucket, count] of this.bucketCounts) {
       counts[bucket] = count
@@ -113,7 +121,7 @@ export class Histogram extends BaseMetric implements
    * @type {string}
    * @memberof Histogram
    */
-  public get sum (): string {
+  public get sum(): string {
     return this.sumInternal.toString()
   }
 
@@ -124,7 +132,7 @@ export class Histogram extends BaseMetric implements
    * @type {SerializedSnapshot}
    * @memberof Histogram
    */
-  public get snapshot (): SerializedSnapshot {
+  public get snapshot(): SerializedSnapshot {
     return {
       values: this.reservoir.snapshot().getValues()
     }
@@ -149,7 +157,7 @@ export class Histogram extends BaseMetric implements
    * @returns {this}
    * @memberof Histogram
    */
-  public update (value: number): this {
+  public update(value: number): this {
     this.count++
     this.sumInternal.add(value)
     for (const boundary of this.bucketsInternal.boundaries) {
@@ -167,7 +175,7 @@ export class Histogram extends BaseMetric implements
    * @returns {Snapshot}
    * @memberof Histogram
    */
-  public getSnapshot (): Snapshot {
+  public getSnapshot(): Snapshot {
     return this.reservoir.snapshot()
   }
 
@@ -177,7 +185,7 @@ export class Histogram extends BaseMetric implements
    * @returns {number}
    * @memberof Histogram
    */
-  public getCount (): number {
+  public getCount(): number {
     return this.count
   }
 
@@ -187,7 +195,7 @@ export class Histogram extends BaseMetric implements
    * @returns {Int64Wrapper}
    * @memberof Histogram
    */
-  public getSum (): Int64Wrapper {
+  public getSum(): Int64Wrapper {
     return this.sumInternal
   }
 
@@ -197,7 +205,7 @@ export class Histogram extends BaseMetric implements
    * @returns {Buckets}
    * @memberof Histogram
    */
-  public getBuckets (): Buckets {
+  public getBuckets(): Buckets {
     return this.bucketsInternal
   }
 
@@ -207,7 +215,7 @@ export class Histogram extends BaseMetric implements
    * @returns {Map<number, number>}
    * @memberof Histogram
    */
-  public getCounts (): Map<number, number> {
+  public getCounts(): Map<number, number> {
     return this.bucketCounts
   }
 
@@ -218,7 +226,7 @@ export class Histogram extends BaseMetric implements
    * @returns {*}
    * @memberof Histogram
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.counts = {}
     for (const [key, value] of this.bucketCounts) {

@@ -1,7 +1,7 @@
 /**
  * native Int64 lib.
  */
-const Int64 = require("node-cint64").Int64;
+const Int64 = require('node-cint64').Int64
 
 /**
  * Wrapper class for a native int64_t value.
@@ -10,7 +10,6 @@ const Int64 = require("node-cint64").Int64;
  * @class Int64Wrapper
  */
 export class Int64Wrapper {
-
   /**
    * int64_t value instance.
    *
@@ -18,7 +17,7 @@ export class Int64Wrapper {
    * @type {*}
    * @memberof Int64Wrapper
    */
-  private num: any;
+  private num: any
 
   /**
    * Creates an instance of Int64Wrapper.
@@ -27,7 +26,7 @@ export class Int64Wrapper {
    * @memberof Int64Wrapper
    */
   public constructor(initial: number = 0) {
-    this.num = new Int64(initial);
+    this.num = new Int64(initial)
   }
 
   /**
@@ -38,8 +37,8 @@ export class Int64Wrapper {
    * @memberof Int64Wrapper
    */
   public add(value: number): this {
-    this.num = this.num.add(value);
-    return this;
+    this.num = this.num.add(value)
+    return this
   }
 
   /**
@@ -49,7 +48,7 @@ export class Int64Wrapper {
    * @memberof Int64Wrapper
    */
   public toNumber(): number {
-    return this.num.toNumber();
+    return this.num.toNumber()
   }
 
   /**
@@ -59,7 +58,6 @@ export class Int64Wrapper {
    * @memberof Int64Wrapper
    */
   public toString(): string {
-    return this.num.toString();
+    return this.num.toString()
   }
-
 }

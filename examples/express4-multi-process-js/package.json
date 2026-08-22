@@ -25,6 +25,6 @@
   "scripts": {
     "build": "npm run lint",
     "deps": "npm-check --no-spinner --no-emoji --no-color",
-    "lint": "biome lint src"
+    "lint": "biome check src"
   }
 }

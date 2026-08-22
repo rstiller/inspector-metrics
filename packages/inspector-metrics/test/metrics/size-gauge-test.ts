@@ -11,7 +11,7 @@ const expect = chai.expect
 @suite
 export class SizeGaugeTest {
   @test
-  public 'check length attribute' (): void {
+  public 'check length attribute'(): void {
     const arr: string[] = []
     const gauge: SizeGauge = new SizeGauge('length-attribute', arr)
     expect(gauge.getValue()).to.equal(0)
@@ -22,7 +22,7 @@ export class SizeGaugeTest {
   }
 
   @test
-  public 'check length method' (): void {
+  public 'check length method'(): void {
     const arr: string[] = []
     const gauge: SizeGauge = new SizeGauge('length-method', {
       size: () => arr.length
@@ -35,7 +35,7 @@ export class SizeGaugeTest {
   }
 
   @test
-  public 'check size attribute' (): void {
+  public 'check size attribute'(): void {
     const map = new Map()
     const gauge: SizeGauge = new SizeGauge('size-attribute', map)
     expect(gauge.getValue()).to.equal(0)
@@ -46,7 +46,7 @@ export class SizeGaugeTest {
   }
 
   @test
-  public 'check size method' (): void {
+  public 'check size method'(): void {
     const map = new Map()
     const gauge: SizeGauge = new SizeGauge('size-method', {
       size: () => map.size

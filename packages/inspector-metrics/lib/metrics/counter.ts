@@ -30,7 +30,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @param {string} [description] optional description of the counter
    * @memberof MonotoneCounter
    */
-  public constructor (name?: string, description?: string) {
+  public constructor(name?: string, description?: string) {
     super()
     this.name = name
     this.description = description
@@ -43,7 +43,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @returns {this}
    * @memberof MonotoneCounter
    */
-  public increment (value: number = 1): this {
+  public increment(value: number = 1): this {
     if (value < 0) {
       throw new Error('MonotoneCounter must not be increased by a negative value')
     }
@@ -57,7 +57,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @returns {number}
    * @memberof MonotoneCounter
    */
-  public getCount (): number {
+  public getCount(): number {
     return this.count
   }
 
@@ -67,7 +67,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @returns {this}
    * @memberof MonotoneCounter
    */
-  public reset (): this {
+  public reset(): this {
     this.count = 0
     return this
   }
@@ -78,7 +78,7 @@ export class MonotoneCounter extends BaseMetric implements Counting, Metric {
    * @returns {*}
    * @memberof MonotoneCounter
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.count = this.count
     return json
@@ -103,7 +103,7 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
    * @param {string} [description] optional description of the counter
    * @memberof Counter
    */
-  public constructor (name?: string, description?: string) {
+  public constructor(name?: string, description?: string) {
     super(name, description)
   }
 
@@ -114,7 +114,7 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
    * @returns {this}
    * @memberof MonotoneCounter
    */
-  public increment (value: number = 1): this {
+  public increment(value: number = 1): this {
     this.count += value
     return this
   }
@@ -126,7 +126,7 @@ export class Counter extends MonotoneCounter implements Counting, Metric {
    * @returns {this}
    * @memberof Counter
    */
-  public decrement (value: number = 1): this {
+  public decrement(value: number = 1): this {
     this.count -= value
     return this
   }

@@ -1,13 +1,6 @@
 import 'source-map-support/register'
 
-import {
-  BaseMetric,
-  Metric,
-  MetricSet,
-  MonotoneCounter,
-  Scheduler,
-  SimpleGauge
-} from 'inspector-metrics'
+import { BaseMetric, Metric, MetricSet, MonotoneCounter, Scheduler, SimpleGauge } from 'inspector-metrics'
 
 /**
  * Metric set with values related to the nodejs process.
@@ -25,7 +18,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {Metric[]}
    * @memberof V8ProcessMetrics
    */
-  private readonly metrics: Metric[] = [];
+  private readonly metrics: Metric[] = []
   /**
    * Tracks the active handle count.
    *
@@ -33,7 +26,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8ProcessMetrics
    */
-  private readonly activeHandles: SimpleGauge;
+  private readonly activeHandles: SimpleGauge
   /**
    * Tracks the active request count.
    *
@@ -41,7 +34,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8ProcessMetrics
    */
-  private readonly activeRequests: SimpleGauge;
+  private readonly activeRequests: SimpleGauge
   /**
    * Tracks the cpu system usage.
    *
@@ -49,7 +42,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {MonotoneCounter}
    * @memberof V8ProcessMetrics
    */
-  private readonly cpuSystemUsage: MonotoneCounter;
+  private readonly cpuSystemUsage: MonotoneCounter
   /**
    * Tracks the cpu total usage.
    *
@@ -57,7 +50,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {MonotoneCounter}
    * @memberof V8ProcessMetrics
    */
-  private readonly cpuTotalUsage: MonotoneCounter;
+  private readonly cpuTotalUsage: MonotoneCounter
   /**
    * Tracks the cpu user usage.
    *
@@ -65,7 +58,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {MonotoneCounter}
    * @memberof V8ProcessMetrics
    */
-  private readonly cpuUserUsage: MonotoneCounter;
+  private readonly cpuUserUsage: MonotoneCounter
   /**
    * The timer reference from the scheduler.
    *
@@ -73,7 +66,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {NodeJS.Timer}
    * @memberof V8ProcessMetrics
    */
-  private readonly timer: NodeJS.Timer;
+  private readonly timer: NodeJS.Timer
   /**
    * Last cpu usage object.
    *
@@ -81,7 +74,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @type {NodeJS.CpuUsage}
    * @memberof V8ProcessMetrics
    */
-  private lastUsage: NodeJS.CpuUsage;
+  private lastUsage: NodeJS.CpuUsage
 
   /**
    * Creates an instance of V8ProcessMetrics.
@@ -90,7 +83,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @param {Scheduler} [scheduler=setInterval]
    * @memberof V8ProcessMetrics
    */
-  public constructor (name: string, scheduler: Scheduler = setInterval) {
+  public constructor(name: string, scheduler: Scheduler = setInterval) {
     super()
     this.name = name
 
@@ -120,7 +113,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    *
    * @memberof V8ProcessMetrics
    */
-  public stop (): void {
+  public stop(): void {
     if (this.timer) {
       this.timer.unref()
     }
@@ -132,7 +125,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @returns {Map<string, Metric>}
    * @memberof V8ProcessMetrics
    */
-  public getMetrics (): Map<string, Metric> {
+  public getMetrics(): Map<string, Metric> {
     const map: Map<string, Metric> = new Map()
     this.metrics.forEach((metric) => map.set(metric.getName(), metric))
     return map
@@ -144,7 +137,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @returns {Metric[]}
    * @memberof V8ProcessMetrics
    */
-  public getMetricList (): Metric[] {
+  public getMetricList(): Metric[] {
     return this.metrics
   }
 
@@ -155,7 +148,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8ProcessMetrics
    */
-  public setGroup (group: string): this {
+  public setGroup(group: string): this {
     this.group = group
 
     this.activeHandles.setGroup(group)
@@ -175,7 +168,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8ProcessMetrics
    */
-  public setTag (name: string, value: string): this {
+  public setTag(name: string, value: string): this {
     this.tagMap.set(name, value)
 
     this.activeHandles.setTag(name, value)
@@ -194,7 +187,7 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8ProcessMetrics
    */
-  public removeTag (name: string): this {
+  public removeTag(name: string): this {
     this.tagMap.delete(name)
 
     this.activeHandles.removeTag(name)
@@ -206,27 +199,27 @@ export class V8ProcessMetrics extends BaseMetric implements MetricSet {
     return this
   }
 
-  private update (): void {
+  private update(): void {
     this.updateActiveHandles()
     this.updateActiveRequests()
     this.updateCpuUsage()
   }
 
-  private updateActiveHandles (): void {
+  private updateActiveHandles(): void {
     const p = process as any
     if (typeof p._getActiveHandles === 'function') {
       this.activeHandles.setValue(p._getActiveHandles().length)
     }
   }
 
-  private updateActiveRequests (): void {
+  private updateActiveRequests(): void {
     const p = process as any
     if (typeof p._getActiveRequests === 'function') {
       this.activeRequests.setValue(p._getActiveRequests().length)
     }
   }
 
-  private updateCpuUsage (): void {
+  private updateCpuUsage(): void {
     const cpuUsage = process.cpuUsage()
 
     if (this.lastUsage) {

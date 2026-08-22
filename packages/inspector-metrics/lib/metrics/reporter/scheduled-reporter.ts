@@ -1,13 +1,13 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { MILLISECOND, TimeUnit } from "../model/time-unit";
-import { MetricReporter } from "./metric-reporter";
-import { MetricReporterOptions } from "./metric-reporter-options";
+import { MILLISECOND, TimeUnit } from '../model/time-unit'
+import { MetricReporter } from './metric-reporter'
+import { MetricReporterOptions } from './metric-reporter-options'
 
 /**
  * Scheduler function type definition.
  */
-export type Scheduler = (prog: () => Promise<any>, interval: number) => NodeJS.Timer;
+export type Scheduler = (prog: () => Promise<any>, interval: number) => NodeJS.Timer
 
 /**
  * Options for the {@link ScheduledMetricReporter}.
@@ -23,21 +23,21 @@ export interface ScheduledMetricReporterOptions extends MetricReporterOptions {
    * @type {number}
    * @memberof ScheduledMetricReporterOptions
    */
-  readonly reportInterval?: number;
+  readonly reportInterval?: number
   /**
    * Time unit for the reporting interval.
    *
    * @type {TimeUnit}
    * @memberof ScheduledMetricReporterOptions
    */
-  readonly unit?: TimeUnit;
+  readonly unit?: TimeUnit
   /**
    * The scheduler function used to trigger reporting runs.
    *
    * @type {Scheduler}
    * @memberof ScheduledMetricReporterOptions
    */
-  readonly scheduler?: Scheduler;
+  readonly scheduler?: Scheduler
 }
 
 /**
@@ -47,9 +47,10 @@ export interface ScheduledMetricReporterOptions extends MetricReporterOptions {
  * @abstract
  * @class ScheduledMetricReporter
  */
-export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterOptions, T>
-  extends MetricReporter<O, T> {
-
+export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterOptions, T> extends MetricReporter<
+  O,
+  T
+> {
   /**
    * Timer instance returned by the scheduler function.
    *
@@ -57,7 +58,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
    * @type {NodeJS.Timer}
    * @memberof ScheduledMetricReporter
    */
-  private timer: NodeJS.Timer;
+  private timer: NodeJS.Timer
 
   /**
    * Creates an instance of ScheduledMetricReporter.
@@ -67,7 +68,7 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
    * @memberof ScheduledMetricReporter
    */
   public constructor(options: O, reporterType?: string) {
-    super(options, reporterType);
+    super(options, reporterType)
   }
 
   /**
@@ -78,9 +79,9 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
    * @memberof ScheduledMetricReporter
    */
   public async start(): Promise<this> {
-    const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND);
-    this.timer = this.options.scheduler(async () => this.report(), interval);
-    return this;
+    const interval: number = this.options.unit.convertTo(this.options.reportInterval, MILLISECOND)
+    this.timer = this.options.scheduler(async () => this.report(), interval)
+    return this
   }
 
   /**
@@ -91,8 +92,8 @@ export abstract class ScheduledMetricReporter<O extends ScheduledMetricReporterO
    */
   public async stop(): Promise<this> {
     if (this.timer) {
-        this.timer.unref();
+      this.timer.unref()
     }
-    return this;
+    return this
   }
 }

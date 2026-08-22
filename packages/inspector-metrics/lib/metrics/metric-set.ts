@@ -10,7 +10,6 @@ import { Metric } from './model/metric'
  * @extends {Metric}
  */
 export interface MetricSet extends Metric {
-
   /**
    * Gets a mapping from names to metric instances.
    *

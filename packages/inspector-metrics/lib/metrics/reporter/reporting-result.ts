@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { Metric, SerializableMetric } from "../model/metric";
+import { Metric, SerializableMetric } from '../model/metric'
 
 /**
  * Helper interface for reporting results.
@@ -12,12 +12,12 @@ export interface ReportingResult<M extends Metric | SerializableMetric, T> {
    * @type {M}
    * @memberof ReportingResult
    */
-  readonly metric: M;
+  readonly metric: M
   /**
    * The reporting result - implementation specific.
    *
    * @type {T}
    * @memberof ReportingResult
    */
-  readonly result: T;
+  readonly result: T
 }

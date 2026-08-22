@@ -33,22 +33,22 @@ import * as moment from 'moment-timezone'
 /**
  * Lists all possible column types.
  */
-export type ColumnType = 'date' | 'name' | 'field' | 'group' | 'description' | 'value' | 'tags' | 'type' | 'metadata';
+export type ColumnType = 'date' | 'name' | 'field' | 'group' | 'description' | 'value' | 'tags' | 'type' | 'metadata'
 
 /**
  * Shortcut type for a row.
  */
-export type Row = string[];
+export type Row = string[]
 
 /**
  * Shortcut type for many rows.
  */
-export type Rows = Row[];
+export type Rows = Row[]
 
 /**
  * Type for a tag or metadata filter.
  */
-export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>;
+export type Filter = (metric: Metric, key: string, value: string) => Promise<boolean>
 
 /**
  * Helper interface for Fields.
@@ -67,7 +67,7 @@ interface Fields {
  */
 export enum ExportMode {
   ALL_IN_ONE_COLUMN,
-  EACH_IN_OWN_COLUMN,
+  EACH_IN_OWN_COLUMN
 }
 
 /**
@@ -77,7 +77,6 @@ export enum ExportMode {
  * @interface CsvFileWriter
  */
 export interface CsvFileWriter {
-
   /**
    * Called on every metrics-report run one time - behavior is implementation specific.
    *
@@ -213,7 +212,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @type {Row}
    * @memberof CsvMetricReporter
    */
-  private header: Row;
+  private header: Row
   /**
    * All metadata names
    *
@@ -221,7 +220,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @type {string[]}
    * @memberof CsvMetricReporter
    */
-  private readonly metadataNames: string[] = [];
+  private readonly metadataNames: string[] = []
   /**
    * All tags names.
    *
@@ -229,7 +228,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @type {string[]}
    * @memberof CsvMetricReporter
    */
-  private readonly tagsNames: string[] = [];
+  private readonly tagsNames: string[] = []
 
   /**
    * Creates an instance of CsvMetricReporter.
@@ -237,51 +236,56 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @param {string} [reporterType] the type of the reporter implementation - for internal use
    * @memberof CsvMetricReporter
    */
-  public constructor ({
-    writer,
-    useSingleQuotes = false,
-    tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
-    metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
-    tagColumnPrefix = 'tag_',
-    tagDelimiter = ';',
-    metadataColumnPrefix = 'meta_',
-    metadataDelimiter = ';',
-    columns = [],
-    dateFormat = 'YYYYMMDDHHmmss.SSSZ',
-    timezone = 'UTC',
-    tagFilter = async () => true,
-    metadataFilter = async () => true,
-    reportInterval = 1000,
-    unit = MILLISECOND,
-    clock = new StdClock(),
-    scheduler = setInterval,
-    minReportingTimeout = 1,
-    tags = new Map(),
-    clusterOptions = new DefaultClusterOptions()
-  }: CsvMetricReporterOptions,
-  reporterType?: string) {
-    super({
-      clock,
-      clusterOptions,
-      columns,
-      dateFormat,
-      metadataColumnPrefix,
-      metadataDelimiter,
-      metadataExportMode,
-      metadataFilter,
-      minReportingTimeout,
-      reportInterval,
-      scheduler,
-      tagColumnPrefix,
-      tagDelimiter,
-      tagExportMode,
-      tagFilter,
-      tags,
-      timezone,
-      unit,
-      useSingleQuotes,
-      writer
-    }, reporterType)
+  public constructor(
+    {
+      writer,
+      useSingleQuotes = false,
+      tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+      metadataExportMode = ExportMode.ALL_IN_ONE_COLUMN,
+      tagColumnPrefix = 'tag_',
+      tagDelimiter = ';',
+      metadataColumnPrefix = 'meta_',
+      metadataDelimiter = ';',
+      columns = [],
+      dateFormat = 'YYYYMMDDHHmmss.SSSZ',
+      timezone = 'UTC',
+      tagFilter = async () => true,
+      metadataFilter = async () => true,
+      reportInterval = 1000,
+      unit = MILLISECOND,
+      clock = new StdClock(),
+      scheduler = setInterval,
+      minReportingTimeout = 1,
+      tags = new Map(),
+      clusterOptions = new DefaultClusterOptions()
+    }: CsvMetricReporterOptions,
+    reporterType?: string
+  ) {
+    super(
+      {
+        clock,
+        clusterOptions,
+        columns,
+        dateFormat,
+        metadataColumnPrefix,
+        metadataDelimiter,
+        metadataExportMode,
+        metadataFilter,
+        minReportingTimeout,
+        reportInterval,
+        scheduler,
+        tagColumnPrefix,
+        tagDelimiter,
+        tagExportMode,
+        tagFilter,
+        tags,
+        timezone,
+        unit,
+        useSingleQuotes,
+        writer
+      },
+      reporterType
+    )
   }
 
   /**
@@ -293,7 +297,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Promise<this>}
    * @memberof CsvMetricReporter
    */
-  public async start (): Promise<this> {
+  public async start(): Promise<this> {
     if (this.metricRegistries && this.metricRegistries.length > 0) {
       // rebuild header on every call to start
       this.header = await this.buildHeaders()
@@ -327,18 +331,22 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     })
 
     if (result) {
-      if (this.options.clusterOptions &&
+      if (
+        this.options.clusterOptions &&
         this.options.clusterOptions.enabled &&
-        this.options.clusterOptions.sendMetricsToMaster) {
+        this.options.clusterOptions.sendMetricsToMaster
+      ) {
         const message: InterprocessReportMessage<Fields> = {
           ctx: {},
           date: event.getTime(),
           metrics: {
             counters: [],
-            gauges: [{
-              metric: event,
-              result
-            }],
+            gauges: [
+              {
+                metric: event,
+                result
+              }
+            ],
             histograms: [],
             meters: [],
             monotoneCounters: [],
@@ -351,10 +359,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
         await this.options.clusterOptions.sendToMaster(message)
       } else {
         await this.options.writer.init(this.header)
-        await this.handleResults(null, null, event.getTime(), 'gauge', [{
-          metric: event,
-          result
-        }])
+        await this.handleResults(null, null, event.getTime(), 'gauge', [
+          {
+            metric: event,
+            result
+          }
+        ])
       }
     }
     return event
@@ -366,8 +376,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Promise<void>}
    * @memberof CsvMetricReporter
    */
-  public async flushEvents (): Promise<void> {
-  }
+  public async flushEvents(): Promise<void> {}
 
   /**
    * Indicates if the init method of the writer instance should be called.
@@ -376,10 +385,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {boolean}
    * @memberof CsvMetricReporter
    */
-  protected shouldCallInit (): boolean {
-    return !this.options.clusterOptions ||
+  protected shouldCallInit(): boolean {
+    return (
+      !this.options.clusterOptions ||
       !this.options.clusterOptions.enabled ||
       (this.options.clusterOptions.enabled && !this.options.clusterOptions.sendMetricsToMaster)
+    )
   }
 
   /**
@@ -392,7 +403,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @param {*} handle
    * @memberof CsvMetricReporter
    */
-  protected async handleReportMessage (worker: cluster.Worker, message: any, handle: any): Promise<void> {
+  protected async handleReportMessage(worker: cluster.Worker, message: any, handle: any): Promise<void> {
     if (this.canHandleMessage(message)) {
       if (!this.header) {
         this.header = await this.buildHeaders()
@@ -410,7 +421,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @protected
    * @memberof CsvMetricReporter
    */
-  protected async beforeReport (ctx: OverallReportContext): Promise<void> {
+  protected async beforeReport(ctx: OverallReportContext): Promise<void> {
     if (this.shouldCallInit()) {
       await this.options.writer.init(this.header)
     }
@@ -426,12 +437,13 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @param {Array<ReportingResult<any, Fields>>} results
    * @memberof CsvMetricReporter
    */
-  protected async handleResults (
+  protected async handleResults(
     ctx: OverallReportContext,
     registry: MetricRegistry | null,
     date: Date,
     type: MetricType,
-    results: Array<ReportingResult<any, Fields>>): Promise<void> {
+    results: Array<ReportingResult<any, Fields>>
+  ): Promise<void> {
     const dateStr = moment.tz(date, this.options.timezone).format(this.options.dateFormat)
     for (const result of results) {
       const fields = result.result
@@ -458,8 +470,10 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Fields}
    * @memberof CsvMetricReporter
    */
-  protected reportCounter (
-    counter: MonotoneCounter | Counter, ctx: MetricSetReportContext<MonotoneCounter | Counter>): Fields {
+  protected reportCounter(
+    counter: MonotoneCounter | Counter,
+    ctx: MetricSetReportContext<MonotoneCounter | Counter>
+  ): Fields {
     return {
       count: `${counter.getCount()}`
     }
@@ -474,7 +488,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Fields}
    * @memberof CsvMetricReporter
    */
-  protected reportGauge (gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): Fields {
+  protected reportGauge(gauge: Gauge<any>, ctx: MetricSetReportContext<Gauge<any>>): Fields {
     return {
       value: `${gauge.getValue()}`
     }
@@ -489,14 +503,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Fields}
    * @memberof CsvMetricReporter
    */
-  protected reportHistogram (histogram: Histogram, ctx: MetricSetReportContext<Histogram>): Fields {
+  protected reportHistogram(histogram: Histogram, ctx: MetricSetReportContext<Histogram>): Fields {
     const snapshot = histogram.getSnapshot()
     const bucketFields: Fields = {}
-    histogram
-      .getCounts()
-      .forEach((value, bucket): void => {
-        bucketFields[`bucket_${bucket}`] = `${value}`
-      })
+    histogram.getCounts().forEach((value, bucket): void => {
+      bucketFields[`bucket_${bucket}`] = `${value}`
+    })
     bucketFields.bucket_inf = `${this.getNumber(histogram.getCount())}`
     return {
       ...bucketFields,
@@ -524,7 +536,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Fields}
    * @memberof CsvMetricReporter
    */
-  protected reportMeter (meter: Meter, ctx: MetricSetReportContext<Meter>): Fields {
+  protected reportMeter(meter: Meter, ctx: MetricSetReportContext<Meter>): Fields {
     return {
       count: `${this.getNumber(meter.getCount())}`,
       m15_rate: `${this.getNumber(meter.get15MinuteRate())}`,
@@ -543,14 +555,12 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Fields}
    * @memberof CsvMetricReporter
    */
-  protected reportTimer (timer: Timer, ctx: MetricSetReportContext<Timer>): Fields {
+  protected reportTimer(timer: Timer, ctx: MetricSetReportContext<Timer>): Fields {
     const snapshot = timer.getSnapshot()
     const bucketFields: Fields = {}
-    timer
-      .getCounts()
-      .forEach((value, bucket): void => {
-        bucketFields[`bucket_${bucket}`] = `${value}`
-      })
+    timer.getCounts().forEach((value, bucket): void => {
+      bucketFields[`bucket_${bucket}`] = `${value}`
+    })
     bucketFields.bucket_inf = `${this.getNumber(timer.getCount())}`
     return {
       ...bucketFields,
@@ -580,7 +590,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Promise<Row>}
    * @memberof CsvMetricReporter
    */
-  private async buildHeaders (): Promise<Row> {
+  private async buildHeaders(): Promise<Row> {
     const headers: Row = []
 
     for (const columnType of this.options.columns) {
@@ -615,15 +625,17 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Promise<Set<string>>}
    * @memberof CsvMetricReporter
    */
-  private async filterKeys (keys: Set<string>, filter: Filter): Promise<Set<string>> {
+  private async filterKeys(keys: Set<string>, filter: Filter): Promise<Set<string>> {
     const filteredKeys = new Set<string>()
     const tasks: Array<Promise<any>> = []
     keys.forEach((key) => {
-      tasks.push((async () => {
-        if (!filter || await filter(null, key, null)) {
-          filteredKeys.add(key)
-        }
-      })())
+      tasks.push(
+        (async () => {
+          if (!filter || (await filter(null, key, null))) {
+            filteredKeys.add(key)
+          }
+        })()
+      )
     })
     await Promise.all(tasks)
     return filteredKeys
@@ -636,7 +648,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Set<string>}
    * @memberof CsvMetricReporter
    */
-  private getAllMetadataKeys (): Set<string> {
+  private getAllMetadataKeys(): Set<string> {
     const metadataNames = new Set<string>()
     this.metricRegistries
       .map((registry) => registry.getMetricList())
@@ -658,7 +670,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
    * @returns {Set<string>}
    * @memberof CsvMetricReporter
    */
-  private getAllTagKeys (): Set<string> {
+  private getAllTagKeys(): Set<string> {
     const tags = new Set<string>()
     this.options.tags.forEach((value, tag) => tags.add(tag))
     this.metricRegistries
@@ -695,7 +707,8 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     metric: T,
     type: MetricType,
     field: string,
-    value: string): Row {
+    value: string
+  ): Row {
     const quote = this.options.useSingleQuotes ? "'" : '"'
     const row: Row = []
     const tags = this.buildTags(registry, metric)

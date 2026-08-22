@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { SimpleSnapshot, Snapshot } from "./snapshot";
+import { SimpleSnapshot, Snapshot } from './snapshot'
 
 /**
  * Represents a collection of values.
@@ -9,14 +9,13 @@ import { SimpleSnapshot, Snapshot } from "./snapshot";
  * @interface Reservoir
  */
 export interface Reservoir {
-
   /**
    * Gets the capacity of this reservoir.
    *
    * @returns {number}
    * @memberof Reservoir
    */
-  size(): number;
+  size(): number
 
   /**
    * Adds a value to the reservoir.
@@ -25,7 +24,7 @@ export interface Reservoir {
    * @returns {this}
    * @memberof Reservoir
    */
-  update(value: number): this;
+  update(value: number): this
 
   /**
    * Creates a new snapshot of this reservoir.
@@ -33,8 +32,7 @@ export interface Reservoir {
    * @returns {Snapshot}
    * @memberof Reservoir
    */
-  snapshot(): Snapshot;
-
+  snapshot(): Snapshot
 }
 
 /**
@@ -47,7 +45,6 @@ export interface Reservoir {
  * @implements {Reservoir}
  */
 export class DefaultReservoir implements Reservoir {
-
   /**
    * The values.
    *
@@ -55,7 +52,7 @@ export class DefaultReservoir implements Reservoir {
    * @type {number[]}
    * @memberof DefaultReservoir
    */
-  private values: number[] = [];
+  private values: number[] = []
   /**
    * The capacity of this reservoir.
    *
@@ -63,7 +60,7 @@ export class DefaultReservoir implements Reservoir {
    * @type {number}
    * @memberof DefaultReservoir
    */
-  private maxSize: number;
+  private maxSize: number
 
   /**
    * Creates an instance of DefaultReservoir.
@@ -72,7 +69,7 @@ export class DefaultReservoir implements Reservoir {
    * @memberof DefaultReservoir
    */
   public constructor(maxSize: number) {
-    this.maxSize = maxSize;
+    this.maxSize = maxSize
   }
 
   /**
@@ -82,7 +79,7 @@ export class DefaultReservoir implements Reservoir {
    * @memberof DefaultReservoir
    */
   public size(): number {
-    return this.values.length;
+    return this.values.length
   }
 
   /**
@@ -96,12 +93,12 @@ export class DefaultReservoir implements Reservoir {
    */
   public update(value: number): this {
     if (this.values.length < this.maxSize) {
-      this.values.push(value);
+      this.values.push(value)
     } else {
-      const randomIndex: number = Math.round(Math.random() * this.values.length);
-      this.values[randomIndex % this.values.length] = value;
+      const randomIndex: number = Math.round(Math.random() * this.values.length)
+      this.values[randomIndex % this.values.length] = value
     }
-    return this;
+    return this
   }
 
   /**
@@ -111,9 +108,8 @@ export class DefaultReservoir implements Reservoir {
    * @memberof DefaultReservoir
    */
   public snapshot(): Snapshot {
-    return new SimpleSnapshot(this.values);
+    return new SimpleSnapshot(this.values)
   }
-
 }
 
 /**
@@ -125,7 +121,6 @@ export class DefaultReservoir implements Reservoir {
  * @implements {Reservoir}
  */
 export class SlidingWindowReservoir implements Reservoir {
-
   /**
    * The values.
    *
@@ -133,7 +128,7 @@ export class SlidingWindowReservoir implements Reservoir {
    * @type {number[]}
    * @memberof SlidingWindowReservoir
    */
-  private values: number[] = [];
+  private values: number[] = []
   /**
    * The capacity of the reservoir.
    *
@@ -141,7 +136,7 @@ export class SlidingWindowReservoir implements Reservoir {
    * @type {number}
    * @memberof SlidingWindowReservoir
    */
-  private maxSize: number;
+  private maxSize: number
   /**
    * The current index in the value array.
    *
@@ -149,7 +144,7 @@ export class SlidingWindowReservoir implements Reservoir {
    * @type {number}
    * @memberof SlidingWindowReservoir
    */
-  private index: number = 0;
+  private index: number = 0
 
   /**
    * Creates an instance of SlidingWindowReservoir.
@@ -158,7 +153,7 @@ export class SlidingWindowReservoir implements Reservoir {
    * @memberof SlidingWindowReservoir
    */
   public constructor(maxSize: number) {
-    this.maxSize = maxSize;
+    this.maxSize = maxSize
   }
 
   /**
@@ -168,7 +163,7 @@ export class SlidingWindowReservoir implements Reservoir {
    * @memberof SlidingWindowReservoir
    */
   public size(): number {
-    return this.values.length;
+    return this.values.length
   }
 
   /**
@@ -182,11 +177,11 @@ export class SlidingWindowReservoir implements Reservoir {
    */
   public update(value: number): this {
     if (this.values.length < this.maxSize) {
-      this.values.push(value);
+      this.values.push(value)
     } else {
-      this.values[this.index++ % this.values.length] = value;
+      this.values[this.index++ % this.values.length] = value
     }
-    return this;
+    return this
   }
 
   /**
@@ -196,7 +191,6 @@ export class SlidingWindowReservoir implements Reservoir {
    * @memberof SlidingWindowReservoir
    */
   public snapshot(): Snapshot {
-    return new SimpleSnapshot(this.values);
+    return new SimpleSnapshot(this.values)
   }
-
 }

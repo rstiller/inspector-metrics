@@ -1,9 +1,7 @@
 import 'source-map-support'
 
 import * as cluster from 'cluster'
-import {
-  Worker
-} from 'cluster'
+import { Worker } from 'cluster'
 
 import { ReportMessageReceiver } from 'inspector-metrics'
 import { PrometheusClusterOptions } from './PrometheusClusterOptions'
@@ -24,35 +22,33 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    * @type {number}
    * @memberof DefaultPrometheusClusterOptions
    */
-  public readonly workerResponseTimeout: number = 500;
+  public readonly workerResponseTimeout: number = 500
   /**
    * Set to true.
    *
    * @type {boolean}
    * @memberof DefaultClusterOptions
    */
-  public readonly enabled: boolean = true;
+  public readonly enabled: boolean = true
   /**
    * Set to cluster module.
    *
    * @type {ReportMessageReceiver}
    * @memberof DefaultClusterOptions
    */
-  public readonly eventReceiver: ReportMessageReceiver;
+  public readonly eventReceiver: ReportMessageReceiver
   /**
    * True for forked processes.
    *
    * @type {boolean}
    * @memberof DefaultClusterOptions
    */
-  public readonly sendMetricsToMaster: boolean = defaultCluster.isWorker;
+  public readonly sendMetricsToMaster: boolean = defaultCluster.isWorker
 
-  public constructor () {
+  public constructor() {
     if (defaultCluster.isWorker) {
       this.eventReceiver = {
-        on: (
-          messageType: any,
-          callback: (worker: Worker, message: any, handle: any) => void) => {
+        on: (messageType: any, callback: (worker: Worker, message: any, handle: any) => void) => {
           process.on(messageType, (message) => callback(null, message, null))
         }
       }
@@ -66,7 +62,7 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    *
    * @memberof DefaultClusterOptions
    */
-  public async sendToWorker (worker: Worker, message: any): Promise<any> {
+  public async sendToWorker(worker: Worker, message: any): Promise<any> {
     if (worker) {
       worker.send(message)
     }
@@ -77,7 +73,7 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    *
    * @memberof DefaultClusterOptions
    */
-  public async getWorkers (): Promise<Worker[]> {
+  public async getWorkers(): Promise<Worker[]> {
     const workers: Worker[] = []
     if (workers) {
       for (const key of Object.keys(workers)) {
@@ -92,7 +88,7 @@ export class DefaultPrometheusClusterOptions implements PrometheusClusterOptions
    *
    * @memberof DefaultClusterOptions
    */
-  public async sendToMaster (message: any): Promise<any> {
+  public async sendToMaster(message: any): Promise<any> {
     process.send(message)
   }
 }

@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { NANOSECOND, TimeUnit } from "./time-unit";
+import { NANOSECOND, TimeUnit } from './time-unit'
 
 /**
  * Represents an average value which depends on an alpha factor.
@@ -9,14 +9,13 @@ import { NANOSECOND, TimeUnit } from "./time-unit";
  * @interface MovingAverage
  */
 export interface MovingAverage {
-
   /**
    * Gets the alpha value.
    *
    * @returns {number}
    * @memberof MovingAverage
    */
-  getAlpha(): number;
+  getAlpha(): number
 
   /**
    * Gets the average for the specified time unit -
@@ -26,7 +25,7 @@ export interface MovingAverage {
    * @returns {number}
    * @memberof MovingAverage
    */
-  getAverage(unit: TimeUnit): number;
+  getAverage(unit: TimeUnit): number
 
   /**
    * Adds the given value to the logic of the implementation.
@@ -35,7 +34,7 @@ export interface MovingAverage {
    * @returns {this}
    * @memberof MovingAverage
    */
-  update(value: number): this;
+  update(value: number): this
 
   /**
    * Triggers the actual average to be updated.
@@ -44,7 +43,7 @@ export interface MovingAverage {
    * @returns {this}
    * @memberof MovingAverage
    */
-  tick(): this;
+  tick(): this
 }
 
 /**
@@ -55,13 +54,12 @@ export interface MovingAverage {
  * @implements {MovingAverage}
  */
 export class ExponentiallyWeightedMovingAverage implements MovingAverage {
-
-  public static ALPHA_1_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / 60));
-  public static ALPHA_1_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / 60));
-  public static ALPHA_5_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / (60 * 5)));
-  public static ALPHA_5_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / (60 * 5)));
-  public static ALPHA_15_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / (60 * 15)));
-  public static ALPHA_15_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / (60 * 15)));
+  public static ALPHA_1_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / 60))
+  public static ALPHA_1_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / 60))
+  public static ALPHA_5_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / (60 * 5)))
+  public static ALPHA_5_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / (60 * 5)))
+  public static ALPHA_15_MINUTE_1_SECOND_SAMPLERATE: number = 1 - Math.exp(-(1 / (60 * 15)))
+  public static ALPHA_15_MINUTE_5_SECOND_SAMPLERATE: number = 1 - Math.exp(-(5 / (60 * 15)))
 
   /**
    * Alpha component (weight) of the moving average.
@@ -70,7 +68,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {number}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private alpha: number;
+  private alpha: number
   /**
    * The sampling interval.
    *
@@ -78,7 +76,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {number}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private interval: number;
+  private interval: number
   /**
    * The sum of all values passed to the update function.
    *
@@ -86,7 +84,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {number}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private sum: number = 0;
+  private sum: number = 0
   /**
    * The current average.
    *
@@ -94,7 +92,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {number}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private avg: number = -1.0;
+  private avg: number = -1.0
   /**
    * Multiplier of the time unit specified in the constructor in nanoseconds.
    *
@@ -102,7 +100,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {number}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private timeUnitInNanoseconds: number;
+  private timeUnitInNanoseconds: number
   /**
    * The time unit of the sampling rate.
    *
@@ -110,7 +108,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @type {TimeUnit}
    * @memberof ExponentiallyWeightedMovingAverage
    */
-  private unit: TimeUnit;
+  private unit: TimeUnit
 
   /**
    * Creates an instance of ExponentiallyWeightedMovingAverage.
@@ -121,10 +119,10 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @memberof ExponentiallyWeightedMovingAverage
    */
   public constructor(alpha: number, interval: number, unit: TimeUnit) {
-    this.alpha = alpha;
-    this.interval = interval;
-    this.unit = unit;
-    this.timeUnitInNanoseconds = unit.convertTo(interval, NANOSECOND);
+    this.alpha = alpha
+    this.interval = interval
+    this.unit = unit
+    this.timeUnitInNanoseconds = unit.convertTo(interval, NANOSECOND)
   }
 
   /**
@@ -134,7 +132,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @memberof ExponentiallyWeightedMovingAverage
    */
   public getAlpha(): number {
-    return this.alpha;
+    return this.alpha
   }
 
   /**
@@ -144,7 +142,7 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @memberof ExponentiallyWeightedMovingAverage
    */
   public getUnit(): TimeUnit {
-    return this.unit;
+    return this.unit
   }
 
   /**
@@ -156,9 +154,9 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    */
   public getAverage(unit: TimeUnit): number {
     if (this.avg === -1.0) {
-      return 0;
+      return 0
     }
-    return this.avg * NANOSECOND.convertTo(this.timeUnitInNanoseconds, unit);
+    return this.avg * NANOSECOND.convertTo(this.timeUnitInNanoseconds, unit)
   }
 
   /**
@@ -169,8 +167,8 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @memberof ExponentiallyWeightedMovingAverage
    */
   public update(value: number): this {
-    this.sum += value;
-    return this;
+    this.sum += value
+    return this
   }
 
   /**
@@ -185,15 +183,15 @@ export class ExponentiallyWeightedMovingAverage implements MovingAverage {
    * @memberof ExponentiallyWeightedMovingAverage
    */
   public tick(): this {
-    const sum = this.sum;
-    const avg = sum / this.interval;
-    this.sum -= sum;
+    const sum = this.sum
+    const avg = sum / this.interval
+    this.sum -= sum
 
     if (this.avg === -1.0) {
-      this.avg = avg;
+      this.avg = avg
     } else {
-      this.avg += this.alpha * (avg - this.avg);
+      this.avg += this.alpha * (avg - this.avg)
     }
-    return this;
+    return this
   }
 }

@@ -1,20 +1,15 @@
 import { ClientOptions } from '@elastic/elasticsearch'
 import { ElasticsearchMetricReporter } from 'inspector-elasticsearch'
 import { Event, MetricRegistry } from 'inspector-metrics'
-import {
-  V8EventLoop,
-  V8GCMetrics,
-  V8MemoryMetrics,
-  V8ProcessMetrics
-} from 'inspector-vm'
+import { V8EventLoop, V8GCMetrics, V8MemoryMetrics, V8ProcessMetrics } from 'inspector-vm'
 import { hostname } from 'os'
 
 export class MetricsSupport {
-  public readonly reporter: ElasticsearchMetricReporter;
-  public readonly registry: MetricRegistry;
-  public readonly packageJson: any;
+  public readonly reporter: ElasticsearchMetricReporter
+  public readonly registry: MetricRegistry
+  public readonly packageJson: any
 
-  public constructor () {
+  public constructor() {
     const clientOptions: ClientOptions = {
       node: 'http://localhost:9200'
     }
@@ -30,7 +25,7 @@ export class MetricsSupport {
     this.packageJson = require('../../package.json')
   }
 
-  public async init (): Promise<void> {
+  public async init(): Promise<void> {
     this.registry.registerMetric(new V8GCMetrics('gc', this.registry.getDefaultClock()))
     this.registry.registerMetric(new V8MemoryMetrics('memory'))
     this.registry.registerMetric(new V8EventLoop('eventLoop'))
@@ -48,7 +43,7 @@ export class MetricsSupport {
     await this.reporter.start()
   }
 
-  public async reportEvent (event: Event<any>): Promise<Event<any>> {
+  public async reportEvent(event: Event<any>): Promise<Event<any>> {
     return await this.reporter.reportEvent(event)
   }
 }

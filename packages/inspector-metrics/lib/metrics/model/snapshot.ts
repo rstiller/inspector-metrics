@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * A static state of a collection of values.
@@ -7,14 +7,13 @@ import "source-map-support/register";
  * @interface Snapshot
  */
 export interface Snapshot {
-
   /**
    * Gets the value of 75% boundary.
    *
    * @returns {number}
    * @memberof Snapshot
    */
-  get75thPercentile(): number;
+  get75thPercentile(): number
 
   /**
    * Gets the value of 95% boundary.
@@ -22,7 +21,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  get95thPercentile(): number;
+  get95thPercentile(): number
 
   /**
    * Gets the value of 98% boundary.
@@ -30,7 +29,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  get98thPercentile(): number;
+  get98thPercentile(): number
 
   /**
    * Gets the value of 99.9% boundary.
@@ -38,7 +37,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  get999thPercentile(): number;
+  get999thPercentile(): number
 
   /**
    * Gets the value of 99% boundary.
@@ -46,7 +45,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  get99thPercentile(): number;
+  get99thPercentile(): number
 
   /**
    * Gets the value of 50% boundary.
@@ -54,7 +53,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getMedian(): number;
+  getMedian(): number
 
   /**
    * Gets the maximum value.
@@ -62,7 +61,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getMax(): number;
+  getMax(): number
 
   /**
    * Gets the minimum value.
@@ -70,7 +69,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getMin(): number;
+  getMin(): number
 
   /**
    * Gets all values.
@@ -78,7 +77,7 @@ export interface Snapshot {
    * @returns {number[]}
    * @memberof Snapshot
    */
-  getValues(): number[];
+  getValues(): number[]
 
   /**
    * Gets the number of values.
@@ -86,7 +85,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  size(): number;
+  size(): number
 
   /**
    * Gets the average of all values.
@@ -94,7 +93,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getMean(): number;
+  getMean(): number
 
   /**
    * Gets the average deviation among the values.
@@ -102,7 +101,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getStdDev(): number;
+  getStdDev(): number
 
   /**
    * Gets the value of boundary specified.
@@ -111,8 +110,7 @@ export interface Snapshot {
    * @returns {number}
    * @memberof Snapshot
    */
-  getValue(quantile: number): number;
-
+  getValue(quantile: number): number
 }
 
 /**
@@ -128,7 +126,7 @@ export interface SerializedSnapshot {
    * @type {number[]}
    * @memberof SerializedSnapshot
    */
-  values: number[];
+  values: number[]
 }
 
 /**
@@ -139,7 +137,6 @@ export interface SerializedSnapshot {
  * @implements {Snapshot}
  */
 export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
-
   /**
    * Sorted collection of values.
    *
@@ -147,7 +144,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @type {number[]}
    * @memberof SimpleSnapshot
    */
-  public values: number[] = [];
+  public values: number[] = []
 
   /**
    * Creates an instance of SimpleSnapshot.
@@ -156,8 +153,8 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public constructor(values: number[]) {
-    this.values = values.slice(0, values.length);
-    this.values = this.values.sort((a, b) => a - b);
+    this.values = values.slice(0, values.length)
+    this.values = this.values.sort((a, b) => a - b)
   }
 
   /**
@@ -167,7 +164,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public get75thPercentile(): number {
-    return this.getValue(0.75);
+    return this.getValue(0.75)
   }
 
   /**
@@ -177,7 +174,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public get95thPercentile(): number {
-    return this.getValue(0.95);
+    return this.getValue(0.95)
   }
 
   /**
@@ -187,7 +184,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public get98thPercentile(): number {
-    return this.getValue(0.98);
+    return this.getValue(0.98)
   }
 
   /**
@@ -197,7 +194,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public get999thPercentile(): number {
-    return this.getValue(0.999);
+    return this.getValue(0.999)
   }
 
   /**
@@ -207,7 +204,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public get99thPercentile(): number {
-    return this.getValue(0.99);
+    return this.getValue(0.99)
   }
 
   /**
@@ -217,7 +214,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public getMedian(): number {
-    return this.getValue(0.5);
+    return this.getValue(0.5)
   }
 
   /**
@@ -227,7 +224,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public getMax(): number {
-    return this.values[this.values.length - 1];
+    return this.values[this.values.length - 1]
   }
 
   /**
@@ -237,7 +234,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public getMin(): number {
-    return this.values[0];
+    return this.values[0]
   }
 
   /**
@@ -247,7 +244,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public getValues(): number[] {
-    return this.values;
+    return this.values
   }
 
   /**
@@ -257,7 +254,7 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    * @memberof SimpleSnapshot
    */
   public size(): number {
-    return this.values.length;
+    return this.values.length
   }
 
   /**
@@ -268,12 +265,12 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    */
   public getMean(): number {
     if (this.values.length === 0) {
-      return 0;
+      return 0
     }
 
-    let sum = 0;
-    this.values.forEach((value) => sum += value);
-    return sum / this.values.length;
+    let sum = 0
+    this.values.forEach((value) => (sum += value))
+    return sum / this.values.length
   }
 
   /**
@@ -284,17 +281,17 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    */
   public getStdDev(): number {
     if (this.values.length === 0) {
-      return 0;
+      return 0
     }
 
-    const mean = this.getMean();
-    let sum = 0;
+    const mean = this.getMean()
+    let sum = 0
     this.values.forEach((value) => {
-      const diff = value - mean;
-      sum += diff * diff;
-    });
+      const diff = value - mean
+      sum += diff * diff
+    })
 
-    return Math.sqrt(sum / (this.values.length - 1));
+    return Math.sqrt(sum / (this.values.length - 1))
   }
 
   /**
@@ -318,25 +315,24 @@ export class SimpleSnapshot implements Snapshot, SerializedSnapshot {
    */
   public getValue(quantile: number): number {
     if (quantile < 0.0 || quantile > 1.0 || isNaN(quantile)) {
-      return NaN;
+      return NaN
     }
 
     if (this.values.length === 0) {
-      return 0;
+      return 0
     }
 
-    const pos = quantile * (this.values.length + 1);
-    const index = Math.round(pos);
+    const pos = quantile * (this.values.length + 1)
+    const index = Math.round(pos)
 
     if (index < 1) {
-      return this.getMin();
+      return this.getMin()
     } else if (index >= this.values.length) {
-      return this.getMax();
+      return this.getMax()
     }
 
-    const lower = this.values[index - 1];
-    const upper = this.values[index];
-    return lower + (pos - Math.floor(pos)) * (upper - lower);
+    const lower = this.values[index - 1]
+    const upper = this.values[index]
+    return lower + (pos - Math.floor(pos)) * (upper - lower)
   }
-
 }

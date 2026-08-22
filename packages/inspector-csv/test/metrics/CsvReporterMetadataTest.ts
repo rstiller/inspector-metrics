@@ -14,7 +14,7 @@ const expect = chai.expect
 @suite
 export class CsvReporterMetadataTest extends AbstractReportTest {
   @test
-  public async 'check reporting with empty metric registry and metadata in columns, but no metadata assigned' (): Promise<void> {
+  public async 'check reporting with empty metric registry and metadata in columns, but no metadata assigned'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       writer: this.writer
@@ -28,7 +28,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check reporting with metadata in one column' (): Promise<void> {
+  public async 'check reporting with metadata in one column'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       writer: this.writer
@@ -41,21 +41,18 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'metadata'])
-    this.verifyWriteCall(
-      counter,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter"',
-        '"count"',
-        '0',
-        'type="requests_per_second";measurement="iops"'
-      ]
-    )
+    this.verifyWriteCall(counter, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter"',
+      '"count"',
+      '0',
+      'type="requests_per_second";measurement="iops"'
+    ])
   }
 
   @test
-  public async 'check reporting with metadata in one column and custom delimiter' (): Promise<void> {
+  public async 'check reporting with metadata in one column and custom delimiter'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       metadataDelimiter: ':',
@@ -69,21 +66,18 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'metadata'])
-    this.verifyWriteCall(
-      counter,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter"',
-        '"count"',
-        '0',
-        'type="requests_per_second":measurement="iops"'
-      ]
-    )
+    this.verifyWriteCall(counter, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter"',
+      '"count"',
+      '0',
+      'type="requests_per_second":measurement="iops"'
+    ])
   }
 
   @test
-  public async 'check reporting with metadata in separate columns' (): Promise<void> {
+  public async 'check reporting with metadata in separate columns'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -95,14 +89,11 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value'])
-    this.verifyWriteCall(
-      counter,
-      ['19700101000000.000+00:00', '""', '"test_counter"', '"count"', '0']
-    )
+    this.verifyWriteCall(counter, ['19700101000000.000+00:00', '""', '"test_counter"', '"count"', '0'])
   }
 
   @test
-  public async 'check reporting with metadata in separate columns as superset of all metrics' (): Promise<void> {
+  public async 'check reporting with metadata in separate columns as superset of all metrics'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -118,35 +109,24 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'meta_type', 'meta_measurement'])
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '"requests_per_second"',
-        '""'
-      ]
-    )
+    this.verifyWriteCall(counter1, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter_1"',
+      '"count"',
+      '0',
+      '"requests_per_second"',
+      '""'
+    ])
     this.verifyWriteCall(
       counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '""',
-        '"iops"'
-      ],
+      ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '""', '"iops"'],
       1
     )
   }
 
   @test
-  public async 'check reporting with custom metadata prefix' (): Promise<void> {
+  public async 'check reporting with custom metadata prefix'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       metadataColumnPrefix: 'm_',
@@ -163,35 +143,24 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'm_type', 'm_measurement'])
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '"requests_per_second"',
-        '""'
-      ]
-    )
+    this.verifyWriteCall(counter1, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter_1"',
+      '"count"',
+      '0',
+      '"requests_per_second"',
+      '""'
+    ])
     this.verifyWriteCall(
       counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '""',
-        '"iops"'
-      ],
+      ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '""', '"iops"'],
       1
     )
   }
 
   @test
-  public async 'check metadata filtering in columns' (): Promise<void> {
+  public async 'check metadata filtering in columns'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'metadata'],
       metadataExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -207,28 +176,7 @@ export class CsvReporterMetadataTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'meta_measurement'])
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '""'
-      ]
-    )
-    this.verifyWriteCall(
-      counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '"iops"'
-      ],
-      1
-    )
+    this.verifyWriteCall(counter1, ['19700101000000.000+00:00', '""', '"test_counter_1"', '"count"', '0', '""'])
+    this.verifyWriteCall(counter2, ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '"iops"'], 1)
   }
 }

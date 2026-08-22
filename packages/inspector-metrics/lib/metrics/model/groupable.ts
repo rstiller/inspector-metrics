@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Name-based (string) grouping interface - the group as metadata
@@ -8,14 +8,13 @@ import "source-map-support/register";
  * @interface Groupable
  */
 export interface Groupable {
-
   /**
    * Gets the group name.
    *
    * @returns {string}
    * @memberof Groupable
    */
-  getGroup(): string;
+  getGroup(): string
 
   /**
    * Sets the group name.
@@ -24,6 +23,5 @@ export interface Groupable {
    * @returns {this}
    * @memberof Groupable
    */
-  setGroup(group: string): this;
-
+  setGroup(group: string): this
 }

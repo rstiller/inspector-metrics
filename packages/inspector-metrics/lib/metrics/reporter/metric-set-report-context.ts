@@ -1,8 +1,8 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { MetricRegistry } from "../metric-registry";
-import { MetricType } from "./metric-type";
-import { OverallReportContext } from "./overall-report-context";
+import { MetricRegistry } from '../metric-registry'
+import { MetricType } from './metric-type'
+import { OverallReportContext } from './overall-report-context'
 
 /**
  * Helper interface for reporting runs.
@@ -14,33 +14,33 @@ export interface MetricSetReportContext<M> {
    * @type {OverallReportContext}
    * @memberof ReportingContext
    */
-  overallCtx: OverallReportContext;
+  overallCtx: OverallReportContext
   /**
    * The array of metric instance that is currently reported.
    *
    * @type {M[]}
    * @memberof ReportingContext
    */
-  metrics: M[];
+  metrics: M[]
   /**
    * The registry the metric are registered in.
    *
    * @type {MetricRegistry | null}
    * @memberof ReportingContext
    */
-  readonly registry: MetricRegistry | null;
+  readonly registry: MetricRegistry | null
   /**
    * The current date.
    *
    * @type {Date}
    * @memberof ReportingContext
    */
-  readonly date: Date;
+  readonly date: Date
   /**
    * The type of the metrics in the {@link #metrics} array.
    *
    * @type {MetricType}
    * @memberof ReportingContext
    */
-  readonly type: MetricType;
+  readonly type: MetricType
 }

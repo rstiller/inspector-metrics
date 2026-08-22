@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { Worker } from "cluster";
+import { Worker } from 'cluster'
 
 /**
  * Interface for abstracting event-emitter.
@@ -18,5 +18,5 @@ export interface ReportMessageReceiver {
    * @returns {*}
    * @memberof ReportMessageReceiver
    */
-  on(messageType: string, callback: (worker: Worker, message: any, handle: any) => any): any;
+  on(messageType: string, callback: (worker: Worker, message: any, handle: any) => any): any
 }

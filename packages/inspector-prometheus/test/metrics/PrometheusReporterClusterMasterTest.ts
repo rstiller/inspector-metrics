@@ -4,9 +4,7 @@ import 'source-map-support/register'
 import * as chai from 'chai'
 import * as sinonChai from 'sinon-chai'
 
-import {
-  InterprocessMessage, MetricRegistry, MetricReporter
-} from 'inspector-metrics'
+import { InterprocessMessage, MetricRegistry, MetricReporter } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'
 import * as moment from 'moment'
 import { SinonSpy, spy } from 'sinon'
@@ -20,27 +18,30 @@ const expect = chai.expect
 
 @suite
 export class PrometheusReporterClusterMasterTest {
-  private readonly clock: MockedClock = new MockedClock();
-  private registry: MetricRegistry;
-  private reporter: PrometheusMetricReporter;
-  private clusterOptions: TestClusterOptions;
-  private getMetricsStringSpy: SinonSpy;
+  private readonly clock: MockedClock = new MockedClock()
+  private registry: MetricRegistry
+  private reporter: PrometheusMetricReporter
+  private clusterOptions: TestClusterOptions
+  private getMetricsStringSpy: SinonSpy
 
-  public before (): void {
+  public before(): void {
     this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 })
     this.registry = new MetricRegistry()
     this.clusterOptions = new TestClusterOptions(true, false, [], 1000)
-    this.reporter = new PrometheusMetricReporter({
-      clock: this.clock,
-      clusterOptions: this.clusterOptions
-    }, 'TestPrometheusMetricReporter')
+    this.reporter = new PrometheusMetricReporter(
+      {
+        clock: this.clock,
+        clusterOptions: this.clusterOptions
+      },
+      'TestPrometheusMetricReporter'
+    )
     this.reporter.addMetricRegistry(this.registry)
     this.getMetricsStringSpy = spy(this.reporter.getMetricsString)
     this.reporter.getMetricsString = this.getMetricsStringSpy
   }
 
   @test
-  public async 'check if ordinary report messages are ignored' (): Promise<void> {
+  public async 'check if ordinary report messages are ignored'(): Promise<void> {
     const message: InterprocessMessage = {
       targetReporterType: 'TestPrometheusMetricReporter',
       type: MetricReporter.MESSAGE_TYPE
@@ -50,7 +51,7 @@ export class PrometheusReporterClusterMasterTest {
   }
 
   @test
-  public async 'check if wrong targetReporterType is ignored' (): Promise<void> {
+  public async 'check if wrong targetReporterType is ignored'(): Promise<void> {
     const message: InterprocessMessage = {
       targetReporterType: 'NotMatching',
       type: MetricReporter.MESSAGE_TYPE
@@ -60,7 +61,7 @@ export class PrometheusReporterClusterMasterTest {
   }
 
   @test
-  public async 'check if unexpected response messages are ignored' (): Promise<void> {
+  public async 'check if unexpected response messages are ignored'(): Promise<void> {
     const message: InterprocessReportResponse = {
       id: 'unexpected',
       metricsStr: '#empty',
@@ -72,14 +73,14 @@ export class PrometheusReporterClusterMasterTest {
   }
 
   @test
-  public async 'check if master process is trying to send messages to workers' (): Promise<void> {
+  public async 'check if master process is trying to send messages to workers'(): Promise<void> {
     expect(this.clusterOptions.getWorkersSpy).to.not.have.been.called
     await this.reporter.getMetricsString()
     expect(this.clusterOptions.getWorkersSpy).to.have.been.called
   }
 
   @test
-  public async 'check if timeout for worker responses is working' (): Promise<void> {
+  public async 'check if timeout for worker responses is working'(): Promise<void> {
     const worker = {}
     this.clusterOptions.workers.push(worker as any)
 
@@ -92,12 +93,11 @@ export class PrometheusReporterClusterMasterTest {
 
     expect(this.clusterOptions.getWorkersSpy).to.have.been.called
     expect(this.clusterOptions.sendToWorkerSpy).to.have.been.called
-    expect(moment.duration(end.diff(start)).as('milliseconds'))
-      .to.be.gte(this.clusterOptions.workerResponseTimeout)
+    expect(moment.duration(end.diff(start)).as('milliseconds')).to.be.gte(this.clusterOptions.workerResponseTimeout)
   }
 
   @test
-  public async 'check if request message contains all required fields' (): Promise<void> {
+  public async 'check if request message contains all required fields'(): Promise<void> {
     const worker = {}
     this.clusterOptions.workers.push(worker as any)
 
@@ -119,9 +119,7 @@ export class PrometheusReporterClusterMasterTest {
   }
 
   @test
-  public 'check if response from forked process is properly taken into account' (
-    done: (err?: any) => any
-  ): void {
+  public 'check if response from forked process is properly taken into account'(done: (err?: any) => any): void {
     const callback = this.clusterOptions.eventReceiverOnSpy.getCall(1).args[1]
     const worker = {}
     this.clusterOptions.workers.push(worker as any)
@@ -150,8 +148,9 @@ export class PrometheusReporterClusterMasterTest {
           const end = moment()
 
           expect(metricsString).to.equal('#empty')
-          expect(moment.duration(end.diff(start)).as('milliseconds'))
-            .to.be.lt(this.clusterOptions.workerResponseTimeout)
+          expect(moment.duration(end.diff(start)).as('milliseconds')).to.be.lt(
+            this.clusterOptions.workerResponseTimeout
+          )
 
           done()
         })
@@ -159,7 +158,7 @@ export class PrometheusReporterClusterMasterTest {
     })
   }
 
-  protected verifyMessageIsIgnored (message: any): void {
+  protected verifyMessageIsIgnored(message: any): void {
     expect(this.getMetricsStringSpy).to.not.have.been.called
     expect(this.clusterOptions.eventReceiverOnSpy).to.have.been.called
     expect(this.clusterOptions.eventReceiverOnSpy.callCount).to.equal(2)

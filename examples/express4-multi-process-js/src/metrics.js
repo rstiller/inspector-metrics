@@ -19,10 +19,8 @@ const packageJson = require('../package.json')
 //   return reporter
 // }
 
-async function carbonReporter (registry, tags) {
-  const {
-    CarbonMetricReporter
-  } = require('inspector-carbon')
+async function carbonReporter(registry, tags) {
+  const { CarbonMetricReporter } = require('inspector-carbon')
 
   const reporter = new CarbonMetricReporter({
     host: 'http://localhost/',
@@ -39,11 +37,8 @@ async function carbonReporter (registry, tags) {
   return reporter
 }
 
-async function csvReporter (registry, tags) {
-  const {
-    CsvMetricReporter,
-    DefaultCsvFileWriter
-  } = require('inspector-csv')
+async function csvReporter(registry, tags) {
+  const { CsvMetricReporter, DefaultCsvFileWriter } = require('inspector-csv')
 
   const reporter = new CsvMetricReporter({
     columns: ['date', 'group', 'name', 'field', 'type', 'value', 'tags'],
@@ -61,10 +56,8 @@ async function csvReporter (registry, tags) {
   return reporter
 }
 
-async function elasticsearchReporter (registry, tags) {
-  const {
-    ElasticsearchMetricReporter
-  } = require('inspector-elasticsearch')
+async function elasticsearchReporter(registry, tags) {
+  const { ElasticsearchMetricReporter } = require('inspector-elasticsearch')
 
   const clientOptions = {
     apiVersion: '6.0',
@@ -86,18 +79,17 @@ async function elasticsearchReporter (registry, tags) {
   return reporter
 }
 
-async function influxReporter (registry, tags) {
-  const {
-    DefaultSender,
-    InfluxMetricReporter
-  } = require('inspector-influx')
+async function influxReporter(registry, tags) {
+  const { DefaultSender, InfluxMetricReporter } = require('inspector-influx')
 
   const sender = new DefaultSender({
     database: 'express4',
-    hosts: [{
-      host: '127.0.0.1',
-      port: 8086
-    }]
+    hosts: [
+      {
+        host: '127.0.0.1',
+        port: 8086
+      }
+    ]
   })
   const reporter = new InfluxMetricReporter({
     log: null,
@@ -114,10 +106,8 @@ async function influxReporter (registry, tags) {
   return reporter
 }
 
-async function prometheusReporter (registry, tags) {
-  const {
-    PrometheusMetricReporter
-  } = require('inspector-prometheus')
+async function prometheusReporter(registry, tags) {
+  const { PrometheusMetricReporter } = require('inspector-prometheus')
   const express = require('express')
 
   const reporter = new PrometheusMetricReporter({})
@@ -132,10 +122,7 @@ async function prometheusReporter (registry, tags) {
     const port = 3001
     app.get('/metrics', async (req, res) => {
       const metricStr = await reporter.getMetricsString()
-      res
-        .status(200)
-        .type('text/plain')
-        .send(metricStr)
+      res.status(200).type('text/plain').send(metricStr)
     })
     app.listen(port, () => console.log(`/metrics endpoint listening on port ${port} with pid ${process.pid}!`))
   }
@@ -143,16 +130,9 @@ async function prometheusReporter (registry, tags) {
   return reporter
 }
 
-async function install () {
-  const {
-    MetricRegistry
-  } = require('inspector-metrics')
-  const {
-    V8MemoryMetrics,
-    V8GCMetrics,
-    V8EventLoop,
-    V8ProcessMetrics
-  } = require('inspector-vm')
+async function install() {
+  const { MetricRegistry } = require('inspector-metrics')
+  const { V8MemoryMetrics, V8GCMetrics, V8EventLoop, V8ProcessMetrics } = require('inspector-vm')
 
   const registry = new MetricRegistry()
   registry.registerMetric(new V8GCMetrics('gc', registry.getDefaultClock()))

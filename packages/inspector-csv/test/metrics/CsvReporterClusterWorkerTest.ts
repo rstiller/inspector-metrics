@@ -16,9 +16,9 @@ const expect = chai.expect
 
 @suite
 export class CsvReporterClusterWorkerTest extends AbstractReportTest {
-  private clusterOptions: TestClusterOptions;
+  private clusterOptions: TestClusterOptions
 
-  public before (): void {
+  public before(): void {
     super.before()
     this.clusterOptions = new TestClusterOptions(true, true, [])
     this.reporter = this.newReporter({
@@ -30,7 +30,7 @@ export class CsvReporterClusterWorkerTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check if metrics are serialized and send to master' (): Promise<void> {
+  public async 'check if metrics are serialized and send to master'(): Promise<void> {
     this.registry.newCounter('counter1')
 
     expect(this.clusterOptions.sendToMasterSpy).to.have.not.been.called
@@ -71,10 +71,8 @@ export class CsvReporterClusterWorkerTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check if events are serialized and send to master' (): Promise<void> {
-    const event = new Event('test-event')
-      .setTime(new Date(this.clock.time().milliseconds))
-      .setValue(123)
+  public async 'check if events are serialized and send to master'(): Promise<void> {
+    const event = new Event('test-event').setTime(new Date(this.clock.time().milliseconds)).setValue(123)
     await this.reporter.reportEvent(event)
 
     expect(this.clusterOptions.sendToMasterSpy).to.have.been.called
@@ -111,7 +109,7 @@ export class CsvReporterClusterWorkerTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check if writer.init is not called' (): Promise<void> {
+  public async 'check if writer.init is not called'(): Promise<void> {
     expect(this.initSpy).to.have.not.been.called
 
     await this.triggerReporting()

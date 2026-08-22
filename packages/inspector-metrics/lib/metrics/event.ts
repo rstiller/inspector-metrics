@@ -44,7 +44,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    *              to be in line with ordinary {@link MetricReporter} implementations.
    * @memberof Event
    */
-  public constructor (name: string, description?: string, group?: string, time: Date = new Date()) {
+  public constructor(name: string, description?: string, group?: string, time: Date = new Date()) {
     super()
     this.time = time
     this.name = name
@@ -58,7 +58,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {Date}
    * @memberof Event
    */
-  public getTime (): Date {
+  public getTime(): Date {
     return this.time
   }
 
@@ -69,7 +69,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {this}
    * @memberof Event
    */
-  public setTime (time: Date): this {
+  public setTime(time: Date): this {
     this.time = time
     return this
   }
@@ -80,7 +80,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {TEventData}
    * @memberof Event
    */
-  public getValue (): TEventData {
+  public getValue(): TEventData {
     return this.value
   }
 
@@ -91,7 +91,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {this}
    * @memberof Event
    */
-  public setValue (value: TEventData): this {
+  public setValue(value: TEventData): this {
     this.value = value
     return this
   }
@@ -102,7 +102,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {string}
    * @memberof Event
    */
-  public toString (): string {
+  public toString(): string {
     return this.name
   }
 
@@ -112,7 +112,7 @@ export class Event<TEventData> extends BaseMetric implements Gauge<TEventData> {
    * @returns {*}
    * @memberof Event
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.value = this.value
     json.time = this.time

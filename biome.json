@@ -8,11 +8,31 @@
   "files": {
     "includes": ["**/*.{ts,tsx,js,cjs,mjs}"]
   },
+  "formatter": {
+    "indentStyle": "space",
+    "indentWidth": 2,
+    "lineWidth": 120
+  },
+  "javascript": {
+    "jsxRuntime": "reactClassic",
+    "formatter": {
+      "quoteStyle": "single",
+      "semicolons": "asNeeded",
+      "trailingCommas": "none"
+    }
+  },
   "linter": {
     "rules": {
       "preset": "none",
       "correctness": {
         "recommended": true
+      }
+    }
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": "off"
       }
     }
   }

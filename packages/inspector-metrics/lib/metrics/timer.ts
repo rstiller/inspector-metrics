@@ -52,7 +52,7 @@ export class StopWatch {
    * @param {Timer} timer
    * @memberof StopWatch
    */
-  public constructor (clock: Clock, timer: Timer) {
+  public constructor(clock: Clock, timer: Timer) {
     this.clock = clock
     this.timer = timer
   }
@@ -63,7 +63,7 @@ export class StopWatch {
    * @returns {this}
    * @memberof StopWatch
    */
-  public start (): this {
+  public start(): this {
     this.startTime = this.clock.time()
     return this
   }
@@ -75,7 +75,7 @@ export class StopWatch {
    * @returns {this}
    * @memberof StopWatch
    */
-  public stop (): this {
+  public stop(): this {
     this.timer.addDuration(diff(this.startTime, this.clock.time()), NANOSECOND)
     return this
   }
@@ -91,10 +91,18 @@ export class StopWatch {
  * @implements {Metered}
  * @implements {Sampling}
  */
-export class Timer extends BaseMetric implements
-    BucketCounting, Metered, Sampling, Summarizing,
-    SerializableSummarizing, SerializableBucketCounting,
-    SerializableSampling, SerializableMetered {
+export class Timer
+  extends BaseMetric
+  implements
+    BucketCounting,
+    Metered,
+    Sampling,
+    Summarizing,
+    SerializableSummarizing,
+    SerializableBucketCounting,
+    SerializableSampling,
+    SerializableMetered
+{
   /**
    * Used to determine a duration.
    *
@@ -130,12 +138,13 @@ export class Timer extends BaseMetric implements
    * @param {string} [buckets=new Buckets()]
    * @memberof Timer
    */
-  public constructor (
+  public constructor(
     clock: Clock,
     reservoir: Reservoir,
     name?: string,
     description?: string,
-    buckets: Buckets = new Buckets()) {
+    buckets: Buckets = new Buckets()
+  ) {
     super()
     this.clock = clock
     this.name = name
@@ -150,7 +159,7 @@ export class Timer extends BaseMetric implements
    * @returns {number[]}
    * @memberof Timer
    */
-  public get buckets (): number[] {
+  public get buckets(): number[] {
     return this.histogram.buckets
   }
 
@@ -160,7 +169,7 @@ export class Timer extends BaseMetric implements
    * @returns {BucketToCountMap}
    * @memberof Timer
    */
-  public get counts (): BucketToCountMap {
+  public get counts(): BucketToCountMap {
     return this.histogram.counts
   }
 
@@ -171,7 +180,7 @@ export class Timer extends BaseMetric implements
    * @type {string}
    * @memberof Timer
    */
-  public get sum (): string {
+  public get sum(): string {
     return this.histogram.sum
   }
 
@@ -182,7 +191,7 @@ export class Timer extends BaseMetric implements
    * @type {SerializedSnapshot}
    * @memberof Timer
    */
-  public get snapshot (): SerializedSnapshot {
+  public get snapshot(): SerializedSnapshot {
     return this.histogram.snapshot
   }
 
@@ -193,7 +202,7 @@ export class Timer extends BaseMetric implements
    * @type {number}
    * @memberof Timer
    */
-  public get count (): number {
+  public get count(): number {
     return this.getCount()
   }
 
@@ -204,7 +213,7 @@ export class Timer extends BaseMetric implements
    * @type {number}
    * @memberof Timer
    */
-  public get meanRate (): number {
+  public get meanRate(): number {
     return this.getMeanRate()
   }
 
@@ -215,7 +224,7 @@ export class Timer extends BaseMetric implements
    * @type {MeteredRates}
    * @memberof Timer
    */
-  public get rates (): MeteredRates {
+  public get rates(): MeteredRates {
     return {
       15: this.get15MinuteRate(),
       5: this.get5MinuteRate(),
@@ -231,7 +240,7 @@ export class Timer extends BaseMetric implements
    * @returns {this}
    * @memberof Timer
    */
-  public addDuration (duration: number, unit: TimeUnit): this {
+  public addDuration(duration: number, unit: TimeUnit): this {
     if (duration >= 0) {
       this.histogram.update(unit.convertTo(duration, NANOSECOND))
       this.meter.mark(1)
@@ -245,7 +254,7 @@ export class Timer extends BaseMetric implements
    * @returns {Snapshot}
    * @memberof Timer
    */
-  public getSnapshot (): Snapshot {
+  public getSnapshot(): Snapshot {
     return this.histogram.getSnapshot()
   }
 
@@ -255,7 +264,7 @@ export class Timer extends BaseMetric implements
    * @returns {number}
    * @memberof Timer
    */
-  public getCount (): number {
+  public getCount(): number {
     return this.histogram.getCount()
   }
 
@@ -265,7 +274,7 @@ export class Timer extends BaseMetric implements
    * @returns {Int64Wrapper}
    * @memberof Timer
    */
-  public getSum (): Int64Wrapper {
+  public getSum(): Int64Wrapper {
     return this.histogram.getSum()
   }
 
@@ -275,7 +284,7 @@ export class Timer extends BaseMetric implements
    * @returns {number}
    * @memberof Timer
    */
-  public get15MinuteRate (): number {
+  public get15MinuteRate(): number {
     return this.meter.get15MinuteRate()
   }
 
@@ -285,7 +294,7 @@ export class Timer extends BaseMetric implements
    * @returns {number}
    * @memberof Timer
    */
-  public get5MinuteRate (): number {
+  public get5MinuteRate(): number {
     return this.meter.get5MinuteRate()
   }
 
@@ -295,7 +304,7 @@ export class Timer extends BaseMetric implements
    * @returns {number}
    * @memberof Timer
    */
-  public get1MinuteRate (): number {
+  public get1MinuteRate(): number {
     return this.meter.get1MinuteRate()
   }
 
@@ -305,7 +314,7 @@ export class Timer extends BaseMetric implements
    * @returns {number}
    * @memberof Timer
    */
-  public getMeanRate (): number {
+  public getMeanRate(): number {
     return this.meter.getMeanRate()
   }
 
@@ -315,7 +324,7 @@ export class Timer extends BaseMetric implements
    * @returns {Buckets}
    * @memberof Timer
    */
-  public getBuckets (): Buckets {
+  public getBuckets(): Buckets {
     return this.histogram.getBuckets()
   }
 
@@ -325,7 +334,7 @@ export class Timer extends BaseMetric implements
    * @returns {Map<number, number>}
    * @memberof Timer
    */
-  public getCounts (): Map<number, number> {
+  public getCounts(): Map<number, number> {
     return this.histogram.getCounts()
   }
 
@@ -337,7 +346,7 @@ export class Timer extends BaseMetric implements
    * @returns {T}
    * @memberof Timer
    */
-  public time<T> (f: () => T): T {
+  public time<T>(f: () => T): T {
     const startTime: Time = this.clock.time()
     try {
       return f()
@@ -354,7 +363,7 @@ export class Timer extends BaseMetric implements
    * @returns {T}
    * @memberof Timer
    */
-  public async timeAsync<T> (f: () => Promise<T>): Promise<T> {
+  public async timeAsync<T>(f: () => Promise<T>): Promise<T> {
     const startTime: Time = this.clock.time()
     return await f()
       .then((res) => {
@@ -373,7 +382,7 @@ export class Timer extends BaseMetric implements
    * @returns {StopWatch}
    * @memberof Timer
    */
-  public newStopWatch (): StopWatch {
+  public newStopWatch(): StopWatch {
     return new StopWatch(this.clock, this)
   }
 
@@ -383,7 +392,7 @@ export class Timer extends BaseMetric implements
    * @returns {*}
    * @memberof Timer
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     const histogramJson = this.histogram.toJSON()
     const meterJson = this.meter.toJSON()

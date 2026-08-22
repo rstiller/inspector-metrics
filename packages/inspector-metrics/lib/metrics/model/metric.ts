@@ -1,8 +1,8 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { Groupable } from "./groupable";
-import { mapToMetadata, Metadata, MetadataContainer } from "./metadata-container";
-import { mapToTags, Taggable, Tags } from "./taggable";
+import { Groupable } from './groupable'
+import { mapToMetadata, Metadata, MetadataContainer } from './metadata-container'
+import { mapToTags, Taggable, Tags } from './taggable'
 
 /**
  * Determines if the metric passed is a {@link SerializableMetric} or not.
@@ -12,15 +12,18 @@ import { mapToTags, Taggable, Tags } from "./taggable";
  * @returns {metric is SerializableMetric}
  */
 export function isSerializableMetric(
-  metric: Groupable | MetadataContainer | Taggable | Metric | SerializableMetric): metric is SerializableMetric {
-  const anyMetric: any = metric as any;
-  if ((anyMetric.getGroup && typeof anyMetric.getGroup === "function") ||
-    (anyMetric.getMetadataMap && typeof anyMetric.getMetadataMap === "function") ||
-    (anyMetric.getTags && typeof anyMetric.getTags === "function") ||
-    (anyMetric.getName && typeof anyMetric.getName === "function")) {
-    return false;
+  metric: Groupable | MetadataContainer | Taggable | Metric | SerializableMetric
+): metric is SerializableMetric {
+  const anyMetric: any = metric as any
+  if (
+    (anyMetric.getGroup && typeof anyMetric.getGroup === 'function') ||
+    (anyMetric.getMetadataMap && typeof anyMetric.getMetadataMap === 'function') ||
+    (anyMetric.getTags && typeof anyMetric.getTags === 'function') ||
+    (anyMetric.getName && typeof anyMetric.getName === 'function')
+  ) {
+    return false
   }
-  return typeof anyMetric.name === "string";
+  return typeof anyMetric.name === 'string'
 }
 
 /**
@@ -32,9 +35,9 @@ export function isSerializableMetric(
  */
 export function getMetricName(metric: Metric | SerializableMetric): string {
   if (isSerializableMetric(metric)) {
-    return metric.name;
+    return metric.name
   } else {
-    return metric.getName();
+    return metric.getName()
   }
 }
 
@@ -47,9 +50,9 @@ export function getMetricName(metric: Metric | SerializableMetric): string {
  */
 export function getMetricDescription(metric: Metric | SerializableMetric): string {
   if (isSerializableMetric(metric)) {
-    return metric.description;
+    return metric.description
   } else {
-    return metric.getDescription();
+    return metric.getDescription()
   }
 }
 
@@ -62,9 +65,9 @@ export function getMetricDescription(metric: Metric | SerializableMetric): strin
  */
 export function getMetricGroup(metric: Groupable | SerializableMetric): string {
   if (isSerializableMetric(metric)) {
-    return metric.group;
+    return metric.group
   } else {
-    return metric.getGroup();
+    return metric.getGroup()
   }
 }
 
@@ -77,9 +80,9 @@ export function getMetricGroup(metric: Groupable | SerializableMetric): string {
  */
 export function getMetricTags(metric: Taggable | SerializableMetric): Tags {
   if (isSerializableMetric(metric)) {
-    return (metric.tags as any) as Tags;
+    return metric.tags as any as Tags
   } else {
-    return mapToTags(metric.getTags());
+    return mapToTags(metric.getTags())
   }
 }
 
@@ -92,9 +95,9 @@ export function getMetricTags(metric: Taggable | SerializableMetric): Tags {
  */
 export function getMetricMetadata(metric: MetadataContainer | SerializableMetric): Metadata {
   if (isSerializableMetric(metric)) {
-    return metric.metadata;
+    return metric.metadata
   } else {
-    return mapToMetadata(metric.getMetadataMap());
+    return mapToMetadata(metric.getMetadataMap())
   }
 }
 
@@ -108,14 +111,13 @@ export function getMetricMetadata(metric: MetadataContainer | SerializableMetric
  * @extends {Taggable}
  */
 export interface Metric extends Groupable, MetadataContainer, Taggable {
-
   /**
    * Gets the name of the metric.
    *
    * @returns {string}
    * @memberof Metric
    */
-  getName(): string;
+  getName(): string
 
   /**
    * Sets the name of the metric.
@@ -124,7 +126,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
    * @returns {this}
    * @memberof Metric
    */
-  setName(name: string): this;
+  setName(name: string): this
 
   /**
    * Gets the description of the metric.
@@ -132,7 +134,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
    * @returns {string}
    * @memberof Metric
    */
-  getDescription(): string;
+  getDescription(): string
 
   /**
    * Sets the description of the metric.
@@ -141,8 +143,7 @@ export interface Metric extends Groupable, MetadataContainer, Taggable {
    * @returns {this}
    * @memberof Metric
    */
-  setDescription(description: string): this;
-
+  setDescription(description: string): this
 }
 
 /**
@@ -159,35 +160,35 @@ export interface SerializableMetric extends Metric {
    * @type {string}
    * @memberof SerializableMetric
    */
-  description: string;
+  description: string
   /**
    * Group of the metric.
    *
    * @type {string}
    * @memberof SerializableMetric
    */
-  group: string;
+  group: string
   /**
    * Metadata map of the metric.
    *
    * @type {Metadata}
    * @memberof SerializableMetric
    */
-  metadata: Metadata;
+  metadata: Metadata
   /**
    * name of the metric.
    *
    * @type {string}
    * @memberof SerializableMetric
    */
-  name: string;
+  name: string
   /**
    * Tags of the metric.
    *
    * @type {Tags}
    * @memberof SerializableMetric
    */
-  tags: Tags;
+  tags: Tags
 }
 
 /**
@@ -205,7 +206,6 @@ export interface SerializableMetric extends Metric {
  * @implements {SerializableMetric}
  */
 export abstract class BaseMetric implements Metric, SerializableMetric {
-
   /**
    * A static number instance to give an unique id within an application instance.
    * This counter is only unique per process, forked processes start from 0.
@@ -214,7 +214,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @static
    * @memberof BaseMetric
    */
-  private static COUNTER = 0;
+  private static COUNTER = 0
 
   /**
    * The unique id of this metric instance.
@@ -222,7 +222,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {number}
    * @memberof BaseMetric
    */
-  public readonly id: number = BaseMetric.COUNTER++;
+  public readonly id: number = BaseMetric.COUNTER++
   /**
    * The group set to this metric.
    *
@@ -230,7 +230,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {string}
    * @memberof BaseMetric
    */
-  public group: string;
+  public group: string
   /**
    * The name of this metric.
    *
@@ -238,7 +238,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {string}
    * @memberof BaseMetric
    */
-  public name: string;
+  public name: string
   /**
    * The description of this metric.
    *
@@ -246,7 +246,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {string}
    * @memberof BaseMetric
    */
-  public description: string;
+  public description: string
   /**
    * The metadata associated with an instance of class.
    *
@@ -254,7 +254,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {Map<string, any>}
    * @memberof BaseMetric
    */
-  protected metadataMap: Map<string, any> = new Map();
+  protected metadataMap: Map<string, any> = new Map()
   /**
    * Maps of tags for this metric.
    *
@@ -262,100 +262,100 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
    * @type {Map<string, string>}
    * @memberof BaseMetric
    */
-  protected tagMap: Map<string, string> = new Map();
+  protected tagMap: Map<string, string> = new Map()
 
   public get metadata(): Metadata {
-    return mapToMetadata(this.metadataMap);
+    return mapToMetadata(this.metadataMap)
   }
 
   public get tags(): Tags {
-    return mapToTags(this.tagMap);
+    return mapToTags(this.tagMap)
   }
 
   public getMetadataMap(): Map<string, any> {
-    return this.metadataMap;
+    return this.metadataMap
   }
 
   public getMetadata<T>(name: string): T {
-    return this.metadataMap.get(name) as T;
+    return this.metadataMap.get(name) as T
   }
 
   public removeMetadata<T>(name: string): T {
-    const value = this.metadataMap.get(name) as T;
-    this.metadataMap.delete(name);
-    return value;
+    const value = this.metadataMap.get(name) as T
+    this.metadataMap.delete(name)
+    return value
   }
 
   public setMetadata<T>(name: string, value: T): this {
-    this.metadataMap.set(name, value);
-    return this;
+    this.metadataMap.set(name, value)
+    return this
   }
 
   public getName(): string {
-    return this.name;
+    return this.name
   }
 
   public setName(name: string): this {
-    this.name = name;
-    return this;
+    this.name = name
+    return this
   }
 
   public getDescription(): string {
-    return this.description;
+    return this.description
   }
 
   public setDescription(description: string): this {
-    this.description = description;
-    return this;
+    this.description = description
+    return this
   }
 
   public getGroup(): string {
-    return this.group;
+    return this.group
   }
 
   public setGroup(group: string): this {
-    this.group = group;
-    return this;
+    this.group = group
+    return this
   }
 
   public getTags(): Map<string, string> {
-    return this.tagMap;
+    return this.tagMap
   }
 
   public getTag(name: string): string {
-    return this.tagMap.get(name);
+    return this.tagMap.get(name)
   }
 
   public setTag(name: string, value: string): this {
-    this.tagMap.set(name, value);
-    return this;
+    this.tagMap.set(name, value)
+    return this
   }
 
   public setTags(tags: Map<string, string>): this {
-    this.tagMap = tags;
-    return this;
+    this.tagMap = tags
+    return this
   }
 
   public addTags(tags: Map<string, string>): this {
-    tags.forEach((value, key) => this.tagMap.set(key, value));
-    return this;
+    tags.forEach((value, key) => this.tagMap.set(key, value))
+    return this
   }
 
   public removeTag(name: string): this {
-    this.tagMap.delete(name);
-    return this;
+    this.tagMap.delete(name)
+    return this
   }
 
   public removeTags(...names: string[]): this {
-    names.forEach((name) => this.removeTag(name));
-    return this;
+    names.forEach((name) => this.removeTag(name))
+    return this
   }
 
   public toString(): string {
     if (this.group) {
-      return `${this.group}.${this.name}`;
+      return `${this.group}.${this.name}`
     }
-    return this.name;
+    return this.name
   }
 
   /**
@@ -370,8 +370,7 @@ export abstract class BaseMetric implements Metric, SerializableMetric {
       group: this.getGroup(),
       metadata: this.metadata,
       name: this.getName(),
-      tags: this.tags,
-    };
+      tags: this.tags
+    }
   }
-
 }

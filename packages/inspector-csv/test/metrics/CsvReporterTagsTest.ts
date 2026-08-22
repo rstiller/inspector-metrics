@@ -14,7 +14,7 @@ const expect = chai.expect
 @suite
 export class CsvReporterTagsTest extends AbstractReportTest {
   @test
-  public async 'check reporting with empty metric registry and tags in columns, but no tags assigned' (): Promise<void> {
+  public async 'check reporting with empty metric registry and tags in columns, but no tags assigned'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       writer: this.writer
@@ -28,7 +28,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check reporting with empty metric registry and tags in one column' (): Promise<void> {
+  public async 'check reporting with empty metric registry and tags in one column'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       writer: this.writer
@@ -47,7 +47,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check reporting with tags in one column' (): Promise<void> {
+  public async 'check reporting with tags in one column'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       writer: this.writer
@@ -65,21 +65,18 @@ export class CsvReporterTagsTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'tags'])
-    this.verifyWriteCall(
-      counter,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter"',
-        '"count"',
-        '0',
-        'app="test-app";version="1.0.0";type="requests_per_second"'
-      ]
-    )
+    this.verifyWriteCall(counter, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter"',
+      '"count"',
+      '0',
+      'app="test-app";version="1.0.0";type="requests_per_second"'
+    ])
   }
 
   @test
-  public async 'check reporting with tags in one column and custom delimiter' (): Promise<void> {
+  public async 'check reporting with tags in one column and custom delimiter'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagDelimiter: ':',
@@ -98,21 +95,18 @@ export class CsvReporterTagsTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'tags'])
-    this.verifyWriteCall(
-      counter,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter"',
-        '"count"',
-        '0',
-        'app="test-app":version="1.0.0":type="requests_per_second"'
-      ]
-    )
+    this.verifyWriteCall(counter, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter"',
+      '"count"',
+      '0',
+      'app="test-app":version="1.0.0":type="requests_per_second"'
+    ])
   }
 
   @test
-  public async 'check reporting with empty metric registry and tags in separate columns' (): Promise<void> {
+  public async 'check reporting with empty metric registry and tags in separate columns'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -132,7 +126,7 @@ export class CsvReporterTagsTest extends AbstractReportTest {
   }
 
   @test
-  public async 'check reporting with tags in separate columns' (): Promise<void> {
+  public async 'check reporting with tags in separate columns'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -150,14 +144,19 @@ export class CsvReporterTagsTest extends AbstractReportTest {
     await this.triggerReporting()
 
     this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'tag_app', 'tag_version'])
-    this.verifyWriteCall(
-      counter,
-      ['19700101000000.000+00:00', '""', '"test_counter"', '"count"', '0', '"test-app"', '"1.0.0"']
-    )
+    this.verifyWriteCall(counter, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter"',
+      '"count"',
+      '0',
+      '"test-app"',
+      '"1.0.0"'
+    ])
   }
 
   @test
-  public async 'check reporting with tags in separate columns as superset of all metrics' (): Promise<void> {
+  public async 'check reporting with tags in separate columns as superset of all metrics'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -178,42 +177,37 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
     await this.triggerReporting()
 
-    this.verifyInitCall(
-      ['date', 'group', 'name', 'field', 'value', 'tag_app', 'tag_version', 'tag_type', 'tag_measurement']
-    )
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '"1.0.0"',
-        '"requests_per_second"',
-        '""'
-      ]
-    )
+    this.verifyInitCall([
+      'date',
+      'group',
+      'name',
+      'field',
+      'value',
+      'tag_app',
+      'tag_version',
+      'tag_type',
+      'tag_measurement'
+    ])
+    this.verifyWriteCall(counter1, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter_1"',
+      '"count"',
+      '0',
+      '"test-app"',
+      '"1.0.0"',
+      '"requests_per_second"',
+      '""'
+    ])
     this.verifyWriteCall(
       counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '"1.0.0"',
-        '""',
-        '"iops"'
-      ],
+      ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '"test-app"', '"1.0.0"', '""', '"iops"'],
       1
     )
   }
 
   @test
-  public async 'check reporting with custom tag prefix' (): Promise<void> {
+  public async 'check reporting with custom tag prefix'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagColumnPrefix: 't_',
@@ -235,42 +229,27 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
     await this.triggerReporting()
 
-    this.verifyInitCall(
-      ['date', 'group', 'name', 'field', 'value', 't_app', 't_version', 't_type', 't_measurement']
-    )
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '"1.0.0"',
-        '"requests_per_second"',
-        '""'
-      ]
-    )
+    this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 't_app', 't_version', 't_type', 't_measurement'])
+    this.verifyWriteCall(counter1, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter_1"',
+      '"count"',
+      '0',
+      '"test-app"',
+      '"1.0.0"',
+      '"requests_per_second"',
+      '""'
+    ])
     this.verifyWriteCall(
       counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '"1.0.0"',
-        '""',
-        '"iops"'
-      ],
+      ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '"test-app"', '"1.0.0"', '""', '"iops"'],
       1
     )
   }
 
   @test
-  public async 'check tag filtering in columns' (): Promise<void> {
+  public async 'check tag filtering in columns'(): Promise<void> {
     this.reporter = this.newReporter({
       columns: ['date', 'group', 'name', 'field', 'value', 'tags'],
       tagExportMode: ExportMode.EACH_IN_OWN_COLUMN,
@@ -292,34 +271,20 @@ export class CsvReporterTagsTest extends AbstractReportTest {
 
     await this.triggerReporting()
 
-    this.verifyInitCall(
-      ['date', 'group', 'name', 'field', 'value', 'tag_app', 'tag_type', 'tag_measurement']
-    )
-    this.verifyWriteCall(
-      counter1,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_1"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '"requests_per_second"',
-        '""'
-      ]
-    )
+    this.verifyInitCall(['date', 'group', 'name', 'field', 'value', 'tag_app', 'tag_type', 'tag_measurement'])
+    this.verifyWriteCall(counter1, [
+      '19700101000000.000+00:00',
+      '""',
+      '"test_counter_1"',
+      '"count"',
+      '0',
+      '"test-app"',
+      '"requests_per_second"',
+      '""'
+    ])
     this.verifyWriteCall(
       counter2,
-      [
-        '19700101000000.000+00:00',
-        '""',
-        '"test_counter_2"',
-        '"count"',
-        '0',
-        '"test-app"',
-        '""',
-        '"iops"'
-      ],
+      ['19700101000000.000+00:00', '""', '"test_counter_2"', '"count"', '0', '"test-app"', '""', '"iops"'],
       1
     )
   }

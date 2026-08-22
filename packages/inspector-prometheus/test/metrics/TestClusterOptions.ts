@@ -8,23 +8,25 @@ import { SinonSpy, spy } from 'sinon'
 import { PrometheusClusterOptions } from '../../lib/metrics'
 
 export class TestClusterOptions implements PrometheusClusterOptions<cluster.Worker> {
-  public enabled: boolean;
-  public sendMetricsToMaster: boolean;
-  public workerResponseTimeout: number;
-  public eventReceiver: EventEmitter;
-  public getWorkers: () => Promise<cluster.Worker[]>;
-  public sendToMaster: (message: any) => Promise<any>;
-  public sendToWorker: (worker: cluster.Worker, message: any) => Promise<any>;
-  public eventReceiverOnSpy: SinonSpy;
-  public getWorkersSpy: SinonSpy;
-  public sendToMasterSpy: SinonSpy;
-  public sendToWorkerSpy: SinonSpy;
-  public workers: cluster.Worker[];
+  public enabled: boolean
+  public sendMetricsToMaster: boolean
+  public workerResponseTimeout: number
+  public eventReceiver: EventEmitter
+  public getWorkers: () => Promise<cluster.Worker[]>
+  public sendToMaster: (message: any) => Promise<any>
+  public sendToWorker: (worker: cluster.Worker, message: any) => Promise<any>
+  public eventReceiverOnSpy: SinonSpy
+  public getWorkersSpy: SinonSpy
+  public sendToMasterSpy: SinonSpy
+  public sendToWorkerSpy: SinonSpy
+  public workers: cluster.Worker[]
 
-  public constructor (enabled: boolean,
+  public constructor(
+    enabled: boolean,
     sendMetricsToMaster: boolean,
     workers: cluster.Worker[],
-    workerResponseTimeout: number = 10) {
+    workerResponseTimeout: number = 10
+  ) {
     this.enabled = enabled
     this.sendMetricsToMaster = sendMetricsToMaster
     this.workerResponseTimeout = workerResponseTimeout
@@ -34,11 +36,11 @@ export class TestClusterOptions implements PrometheusClusterOptions<cluster.Work
     this.eventReceiverOnSpy = spy(this.eventReceiver.on)
     this.eventReceiver.on = this.eventReceiverOnSpy
 
-    this.sendToMaster = async () => { }
+    this.sendToMaster = async () => {}
     this.sendToMasterSpy = spy(this.sendToMaster)
     this.sendToMaster = this.sendToMasterSpy
 
-    this.sendToWorker = async () => { }
+    this.sendToWorker = async () => {}
     this.sendToWorkerSpy = spy(this.sendToWorker)
     this.sendToWorker = this.sendToWorkerSpy
 

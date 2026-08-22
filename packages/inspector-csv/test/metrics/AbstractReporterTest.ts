@@ -2,18 +2,10 @@ import 'reflect-metadata'
 import 'source-map-support/register'
 
 import * as chai from 'chai'
-import {
-  Metric, MetricRegistry, MILLISECOND
-} from 'inspector-metrics'
+import { Metric, MetricRegistry, MILLISECOND } from 'inspector-metrics'
 import { SinonSpy, spy } from 'sinon'
 import * as sinonChai from 'sinon-chai'
-import {
-  CsvFileWriter,
-  CsvMetricReporter,
-  CsvMetricReporterOptions,
-  ExportMode,
-  Row
-} from '../../lib/metrics'
+import { CsvFileWriter, CsvMetricReporter, CsvMetricReporterOptions, ExportMode, Row } from '../../lib/metrics'
 import { MockedClock } from './mocked-clock'
 import { TestClusterOptions } from './TestClusterOptions'
 
@@ -22,15 +14,15 @@ chai.use(sinonChai)
 const expect = chai.expect
 
 export class AbstractReportTest {
-  protected internalCallback: () => Promise<any>;
-  protected clock: MockedClock = new MockedClock();
-  protected registry: MetricRegistry;
-  protected reporter: CsvMetricReporter;
-  protected initSpy: SinonSpy;
-  protected writeRowSpy: SinonSpy;
-  protected writer: CsvFileWriter;
+  protected internalCallback: () => Promise<any>
+  protected clock: MockedClock = new MockedClock()
+  protected registry: MetricRegistry
+  protected reporter: CsvMetricReporter
+  protected initSpy: SinonSpy
+  protected writeRowSpy: SinonSpy
+  protected writer: CsvFileWriter
 
-  public before (): void {
+  public before(): void {
     this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 })
     this.registry = new MetricRegistry()
     this.registry.setDefaultClock(this.clock)
@@ -44,7 +36,7 @@ export class AbstractReportTest {
     this.reporter.addMetricRegistry(this.registry)
   }
 
-  protected newReporter ({
+  protected newReporter({
     writer = this.writer,
     useSingleQuotes = false,
     tagExportMode = ExportMode.ALL_IN_ONE_COLUMN,
@@ -69,31 +61,34 @@ export class AbstractReportTest {
     tags = new Map(),
     clusterOptions = new TestClusterOptions(false, false, [])
   }: CsvMetricReporterOptions): CsvMetricReporter {
-    return new CsvMetricReporter({
-      clock,
-      clusterOptions,
-      columns,
-      dateFormat,
-      metadataColumnPrefix,
-      metadataDelimiter,
-      metadataExportMode,
-      metadataFilter,
-      minReportingTimeout,
-      reportInterval,
-      scheduler,
-      tagColumnPrefix,
-      tagDelimiter,
-      tagExportMode,
-      tagFilter,
-      tags,
-      timezone,
-      unit,
-      useSingleQuotes,
-      writer
-    }, 'TestMetricReporter')
+    return new CsvMetricReporter(
+      {
+        clock,
+        clusterOptions,
+        columns,
+        dateFormat,
+        metadataColumnPrefix,
+        metadataDelimiter,
+        metadataExportMode,
+        metadataFilter,
+        minReportingTimeout,
+        reportInterval,
+        scheduler,
+        tagColumnPrefix,
+        tagDelimiter,
+        tagExportMode,
+        tagFilter,
+        tags,
+        timezone,
+        unit,
+        useSingleQuotes,
+        writer
+      },
+      'TestMetricReporter'
+    )
   }
 
-  protected async triggerReporting (): Promise<void> {
+  protected async triggerReporting(): Promise<void> {
     expect(this.initSpy).to.have.not.been.called
     expect(this.writeRowSpy).to.have.not.been.called
     expect(this.internalCallback).to.not.exist
@@ -105,7 +100,7 @@ export class AbstractReportTest {
     }
   }
 
-  protected verifyInitCall (columns: string[], call = 0): void {
+  protected verifyInitCall(columns: string[], call = 0): void {
     expect(this.initSpy).to.have.been.called
     const calls = this.initSpy.getCalls()
     expect(calls.length).to.be.gte(call + 1)

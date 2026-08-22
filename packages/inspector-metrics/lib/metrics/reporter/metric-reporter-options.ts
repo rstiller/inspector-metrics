@@ -1,13 +1,11 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import * as cluster from "cluster";
+import * as cluster from 'cluster'
 
-import {
-  Worker
-} from "cluster";
+import { Worker } from 'cluster'
 
-import { Clock } from "../clock";
-import { ReportMessageReceiver } from "./report-message-receiver";
+import { Clock } from '../clock'
+import { ReportMessageReceiver } from './report-message-receiver'
 
 const defaultCluster = (cluster.default || cluster) as any
 
@@ -25,14 +23,14 @@ export interface ClusterOptions<Worker> {
    * @type {boolean}
    * @memberof ClusterOptions
    */
-  readonly enabled: boolean;
+  readonly enabled: boolean
   /**
    * Indicates if the {@link #sendToMaster} function should be used to send messages to the master process.
    *
    * @type {boolean}
    * @memberof ClusterOptions
    */
-  readonly sendMetricsToMaster: boolean;
+  readonly sendMetricsToMaster: boolean
   /**
    * EventReceiver to get messages from master on forked processes or from forked processes on master.
    * Compatible with 'cluster'.
@@ -40,7 +38,7 @@ export interface ClusterOptions<Worker> {
    * @type {ReportMessageReceiver}
    * @memberof ClusterOptions
    */
-  readonly eventReceiver: ReportMessageReceiver;
+  readonly eventReceiver: ReportMessageReceiver
   /**
    * Function to send messages to the master-process.
    *
@@ -48,7 +46,7 @@ export interface ClusterOptions<Worker> {
    * @returns {Promise<any>}
    * @memberof ClusterOptions
    */
-  sendToMaster(message: any): Promise<any>;
+  sendToMaster(message: any): Promise<any>
   /**
    * Function for sending message to a worker instance.
    *
@@ -57,14 +55,14 @@ export interface ClusterOptions<Worker> {
    * @returns {Promise<any>}
    * @memberof ClusterOptions
    */
-  sendToWorker(worker: Worker, message: any): Promise<any>;
+  sendToWorker(worker: Worker, message: any): Promise<any>
   /**
    * Gets a list of all workers.
    *
    * @returns {Promise<Worker[]>}
    * @memberof ClusterOptions
    */
-  getWorkers(): Promise<Worker[]>;
+  getWorkers(): Promise<Worker[]>
 }
 
 /**
@@ -80,28 +78,28 @@ export interface MetricReporterOptions {
    * @type {Clock}
    * @memberof MetricReporterOptions
    */
-  readonly clock?: Clock;
+  readonly clock?: Clock
   /**
    * Timeout in minutes a metric need to be included in the report without having changed.
    *
    * @type {number}
    * @memberof MetricReporterOptions
    */
-  minReportingTimeout?: number;
+  minReportingTimeout?: number
   /**
    * Options for clustering support.
    *
    * @type {ClusterOptions<any>}
    * @memberof MetricReporterOptions
    */
-  clusterOptions?: ClusterOptions<any>;
+  clusterOptions?: ClusterOptions<any>
   /**
    * Tags for this reporter instance - to be combined with the tags of each metric while reporting.
    *
    * @type {Map<string, string>}
    * @memberof MetricReporterOptions
    */
-  tags?: Map<string, string>;
+  tags?: Map<string, string>
 }
 
 /**
@@ -119,39 +117,40 @@ export class DefaultClusterOptions implements ClusterOptions<Worker> {
    * @type {boolean}
    * @memberof DefaultClusterOptions
    */
-  public readonly enabled: boolean = true;
+  public readonly enabled: boolean = true
   /**
    * Set to cluster module.
    *
    * @type {ReportMessageReceiver}
    * @memberof DefaultClusterOptions
    */
-  public readonly eventReceiver: ReportMessageReceiver = defaultCluster;
+  public readonly eventReceiver: ReportMessageReceiver = defaultCluster
   /**
    * Set to null.
    *
    * @memberof DefaultClusterOptions
    */
-  public readonly getWorkers: () => Promise<Worker[]> = null;
+  public readonly getWorkers: () => Promise<Worker[]> = null
   /**
    * True for forked processes.
    *
    * @type {boolean}
    * @memberof DefaultClusterOptions
    */
-  public readonly sendMetricsToMaster: boolean = !!defaultCluster.worker;
+  public readonly sendMetricsToMaster: boolean = !!defaultCluster.worker
   /**
    * Set to null.
    *
    * @memberof DefaultClusterOptions
    */
-  public readonly sendToWorker: (worker: Worker, message: any) => Promise<any> = null;
+  public readonly sendToWorker: (worker: Worker, message: any) => Promise<any> = null
   /**
    * Uses 'cluster.worker.send' to send messages.
    *
    * @memberof DefaultClusterOptions
    */
-  public readonly sendToMaster: (message: any) => Promise<any> = async (message: any) => defaultCluster.worker.send(message);
+  public readonly sendToMaster: (message: any) => Promise<any> = async (message: any) =>
+    defaultCluster.worker.send(message)
 }
 
 /**
@@ -168,37 +167,37 @@ export class DisabledClusterOptions implements ClusterOptions<Worker> {
    * @type {boolean}
    * @memberof DisabledClusterOptions
    */
-  public readonly enabled: boolean = false;
+  public readonly enabled: boolean = false
   /**
    * Set to null.
    *
    * @type {ReportMessageReceiver}
    * @memberof DisabledClusterOptions
    */
-  public readonly eventReceiver: ReportMessageReceiver = null;
+  public readonly eventReceiver: ReportMessageReceiver = null
   /**
    * Set to null.
    *
    * @memberof DisabledClusterOptions
    */
-  public readonly getWorkers: () => Promise<Worker[]> = null;
+  public readonly getWorkers: () => Promise<Worker[]> = null
   /**
    * Set to false.
    *
    * @type {boolean}
    * @memberof DisabledClusterOptions
    */
-  public readonly sendMetricsToMaster: boolean = false;
+  public readonly sendMetricsToMaster: boolean = false
   /**
    * Set to null.
    *
    * @memberof DisabledClusterOptions
    */
-  public readonly sendToWorker: (worker: Worker, message: any) => Promise<any> = null;
+  public readonly sendToWorker: (worker: Worker, message: any) => Promise<any> = null
   /**
    * Set to null.
    *
    * @memberof DisabledClusterOptions
    */
-  public readonly sendToMaster: (message: any) => Promise<any> = null;
+  public readonly sendToMaster: (message: any) => Promise<any> = null
 }

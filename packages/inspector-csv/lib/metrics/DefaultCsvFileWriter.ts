@@ -6,7 +6,7 @@ import { join } from 'path'
 
 import { Metric, SerializableMetric } from 'inspector-metrics'
 import { CsvFileWriter } from './CsvMetricReporter'
-import moment = require('moment');
+import moment = require('moment')
 
 /**
  * Options for standard implementation for a csv file writer.
@@ -15,7 +15,6 @@ import moment = require('moment');
  * @interface DefaultCsvFileWriterOptions
  */
 export interface DefaultCsvFileWriterOptions {
-
   /**
    * Determines if the column headers should be written at the top of each file.
    *
@@ -80,7 +79,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @type {DefaultCsvFileWriterOptions}
    * @memberof DefaultCsvFileWriter
    */
-  private readonly options: DefaultCsvFileWriterOptions;
+  private readonly options: DefaultCsvFileWriterOptions
   /**
    * Holds the current file name to check if the filename has changed
    * and the headers needs to be written.
@@ -89,7 +88,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @type {string}
    * @memberof DefaultCsvFileWriter
    */
-  private currentFilename: string;
+  private currentFilename: string
   /**
    * Holds the current dir to check if dir has changed
    * and a new one needs to be created as well as the file in it.
@@ -98,7 +97,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @type {string}
    * @memberof DefaultCsvFileWriter
    */
-  private currentDir: string;
+  private currentDir: string
   /**
    * Write queue to sync on file writes.
    *
@@ -106,7 +105,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @type {async.AsyncQueue<any>}
    * @memberof DefaultCsvFileWriter
    */
-  private readonly queue: async.AsyncQueue<any>;
+  private readonly queue: async.AsyncQueue<any>
 
   /**
    * Creates an instance of DefaultCsvFileWriter.
@@ -114,7 +113,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @param {DefaultCsvFileWriterOptions} options
    * @memberof DefaultCsvFileWriter
    */
-  public constructor ({
+  public constructor({
     filename = async () => `${moment().format('YYYYMMDDHH00')}_metrics.csv`,
     dir = async () => './metrics',
     writeHeaders = true,
@@ -145,7 +144,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @param {string[]} header
    * @memberof DefaultCsvFileWriter
    */
-  public async init (header: string[]): Promise<void> {
+  public async init(header: string[]): Promise<void> {
     const dir = await this.options.dir()
     const filename = await this.options.filename()
 
@@ -174,10 +173,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
         }
       }
       if (writeHeader) {
-        await this.write(
-          normalizedFilename,
-          header.join(this.options.delimiter) + this.options.lineEnding
-        )
+        await this.write(normalizedFilename, header.join(this.options.delimiter) + this.options.lineEnding)
       }
     }
     this.currentDir = dir
@@ -191,13 +187,10 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @param {string[]} values
    * @memberof DefaultCsvFileWriter
    */
-  public async writeRow (metric: Metric | SerializableMetric, values: string[]): Promise<void> {
+  public async writeRow(metric: Metric | SerializableMetric, values: string[]): Promise<void> {
     const normalizedFilename = join(this.currentDir, this.currentFilename)
     this.queue.push(async (callback: () => void) => {
-      await this.write(
-        normalizedFilename,
-        values.join(this.options.delimiter) + this.options.lineEnding
-      )
+      await this.write(normalizedFilename, values.join(this.options.delimiter) + this.options.lineEnding)
       callback()
     })
   }
@@ -211,20 +204,15 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @returns {Promise<void>}
    * @memberof DefaultCsvFileWriter
    */
-  private async write (filename: string, data: string): Promise<void> {
+  private async write(filename: string, data: string): Promise<void> {
     return await new Promise<void>((resolve, reject) => {
-      appendFile(
-        filename,
-        data,
-        this.options.encoding as any,
-        (err) => {
-          if (err) {
-            reject(err)
-            return
-          }
-          resolve()
+      appendFile(filename, data, this.options.encoding as any, (err) => {
+        if (err) {
+          reject(err)
+          return
         }
-      )
+        resolve()
+      })
     })
   }
 
@@ -236,7 +224,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @returns {Promise<void>}
    * @memberof DefaultCsvFileWriter
    */
-  private async mkdir (dir: string): Promise<void> {
+  private async mkdir(dir: string): Promise<void> {
     return await new Promise<void>((resolve, reject) => {
       mkdir(dir, (err) => {
         if (err) {
@@ -256,7 +244,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @returns {Promise<Stats>}
    * @memberof DefaultCsvFileWriter
    */
-  private async stat (filename: string): Promise<Stats> {
+  private async stat(filename: string): Promise<Stats> {
     return await new Promise<Stats>((resolve, reject) => {
       stat(filename, (err, stats) => {
         if (err) {

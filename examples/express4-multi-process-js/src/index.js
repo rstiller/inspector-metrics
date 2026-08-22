@@ -3,7 +3,7 @@ const os = require('os')
 const metrics = require('./metrics')
 const Event = require('inspector-metrics').Event
 
-async function start () {
+async function start() {
   await metrics.install()
 
   if (cluster.isMaster) {

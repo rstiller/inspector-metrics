@@ -130,7 +130,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @param {string} [description] optional metric description.
    * @memberof Meter
    */
-  public constructor (clock: Clock, sampleRate: number, name?: string, description?: string) {
+  public constructor(clock: Clock, sampleRate: number, name?: string, description?: string) {
     super()
     this.name = name
     this.description = description
@@ -148,7 +148,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {number}
    * @memberof Meter
    */
-  public get count (): number {
+  public get count(): number {
     return this.getCount()
   }
 
@@ -159,7 +159,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {number}
    * @memberof Meter
    */
-  public get meanRate (): number {
+  public get meanRate(): number {
     return this.getMeanRate()
   }
 
@@ -170,7 +170,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @type {MeteredRates}
    * @memberof Meter
    */
-  public get rates (): MeteredRates {
+  public get rates(): MeteredRates {
     return {
       15: this.get15MinuteRate(),
       5: this.get5MinuteRate(),
@@ -185,7 +185,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {this}
    * @memberof Meter
    */
-  public mark (value: number): this {
+  public mark(value: number): this {
     this.tickIfNeeded()
     this.countInternal += value
     this.avg15Minute.update(value)
@@ -200,7 +200,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {number}
    * @memberof Meter
    */
-  public getCount (): number {
+  public getCount(): number {
     return this.countInternal
   }
 
@@ -210,7 +210,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {number}
    * @memberof Meter
    */
-  public get15MinuteRate (): number {
+  public get15MinuteRate(): number {
     this.tickIfNeeded()
     return this.avg15Minute.getAverage(SECOND)
   }
@@ -221,7 +221,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {number}
    * @memberof Meter
    */
-  public get5MinuteRate (): number {
+  public get5MinuteRate(): number {
     this.tickIfNeeded()
     return this.avg5Minute.getAverage(SECOND)
   }
@@ -232,7 +232,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {number}
    * @memberof Meter
    */
-  public get1MinuteRate (): number {
+  public get1MinuteRate(): number {
     this.tickIfNeeded()
     return this.avg1Minute.getAverage(SECOND)
   }
@@ -243,12 +243,12 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {number} either 0 or the mean rate.
    * @memberof Meter
    */
-  public getMeanRate (): number {
+  public getMeanRate(): number {
     if (this.countInternal === 0) {
       return 0.0
     } else {
       const elapsed: number = diff(this.startTime, this.clock.time())
-      return this.countInternal / elapsed * Meter.SECOND_1_NANOS
+      return (this.countInternal / elapsed) * Meter.SECOND_1_NANOS
     }
   }
 
@@ -258,7 +258,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @returns {*}
    * @memberof Meter
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.count = this.countInternal
     json.meanRate = this.meanRate
@@ -273,7 +273,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @param {number} ticks number of updates.
    * @memberof Meter
    */
-  private tick (ticks: number): void {
+  private tick(ticks: number): void {
     while (ticks-- > 0) {
       this.avg15Minute.tick()
       this.avg5Minute.tick()
@@ -287,7 +287,7 @@ export class Meter extends BaseMetric implements Metered, SerializableMetered {
    * @private
    * @memberof Meter
    */
-  private tickIfNeeded (): void {
+  private tickIfNeeded(): void {
     const currentTime: Time = this.clock.time()
     const age: number = diff(this.lastTime, currentTime)
     if (age > this.interval) {

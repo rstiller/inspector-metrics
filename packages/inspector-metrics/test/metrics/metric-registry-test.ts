@@ -19,14 +19,14 @@ import { Timer } from '../../lib/metrics/timer'
 chai.use(sinonChai)
 
 const expect = chai.expect
-function mapSize (size: number): (map: Map<string, string>) => boolean {
+function mapSize(size: number): (map: Map<string, string>) => boolean {
   return (map: Map<string, string>) => map.size === size
 }
 
 @suite
 export class MetricRegistryTest {
   @test
-  public 'check default clock' (): void {
+  public 'check default clock'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getDefaultClock()).to.be.not.null
@@ -39,7 +39,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check monotone and non-monotone counters' (): void {
+  public 'check monotone and non-monotone counters'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounterList()).to.have.lengthOf(0)
@@ -60,7 +60,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check counters' (): void {
+  public 'add, set, remove and check counters'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounters()).to.satisfy(mapSize(0))
@@ -98,7 +98,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check counters with fluent interface' (): void {
+  public 'add, set, remove and check counters with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounters()).to.satisfy(mapSize(0))
@@ -113,9 +113,7 @@ export class MetricRegistryTest {
     expect(registry.getCounter('counter1')).to.be.equal(counter)
     expect(registry.getMetric('counter1')).to.be.equal(counter)
 
-    registry
-      .removeCounter('counter1')
-      .register('counter1', counter)
+    registry.removeCounter('counter1').register('counter1', counter)
 
     expect(registry.getCounters()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -131,7 +129,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check monotone counters' (): void {
+  public 'add, set, remove and check monotone counters'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounterList()).to.have.lengthOf(0)
@@ -178,7 +176,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check monotone counters with fluent interface' (): void {
+  public 'add, set, remove and check monotone counters with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounterList()).to.have.lengthOf(0)
@@ -196,9 +194,7 @@ export class MetricRegistryTest {
     expect(registry.getMonotoneCountersByName('monotone-counter1')[0]).to.be.equal(counter)
     expect(registry.getMetric('monotone-counter1')).to.be.equal(counter)
 
-    registry
-      .removeCounter('monotone-counter1')
-      .register('monotone-counter1', counter)
+    registry.removeCounter('monotone-counter1').register('monotone-counter1', counter)
 
     expect(registry.getMonotoneCounterList()).to.have.lengthOf(1)
     expect(registry.getCounters()).to.satisfy(mapSize(0))
@@ -218,7 +214,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check hdr-histograms' (): void {
+  public 'add, set, remove and check hdr-histograms'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getHistograms()).to.satisfy(mapSize(0))
@@ -256,7 +252,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check hdr-histograms with fluent interface' (): void {
+  public 'add, set, remove and check hdr-histograms with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getHistograms()).to.satisfy(mapSize(0))
@@ -271,9 +267,7 @@ export class MetricRegistryTest {
     expect(registry.getHistogram('histogram1')).to.be.equal(histogram)
     expect(registry.getMetric('histogram1')).to.be.equal(histogram)
 
-    registry
-      .removeHistogram('histogram1')
-      .register('histogram1', histogram)
+    registry.removeHistogram('histogram1').register('histogram1', histogram)
 
     expect(registry.getHistograms()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -289,7 +283,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check histograms' (): void {
+  public 'add, set, remove and check histograms'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getHistograms()).to.satisfy(mapSize(0))
@@ -327,7 +321,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check histograms with fluent interface' (): void {
+  public 'add, set, remove and check histograms with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getHistograms()).to.satisfy(mapSize(0))
@@ -342,9 +336,7 @@ export class MetricRegistryTest {
     expect(registry.getHistogram('histogram1')).to.be.equal(histogram)
     expect(registry.getMetric('histogram1')).to.be.equal(histogram)
 
-    registry
-      .removeHistogram('histogram1')
-      .register('histogram1', histogram)
+    registry.removeHistogram('histogram1').register('histogram1', histogram)
 
     expect(registry.getHistograms()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -360,7 +352,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check meters' (): void {
+  public 'add, set, remove and check meters'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getMeters()).to.satisfy(mapSize(0))
@@ -398,7 +390,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check meters with fluent interface' (): void {
+  public 'add, set, remove and check meters with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getMeters()).to.satisfy(mapSize(0))
@@ -413,9 +405,7 @@ export class MetricRegistryTest {
     expect(registry.getMeter('meter1')).to.be.equal(meter)
     expect(registry.getMetric('meter1')).to.be.equal(meter)
 
-    registry
-      .removeMeter('meter1')
-      .register('meter1', meter)
+    registry.removeMeter('meter1').register('meter1', meter)
 
     expect(registry.getMeters()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -431,7 +421,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check mix of histograms and hdr-histograms' (): void {
+  public 'check mix of histograms and hdr-histograms'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getHistograms()).to.satisfy(mapSize(0))
@@ -455,7 +445,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check timers' (): void {
+  public 'add, set, remove and check timers'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getTimers()).to.satisfy(mapSize(0))
@@ -492,7 +482,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check timers with fluent interface' (): void {
+  public 'add, set, remove and check timers with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getTimers()).to.satisfy(mapSize(0))
@@ -506,9 +496,7 @@ export class MetricRegistryTest {
     expect(registry.getTimer('timer1')).to.be.equal(timer)
     expect(registry.getMetric('timer1')).to.be.equal(timer)
 
-    registry
-      .removeTimer('timer1')
-      .register('timer1', timer)
+    registry.removeTimer('timer1').register('timer1', timer)
 
     expect(registry.getTimers()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -524,7 +512,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add metric set' (): void {
+  public 'add metric set'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounters()).to.satisfy(mapSize(0))
@@ -540,7 +528,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check name factory' (): void {
+  public 'check name factory'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getCounters()).to.satisfy(mapSize(0))
@@ -556,7 +544,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check gauges' (): void {
+  public 'add, set, remove and check gauges'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getGauges()).to.satisfy(mapSize(0))
@@ -591,17 +579,14 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'add, set, remove and check gauges with fluent interface' (): void {
+  public 'add, set, remove and check gauges with fluent interface'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     expect(registry.getGauges()).to.satisfy(mapSize(0))
     const gauge = new SimpleGauge()
 
     // should only register gauge one time
-    registry
-      .register('gauge1', gauge)
-      .removeGauge('gauge1')
-      .register('gauge1', gauge)
+    registry.register('gauge1', gauge).removeGauge('gauge1').register('gauge1', gauge)
 
     expect(registry.getGauges()).to.satisfy(mapSize(1))
     expect(registry.getMetrics()).to.satisfy(mapSize(1))
@@ -617,7 +602,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check groups' (): void {
+  public 'check groups'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     const counter = registry.newCounter('counter1', 'group')
@@ -635,7 +620,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check listeners' (): void {
+  public 'check listeners'(): void {
     const registry: MetricRegistry = new MetricRegistry()
     const listener: MetricRegistryListener = {
       metricAdded: (name: string, metric: Metric) => {},
@@ -719,7 +704,7 @@ export class MetricRegistryTest {
   }
 
   @test
-  public 'check name building with registerMetric' (): void {
+  public 'check name building with registerMetric'(): void {
     const registry: MetricRegistry = new MetricRegistry()
 
     const counter = registry.newCounter('test_counter', 'test_group', 'test_counter_desc')
@@ -743,7 +728,10 @@ export class MetricRegistryTest {
     expect(meter.getDescription()).to.be.equal('test_meter_desc')
 
     const monotoneCounter = registry.newMonotoneCounter(
-      'test_monotoneCounter', 'test_group', 'test_monotoneCounter_desc')
+      'test_monotoneCounter',
+      'test_group',
+      'test_monotoneCounter_desc'
+    )
     expect(monotoneCounter.getName()).to.be.equal('test_monotoneCounter')
     expect(monotoneCounter.getGroup()).to.be.equal('test_group')
     expect(monotoneCounter.getDescription()).to.be.equal('test_monotoneCounter_desc')

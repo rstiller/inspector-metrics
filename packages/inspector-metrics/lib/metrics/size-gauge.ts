@@ -63,7 +63,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {collection is LengthAttributeInterface}
    * @memberof SizeGauge
    */
-  protected static isLengthAttributeInterface (collection: any): collection is LengthAttributeInterface {
+  protected static isLengthAttributeInterface(collection: any): collection is LengthAttributeInterface {
     return collection && typeof collection.length === 'number'
   }
 
@@ -76,7 +76,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {collection is LengthMethodInterface}
    * @memberof SizeGauge
    */
-  protected static isLengthMethodInterface (collection: any): collection is LengthMethodInterface {
+  protected static isLengthMethodInterface(collection: any): collection is LengthMethodInterface {
     return collection && typeof collection.length === 'function'
   }
 
@@ -89,7 +89,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {collection is SizeAttributeInterface}
    * @memberof SizeGauge
    */
-  protected static isSizeAttributeInterface (collection: any): collection is SizeAttributeInterface {
+  protected static isSizeAttributeInterface(collection: any): collection is SizeAttributeInterface {
     return collection && typeof collection.size === 'number'
   }
 
@@ -102,7 +102,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {collection is SizeMethodInterface}
    * @memberof SizeGauge
    */
-  protected static isSizeMethodInterface (collection: any): collection is SizeMethodInterface {
+  protected static isSizeMethodInterface(collection: any): collection is SizeMethodInterface {
     return collection && typeof collection.size === 'function'
   }
 
@@ -123,10 +123,11 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @param {string} [description] The description of the metric
    * @memberof SizeGauge
    */
-  public constructor (
+  public constructor(
     name: string,
     collection: LengthAttributeInterface | LengthMethodInterface | SizeAttributeInterface | SizeMethodInterface,
-    description?: string) {
+    description?: string
+  ) {
     super()
     this.setName(name)
     this.setDescription(description)
@@ -150,7 +151,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {number} Returns the current size of the collection or -1.
    * @memberof SizeGauge
    */
-  public getValue (): number {
+  public getValue(): number {
     return this.extractor()
   }
 
@@ -160,7 +161,7 @@ export class SizeGauge extends BaseMetric implements Gauge<number> {
    * @returns {*}
    * @memberof SizeGauge
    */
-  public toJSON (): any {
+  public toJSON(): any {
     const json = super.toJSON()
     json.value = this.extractor()
     return json

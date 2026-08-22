@@ -1,11 +1,6 @@
 import 'source-map-support/register'
 
-import {
-  BaseMetric,
-  Metric,
-  MetricSet,
-  SimpleGauge
-} from 'inspector-metrics'
+import { BaseMetric, Metric, MetricSet, SimpleGauge } from 'inspector-metrics'
 import * as v8 from 'v8'
 
 /**
@@ -21,28 +16,28 @@ export class SpaceHistory {
    * @type {SimpleGauge}
    * @memberof SpaceHistory
    */
-  public size: SimpleGauge;
+  public size: SimpleGauge
   /**
    * Used size.
    *
    * @type {SimpleGauge}
    * @memberof SpaceHistory
    */
-  public usedSize: SimpleGauge;
+  public usedSize: SimpleGauge
   /**
    * Available size.
    *
    * @type {SimpleGauge}
    * @memberof SpaceHistory
    */
-  public availableSize: SimpleGauge;
+  public availableSize: SimpleGauge
   /**
    * Physical size.
    *
    * @type {SimpleGauge}
    * @memberof SpaceHistory
    */
-  public physicalSize: SimpleGauge;
+  public physicalSize: SimpleGauge
 
   /**
    * Creates an instance of SpaceHistory.
@@ -51,7 +46,7 @@ export class SpaceHistory {
    * @param {Metric[]} metrics
    * @memberof SpaceHistory
    */
-  public constructor (spaceName: string, metrics: Metric[]) {
+  public constructor(spaceName: string, metrics: Metric[]) {
     this.size = new SimpleGauge('spaceSize')
     this.usedSize = new SimpleGauge('spaceUsedSize')
     this.availableSize = new SimpleGauge('spaceAvailableSize')
@@ -85,7 +80,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {Metric[]}
    * @memberof V8MemoryMetrics
    */
-  private readonly metrics: Metric[] = [];
+  private readonly metrics: Metric[] = []
   /**
    * Stores the size gauges for different specs.
    *
@@ -93,7 +88,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {Map<string, SpaceHistory>}
    * @memberof V8MemoryMetrics
    */
-  private readonly spaces: Map<string, SpaceHistory> = new Map();
+  private readonly spaces: Map<string, SpaceHistory> = new Map()
   /**
    * Total heap size.
    *
@@ -101,7 +96,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly totalHeapSize: SimpleGauge = new SimpleGauge('totalHeapSize');
+  private readonly totalHeapSize: SimpleGauge = new SimpleGauge('totalHeapSize')
   /**
    * Total available size.
    *
@@ -109,7 +104,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly totalAvailableSize: SimpleGauge = new SimpleGauge('totalAvailableSize');
+  private readonly totalAvailableSize: SimpleGauge = new SimpleGauge('totalAvailableSize')
   /**
    * Total physical size.
    *
@@ -117,7 +112,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly totalPhysicalSize: SimpleGauge = new SimpleGauge('totalPhysicalSize');
+  private readonly totalPhysicalSize: SimpleGauge = new SimpleGauge('totalPhysicalSize')
   /**
    * Total heap size for executable code.
    *
@@ -125,7 +120,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly totalHeapSizeExecutable: SimpleGauge = new SimpleGauge('totalHeapSizeExecutable');
+  private readonly totalHeapSizeExecutable: SimpleGauge = new SimpleGauge('totalHeapSizeExecutable')
   /**
    * Used heap size.
    *
@@ -133,7 +128,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly usedHeapSize: SimpleGauge = new SimpleGauge('usedHeapSize');
+  private readonly usedHeapSize: SimpleGauge = new SimpleGauge('usedHeapSize')
   /**
    * Maximum heap size.
    *
@@ -141,7 +136,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly heapSizeLimit: SimpleGauge = new SimpleGauge('heapSizeLimit');
+  private readonly heapSizeLimit: SimpleGauge = new SimpleGauge('heapSizeLimit')
   /**
    * Allocated memory.
    *
@@ -149,7 +144,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly mallocedMemory: SimpleGauge = new SimpleGauge('mallocedMemory');
+  private readonly mallocedMemory: SimpleGauge = new SimpleGauge('mallocedMemory')
   /**
    * Maximum allocated memory.
    *
@@ -157,7 +152,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {SimpleGauge}
    * @memberof V8MemoryMetrics
    */
-  private readonly peakMallocedMemory: SimpleGauge = new SimpleGauge('peakMallocedMemory');
+  private readonly peakMallocedMemory: SimpleGauge = new SimpleGauge('peakMallocedMemory')
   /**
    * The timer reference from the scheduler.
    *
@@ -165,7 +160,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @type {NodeJS.Timer}
    * @memberof V8MemoryMetrics
    */
-  private readonly intervalRef: NodeJS.Timer;
+  private readonly intervalRef: NodeJS.Timer
 
   /**
    * Creates an instance of V8MemoryMetrics.
@@ -174,7 +169,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @param {number} [sampleRate=1000]
    * @memberof V8MemoryMetrics
    */
-  public constructor (name: string, sampleRate = 1000) {
+  public constructor(name: string, sampleRate = 1000) {
     super()
     this.name = name
 
@@ -223,7 +218,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    *
    * @memberof V8MemoryMetrics
    */
-  public stop (): void {
+  public stop(): void {
     this.intervalRef.unref()
   }
 
@@ -233,7 +228,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @returns {Map<string, Metric>}
    * @memberof V8MemoryMetrics
    */
-  public getMetrics (): Map<string, Metric> {
+  public getMetrics(): Map<string, Metric> {
     const map: Map<string, Metric> = new Map()
     this.metrics.forEach((metric) => map.set(metric.getName(), metric))
     return map
@@ -245,7 +240,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @returns {Metric[]}
    * @memberof V8MemoryMetrics
    */
-  public getMetricList (): Metric[] {
+  public getMetricList(): Metric[] {
     return this.metrics
   }
 
@@ -256,7 +251,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8MemoryMetrics
    */
-  public setGroup (group: string): this {
+  public setGroup(group: string): this {
     this.group = group
 
     this.totalHeapSize.setGroup(group)
@@ -286,7 +281,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @returns {this}
    * @memberof V8MemoryMetrics
    */
-  public setTag (name: string, value: string): this {
+  public setTag(name: string, value: string): this {
     this.tagMap.set(name, value)
 
     this.totalHeapSize.setTag(name, value)
@@ -314,7 +309,7 @@ export class V8MemoryMetrics extends BaseMetric implements MetricSet {
    * @param {string} name
    * @memberof V8MemoryMetrics
    */
-  public removeTag (name: string): this {
+  public removeTag(name: string): this {
     this.tagMap.delete(name)
 
     this.totalHeapSize.removeTag(name)

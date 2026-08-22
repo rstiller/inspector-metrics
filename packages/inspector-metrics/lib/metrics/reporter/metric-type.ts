@@ -1,6 +1,6 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Enumeration of all metric types.
  */
-export type MetricType = "counter" | "gauge" | "histogram" | "meter" | "timer";
+export type MetricType = 'counter' | 'gauge' | 'histogram' | 'meter' | 'timer'

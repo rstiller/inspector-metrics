@@ -1,4 +1,4 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Utility interface to track report-timestamps and -values of metric instances.
@@ -20,12 +20,12 @@ export interface MetricEntry {
    * @type {number}
    * @memberof MetricEntry
    */
-  lastReport: number;
+  lastReport: number
   /**
    * value that got reported as latest.
    *
    * @type {number}
    * @memberof MetricEntry
    */
-  lastValue: number;
+  lastValue: number
 }

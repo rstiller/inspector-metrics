@@ -1,28 +1,25 @@
 import { IClusterConfig } from 'influx'
 import { DefaultSender, InfluxMetricReporter } from 'inspector-influx'
 import { Event, MetricRegistry } from 'inspector-metrics'
-import {
-  V8EventLoop,
-  V8GCMetrics,
-  V8MemoryMetrics,
-  V8ProcessMetrics
-} from 'inspector-vm'
+import { V8EventLoop, V8GCMetrics, V8MemoryMetrics, V8ProcessMetrics } from 'inspector-vm'
 import { hostname } from 'os'
 
 export class MetricsSupport {
-  public readonly reporter: InfluxMetricReporter;
-  public readonly registry: MetricRegistry;
-  public readonly packageJson: any;
+  public readonly reporter: InfluxMetricReporter
+  public readonly registry: MetricRegistry
+  public readonly packageJson: any
 
-  public constructor () {
+  public constructor() {
     const config: IClusterConfig = {
       username: 'admin',
       password: 'admin',
       database: 'influx-v1-example',
-      hosts: [{
-        host: 'localhost',
-        port: 8086
-      }]
+      hosts: [
+        {
+          host: 'localhost',
+          port: 8086
+        }
+      ]
     }
     this.registry = new MetricRegistry()
     this.reporter = new InfluxMetricReporter({
@@ -35,7 +32,7 @@ export class MetricsSupport {
     this.packageJson = require('../../package.json')
   }
 
-  public async init (): Promise<void> {
+  public async init(): Promise<void> {
     this.registry.registerMetric(new V8GCMetrics('gc', this.registry.getDefaultClock()))
     this.registry.registerMetric(new V8MemoryMetrics('memory'))
     this.registry.registerMetric(new V8EventLoop('eventLoop'))
@@ -53,7 +50,7 @@ export class MetricsSupport {
     await this.reporter.start()
   }
 
-  public async reportEvent (event: Event<any>): Promise<Event<any>> {
+  public async reportEvent(event: Event<any>): Promise<Event<any>> {
     return await this.reporter.reportEvent(event)
   }
 }

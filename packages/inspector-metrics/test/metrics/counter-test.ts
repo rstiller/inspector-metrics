@@ -12,7 +12,7 @@ const expect = chai.expect
 @suite
 export class CounterTest {
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let counter: Counter = new Counter()
     expect(counter.getName()).to.be.undefined
     expect(counter.getDescription()).to.be.undefined
@@ -27,7 +27,7 @@ export class CounterTest {
   }
 
   @test
-  public 'check count, reset and get' (): void {
+  public 'check count, reset and get'(): void {
     const counter: Counter = new Counter()
     expect(counter.getCount()).to.equal(0)
     counter.increment()
@@ -51,7 +51,7 @@ export class CounterTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     const internalObject = {
       property1: 'value1',
       property2: 2
@@ -90,7 +90,7 @@ export class CounterTest {
 @suite
 export class MonotoneCounterTest {
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let counter: MonotoneCounter = new MonotoneCounter()
     expect(counter.getName()).to.be.undefined
     expect(counter.getDescription()).to.be.undefined
@@ -105,7 +105,7 @@ export class MonotoneCounterTest {
   }
 
   @test
-  public 'check count, reset and get' (): void {
+  public 'check count, reset and get'(): void {
     const counter: MonotoneCounter = new MonotoneCounter()
     expect(counter.getCount()).to.equal(0)
     counter.increment()
@@ -117,7 +117,7 @@ export class MonotoneCounterTest {
   }
 
   @test
-  public 'check increase by negative value' (): void {
+  public 'check increase by negative value'(): void {
     const counter: MonotoneCounter = new MonotoneCounter()
     expect(counter.getCount()).to.equal(0)
     try {
@@ -129,7 +129,7 @@ export class MonotoneCounterTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     const internalObject = {
       property1: 'value1',
       property2: 2

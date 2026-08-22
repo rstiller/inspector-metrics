@@ -3,7 +3,7 @@ import { hostname } from 'os'
 
 import { MetricsSupport } from './metrics'
 
-async function start (): Promise<void> {
+async function start(): Promise<void> {
   const metricsSupport = new MetricsSupport()
   await metricsSupport.init()
 
@@ -14,5 +14,4 @@ async function start (): Promise<void> {
   await metricsSupport.reportEvent(event)
 }
 
-start()
-  .catch((cause) => console.log(cause))
+start().catch((cause) => console.log(cause))

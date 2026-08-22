@@ -6,6 +6,5 @@ import { suite, test } from '@testdeck/mocha'
 @suite
 export class ElasticsearchMetricReporterTest {
   @test
-  public checkNothing (): void {
-  }
+  public checkNothing(): void {}
 }

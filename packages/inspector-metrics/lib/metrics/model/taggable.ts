@@ -1,10 +1,10 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
 /**
  * Helper interface for handling tags.
  */
 export interface Tags {
-  [key: string]: string;
+  [key: string]: string
 }
 
 /**
@@ -14,14 +14,13 @@ export interface Tags {
  * @interface Taggable
  */
 export interface Taggable {
-
   /**
    * Gets all tags.
    *
    * @returns {Map<string, string>}
    * @memberof Taggable
    */
-  getTags(): Map<string, string>;
+  getTags(): Map<string, string>
 
   /**
    * Gets the specified tag or {@code null}.
@@ -30,7 +29,7 @@ export interface Taggable {
    * @returns {string}
    * @memberof Taggable
    */
-  getTag(name: string): string;
+  getTag(name: string): string
 
   /**
    * Sets the specified tag.
@@ -40,7 +39,7 @@ export interface Taggable {
    * @returns {this}
    * @memberof Taggable
    */
-  setTag(name: string, value: string): this;
+  setTag(name: string, value: string): this
 
   /**
    * Sets tags set.
@@ -49,7 +48,7 @@ export interface Taggable {
    * @returns {this}
    * @memberof Taggable
    */
-  setTags(tags: Map<string, string>): this;
+  setTags(tags: Map<string, string>): this
 
   /**
    * Adds the specified tags to metric's tags.
@@ -58,7 +57,7 @@ export interface Taggable {
    * @returns {this}
    * @memberof Taggable
    */
-  addTags(tags: Map<string, string>): this;
+  addTags(tags: Map<string, string>): this
 
   /**
    * Removes the specified tag.
@@ -67,7 +66,7 @@ export interface Taggable {
    * @returns {this}
    * @memberof Taggable
    */
-  removeTag(name: string): this;
+  removeTag(name: string): this
 
   /**
    * Removes the specified tag names.
@@ -76,8 +75,7 @@ export interface Taggable {
    * @returns {this}
    * @memberof Taggable
    */
-  removeTags(...names: string[]): this;
-
+  removeTags(...names: string[]): this
 }
 
 /**
@@ -88,11 +86,11 @@ export interface Taggable {
  * @returns {Map<string, string>}
  */
 export function tagsToMap(tags: Tags): Map<string, string> {
-  const tagMap: Map<string, string> = new Map();
+  const tagMap: Map<string, string> = new Map()
   if (tags) {
-    Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]));
+    Object.keys(tags).forEach((key) => tagMap.set(key, tags[key]))
   }
-  return tagMap;
+  return tagMap
 }
 
 /**
@@ -103,9 +101,9 @@ export function tagsToMap(tags: Tags): Map<string, string> {
  * @returns {Tags}
  */
 export function mapToTags(tagMap: Map<string, string>): Tags {
-  const tags: Tags = {};
+  const tags: Tags = {}
   if (tagMap) {
-    tagMap.forEach((tag, name) => tags[name] = tag);
+    tagMap.forEach((tag, name) => (tags[name] = tag))
   }
-  return tags;
+  return tags
 }

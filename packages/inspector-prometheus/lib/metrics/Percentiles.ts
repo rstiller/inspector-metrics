@@ -13,14 +13,14 @@ export class Percentiles {
    * @static
    * @memberof Percentiles
    */
-  public static readonly METADATA_NAME = 'quantiles';
+  public static readonly METADATA_NAME = 'quantiles'
   /**
    * Creates an instance of Percentiles.
    *
    * @param {number[]} [boundaries=[0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]]
    * @memberof Percentiles
    */
-  constructor (public boundaries: number[] = [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]) {
+  constructor(public boundaries: number[] = [0.01, 0.05, 0.5, 0.75, 0.9, 0.95, 0.98, 0.99, 0.999]) {
     boundaries.sort((a: number, b: number) => a - b)
     boundaries.forEach((boundary) => {
       if (boundary <= 0.0) {

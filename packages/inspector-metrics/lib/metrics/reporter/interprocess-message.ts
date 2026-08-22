@@ -1,9 +1,9 @@
-import "source-map-support/register";
+import 'source-map-support/register'
 
-import { SerializableMetric } from "../model/metric";
-import { Tags } from "../model/taggable";
-import { OverallReportContext } from "./overall-report-context";
-import { ReportingResult } from "./reporting-result";
+import { SerializableMetric } from '../model/metric'
+import { Tags } from '../model/taggable'
+import { OverallReportContext } from './overall-report-context'
+import { ReportingResult } from './reporting-result'
 
 /**
  * Interface for common inter-process messages.
@@ -18,14 +18,14 @@ export interface InterprocessMessage {
    * @type {string}
    * @memberof InterprocessReportMessage
    */
-  targetReporterType: string;
+  targetReporterType: string
   /**
    * The type property of the message sent to the master process.
    *
    * @type {string}
    * @memberof InterprocessReportMessage
    */
-  type: string;
+  type: string
 }
 
 /**
@@ -42,21 +42,21 @@ export interface InterprocessReportMessage<T> extends InterprocessMessage {
    * @type {OverallReportContext}
    * @memberof InterprocessReportMessage
    */
-  ctx: OverallReportContext;
+  ctx: OverallReportContext
   /**
    * Date from report function in forked process.
    *
    * @type {Date}
    * @memberof InterprocessReportMessage
    */
-  date: Date;
+  date: Date
   /**
    * Tags from originating {@link MetricRegistry}.
    *
    * @type {Tags}
    * @memberof InterprocessReportMessage
    */
-  tags: Tags;
+  tags: Tags
   /**
    * Collection of metric reporting results from forked process.
    *
@@ -71,11 +71,11 @@ export interface InterprocessReportMessage<T> extends InterprocessMessage {
    * @memberof InterprocessReportMessage
    */
   metrics: {
-      counters: Array<ReportingResult<SerializableMetric, T>>;
-      gauges: Array<ReportingResult<SerializableMetric, T>>;
-      histograms: Array<ReportingResult<SerializableMetric, T>>;
-      meters: Array<ReportingResult<SerializableMetric, T>>;
-      monotoneCounters: Array<ReportingResult<SerializableMetric, T>>;
-      timers: Array<ReportingResult<SerializableMetric, T>>;
-  };
+    counters: Array<ReportingResult<SerializableMetric, T>>
+    gauges: Array<ReportingResult<SerializableMetric, T>>
+    histograms: Array<ReportingResult<SerializableMetric, T>>
+    meters: Array<ReportingResult<SerializableMetric, T>>
+    monotoneCounters: Array<ReportingResult<SerializableMetric, T>>
+    timers: Array<ReportingResult<SerializableMetric, T>>
+  }
 }

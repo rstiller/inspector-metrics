@@ -18,7 +18,7 @@ export class TimerTest {
   private readonly clock: MockedClock = new MockedClock()
 
   @test
-  public 'check name and description' (): void {
+  public 'check name and description'(): void {
     let timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3))
     expect(timer.getName()).to.be.undefined
     expect(timer.getDescription()).to.be.undefined
@@ -33,7 +33,7 @@ export class TimerTest {
   }
 
   @test
-  public 'negative duration' (): void {
+  public 'negative duration'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -82,7 +82,7 @@ export class TimerTest {
   }
 
   @test
-  public 'single duration measuring with no tick' (): void {
+  public 'single duration measuring with no tick'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -131,7 +131,7 @@ export class TimerTest {
   }
 
   @test
-  public 'multiple duration measuring with no tick' (): void {
+  public 'multiple duration measuring with no tick'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -182,7 +182,7 @@ export class TimerTest {
   }
 
   @test
-  public 'single duration measuring with one tick' (): void {
+  public 'single duration measuring with one tick'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -235,7 +235,7 @@ export class TimerTest {
   }
 
   @test
-  public 'multiple duration measuring with one tick' (): void {
+  public 'multiple duration measuring with one tick'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -290,7 +290,7 @@ export class TimerTest {
   }
 
   @test
-  public 'multiple duration measuring with multiple ticks' (): void {
+  public 'multiple duration measuring with multiple ticks'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -372,7 +372,7 @@ export class TimerTest {
   }
 
   @test
-  public 'multiple duration measuring with multiple ticks within different rate-intervals' (): void {
+  public 'multiple duration measuring with multiple ticks within different rate-intervals'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -454,7 +454,7 @@ export class TimerTest {
   }
 
   @test
-  public 'add duration with time function' (): void {
+  public 'add duration with time function'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -512,7 +512,7 @@ export class TimerTest {
   }
 
   @test
-  public 'add duration with async time function' (callback: () => any): void {
+  public 'add duration with async time function'(callback: () => any): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -538,15 +538,16 @@ export class TimerTest {
     expect(snapshot.getMin()).to.be.undefined
     expect(snapshot.getStdDev()).to.equal(0)
 
-    timer.timeAsync(async () => {
-      return await new Promise<void>((resolve) => {
-        this.clock.setCurrentTime({
-          milliseconds: 10,
-          nanoseconds: 0
+    timer
+      .timeAsync(async () => {
+        return await new Promise<void>((resolve) => {
+          this.clock.setCurrentTime({
+            milliseconds: 10,
+            nanoseconds: 0
+          })
+          resolve()
         })
-        resolve()
       })
-    })
       .then(() => {
         this.clock.setCurrentTime({
           milliseconds: 1001,
@@ -577,14 +578,12 @@ export class TimerTest {
   }
 
   @test
-  public 'check bucket counting' (): void {
+  public 'check bucket counting'(): void {
     const buckets = Buckets.linear(100, 200, 5)
     const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3), 'name', 'description', buckets)
 
     expect(timer.getBuckets()).to.be.equal(buckets)
-    expect(timer.getBuckets().boundaries).to.deep.equal([
-      100, 300, 500, 700, 900
-    ])
+    expect(timer.getBuckets().boundaries).to.deep.equal([100, 300, 500, 700, 900])
     expect(timer.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5)
 
     timer.addDuration(101, NANOSECOND)
@@ -616,14 +615,12 @@ export class TimerTest {
   }
 
   @test
-  public 'check bucket counting more than reservoir capacity' (): void {
+  public 'check bucket counting more than reservoir capacity'(): void {
     const buckets = Buckets.linear(100, 200, 5)
     const timer: Timer = new Timer(this.clock, new SlidingWindowReservoir(3), 'name', 'description', buckets)
 
     expect(timer.getBuckets()).to.be.equal(buckets)
-    expect(timer.getBuckets().boundaries).to.deep.equal([
-      100, 300, 500, 700, 900
-    ])
+    expect(timer.getBuckets().boundaries).to.deep.equal([100, 300, 500, 700, 900])
     expect(timer.getCounts()).to.satisfy((map: Map<number, number>) => map.size === 5)
 
     timer.addDuration(50, NANOSECOND)
@@ -646,7 +643,7 @@ export class TimerTest {
   }
 
   @test
-  public 'check serialization' (): void {
+  public 'check serialization'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -738,7 +735,7 @@ export class StopWatchTest {
   private readonly clock: MockedClock = new MockedClock()
 
   @test
-  public 'start and stop without time difference' (): void {
+  public 'start and stop without time difference'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -789,7 +786,7 @@ export class StopWatchTest {
   }
 
   @test
-  public 'start and stop with time difference' (): void {
+  public 'start and stop with time difference'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0
@@ -851,7 +848,7 @@ export class StopWatchTest {
   }
 
   @test
-  public 'start and stop with time difference within different rate-intervals' (): void {
+  public 'start and stop with time difference within different rate-intervals'(): void {
     this.clock.setCurrentTime({
       milliseconds: 0,
       nanoseconds: 0

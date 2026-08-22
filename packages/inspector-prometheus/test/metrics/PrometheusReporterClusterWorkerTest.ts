@@ -4,9 +4,7 @@ import 'source-map-support/register'
 import * as chai from 'chai'
 import * as sinonChai from 'sinon-chai'
 
-import {
-  InterprocessMessage, MetricRegistry, MetricReporter
-} from 'inspector-metrics'
+import { InterprocessMessage, MetricRegistry, MetricReporter } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'
 import { SinonSpy, spy } from 'sinon'
 import { InterprocessReportRequest, InterprocessReportResponse, PrometheusMetricReporter } from '../../lib/metrics'
@@ -19,27 +17,30 @@ const expect = chai.expect
 
 @suite
 export class PrometheusReporterClusterWorkerTest {
-  private readonly clock: MockedClock = new MockedClock();
-  private registry: MetricRegistry;
-  private reporter: PrometheusMetricReporter;
-  private clusterOptions: TestClusterOptions;
-  private getMetricsStringSpy: SinonSpy;
+  private readonly clock: MockedClock = new MockedClock()
+  private registry: MetricRegistry
+  private reporter: PrometheusMetricReporter
+  private clusterOptions: TestClusterOptions
+  private getMetricsStringSpy: SinonSpy
 
-  public before (): void {
+  public before(): void {
     this.clock.setCurrentTime({ milliseconds: 0, nanoseconds: 0 })
     this.registry = new MetricRegistry()
     this.clusterOptions = new TestClusterOptions(true, true, [], 1000)
-    this.reporter = new PrometheusMetricReporter({
-      clock: this.clock,
-      clusterOptions: this.clusterOptions
-    }, 'TestPrometheusMetricReporter')
+    this.reporter = new PrometheusMetricReporter(
+      {
+        clock: this.clock,
+        clusterOptions: this.clusterOptions
+      },
+      'TestPrometheusMetricReporter'
+    )
     this.reporter.addMetricRegistry(this.registry)
     this.getMetricsStringSpy = spy(this.reporter.getMetricsString)
     this.reporter.getMetricsString = this.getMetricsStringSpy
   }
 
   @test
-  public async 'check if ordinary report messages are ignored' (): Promise<void> {
+  public async 'check if ordinary report messages are ignored'(): Promise<void> {
     const message: InterprocessMessage = {
       targetReporterType: 'TestPrometheusMetricReporter',
       type: MetricReporter.MESSAGE_TYPE
@@ -49,7 +50,7 @@ export class PrometheusReporterClusterWorkerTest {
   }
 
   @test
-  public async 'check if wrong targetReporterType is ignored' (): Promise<void> {
+  public async 'check if wrong targetReporterType is ignored'(): Promise<void> {
     const message: InterprocessMessage = {
       targetReporterType: 'NotMatching',
       type: PrometheusMetricReporter.MESSAGE_TYPE_REQUEST
@@ -59,7 +60,7 @@ export class PrometheusReporterClusterWorkerTest {
   }
 
   @test
-  public async 'check if response messages are ignored' (): Promise<void> {
+  public async 'check if response messages are ignored'(): Promise<void> {
     const message: InterprocessReportResponse = {
       id: 'unexpected',
       metricsStr: '#empty',
@@ -71,7 +72,7 @@ export class PrometheusReporterClusterWorkerTest {
   }
 
   @test
-  public async 'check if request messages are answered' (): Promise<void> {
+  public async 'check if request messages are answered'(): Promise<void> {
     const callback = this.clusterOptions.eventReceiverOnSpy.getCall(0).args[1]
 
     const requestMessage: InterprocessReportRequest = {
@@ -97,7 +98,7 @@ export class PrometheusReporterClusterWorkerTest {
     expect(responseMessage.type).to.equal(PrometheusMetricReporter.MESSAGE_TYPE_RESPONSE)
   }
 
-  protected verifyMessageIsIgnored (message: any): void {
+  protected verifyMessageIsIgnored(message: any): void {
     expect(this.getMetricsStringSpy).to.not.have.been.called
     expect(this.clusterOptions.eventReceiverOnSpy).to.have.been.called
     expect(this.clusterOptions.eventReceiverOnSpy.callCount).to.equal(1)

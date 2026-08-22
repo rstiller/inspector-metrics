@@ -1,127 +1,123 @@
-import "reflect-metadata";
-import "source-map-support/register";
+import 'reflect-metadata'
+import 'source-map-support/register'
 
-import * as chai from "chai";
-import { suite, test } from "@testdeck/mocha";
-import { SinonSpy, spy } from "sinon";
-import * as sinonChai from "sinon-chai";
+import * as chai from 'chai'
+import { suite, test } from '@testdeck/mocha'
+import { SinonSpy, spy } from 'sinon'
+import * as sinonChai from 'sinon-chai'
 
 import {
-    Clock,
-    Logger,
-    LoggerReporter,
-    MetricRegistry,
-    MILLISECOND,
-    Scheduler,
-    SimpleGauge,
-    Time,
-} from "../../../lib/metrics/";
+  Clock,
+  Logger,
+  LoggerReporter,
+  MetricRegistry,
+  MILLISECOND,
+  Scheduler,
+  SimpleGauge,
+  Time
+} from '../../../lib/metrics/'
 
-chai.use(sinonChai);
+chai.use(sinonChai)
 
-const expect = chai.expect;
+const expect = chai.expect
 
 export class MockedLogger implements Logger {
-    public calls: any[] = [];
+  public calls: any[] = []
 
-    public log(): void {}
-    public error(): void {}
-    public warn(): void {}
-    public info(msg: string, metadata: any): void {
-        this.calls.push(Object.assign({}, metadata));
-    }
-    public debug(): void {}
-    public trace(): void {}
+  public log(): void {}
+  public error(): void {}
+  public warn(): void {}
+  public info(msg: string, metadata: any): void {
+    this.calls.push(Object.assign({}, metadata))
+  }
+  public debug(): void {}
+  public trace(): void {}
 }
 
 export class MockedClock implements Clock {
+  private currentTime: Time
 
-    private currentTime: Time;
+  public time(): Time {
+    return this.currentTime
+  }
 
-    public time(): Time {
-        return this.currentTime;
-    }
-
-    public setCurrentTime(time: Time): void {
-        this.currentTime = time;
-    }
-
+  public setCurrentTime(time: Time): void {
+    this.currentTime = time
+  }
 }
 
 @suite
 export class LoggerReporterTest {
+  private clock: MockedClock = new MockedClock()
+  private registry: MetricRegistry
+  private logger: MockedLogger
+  private internalCallback: () => Promise<void>
+  private scheduler: Scheduler
+  private schedulerSpy: SinonSpy
+  private reporter: LoggerReporter
 
-    private clock: MockedClock = new MockedClock();
-    private registry: MetricRegistry;
-    private logger: MockedLogger;
-    private internalCallback: () => Promise<void>;
-    private scheduler: Scheduler;
-    private schedulerSpy: SinonSpy;
-    private reporter: LoggerReporter;
+  public before(): void {
+    this.clock.setCurrentTime({
+      milliseconds: 0,
+      nanoseconds: 0
+    })
 
-    public before(): void {
-        this.clock.setCurrentTime({
-            milliseconds: 0,
-            nanoseconds: 0,
-        });
-
-        this.registry = new MetricRegistry();
-        this.logger = new MockedLogger();
-        this.scheduler = (prog: () => Promise<void>, interval: number): NodeJS.Timer => {
-            this.internalCallback = prog;
-            return null;
-        };
-        this.schedulerSpy = spy(this.scheduler);
-        this.reporter = new LoggerReporter({
-            clock: this.clock,
-            log: this.logger,
-            reportInterval: 1000,
-            scheduler: this.schedulerSpy,
-            tags: new Map(),
-            unit: MILLISECOND,
-        });
-
-        this.registry.setDefaultClock(this.clock);
-        this.reporter.addMetricRegistry(this.registry);
+    this.registry = new MetricRegistry()
+    this.logger = new MockedLogger()
+    this.scheduler = (prog: () => Promise<void>, interval: number): NodeJS.Timer => {
+      this.internalCallback = prog
+      return null
     }
+    this.schedulerSpy = spy(this.scheduler)
+    this.reporter = new LoggerReporter({
+      clock: this.clock,
+      log: this.logger,
+      reportInterval: 1000,
+      scheduler: this.schedulerSpy,
+      tags: new Map(),
+      unit: MILLISECOND
+    })
 
-    @test
-    public async "report multiple metric with same name"() {
-        const gauge1 = new SimpleGauge("myValue");
-        const gauge2 = new SimpleGauge("myValue");
+    this.registry.setDefaultClock(this.clock)
+    this.reporter.addMetricRegistry(this.registry)
+  }
 
-        gauge1.setTag("type", "abc");
-        gauge2.setTag("type", "def");
+  @test
+  public async 'report multiple metric with same name'() {
+    const gauge1 = new SimpleGauge('myValue')
+    const gauge2 = new SimpleGauge('myValue')
 
-        this.registry.registerMetric(gauge1);
-        this.registry.registerMetric(gauge2);
+    gauge1.setTag('type', 'abc')
+    gauge2.setTag('type', 'def')
 
-        const metrics = this.registry.getMetricList();
-        expect(metrics).to.have.length(2);
-        expect(metrics[0]).to.equal(gauge1);
-        expect(metrics[1]).to.equal(gauge2);
+    this.registry.registerMetric(gauge1)
+    this.registry.registerMetric(gauge2)
 
-        expect(this.schedulerSpy).to.not.have.been.called;
+    const metrics = this.registry.getMetricList()
+    expect(metrics).to.have.length(2)
+    expect(metrics[0]).to.equal(gauge1)
+    expect(metrics[1]).to.equal(gauge2)
 
-        await this.reporter.start();
+    expect(this.schedulerSpy).to.not.have.been.called
 
-        expect(this.schedulerSpy).to.have.been.called;
+    await this.reporter.start()
 
-        await this.internalCallback();
+    expect(this.schedulerSpy).to.have.been.called
 
-        expect(this.logger.calls.length).to.equal(2);
+    await this.internalCallback()
 
-        let logMetadata = this.logger.calls[0];
-        expect(logMetadata.measurement).to.equal("myValue");
-        expect(logMetadata.measurement_type).to.equal("gauge");
-        expect(logMetadata.timestamp.getTime()).to.equal(0);
-        expect(logMetadata.tags["type"]).to.equal("abc");
+    expect(this.logger.calls.length).to.equal(2)
 
-        logMetadata = this.logger.calls[1];
-        expect(logMetadata.measurement).to.equal("myValue");
-        expect(logMetadata.measurement_type).to.equal("gauge");
-        expect(logMetadata.timestamp.getTime()).to.equal(0);
-        expect(logMetadata.tags["type"]).to.equal("def");
-    }
+    let logMetadata = this.logger.calls[0]
+    expect(logMetadata.measurement).to.equal('myValue')
+    expect(logMetadata.measurement_type).to.equal('gauge')
+    expect(logMetadata.timestamp.getTime()).to.equal(0)
+    expect(logMetadata.tags['type']).to.equal('abc')
 
+    logMetadata = this.logger.calls[1]
+    expect(logMetadata.measurement).to.equal('myValue')
+    expect(logMetadata.measurement_type).to.equal('gauge')
+    expect(logMetadata.timestamp.getTime()).to.equal(0)
+    expect(logMetadata.tags['type']).to.equal('def')
+  }
 }
