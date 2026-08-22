@@ -1,3 +1,11 @@
 packages:
   - examples/**
   - packages/**
+
+# pnpm 11: dependencies allowed to run their install scripts (native modules).
+# Replaces the pnpm-10 `onlyBuiltDependencies` setting, which pnpm 11 no
+# longer reads from package.json.
+allowBuilds:
+  node-cint64: true
+  native-hdr-histogram: true
+  "@sematext/gc-stats": true

@@ -47,26 +47,29 @@ Code examples for `javascript` and `typescript` are in the `examples` folder.
 
 You should have [nodejs](https://nodejs.org/en/) and a container runtime with compose support
 installed ([podman](https://podman.io/) is preferred, plain [docker](https://www.docker.com/) also works).
-The repository is managed with [pnpm 10](https://pnpm.io/) (use [corepack](https://nodejs.org/api/corepack.html)
-or `npm i -g pnpm@10` to get it; the required version is pinned in `packageManager`).
 
-boot test environment (auto-detects podman compose / docker compose):  
+The repository is developed with [pnpm 11](https://pnpm.io/) on **Node.js 22**: pnpm 11 requires
+Node.js `>= 22.13`, and `node-cint64` (a runtime dependency of `inspector-metrics`) only compiles on
+Node.js `<= 22`, so Node.js 22 is the only version that both runs pnpm 11 and builds the native
+dependencies. Use [corepack](https://nodejs.org/api/corepack.html) or `npm i -g pnpm@11` to get it;
+the exact version is pinned in `packageManager`.
+
+boot the local metric backends (graphite, elasticsearch, influx, prometheus, ...) for manual checking
+(auto-detects podman compose / docker compose):  
 `./test-env/boot.sh`
 
-shutdown test environment:  
+shutdown the backends:  
 `./test-env/reset.sh`
-
-execute compatibility tests:  
-`./test-env/compose.sh run --rm nodeX`  
-_X = nodejs version (available: 18, 20, 22)_
-
-the published packages keep a lower Node.js floor (`>= 14`); CI additionally runs
-a compatibility smoke test on legacy runtimes (see `.github/workflows/ci.yml`).
 
 init / update project (if a new dependency is introduced or an existing is updated):  
 ```bash
 pnpm i
 ```
+
+the published packages keep a lower Node.js floor (`>= 14`). CI runs the build/lint/tests on Node.js 22
+and a separate compatibility job re-installs the built artifacts with plain npm and smoke-tests them on
+Node.js 14, 16, 18 and 20 so a dependency that drops old-Node support fails before release
+(see `.github/workflows/ci.yml` and `test-env/compat-smoke.sh`).
 
 generate dependency report:  
 ```bash

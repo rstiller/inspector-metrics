@@ -1,47 +1,5 @@
 services:
 
-  node18:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node18
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=18
-
-  node20:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node20
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=20
-
-  node22:
-    build:
-      context: ./test-env
-      dockerfile: Dockerfile-node22
-    user: "root"
-    entrypoint: "/opt/inspector-metrics/test-env/compile+test.sh"
-    restart: "no"
-    volumes:
-      - .:/opt/inspector-metrics/
-    working_dir: "/opt/inspector-metrics"
-    environment:
-      - NPM_CONFIG_CACHE="/opt/inspector-metrics/.tmp/.npm/"
-      - NODE_VERSION=22
-
   grafana:
     build:
       context: ./test-env/grafana

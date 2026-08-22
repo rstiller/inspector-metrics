@@ -8,4 +8,4 @@ RUN echo $TZ > /etc/timezone
 RUN dpkg-reconfigure --frontend noninteractive tzdata
 
 RUN apt update -y && apt install -y rsync sudo
-RUN npm install -g npm-check @compodoc/compodoc@2 pnpm@10
+RUN npm install -g npm-check @compodoc/compodoc@2 pnpm@11

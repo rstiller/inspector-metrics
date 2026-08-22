@@ -12,9 +12,13 @@ on:
 
 jobs:
   build:
+    # pnpm 11 requires Node.js >= 22.13, and the node-cint64 native module
+    # (a runtime dependency of inspector-metrics) only compiles on Node.js <= 22.
+    # Node.js 22 is therefore the only leg that runs pnpm 11 *and* builds all
+    # native dependencies. Older runtimes are covered by the compat job below.
     strategy:
       matrix:
-        node-version: [18, 20, 22]
+        node-version: [22]
         os:
           - ubuntu-24.04
           - ubuntu-22.04
@@ -50,10 +54,10 @@ jobs:
           CI: true
           TZ: Europe/Berlin
 
-      # only the 18.x leg publishes artifacts: the build output only depends
-      # on the fixed tsc target (es2017), not on the building node version
+      # the build output only depends on the fixed tsc target (es2017), not on
+      # the building host; publish the artifact from a single leg
       - name: Upload built packages
-        if: matrix.node-version == 18
+        if: matrix.node-version == 22 && matrix.os == 'ubuntu-24.04'
         uses: actions/upload-artifact@v4
         with:
           name: compatibility-packages
@@ -63,10 +67,11 @@ jobs:
             packages/inspector-prometheus/build
             packages/inspector-prometheus/package.json
 
-  # Legacy compatibility check: the published packages must keep working on the
-  # Node.js version floor (the core's engines say node >= 14) even though the
-  # project is developed on modern Node.js. It takes the built workspace
-  # artifacts and re-installs + smoke-tests them on legacy Node runtimes, so a
+  # Compatibility check: the published packages must keep working on the
+  # supported Node.js runtimes (the core's engines say node >= 14) even though
+  # the project is developed on modern Node.js with pnpm 11. It takes the built
+  # workspace artifacts and re-installs + smoke-tests them with plain npm on
+  # Node.js 14-20 (native modules rebuild for the target runtime), so a
   # dependency that drops old-Node support fails CI before release.
   compat:
     runs-on: ubuntu-22.04
@@ -74,7 +79,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14, 16]
+        node-version: [14, 16, 18, 20]
     name: compat-node-${{ matrix.node-version }}
 
     steps:
