@@ -47,7 +47,7 @@
     "clean": "rimraf build",
     "compile": "tsc --incremental -p .",
     "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
-    "lint": "eslint ./lib/**/*.ts ./test/**/*.ts",
+    "lint": "biome lint lib test",
     "prepublishOnly": "npm run build",
     "test": "mocha test/**/*Test.ts"
   },

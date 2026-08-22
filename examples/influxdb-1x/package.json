@@ -27,6 +27,6 @@
     "clean": "rimraf build",
     "compile": "tsc --incremental -p .",
     "deps": "npm-check --no-spinner --no-emoji --no-color",
-    "lint": "eslint ./src/**/*.ts"
+    "lint": "biome lint src"
   }
 }

@@ -9,3 +9,14 @@ allowBuilds:
   node-cint64: true
   native-hdr-histogram: true
   "@sematext/gc-stats": true
+
+minimumReleaseAgeExclude:
+  - '@biomejs/biome@2.5.10'
+  - '@biomejs/cli-darwin-arm64@2.5.10'
+  - '@biomejs/cli-darwin-x64@2.5.10'
+  - '@biomejs/cli-linux-arm64-musl@2.5.10'
+  - '@biomejs/cli-linux-arm64@2.5.10'
+  - '@biomejs/cli-linux-x64-musl@2.5.10'
+  - '@biomejs/cli-linux-x64@2.5.10'
+  - '@biomejs/cli-win32-arm64@2.5.10'
+  - '@biomejs/cli-win32-x64@2.5.10'
