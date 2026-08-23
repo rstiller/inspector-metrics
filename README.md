@@ -49,12 +49,14 @@ You should have [nodejs](https://nodejs.org/en/) and a container runtime with co
 installed ([podman](https://podman.io/) is preferred, plain [docker](https://www.docker.com/) also works).
 
 The repository is developed with [pnpm 11](https://pnpm.io/) on a recent LTS **Node.js** (`22`, `24` or
-`26`): pnpm 11 requires Node.js `>= 22.13`, and the remaining native modules — `@sematext/gc-stats`
-(`inspector-vm`, compiled per runtime) and `native-hdr-histogram` (NAPI prebuilds) — build/resolve on all of
-them. The core `inspector-metrics` package itself has no mandatory native dependency, since the
-64-bit integer support previously provided by `node-cint64` is now implemented in pure JavaScript on
-top of [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).
-Use [corepack](https://nodejs.org/api/corepack.html) or `npm i -g pnpm@11` to get it;
+`26`): pnpm 11 requires Node.js `>= 22.13`, and the remaining native module — `native-hdr-histogram`
+(NAPI prebuilds) — builds/resolves on all of them. The core `inspector-metrics` package itself has no
+mandatory native dependency, since the 64-bit integer support previously provided by `node-cint64` is
+now implemented in pure JavaScript on top of
+[`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).
+Likewise `inspector-vm` no longer depends on the native `@sematext/gc-stats` module — GC events are
+collected via Node's built-in [`perf_hooks`](https://nodejs.org/api/perf_hooks.html)
+`PerformanceObserver`. Use [corepack](https://nodejs.org/api/corepack.html) or `npm i -g pnpm@11` to get it;
 the exact version is pinned in `packageManager`.
 
 boot the local metric backends (graphite, elasticsearch, influx, prometheus, ...) for manual checking

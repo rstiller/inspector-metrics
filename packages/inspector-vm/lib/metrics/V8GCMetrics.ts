@@ -1,13 +1,8 @@
 import 'source-map-support/register'
 
-import { EventEmitter } from 'events'
 import { BaseMetric, Clock, DefaultReservoir, Metric, MetricSet, NANOSECOND, Timer } from 'inspector-metrics'
 
-/**
- * Event emitter for GC event within nodejs.
- */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const GC = require('@sematext/gc-stats')
+import { constants, NodeGCPerformanceDetail, PerformanceEntry, PerformanceObserver } from 'node:perf_hooks'
 
 /**
  * Metric set with values related to nodejs GC.
@@ -67,13 +62,13 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    */
   private readonly allRuns: Timer
   /**
-   * Garbage collection data emitter.
+   * Garbage collection data observer.
    *
    * @private
-   * @type {EventEmitter}
+   * @type {PerformanceObserver}
    * @memberof V8GCMetrics
    */
-  private readonly gc: EventEmitter
+  private readonly gc: PerformanceObserver
 
   /**
    * Creates an instance of V8GCMetrics.
@@ -109,28 +104,45 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
 
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const slf = this
-    this.gc = GC()
-    this.gc.on('stats', function (stats: any) {
-      const duration = stats.pause
-
-      switch (stats.gctype) {
-        case 1:
-          slf.minorRuns.addDuration(duration, NANOSECOND)
-          break
-        case 2:
-          slf.majorRuns.addDuration(duration, NANOSECOND)
-          break
-        case 4:
-          slf.incrementalMarkingRuns.addDuration(duration, NANOSECOND)
-          break
-        case 8:
-          slf.phantomCallbackProcessingRuns.addDuration(duration, NANOSECOND)
-          break
-        case 15:
-          slf.allRuns.addDuration(duration, NANOSECOND)
-          break
+    this.gc = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        slf.handleGCEntry(entry)
       }
     })
+    this.gc.observe({ entryTypes: ['gc'] })
+  }
+
+  /**
+   * Processes a single GC performance entry.
+   *
+   * @param {PerformanceEntry} entry
+   * @memberof V8GCMetrics
+   */
+  private handleGCEntry(entry: PerformanceEntry): void {
+    const duration = Math.round(entry.duration * 1e6)
+    const gcEntry = entry as PerformanceEntry & {
+      detail?: NodeGCPerformanceDetail
+      kind?: number
+    }
+    const gcType = gcEntry.detail?.kind ?? gcEntry.kind
+
+    switch (gcType) {
+      case constants.NODE_PERFORMANCE_GC_MINOR:
+        this.minorRuns.addDuration(duration, NANOSECOND)
+        break
+      case constants.NODE_PERFORMANCE_GC_MAJOR:
+        this.majorRuns.addDuration(duration, NANOSECOND)
+        break
+      case constants.NODE_PERFORMANCE_GC_INCREMENTAL:
+        this.incrementalMarkingRuns.addDuration(duration, NANOSECOND)
+        break
+      case constants.NODE_PERFORMANCE_GC_WEAKCB:
+        this.phantomCallbackProcessingRuns.addDuration(duration, NANOSECOND)
+        break
+      case 15:
+        this.allRuns.addDuration(duration, NANOSECOND)
+        break
+    }
   }
 
   /**
@@ -139,7 +151,7 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
    * @memberof V8GCMetrics
    */
   public stop(): void {
-    this.gc.removeAllListeners()
+    this.gc.disconnect()
   }
 
   /**

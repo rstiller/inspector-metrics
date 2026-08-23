@@ -1,7 +1,7 @@
 import 'source-map-support/register'
 
 import * as chai from 'chai'
-import { MetricRegistry, StdClock } from 'inspector-metrics'
+import { MetricRegistry, StdClock, Timer } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'
 import { V8GCMetrics } from '../../lib/metrics/V8GCMetrics'
 
@@ -59,5 +59,26 @@ export class V8GCMetricsTest {
     })
 
     metric.stop()
+  }
+
+  @test
+  public async gcEvents(): Promise<void> {
+    const gc = (globalThis as any).gc
+    if (typeof gc !== 'function') {
+      return
+    }
+
+    const metric: V8GCMetrics = new V8GCMetrics('v8', new StdClock())
+    gc()
+    gc()
+    await new Promise((resolve) => setTimeout(resolve, 50))
+
+    expect(metric.getMetricList().some((submetric) => (submetric as Timer).getCount() > 0)).to.equal(true)
+
+    metric.stop()
+
+    gc()
+    await new Promise((resolve) => setTimeout(resolve, 50))
+    expect(metric.getMetricList().every((submetric) => !isNaN((submetric as Timer).getCount()))).to.equal(true)
   }
 }

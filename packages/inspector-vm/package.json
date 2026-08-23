@@ -31,7 +31,6 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "@sematext/gc-stats": "^1.5.9",
     "inspector-metrics": "workspace:^1.23.0",
     "source-map-support": "^0.5.21"
   },
@@ -45,7 +44,7 @@
     "deps": "npm-check --ignore @types/* --no-spinner --no-emoji --no-color",
     "lint": "biome check lib test",
     "prepublishOnly": "npm run build",
-    "test": "mocha test/**/*Test.ts"
+    "test": "mocha --node-option=expose-gc test/**/*Test.ts"
   },
   "mocha": {
     "require": [

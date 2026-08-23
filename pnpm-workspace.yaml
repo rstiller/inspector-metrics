@@ -7,7 +7,6 @@ packages:
 # longer reads from package.json.
 allowBuilds:
   native-hdr-histogram: true
-  "@sematext/gc-stats": true
   esbuild: true
 
 minimumReleaseAgeExclude:
