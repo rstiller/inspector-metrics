@@ -265,7 +265,6 @@ export class MetricRegistry extends BaseMetric implements MetricSet {
   public removeListener(listener: MetricRegistryListener): this {
     const index = this.listeners.indexOf(listener)
     if (index > -1) {
-      // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
       delete this.listeners[index]
     }
     return this

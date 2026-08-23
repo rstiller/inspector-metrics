@@ -102,7 +102,6 @@ export class V8GCMetrics extends BaseMetric implements MetricSet {
     this.metrics.push(this.minorRuns)
     this.metrics.push(this.phantomCallbackProcessingRuns)
 
-    // eslint-disable-next-line @typescript-eslint/no-this-alias
     const slf = this
     this.gc = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {

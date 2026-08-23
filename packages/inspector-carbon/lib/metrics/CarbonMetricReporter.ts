@@ -26,7 +26,6 @@ import {
 /**
  * Graphite / carbon client module.
  */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const graphite = require('graphite')
 
 /**

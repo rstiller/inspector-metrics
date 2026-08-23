@@ -480,11 +480,7 @@ export class ElasticsearchMetricReporter extends ScheduledMetricReporter<Elastic
       const response = await this.client.bulk({ body })
       if (this.options.log) {
         const warnings = response.warnings
-        this.options.log.debug(
-          // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-          `wrote ${type} metrics - warnings ${warnings}`,
-          this.logMetadata
-        )
+        this.options.log.debug(`wrote ${type} metrics - warnings ${warnings}`, this.logMetadata)
       }
     } catch (reason) {
       if (this.options.log) {
