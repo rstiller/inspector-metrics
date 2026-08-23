@@ -12,13 +12,16 @@ on:
 
 jobs:
   build:
-    # pnpm 11 requires Node.js >= 22.13, and the node-cint64 native module
-    # (a runtime dependency of inspector-metrics) only compiles on Node.js <= 22.
-    # Node.js 22 is therefore the only leg that runs pnpm 11 *and* builds all
-    # native dependencies. Older runtimes are covered by the compat job below.
+    # pnpm 11 requires Node.js >= 22.13, so the dev legs run on LTS Node.js 22,
+    # 24 and 26. The core `inspector-metrics` package no longer carries a
+    # mandatory native dependency (node-cint64 was replaced by a pure-JS BigInt
+    # implementation), so the remaining native modules — @sematext/gc-stats
+    # (inspector-vm, compiled per-ABI) and native-hdr-histogram (NAPI prebuilds) —
+    # build/resolve on all three runtimes. Older *published* runtimes are covered
+    # by the compat job below.
     strategy:
       matrix:
-        node-version: [22]
+        node-version: [22, 24, 26]
         os:
           - ubuntu-24.04
           - ubuntu-22.04

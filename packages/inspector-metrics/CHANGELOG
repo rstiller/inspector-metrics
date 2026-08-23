@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+- replaced the native `node-cint64` dependency with a pure-JS `Int64Wrapper`
+  implemented on top of `BigInt`. The 64-bit integer semantics are unchanged
+  (values are wrapped to the signed 64-bit range, `toNumber()` returns the
+  closest double, `toString()` keeps the exact decimal representation with a
+  zero value rendered as an empty string). The core `inspector-metrics`
+  package no longer requires a mandatory native build.
 
 ## [1.23.0] - 2022-04-20
 ### Changed

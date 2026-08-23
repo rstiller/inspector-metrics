@@ -252,9 +252,6 @@ importers:
 
   packages/inspector-metrics:
     dependencies:
-      node-cint64:
-        specifier: ^3.0.0
-        version: 3.0.0
       source-map-support:
         specifier: ^0.5.21
         version: 0.5.21
@@ -1699,9 +1696,6 @@ packages:
 
   node-addon-api@3.2.1:
     resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}
-
-  node-cint64@3.0.0:
-    resolution: {integrity: sha512-2qOQkpHCsgLbMWSxNGlSjZ5yK++mPuRPwCEuNW4hjiNpSTSzP2eYKJbIrpjv9RMTvIgA+Ru2iUFObirZRqrW8w==}
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -3675,8 +3669,6 @@ snapshots:
 
   node-addon-api@3.2.1:
     optional: true
-
-  node-cint64@3.0.0: {}
 
   node-fetch@2.7.0:
     dependencies:

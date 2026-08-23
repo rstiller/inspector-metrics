@@ -48,10 +48,13 @@ Code examples for `javascript` and `typescript` are in the `examples` folder.
 You should have [nodejs](https://nodejs.org/en/) and a container runtime with compose support
 installed ([podman](https://podman.io/) is preferred, plain [docker](https://www.docker.com/) also works).
 
-The repository is developed with [pnpm 11](https://pnpm.io/) on **Node.js 22**: pnpm 11 requires
-Node.js `>= 22.13`, and `node-cint64` (a runtime dependency of `inspector-metrics`) only compiles on
-Node.js `<= 22`, so Node.js 22 is the only version that both runs pnpm 11 and builds the native
-dependencies. Use [corepack](https://nodejs.org/api/corepack.html) or `npm i -g pnpm@11` to get it;
+The repository is developed with [pnpm 11](https://pnpm.io/) on a recent LTS **Node.js** (`22`, `24` or
+`26`): pnpm 11 requires Node.js `>= 22.13`, and the remaining native modules — `@sematext/gc-stats`
+(`inspector-vm`, compiled per runtime) and `native-hdr-histogram` (NAPI prebuilds) — build/resolve on all of
+them. The core `inspector-metrics` package itself has no mandatory native dependency, since the
+64-bit integer support previously provided by `node-cint64` is now implemented in pure JavaScript on
+top of [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt).
+Use [corepack](https://nodejs.org/api/corepack.html) or `npm i -g pnpm@11` to get it;
 the exact version is pinned in `packageManager`.
 
 boot the local metric backends (graphite, elasticsearch, influx, prometheus, ...) for manual checking
@@ -66,8 +69,8 @@ init / update project (if a new dependency is introduced or an existing is updat
 pnpm i
 ```
 
-the published packages keep a lower Node.js floor (`>= 14`). CI runs the build/lint/tests on Node.js 22
-and a separate compatibility job re-installs the built artifacts with plain npm and smoke-tests them on
+the published packages keep a lower Node.js floor (`>= 14`). CI runs the build/lint/tests on Node.js 22, 24
+and 26, and a separate compatibility job re-installs the built artifacts with plain npm and smoke-tests them on
 Node.js 14, 16, 18 and 20 so a dependency that drops old-Node support fails before release
 (see `.github/workflows/ci.yml` and `test-env/compat-smoke.sh`).
 

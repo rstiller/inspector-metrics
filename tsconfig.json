@@ -7,6 +7,7 @@
         "strict": false,
         "module": "commonjs",
         "target": "es2017",
+        "lib": ["es2020", "dom"],
         "sourceMap": true,
         "newLine": "LF",
         "moduleResolution": "bundler",
