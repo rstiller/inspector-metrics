@@ -99,6 +99,15 @@ jobs:
           name: compatibility-packages
           path: .compat/pkg
 
+      # upload-artifact@v4+ strips the common root (packages/) of a multi-path
+      # upload, so the download lands as .compat/pkg/<name>/... while the smoke
+      # script expects .compat/pkg/packages/<name>/... . Re-add the nesting once.
+      - name: Restore packages/ layout for the smoke script
+        run: |
+          mkdir -p .compat/pkg/packages
+          mv .compat/pkg/inspector-metrics .compat/pkg/packages/
+          mv .compat/pkg/inspector-prometheus .compat/pkg/packages/
+
       - name: Smoke test on legacy Node.js
         env:
           COMPAT_PKG_DIR: ${{ github.workspace }}/.compat/pkg
