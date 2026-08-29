@@ -27,6 +27,9 @@
     "node": ">= 14",
     "npm": ">= 3"
   },
+  "devDependencies": {
+    "dayjs": "^1.11.23"
+  },
   "peerDependencies": {
     "inspector-metrics": ">=1.16.x"
   },
