@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { StdClock } from '../clock'
 import { Counter, MonotoneCounter } from '../counter'
 import { Event } from '../event'

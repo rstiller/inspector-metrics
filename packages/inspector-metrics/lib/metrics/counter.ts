@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Counting } from './model/counting'
 import { BaseMetric, Metric } from './model/metric'
 

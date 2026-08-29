@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import cluster = require('cluster')
 
 import { Worker } from 'cluster'

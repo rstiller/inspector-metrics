@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { ClientOptions, InfluxDB, Point, WriteApi, WriteOptions, WritePrecisionType } from '@influxdata/influxdb-client'
 import { BucketsAPI, OrgsAPI, RetentionRules } from '@influxdata/influxdb-client-apis'
 import { MeasurementPoint, Sender } from './InfluxMetricReporter'

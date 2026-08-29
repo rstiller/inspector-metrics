@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Int64Wrapper } from './int64'
 
 /**

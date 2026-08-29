@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Utility interface to track report-timestamps and -values of metric instances.
  * This is directly linked to the minimum-reporting timeout of the {@link BaseReporter},

@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { MILLISECOND, TimeUnit } from '../model/time-unit'
 import { MetricReporter } from './metric-reporter'
 import { MetricReporterOptions } from './metric-reporter-options'

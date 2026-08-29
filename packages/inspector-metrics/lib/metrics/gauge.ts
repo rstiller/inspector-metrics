@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { BaseMetric, Metric, SerializableMetric } from './model/metric'
 
 /**

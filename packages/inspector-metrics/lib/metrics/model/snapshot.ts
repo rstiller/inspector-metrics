@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * A static state of a collection of values.
  *

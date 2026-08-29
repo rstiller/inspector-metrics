@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { NANOSECOND, TimeUnit } from './time-unit'
 
 /**

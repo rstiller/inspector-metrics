@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { BaseMetric, Clock, DefaultReservoir, Metric, MetricSet, NANOSECOND, Timer } from 'inspector-metrics'
 
 import { constants, NodeGCPerformanceDetail, PerformanceEntry, PerformanceObserver } from 'node:perf_hooks'

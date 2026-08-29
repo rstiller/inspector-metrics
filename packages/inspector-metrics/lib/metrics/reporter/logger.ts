@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * A logger abstraction used in this library.
  *

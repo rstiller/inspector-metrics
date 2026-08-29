@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Gauge } from './gauge'
 import { BaseMetric } from './model/metric'
 

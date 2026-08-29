@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 /**
  * List of values between 0 and 1 representing the percent boundaries for reporting.
  *

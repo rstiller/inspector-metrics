@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { SimpleSnapshot, Snapshot } from './snapshot'
 
 /**

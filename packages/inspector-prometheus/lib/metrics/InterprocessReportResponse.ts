@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 import { InterprocessMessage } from 'inspector-metrics'
 
 /**

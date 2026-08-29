@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import 'source-map-support/register'
 
 import { Worker } from 'cluster'
 

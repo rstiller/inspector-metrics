@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Represents a time unit like second, minute, hour.
  *

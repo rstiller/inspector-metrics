@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Groupable } from './groupable'
 import { mapToMetadata, Metadata, MetadataContainer } from './metadata-container'
 import { mapToTags, Taggable, Tags } from './taggable'

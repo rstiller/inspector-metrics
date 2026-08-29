@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Clock, diff, Time } from './clock'
 import { Metered, MeteredRates, SerializableMetered } from './model/metered'
 import { BaseMetric } from './model/metric'

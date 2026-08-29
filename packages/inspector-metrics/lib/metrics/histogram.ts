@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { BucketCounting, Buckets, BucketToCountMap, Counting, SerializableBucketCounting } from './model/counting'
 import { Int64Wrapper } from './model/int64'
 import { BaseMetric, Metric } from './model/metric'

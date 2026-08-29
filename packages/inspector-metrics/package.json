@@ -31,9 +31,6 @@
   "optionalDependencies": {
     "native-hdr-histogram": "^1.0.0"
   },
-  "dependencies": {
-    "source-map-support": "^0.5.21"
-  },
   "files": [
     "build/lib/**/*"
   ],
@@ -48,7 +45,6 @@
   },
   "mocha": {
     "require": [
-      "source-map-support/register",
       "tsx"
     ],
     "reporter": "dot",

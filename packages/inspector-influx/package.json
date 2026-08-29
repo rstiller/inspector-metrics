@@ -35,8 +35,7 @@
     "influx": "^5.12.0"
   },
   "dependencies": {
-    "inspector-metrics": "workspace:^1.23.0",
-    "source-map-support": "^0.5.21"
+    "inspector-metrics": "workspace:^1.23.0"
   },
   "files": [
     "build/lib/**/*"
@@ -52,7 +51,6 @@
   },
   "mocha": {
     "require": [
-      "source-map-support/register",
       "tsx"
     ],
     "reporter": "dot",

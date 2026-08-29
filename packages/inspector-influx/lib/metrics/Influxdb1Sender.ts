@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { IClusterConfig, InfluxDB, IPoint, TimePrecision } from 'influx'
 import { Sender } from './InfluxMetricReporter'
 

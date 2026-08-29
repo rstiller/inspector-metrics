@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 import { ClusterOptions } from 'inspector-metrics'
 
 /**

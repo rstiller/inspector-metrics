@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { BaseMetric, Metric, MetricSet, SimpleGauge } from 'inspector-metrics'
 import v8 = require('v8')
 

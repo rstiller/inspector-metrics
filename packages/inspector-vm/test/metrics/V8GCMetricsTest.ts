@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import * as chai from 'chai'
 import { MetricRegistry, StdClock, Timer } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'

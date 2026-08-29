@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 export * from './DefaultPrometheusClusterOptions'
 export * from './InterprocessReportRequest'
 export * from './InterprocessReportResponse'

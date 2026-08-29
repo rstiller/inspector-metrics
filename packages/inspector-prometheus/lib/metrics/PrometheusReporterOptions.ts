@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 import { MetricReporterOptions, Logger } from 'inspector-metrics'
 import { PrometheusClusterOptions } from './PrometheusClusterOptions'
 

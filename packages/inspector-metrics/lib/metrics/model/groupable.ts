@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Name-based (string) grouping interface - the group as metadata
  * of a metric is used in some metric-reporter.

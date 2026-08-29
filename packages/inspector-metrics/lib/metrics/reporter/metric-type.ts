@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Enumeration of all metric types.
  */

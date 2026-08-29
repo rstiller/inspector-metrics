@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { Metric, MetricRegistry, MILLISECOND } from 'inspector-metrics'

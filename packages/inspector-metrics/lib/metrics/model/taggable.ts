@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Helper interface for handling tags.
  */

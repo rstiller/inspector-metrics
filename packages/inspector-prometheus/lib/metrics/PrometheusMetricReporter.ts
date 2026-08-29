@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 import * as cluster from 'cluster'
 import { randomBytes } from 'crypto'
 import { EventEmitter } from 'events'

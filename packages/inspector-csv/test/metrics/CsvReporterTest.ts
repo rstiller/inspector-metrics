@@ -1,5 +1,4 @@
 import 'reflect-metadata'
-import 'source-map-support/register'
 
 import * as chai from 'chai'
 import { Buckets, Event, NANOSECOND, SimpleGauge } from 'inspector-metrics'

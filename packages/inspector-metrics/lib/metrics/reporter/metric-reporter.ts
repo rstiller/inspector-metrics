@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import * as cluster from 'cluster'
 import { Counter, MonotoneCounter } from '../counter'
 import { Event } from '../event'

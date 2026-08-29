@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Represents a point in time.
  *

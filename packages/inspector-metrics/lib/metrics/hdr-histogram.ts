@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Histogram } from './histogram'
 import { BucketCounting, Buckets, Counting } from './model/counting'
 import { Metric } from './model/metric'

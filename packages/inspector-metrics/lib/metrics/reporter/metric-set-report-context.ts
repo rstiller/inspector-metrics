@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { MetricRegistry } from '../metric-registry'
 import { MetricType } from './metric-type'
 import { OverallReportContext } from './overall-report-context'

@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Clock, diff, Time } from './clock'
 import { Histogram } from './histogram'
 import { Meter } from './meter'

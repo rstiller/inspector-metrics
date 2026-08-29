@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 /**
  * Interface for all classes that can associate metadata with instances.
  *

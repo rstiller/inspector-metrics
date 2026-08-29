@@ -1,5 +1,3 @@
-import 'source-map-support'
-
 import http = require('http')
 import {
   Counter,

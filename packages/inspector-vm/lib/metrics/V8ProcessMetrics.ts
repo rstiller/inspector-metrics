@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { BaseMetric, Metric, MetricSet, MonotoneCounter, Scheduler, SimpleGauge } from 'inspector-metrics'
 
 /**

@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { Client } from '@elastic/elasticsearch'
 import {
   Counter,

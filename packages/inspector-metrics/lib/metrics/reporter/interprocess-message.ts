@@ -1,5 +1,3 @@
-import 'source-map-support/register'
-
 import { SerializableMetric } from '../model/metric'
 import { Tags } from '../model/taggable'
 import { OverallReportContext } from './overall-report-context'
