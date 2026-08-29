@@ -28,7 +28,12 @@ import {
   StdClock,
   Timer
 } from 'inspector-metrics'
-import moment = require('moment-timezone')
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 /**
  * Lists all possible column types.
@@ -444,7 +449,7 @@ export class CsvMetricReporter extends ScheduledMetricReporter<CsvMetricReporter
     type: MetricType,
     results: Array<ReportingResult<any, Fields>>
   ): Promise<void> {
-    const dateStr = moment.tz(date, this.options.timezone).format(this.options.dateFormat)
+    const dateStr = dayjs(date).tz(this.options.timezone).format(this.options.dateFormat)
     for (const result of results) {
       const fields = result.result
       const metric = result.metric

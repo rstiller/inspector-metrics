@@ -4,6 +4,7 @@
     "private": true,
     "packageManager": "pnpm@11.22.0",
     "devDependencies": {
+        "@biomejs/biome": "2.5.10",
         "@testdeck/mocha": "0.3.3",
         "@types/async": "^3.2.25",
         "@types/chai": "^5.2.3",
@@ -12,7 +13,6 @@
         "@types/node": "^22.20.1",
         "@types/sinon": "^22.0.0",
         "@types/sinon-chai": "^4.0.0",
-        "@biomejs/biome": "2.5.10",
         "c8": "^12.0.0",
         "chai": "^6.2.2",
         "lodash": "^4.17.21",
@@ -61,5 +61,8 @@
             "json-summary"
         ],
         "all": true
+    },
+    "dependencies": {
+        "dayjs": "^1.11.23"
     }
 }

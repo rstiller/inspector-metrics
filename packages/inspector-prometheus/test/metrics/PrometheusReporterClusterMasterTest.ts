@@ -4,9 +4,13 @@ import 'source-map-support/register'
 import * as chai from 'chai'
 import sinonChai from 'sinon-chai'
 
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+
+dayjs.extend(duration)
+
 import { InterprocessMessage, MetricRegistry, MetricReporter } from 'inspector-metrics'
 import { suite, test } from '@testdeck/mocha'
-import moment from 'moment'
 import { SinonSpy, spy } from 'sinon'
 import { InterprocessReportResponse, PrometheusMetricReporter } from '../../lib/metrics'
 import { MockedClock } from './mocked-clock'
@@ -87,13 +91,13 @@ export class PrometheusReporterClusterMasterTest {
     expect(this.clusterOptions.getWorkersSpy).to.not.have.been.called
     expect(this.clusterOptions.sendToWorkerSpy).to.not.have.been.called
 
-    const start = moment()
+    const start = dayjs()
     await this.reporter.getMetricsString()
-    const end = moment()
+    const end = dayjs()
 
     expect(this.clusterOptions.getWorkersSpy).to.have.been.called
     expect(this.clusterOptions.sendToWorkerSpy).to.have.been.called
-    expect(moment.duration(end.diff(start)).as('milliseconds')).to.be.gte(this.clusterOptions.workerResponseTimeout)
+    expect(dayjs.duration(end.diff(start)).as('milliseconds')).to.be.gte(this.clusterOptions.workerResponseTimeout)
   }
 
   @test
@@ -127,7 +131,7 @@ export class PrometheusReporterClusterMasterTest {
     expect(this.clusterOptions.getWorkersSpy).to.not.have.been.called
     expect(this.clusterOptions.sendToWorkerSpy).to.not.have.been.called
 
-    const start = moment()
+    const start = dayjs()
     const metricsPromise = this.reporter.getMetricsString()
 
     setImmediate(() => {
@@ -145,10 +149,10 @@ export class PrometheusReporterClusterMasterTest {
 
       metricsPromise
         .then((metricsString) => {
-          const end = moment()
+          const end = dayjs()
 
           expect(metricsString).to.equal('#empty')
-          expect(moment.duration(end.diff(start)).as('milliseconds')).to.be.lt(
+          expect(dayjs.duration(end.diff(start)).as('milliseconds')).to.be.lt(
             this.clusterOptions.workerResponseTimeout
           )
 

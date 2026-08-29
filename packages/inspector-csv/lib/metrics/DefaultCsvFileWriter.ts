@@ -6,7 +6,12 @@ import { join } from 'path'
 
 import { Metric, SerializableMetric } from 'inspector-metrics'
 import { CsvFileWriter } from './CsvMetricReporter'
-import moment = require('moment')
+import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+
+dayjs.extend(utc)
+dayjs.extend(timezone)
 
 /**
  * Options for standard implementation for a csv file writer.
@@ -114,7 +119,7 @@ export class DefaultCsvFileWriter implements CsvFileWriter {
    * @memberof DefaultCsvFileWriter
    */
   public constructor({
-    filename = async () => `${moment().format('YYYYMMDDHH00')}_metrics.csv`,
+    filename = async () => `${dayjs().format('YYYYMMDDHH00')}_metrics.csv`,
     dir = async () => './metrics',
     writeHeaders = true,
     createDir = true,
