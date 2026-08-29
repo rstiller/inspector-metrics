@@ -9,6 +9,19 @@ allowBuilds:
   native-hdr-histogram: true
   esbuild: true
 
+# pnpm 11: version overrides. These pin the mocha/sinon dev-dependency
+# `diff` and mocha's `serialize-javascript` transitive deps to patched
+# releases. `diff` is vulnerable to a ReDoS (GHSA-73rr-hh4g-fpgx, fixed in
+# 8.0.3) and `serialize-javascript` to RCE/DoS (GHSA-5c6j-r48x-rmvq /
+# GHSA-qj8w-gfj5-8c6v, fixed in 7.0.5+). Mocha 11 declares `diff@^7.0.0` /
+# `serialize-javascript@^6.0.2`, which pull the unfixed ranges, so the
+# overrides below force the patched versions. Both expose the exact APIs
+# mocha (diff.createPatch, serialize-javascript(opts,{unsafe,ignoreFunction}))
+# and sinon (diff) rely on, so the bump is transparent to the test toolchain.
+overrides:
+  'diff@>=7.0.0 <8.0.3': '8.0.3'
+  'serialize-javascript@>=6.0.0 <7.0.5': '7.0.7'
+
 minimumReleaseAgeExclude:
   - '@biomejs/biome@2.5.11'
   - '@biomejs/cli-darwin-arm64@2.5.11'
