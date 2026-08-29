@@ -152,9 +152,7 @@ export class PrometheusReporterClusterMasterTest {
           const end = dayjs()
 
           expect(metricsString).to.equal('#empty')
-          expect(dayjs.duration(end.diff(start)).as('milliseconds')).to.be.lt(
-            this.clusterOptions.workerResponseTimeout
-          )
+          expect(dayjs.duration(end.diff(start)).as('milliseconds')).to.be.lt(this.clusterOptions.workerResponseTimeout)
 
           done()
         })

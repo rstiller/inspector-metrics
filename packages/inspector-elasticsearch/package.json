@@ -31,9 +31,9 @@
     "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "@elastic/elasticsearch": "^7.17.12",
+    "@elastic/elasticsearch": "^7.17.14",
     "inspector-metrics": "workspace:^1.23.0",
-    "lodash": "^4.17.21",
+    "lodash": "^4.18.1",
     "source-map-support": "^0.5.21"
   },
   "files": [

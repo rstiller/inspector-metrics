@@ -28,15 +28,11 @@
   },
   "peerDependencies": {
     "async": ">=3.x",
-    "inspector-metrics": ">=1.16.x",
-    "moment": ">=2.x",
-    "moment-timezone": ">=0.5.X"
+    "inspector-metrics": ">=1.16.x"
   },
   "dependencies": {
-    "async": "^3.2.4",
+    "async": "^3.2.6",
     "inspector-metrics": "workspace:^1.23.0",
-    "moment": "^2.29.4",
-    "moment-timezone": "^0.5.43",
     "source-map-support": "^0.5.21"
   },
   "files": [

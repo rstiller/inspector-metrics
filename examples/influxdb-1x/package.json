@@ -14,10 +14,10 @@
     }
   ],
   "peerDependencies": {
-    "influx": "^5.9.3"
+    "influx": "^5.12.0"
   },
   "dependencies": {
-    "influx": "^5.9.3",
+    "influx": "^5.12.0",
     "inspector-influx": "workspace:^2.10.0",
     "inspector-metrics": "workspace:^1.23.0",
     "inspector-vm": "workspace:^3.7.0"
