@@ -19,8 +19,8 @@ importers:
         specifier: 0.3.3
         version: 0.3.3
       '@types/async':
-        specifier: ^3.2.25
-        version: 3.2.25
+        specifier: ^3.2.26
+        version: 3.2.26
       '@types/chai':
         specifier: ^5.2.3
         version: 5.2.3
@@ -522,8 +522,8 @@ packages:
     resolution: {integrity: sha512-U5CX88u1G44SZ2LG2EFgh2SPYTczT5hCY7W8n41DCZMM61oKEkwDCiDBDi7IJVnLrPaNsceZpoVzosoepqIwog==}
     hasBin: true
 
-  '@types/async@3.2.25':
-    resolution: {integrity: sha512-O6Th/DI18XjrL9TX8LO9F/g26qAz5vynmQqlXt/qLGrskvzCKXKc5/tATz3G2N6lM8eOf3M8/StB14FncAmocg==}
+  '@types/async@3.2.26':
+    resolution: {integrity: sha512-KqX2Cp6N7C0KEpExkHkDalNgx9ohk8oxjDM9ygtFTJr5BsHaiKWYjVnUQusGnc8A1jOoJuzldeazVRZuFYxjfw==}
 
   '@types/chai@4.3.20':
     resolution: {integrity: sha512-/pC9HAB5I/xMlc5FP77qjCnI16ChlJfW0tGa0IUcFn38VJrTV6DeZ60NU5KZBtaOZqjdpwTWohz5HU1RrhiYxQ==}
@@ -1540,7 +1540,7 @@ snapshots:
     dependencies:
       '@testdeck/core': 0.3.3
 
-  '@types/async@3.2.25': {}
+  '@types/async@3.2.26': {}
 
   '@types/chai@4.3.20': {}
 
