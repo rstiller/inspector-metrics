@@ -4,7 +4,7 @@
     "private": true,
     "packageManager": "pnpm@11.24.0",
     "devDependencies": {
-        "@biomejs/biome": "2.5.12",
+        "@biomejs/biome": "2.5.13",
         "@testdeck/mocha": "0.3.3",
         "@types/async": "^3.2.25",
         "@types/chai": "^5.2.3",
