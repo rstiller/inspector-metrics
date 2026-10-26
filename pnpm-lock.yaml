@@ -34,8 +34,8 @@ importers:
         specifier: ^22.0.0
         version: 22.0.0
       '@types/sinon-chai':
-        specifier: ^4.0.0
-        version: 4.0.0
+        specifier: ^4.0.1
+        version: 4.0.1
       c8:
         specifier: ^12.0.0
         version: 12.0.0
@@ -519,9 +519,6 @@ packages:
   '@types/async@3.2.26':
     resolution: {integrity: sha512-KqX2Cp6N7C0KEpExkHkDalNgx9ohk8oxjDM9ygtFTJr5BsHaiKWYjVnUQusGnc8A1jOoJuzldeazVRZuFYxjfw==}
 
-  '@types/chai@4.3.20':
-    resolution: {integrity: sha512-/pC9HAB5I/xMlc5FP77qjCnI16ChlJfW0tGa0IUcFn38VJrTV6DeZ60NU5KZBtaOZqjdpwTWohz5HU1RrhiYxQ==}
-
   '@types/chai@5.2.3':
     resolution: {integrity: sha512-Mw558oeA9fFbv65/y4mHtXDs9bPnFMZAL/jxdPFUpOHHIXX91mcgEHbS5Lahr+pwZFR8A7GQleRWeI6cGFC2UA==}
 
@@ -543,11 +540,8 @@ packages:
   '@types/node@22.20.1':
     resolution: {integrity: sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q==}
 
-  '@types/sinon-chai@4.0.0':
-    resolution: {integrity: sha512-Uar+qk3TmeFsUWCwtqRNqNUE7vf34+MCJiQJR5M2rd4nCbhtE8RgTiHwN/mVwbfCjhmO6DiOel/MgzHkRMJJFg==}
-
-  '@types/sinon@10.0.20':
-    resolution: {integrity: sha512-2APKKruFNCAZgx3daAyACGzWuJ028VVCUDk6o2rw/Z4PXT0ogwdV4KUegW0MwVs0Zu59auPXbbuBJHF12Sx1Eg==}
+  '@types/sinon-chai@4.0.1':
+    resolution: {integrity: sha512-CQmvXG0GAOesZfRHS4aYSWcoHTZCdfOhgOJRM20bYqBECBMVe/ogBP18Qbfsy7gMA1cE4yIKO75aPRjeFyR2NQ==}
 
   '@types/sinon@22.0.0':
     resolution: {integrity: sha512-TDbVpbccc2HfiqHR09Argj3mHV1KMW7sCCKj52fsl8lbRLkEn7fB1966EWhOKWUBcqfBueZuPoA7/OK1CKiy3g==}
@@ -1530,8 +1524,6 @@ snapshots:
 
   '@types/async@3.2.26': {}
 
-  '@types/chai@4.3.20': {}
-
   '@types/chai@5.2.3':
     dependencies:
       '@types/deep-eql': 4.0.2
@@ -1553,14 +1545,10 @@ snapshots:
     dependencies:
       undici-types: 6.21.0
 
-  '@types/sinon-chai@4.0.0':
+  '@types/sinon-chai@4.0.1':
     dependencies:
-      '@types/chai': 4.3.20
-      '@types/sinon': 10.0.20
-
-  '@types/sinon@10.0.20':
-    dependencies:
-      '@types/sinonjs__fake-timers': 15.0.1
+      '@types/chai': 5.2.3
+      '@types/sinon': 22.0.0
 
   '@types/sinon@22.0.0':
     dependencies:
