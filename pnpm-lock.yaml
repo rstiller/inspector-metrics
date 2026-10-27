@@ -31,8 +31,8 @@ importers:
         specifier: ^22.20.1
         version: 22.20.1
       '@types/sinon':
-        specifier: ^22.0.0
-        version: 22.0.0
+        specifier: ^22.0.1
+        version: 22.0.1
       '@types/sinon-chai':
         specifier: ^4.0.1
         version: 4.0.1
@@ -555,11 +555,8 @@ packages:
   '@types/sinon-chai@4.0.1':
     resolution: {integrity: sha512-CQmvXG0GAOesZfRHS4aYSWcoHTZCdfOhgOJRM20bYqBECBMVe/ogBP18Qbfsy7gMA1cE4yIKO75aPRjeFyR2NQ==}
 
-  '@types/sinon@22.0.0':
-    resolution: {integrity: sha512-TDbVpbccc2HfiqHR09Argj3mHV1KMW7sCCKj52fsl8lbRLkEn7fB1966EWhOKWUBcqfBueZuPoA7/OK1CKiy3g==}
-
-  '@types/sinonjs__fake-timers@15.0.1':
-    resolution: {integrity: sha512-Ko2tjWJq8oozHzHV+reuvS5KYIRAokHnGbDwGh/J64LntgpbuylF74ipEL24HCyRjf9FOlBiBHWBR1RlVKsI1w==}
+  '@types/sinon@22.0.1':
+    resolution: {integrity: sha512-MThluJXPmpBY+Z5S3565F2z+hjkCXnBrr36j2mitVQ7JUtxA+A+YQhs+0Q6J8jxb0SVJvydO+6NWfj9EBzpiBQ==}
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     resolution: {integrity: sha512-MTKKkWB7p/0E9xi1d1tHtZ5PiLkGEMIq88pK2CubZjOsLtYTLqhgIgi6zepFa+9GHZ6h05NMCkQxGKiPXMxXtQ==}
@@ -1568,13 +1565,11 @@ snapshots:
   '@types/sinon-chai@4.0.1':
     dependencies:
       '@types/chai': 5.2.3
-      '@types/sinon': 22.0.0
+      '@types/sinon': 22.0.1
 
-  '@types/sinon@22.0.0':
+  '@types/sinon@22.0.1':
     dependencies:
-      '@types/sinonjs__fake-timers': 15.0.1
-
-  '@types/sinonjs__fake-timers@15.0.1': {}
+      '@sinonjs/fake-timers': 15.4.0
 
   '@typescript/typescript-aix-ppc64@7.0.2':
     optional: true
